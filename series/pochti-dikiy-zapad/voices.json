@@ -2,7 +2,7 @@
   "cartoon": "Почти Дикий Запад",
   "slug": "pochti_dikiy_zapad",
   "elevenlabs_flow_id": "Qa3Yfq9u4TK6JwnpRk9Z",
-  "tts_model": "eleven_v3",
+  "tts_model": "eleven_v4",
   "characters": {
     "billy": {
       "name": "Ковбой Билли",

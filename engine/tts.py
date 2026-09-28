@@ -1,6 +1,8 @@
 """ElevenLabs TTS/SFX. Usage:
   python3 engine/tts.py lines <slug> <ep> [keys...]     # voice/<ep>/lines.json -> voice/<ep>/<key>.mp3 (skips existing)
-  python3 engine/tts.py sfx <out.mp3> <seconds> "<prompt>"
+  python3 engine/tts.py sfx <out.mp3> <seconds> "<prompt>" [loop]
+  python3 engine/tts.py music <out.mp3> <seconds> "<prompt>"
+Russian stress: put U+0301 (combining acute) after the stressed vowel: «ло́шадь»; use «ё».
 Key: ELEVENLABS_API_KEY (never printed)."""
 import json, os, sys, urllib.request
 import paths as P
@@ -37,4 +39,9 @@ if __name__ == '__main__':
     if sys.argv[1] == 'lines':
         lines(sys.argv[2], sys.argv[3], sys.argv[4:])
     elif sys.argv[1] == 'sfx':
-        _post(f'{API}/sound-generation', {'text': sys.argv[4], 'duration_seconds': float(sys.argv[3])}, sys.argv[2])
+        body = {'text': sys.argv[4], 'duration_seconds': float(sys.argv[3])}
+        if len(sys.argv) > 5 and sys.argv[5] == 'loop': body.update(loop=True, model_id='eleven_text_to_sound_v2')
+        _post(f'{API}/sound-generation', body, sys.argv[2])
+    elif sys.argv[1] == 'music':
+        _post(f'{API}/music?output_format=mp3_44100_128', {'prompt': sys.argv[4], 'music_length_ms': int(float(sys.argv[3]) * 1000),
+                                                           'model_id': 'music_v2_5', 'force_instrumental': True}, sys.argv[2])

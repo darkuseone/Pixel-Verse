@@ -1,10 +1,10 @@
 {
-  "b1": ["billy", "[furious, shouting] Ты УВОЛЕНА! Найду себе лошадь ЧЕСТНУЮ!"],
-  "m1": ["molniya", "[deadpan, chewing] Выходное пособие. [pause] Морковью."],
-  "s1": ["sam", "[polite, salesman] Добро пожаловать в прокат! Тарифы: эконом, комфорт... [pause] и ПРЕМИУМ."],
-  "b2": ["billy", "[suspicious] Мы с вами... раньше не встречались?"],
-  "s2": ["sam", "[nervous, innocent] Никогда. Я Сэм... [pause] СЭМЮЭЛЬ."],
-  "b3": ["billy", "[amazed, excited] Вот это конь! Сразу видно — ЧЕСТНЫЙ!"],
-  "s3": ["sam", "[very fast, mumbling] Первый день бесплатно. Дальше автопродление. Отмена — ПИСЬМОМ."],
-  "m2": ["molniya", "[deadpan, to camera] Спасибо за ПОДПИСКУ."]
+  "b1": ["billy", "[furious, shouting] Ты УВО́ЛЕНА! Найду́ себе́ ло́шадь... ЧЕ́СТНУЮ!"],
+  "m1": ["molniya", "[deadpan, chewing] Выходно́е посо́бие... [pause] Морко́вью."],
+  "s1": ["sam", "[cheerful salesman, smug] Добро́ пожа́ловать в прока́т! Тари́фы: эконо́м, комфо́рт... [pause] и ПРЕ́МИУМ."],
+  "b2": ["billy", "[suspicious, squinting] Мы с ва́ми... ра́ньше не встреча́лись?"],
+  "s2": ["sam", "[nervous, too fast] Никогда́! Я Сэм... [pause] [awkward] Сэ́мюэль."],
+  "b3": ["billy", "[amazed, excited] Вот э́то конь! Сра́зу ви́дно — ЧЕ́СТНЫЙ!"],
+  "s3": ["sam", "[rapid mumbling fine print, fast] Пе́рвый день беспла́тно, да́льше автопродле́ние, отме́на — то́лько ПИСЬМО́М."],
+  "m2": ["molniya", "[deadpan, dry, to camera] Спаси́бо за ПОДПИ́СКУ."]
 }

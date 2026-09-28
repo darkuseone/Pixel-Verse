@@ -159,19 +159,19 @@ def ext_scene(CH, v, t, name):
         Pz = mol_pose(t, chew=True)
         ax, ay = horse_anchor(MOL_X, R.EXT_FEET, U_EXT)
         CH_.molniya(CH, v.cam(ax, ay, U_EXT), t, Pz, carrot=True)
-        if t < 6.45:
+        if t < 7.05:
             bx, feet, u = BILLY_X0, R.EXT_FEET + 6, U_EXT
             CH_.billy(CH, v.cam(bx, feet - CH_.HIP_H * u, u, True), CH_.POSES['angry'], 0.05, talk('billy', t), 'angry', red=0.5)
         elif t < 8.3:
-            k = (t - 6.45) / 1.85
+            k = (t - 7.05) / 1.25
             bx = lerp(BILLY_X0, 585, k); feet = lerp(R.EXT_FEET + 6, 500, k); u = lerp(U_EXT, 4.6, k)
             CH_.billy(CH, v.cam(bx, feet - CH_.HIP_H * u, u), CH_.stomp_pose(t), 0.12, 0.0, 'angry', red=0.4)
     else:
-        Pz = mol_pose(t, chew=t > 42.9)
+        Pz = mol_pose(t, chew=t > 43.3)
         ax, ay = horse_anchor(RIDE_X, R.EXT_FEET, U_EXT)
         drop = (t - 40.0) if t >= 40.0 else None
         pose = CH_.POSES['ride_whip'] if 38.0 <= t < 39.6 else CH_.POSES['ride']
-        CH_.molniya(CH, v.cam(ax, ay, U_EXT), t, Pz, carrot=t > 42.9, disguise=1.0, stache_drop=drop,
+        CH_.molniya(CH, v.cam(ax, ay, U_EXT), t, Pz, carrot=t > 43.3, disguise=1.0, stache_drop=drop,
                     rider=CH_.rider_billy(pose, talk('billy', t)))
         if 39.6 <= t < 41.6:
             u = t - 39.6
@@ -206,12 +206,12 @@ def billy_in(x, feet, u, facing, pose, expr, t):
 ST_view = [None]
 
 SHOTS = [
-    (0.00, 2.00, 'cu_billy_ext'), (2.00, 3.95, 'two_ext'), (3.95, 6.45, 'cu_mol_ext'), (6.45, 8.40, 'wide_ext'),
-    (8.40, 11.15, 'wide_int'), (11.15, 13.80, 'board'), (13.80, 16.00, 'cu_sam'), (16.00, 17.80, 'cu_billy_int'),
+    (0.00, 2.00, 'cu_billy_ext'), (2.00, 3.90, 'two_ext'), (3.90, 5.60, 'cu_mol_ext'), (5.60, 7.05, 'two_ext'), (7.05, 8.40, 'wide_ext'),
+    (8.40, 11.15, 'wide_int'), (11.15, 13.30, 'board'), (13.30, 16.00, 'cu_sam'), (16.00, 17.80, 'cu_billy_int'),
     (17.80, 19.60, 'cu_sam_sweat'), (19.60, 21.30, 'two_int'), (21.30, 23.30, 'cu_sam_tag'), (23.30, 26.35, 'split_stalls'),
     (26.35, 27.40, 'premium'), (27.40, 29.60, 'cu_billy_amazed'), (29.60, 31.80, 'cu_prem'), (31.80, 34.50, 'cu_sam_fine'),
-    (34.50, 37.20, 'contract'), (37.20, 39.60, 'ride'), (39.60, 41.60, 'cu_mol_ride'), (41.60, 43.00, 'cu_mol_cam'),
-    (43.00, DUR + 1, 'cu_billy_red'),
+    (34.50, 37.20, 'contract'), (37.20, 39.60, 'ride'), (39.60, 41.60, 'cu_mol_ride'), (41.60, 43.30, 'cu_mol_cam'),
+    (43.30, DUR + 1, 'cu_billy_red'),
 ]
 FLASH_AT = [0.0, 8.4, 26.35, 37.2]
 
@@ -234,7 +234,7 @@ def render_scene(t):
             hx, hy = head_of_horse(MOL_X, R.EXT_FEET, U_EXT, mol_pose(t))
             v = view_at(EXT, hx + 4 * U_EXT, hy + 2 * U_EXT, 3.0 + 0.08 * u, 180, 430)
         elif name == 'wide_ext':
-            v = View(EXT, 330 + 90 * sm(u / 1.9), 80, 1.0 + 0.04 * u)
+            v = View(EXT, 330 + 90 * sm(u / 1.3), 80, 1.0 + 0.04 * u)
         elif name == 'ride':
             v = view_at(EXT, RIDE_X + 10, 470, 1.55 + 0.05 * u, 180, 420)
         elif name in ('cu_mol_ride', 'cu_mol_cam'):
