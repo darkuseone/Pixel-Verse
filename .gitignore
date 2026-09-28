@@ -1,0 +1,7 @@
+# промежуточное: сегменты, кэш wav, тестовые листы
+build/
+__pycache__/
+*.pyc
+*.wav
+*seg_*.mp4
+*_noaudio.mp4

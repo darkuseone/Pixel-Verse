@@ -1,0 +1,56 @@
+{
+  "cartoon": "Почти Дикий Запад",
+  "slug": "pochti_dikiy_zapad",
+  "elevenlabs_flow_id": "Qa3Yfq9u4TK6JwnpRk9Z",
+  "tts_model": "eleven_v3",
+  "characters": {
+    "billy": {
+      "name": "Ковбой Билли",
+      "voice": "Bob - Rugged and Warm Cowboy",
+      "voice_id": "KTPVrSVAEUSJRClDzBw7",
+      "style": "[shouting, heroic] / [groggy] / [screaming]",
+      "color_caption": [
+        255,
+        222,
+        96
+      ]
+    },
+    "molniya": {
+      "name": "Лошадь Молния",
+      "voice": "Silas - Weathered Villain",
+      "voice_id": "WzVKtqQpTUUQ2JNx8YxI",
+      "style": "[deadpan] [chewing] — всегда сухо и коротко",
+      "color_caption": [
+        255,
+        255,
+        255
+      ]
+    },
+    "sam": {
+      "name": "Кривой Сэм",
+      "voice": "Callum - Husky Trickster",
+      "voice_id": "N2lVS1w4EtoT3dr4eOWO",
+      "style": "[smug, sly whisper] — вежливый бандит",
+      "color_caption": [
+        214,
+        170,
+        255
+      ]
+    }
+  },
+  "music": {
+    "theme": "music/theme_western_chiptune_16s.mp3"
+  },
+  "sfx": [
+    "../../library/sfx/brake_skid.mp3",
+    "sfx/cactus_boing.mp3",
+    "../../library/sfx/carrot_crunch.mp3",
+    "sfx/carrot_spill.mp3",
+    "sfx/costume_pop.mp3",
+    "../../library/sfx/donkey_bray.mp3",
+    "../../library/sfx/donkey_walk.mp3",
+    "../../library/sfx/horse_gallop.mp3",
+    "../../library/sfx/vulture.mp3",
+    "../../library/sfx/whoosh.mp3"
+  ]
+}

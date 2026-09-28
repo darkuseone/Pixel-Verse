@@ -1,0 +1,14 @@
+{
+  "b1": ["billy", "[whispering, sneaky] Тс-с-с. Я — КАКТУС."],
+  "b2": ["billy", "[excited whisper] План гениальный: Сэм подъедет — а я его... [shouting] ХВАТЬ!"],
+  "m1": ["molniya", "[deadpan, unimpressed] Можно. [pause] А зачем?  (пауза режется: 0–1.0 + 1.45–2.16)"],
+  "b3": ["billy", "[panicked whisper] Молния! ПРЯЧЬСЯ!"],
+  "m2": ["molniya", "[deadpan, bored] Спряталась."],
+  "s1": ["sam", "[smug, relaxed] Какой славный кактус... Присяду."],
+  "b4": ["billy", "[muffled, strained] Ммм-мф-ф-ф!"],
+  "s2": ["sam", "[pleasantly surprised] Хм. Тёплый."],
+  "s3": ["sam", "[sly, polite] Как договаривались, мэм. Морковь за неделю."],
+  "n4 (из ep01)": ["molniya", "Спасибо."],
+  "b5": ["billy", "[triumphant, shouting] Засада сработала! Он меня даже не ЗАМЕТИЛ!"],
+  "m3": ["molniya", "[chewing, deadpan] Воздухан.  (используется 0–0.8 с)"]
+}
