@@ -56,17 +56,18 @@ def blend_pose(a, b, k):
 
 
 # ---------------------------------------------------------------- Billy (hatless: the hat is on Molniya since the pilot)
-def billy(CH, cam, pose, rot=0.05, mouth=0.0, expr='normal', red=0.0):
+def billy(CH, cam, pose, rot=0.05, mouth=0.0, expr='normal', red=0.0, hat=False):
     L = Layer(cam)
     S.CC['mst'] = (96, 60, 36)
     skin0 = S.CC['skin']
     if red > 0: S.CC['skin'] = tuple(int(lerp(a, b, red)) for a, b in zip(skin0, (232, 96, 80)))
-    S.cowboy(L, (1000.0, 1000.0), rot, pose, hat_on=False, mouth=mouth)
+    S.cowboy(L, (1000.0, 1000.0), rot, pose, hat_on=hat, mouth=mouth)
     S.CC['skin'] = skin0
     HP = HPf(rot)
-    ell(L, HP(0.4, 11.4), 2.9, 1.5, (104, 66, 40), rot, hi=(136, 90, 56))
-    for dx in (-1.5, -0.3, 0.9):
-        cap(L, HP(dx, 11.9), HP(dx + 0.9, 12.9), 0.55, 0.2, (104, 66, 40))
+    if not hat:
+        ell(L, HP(0.4, 11.4), 2.9, 1.5, (104, 66, 40), rot, hi=(136, 90, 56))
+        for dx in (-1.5, -0.3, 0.9):
+            cap(L, HP(dx, 11.9), HP(dx + 0.9, 12.9), 0.55, 0.2, (104, 66, 40))
     if cam.sc > 9:
         ew = 0.78 if expr in ('excited', 'shout', 'amazed') else 0.6
         ell(L, HP(1.75, 10.35), ew * 0.85, ew, (250, 250, 244), rot)
@@ -117,13 +118,14 @@ def molniya_pose(t, chew=False, jaw_talk=0.0, moving=False):
     return Pz
 
 
-def molniya(CH, cam, t, Pz=None, carrot=False, disguise=0.0, stache_drop=None, rider=None, p=0.0, carrots=1):
+def molniya(CH, cam, t, Pz=None, carrot=False, disguise=0.0, stache_drop=None, rider=None, p=0.0, carrots=1, hat=True):
     """disguise: 0 none, 1 = sunglasses + fake mustache. stache_drop: seconds since the mustache fell (None = on face).
     rider: callable(L, T) drawing a rider on the saddle (same layer, same units)."""
     L = Layer(cam)
     Pz = Pz or molniya_pose(t)
     T, hs, hd_, up = S.draw_horse(L, 1000.0, 1000.0, Pz, t, p, saddle=True)
-    pos, rot = S.head_hat_anchor(1000.0, 1000.0, Pz); S.hat(L, pos, rot)
+    pos, rot = S.head_hat_anchor(1000.0, 1000.0, Pz)
+    if hat: S.hat(L, pos, rot)
     he = (hs[0] + hd_[0] * 8.5, hs[1] + hd_[1] * 8.5); dn = (-hd_[1], hd_[0])
     if carrot:
         for k in range(carrots):
@@ -256,3 +258,33 @@ def rocking_horse(CH, cam, ang):
     dot(L, R(6.4, -11.2), (30, 20, 16), 0.3)
     cap(L, R(4.8, -12.0), R(5.2, -13.2), 0.4, 0.2, (236, 226, 200))
     outline(L, (40, 24, 14)); CH.add(L)
+
+
+# ---------------------------------------------------------------- placement helpers (world px)
+def horse_anchor(x, feet, u): return x, feet - 19 * u
+
+
+def head_of_horse(x, feet, u, Pz, flip=False):
+    ax, ay = horse_anchor(x, feet, u)
+    hs = S.horse_frames(1000.0, 1000.0, Pz)[3]
+    dx = (hs[0] - 1000.0) * u
+    return (ax - dx if flip else ax + dx), ay + (hs[1] - 1000.0) * u
+
+
+def rider_hip_world(x, feet, u, Pz, flip=False):
+    ax, ay = horse_anchor(x, feet, u)
+    T = S.horse_frames(1000.0, 1000.0, Pz)[0]; h = T(-1.0, -9.4)
+    dx = (h[0] - 1000.0) * u
+    return (ax - dx if flip else ax + dx), ay + (h[1] - 1000.0) * u
+
+
+def carrot_icon(n=2, s=6):
+    import numpy as np
+    c = np.zeros((16 * s, (12 * n + 4) * s, 4), np.uint8)
+    for k in range(n):
+        x0 = k * 12 * s
+        for i in range(10):
+            w = max(1, 5 - i // 2)
+            c[(4 + i) * s:(5 + i) * s, x0 + (6 - w // 2) * s:x0 + (6 + w - w // 2) * s] = (236, 128, 40, 255)
+        c[0:4 * s, x0 + 5 * s:x0 + 7 * s] = (84, 160, 60, 255); c[s:3 * s, x0 + 3 * s:x0 + 9 * s] = (84, 160, 60, 255)
+    return c

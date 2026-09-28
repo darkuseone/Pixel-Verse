@@ -468,7 +468,7 @@ def cover_frame():
 
 def encode(a0, a1, out):
     proc = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{OUT_W}x{OUT_H}', '-r', str(FPS),
-                             '-i', '-', '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-pix_fmt', 'yuv420p', out], stdin=subprocess.PIPE)
+                             '-i', '-', '-c:v', 'libx264', '-preset', 'medium', '-crf', '20', '-pix_fmt', 'yuv420p', out], stdin=subprocess.PIPE)
     cov = cover_frame()
     for i in range(a0, a1):
         fr = cov if (i < 6 and cov is not None) else render(i / FPS)
