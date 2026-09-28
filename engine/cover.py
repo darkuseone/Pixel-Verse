@@ -66,12 +66,15 @@ def pixel_text(F, lines, top, size, max_w=500, gap=6):
     return y
 
 
-def plank(F, text, y, size=16):
+def plank(F, text, y, size=16, gap=10):
+    """wooden plank with pixel text; '\n' in text = several rows (bigger, readable in the phone grid). Returns bottom y."""
     f = ImageFont.truetype(FONT_PATH, size)
     try: f.set_variation_by_axes([700])
     except Exception: pass
-    bb = f.getbbox(text); tw = bb[2] - bb[0]; th = bb[3] - bb[1]
-    pw, ph = tw + 40, th + 22
+    rows = text.split('\n')
+    bbs = [f.getbbox(r) for r in rows]
+    tw = max(b[2] - b[0] for b in bbs); th = max(b[3] - b[1] for b in bbs)
+    pw, ph = tw + 40, th * len(rows) + gap * (len(rows) - 1) + 22
     x0 = (W - pw) // 2
     F[y - 3:y + ph + 3, x0 - 3:x0 + pw + 3] = OUTLINE
     F[y:y + ph, x0:x0 + pw] = PLANK
@@ -83,11 +86,14 @@ def plank(F, text, y, size=16):
         F[y + ph // 2 - 2:y + ph // 2 + 2, nx:nx + 3] = (210, 200, 180)
     img = Image.new('L', (W, ph), 0)
     d = ImageDraw.Draw(img); d.fontmode = '1'
-    d.text(((W - tw) // 2 - bb[0], (ph - th) // 2 - bb[1]), text, font=f, fill=255)
+    for i, (r, bb) in enumerate(zip(rows, bbs)):
+        rw = bb[2] - bb[0]
+        d.text(((W - rw) // 2 - bb[0], 11 + i * (th + gap) - bb[1]), r, font=f, fill=255)
     m = np.array(img) > 127
     reg = F[y:y + ph]
     reg[np.roll(np.roll(m, 3, 0), 2, 1) & ~m] = PLANK_D
     reg[m] = (255, 236, 170)
+    return y + ph
 
 
 def render_cover(title_lines, badge, out_png, out_frame=None):

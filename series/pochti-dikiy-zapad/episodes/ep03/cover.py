@@ -12,7 +12,7 @@ import paths as P
 
 EP = 'ep03'
 TITLE = ['ИНФОРМАТОР?']
-BADGE = 'ПОЧТИ ДИКИЙ ЗАПАД • 3/6'
+BADGE = 'ПОЧТИ ДИКИЙ ЗАПАД\nСЕРИЯ 3/6'
 SRC = P.episode(EP) / 'cover_ai_source.jpg'
 PROMPT = (
     "Redraw this image as a highly detailed HD pixel art scene from a modern indie pixel-art adventure game "
@@ -67,12 +67,14 @@ def pixelize(im):
 def make(k):
     raw = P.build(EP, f'cover_ai_{k}.png')
     Image.open(raw).convert('RGB').save(SRC, quality=93)
-    import cover as C                       # engine/cover.py (series plank + pixel title), 540x960 grid
+    import importlib.util                   # engine/cover.py (series plank + pixel title), 540x960 grid
+    spec = importlib.util.spec_from_file_location('engine_cover', P.ENGINE / 'cover.py')
+    C = importlib.util.module_from_spec(spec); spec.loader.exec_module(C)
     F = pixelize(Image.open(SRC))
     for i, yy in enumerate(range(0, 110, 22)):
         F[yy:yy + 22] = (F[yy:yy + 22].astype(np.float32) * (0.62 + 0.07 * i)).astype(np.uint8)
-    C.plank(F, BADGE, 134, 16)
-    C.pixel_text(F, TITLE, 206, 64, max_w=512, gap=10)
+    yb = C.plank(F, BADGE, 138, 24)
+    C.pixel_text(F, TITLE, yb + 22, 64, max_w=532, gap=10)
     img = Image.fromarray(F).resize((1080, 1920), Image.NEAREST)
     out = P.episode(EP) / 'cover.png'; img.save(out)
     img.save(P.series() / 'covers' / 'cover_s01e03.png'); print(out)
