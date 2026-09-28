@@ -117,18 +117,19 @@ def molniya_pose(t, chew=False, jaw_talk=0.0, moving=False):
     return Pz
 
 
-def molniya(CH, cam, t, Pz=None, carrot=False, disguise=0.0, stache_drop=None, rider=None):
+def molniya(CH, cam, t, Pz=None, carrot=False, disguise=0.0, stache_drop=None, rider=None, p=0.0, carrots=1):
     """disguise: 0 none, 1 = sunglasses + fake mustache. stache_drop: seconds since the mustache fell (None = on face).
     rider: callable(L, T) drawing a rider on the saddle (same layer, same units)."""
     L = Layer(cam)
     Pz = Pz or molniya_pose(t)
-    T, hs, hd_, up = S.draw_horse(L, 1000.0, 1000.0, Pz, t, 0.0, saddle=True)
+    T, hs, hd_, up = S.draw_horse(L, 1000.0, 1000.0, Pz, t, p, saddle=True)
     pos, rot = S.head_hat_anchor(1000.0, 1000.0, Pz); S.hat(L, pos, rot)
     he = (hs[0] + hd_[0] * 8.5, hs[1] + hd_[1] * 8.5); dn = (-hd_[1], hd_[0])
     if carrot:
-        c0 = (he[0] + dn[0] * 1.4 - hd_[0] * 0.6, he[1] + dn[1] * 1.4 - hd_[1] * 0.6)
-        cap(L, c0, (c0[0] + 4.2, c0[1] + 0.9), 1.1, 0.4, (236, 128, 40), hi=(255, 176, 90))
-        for a in (-0.5, 0.0, 0.5): cap(L, c0, (c0[0] - 1.8, c0[1] - 1.1 - a), 0.4, 0.22, (84, 160, 60))
+        for k in range(carrots):
+            c0 = (he[0] + dn[0] * (1.4 + 0.9 * k) - hd_[0] * 0.6, he[1] + dn[1] * (1.4 + 0.9 * k) - hd_[1] * 0.6)
+            cap(L, c0, (c0[0] + 4.2 - k * 0.6, c0[1] + 0.9 + k * 0.8), 1.1, 0.4, (236, 128, 40), hi=(255, 176, 90))
+            for a in (-0.5, 0.0, 0.5): cap(L, c0, (c0[0] - 1.8, c0[1] - 1.1 - a), 0.4, 0.22, (84, 160, 60))
     S.draw_ears(L, hs, hd_, up, Pz['ear'])
     ec = (hs[0] + hd_[0] * 2.0 + up[0] * 1.0, hs[1] + hd_[1] * 2.0 + up[1] * 1.0)
     if cam.sc > 9 and disguise < 0.5:
@@ -187,13 +188,54 @@ def long_ears(L, hs, hd_, up, ear, t):
         if side: cap(L, base, tip, 0.5, 0.3, (90, 84, 82))
 
 
-def donkey(CH, cam, t, bray=0.0):
+def donkey(CH, cam, t, bray=0.0, moving=False, rider=None, speed=1.6):
     L = Layer(cam)
-    Pz = S.stand_pose(t)
-    Pz.update(neck=-0.55 - 0.5 * bray, head=0.95 - 0.8 * bray, ear=0.75, lid=0.3 - 0.3 * bray, jaw=0.9 * bray)
+    if moving:
+        ph = (t * speed) % 1.0
+        legs = []
+        for kind, off in (('h', 0.0), ('f', 0.25), ('h', 0.5), ('f', 0.75)):
+            a2 = 2 * math.pi * (ph + off)
+            if kind == 'f': a1 = 0.02 + 0.3 * math.sin(a2); b = a1 - 0.7 * max(0.0, math.cos(a2)) ** 2
+            else: a1 = -0.33 + 0.28 * math.sin(a2); b = a1 + 0.5 + 0.5 * max(0.0, math.cos(a2)) ** 2
+            legs.append((a1, b))
+        Pz = dict(legs=legs, bob=-0.6 * abs(math.sin(2 * math.pi * ph)), pitch=0.0, neck=-0.6, head=0.95,
+                  jaw=0.0, wind=0.3, ear=0.75, lid=0.3)
+    else:
+        Pz = S.stand_pose(t)
+        Pz.update(neck=-0.55 - 0.5 * bray, head=0.95 - 0.8 * bray, ear=0.75, lid=0.3 - 0.3 * bray, jaw=0.9 * bray)
     T, hs, hd_, up = with_pal(S.HC, DONKEY, lambda: S.draw_horse(L, 1000.0, 1000.0, Pz, t, 0.0, saddle=True))
     with_pal(S.HC, DONKEY, lambda: long_ears(L, hs, hd_, up, Pz['ear'], t))
+    if rider: rider(L, T)
     outline(L, (38, 30, 30)); CH.add(L)
+
+
+def rider_sam(pose, mouth=0.0, rot=0.03, wave=False, sack=True):
+    """Sam in the saddle (for donkey()/molniya())"""
+    def f(L, T):
+        hip = T(-1.0, -9.0)
+        ps = dict(pose)
+        if wave: ps['narm'] = (2.9, 3.0 + 0.4 * math.sin(pose.get('_t', 0) * 12))
+        with_pal(S.CC, CC_BANDIT, lambda: S.cowboy(L, hip, rot, {k: v for k, v in ps.items() if k != '_t'}, hat_on=True, mouth=mouth))
+        HP = HPf(rot, hip)
+        cap(L, HP(-1.2, 10.3), HP(2.7, 10.3), 0.78, 0.78, (24, 20, 24)); dot(L, HP(1.9, 10.3), (240, 240, 240), 0.32)
+        cap(L, HP(1.3, 8.45), HP(3.4, 7.25), 0.6, 0.4, (34, 26, 24))
+        if sack:
+            ell(L, HP(-3.4, 5.2), 2.6, 2.3, (216, 188, 128), hi=(238, 214, 160), sh=(186, 158, 104))
+    return f
+
+
+def gallop(t, speed=2.2):
+    p = (t * speed) % 1.0
+    Pz = S.gallop_pose(p, t); Pz.update(lid=0.55, ear=0.2)
+    return Pz, p
+
+
+def lasso_loop(L, c, r, t, col=(196, 150, 90)):
+    """spinning lasso ring (seen at an angle) around centre c (units of the layer camera)"""
+    for i in range(14):
+        a0 = t * 18 + i * 2 * math.pi / 14; a1 = a0 + 2 * math.pi / 14
+        cap(L, (c[0] + r * math.cos(a0), c[1] + 0.35 * r * math.sin(a0)),
+            (c[0] + r * math.cos(a1), c[1] + 0.35 * r * math.sin(a1)), 0.3, 0.3, col)
 
 
 def rocking_horse(CH, cam, ang):
