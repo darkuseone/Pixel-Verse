@@ -57,6 +57,32 @@ def pixel_title(lines, size=64, width=OUT_W):
     return out
 
 
+def winter_title(lines, size=64, width=OUT_W, outline=(18, 24, 52), shadow=(8, 10, 26)):
+    """«Валера и кот» title style: same proven yellow->orange stepped gradient, navy outline + shadow, snow caps on top"""
+    f = pfont(size)
+    out = np.zeros((len(lines) * (size + 48) + 44, width, 4), np.uint8)
+    y = 26
+    for line in lines:
+        bb = f.getbbox(line); tw = bb[2] - bb[0]; th = bb[3] - bb[1]
+        img = Image.new('L', (width, th + 44), 0); d = ImageDraw.Draw(img); d.fontmode = '1'
+        d.text(((width - tw) // 2 - bb[0], 18 - bb[1]), line, font=f, fill=255)
+        m = np.array(img) > 127
+        dil = _dilate(m, 8)
+        shd = np.roll(np.roll(dil, 10, 0), 6, 1)
+        reg = out[y:y + m.shape[0]]
+        reg[shd] = shadow + (255,); reg[dil] = outline + (255,)
+        rows = np.where(m.any(1))[0]; r0, r1 = rows[0], rows[-1]
+        for yy in range(m.shape[0]):
+            k = (yy - r0) / max(1, r1 - r0)
+            col = (255, 236, 120) if k < 0.34 else (255, 200, 70) if k < 0.67 else (255, 150, 50)
+            reg[yy][m[yy]] = col + (255,)
+        cap = m & ~np.roll(m, 10, 0)                       # snow on the top edges of the glyphs
+        cap2 = np.roll(cap, -6, 0) & ~m & np.roll(dil, 0, 0)
+        reg[cap] = (250, 252, 255, 255); reg[cap2] = (236, 244, 255, 255)
+        y += th + 48
+    return out
+
+
 def make_badge(text, size=34):
     font = ImageFont.truetype(P.FONT_BOLD, size)
     img = Image.new('RGBA', (620, 70), (0, 0, 0, 0)); d = ImageDraw.Draw(img)

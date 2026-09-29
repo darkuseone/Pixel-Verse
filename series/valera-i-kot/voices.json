@@ -1,0 +1,158 @@
+{
+  "cartoon": "Валера и кот",
+  "slug": "valera-i-kot",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "valera": {
+      "name": "Валера",
+      "color_caption": [
+        120,
+        200,
+        255
+      ],
+      "style": "[shouting] [commanding] [whispering] — громко, по-армейски",
+      "design": {
+        "description": "Deep, low-pitched, hoarse bass-baritone voice of a heavyset Russian man in his mid-fifties, a retired army warrant officer. Gravelly smoker's rasp, chesty and booming, bossy and blunt like giving orders, self-important, but not screaming. Native Russian speaker, plain provincial Russian accent.",
+        "text": "Так, Де́мбель. Слу́шай мою́ кома́нду. Горя́чую во́ду отключи́ли, но пра́порщик не сдаётся. Я два́дцать лет в а́рмии. Опера́ция «Та́зик» начина́ется пря́мо сейча́с. Отста́вить смех!",
+        "picked": {
+          "i": 1,
+          "dur": 18.91,
+          "f0": 333.3,
+          "f0_iqr": 300.9,
+          "rate": 14.6,
+          "loud_sd": 5.9
+        }
+      },
+      "voice_id": "rBeJLZF1kJdbvH3OTV0M",
+      "voice": "Валера и кот — Валера"
+    },
+    "cat": {
+      "name": "Кот Дембель",
+      "color_caption": [
+        255,
+        170,
+        70
+      ],
+      "style": "[deadpan] [bored] — сухо, лениво, только в камеру",
+      "design": {
+        "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
+        "text": "На скла́де. К весне́ помо́ется. Копчёный. Ещё четы́рнадцать дней. Я своё отслужи́л, тепе́рь я лежу́ на батаре́е. Тради́ция. Двадцать лет в армии... спалился за двадцать секунд.",
+        "picked": {
+          "i": 1,
+          "dur": 21.08,
+          "f0": 132.2,
+          "f0_iqr": 39.3,
+          "rate": 12.1,
+          "loud_sd": 5.3
+        }
+      },
+      "voice_id": "0SYrGzuYVNDS2OD4YroI",
+      "voice": "Валера и кот — Кот Дембель"
+    },
+    "zina": {
+      "name": "Баба Зина",
+      "color_caption": [
+        255,
+        150,
+        190
+      ],
+      "style": "[sarcastic] [gossiping] — быстро, язвительно",
+      "design": {
+        "description": "A sharp, nosy Russian grandmother in her late seventies. Thin, slightly shrill and crackly elderly female voice, quick sarcastic gossiping delivery, sounds like she knows everyone's business. Native Russian speaker.",
+        "text": "Лю́ба, сугро́б ползёт. Сугро́б, ты куда́ собра́лся? Мы тебя́ не ви́дели. Алло́, Тама́ра? Вале́ра идёт, гото́вь паке́т! Я всё ви́жу, я тут с утра́ сижу́.",
+        "picked": {
+          "i": 0,
+          "dur": 11.96,
+          "f0": 313.7,
+          "f0_iqr": 109.8,
+          "rate": 17.9,
+          "loud_sd": 6.9
+        }
+      },
+      "voice_id": "YLwEzYleYhWwRlkHH8jA",
+      "voice": "Валера и кот — Баба Зина"
+    },
+    "lyuba": {
+      "name": "Баба Люба",
+      "color_caption": [
+        200,
+        170,
+        255
+      ],
+      "style": "[slow] [deadpan] — медленно, добивает",
+      "design": {
+        "description": "A slow, heavy Russian grandmother around eighty. Low, raspy and breathy elderly female voice, very slow deadpan delivery with long pauses, dry and unimpressed. Native Russian speaker.",
+        "text": "С пу́зом. Хлеб в буты́лках не продаю́т. Всё включено́. Ой, да ла́дно тебе́, Зи́на, сиди́ уже́, не тарато́рь. Моро́з сего́дня, а мы сиди́м.",
+        "picked": {
+          "i": 1,
+          "dur": 22.6,
+          "f0": 166.7,
+          "f0_iqr": 125.6,
+          "rate": 9.2,
+          "loud_sd": 4.7
+        }
+      },
+      "voice_id": "e0TVxkt3XGwbs1DJmz5O",
+      "voice": "Валера и кот — Баба Люба"
+    },
+    "tamara": {
+      "name": "Кассирша Тамара",
+      "color_caption": [
+        150,
+        230,
+        140
+      ],
+      "style": "[bored] [flat] — жвачка, ноль эмоций",
+      "design": {
+        "description": "A tired Russian supermarket cashier woman in her early fifties. Flat, slightly nasal and husky voice, bored deadpan delivery, chewing gum, completely unimpressed by customers. Native Russian speaker.",
+        "text": "Две́сти во́семьдесят де́вять. Кру́пно — по ка́рте, ме́лко — по пра́вде. А я три́дцать лет на ка́ссе. Паке́т — девяно́сто. Ка́рта магази́на есть? Сле́дующий!",
+        "picked": {
+          "i": 1,
+          "dur": 15.15,
+          "f0": 183.9,
+          "f0_iqr": 35.9,
+          "rate": 17.2,
+          "loud_sd": 5.7
+        }
+      },
+      "voice_id": "3ce56pY2fyj9q7ajgqw6",
+      "voice": "Валера и кот — Кассирша Тамара"
+    },
+    "nina": {
+      "name": "Нина Петровна (ЖЭК)",
+      "color_caption": [
+        255,
+        130,
+        110
+      ],
+      "style": "[condescending] [indifferent] — вежливый бюрократ",
+      "design": {
+        "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
+        "text": "ЖЭК, слу́шаю. В труба́х, мужчи́на. До пятна́дцатого. Зна́чит, до сле́дующего. Э́то вода́. Служе́бная. Заявле́ния принима́ем по вто́рникам, с двух до двух пятна́дцати.",
+        "picked": {
+          "i": 1,
+          "dur": 13.56,
+          "f0": 177.8,
+          "f0_iqr": 41.3,
+          "rate": 16.2,
+          "loud_sd": 5.0
+        }
+      },
+      "voice_id": "9dk6dPXhLLtqmUWeVU6p",
+      "voice": "Валера и кот — Нина Петровна (ЖЭК)"
+    },
+    "robot": {
+      "name": "Автоответчик ЖЭКа",
+      "color_caption": [
+        200,
+        200,
+        200
+      ],
+      "voice": "Marusya G – Persuasive Outbound Caller",
+      "voice_id": "uQiZyJqZ7ePaB8bwME8n",
+      "style": "[robotic, cheerful, monotone] + телефонный фильтр при сведении"
+    }
+  },
+  "music": {},
+  "sfx": []
+}

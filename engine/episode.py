@@ -17,14 +17,15 @@ CRF = '20'
 
 
 class Episode:
-    def __init__(s, ep, voice, dur, fps=30, colors=COL):
-        s.ep, s.voice, s.dur, s.fps = ep, voice, dur, fps
+    def __init__(s, ep, voice, dur, fps=30, colors=COL, slug=P.PDZ, cap_words=3):
+        s.ep, s.voice, s.dur, s.fps, s.slug = ep, voice, dur, fps, slug
+        s.bk = ep if slug == P.PDZ else f'{slug}-{ep}'      # build/ subfolder
         s.env = {}
         for vid, vep, key, t0, a, b, who, txt in voice:
-            if (vep, key) not in s.env: s.env[(vep, key)] = S.load_env(P.voice_wav(vep, key))
+            if (vep, key) not in s.env: s.env[(vep, key)] = S.load_env(P.voice_wav(vep, key, slug))
         items = []
         for vid, vep, key, t0, a, b, who, txt in voice:
-            ch = O.chunk_words(O.word_times(s.env[(vep, key)], t0, a, b, txt.split()))
+            ch = O.chunk_words(O.word_times(s.env[(vep, key)], t0, a, b, txt.split()), cap_words)
             for i, c in enumerate(ch):
                 s0 = c[0][1]; e0 = ch[i + 1][0][1] if i + 1 < len(ch) else max(c[-1][2] + 0.35, t0 + (b - a))
                 items.append((s0, e0, [w[0] for w in c], colors[who]))
@@ -39,7 +40,7 @@ class Episode:
         return v
 
     def cover_frame(s):
-        p = P.episode(s.ep) / 'cover.png'
+        p = P.episode(s.ep, s.slug) / 'cover.png'
         return np.array(Image.open(p).convert('RGB').resize((OUT_W, OUT_H))) if p.exists() else None
 
     def encode(s, render, a0, a1, out):
@@ -59,20 +60,20 @@ class Episode:
             c = Image.new('RGB', (270 * len(ts), 480))
             for k, tt in enumerate(ts):
                 c.paste(Image.fromarray(render(tt)).resize((270, 480), Image.LANCZOS), (k * 270, 0))
-            c.save(P.build(s.ep, 'sheet.png')); print(P.build(s.ep, 'sheet.png'))
+            c.save(P.build(s.bk, 'sheet.png')); print(P.build(s.bk, 'sheet.png'))
         elif a[1] == 'frame':
-            Image.fromarray(render(float(a[2]))).save(P.build(s.ep, 'frame.png')); print(P.build(s.ep, 'frame.png'))
+            Image.fromarray(render(float(a[2]))).save(P.build(s.bk, 'frame.png')); print(P.build(s.bk, 'frame.png'))
         elif a[1] == 'seg':
             a0, a1 = int(a[2]), min(int(a[3]), n)
-            s.encode(render, a0, a1, P.build(s.ep, f'seg_{a0:04d}.mp4')); print('done', a0, a1)
+            s.encode(render, a0, a1, P.build(s.bk, f'seg_{a0:04d}.mp4')); print('done', a0, a1)
         elif a[1] == 'all':
             k = int(a[2]) if len(a) > 2 else 4
             cuts = [round(n * i / k) for i in range(k + 1)]
             procs = [subprocess.Popen([sys.executable, script, 'seg', str(cuts[i]), str(cuts[i + 1])]) for i in range(k)]
             for p_ in procs: p_.wait()
-            lst = P.build(s.ep, 'segs.txt')
+            lst = P.build(s.bk, 'segs.txt')
             with open(lst, 'w') as f:
-                for i in range(k): f.write(f"file '{P.build(s.ep, f'seg_{cuts[i]:04d}.mp4')}'\n")
+                for i in range(k): f.write(f"file '{P.build(s.bk, f'seg_{cuts[i]:04d}.mp4')}'\n")
             subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', lst, '-c', 'copy',
-                            P.build(s.ep, 'noaudio.mp4')], check=True)
-            print('ok', P.build(s.ep, 'noaudio.mp4'))
+                            P.build(s.bk, 'noaudio.mp4')], check=True)
+            print('ok', P.build(s.bk, 'noaudio.mp4'))
