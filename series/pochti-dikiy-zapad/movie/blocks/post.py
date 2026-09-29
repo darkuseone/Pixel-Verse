@@ -21,6 +21,7 @@ BT = E3.SAL.BT_X
 
 
 def bar(t, cx, Z):
+    ST.set_px(1)
     v = E3.view_at(BT + cx, 440, Z, 180, 330)
     big, xs, ys = E3.bg(v)
     E3.blit_world(big, xs, ys, E3.BT['polish%d' % (int(t * 4) % 2)], BT - 60, 0)

@@ -382,6 +382,7 @@ def shot_at(t):
 
 
 def render_scene(t):
+    ST.set_px(1)                                   # other blocks may have changed the shared hero pixel size
     a, b, name = shot_at(t); u = t - a; CH = Chars(); extra = []
     if name in ('doors', 'doors_end'):
         if name == 'doors':
