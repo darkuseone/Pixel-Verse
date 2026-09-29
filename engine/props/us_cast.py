@@ -58,7 +58,7 @@ def _aviators(Hd, F, P, look, down):
         cap(Hd, F(1.6, 24.75), F(1.8, 24.7), 0.13, 0.13, P['gold'])
 
 
-def _dale_head(Hd, F, P, expr, t, mouth, look, shades, blink, sweat=0.0, red=0.0, beard=1.0):
+def _dale_head(Hd, F, P, expr, t, mouth, look, shades, blink, sweat=0.0, red=0.0, beard=1.0, visor=False):
     """3/4 head facing +x: lean sunburnt face, bleach-blond mullet, peeling nose, soul patch. F(x, h) head-local coords."""
     sk = {k: tuple(int(c + (r - c) * red) for c, r in zip(P[k], (250, 84, 76))) for k in ('skin', 'skin_hi', 'skin_sh')}
     # mullet (behind the head)
@@ -106,7 +106,14 @@ def _dale_head(Hd, F, P, expr, t, mouth, look, shades, blink, sweat=0.0, red=0.0
         base = e_[1] - r - 0.72 - lift - (0.35 if hide else 0.0)
         s_ = 1 if k == 0 else -1
         cap(Hd, (e_[0] - 0.8, base - s_ * bt * 0.36), (e_[0] + 0.8, base + s_ * bt * 0.36), 0.34, 0.3, P['brow'])
-    if shades is not None: _aviators(Hd, F, P, look, shades)
+    if visor:                                                                                      # HOA president's visor over the bleached spikes
+        cap(Hd, F(-1.9, 24.0), F(3.6, 24.1), 0.5, 0.5, (250, 250, 246), (255, 255, 255), (200, 206, 212))
+        cap(Hd, F(-1.9, 23.6), F(3.6, 23.7), 0.2, 0.2, (255, 130, 176))
+        ell(Hd, F(4.1, 24.3), 2.4, 0.5, (250, 250, 246), -0.08, (255, 255, 255), (200, 206, 212))
+        ell(Hd, F(4.2, 24.08), 2.2, 0.18, (214, 92, 138), -0.08)
+        for x0 in (-1.0, 0.2, 1.4): cap(Hd, F(x0, 24.5), F(x0 - 0.2, 25.9), 0.5, 0.1, P['hair'], P['hair_hi'], None)   # spikes poke through
+        if shades is True: _aviators(Hd, F, P, look, True)
+    elif shades is not None: _aviators(Hd, F, P, look, shades)
     elif True: _aviators(Hd, F, P, look, False)
     # nose (big, peeling), moustache, soul patch, mouth
     ell(Hd, F(3.95, 20.9), 1.05, 0.95, sk['skin'], 0, sk['skin_hi'], sk['skin_sh'])
@@ -135,7 +142,7 @@ def _dale_head(Hd, F, P, expr, t, mouth, look, shades, blink, sweat=0.0, red=0.0
 
 
 def dale(CH, cam, pose=None, t=0.0, mouth=0.0, expr='normal', look=0.0, shades=False, hand_n=None, hand_f=None, prop_n=None,
-         prop_f=None, lean=0.0, sweat=0.0, red=0.0, paint=None, legs=True, blink=True):
+         prop_f=None, lean=0.0, sweat=0.0, red=0.0, paint=None, legs=True, blink=True, visor=False):
     """expr: normal | shout | angry | smug | sly | shock | cheer | deadpan | incredulous | manic | sad
     shades: False (pushed up on the hair) | True (down over the eyes) | None (hidden entirely)
     paint: (r,g,b) overspray tint on shirt/skin, or None. hand_n / hand_f: IK targets; prop_n / prop_f: callables(L, hand)."""
@@ -196,7 +203,7 @@ def dale(CH, cam, pose=None, t=0.0, mouth=0.0, expr='normal', look=0.0, shades=F
     hx = 0.9 + ln * 1.3
     hc = H(hx, 21.3 + br)
     def F(x, h): return H(hx + x - 0.9, h + br)
-    _dale_head(Hd, F, P, expr, t, mouth, look, shades, blink, sweat, red)
+    _dale_head(Hd, F, P, expr, t, mouth, look, shades, blink, sweat, red, visor=visor)
     _merge(L, Hd)
     # near arm (front)
     A = Layer(cam)
@@ -240,7 +247,7 @@ BPOSE = dict(
 )
 
 
-def _brenda_head(Hd, F, P, expr, t, mouth, look, blink, visor=True, sweat=0.0):
+def _brenda_head(Hd, F, P, expr, t, mouth, look, blink, visor=True, sweat=0.0, curlers=False):
     """3/4 head facing +x: round face, frosted asymmetric bob under a white sun visor, huge toothy smile."""
     # back of the bob
     ell(Hd, F(-1.4, 21.0), 2.2, 3.0, P['hair'], 0.1, P['hair_hi'], P['hair_sh'])
@@ -257,6 +264,11 @@ def _brenda_head(Hd, F, P, expr, t, mouth, look, blink, visor=True, sweat=0.0):
     ell(Hd, F(-0.6, 20.6), 1.35, 2.7, P['hair'], 0.05, P['hair_hi'], P['hair_sh'])
     cap(Hd, F(-1.0, 22.0), F(-0.9, 18.2), 1.0, 0.85, P['hair'], P['hair_hi'], P['hair_sh'])
     ell(Hd, F(0.3, 23.2), 3.0, 1.3, P['hair'], 0, P['hair_hi'], P['hair_sh'])
+    if curlers:                                                                                    # pink curlers + sleep mask pushed up
+        for k, (x0, h0) in enumerate(((-0.6, 24.6), (0.9, 25.0), (2.3, 24.6))):
+            cap(Hd, F(x0, h0), F(x0 + 0.1, h0 + 1.5), 0.72, 0.72, (255, 140, 190), (255, 190, 220), (214, 96, 150))
+            dot(Hd, F(x0, h0 + 1.6), (230, 230, 240), 0.3)
+        cap(Hd, F(-0.2, 23.3), F(3.4, 23.2), 0.62, 0.62, (120, 90, 190), (160, 130, 230), (84, 60, 150))
     poly(Hd, [F(0.4, 23.2), F(3.2, 22.6), F(2.4, 21.9), F(0.2, 22.4)], P['hair'])                              # side-swept bangs
     cap(Hd, F(1.1, 23.0), F(3.0, 22.4), 0.4, 0.3, P['hair_hi'])
     if visor:
@@ -320,9 +332,13 @@ def _brenda_head(Hd, F, P, expr, t, mouth, look, blink, visor=True, sweat=0.0):
 
 
 def brenda(CH, cam, pose=None, t=0.0, mouth=0.0, expr='sweet', look=0.0, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-           lean=0.0, sweat=0.0, legs=True, blink=True, visor=True):
-    """expr: sweet | evil | shock | hollow | cheer | bright | dread"""
-    P = BC
+           lean=0.0, sweat=0.0, legs=True, blink=True, visor=True, outfit='polo'):
+    """expr: sweet | evil | shock | hollow | cheer | bright | dread;  outfit: polo | robe (3 a.m.: fluffy robe, curlers, no visor)"""
+    P = dict(BC)
+    if outfit == 'robe':
+        visor = False
+        P.update(polo=(214, 172, 236), polo_hi=(238, 204, 250), polo_sh=(160, 120, 190), collar=(240, 210, 250), capri=(214, 172, 236),
+                 capri_hi=(238, 204, 250), capri_sh=(160, 120, 190), shoe=(255, 140, 190), shoe_sh=(214, 96, 150), lan=(214, 172, 236))
     pose = pose or BPOSE['stand']
     br = 0.16 * math.sin(t * 2.0 + 1.1)
     sk = (P['skin'], P['skin_hi'], P['skin_sh'])
@@ -357,17 +373,22 @@ def brenda(CH, cam, pose=None, t=0.0, mouth=0.0, expr='sweet', look=0.0, hand_n=
     T = Layer(cam)
     ellt(T, H(0.9 + 0.3 * ln, 12.4 + br * 0.5), 4.6, 5.0, (P['polo'], P['polo_hi'], P['polo_sh']))
     ellt(T, H(0.3 + ln, 15.8 + br), 4.2, 2.9, (P['polo'], P['polo_hi'], P['polo_sh']))
-    cap(T, H(2.2 + ln, 17.0), H(3.1 + ln, 11.6), 0.22, 0.22, P['lan'])                                        # lanyard
-    ell(T, H(3.0 + ln, 11.2), 0.95, 1.2, P['badge'], 0, None, P['visor_sh'])
-    dot(T, H(2.85 + ln, 11.6), P['polo_sh'], 0.35); cap(T, H(2.5 + ln, 10.6), H(3.6 + ln, 10.6), 0.08, 0.08, P['badge_ln'])
-    poly(T, [H(-0.4 + ln, 17.8 + br), H(0.9 + ln, 19.2 + br), H(1.7 + ln, 17.6 + br), H(0.6 + ln, 16.8 + br)], P['collar'])   # popped collar
-    poly(T, [H(1.9 + ln, 17.4 + br), H(3.2 + ln, 18.6 + br), H(3.4 + ln, 17.0 + br), H(2.4 + ln, 16.4 + br)], P['collar'])
+    if outfit != 'robe':
+        cap(T, H(2.2 + ln, 17.0), H(3.1 + ln, 11.6), 0.22, 0.22, P['lan'])                                    # lanyard
+        ell(T, H(3.0 + ln, 11.2), 0.95, 1.2, P['badge'], 0, None, P['visor_sh'])
+        dot(T, H(2.85 + ln, 11.6), P['polo_sh'], 0.35); cap(T, H(2.5 + ln, 10.6), H(3.6 + ln, 10.6), 0.08, 0.08, P['badge_ln'])
+    if outfit == 'robe':
+        cap(T, H(-3.6 + ln, 9.0), H(5.4 + ln, 9.0), 0.55, 0.55, (255, 140, 190))                               # robe belt
+        ell(T, H(2.4 + ln, 14.6 + br), 1.3, 3.0, P['polo_sh'], 0.2)                                        # robe opening
+    else:
+        poly(T, [H(-0.4 + ln, 17.8 + br), H(0.9 + ln, 19.2 + br), H(1.7 + ln, 17.6 + br), H(0.6 + ln, 16.8 + br)], P['collar'])   # popped collar
+        poly(T, [H(1.9 + ln, 17.4 + br), H(3.2 + ln, 18.6 + br), H(3.4 + ln, 17.0 + br), H(2.4 + ln, 16.4 + br)], P['collar'])
     _merge(L, T)
     Hd = Layer(cam)
     hx = 0.9 + ln * 1.3
     hc = H(hx, 20.8 + br)
     def F(x, h): return H(hx + x - 0.9, h + br)
-    _brenda_head(Hd, F, P, expr, t, mouth, look, blink, visor, sweat)
+    _brenda_head(Hd, F, P, expr, t, mouth, look, blink, visor, sweat, curlers=(outfit == 'robe'))
     _merge(L, Hd)
     A = Layer(cam)
     tn = hand_n if hand_n is not None else H(*pose['n'])
@@ -386,7 +407,7 @@ EC = dict(skin=(98, 136, 64), skin_hi=(150, 186, 92), skin_sh=(58, 92, 46), bell
           nostril=(30, 46, 28), water=(46, 104, 100), water_hi=(120, 186, 170), pad=(84, 168, 80), pad_hi=(140, 210, 110))
 
 
-def earl(CH, cam, t=0.0, mouth=0.0, lid=0.5, look=(0.0, 0.0), paint=None, water_y=0.0, ripple=1.0, blink=True, grin=0.0):
+def earl(CH, cam, t=0.0, mouth=0.0, lid=0.5, look=(0.0, 0.0), paint=None, water_y=0.0, ripple=1.0, blink=True, grin=0.0, stuff=None, chew=0.0):
     """Earl in profile facing +x, floating in the pond: only eyes, snout and the top of the head show above the waterline
     (h = water_y). lid: 0 wide open .. 1 shut; paint: (r,g,b) overspray on the snout; anchor = waterline centre under the eye."""
     P = EC
@@ -417,12 +438,18 @@ def earl(CH, cam, t=0.0, mouth=0.0, lid=0.5, look=(0.0, 0.0), paint=None, water_
         L.col[A.m] = A.col[A.m]; L.m |= A.m
         cap(L, (e[0] - 1.25, e[1] - 1.22 + 2.44 * cl), (e[0] + 1.25, e[1] - 1.22 + 2.44 * cl), 0.14, 0.14, P['skin_sh'])
     # mouth line + teeth, jaw drops when talking
-    m = max(mouth, grin)
+    m = max(mouth, grin, chew * (0.5 + 0.5 * math.sin(t * 11.0)) * 0.7)
     ell(L, H(3.2, hh(wl + 0.05 - 0.55 * m)), 5.2, 0.32 + 0.6 * m, P['skin_sh'] if m < 0.08 else P['mouth'])
     if m > 0.08:
         for k in range(6): poly(L, [H(0.6 + k * 1.05, hh(wl + 0.25)), H(1.0 + k * 1.05, hh(wl + 0.25)), H(0.8 + k * 1.05, hh(wl - 0.35))], P['tooth'])
     else:
         for k in range(4): poly(L, [H(4.0 + k * 1.05, hh(wl + 0.05)), H(4.4 + k * 1.05, hh(wl + 0.05)), H(4.2 + k * 1.05, hh(wl - 0.45))], P['tooth'])
+    if stuff == 'flamingo':                                                                          # plastic legs + a scrap of vest sticking out of the jaws
+        sw = 0.35 * math.sin(t * 9.0) * (1 if chew else 0.3)
+        cap(L, H(6.6, hh(wl + 0.2)), H(8.0 + sw, hh(wl + 4.4)), 0.32, 0.26, (244, 120, 160), (255, 170, 205), (200, 80, 128))
+        cap(L, H(6.0, hh(wl + 0.2)), H(6.9 + sw, hh(wl + 4.9)), 0.32, 0.26, (244, 120, 160), (255, 170, 205), (200, 80, 128))
+        ell(L, H(7.2, hh(wl + 0.3)), 0.9, 0.6, (255, 214, 60))                                          # vest scrap
+        dot(L, H(8.0 + sw, hh(wl + 4.6)), (255, 214, 200), 0.32)
     # bumps on the back of the head
     for k in range(3): ell(L, H(-4.2 - k * 1.3, hh(wl + 1.1 - 0.15 * k)), 0.7, 0.5, P['skin_sh'])
     if paint is not None:

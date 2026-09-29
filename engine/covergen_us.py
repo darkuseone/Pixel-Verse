@@ -85,11 +85,27 @@ def title(F, lines, top, sizes, max_w=528, gap=6):
 def make(raw_png, src_jpg, out_pngs, n, title_lines, sizes, series='SUNNY PALMS HOA', extra=None, total=6):
     Image.open(raw_png).convert('RGB').save(src_jpg, quality=93)
     F = pixelize(Image.open(src_jpg))
-    for i, yy in enumerate(range(0, 130, 22)):                              # darken the very top slightly for text contrast
-        F[yy:yy + 22] = (F[yy:yy + 22].astype(np.float32) * (0.70 + 0.06 * i)).clip(0, 255).astype(np.uint8)
+    for yy in range(0, 132, 4):                                             # darken the very top slightly for text contrast (smooth 4-px steps)
+        F[yy:yy + 4] = (F[yy:yy + 4].astype(np.float32) * (0.74 + 0.26 * yy / 132)).clip(0, 255).astype(np.uint8)
     yb = neon_plank(F, f'{series}\nEPISODE {n}/{total}', 128, 22)            # just below the 3:4 grid crop line
     title(F, title_lines, yb + 18, sizes)
     if extra: extra(F)
     img = Image.fromarray(F).resize((1080, 1920), Image.NEAREST)
     for o in out_pngs: img.save(o)
     return img
+
+
+def calm_sky(big):
+    """paint a quiet sky gradient + chunky clouds over the top of a 1080x1920 reference frame (the neon title goes there)"""
+    ys = np.arange(1920)[:, None].astype(np.float32)
+    a = np.clip(1.0 - (ys - 380) / 420.0, 0, 1) ** 0.7
+    sky = np.zeros((1920, 1, 3), np.float32)
+    for c, (top, bot) in enumerate(((96, 168), (188, 226), (255, 255))): sky[:, 0, c] = top + (bot - top) * np.clip(ys[:, 0] / 900, 0, 1)
+    big[:] = (big * (1 - a[..., None]) + sky * a[..., None]).astype(np.uint8)
+    yy, xx = np.ogrid[:1920, :1080]
+    for cx, cy, w in ((250, 150, 200), (760, 260, 260), (470, 60, 150)):
+        for k in range(5):
+            x0 = cx - w // 2 + k * w // 6; r = int(w * 0.26 * (1 - abs(k - 2) * 0.22))
+            m = ((xx - x0) ** 2 + (yy - cy + 12 * (k % 2)) ** 2) < r * r
+            big[m] = (250, 252, 255)
+    return big

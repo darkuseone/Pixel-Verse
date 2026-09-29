@@ -220,7 +220,7 @@ def fund_jar(CH, v, t, level=0.94, pop=0.0):
     CH.add(L)
 
 
-def fund_insert(big, v, t, level=0.94, pop=0.0):
+def fund_insert(big, v, t, level=0.94, pop=0.0, title=('BAHAMAS', '2027')):
     """cork-board chart + jar label drawn straight onto the frame (output px, positions via the view v):
     BAHAMAS 2027 card, thermometer bar `level` (0..1), jar label. pop 0..1 bounces the percentage."""
     from PIL import ImageFont
@@ -240,7 +240,7 @@ def fund_insert(big, v, t, level=0.94, pop=0.0):
         a, b = o(x0, y0), o(x1, y1)
         d.rectangle([a, b], fill=fill, outline=outline_, width=w)
     box(352, 92, 592, 150, (252, 250, 240), (40, 60, 120), 4)                                # card
-    txt('BAHAMAS', *o(472, 112), 12, (24, 96, 200)); txt('2027', *o(472, 136), 12, (255, 90, 160))
+    txt(title[0], *o(472, 112), 12, (24, 96, 200)); txt(title[1], *o(472, 136), 12, (255, 90, 160))
     box(352, 176, 592, 210, (236, 236, 240), (40, 40, 60), 4)                                # thermometer track
     fx = 352 + 240 * min(1.0, level)
     box(354, 178, fx, 208, (232, 48, 64))
@@ -251,4 +251,97 @@ def fund_insert(big, v, t, level=0.94, pop=0.0):
     txt(pct, *o(472, 242 + 0), 14 * k, (255, 236, 90) if level < 0.999 else (140, 255, 150), (30, 20, 40))
     box(272, 368, 360, 396, (252, 250, 240), (255, 100, 170), 3)                              # jar label
     txt('BEAUTIFICATION', *o(316, 376), 5.2, (60, 60, 90)); txt('FUND', *o(316, 388), 6.0, (200, 40, 70))
+    O.overlay(big, np.array(im), 0, 0, 1.0)
+
+
+# ---------------------------------------------------------------- E02: Kevin the (plastic) emotional support flamingo
+FL = dict(pk=(255, 124, 172), hi=(255, 176, 208), sh=(212, 84, 134), dk=(226, 96, 146), beak=(255, 224, 208), vest=(255, 214, 60),
+          vest_hi=(255, 240, 150), vest_sh=(208, 160, 30))
+
+
+def flamingo(CH, cam, t=0.0, vest=True, shades=True, wob=0.0, tilt=0.0):
+    """pink plastic lawn flamingo on one leg, ESA vest + tiny aviators; anchor = foot on the ground, ~18 units tall"""
+    P = FL
+    L = Layer(cam)
+    cap(L, H(0.7, 6.4), H(2.6, 5.2), 0.3, 0.3, P['dk'])                                    # tucked leg
+    cap(L, H(0.0, 0.0), H(0.2, 6.6), 0.36, 0.3, P['pk'], P['hi'], P['sh'])                  # standing leg
+    cap(L, H(-0.9, 0.1), H(1.1, 0.1), 0.3, 0.3, P['pk'])
+    poly(L, [H(-2.6, 9.8 + wob), H(-5.8, 7.6), H(-5.0, 10.6 + wob)], P['sh'])                # tail feathers
+    ell(L, H(0.4, 9.0 + wob), 3.5 + wob * 0.6, 2.4 - wob * 0.4, P['pk'], -0.22, P['hi'], P['sh'])
+    ell(L, H(-0.1 + tilt, 9.3 + wob), 2.2, 1.3, P['hi'], -0.3, None, P['pk'])                # wing
+    pts = [H(3.0, 10.4 + wob), H(4.3, 12.4), H(3.4, 14.6), H(4.2, 16.6)]
+    for a, b in zip(pts, pts[1:]): cap(L, a, b, 0.8, 0.7, P['pk'], P['hi'], P['sh'])         # S-neck
+    ell(L, H(4.7, 17.4), 1.15, 1.0, P['pk'], 0, P['hi'], P['sh'])
+    cap(L, H(5.6, 17.4), H(7.0, 16.5), 0.62, 0.42, P['beak'])
+    cap(L, H(6.6, 16.7), H(7.5, 16.2), 0.44, 0.3, (30, 26, 30))
+    if vest:
+        ell(L, H(0.6, 9.2 + wob), 2.6, 2.2, P['vest'], -0.2, P['vest_hi'], P['vest_sh'])
+        cap(L, H(-1.4, 9.8), H(2.6, 8.4), 0.22, 0.22, (200, 200, 208))
+        ltext(L, 'ESA', (0.7, 9.0), 1.15, (60, 44, 60))
+    if shades:
+        ell(L, H(4.9, 17.7), 0.72, 0.6, (232, 190, 60)); ell(L, H(4.9, 17.7), 0.56, 0.44, (50, 60, 112))
+        dot(L, H(4.7, 17.9), (170, 196, 240), 0.14)
+        cap(L, H(4.2, 17.7), H(3.6, 17.5), 0.1, 0.1, (232, 190, 60))
+    else:
+        dot(L, H(4.9, 17.7), (20, 18, 22), 0.28)
+    dot(L, H(0.0, 10.5), (255, 255, 255), 0.3)                                              # plastic glint
+    outline(L, OL)
+    CH.add(L)
+
+
+def binder(L, h, ang=-0.1, w=6.0, hh=8.0, title='BYLAWS'):
+    """thick HOA rulebook"""
+    cx, cy = h[0] + 0.6, h[1] - 0.8
+    rect(L, cx + 0.4, cy + 0.4, w + 1.0, hh + 0.6, ang, (18, 30, 70))
+    rect(L, cx, cy, w, hh, ang, (36, 74, 168))
+    rect(L, cx - w * 0.46, cy, 0.9, hh, ang, (24, 50, 120))                                  # spine
+    rect(L, cx + 0.3, cy - hh * 0.12, w * 0.7, hh * 0.34, ang, (250, 250, 246))              # label
+    ltext(L, title, (cx + 0.3, cy - hh * 0.12), min(1.3, w * 0.62 / len(title)), (30, 40, 90), ang)
+    ltext(L, '4,212 PG', (cx + 0.3, cy + hh * 0.30), 0.9, (200, 210, 240), ang)
+
+
+def cert_insert(big, t, hl=0.0):
+    """full-screen insert: the online «Emotional Support Flamingo» certificate; hl 0..1 highlights the fine print (NOVELTY)"""
+    import overlays as O
+    W_, H_ = big.shape[1], big.shape[0]
+    big[:] = (big * 0.32).astype(np.uint8)
+    im = Image.new('RGBA', (W_, H_), (0, 0, 0, 0)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    x0, y0, x1, y1 = 110, 330, 970, 1400
+    wob = int(6 * math.sin(t * 5))
+    y0 += wob; y1 += wob
+    d.rectangle([x0 - 14, y0 - 14, x1 + 14, y1 + 14], fill=(30, 16, 40, 255))
+    d.rectangle([x0, y0, x1, y1], fill=(250, 244, 222, 255), outline=(214, 170, 60, 255), width=12)
+    d.rectangle([x0 + 26, y0 + 26, x1 - 26, y1 - 26], outline=(120, 70, 150, 255), width=4)
+    def ctext(s_, cy, size, col, stroke=None):
+        f = O.pfont(size); bb = f.getbbox(s_)
+        pos = ((x0 + x1) // 2 - (bb[2] - bb[0]) / 2 - bb[0], cy - (bb[3] - bb[1]) / 2 - bb[1])
+        if stroke:
+            for dx in (-3, 0, 3):
+                for dy in (-3, 0, 3): d.text((pos[0] + dx, pos[1] + dy), s_, font=f, fill=stroke)
+        d.text(pos, s_, font=f, fill=col)
+    ctext('OFFICIAL', y0 + 110, 40, (120, 70, 150, 255))
+    ctext('EMOTIONAL', y0 + 190, 52, (40, 40, 90, 255))
+    ctext('SUPPORT', y0 + 260, 52, (40, 40, 90, 255))
+    ctext('FLAMINGO', y0 + 350, 74, (230, 60, 130, 255))
+    ctext('CERTIFICATE', y0 + 430, 40, (120, 70, 150, 255))
+    for k in range(5):                                                                     # five stars
+        cx, cy = 260 + k * 140, y0 + 540
+        pts = []
+        for i in range(10):
+            r = 52 if i % 2 == 0 else 22
+            a = -math.pi / 2 + i * math.pi / 5
+            pts.append((cx + r * math.cos(a), cy + r * math.sin(a)))
+        d.polygon(pts, fill=(255, 196, 40, 255), outline=(150, 100, 20, 255))
+    ctext('5.0 (2 REVIEWS)', y0 + 640, 34, (60, 60, 80, 255))
+    d.ellipse([(x0 + x1) // 2 - 120, y0 + 690, (x0 + x1) // 2 + 120, y0 + 880], fill=(214, 170, 60, 255), outline=(150, 100, 20, 255), width=8)
+    ctext('ONLY', y0 + 748, 30, (255, 255, 255, 255)); ctext('$19.99', y0 + 820, 44, (255, 255, 255, 255))
+    k = min(1.0, hl)
+    size = int(20 + 12 * k)
+    lines_ = ('*NOVELTY ITEM.', 'NOT A LEGAL DOCUMENT.')
+    if k > 0:
+        f = O.pfont(size); tw = max(f.getbbox(l_)[2] - f.getbbox(l_)[0] for l_ in lines_)
+        cx0 = (x0 + x1) // 2 - tw // 2 - 26
+        d.rectangle([cx0, y0 + 920, cx0 + tw + 52, y0 + 920 + size * 2 + 78], fill=(255, 236, 90, int(255 * k)), outline=(230, 40, 60, 255), width=8)
+    for i_, l_ in enumerate(lines_):
+        ctext(l_, y0 + 960 + i_ * (size + 24), size, (200, 30, 50, 255) if k > 0 else (140, 140, 150, 255))
     O.overlay(big, np.array(im), 0, 0, 1.0)
