@@ -1,0 +1,14 @@
+{
+  "d1": ["dale",   "[confused, reading aloud] 'Suspicious man. Walking.' Who is walking?!"],
+  "b1": ["brenda", "[sweetly] You are, Dale. It's on my Ring."],
+  "d2": ["dale",   "[outraged, shouting] I was taking out the TRASH!"],
+  "b2": ["brenda", "[sweet, bright] Trash is Tuesday. Today is Wednesday. Suspicious."],
+  "d3": ["dale",   "[smug, dim-witted] Fine. I have a Ring too. It's mostly pointed at my truck."],
+  "d4": ["dale",   "[shocked, whispering] She moved my mailbox. Six inches."],
+  "b3": ["brenda", "[sweetly, unbothered] Routine compliance measurement."],
+  "d5": ["dale",   "[triumphant, shouting] It's on CAMERA!"],
+  "b4": ["brenda", "[sugary, matter-of-fact] Only approved doorbells are admissible. Yours is black."],
+  "d6": ["dale",   "[incredulous, shouting] So the doorbell has to be BEIGE?!"],
+  "b5": ["brenda", "[sweetly] Ecru Whisper."],
+  "e1": ["earl",   "[deadpan, flat] Haven't seen any cat."]
+}

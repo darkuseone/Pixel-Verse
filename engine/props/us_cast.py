@@ -244,7 +244,17 @@ BPOSE = dict(
     wave=dict(n=(5.6, 23.6), f=(2.0, 13.0), bn=-1, bf=1, nleg=(0.05, 0.0), fleg=(-0.05, 0.0)),
     hands=dict(n=(3.8, 12.2), f=(2.2, 12.2), bn=1, bf=1, nleg=(0.05, 0.0), fleg=(-0.05, 0.0)),              # hands clasped: sweet
     sit=dict(n=(4.8, 11.4), f=(3.6, 11.6), bn=1, bf=1, nleg=(1.5, 0.0), fleg=(1.4, 0.0)),
+    shovel=dict(n=(6.8, 12.0), f=(4.4, 11.4), bn=1, bf=1, nleg=(0.2, 0.0), fleg=(-0.2, 0.0)),               # both hands on a shovel handle
+    measure=dict(n=(7.0, 10.4), f=(3.0, 11.6), bn=1, bf=1, nleg=(0.15, 0.0), fleg=(-0.15, 0.0)),
 )
+
+
+def bwalk(t, speed=8.0, amp=0.4, carry=None):
+    s_ = math.sin(t * speed)
+    p = dict(n=(3.4 - 2.0 * s_, 10.6 + 0.4 * abs(s_)), f=(-3.0 + 2.0 * s_, 10.6), bn=1, bf=-1,
+             nleg=(amp * s_, 0.25 * max(0, -s_)), fleg=(-amp * s_, 0.25 * max(0, s_)))
+    if carry == 'shoulder': p.update(n=(2.2, 19.6), bn=-1)                                             # shovel over the shoulder
+    return p
 
 
 def _brenda_head(Hd, F, P, expr, t, mouth, look, blink, visor=True, sweat=0.0, curlers=False):

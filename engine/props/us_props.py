@@ -345,3 +345,131 @@ def cert_insert(big, t, hl=0.0):
     for i_, l_ in enumerate(lines_):
         ctext(l_, y0 + 960 + i_ * (size + 24), size, (200, 30, 50, 255) if k > 0 else (140, 140, 150, 255))
     O.overlay(big, np.array(im), 0, 0, 1.0)
+
+
+# ---------------------------------------------------------------- E03: phone, NeighborNet feed, Ring night footage, shovel, tape
+def phone(L, h, ang=0.0, w=3.6, hh=6.6, screen='feed'):
+    """smartphone held at hand h; screen: feed (green app) | ring (blue camera app) | truck (photo roll of a pickup)"""
+    cx, cy = h[0] + 0.4, h[1] - 0.6
+    rect(L, cx, cy, w + 0.5, hh + 0.5, ang, (18, 18, 26))
+    bg = {'feed': (236, 244, 236), 'ring': (20, 40, 90), 'truck': (28, 30, 40)}[screen]
+    rect(L, cx, cy, w, hh, ang, bg)
+    if screen == 'feed':
+        rect(L, cx, cy - hh * 0.36, w, hh * 0.22, ang, (44, 170, 96))
+        for k in range(3): cap(L, (cx - w * 0.36, cy - hh * 0.05 + k * hh * 0.17), (cx + w * (0.36 - 0.12 * k), cy - hh * 0.05 + k * hh * 0.17), 0.12, 0.12, (150, 160, 150))
+        UP_dot = dot; UP_dot(L, (cx + w * 0.3, cy - hh * 0.36), (238, 60, 60), 0.4)
+    elif screen == 'ring':
+        ell(L, (cx, cy - hh * 0.05), w * 0.28, w * 0.28, (70, 150, 255)); dot(L, (cx, cy - hh * 0.05), (12, 24, 60), w * 0.12)
+        cap(L, (cx - w * 0.36, cy + hh * 0.34), (cx + w * 0.36, cy + hh * 0.34), 0.13, 0.13, (238, 60, 60))
+    else:
+        rect(L, cx, cy + hh * 0.05, w * 0.7, hh * 0.22, ang, (220, 60, 60))
+        dot(L, (cx - w * 0.22, cy + hh * 0.2), (240, 240, 240), 0.42); dot(L, (cx + w * 0.22, cy + hh * 0.2), (240, 240, 240), 0.42)
+        rect(L, cx + w * 0.1, cy - hh * 0.06, w * 0.34, hh * 0.1, ang, (170, 210, 250))
+
+
+def trash_bag(L, h):
+    cx, cy = h[0] + 0.2, h[1] + 2.4
+    ell(L, (cx, cy), 2.6, 3.0, (36, 36, 44), 0, (86, 88, 104), (18, 18, 24))
+    poly(L, [(cx - 0.5, cy - 2.8), (cx - 1.4, cy - 4.4), (cx - 0.1, cy - 3.6)], (36, 36, 44))
+    poly(L, [(cx + 0.3, cy - 2.8), (cx + 1.5, cy - 4.2), (cx + 0.2, cy - 3.4)], (36, 36, 44))
+    dot(L, (cx - 0.9, cy - 0.6), (150, 154, 170), 0.3)
+
+
+def shovel(L, h, ang=-0.5):
+    ca, sa = math.cos(ang), math.sin(ang)
+    cap(L, (h[0] - ca * 3.5, h[1] - sa * 3.5), (h[0] + ca * 7.5, h[1] + sa * 7.5), 0.38, 0.38, (176, 128, 78), (210, 164, 110), (120, 84, 48))
+    b0 = (h[0] + ca * 7.5, h[1] + sa * 7.5)
+    ell(L, (b0[0] + ca * 1.6, b0[1] + sa * 1.6), 1.7, 2.3, (176, 184, 196), ang + 1.57, (226, 232, 240), (120, 128, 142))
+
+
+def tape_hold(L, h):
+    rect(L, h[0] + 0.3, h[1] - 0.5, 2.6, 2.4, 0.0, (255, 214, 50))
+    rect(L, h[0] + 0.3, h[1] - 0.5, 1.6, 0.6, 0.0, (30, 30, 34))
+    cap(L, (h[0] + 1.6, h[1] - 0.2), (h[0] + 3.6, h[1] + 0.4), 0.16, 0.16, (250, 236, 120))
+
+
+NN_COMMENTS = [('Doug K.', (230, 120, 60), 'Saw him last week too.', 'Also walking.'),
+               ('Linda P.', (170, 90, 200), 'He was wearing SHORTS.', 'In public.'),
+               ('Hank R.', (60, 150, 210), 'Is this the guy with', 'the flamingo?'),
+               ('Marge T.', (220, 90, 130), 'Has anyone seen Mr. Whiskers?', 'Orange. Fat. Judgmental.')]
+
+
+def neighbornet_feed(big, t, u):
+    """full-screen fake neighbourhood-app feed (fictional «NeighborNet»): Brenda's post with a blurry Ring photo and pop-in comments"""
+    import overlays as O
+    W_, H_ = 1080, 1920
+    im = Image.new('RGB', (W_, H_), (232, 238, 232)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    def txt(s_, x, y, size, col, anchor='l'):
+        f = O.pfont(size); bb = f.getbbox(s_)
+        px = x if anchor == 'l' else (x - (bb[2] - bb[0]) // 2 if anchor == 'c' else x - (bb[2] - bb[0]))
+        d.text((px - bb[0], y - bb[1]), s_, font=f, fill=col)
+    d.rectangle([0, 0, W_, 70], fill=(20, 30, 24)); txt('9:41', 40, 22, 26, (255, 255, 255)); txt('87%', W_ - 40, 22, 26, (255, 255, 255), 'r')
+    d.rectangle([0, 70, W_, 220], fill=(44, 170, 96)); txt('neighbornet', 320, 118, 46, (255, 255, 255))
+    d.ellipse([W_ - 150, 100, W_ - 70, 180], fill=(255, 255, 255)); d.ellipse([W_ - 100, 90, W_ - 60, 130], fill=(238, 60, 60))
+    txt('5', W_ - 80, 100, 26, (255, 255, 255), 'c')
+    d.rectangle([0, 220, W_, 300], fill=(255, 255, 255)); txt('Feed', 110, 248, 26, (90, 90, 90)); txt('SAFETY!', 470, 248, 26, (220, 40, 50)); txt('Lost & Found', 770, 248, 26, (90, 90, 90))
+    d.rectangle([380, 292, 640, 300], fill=(220, 40, 50))
+    d.rectangle([30, 330, W_ - 30, 1050], fill=(255, 255, 255), outline=(200, 208, 200), width=4)
+    d.ellipse([60, 356, 170, 466], fill=(255, 150, 200)); d.ellipse([70, 366, 160, 400], fill=(255, 255, 255))
+    txt('Brenda W.', 200, 366, 30, (30, 40, 40)); txt('HOA PRESIDENT', 200, 414, 20, (44, 170, 96)); txt('9 min ago - Sunny Palms', 200, 448, 18, (130, 130, 130))
+    txt('SUSPICIOUS MAN', 60, 500, 40, (220, 40, 50)); txt('(WALKING)', 60, 556, 40, (220, 40, 50))
+    txt('Ring footage attached. Be advised.', 60, 616, 20, (90, 90, 90))
+    # blurry Ring photo
+    ph = Image.new('RGB', (900, 340), (150, 200, 240)); pd = ImageDraw.Draw(ph)
+    pd.rectangle([0, 190, 900, 340], fill=(90, 160, 80)); pd.rectangle([620, 150, 700, 210], fill=(232, 222, 200)); pd.rectangle([654, 210, 666, 290], fill=(120, 80, 50))
+    pd.rectangle([340, 100, 420, 180], fill=(228, 146, 112)); pd.rectangle([310, 90, 350, 190], fill=(238, 208, 110)); pd.rectangle([320, 180, 430, 260], fill=(30, 150, 162))
+    pd.rectangle([330, 260, 420, 330], fill=(196, 168, 106)); pd.ellipse([430, 200, 500, 280], fill=(30, 30, 38))
+    ph = ph.resize((45, 17), Image.BOX).resize((900, 340), Image.NEAREST)
+    im.paste(ph, (90, 660))
+    d.rectangle([300, 700, 560, 990 - 40], outline=(238, 60, 60), width=6); d.rectangle([300, 700, 560, 736], fill=(238, 60, 60)); txt('PERSON - WALKING', 310, 710, 16, (255, 255, 255))
+    cnt = int(147 * min(1.0, max(0.0, u / 2.7)) ** 1.6)
+    txt(f'{cnt} comments', 60, 1010, 24, (60, 60, 60)); txt('Like    Reply', W_ - 60, 1010, 24, (44, 140, 96), 'r')
+    for k, (nm, col, l1, l2) in enumerate(NN_COMMENTS):
+        t0 = 0.35 + 0.6 * k
+        if u < t0: continue
+        pop = min(1.0, (u - t0) / 0.18)
+        y0 = 1090 + k * 200 + int((1 - pop) * 40)
+        d.rounded_rectangle([30, y0, W_ - 30, y0 + 176], 18, fill=(255, 255, 255), outline=(200, 208, 200), width=3)
+        d.ellipse([56, y0 + 26, 136, y0 + 106], fill=col)
+        txt(nm, 160, y0 + 24, 26, (30, 40, 40)); txt(l1, 160, y0 + 72, 22, (70, 70, 70)); txt(l2, 160, y0 + 110, 22, (70, 70, 70))
+    d.rounded_rectangle([0, 0, W_ - 1, H_ - 1], 60, outline=(10, 10, 14), width=26)
+    big[:] = np.array(im)
+
+
+def ring_look(big, t, motion=True):
+    """turn a rendered frame into night doorbell-cam footage: IR grade, fisheye, scanlines, noise, HUD"""
+    import overlays as O
+    H_, W_ = big.shape[:2]
+    f = big.astype(np.float32)
+    g = f[..., 0] * 0.3 + f[..., 1] * 0.59 + f[..., 2] * 0.11
+    g = np.clip((g - 10) * 0.78, 0, 255)
+    out = np.stack([g * 0.72, g * 1.0, g * 0.86], -1) + 8
+    yy, xx = np.mgrid[0:H_, 0:W_].astype(np.float32)
+    nx, ny = (xx - W_ / 2) / (W_ / 2), (yy - H_ / 2) / (H_ / 2)
+    r2 = nx * nx + ny * ny
+    k = 1 + 0.16 * r2
+    sx = np.clip((nx * k * W_ / 2 + W_ / 2).astype(np.int32), 0, W_ - 1); sy = np.clip((ny * k * H_ / 2 + H_ / 2).astype(np.int32), 0, H_ - 1)
+    out = out[sy, sx]
+    out[::4] *= 0.86
+    rng = np.random.default_rng(int(t * 30))
+    out += rng.normal(0, 7, out.shape[:2])[..., None]
+    out *= (1 - 0.55 * np.clip(r2 - 0.35, 0, 1))[..., None]
+    out = np.clip(out, 0, 255).astype(np.uint8)
+    im = Image.fromarray(out); d = ImageDraw.Draw(im); d.fontmode = '1'
+    def txt(s_, x, y, size, col):
+        ff = O.pfont(size); bb = ff.getbbox(s_); d.text((x - bb[0], y - bb[1]), s_, font=ff, fill=col)
+    sec = 17 + int(t * 1.0)
+    txt(f'03:04:{sec % 60:02d} AM', 50, 190, 32, (230, 255, 230))
+    txt('FRONT DOOR', 50, 240, 22, (200, 240, 200))
+    if int(t * 2) % 2 == 0:
+        d.ellipse([W_ - 190, 190, W_ - 158, 222], fill=(255, 60, 60)); txt('REC', W_ - 140, 192, 30, (255, 255, 255))
+    if motion and int(t * 3) % 2 == 0: txt('MOTION DETECTED', 50, H_ - 330, 30, (255, 236, 90))
+    big[:] = np.array(im)
+
+
+def binoculars(L, h, ang=0.0):
+    """chunky black binoculars held at hand h (raised to the eyes)"""
+    for dx in (-1.35, 1.35):
+        cap(L, (h[0] + dx, h[1] + 1.4), (h[0] + dx, h[1] - 1.6), 1.15, 1.0, (34, 34, 42), (80, 80, 96), (16, 16, 22))
+        ell(L, (h[0] + dx, h[1] - 1.8), 1.0, 0.7, (110, 140, 210), 0, (190, 210, 250), (60, 80, 140))
+    cap(L, (h[0] - 1.35, h[1] - 0.2), (h[0] + 1.35, h[1] - 0.2), 0.5, 0.5, (52, 52, 64))
