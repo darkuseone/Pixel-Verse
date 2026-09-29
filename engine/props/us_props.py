@@ -473,3 +473,77 @@ def binoculars(L, h, ang=0.0):
         cap(L, (h[0] + dx, h[1] + 1.4), (h[0] + dx, h[1] - 1.6), 1.15, 1.0, (34, 34, 42), (80, 80, 96), (16, 16, 22))
         ell(L, (h[0] + dx, h[1] - 1.8), 1.0, 0.7, (110, 140, 210), 0, (190, 210, 250), (60, 80, 140))
     cap(L, (h[0] - 1.35, h[1] - 0.2), (h[0] + 1.35, h[1] - 0.2), 0.5, 0.5, (52, 52, 64))
+
+
+# ---------------------------------------------------------------- E04: storm props
+def lawn_chair(CH, cam, t=0.0):
+    """folding aluminium lawn chair with green/white webbing (drawn behind a seated hero, anchor = floor)"""
+    L = Layer(cam)
+    for x in (-5.4, 4.6):
+        cap(L, H(x, 0.0), H(x + (0.6 if x < 0 else -0.6), 9.0), 0.4, 0.4, (200, 204, 214), (240, 244, 250), (140, 144, 158))
+    cap(L, H(-5.0, 9.0), H(-6.6, 24.0), 0.4, 0.4, (200, 204, 214), (240, 244, 250), (140, 144, 158))
+    for k, h in enumerate(range(0, 7)):                                                   # striped back webbing
+        c = (44, 160, 110) if k % 2 == 0 else (240, 240, 236)
+        cap(L, H(-5.4 - 0.2 * k, 10.0 + 2.0 * k), H(-3.4 - 0.2 * k, 10.0 + 2.0 * k), 0.85, 0.85, c)
+    for k in range(5):                                                                     # seat webbing
+        c = (44, 160, 110) if k % 2 == 0 else (240, 240, 236)
+        cap(L, H(-4.6 + 2.2 * k, 8.4), H(-3.4 + 2.2 * k, 8.4), 0.5, 0.5, c)
+    cap(L, H(-2.0, 12.6), H(4.6, 12.6), 0.5, 0.5, (200, 204, 214))                         # arm rest
+    outline(L, OL)
+    CH.add(L)
+
+
+def cooler(CH, cam):
+    """blue/white cooler with a beer can on the lid; anchor = floor"""
+    L = Layer(cam)
+    rect(L, H(0.0, 3.0), 9.0, 6.0, 0, (40, 110, 200))
+    rect(L, H(0.0, 6.6), 9.4, 1.4, 0, (250, 250, 252))
+    rect(L, H(0.0, 1.0), 9.0, 1.2, 0, (28, 80, 150))
+    cap(L, H(-1.8, 8.2), H(1.8, 8.2), 0.4, 0.4, (250, 250, 252))
+    koozie_can(L, H(3.2, 8.8))
+    outline(L, OL)
+    CH.add(L)
+
+
+def umbrella(CH, cam, hand_x=3.4, hand_h=13.0, top_h=31.0):
+    """pastel-mint umbrella held above the hero (canopy + handle), drawn over the hero"""
+    L = Layer(cam)
+    cap(L, H(hand_x, hand_h), H(1.4, top_h - 1.0), 0.28, 0.28, (170, 176, 190))
+    ell(L, H(1.4, top_h), 12.0, 3.6, (120, 226, 190), 0, (190, 250, 224), (70, 168, 136))
+    for k in range(-2, 3): cap(L, H(1.4 + k * 4.4, top_h - 1.0), H(1.4 + k * 3.0, top_h + 2.6), 0.14, 0.14, (70, 168, 136))
+    cap(L, H(1.4, top_h + 3.0), H(1.4, top_h + 4.2), 0.3, 0.2, (170, 176, 190))
+    outline(L, OL)
+    CH.add(L)
+
+
+def weeds(CH, cam):
+    """pond weed draped on a soaked head"""
+    L = Layer(cam)
+    for k, (x0, y0, x1, y1) in enumerate(((-1.4, 25.6, -2.4, 23.0), (-0.2, 26.0, -0.7, 24.2), (1.0, 26.0, 1.7, 24.4), (2.2, 25.4, 3.1, 23.9))):
+        cap(L, H(x0, y0), H(x1, y1), 0.34, 0.2, (40, 120, 60), (80, 170, 84), (24, 84, 44))
+    ell(L, H(0.8, 25.9), 1.5, 0.5, (52, 140, 70))
+    CH.add(L)
+
+
+def rain(big, t, k=1.0, slant=0.35, n=170, col=(196, 222, 255)):
+    """slanted rain streaks over the frame (k = intensity 0..1) + a slight darkening"""
+    import overlays as O
+    if k <= 0: return
+    H_, W_ = big.shape[:2]
+    rng = np.random.default_rng(int(t * 30) % 100000)
+    im = Image.new('RGBA', (W_, H_), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    for i in range(int(n * k)):
+        x = rng.uniform(-100, W_ + 300); y = rng.uniform(-150, H_); l = rng.uniform(80, 170)
+        d.line([(x, y), (x - l * slant, y + l)], fill=col + (int(rng.uniform(90, 180)),), width=int(rng.integers(2, 5)))
+    big[:] = (big.astype(np.float32) * (1 - 0.18 * k)).astype(np.uint8)
+    O.overlay(big, np.array(im), 0, 0, 1.0)
+
+
+def rainbow(big, a=0.30, cx=540, cy=1800, r0=1500, band=42):
+    import overlays as O
+    H_, W_ = big.shape[:2]
+    im = Image.new('RGBA', (W_, H_), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    for i, c in enumerate(((255, 70, 70), (255, 150, 60), (255, 236, 80), (90, 210, 100), (80, 160, 255), (160, 100, 230))):
+        r = r0 - i * band
+        d.arc([cx - r, cy - r, cx + r, cy + r], 200, 340, fill=c + (int(255 * a),), width=band)
+    O.overlay(big, np.array(im), 0, 0, 1.0)

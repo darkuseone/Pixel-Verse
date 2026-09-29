@@ -24,6 +24,11 @@ def light_pond(v):
     return Light(amb=(0.92, 1.04, 0.98), rim=(-1, -0.5, (230, 255, 210), 0.3), grad=(1.05, 0.9))
 
 
+def light_storm(v):
+    """hurricane: dark, cold green-gray; a weak rim from the flashing sky"""
+    return Light(amb=(0.72, 0.82, 0.9), rim=(-1, -0.6, (190, 214, 255), 0.35), grad=(0.96, 0.84))
+
+
 def light_int(v):
     return Light(amb=(1.03, 0.98, 0.92), rim=(-1, -0.2, (255, 232, 180), 0.4), grad=(1.04, 0.92))
 

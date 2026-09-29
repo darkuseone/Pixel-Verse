@@ -72,6 +72,29 @@
       },
       "voice_id": "LnoWNLqEhWQWVHwQFlpP",
       "voice": "Sunny Palms HOA — Earl the Gator"
+    },
+    "tablet": {
+      "name": "Payment Tablet",
+      "color_caption": [
+        120,
+        230,
+        255
+      ],
+      "style": "[cheerful, bright] — relentlessly upbeat, guilt-tripping when sad, always to the customer",
+      "design": {
+        "description": "A relentlessly cheerful, bright, slightly synthetic customer-service voice of a payment tablet: young, upbeat, fast and chirpy, smiling audibly, a touch robotic, can switch to a wounded whimper when guilt-tripping. Native American English speaker.",
+        "text": "Would you like to add a tip? Twenty. Twenty-five. Thirty percent. Are you sure? Brenda worked really hard. Great! Would you like to leave a review? Your total is forty-seven sixty-three!",
+        "picked": {
+          "i": 1,
+          "dur": 15.39,
+          "f0": 285.7,
+          "f0_iqr": 90.4,
+          "rate": 19.5,
+          "loud_sd": 5.4
+        }
+      },
+      "voice_id": "pmf8vtu31xjkFqYKEPwq",
+      "voice": "Sunny Palms HOA — Payment Tablet"
     }
   },
   "music": {},
