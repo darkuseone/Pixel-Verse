@@ -1,6 +1,9 @@
-"""Stress check for generated Russian lines: for one word, per-vowel duration, loudness and pitch from Scribe character
-timestamps. The stressed vowel is usually the longest + loudest + highest (phrase-final words stretch every vowel, so
-look at loudness/pitch there).  python3 engine/stress.py file.mp3 WORD [WORD ...]"""
+"""Stress hint for generated Russian lines: for one word, per-vowel duration, loudness and pitch from Scribe character
+timestamps. The stressed vowel is usually the longest + loudest + highest.  python3 engine/stress.py file.mp3 WORD [WORD ...]
+Only a hint: it caught «труба́х» → «тру́бах» cleanly, but open vowels (а) are louder than closed ones (и, у) by nature,
+phrase-final words stretch every vowel and Scribe's character times are coarse, so a doubtful result is not a verdict.
+What actually prevents wrong stress: eleven_v4 follows the U+0301 mark, so proofread the marks in lines.json by ear
+(natural speech, not only the dictionary) before generating."""
 import subprocess, sys
 import numpy as np
 from stt import transcribe
