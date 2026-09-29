@@ -242,8 +242,8 @@ def r_ecstatic(t, u):
 
 # ---------------------------------------------------------------- flat
 def r_run(t, u):
-    x = lerp(120, 1000, u / 1.1)
-    v = view_at(STAIR, 560, 430, 1.0, 180, 330)
+    x = lerp(260, 900, u / 1.1)
+    v = view_at(STAIR, x + 30, 430, 1.0, 180, 330)                                       # camera runs with him
     CH, FX = K.begin(v.Z)
     big = v.bg()
     F.valera(CH, v.cam(x, 700, 15.0), F.vwalk(t, 22, 0.6), t, 0.0, 'shout', 'home', hat='ushanka', lean=1.2)
