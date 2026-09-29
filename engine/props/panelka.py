@@ -217,6 +217,51 @@ def bench_world(notice_lines, crossed=(), hand=()):
     return np.array(notice(img, notice_lines, B_NOTICE, crossed, hand))
 
 
+# ---------------------------------------------------------------- basement + hot-spring sandbox (E05)
+BS_VALVE = (1030.0, 390.0, 70.0)       # handwheel centre + radius
+BS_TAG = (1098, 452, 1250, 548)         # cardboard sign «НЕ ТРОГАТЬ!» hung on the valve
+BS_BULB = (515.0, 150.0)
+BS_GAUGES = [(135.0, 290.0, 26.0), (818.0, 340.0, 12.0)]
+BS_JOINTS = [(930.0, 470.0), (250.0, 220.0), (420.0, 360.0), (840.0, 160.0)]
+PL_WATER = 505                          # pool close-up: waterline for the grannies
+PL_ZINA = (560.0, 640.0, 24.0)          # seated anchors (hips) under water
+PL_LYUBA = (830.0, 650.0, 24.0)
+PL_X = (170, 1120)
+SP_WATER = 598                          # wide yard_spring: waterline
+SP_ZINA = (790.0, 628.0, 5.6)
+SP_LYUBA = (880.0, 630.0, 5.6)
+
+
+def basement():
+    img = Image.fromarray(q(Image.open(BG / 'basement.png').convert('RGB')))
+    a = np.array(img)
+    x0, y0, x1, y1 = BS_TAG
+    a[y0 + 3:y1 + 3, x0 + 3:x1 + 3] = (a[y0 + 3:y1 + 3, x0 + 3:x1 + 3] * 0.5).astype(np.uint8)
+    a[y0:y1, x0:x1] = (196, 168, 120)                                   # cardboard
+    a[y0:y0 + 3, x0:x1] = (150, 124, 84); a[y1 - 3:y1, x0:x1] = (150, 124, 84)
+    img = Image.fromarray(a)
+    img = text(img, 'НЕ', (x0 + x1) / 2, y0 + 20, 16, (180, 30, 30))
+    img = text(img, 'ТРОГАТЬ!', (x0 + x1) / 2, y0 + 46, 16, (180, 30, 30))
+    img = text(img, 'ЖЭК №3', (x0 + x1) / 2, y0 + 74, 8, (60, 40, 30))
+    a = np.array(img)
+    for k in range(6):                                                  # wire to the wheel
+        a[y0 - 2 - k * 6:y0 - k * 6, x0 + 30 - k * 5:x0 + 34 - k * 5] = (140, 140, 150)
+    return a
+
+
+def clip_below(CH, v, wy, x0=-1e9, x1=1e9):
+    """hide Chars pixels whose world y is below the waterline wy (inside world x-range) — bathers in a pool"""
+    import stage as ST
+    k = ST.PX[0]
+    h, w = CH.m.shape
+    ys = (np.arange(h) + 0.5) * k                                        # logical px
+    xs = (np.arange(w) + 0.5) * k
+    wy_rows = v.Y0 + (ys - v.oy) / v.Z
+    wx_cols = v.X0 + xs / v.Z
+    m = (wy_rows[:, None] > wy) & (wx_cols[None, :] > x0) & (wx_cols[None, :] < x1)
+    CH.m &= ~m
+
+
 NOTICE_E01 = [('ОБЪЯВЛЕНИЕ', 8, (40, 36, 40)), ('ГОРЯЧЕЙ', 16, (170, 30, 30)), ('ВОДЫ НЕТ', 16, (170, 30, 30)),
               ('С 01.12', 8, (40, 36, 40)), ('ПО 15.12', 8, (40, 36, 40)), ('ЖЭК №3', 8, (60, 60, 120))]
 
