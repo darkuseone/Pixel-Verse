@@ -1,12 +1,14 @@
 """ElevenLabs speech-to-text check (scribe_v1): transcript + audio events, to verify Russian lines / voice previews.
   python3 engine/stt.py file1.mp3 [file2.mp3 ...]
+Language: env STT_LANG (default ru), e.g. STT_LANG=en.
 Key: ELEVENLABS_API_KEY (never printed)."""
 import json, os, sys, urllib.request, uuid
 
 API = 'https://api.elevenlabs.io/v1/speech-to-text'
 
 
-def transcribe(path, lang='ru'):
+def transcribe(path, lang=None):
+    lang = lang or os.environ.get('STT_LANG', 'ru')
     b = uuid.uuid4().hex
     parts = []
     for k, v in (('model_id', 'scribe_v1'), ('language_code', lang), ('tag_audio_events', 'true')):

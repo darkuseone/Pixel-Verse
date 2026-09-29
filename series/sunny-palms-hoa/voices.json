@@ -1,0 +1,79 @@
+{
+  "cartoon": "Sunny Palms HOA",
+  "slug": "sunny-palms-hoa",
+  "lang": "en",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "dale": {
+      "name": "Dale",
+      "color_caption": [
+        255,
+        214,
+        74
+      ],
+      "style": "[shouting] [smug] [outraged] — loud, cocky, always sure he's right",
+      "design": {
+        "description": "A loud, cocky, raspy American man in his late forties, a sunburnt Florida guy with a slightly nasal bro accent. Overconfident, easily outraged, prone to shouting, hoarse from cheap beer and cigarettes, sounds like he says 'trust me' right before every disaster. Expressive, comedic, mid-pitched baritone, native American English speaker.",
+        "text": "Two hundred fifty dollars?! For a MAILBOX?! Relax. I'll repaint it myself. I watched a video. It's fine. Everything's fine. Hold on... is that mailbox on fire? Okay. That was not in the video.",
+        "picked": {
+          "i": 2,
+          "dur": 18.68,
+          "f0": 266.7,
+          "f0_iqr": 98.9,
+          "rate": 19.9,
+          "loud_sd": 5.8
+        }
+      },
+      "voice_id": "Ii27fPpQjUvsObpI9Ex2",
+      "voice": "Sunny Palms HOA — Dale"
+    },
+    "brenda": {
+      "name": "Brenda",
+      "color_caption": [
+        255,
+        120,
+        190
+      ],
+      "style": "[sweet] [passive-aggressive] — sugary, smiling, steel underneath",
+      "design": {
+        "description": "A cheerful, syrupy-sweet American woman in her late fifties, a passive-aggressive suburban HOA president. Bright, slightly high-pitched, slightly nasal voice with a gentle Southern lilt, relentlessly polite with an edge of steel underneath, smiling audibly while she delivers bad news. Says 'bless your heart' as an insult. Native American English speaker.",
+        "text": "Good morning, Dale! Your mailbox is Bone. The approved color is Ecru Whisper. Form twenty-seven B. Thirty days before painting. Oh, sweetie. Bless your heart.",
+        "picked": {
+          "i": 1,
+          "dur": 14.37,
+          "f0": 238.8,
+          "f0_iqr": 73.7,
+          "rate": 16.4,
+          "loud_sd": 5.7
+        }
+      },
+      "voice_id": "SK1BhvqG7RGgUrYJyInI",
+      "voice": "Sunny Palms HOA — Brenda"
+    },
+    "earl": {
+      "name": "Earl the Gator",
+      "color_caption": [
+        140,
+        235,
+        110
+      ],
+      "style": "[deadpan] [tired] — slow, dry, only to the camera",
+      "design": {
+        "description": "A very old, very deep, slow, gravelly Southern American man's voice for a cartoon alligator. Extremely dry deadpan delivery, tired and unbothered like he has seen everything twice, long pauses, low rumbling bass, Florida cracker drawl. Native American English speaker.",
+        "text": "Seventeen years in this pond. Never paid a fine. Grandfathered in. Nobody asked me. Nobody ever asks the alligator. Well. That's Florida.",
+        "picked": {
+          "i": 2,
+          "dur": 16.51,
+          "f0": 246.2,
+          "f0_iqr": 279.3,
+          "rate": 12.9,
+          "loud_sd": 4.7
+        }
+      },
+      "voice_id": "LnoWNLqEhWQWVHwQFlpP",
+      "voice": "Sunny Palms HOA — Earl the Gator"
+    }
+  },
+  "music": {},
+  "sfx": []
+}
