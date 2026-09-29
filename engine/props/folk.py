@@ -177,14 +177,14 @@ def _merge(L, A, ol=OL):
     L.col[A.m] = A.col[A.m]; L.m |= A.m
 
 
-def _valera_head(Hd, F, P, expr, t, mouth, look, cold, wet, hat, outfit, blink, cam):
+def _valera_head(Hd, F, P, expr, t, mouth, look, cold, wet, hat, outfit, blink, cam, stubble=0.0):
     """3/4 head facing +x: egg skull, bald shiny top, thin horseshoe fringe + comb-over, bushy brows, red bulb nose,
     walrus moustache, jowls. F(x, h) maps head-local coords (x ~ -3..5, h ~ 17.5..24.8) to unit coords."""
-    stub = tuple(int(c * 0.92) for c in P['skin_sh'])
+    stub = tuple(int(c * 0.92 + (s_ - c * 0.92) * stubble) for c, s_ in zip(P['skin_sh'], (112, 96, 92)))
     cap(Hd, F(0.5, 17.6), F(0.7, 19.4), 1.9, 1.9, P['skin'], P['skin_hi'], P['skin_sh'])            # neck
     ell(Hd, F(1.5, 18.95), 2.7, 1.35, P['skin'], 0, None, P['skin_sh'])                             # jowls / double chin
     ell(Hd, F(0.75, 21.35), 3.15, 3.45, P['skin'], -0.08, P['skin_hi'], P['skin_sh'])              # skull
-    ell(Hd, F(2.0, 19.35), 2.1, 0.95, stub, 0.1)                                                    # stubble jaw
+    ell(Hd, F(2.0, 19.35), 2.1 + 0.4 * stubble, 0.95 + 0.5 * stubble, stub, 0.1)                   # stubble jaw
     ell(Hd, F(-1.05, 21.0), 0.72, 1.02, P['skin'], 0, None, P['skin_sh'])                           # ear
     ell(Hd, F(-0.98, 21.0), 0.34, 0.58, P['skin_sh'])
     ell(Hd, F(0.6, 24.05), 1.1, 0.42, P['skin_hi'], -0.15)                                          # bald shine
@@ -261,7 +261,7 @@ def _valera_head(Hd, F, P, expr, t, mouth, look, cold, wet, hat, outfit, blink, 
 
 def valera(CH, cam, pose=None, t=0.0, mouth=0.0, expr='normal', outfit='home', look=0.0, tint=None, belly_wob=0.0,
            breath=True, cold=0.0, wet=0.0, blink=True, hat=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-           lean=0.0):
+           lean=0.0, stubble=0.0):
     """expr: normal | shout | angry | proud | smug | sly | blissful | shock | whisper | sad | squint
     outfit: home (telnyashka) | towel (bare torso + towel) | street (ushanka + camo) | sheet (bedsheet) | robe
     tint: (r,g,b) multiplier (rusty after the radiator water); cold 0..1 bluish skin + icicles; look: eye shift.
@@ -348,7 +348,7 @@ def valera(CH, cam, pose=None, t=0.0, mouth=0.0, expr='normal', outfit='home', l
     hx = 0.9 + ln * 1.2
     hc = H(hx, 21.2 + br)
     def F(x, h): return H(hx + x - 0.9, h + br)
-    _valera_head(Hd, F, P, expr, t, mouth, look, cold, wet, hat, outfit, blink, cam)
+    _valera_head(Hd, F, P, expr, t, mouth, look, cold, wet, hat, outfit, blink, cam, stubble)
     _merge(L, Hd)
     mc = F(3.0, 19.3)
     if outfit == 'street':                                                         # jacket collar over the neck
@@ -729,3 +729,91 @@ def flying_sheet(CH, cam, k, P=VC):
             P['sheet_hi'], P['sheet_sh'])
     outline(L, OL)
     CH.add(L)
+
+
+# ======================================================================================= NINA PETROVNA (housing office)
+NC = dict(skin=(238, 198, 176), skin_hi=(250, 218, 200), skin_sh=(206, 160, 140), hair=(150, 70, 44), hair_hi=(190, 100, 64),
+          hair_sh=(112, 50, 32), lips=(196, 40, 56), frame=(140, 110, 50), glass=(214, 232, 240), eye=(30, 24, 26),
+          white=(248, 246, 242), foam=(246, 248, 252), foam_sh=(206, 214, 228), foam_hi=(255, 255, 255), cardi=(96, 70, 110),
+          cardi_hi=(122, 94, 138), cardi_sh=(72, 52, 84))
+
+
+def nina(CH, cam, t=0.0, mouth=0.0, expr='bored', bath=True, hand_n=None, prop_n=None, look=0.0):
+    """Nina Petrovna from the ZhEK: tall beehive, pencil-thin arched brows, big glasses on a chain, red lips, a mole.
+    Anchor = waterline (bath) / desk line. Only the upper body is drawn; in the bath foam covers the chest.
+    expr: bored | smug | blissful | stern"""
+    P = NC
+    L = Layer(cam)
+    br = 0.1 * math.sin(t * 1.5)
+    def F(x, h): return H(x, h + br)
+    T = Layer(cam)
+    tc = (P['skin'], P['skin_hi'], P['skin_sh']) if bath else (P['cardi'], P['cardi_hi'], P['cardi_sh'])
+    ellt(T, F(0.4, 2.6), 3.5, 2.7, tc)                                                                  # shoulders
+    cap(T, F(0.6, 4.6), F(0.8, 6.6), 1.05, 1.05, P['skin'], P['skin_hi'], P['skin_sh'])                  # neck
+    if bath:
+        cap(T, F(-1.2, 4.3), F(0.4, 3.9), 0.08, 0.08, P['skin_sh']); cap(T, F(1.2, 3.9), F(2.6, 4.2), 0.08, 0.08, P['skin_sh'])
+    _merge(L, T)
+    Hd = Layer(cam)
+    for (x, h, rx, ry) in ((0.3, 13.6, 2.5, 2.6), (0.1, 12.0, 2.9, 1.7), (0.5, 15.5, 1.7, 1.3)):          # beehive
+        ell(Hd, F(x, h), rx, ry, P['hair'], 0, P['hair_hi'], P['hair_sh'])
+    for k in range(4):
+        cap(Hd, F(-1.9 + k * 1.1, 14.6 - k * 0.3), F(-1.3 + k * 1.1, 12.4 - k * 0.2), 0.13, 0.1, P['hair_sh'])
+    cap(Hd, F(1.9, 13.9), F(2.5, 14.9), 0.12, 0.12, (200, 200, 210))                                      # hairpin
+    ell(Hd, F(1.2, 7.4), 1.9, 1.1, P['skin'], 0, None, P['skin_sh'])                                      # soft chin
+    ell(Hd, F(0.95, 9.5), 2.35, 2.75, P['skin'], 0, P['skin_hi'], P['skin_sh'])                          # face
+    ell(Hd, F(-1.15, 9.3), 0.45, 0.7, P['skin'], 0, None, P['skin_sh'])                                   # ear
+    ell(Hd, F(-1.15, 8.45), 0.28, 0.36, (236, 196, 70))                                                   # earring
+    lid = {'bored': 0.62, 'smug': 0.5, 'blissful': 1.0, 'stern': 0.35}.get(expr, 0.62)
+    for k2, (x, r) in enumerate(((1.05, 0.62), (2.45, 0.68))):
+        e_ = F(x + 0.08 * look, 10.0)
+        ell(Hd, e_, r * 1.18, r * 1.05, P['frame']); ell(Hd, e_, r * 0.98, r * 0.86, P['glass'])          # big glasses
+        if lid < 0.95:
+            ell(Hd, (e_[0], e_[1] + r * 0.12), r * 0.62, r * 0.46, P['white'])
+            dot(Hd, (e_[0] + 0.06, e_[1] + r * 0.2), P['eye'], r * 0.3)
+            lt = e_[1] - r * 0.5 + lid * r * 0.9
+            poly(Hd, [(e_[0] - r * 0.66, e_[1] - r * 0.6), (e_[0] + r * 0.66, e_[1] - r * 0.6), (e_[0] + r * 0.66, lt),
+                      (e_[0] - r * 0.66, lt)], (150, 120, 176))                                              # lilac eyeshadow
+            cap(Hd, (e_[0] - r * 0.62, lt), (e_[0] + r * 0.62, lt), 0.07, 0.07, P['eye'])
+        else:
+            cap(Hd, (e_[0] - r * 0.55, e_[1] + 0.12), (e_[0] + r * 0.55, e_[1] + 0.02), 0.09, 0.09, P['eye'])
+        bx = e_[0]; lift = 0.35 if expr in ('smug', 'stern') else 0.0                                       # thin arched brows
+        s_ = -1 if k2 == 0 else 1
+        cap(Hd, (bx - 0.75, e_[1] - r * 1.45), (bx, e_[1] - r * 1.9 - lift * (1 if s_ > 0 else 0.4)), 0.07, 0.07, (90, 44, 30))
+        cap(Hd, (bx, e_[1] - r * 1.9 - lift * (1 if s_ > 0 else 0.4)), (bx + 0.75, e_[1] - r * 1.5), 0.07, 0.07, (90, 44, 30))
+    cap(Hd, F(1.67, 10.05), F(1.83, 10.05), 0.1, 0.1, P['frame'])
+    for k in range(6):                                                                                    # glasses chain
+        dot(Hd, F(-0.1 - k * 0.2, 9.4 - k * 0.55), (226, 196, 96), 0.09)
+    ell(Hd, F(3.2, 9.0), 0.42, 0.55, P['skin'], 0, P['skin_hi'], P['skin_sh'])                           # nose
+    ell(Hd, F(1.6, 8.6), 0.55, 0.32, (236, 150, 146))                                                     # blush
+    dot(Hd, F(2.9, 7.3), (110, 60, 50), 0.14)                                                             # mole
+    mc = F(2.45, 7.95)
+    if mouth > 0.08:
+        ell(Hd, mc, 0.5 + 0.2 * mouth, 0.16 + 0.38 * mouth, (110, 20, 30))
+        ell(Hd, (mc[0], mc[1] - 0.12 - 0.26 * mouth), 0.56, 0.14, P['lips']); ell(Hd, (mc[0], mc[1] + 0.12 + 0.26 * mouth), 0.5, 0.15, P['lips'])
+    else:
+        ell(Hd, mc, 0.56, 0.18, P['lips'])
+        if expr in ('smug', 'blissful'): cap(Hd, (mc[0] + 0.3, mc[1]), (mc[0] + 0.72, mc[1] - 0.22), 0.09, 0.09, (110, 20, 30))
+    _merge(L, Hd)
+    A = Layer(cam)
+    tn = hand_n if hand_n is not None else H(3.2, 3.6)
+    kn, en = _limb(A, F(2.5, 4.2), 0, 0, 2.8, 2.6, 0.85, 0.72, P['skin'], P['skin_hi'], P['skin_sh'], target=tn, bend=1)
+    ell(A, en, 0.72, 0.68, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    if prop_n: prop_n(A, en)
+    _merge(L, A)
+    if bath:
+        Fo = Layer(cam)
+        for (x, h, rx, ry) in ((-3.2, 0.9, 2.2, 1.4), (-0.9, 0.7, 2.4, 1.5), (1.6, 0.8, 2.3, 1.4), (3.8, 0.5, 2.0, 1.3),
+                               (-2.0, 2.1, 1.6, 1.1), (2.4, 2.2, 1.5, 1.0), (0.3, 2.0, 1.6, 1.1)):
+            ell(Fo, H(x + 0.15 * math.sin(t * 2 + x), h), rx, ry, P['foam'], 0, P['foam_hi'], P['foam_sh'])
+        _merge(L, Fo, (170, 184, 204))
+    outline(L, OL)
+    CH.add(L)
+    return dict(head=F(0.95, 9.5), mouth=mc, hand_n=en)
+
+
+def handset(L, hand, ang=-1.35, col=(196, 40, 40)):
+    """rotary phone handset held at the face; ang = direction from mouthpiece to earpiece"""
+    d = (math.cos(ang), math.sin(ang))
+    a = (hand[0] - d[0] * 1.2, hand[1] - d[1] * 1.2); b = (hand[0] + d[0] * 1.6, hand[1] + d[1] * 1.6)
+    cap(L, a, b, 0.42, 0.42, col, None, tuple(int(c * 0.7) for c in col))
+    ell(L, (a[0] - 0.3, a[1] + 0.1), 0.75, 0.6, col); ell(L, (b[0] - 0.3, b[1] - 0.1), 0.75, 0.6, col)

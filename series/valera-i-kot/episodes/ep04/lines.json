@@ -1,0 +1,54 @@
+{
+  "v1": [
+    "valera",
+    "[angry, loud, shouting into a phone] Алло́! Это Жэк?!"
+  ],
+  "r1": [
+    "robot",
+    "[robotic, cheerful, monotone announcement] Ваш звоно́к о́чень ва́жен для нас. Вы — сто со́рок тре́тий."
+  ],
+  "c1": [
+    "cat",
+    "[bored, deadpan, to camera] Тре́тий час слу́шаем. Я уже́ подпева́ю."
+  ],
+  "n1": [
+    "nina",
+    "[bored, indifferent, slow] Жэк. Слу́шаю."
+  ],
+  "v2": [
+    "valera",
+    "[furious, shouting] Где горя́чая вода́?!"
+  ],
+  "n2": [
+    "nina",
+    "[condescending, slow, patronizing] В труба́х, мужчи́на."
+  ],
+  "v3": [
+    "valera",
+    "[shouting] Когда́ в кра́не бу́дет?!"
+  ],
+  "n3": [
+    "nina",
+    "[flat, bored] До пятна́дцатого."
+  ],
+  "v4": [
+    "valera",
+    "[exploding, outraged] Сего́дня шестна́дцатое!"
+  ],
+  "n4": [
+    "nina",
+    "[calm, indifferent] Зна́чит, до сле́дующего."
+  ],
+  "v5": [
+    "valera",
+    "[suspicious, quiet, slow] Э́то что... плеск?!"
+  ],
+  "n5": [
+    "nina",
+    "[relaxed, pleased, lazy] Э́то вода́. Служе́бная."
+  ],
+  "r2": [
+    "robot",
+    "[robotic, cheerful, monotone announcement] Вы — сто со́рок четвёртый."
+  ]
+}
