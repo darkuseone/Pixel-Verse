@@ -1,6 +1,6 @@
 # «Почти Дикий Запад» — Сезон 1, режиссёрская версия (16:9, 7:15)
 
-**Файл:** `final.mp4` (1920×1080, 30 fps). **Обложка:** `cover.jpg` (1920×1080, ≤ 2 МБ), исходник `cover.png`.
+**Файл:** `final_master.mp4` (1920×1080, 30 fps, H.264 CRF 20, AAC 192k, 249 МБ, хранится в Git LFS). Скачать: https://media.githubusercontent.com/media/darkuseone/Pixel-Verse/claude/ffmpeg-python-deps-596dbx/series/pochti-dikiy-zapad/movie/final_master.mp4 **Обложка:** `cover.jpg` (1920×1080, ≤ 2 МБ), исходник `cover.png`.
 Публиковать после выхода шестой серии Shorts. В описании каждого Shorts — ссылка на это видео.
 
 ## YouTube
