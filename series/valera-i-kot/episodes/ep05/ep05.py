@@ -299,26 +299,9 @@ def light_pool(v):
                  rim=(0, 1, (150, 255, 220), 0.35), grad=(0.95, 1.05))
 
 
-def cocktail(L, h):
-    x, y = h[0] + 0.2, h[1] - 0.6
-    F.cap(L, (x, y + 0.2), (x, y - 1.4), 0.12, 0.12, (220, 236, 240))
-    F.poly(L, [(x - 1.2, y - 3.2), (x + 1.2, y - 3.2), (x, y - 1.4)], (236, 244, 248))
-    F.poly(L, [(x - 0.95, y - 3.0), (x + 0.95, y - 3.0), (x, y - 1.7)], (255, 150, 60))
-    F.cap(L, (x + 0.5, y - 3.1), (x + 1.3, y - 4.4), 0.08, 0.08, (120, 90, 60))           # umbrella
-    F.poly(L, [(x + 0.4, y - 4.3), (x + 2.2, y - 4.5), (x + 1.3, y - 5.2)], (255, 110, 170))
-
-
-def duck(L, x, y, s, t):
-    b = 0.6 * math.sin(t * 2.3) * s / 3
-    F.ell(L, (x, y + b), 3.0 * s, 1.8 * s, (255, 214, 60), 0, (255, 240, 140), (220, 170, 40))
-    F.ell(L, (x + 2.0 * s, y - 2.0 * s + b), 1.4 * s, 1.3 * s, (255, 214, 60), 0, (255, 240, 140), (220, 170, 40))
-    F.ell(L, (x + 3.4 * s, y - 1.8 * s + b), 0.8 * s, 0.4 * s, (255, 130, 40))
-    F.dot(L, (x + 2.4 * s, y - 2.3 * s + b), (20, 20, 24), 0.25 * s)
-
-
 def grannies_pool(CH, v, t, zk=None, lk=None):
     zk = dict(dict(expr='smug', look=0.6), **(zk or {}))
-    lk = dict(dict(expr='smug', hand_n=F.H(3.4, 10.4), prop_n=cocktail), **(lk or {}))
+    lk = dict(dict(expr='smug', hand_n=F.H(3.4, 10.4), prop_n=B.cocktail), **(lk or {}))
     F.babushka(CH, v.cam(*PK.PL_ZINA), t, 'zina', 'sit', mouth('zina', t), **zk)
     F.babushka(CH, v.cam(*PK.PL_LYUBA, flip=True), t, 'lyuba', 'sit', mouth('lyuba', t), **lk)
     PK.clip_below(CH, v, PK.PL_WATER, *PK.PL_X)
@@ -333,7 +316,7 @@ def pool_frame(v, t, zk=None, lk=None, valera=None, snow=True):
         CH2 = Chars(); valera(CH2, v)
         wx, wy = v.opt(700, 560)
         CH2.comp(big, Light(amb=(0.95, 0.97, 1.04), keys=[(wx, wy, 1500, (130, 255, 214), 0.35)], rim=(-1, 0.3, (150, 255, 220), 0.4)))
-    L = Layer(v.wcam()); duck(L, 690, PK.PL_WATER + 12, 5.0, t); F.outline(L); FX.add(L)
+    L = Layer(v.wcam()); B.duck(L, 690, PK.PL_WATER + 12, 5.0, t); F.outline(L); FX.add(L)
     if snow: B.falling_snow(FX, v, t, v.X0 - 20, v.Y0 - 20, v.X0 + 380 / v.Z + 20, v.Y0 + 660 / v.Z, n=60, speed=40)
     FX.comp(big)
     for i, x in enumerate((300, 520, 700, 900, 1060)):
@@ -354,7 +337,7 @@ def r_reveal(t, u):
     CH, FX = K.begin(v.Z)
     big = v.bg()
     F.babushka(CH, v.cam(*PK.SP_ZINA), t, 'zina', 'sit', 0.0, 'smug', 0.6)
-    F.babushka(CH, v.cam(*PK.SP_LYUBA, flip=True), t, 'lyuba', 'sit', 0.0, 'smug', hand_n=F.H(3.4, 10.4), prop_n=cocktail)
+    F.babushka(CH, v.cam(*PK.SP_LYUBA, flip=True), t, 'lyuba', 'sit', 0.0, 'smug', hand_n=F.H(3.4, 10.4), prop_n=B.cocktail)
     PK.clip_below(CH, v, PK.SP_WATER, *SP_X)
     CH.comp(big, light_pool(v))
     B.falling_snow(FX, v, t, v.X0 - 20, v.Y0 - 20, v.X0 + 380 / v.Z + 20, v.Y0 + 660 / v.Z, n=70, speed=40)

@@ -160,3 +160,22 @@ def flashlight(L, hand, ang=0.0):
     d = (math.cos(ang), math.sin(ang))
     cap(L, hand, (hand[0] + d[0] * 2.4, hand[1] + d[1] * 2.4), 0.45, 0.55, (70, 70, 76), None, (44, 44, 50))
     ell(L, (hand[0] + d[0] * 2.6, hand[1] + d[1] * 2.6), 0.45, 0.6, (255, 244, 190), ang)
+
+
+def cocktail(L, h):
+    """cocktail glass with an umbrella held at hand point h (unit coords) — «всё включено»"""
+    x, y = h[0] + 0.2, h[1] - 0.6
+    cap(L, (x, y + 0.2), (x, y - 1.4), 0.12, 0.12, (220, 236, 240))
+    poly(L, [(x - 1.2, y - 3.2), (x + 1.2, y - 3.2), (x, y - 1.4)], (236, 244, 248))
+    poly(L, [(x - 0.95, y - 3.0), (x + 0.95, y - 3.0), (x, y - 1.7)], (255, 150, 60))
+    cap(L, (x + 0.5, y - 3.1), (x + 1.3, y - 4.4), 0.08, 0.08, (120, 90, 60))           # umbrella
+    poly(L, [(x + 0.4, y - 4.3), (x + 2.2, y - 4.5), (x + 1.3, y - 5.2)], (255, 110, 170))
+
+
+def duck(L, x, y, s, t):
+    """rubber duck bobbing on water at (x, y), s = world px per unit"""
+    b = 0.6 * math.sin(t * 2.3) * s / 3
+    ell(L, (x, y + b), 3.0 * s, 1.8 * s, (255, 214, 60), 0, (255, 240, 140), (220, 170, 40))
+    ell(L, (x + 2.0 * s, y - 2.0 * s + b), 1.4 * s, 1.3 * s, (255, 214, 60), 0, (255, 240, 140), (220, 170, 40))
+    ell(L, (x + 3.4 * s, y - 1.8 * s + b), 0.8 * s, 0.4 * s, (255, 130, 40))
+    dot(L, (x + 2.4 * s, y - 2.3 * s + b), (20, 20, 24), 0.25 * s)
