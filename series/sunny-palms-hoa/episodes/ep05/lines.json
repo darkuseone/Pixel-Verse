@@ -1,0 +1,17 @@
+{
+  "d1": ["dale",   "[incredulous, shouting] It's a FREE hot dog!"],
+  "t1": ["tablet", "[cheerful, bright] Would you like to add a tip? Twenty. Twenty-five. Thirty percent."],
+  "b1": ["brenda", "[sweetly] Service is not free, Dale."],
+  "d2": ["dale",   "[proud, dim-witted] Twenty percent of free is zero. I did the math."],
+  "t2": ["tablet", "[cheerful, precise] Total: forty-seven sixty-three. Includes convenience fee."],
+  "d3": ["dale",   "[outraged, shouting] What's so CONVENIENT?!"],
+  "b2": ["brenda", "[sweetly] Cash has a fifteen percent surcharge."],
+  "d4": ["dale",   "[snapping] Then how do I say NO?!"],
+  "t3": ["tablet", "[sad, whimpering] Are you sure? Brenda worked really hard."],
+  "d5": ["dale",   "[exhausted] Yes."],
+  "t4": ["tablet", "[cheerful, bright] Great! Would you like to leave a review?"],
+  "d6": ["dale",   "[roaring] NO!"],
+  "b3": ["brenda", "[sweetly, cheerful] Enjoy! Bun is extra."],
+  "t5": ["tablet", "[cheerful, to the audience] Would you like to tip this video? Twenty. Twenty-five. Thirty percent."],
+  "e1": ["earl",   "[deadpan, flat] Don't."]
+}

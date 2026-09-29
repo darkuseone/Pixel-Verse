@@ -7,7 +7,7 @@ from stage import Chars, Light
 from scene import sm, lerp
 import overlays as O
 
-COL = dict(dale=(255, 214, 74), brenda=(255, 120, 190), earl=(140, 235, 110))
+COL = dict(dale=(255, 214, 74), brenda=(255, 120, 190), earl=(140, 235, 110), tablet=(120, 230, 255))
 
 
 def begin(Z):

@@ -547,3 +547,102 @@ def rainbow(big, a=0.30, cx=540, cy=1800, r0=1500, band=42):
         r = r0 - i * band
         d.arc([cx - r, cy - r, cx + r, cy + r], 200, 340, fill=c + (int(255 * a),), width=band)
     O.overlay(big, np.array(im), 0, 0, 1.0)
+
+
+# ---------------------------------------------------------------- E05: BBQ props + payment tablet
+def hot_dog(L, h, ang=0.0, bun=True, mustard=True):
+    cx, cy = h
+    if bun:
+        cap(L, (cx - 2.4, cy + 0.5), (cx + 2.4, cy + 0.5), 1.05, 1.05, (232, 180, 100), (252, 214, 140), (186, 132, 64))
+    cap(L, (cx - 2.7, cy - 0.2), (cx + 2.7, cy - 0.2), 0.8, 0.8, (190, 84, 60), (226, 124, 92), (140, 52, 38))
+    if mustard:
+        for k in range(6): dot(L, (cx - 2.2 + k * 0.9, cy - 0.8 + 0.25 * (k % 2)), (250, 214, 40), 0.24)
+
+
+def tongs(L, h, ang=-0.2):
+    ca, sa = math.cos(ang), math.sin(ang)
+    for s_ in (-1, 1):
+        cap(L, (h[0] - ca * 1.5, h[1] - sa * 1.5), (h[0] + ca * 3.6 + s_ * 0.4, h[1] + sa * 3.6 + s_ * 0.7), 0.24, 0.3, (190, 196, 208), (240, 244, 250), (130, 136, 150))
+
+
+def tablet_ui(big, t, state, u, amp=0.0):
+    """full-screen fake payment tablet («TAPPY»): a smiley that talks with the voice envelope + tip / receipt / guilt / review / video screens"""
+    import overlays as O
+    from PIL import ImageFont
+    W_, H_ = 1080, 1920
+    im = Image.new('RGB', (W_, H_), (18, 20, 28)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    d.rounded_rectangle([40, 60, W_ - 40, H_ - 60], 56, fill=(246, 248, 252))
+    def txt(s_, cx, cy, size, col, anchor='c', stroke=None):
+        f = O.pfont(size); bb = f.getbbox(s_)
+        x = cx - (bb[2] - bb[0]) / 2 if anchor == 'c' else (cx if anchor == 'l' else cx - (bb[2] - bb[0]))
+        pos = (x - bb[0], cy - (bb[3] - bb[1]) / 2 - bb[1])
+        if stroke:
+            for dx in (-2, 0, 2):
+                for dy in (-2, 0, 2): d.text((pos[0] + dx, pos[1] + dy), s_, font=f, fill=stroke)
+        d.text(pos, s_, font=f, fill=col)
+    def button(x0, y0, x1, y1, label, right='', fill=(44, 170, 96), col=(255, 255, 255), size=56, border=None, shift=0):
+        d.rounded_rectangle([x0 + shift, y0, x1 + shift, y1], 34, fill=fill, outline=border, width=6 if border else 0)
+        txt(label, x0 + shift + 50, (y0 + y1) // 2, size, col, 'l')
+        if right: txt(right, x1 + shift - 50, (y0 + y1) // 2, int(size * 0.8), col, 'r')
+    txt('TAPPY', 140, 130, 34, (44, 170, 96), 'l'); txt('SUNNY PALMS HOA BBQ', W_ - 110, 130, 20, (130, 136, 150), 'r')
+    # smiley
+    cx, cy, r = 540, 330, 150
+    sad = state == 'guilt'
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(255, 214, 74), outline=(40, 40, 50), width=10)
+    ex = 0 if state != 'video' else int(6 * math.sin(t * 3))
+    for sx in (-1, 1):
+        d.ellipse([cx + sx * 56 - 20 + ex, cy - 40 - 20, cx + sx * 56 + 20 + ex, cy - 40 + 20], fill=(30, 30, 40))
+        d.ellipse([cx + sx * 56 - 8 + ex, cy - 60, cx + sx * 56 + 4 + ex, cy - 48], fill=(255, 255, 255))
+    m = min(1.0, amp * 1.6)
+    if sad:
+        d.arc([cx - 70, cy + 40, cx + 70, cy + 130], 200, 340, fill=(40, 40, 50), width=12)
+        d.polygon([(cx + 84, cy - 10), (cx + 70, cy + 34), (cx + 98, cy + 34)], fill=(110, 180, 255))
+        d.line([(cx - 90, cy - 96), (cx - 30, cy - 76)], fill=(40, 40, 50), width=10); d.line([(cx + 90, cy - 96), (cx + 30, cy - 76)], fill=(40, 40, 50), width=10)
+        if m > 0.1: d.ellipse([cx - 40, cy + 60, cx + 40, cy + 60 + int(20 + 40 * m)], fill=(120, 30, 40))
+    else:
+        h_ = int(16 + 64 * m)
+        d.chord([cx - 84, cy + 20, cx + 84, cy + 20 + 2 * h_ + 30], 0, 180, fill=(120, 30, 40), outline=(40, 40, 50), width=8)
+        d.chord([cx - 60, cy + 34, cx + 60, cy + 34 + 60], 0, 180, fill=(255, 255, 255)) if m > 0.35 else None
+    def slide(k, t0=0.0):
+        return int((1 - min(1.0, max(0.0, (u - t0 - 0.22 * k) / 0.22))) * 900)
+    if state in ('tip', 'video'):
+        txt('Add a tip?' if state == 'tip' else 'Tip this video?', 540, 590, 72 if state == 'tip' else 60, (30, 40, 50))
+        txt('Your tip supports the HOA president' if state == 'tip' else 'Your tip supports the creator', 540, 668, 22, (130, 136, 150))
+        for k, (pc, amt) in enumerate((('20%', '$9.53'), ('25%', '$11.91'), ('30%', '$14.29'))):
+            y0 = 760 + k * 190
+            press = (state == 'tip' and 2.9 < u < 3.3 and k == 0) or (state == 'video' and 3.8 < u < 4.2 and k == 2)
+            button(110, y0, 970, y0 + 150, pc, amt, fill=(24, 130, 70) if press else (44, 170, 96), shift=slide(k))
+        button(110, 1330, 970, 1450, 'Custom Tip', '', fill=(255, 255, 255), col=(44, 170, 96), size=44, border=(44, 170, 96), shift=slide(3))
+        txt('no tip', 540, 1590, 16, (206, 210, 214))
+    elif state == 'receipt':
+        txt('YOUR RECEIPT', 540, 590, 56, (30, 40, 50))
+        txt('HOT DOG', 130, 690, 34, (30, 40, 50), 'l'); txt('FREE!', 950, 690, 34, (30, 170, 90), 'r')
+        items = (('Bun surcharge', '1.50'), ('Condiment tax', '2.15'), ('Convenience fee', '3.99'), ('Plate fee', '2.50'), ('Napkin fee', '2.89'),
+                 ('Suggested donation', '15.00'), ('Service fee 18%', '9.60'), ('Tip 20%', '10.00'))
+        for k, (a_, b_) in enumerate(items):
+            if u < 0.25 + 0.34 * k: continue
+            y = 780 + k * 78
+            txt(a_, 130, y, 28, (70, 76, 90), 'l'); txt('$' + b_, 950, y, 28, (70, 76, 90), 'r')
+            d.line([(130, y + 34), (950, y + 34)], fill=(220, 224, 230), width=3)
+        if u > 0.25 + 0.34 * 8:
+            txt('TOTAL', 130, 1500, 60, (220, 40, 50), 'l'); txt('$47.63', 950, 1500, 60, (220, 40, 50), 'r')
+    elif state == 'guilt':
+        txt('Are you sure?', 540, 600, 68, (30, 40, 50))
+        txt('Brenda worked really hard.', 540, 690, 30, (90, 100, 140))
+        button(110, 800, 970, 950, 'Add tip', '$14.29', shift=slide(0))
+        txt('no thanks (Brenda will be notified)', 540, 1120, 16, (206, 210, 214))
+    elif state == 'review':
+        txt('Rate your visit!', 540, 600, 56, (30, 40, 50))
+        for k in range(5):
+            cxs, cys = 190 + k * 175, 780
+            sc = 1.0 + 0.12 * math.sin(t * 8 + k)
+            pts = []
+            for i in range(10):
+                rr = (70 if i % 2 == 0 else 30) * sc
+                a = -math.pi / 2 + i * math.pi / 5
+                pts.append((cxs + rr * math.cos(a), cys + rr * math.sin(a)))
+            d.polygon(pts, fill=(255, 196, 40), outline=(150, 100, 20))
+        txt('Leave a review?', 540, 960, 46, (30, 40, 50))
+        button(110, 1060, 970, 1210, '5 STARS', '', shift=slide(0))
+        txt('skip', 540, 1330, 16, (206, 210, 214))
+    big[:] = np.array(im)
