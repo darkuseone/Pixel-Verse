@@ -43,11 +43,12 @@ def snow_in(FX, v, t, box, n=40, drift=(-60, 160), col=(236, 244, 255)):
 
 def falling_snow(FX, v, t, x0, y0, x1, y1, n=60, col=(236, 244, 255), speed=40):
     L = Layer(v.wcam())
+    k = 1.0 / max(1.0, v.Z * 0.7)                         # flakes keep a sane on-screen size in close-ups
     for i in range(n):
-        a, b, c, d, e = SEED[200 + i]
+        a, b, c, d, e = SEED[200 + i % 300]
         x = x0 + (a * (x1 - x0) + 14 * math.sin(t * (0.8 + c) + i)) % (x1 - x0)
-        y = y0 + (b * (y1 - y0) + t * speed * (0.6 + 0.8 * d)) % (y1 - y0)
-        dot(L, (x, y), col, 0.9 + 1.2 * e)
+        y = y0 + (b * (y1 - y0) + t * speed * k * (0.6 + 0.8 * d)) % (y1 - y0)
+        dot(L, (x, y), col, (0.9 + 1.2 * e) * k)
     FX.add(L)
 
 

@@ -676,3 +676,56 @@ def string_bag(L, hand):
     for k in range(5):
         cap(L, (hand[0], hand[1]), (c[0] - 2.0 + k, c[1] + 1.8), 0.07, 0.07, (60, 60, 60))
     for dy in (0.0, 1.0): cap(L, (c[0] - 2.1, c[1] + dy), (c[0] + 2.1, c[1] + dy), 0.07, 0.07, (60, 60, 60))
+
+
+def valera_prone(CH, cam, t=0.0, crawl=0.0, mouth=0.0, expr='whisper', look=0.0, P=VC):
+    """Valera crawling on his belly under a white bedsheet (snow camouflage). Anchor = ground under the belly, facing +x.
+    crawl: 0 = frozen still, 1 = full shuffle."""
+    L = Layer(cam)
+    ph = t * 7.0
+    bob = 0.25 * crawl * abs(math.sin(ph))
+    sw = 0.8 * crawl * math.sin(ph)
+    S = (P['sheet'], P['sheet_hi'], P['sheet_sh'])
+    # arms/hands in front (under the sheet edge)
+    A = Layer(cam)
+    for k, (dx, off) in enumerate(((10.6, 0.0), (9.4, math.pi))):
+        x = dx + 0.6 * crawl * math.sin(ph + off)
+        ell(A, H(x, 0.75), 1.05, 0.8, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+        cap(A, H(x - 2.2, 1.6), H(x - 0.5, 0.9), 0.9, 0.8, *S)
+    _merge(L, A)
+    # body lump: butt, back, belly sagging into the snow
+    B_ = Layer(cam)
+    ellt(B_, H(-6.0 + 0.2 * sw, 3.0 + bob), 3.4, 2.7, S)
+    ellt(B_, H(0.0, 3.4 + bob), 7.8, 3.3, S)
+    ellt(B_, H(1.2, 1.1), 5.2, 1.6, S)                                           # the belly under the sheet
+    for x0 in (-3.5, -0.5, 2.6):                                                 # sheet folds
+        cap(B_, H(x0, 5.6 + bob), H(x0 + 1.2, 2.2 + bob), 0.18, 0.12, P['sheet_sh'])
+    ell(B_, H(-9.0, 1.2), 1.6, 0.9, P['boot'])                                   # boot heels sticking out
+    ell(B_, H(-8.4, 0.6), 1.5, 0.8, P['boot'])
+    _merge(L, B_)
+    # head at the front with the ushanka, the sheet draped over it
+    Hd = Layer(cam)
+    def F(x, h): return H(7.6 + (x - 0.75) * 0.95, 3.2 + bob + (h - 21.0) * 0.95)
+    _valera_head(Hd, F, P, expr, t, mouth, look, 0.0, 0.0, 'ushanka', 'street', True, cam)
+    ellt(Hd, F(0.2, 24.4), 3.9, 1.9, S)                                          # sheet over the hat
+    cap(Hd, F(-2.6, 24.0), F(-3.2, 20.2), 1.2, 0.8, *S)
+    _merge(L, Hd)
+    outline(L, OL)
+    CH.add(L)
+    return dict(head=F(2.0, 21.0), mouth=F(3.0, 19.3))
+
+
+def flip_phone(L, hand):
+    cap(L, (hand[0] - 0.2, hand[1] - 1.2), (hand[0] + 0.1, hand[1] + 0.9), 0.5, 0.45, (60, 64, 76), None, (40, 42, 52))
+    dot(L, (hand[0] - 0.15, hand[1] - 0.9), (140, 220, 255), 0.22)
+
+
+def flying_sheet(CH, cam, k, P=VC):
+    """bedsheet thrown off: k 0..1 flight progress (up and back)"""
+    L = Layer(cam)
+    x, h = -2.0 - 9.0 * k, 16.0 + 14.0 * math.sin(math.pi * min(1.0, k * 0.9))
+    for i in range(4):
+        ell(L, H(x + i * 1.6 * (1 - k * 0.4), h - i * 0.9 + math.sin(k * 12 + i) * 0.8), 3.2, 1.8, P['sheet'], 0.4 * math.sin(k * 7 + i),
+            P['sheet_hi'], P['sheet_sh'])
+    outline(L, OL)
+    CH.add(L)

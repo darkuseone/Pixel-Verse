@@ -197,6 +197,26 @@ def counter_occluder(world):
     return spr, x0, y0
 
 
+# ---------------------------------------------------------------- courtyard (wide) + entrance/bench close-up
+Y_BENCH = (465, 608, 522)               # wide yard: bench x0, x1, seat y
+Y_DOOR = (345, 402, 422, 540)
+Y_WINDOW = (395, 165, 478, 230)         # Valera's lit window on the 2nd floor
+Y_SANDBOX = (728, 540, 918, 585)
+Y_UNIT = 4.8                            # seated grannies / Valera at the facade depth
+B_SEAT = 553                            # close-up: bench seat y
+B_ZINA = (712.0, 553.0, 12.5)           # seated anchors (hips on the seat)
+B_LYUBA = (872.0, 553.0, 12.5)
+B_DOOR_EDGE = 497                       # right edge of the door (Valera peeks out here)
+B_FLOOR = 690
+B_UNIT = 14.5
+B_NOTICE = (655, 296, 845, 414)
+
+
+def bench_world(notice_lines, crossed=(), hand=()):
+    img = Image.fromarray(q(Image.open(BG / 'bench.png').convert('RGB')))
+    return np.array(notice(img, notice_lines, B_NOTICE, crossed, hand))
+
+
 NOTICE_E01 = [('ОБЪЯВЛЕНИЕ', 8, (40, 36, 40)), ('ГОРЯЧЕЙ', 16, (170, 30, 30)), ('ВОДЫ НЕТ', 16, (170, 30, 30)),
               ('С 01.12', 8, (40, 36, 40)), ('ПО 15.12', 8, (40, 36, 40)), ('ЖЭК №3', 8, (60, 60, 120))]
 
@@ -210,9 +230,10 @@ def build(force=False):
     stair = np.array(notice(Image.fromarray(q(Image.open(BG / 'stairwell.png').convert('RGB'))), NOTICE_E01))
     tub, tx, ty = tub_occluder(bath)
     shp = np.array(shop())
+    yard = q(Image.open(BG / 'yard.png').convert('RGB'))
     cnt, cx_, cy_ = counter_occluder(shp)
     out = dict(kitchen=kit, bath=bath, stair=stair, tub=tub, tub_xy=np.array([tx, ty]), shop=shp, counter=cnt,
-               counter_xy=np.array([cx_, cy_]),
+               counter_xy=np.array([cx_, cy_]), yard=yard,
                glow_k=glow_map(kit.shape[:2], [LAMP_K], 260), glow_b=glow_map(bath.shape[:2], [BULB], 220),
                glow_s=glow_map(stair.shape[:2], [LAMP_S], 240))
     np.savez_compressed(cache, **out)
