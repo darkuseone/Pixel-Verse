@@ -128,3 +128,21 @@ def flash_burst(big, cx, cy, k):
     if k <= 0: return
     glow(big, cx, cy, 700, (255, 255, 255), 1.4 * k)
     big[:] = np.clip(big.astype(np.float32) * (1 - 0.5 * k) + 255 * 0.5 * k, 0, 255).astype(np.uint8)
+
+
+def vhs(big, t, k=1.0):
+    """VHS rewind look: jittering bands, RGB split, scanlines, noise strip (works on any frame size)"""
+    r = np.random.default_rng(int(t * 30) + 11)
+    h, w = big.shape[:2]
+    for _ in range(int(7 * k)):
+        y = int(r.integers(0, h - 60)); hh = int(r.integers(6, 70)); dx = int(r.integers(-90, 90))
+        big[y:y + hh] = np.roll(big[y:y + hh], dx, 1)
+    sh = int(9 * k)
+    if sh:
+        big[..., 0] = np.roll(big[..., 0], sh, 1); big[..., 2] = np.roll(big[..., 2], -sh, 1)
+    f = big.astype(np.float32)
+    f[::4] *= 0.78
+    f = f * np.array([0.95, 1.0, 1.08], np.float32)
+    y = int(h * 0.82 + r.integers(-8, 8)); hh = int(h * 0.05)
+    f[y:y + hh] = np.clip(f[y:y + hh] * 0.4 + r.random((hh, w, 1)) * 190, 0, 255)
+    big[:] = np.clip(f, 0, 255).astype(np.uint8)

@@ -36,6 +36,17 @@
         170,
         255
       ]
+    },
+    "bartender": {
+      "name": "Бармен",
+      "voice": "Alexander - Deep Mature Narrator",
+      "voice_id": "LTkx8oHrUXaND7aaxdTA",
+      "style": "[deadpan, slow, low] — молчал весь сезон",
+      "color_caption": [
+        200,
+        200,
+        200
+      ]
     }
   },
   "music": {

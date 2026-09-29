@@ -5,7 +5,9 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import paths as P
 
-OUT_W, OUT_H = 1080, 1920
+import os
+WIDE = os.environ.get('PV_WIDE') == '1'
+OUT_W, OUT_H = (1920, 1080) if WIDE else (1080, 1920)
 _pf = {}
 
 

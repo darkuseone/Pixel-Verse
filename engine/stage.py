@@ -1,11 +1,12 @@
 """Stage: logical 360x640 canvas (x3 -> 1080x1920) over a big world image (code-drawn or AI background).
 Camera View maps world px -> screen; characters are drawn with scene.py primitives on a logical layer."""
-import math
+import math, os
 import numpy as np
 import scene as S
 from scene import ell as _ell0
 
-W, H, UP = 360, 640, 3
+WIDE = os.environ.get('PV_WIDE') == '1'           # 16:9 (1920x1080) for long-form; default stays 9:16
+W, H, UP = (640, 360, 3) if WIDE else (360, 640, 3)
 OUT_W, OUT_H = W * UP, H * UP
 S.W, S.H = W, H
 S.YY, S.XX = [a.astype(np.float32) + 0.5 for a in np.mgrid[0:H, 0:W]]
@@ -26,11 +27,11 @@ S.ell = ell
 
 class View:
     """world px -> logical screen px. X0,Y0 world top-left, Z zoom (1 = 360 world px across)."""
-    def __init__(s, world, X0, Y0, Z, oy=0, hlog=H):
-        """hlog: visible logical height used for clamping (320 for a split-screen half)"""
+    def __init__(s, world, X0, Y0, Z, oy=0, hlog=H, wlog=W):
+        """hlog/wlog: visible logical height/width used for clamping (a split-screen half)"""
         s.world = world; s.Z = Z; s.oy = oy
         WW, WH = world.shape[1], world.shape[0]
-        s.X0 = min(max(X0, 0.0), WW - W / Z); s.Y0 = min(max(Y0, 0.0), WH - hlog / Z)
+        s.X0 = min(max(X0, 0.0), WW - wlog / Z); s.Y0 = min(max(Y0, 0.0), WH - hlog / Z)
     def cam(s, wx, wy, unit, flip=False):
         """camera for a character drawn around anchor (1000,1000) placed at world (wx,wy), `unit` world px per unit.
         Divided by the current character pixel size PX (see set_px)."""
@@ -57,8 +58,8 @@ class View:
         return s.world[ys[:, None], xs[None, :]]
 
 
-def view_at(world, wx, wy, Z, sx=180, sy=400, hlog=H):
-    return View(world, wx - sx / Z, wy - sy / Z, Z, hlog=hlog)
+def view_at(world, wx, wy, Z, sx=180, sy=400, hlog=H, wlog=W):
+    return View(world, wx - sx / Z, wy - sy / Z, Z, hlog=hlog, wlog=wlog)
 
 
 def sample(v, arr):
@@ -95,6 +96,7 @@ def set_px(k):
     PX[0] = k
 
 def px_for_zoom(Z):
+    if WIDE: return 2 if Z >= 1.5 else 1
     return 2 if Z >= 2.3 else 1
 
 
