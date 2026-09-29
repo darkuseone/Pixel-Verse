@@ -646,3 +646,96 @@ def tablet_ui(big, t, state, u, amp=0.0):
         button(110, 1060, 970, 1210, '5 STARS', '', shift=slide(0))
         txt('skip', 540, 1330, 16, (206, 210, 214))
     big[:] = np.array(im)
+
+
+# ---------------------------------------------------------------- E06: election props
+def podium_front(CH, cam, w=15.0, h=12.6, flip_mic=False):
+    """wooden lectern with a microphone, drawn OVER the lower body of a hero standing behind it; anchor = hero's floor point"""
+    L = Layer(cam)
+    rect(L, H(1.0, h / 2), w, h, 0, (150, 100, 60))
+    rect(L, H(1.0, h - 0.5), w + 1.0, 1.4, 0, (176, 124, 76))
+    rect(L, H(1.0, h * 0.5), w - 2.6, h - 3.4, 0, (128, 84, 48))
+    ell(L, H(1.0, h * 0.55), 2.2, 1.6, (232, 190, 90), 0, (250, 226, 140), (176, 130, 40))
+    cap(L, H(4.6, h), H(5.2, h + 5.6), 0.22, 0.22, (170, 176, 190))
+    ell(L, H(5.4, h + 6.2), 0.9, 1.1, (40, 40, 48), 0, (90, 90, 104), (20, 20, 28))
+    outline(L, OL)
+    CH.add(L)
+
+
+def ballot_in_mouth(CH, cam, wl=0.0, name='DALE'):
+    """Earl's soggy ballot held in his jaws (Earl units: anchor = waterline)"""
+    L = Layer(cam)
+    rect(L, H(8.2, wl + 3.0), 2.8, 3.6, -0.15, (252, 252, 248))
+    rect(L, H(8.2, wl + 3.0), 2.8, 0.7, -0.15, (60, 70, 140))
+    ltext(L, name, (8.2, wl + 3.4), 0.55, (40, 40, 60), -0.15)
+    for k, (x, h) in enumerate(((7.4, 1.0), (8.0, 0.4), (9.0, 1.2))):
+        cap(L, H(x, wl + 1.6), H(x, wl + h - 0.5), 0.2, 0.16, (150, 200, 240))
+    outline(L, OL)
+    CH.add(L)
+
+
+def ballot_box(CH, v, x, y, s=1.0):
+    """glass ballot box with a slot on a table; centre-bottom at world (x, y)"""
+    cam = v.cam(x, y, 8.0 * s)
+    L = Layer(cam)
+    rect(L, H(0.0, 4.6), 9.0, 9.0, 0, (200, 226, 240))
+    rect(L, H(0.0, 4.6), 8.0, 8.0, 0, (226, 240, 250))
+    rect(L, H(0.0, 9.4), 9.6, 1.2, 0, (176, 124, 76))
+    cap(L, H(-2.0, 9.4), H(2.0, 9.4), 0.25, 0.25, (30, 30, 36))                                   # slot
+    rect(L, H(0.0, 0.6), 9.6, 1.2, 0, (150, 100, 60))
+    rect(L, H(0.0, 4.4), 5.0, 1.6, 0, (252, 252, 248))
+    ltext(L, 'BALLOTS', (0.0, 4.4), 0.62, (60, 70, 140))
+    outline(L, OL)
+    CH.add(L)
+
+
+def ballot_paper(CH, v, x, y, s=1.0, ang=0.0):
+    L = Layer(v.cam(x, y, 8.0 * s))
+    rect(L, H(0.0, 0.0), 3.0, 4.2, ang, (252, 252, 248))
+    rect(L, H(0.0, 1.4), 3.0, 0.7, ang, (60, 70, 140))
+    outline(L, OL)
+    CH.add(L)
+
+
+def tally_overlay(big, v, brenda, dale, x=560, y=470):
+    """chalk-style scoreboard drawn onto the frame at world (x, y)"""
+    import overlays as O
+    im = Image.new('RGBA', (1080, 1920), (0, 0, 0, 0)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    a, b = v.opt(x - 70, y - 50), v.opt(x + 70, y + 50)
+    d.rectangle([a, b], fill=(32, 54, 48, 255), outline=(150, 100, 60, 255), width=10)
+    f = O.pfont(int(9 * v.Z * 3))
+    for i, (nm, n) in enumerate((('BRENDA', brenda), ('DALE', dale))):
+        cx = a[0] + (b[0] - a[0]) * (0.28 + 0.44 * i)
+        bb = f.getbbox(nm); d.text((cx - (bb[2] - bb[0]) / 2 - bb[0], a[1] + 24), nm, font=f, fill=(250, 250, 240, 255))
+        for k in range(n):
+            xx = cx - 10 * v.Z * 3 + k * 8 * v.Z * 3
+            d.line([(xx, a[1] + 90 * v.Z), (xx, a[1] + 150 * v.Z)], fill=(250, 250, 240, 255), width=max(3, int(3 * v.Z)))
+    O.overlay(big, np.array(im), 0, 0, 1.0)
+
+
+def crowd_back(CH, v, n=14, y=690.0, x0=60.0, x1=1220.0, u=6.8, t=0.0, cheer=1.0, seed=6):
+    """neighbours seen from behind (heads, shoulders, visors, cheering arms) in a row along world y"""
+    rng = np.random.default_rng(seed)
+    hair = ((238, 208, 110), (200, 200, 208), (110, 74, 48), (36, 30, 34), (226, 226, 230), (196, 96, 60), (240, 236, 220))
+    shirt = ((226, 90, 120), (60, 150, 210), (255, 200, 60), (120, 200, 150), (160, 110, 210), (240, 240, 236), (240, 140, 60))
+    skin = ((238, 186, 150), (212, 160, 120), (170, 118, 84), (244, 208, 180))
+    for i in range(n):
+        x = lerp_(x0, x1, (i + 0.5 * (i % 2)) / n) + float(rng.uniform(-14, 14)); yy = y + float(rng.uniform(-10, 24))
+        cam = v.cam(x, yy, u * float(rng.uniform(0.9, 1.1)))
+        L = Layer(cam)
+        b = 0.3 * math.sin(t * 7 + i * 1.7) * cheer
+        sc = shirt[int(rng.integers(0, len(shirt)))]
+        ell(L, H(0.0, 6.0), 4.6, 5.2, sc, 0, tuple(min(255, c + 30) for c in sc), tuple(int(c * 0.7) for c in sc))
+        ell(L, H(0.0, 13.6 + b), 2.5, 2.8, skin[int(rng.integers(0, len(skin)))], 0, None, None)
+        hc = hair[int(rng.integers(0, len(hair)))]
+        ell(L, H(0.0, 14.6 + b), 2.9, 2.7, hc, 0, tuple(min(255, c + 24) for c in hc), tuple(int(c * 0.75) for c in hc))
+        if i % 3 == 0: ell(L, H(0.0, 16.4 + b), 3.4, 0.9, (250, 250, 246), 0, None, (196, 200, 208))                 # sun visor
+        for sx in (-1, 1):                                                                                             # cheering arms
+            if (i + (sx > 0)) % 2 == 0:
+                cap(L, H(sx * 3.8, 9.0), H(sx * 5.0, 17.5 + 2.0 * math.sin(t * 9 + i + sx) * cheer), 0.9, 0.8, sc)
+                dot(L, H(sx * 5.0, 18.4 + 2.0 * math.sin(t * 9 + i + sx) * cheer), skin[i % len(skin)], 0.9)
+        outline(L, OL)
+        CH.add(L)
+
+
+def lerp_(a, b, k): return a + (b - a) * k
