@@ -1,0 +1,254 @@
+"""Props of «Sunny Palms HOA»: mailbox, golf cart, notice, clipboard, paint-chip fan, spray can, stamp, ticket pad, fund jar.
+Hand-held props take (L, hand) in character unit coords; world props take a View (v) or a Chars canvas + world coords.
+Conventions as in props/us_cast.py (anchor (1000,1000), H(x, h), +x = facing)."""
+import math
+import numpy as np
+from PIL import Image, ImageDraw
+import scene as S
+from scene import Layer
+import paths as P
+from props.folk import H, cap, ell, ellt, dot, poly, outline, _merge, OL
+
+BONE = (232, 222, 200)                 # «Bone» and «Ecru Whisper» are the SAME colour: that is the joke
+BONE_HI, BONE_SH = (246, 238, 220), (196, 184, 160)
+PINK = (255, 168, 200)
+
+
+def rect(L, *args):
+    """rect(L, (cx, cy), w, h, ang, colour) or rect(L, cx, cy, w, h, ang, colour)"""
+    if isinstance(args[0], (tuple, list)): (cx, cy), w, h, ang, c = args[0], *args[1:]
+    else: cx, cy, w, h, ang, c = args
+    ca, sa = math.cos(ang), math.sin(ang)
+    pts = [(cx + dx * ca - dy * sa, cy + dx * sa + dy * ca) for dx, dy in ((-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2))]
+    poly(L, pts, c)
+
+
+def ltext(L, txt, uxy, h_units, col, ang=0.0):
+    """pixel-font text centred at unit coords uxy on a layer (font height ~ h_units)"""
+    from PIL import ImageFont
+    cm = L.cam
+    size = max(6, int(round(h_units * cm.sc)))
+    f = ImageFont.truetype(P.FONT_PX, size); bb = f.getbbox(txt)
+    tw, th = bb[2] - bb[0], bb[3] - bb[1]
+    img = Image.new('L', (tw + 4, th + 4), 0); d = ImageDraw.Draw(img); d.fontmode = '1'
+    d.text((2 - bb[0], 2 - bb[1]), txt, font=f, fill=255)
+    if ang: img = img.rotate(-math.degrees(ang), expand=True)
+    m = np.array(img) > 127; ys, xs = np.nonzero(m)
+    cx, cy = cm.p(*uxy)
+    yy = (ys + int(cy - m.shape[0] / 2)); xx = (xs + int(cx - m.shape[1] / 2))
+    ok = (yy >= 0) & (yy < L.m.shape[0]) & (xx >= 0) & (xx < L.m.shape[1])
+    L.col[yy[ok], xx[ok]] = col; L.m[yy[ok], xx[ok]] = True
+
+
+# ---------------------------------------------------------------- hand-held
+def notice(L, h, ang=0.0, w=5.4, hh=7.0, txt='$250', crumple=0.0):
+    """pink violation notice held at hand h"""
+    cx, cy = h[0] + 0.3, h[1] - 0.4
+    rect(L, cx + 0.25, cy + 0.25, w, hh, ang, (214, 120, 150))                   # shadow edge
+    rect(L, cx, cy, w, hh, ang, PINK)
+    rect(L, cx, cy - hh * 0.36, w - 0.5, 1.3, ang, (200, 40, 70))               # red header
+    for k in range(3):
+        cap(L, (cx - w * 0.36, cy - hh * 0.1 + k * 0.8), (cx + w * (0.36 - 0.1 * k), cy - hh * 0.1 + k * 0.8), 0.12, 0.12, (150, 90, 110))
+    ltext(L, txt, (cx, cy + hh * 0.22), min(2.3, w * 0.84 / len(txt)), (200, 24, 50))
+    if crumple > 0:
+        for k in range(4):
+            cap(L, (cx - w * 0.4 + k * w * 0.25, cy - hh * 0.4), (cx - w * 0.35 + k * w * 0.25, cy + hh * 0.4), 0.15, 0.15, (200, 120, 146))
+
+
+def clipboard(L, h, ang=-0.15, w=5.4, hh=7.6, title='FORM 27-B'):
+    cx, cy = h[0] + 0.6, h[1] - 0.6
+    rect(L, cx, cy, w + 0.8, hh + 0.8, ang, (110, 72, 42))
+    rect(L, cx, cy, w, hh, ang, (250, 250, 246))
+    rect(L, cx, cy - hh * 0.52, 2.4, 1.0, ang, (200, 204, 212))                   # clip
+    ltext(L, title, (cx, cy - hh * 0.22), 1.1, (60, 70, 120), ang)
+    for k in range(5):
+        cap(L, (cx - w * 0.38, cy + hh * (-0.02 + 0.13 * k)), (cx + w * (0.38 - 0.06 * k), cy + hh * (-0.02 + 0.13 * k)), 0.1, 0.1, (150, 158, 176))
+
+
+def pen(L, h, ang=-0.9):
+    cap(L, h, (h[0] + math.cos(ang) * 2.8, h[1] + math.sin(ang) * 2.8), 0.28, 0.28, (40, 60, 150))
+    dot(L, (h[0] + math.cos(ang) * 2.9, h[1] + math.sin(ang) * 2.9), (20, 20, 30), 0.25)
+
+
+def chip_fan(L, h, ang=-1.3, spread=0.28, big=1.0):
+    """fan of paint chips; every strip is (almost) the same beige"""
+    tones = [BONE, (233, 222, 198), (231, 223, 200), BONE, (232, 221, 199)]
+    for k, c in enumerate(tones):
+        a = ang + (k - 2) * spread
+        L2 = 5.2 * big
+        cap(L, h, (h[0] + math.cos(a) * L2, h[1] + math.sin(a) * L2), 0.95 * big, 0.95 * big, (252, 252, 250), None, (150, 140, 120))
+        cap(L, h, (h[0] + math.cos(a) * L2 * 0.96, h[1] + math.sin(a) * L2 * 0.96), 0.66 * big, 0.66 * big, c, BONE_HI, BONE_SH)
+        dot(L, (h[0] + math.cos(a) * L2 * 0.8, h[1] + math.sin(a) * L2 * 0.8), (170, 160, 140), 0.2)
+    dot(L, h, (190, 190, 200), 0.5)
+
+
+def spray_can(L, h, ang=-0.5, on=0.0):
+    ca, sa = math.cos(ang), math.sin(ang)
+    a = (h[0] - ca * 1.0, h[1] - sa * 1.0); b = (h[0] + ca * 3.4, h[1] + sa * 3.4)
+    cap(L, a, b, 0.95, 0.95, (214, 218, 226), (250, 252, 255), (156, 162, 178))
+    cap(L, (a[0] + ca * 1.4, a[1] + sa * 1.4), (a[0] + ca * 2.4, a[1] + sa * 2.4), 1.0, 1.0, BONE, None, BONE_SH)     # label = the colour
+    cap(L, b, (b[0] + ca * 0.7, b[1] + sa * 0.7), 0.55, 0.5, (60, 64, 76))
+    cap(L, (b[0] + ca * 0.5, b[1] + sa * 0.5), (b[0] + ca * 1.1, b[1] + sa * 1.1 - 0.4), 0.28, 0.28, (250, 250, 250))
+    return (b[0] + ca * 1.6, b[1] + sa * 1.6)
+
+
+def koozie_can(L, h):
+    cap(L, (h[0], h[1] - 1.6), (h[0], h[1] + 1.4), 0.95, 0.95, (126, 236, 88), (190, 255, 150), (84, 176, 56))
+    cap(L, (h[0], h[1] - 2.3), (h[0], h[1] - 1.7), 0.8, 0.8, (214, 218, 224))
+
+
+def stamp_tool(L, h, press=0.0):
+    y = h[1] + 1.4 * press
+    cap(L, (h[0], y - 3.4), (h[0], y - 1.4), 0.7, 0.7, (150, 80, 50), (190, 116, 80), (110, 56, 34))
+    rect(L, h[0], y - 0.7, 3.8, 1.1, 0, (60, 60, 70))
+    rect(L, h[0], y, 3.0, 0.5, 0, (200, 40, 50))
+
+
+def ticket_pad(L, h, ang=-0.2, txt='$250', k=0.8):
+    rect(L, h[0] + 0.5, h[1] - 0.4, 4.6 * k, 6.0 * k, ang, (150, 60, 90))
+    rect(L, h[0] + 0.5, h[1] - 0.4, 4.2 * k, 5.6 * k, ang, PINK)
+    ltext(L, txt, (h[0] + 0.5, h[1] - 0.2), 1.4, (200, 24, 50), ang)
+
+
+def mailbox_held(L, h, ang=0.0, s=1.0):
+    """the whole mailbox carried at the chest (its post ripped off)"""
+    cx, cy = h[0] - 1.5, h[1] - 0.6
+    cap(L, (cx - 2.4 * s, cy), (cx + 2.4 * s, cy), 2.0 * s, 2.0 * s, BONE, BONE_HI, BONE_SH)
+    ell(L, (cx + 4.6 * s, cy), 0.9 * s, 1.9 * s, BONE_SH)
+    cap(L, (cx - 3.6 * s, cy - 1.6 * s), (cx - 3.6 * s, cy - 4.4 * s), 0.25, 0.25, (200, 40, 50))
+    rect(L, cx - 3.2 * s, cy - 4.2 * s, 1.6, 0.9, 0, (214, 46, 56))
+    for (x, y) in ((cx - 1.0 * s, cy + 1.5 * s), (cx + 1.6 * s, cy + 1.7 * s)):
+        dot(L, (x, y), (150, 100, 70), 0.3)
+    dot(L, (cx - 3.4 * s, cy + 1.6 * s), (140, 120, 100), 0.3)                          # a bit of the wooden post still stuck on
+    cap(L, (cx - 0.4 * s, cy + 2.0 * s), (cx - 0.4 * s, cy + 3.8 * s), 0.9, 0.9, (150, 110, 70), (180, 140, 96), (110, 78, 48))
+
+
+# ---------------------------------------------------------------- world props
+def mailbox_world(CH, v, x, y, painted=0.0, t=0.0, wob=0.0, s=1.0, flag_up=True, tint=None):
+    """mailbox with its centre at world (x, y); s = size in world px per 'unit' of 1.0 == 30 px body length.
+    painted 0..1 shows a fresh coat: rust/dents disappear (the colour stays exactly the same)"""
+    cam = v.cam(x, y, 8.0 * s)
+    L = Layer(cam)
+    c, hi, sh = BONE, BONE_HI, BONE_SH
+    cap(L, H(-2.6, 0.0), H(2.6, 0.0), 2.35, 2.35, c, hi, sh)
+    ell(L, H(5.2, 0.0), 1.0, 2.2, sh if painted < 0.5 else (210, 200, 176))
+    dot(L, H(5.5, 0.0), (120, 110, 96), 0.35)
+    cap(L, H(-4.4, -1.5), H(-4.4, -5.2), 0.35, 0.35, (206, 44, 52))                       # flag arm
+    rect(L, H(-3.6, -5.2), 2.2, 1.3, 0, (232, 52, 60))
+    if not flag_up:
+        pass
+    if painted < 0.5:
+        for (px_, py_, r) in ((-1.5, 1.6, 0.5), (0.8, 2.0, 0.4), (-3.0, 0.8, 0.45), (2.6, 1.2, 0.35)):
+            dot(L, H(px_, py_), (150, 96, 64), r)
+        cap(L, H(-2.0, 1.0), H(-2.3, 2.3), 0.16, 0.12, (170, 110, 76))
+    else:
+        cap(L, H(-1.4, -1.5), H(1.2, -1.7), 0.35, 0.3, (252, 250, 240))                   # fresh gloss streak
+    outline(L, OL)
+    CH.add(L)
+
+
+def golf_cart(CH_back, CH_front, v, x, y, u=4.6, flip=True, t=0.0, brake=0.0, beacon=True):
+    """HOA golf cart: draws body+seat into CH_back and canopy/dash/front wheel into CH_front (Brenda goes between).
+    Anchor (x,y) = ground under the cart centre. Returns the seat point (world) for Brenda."""
+    cam = v.cam(x, y, u, flip)
+    bounce = 0.12 * math.sin(t * 9.0) * (1 - brake)
+    A = Layer(cam)
+    for wx in (-11.0, 11.0):                                                            # far-side wheels first (dark)
+        ell(A, H(wx, 3.3 + bounce * 0.2), 3.3, 3.3, (28, 28, 34))
+    cap(A, H(-15.5, 6.6 + bounce), H(15.0, 6.6 + bounce), 3.5, 3.4, (250, 248, 240), (255, 255, 255), (196, 200, 208))
+    ell(A, H(16.5, 7.2 + bounce), 3.0, 3.1, (250, 248, 240), 0, (255, 255, 255), (196, 200, 208))
+    cap(A, H(-16.0, 9.5 + bounce), H(-16.0, 4.0 + bounce), 1.5, 1.5, (236, 234, 226))
+    cap(A, H(-9.5, 10.4 + bounce), H(-2.5, 10.4 + bounce), 1.9, 1.9, (232, 214, 170), (250, 236, 196), (190, 168, 120))    # seat
+    cap(A, H(-11.0, 10.4 + bounce), H(-11.0, 16.4 + bounce), 1.3, 1.3, (232, 214, 170), (250, 236, 196), (190, 168, 120))  # backrest
+    rect(A, H(-1.0, 6.4)[0], H(-1.0, 6.4)[1], 6.0, 3.0, 0, (36, 96, 190))                 # HOA plate
+    ltext(A, 'HOA', H(-1.0, 6.4), 1.9, (255, 255, 255))
+    outline(A, OL)
+    CH_back.add(A)
+    B = Layer(cam)
+    cap(B, H(5.5, 9.8 + bounce), H(4.0, 14.2 + bounce), 0.55, 0.55, (70, 74, 86))       # steering column
+    ell(B, H(3.4, 14.8 + bounce), 0.9, 2.2, (40, 42, 52), 0.5)                           # wheel
+    poly(B, [H(7.0, 10.0 + bounce), H(8.8, 13.2 + bounce), H(8.4, 30.6 + bounce), H(6.8, 30.6 + bounce)], (200, 226, 240))   # windshield
+    cap(B, H(-13.5, 10.6), H(-13.5, 30.8), 0.5, 0.5, (240, 240, 240)); cap(B, H(8.8, 12.0), H(8.8, 30.8), 0.5, 0.5, (240, 240, 240))
+    ell(B, H(-2.0, 31.6), 16.0, 1.5, (120, 226, 190), 0, (170, 250, 220), (70, 168, 136))  # mint canopy
+    ell(B, H(-2.0, 30.4), 15.0, 0.5, (70, 168, 136))
+    for wx in (-11.0, 11.0):                                                            # near wheels
+        ell(B, H(wx, 3.3 + bounce * 0.2), 3.4, 3.4, (24, 24, 30)); ell(B, H(wx, 3.3 + bounce * 0.2), 1.6, 1.6, (196, 200, 210), 0, (240, 242, 250), (140, 144, 158))
+    on = beacon and (int(t * 5) % 2 == 0)
+    cap(B, H(-12.8, 33.0), H(-12.8, 34.2), 0.7, 0.7, (255, 168, 0) if on else (190, 120, 0))
+    cap(B, H(-13.6, 33.2), H(-13.6, 40.0), 0.2, 0.2, (200, 200, 210))
+    poly(B, [H(-13.6, 40.0), H(-9.6, 39.0), H(-13.6, 37.6)], (255, 90, 160))                # pink pennant
+    outline(B, OL)
+    CH_front.add(B)
+    return (x + (-1 if flip else 1) * (-5.5) * u, y - 1.5 * u)
+
+
+def skid_puffs(FX, v, t, t0, x, y, n=7, drift=1.0):
+    """tyre smoke: puffs rising from ground point (x, y) after t0"""
+    L = Layer(v.wcam())
+    u = t - t0
+    if u < 0 or u > 1.4: return
+    for i in range(n):
+        ph = u - i * 0.06
+        if ph < 0: continue
+        r = 5 + 26 * min(1.0, ph / 0.7)
+        px_, py_ = x + drift * (-30 * ph - i * 6), y - 18 * ph
+        a = max(0.0, 1 - ph / 1.2)
+        if a > 0.15: ell(L, (px_, py_), r, r * 0.7, (232, 232, 236))
+    FX.add(L)
+
+
+# ---------------------------------------------------------------- interior insert: the Beautification Fund
+def fund_jar(CH, v, t, level=0.94, pop=0.0):
+    """fills the empty jar (world x 258-372, y 295-435) with bills/coins, sticks a label, and draws the BAHAMAS chart on the cork board
+    (world x 320-625, y 70-285)"""
+    L = Layer(v.wcam())
+    fill_top = 435 - 115 * min(1.0, level)
+    yy = 432
+    k = 0
+    while yy > fill_top + 4:
+        for xx in range(266, 366, 20):
+            jit = ((k * 37) % 7) - 3
+            c = (86, 168, 96) if (k + xx) % 3 else (120, 196, 120)
+            ell(L, (xx + 8 + jit, yy - 6), 12, 6, c, ((k % 5) - 2) * 0.12)
+            dot(L, (xx + 8 + jit, yy - 6), (46, 110, 60), 3)
+            k += 1
+        yy -= 9
+    for (cx, cy) in ((286, fill_top + 2), (330, fill_top - 1), (352, fill_top + 5)):
+        ell(L, (cx, cy), 5, 4, (255, 214, 70), 0, (255, 240, 150), (200, 150, 30))        # coins on top
+    rect(L, 315, 380, 84, 26, 0, (252, 250, 240))                                        # label
+    rect(L, 315, 380, 84, 4, 0, (255, 100, 170))
+    CH.add(L)
+
+
+def fund_insert(big, v, t, level=0.94, pop=0.0):
+    """cork-board chart + jar label drawn straight onto the frame (output px, positions via the view v):
+    BAHAMAS 2027 card, thermometer bar `level` (0..1), jar label. pop 0..1 bounces the percentage."""
+    from PIL import ImageFont
+    import overlays as O
+    W_, H_ = big.shape[1], big.shape[0]
+    im = Image.new('RGBA', (W_, H_), (0, 0, 0, 0)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    def o(x, y): return v.opt(x, y)
+    def txt(s_, cx, cy, size, col, stroke=None):
+        f = ImageFont.truetype(P.FONT_PX, max(8, int(size * v.Z * 3)))
+        bb = f.getbbox(s_)
+        pos = (cx - (bb[2] - bb[0]) / 2 - bb[0], cy - (bb[3] - bb[1]) / 2 - bb[1])
+        if stroke:
+            for dx in (-3, 0, 3):
+                for dy in (-3, 0, 3): d.text((pos[0] + dx, pos[1] + dy), s_, font=f, fill=stroke)
+        d.text(pos, s_, font=f, fill=col)
+    def box(x0, y0, x1, y1, fill, outline_=None, w=3):
+        a, b = o(x0, y0), o(x1, y1)
+        d.rectangle([a, b], fill=fill, outline=outline_, width=w)
+    box(352, 92, 592, 150, (252, 250, 240), (40, 60, 120), 4)                                # card
+    txt('BAHAMAS', *o(472, 112), 12, (24, 96, 200)); txt('2027', *o(472, 136), 12, (255, 90, 160))
+    box(352, 176, 592, 210, (236, 236, 240), (40, 40, 60), 4)                                # thermometer track
+    fx = 352 + 240 * min(1.0, level)
+    box(354, 178, fx, 208, (232, 48, 64))
+    for k in range(1, 10):
+        a = o(352 + 24 * k, 178); d.line([a, (a[0], a[1] + 10)], fill=(255, 255, 255), width=2)
+    pct = f'{int(round(level * 100))}%'
+    k = 1.0 + 0.35 * math.sin(min(pop, 1.0) * math.pi) if pop > 0 else 1.0
+    txt(pct, *o(472, 242 + 0), 14 * k, (255, 236, 90) if level < 0.999 else (140, 255, 150), (30, 20, 40))
+    box(272, 368, 360, 396, (252, 250, 240), (255, 100, 170), 3)                              # jar label
+    txt('BEAUTIFICATION', *o(316, 376), 5.2, (60, 60, 90)); txt('FUND', *o(316, 388), 6.0, (200, 40, 70))
+    O.overlay(big, np.array(im), 0, 0, 1.0)
