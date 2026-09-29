@@ -94,13 +94,30 @@ def title(F, lines, top, size=64, max_w=520, gap=12):
     return y
 
 
-def make(raw_png, src_jpg, out_pngs, n, title_lines, series='ВАЛЕРА И КОТ'):
+def make(raw_png, src_jpg, out_pngs, n, title_lines, series='ВАЛЕРА И КОТ', extra=None):
     Image.open(raw_png).convert('RGB').save(src_jpg, quality=93)
     F = pixelize(Image.open(src_jpg))
     for i, yy in enumerate(range(0, 110, 22)):
         F[yy:yy + 22] = (F[yy:yy + 22].astype(np.float32) * (0.62 + 0.07 * i)).astype(np.uint8)
     yb = enamel_plank(F, f'{series}\nСЕРИЯ {n}/6', 136, 24)                 # below the 3:4 grid crop line
     title(F, title_lines, yb + 22, 64, max_w=524, gap=10)
+    if extra: extra(F)
     img = Image.fromarray(F).resize((1080, 1920), Image.NEAREST)
     for o in out_pngs: img.save(o)
     return img
+
+
+def lcd(F, txt, cx, cy, size=40, col=(120, 255, 140)):
+    """green LCD price display box drawn onto the 540x960 cover canvas"""
+    f = _font(size)
+    bb = f.getbbox(txt); tw, th = bb[2] - bb[0], bb[3] - bb[1]
+    w, h = tw + 36, th + 30
+    x0, y0 = int(cx - w / 2), int(cy - h / 2)
+    F[y0 - 4:y0 + h + 4, x0 - 4:x0 + w + 4] = NAVY
+    F[y0:y0 + h, x0:x0 + w] = (34, 36, 40)
+    F[y0 + 5:y0 + h - 5, x0 + 5:x0 + w - 5] = (12, 34, 18)
+    img = Image.new('L', (w, h), 0); d = ImageDraw.Draw(img); d.fontmode = '1'
+    d.text(((w - tw) // 2 - bb[0], (h - th) // 2 - bb[1]), txt, font=f, fill=255)
+    m = np.array(img) > 127
+    reg = F[y0:y0 + h, x0:x0 + w]
+    reg[m] = col

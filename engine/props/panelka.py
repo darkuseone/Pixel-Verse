@@ -130,6 +130,73 @@ def tub_occluder(world):
     return spr, x0, y0
 
 
+# ---------------------------------------------------------------- gastronom (shop)
+SH_TAMARA = (1165.0, 625.0, 19.0)        # cashier anchor (behind the counter, facing left)
+SH_VALERA = (790.0, 712.0, 22.0)         # customer anchor (facing right)
+SH_ZINA = (560.0, 690.0, 17.0)           # granny in the queue
+LCD = (902, 298, 990, 334)              # customer display on a pole by the register
+COUNTER_EDGE = [(880, 425), (1090, 446), (1280, 452)]
+TAG = (146, 546, 266, 630)              # big yellow price tag on the deli case
+SH_LIGHTS = [(490.0, 32.0), (960.0, 32.0)]
+
+
+def price_tag(img, box=TAG, name='ДОКТОРСКАЯ', big='199', foot=('*ПО КАРТЕ', 'БЕЗ КАРТЫ 289')):
+    a = np.array(img)
+    x0, y0, x1, y1 = box
+    a[y0 - 2:y1 + 2, x0 - 2:x1 + 2] = (70, 56, 20)
+    a[y0:y1, x0:x1] = (250, 218, 60)
+    a[y0:y0 + 14, x0:x1] = (214, 40, 36)
+    img = Image.fromarray(a)
+    cx = (x0 + x1) / 2
+    img = text(img, name, cx, y0 + 7, 8, (255, 250, 230))
+    img = text(img, big, cx - 6, y0 + 36, 32, (200, 30, 30))
+    img = text(img, '*', x1 - 12, y0 + 24, 8, (200, 30, 30))
+    img = text(img, foot[0], cx, y1 - 22, 8, (90, 70, 20))
+    img = text(img, foot[1], cx, y1 - 10, 8, (90, 70, 20))
+    return img
+
+
+def shop():
+    img = Image.fromarray(q(Image.open(BG / 'shop.png').convert('RGB')))
+    img = price_tag(img)
+    a = np.array(img)
+    x0, y0, x1, y1 = LCD
+    a[y0 - 3:y1 + 3, x0 - 3:x1 + 3] = (30, 30, 34)                         # display housing
+    a[y0:y1, x0:x1] = (12, 30, 16)                                          # dark green LCD glass
+    a[y1 + 3:340, (x0 + x1) // 2 - 3:(x0 + x1) // 2 + 3] = (60, 60, 66)    # pole
+    return Image.fromarray(a)
+
+
+def lcd_digits(world_view_big, v, txt, col=(120, 255, 140)):
+    """draw green digits on the shop LCD (output frame, via the view)"""
+    from overlays import pfont
+    x0, y0 = v.opt(LCD[0], LCD[1]); x1, y1 = v.opt(LCD[2], LCD[3])
+    w, h = int(x1 - x0), int(y1 - y0)
+    if w < 12 or h < 8: return
+    f = pfont(max(8, int(h * 0.62) // 8 * 8))
+    bb = f.getbbox(txt)
+    img = Image.new('L', (w, h), 0); d = ImageDraw.Draw(img); d.fontmode = '1'
+    d.text(((w - (bb[2] - bb[0])) // 2 - bb[0], (h - (bb[3] - bb[1])) // 2 - bb[1]), txt, font=f, fill=255)
+    m = np.array(img) > 127
+    X0, Y0 = int(x0), int(y0)
+    big = world_view_big
+    ys, xs = np.nonzero(m)
+    ys = ys + Y0; xs = xs + X0
+    ok = (ys >= 0) & (ys < big.shape[0]) & (xs >= 0) & (xs < big.shape[1])
+    big[ys[ok], xs[ok]] = col
+
+
+def counter_occluder(world):
+    Hh, Ww = world.shape[:2]
+    m = Image.new('L', (Ww, Hh), 0)
+    ImageDraw.Draw(m).polygon(COUNTER_EDGE + [(1280, 720), (880, 720)], fill=1)
+    m = np.array(m).astype(bool)
+    x0, x1, y0, y1 = 870, 1280, 415, 720
+    spr = np.zeros((y1 - y0, x1 - x0, 4), np.uint8)
+    spr[..., :3] = world[y0:y1, x0:x1]; spr[..., 3] = np.where(m[y0:y1, x0:x1], 255, 0)
+    return spr, x0, y0
+
+
 NOTICE_E01 = [('ОБЪЯВЛЕНИЕ', 8, (40, 36, 40)), ('ГОРЯЧЕЙ', 16, (170, 30, 30)), ('ВОДЫ НЕТ', 16, (170, 30, 30)),
               ('С 01.12', 8, (40, 36, 40)), ('ПО 15.12', 8, (40, 36, 40)), ('ЖЭК №3', 8, (60, 60, 120))]
 
@@ -142,7 +209,10 @@ def build(force=False):
     bath = q(Image.open(BG / 'bathroom.png').convert('RGB'))
     stair = np.array(notice(Image.fromarray(q(Image.open(BG / 'stairwell.png').convert('RGB'))), NOTICE_E01))
     tub, tx, ty = tub_occluder(bath)
-    out = dict(kitchen=kit, bath=bath, stair=stair, tub=tub, tub_xy=np.array([tx, ty]),
+    shp = np.array(shop())
+    cnt, cx_, cy_ = counter_occluder(shp)
+    out = dict(kitchen=kit, bath=bath, stair=stair, tub=tub, tub_xy=np.array([tx, ty]), shop=shp, counter=cnt,
+               counter_xy=np.array([cx_, cy_]),
                glow_k=glow_map(kit.shape[:2], [LAMP_K], 260), glow_b=glow_map(bath.shape[:2], [BULB], 220),
                glow_s=glow_map(stair.shape[:2], [LAMP_S], 240))
     np.savez_compressed(cache, **out)

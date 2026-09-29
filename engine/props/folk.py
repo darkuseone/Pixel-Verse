@@ -122,13 +122,14 @@ VPOSE = dict(
     hips=dict(n=(2.9, 10.9), f=(-2.9, 10.9), bn=-1, bf=1, nleg=(0.18, 0.0), fleg=(-0.18, 0.0)),
     proud=dict(n=(2.3, 16.6), f=(-3.0, 10.8), bn=1, bf=-1, nleg=(0.18, 0.0), fleg=(-0.18, 0.0)),        # thumb to chest
     point=dict(n=(10.2, 17.6), f=(-3.0, 10.8), bn=1, bf=-1, nleg=(0.12, 0.0), fleg=(-0.12, 0.0)),
-    salute=dict(n=(2.6, 23.0), f=(-3.0, 10.8), bn=1, bf=-1, nleg=(0.0, 0.0), fleg=(0.0, 0.0)),
+    salute=dict(n=(0.2, 23.3), f=(-3.0, 10.8), bn=-1, bf=-1, nleg=(0.0, 0.0), fleg=(0.0, 0.0)),
     shout=dict(n=(6.0, 25.4), f=(-5.0, 25.0), bn=1, bf=-1, nleg=(0.25, 0.0), fleg=(-0.25, 0.0)),
     shiver=dict(n=(-0.2, 14.4), f=(2.3, 14.0), bn=1, bf=-1, nleg=(0.04, 0.0), fleg=(-0.04, 0.0)),        # hugging himself
     hold=dict(n=(6.4, 14.0), f=(5.6, 14.2), bn=1, bf=1, nleg=(0.08, 0.0), fleg=(-0.08, 0.0)),
     overhead=dict(n=(5.4, 27.0), f=(-3.4, 27.0), bn=1, bf=-1, nleg=(0.1, 0.0), fleg=(-0.1, 0.0)),
     phone=dict(n=(2.2, 20.6), f=(-3.0, 10.8), bn=1, bf=-1, nleg=(0.05, 0.0), fleg=(-0.05, 0.0)),
     strain=dict(n=(7.8, 15.0), f=(6.9, 15.4), bn=1, bf=1, nleg=(0.45, 0.0), fleg=(-0.45, 0.0)),
+    fist=dict(n=(5.6, 25.2), f=(-3.0, 10.8), bn=1, bf=-1, nleg=(0.15, 0.0), fleg=(-0.15, 0.0)),
     shrug=dict(n=(5.6, 17.0), f=(-4.8, 17.0), bn=1, bf=-1, nleg=(0.05, 0.0), fleg=(-0.05, 0.0)),
     sit=dict(n=(4.6, 11.0), f=(3.6, 11.4), bn=1, bf=1, nleg=(1.55, 0.0), fleg=(1.45, 0.0)),
 )
@@ -141,7 +142,7 @@ def vwalk(t, speed=7.0, amp=0.35):
 
 
 def vblend(a, b, k):
-    o = dict(a)
+    o = dict(a if k < 0.5 else b)
     for kk in ('n', 'f', 'nleg', 'fleg'):
         o[kk] = (a[kk][0] + (b[kk][0] - a[kk][0]) * k, a[kk][1] + (b[kk][1] - a[kk][1]) * k)
     return o
@@ -350,6 +351,10 @@ def valera(CH, cam, pose=None, t=0.0, mouth=0.0, expr='normal', outfit='home', l
     _valera_head(Hd, F, P, expr, t, mouth, look, cold, wet, hat, outfit, blink, cam)
     _merge(L, Hd)
     mc = F(3.0, 19.3)
+    if outfit == 'street':                                                         # jacket collar over the neck
+        Cl = Layer(cam)
+        ell(Cl, H(0.8 + ln, 17.9 + br), 2.9, 0.8, P['camo_sh'])
+        _merge(L, Cl)
     # ---------------------------------------------------------------- near arm (front)
     A = Layer(cam)
     tn = hand_n if hand_n is not None else H(pose['n'][0], pose['n'][1])
@@ -490,3 +495,184 @@ def cat(CH, cam, t=0.0, pose='loaf', mouth=0.0, lid=0.55, look=(0.0, 0.0), expr=
         W = Layer(cam); cat_whiskers(W, Q, 1.0, P); L.col[W.m] = W.col[W.m]; L.m |= W.m
     CH.add(L)
     return dict(head=hc)
+
+
+# ======================================================================================= TAMARA (cashier)
+TC = dict(skin=(240, 196, 168), skin_hi=(252, 218, 194), skin_sh=(210, 158, 132), hair=(236, 196, 110), hair_hi=(252, 226, 150),
+          hair_sh=(196, 150, 72), roots=(120, 84, 52), shadow=(90, 150, 220), lips=(200, 40, 60), vest=(128, 34, 46),
+          vest_hi=(160, 52, 64), vest_sh=(96, 24, 34), blouse=(244, 244, 238), blouse_sh=(206, 206, 204), gum=(250, 140, 190),
+          gold=(236, 196, 70), badge=(236, 236, 226), eye=(30, 24, 30), white=(248, 248, 244))
+
+
+def tamara(CH, cam, t=0.0, mouth=0.0, expr='bored', gum=0.0, hand_n=None, hand_f=None, prop_n=None, prop_f=None, look=0.0,
+           chew=True):
+    """cashier behind the counter (full figure, the counter occluder hides the legs). Anchor = floor point.
+    expr: bored | annoyed | smug | sigh; gum 0..1 = bubble size (pops at 1)."""
+    P = TC
+    L = Layer(cam)
+    br = 0.12 * math.sin(t * 1.9)
+    ch = (0.25 * (1 + math.sin(t * 9.0))) if chew and mouth < 0.1 else 0.0
+    sh_n, sh_f = H(2.6, 16.8 + br), H(-2.6, 17.0 + br)
+    A = Layer(cam)
+    tf = hand_f if hand_f is not None else H(-2.6, 11.0)
+    ka, ea = _limb(A, sh_f, 0, 0, 3.6, 3.4, 1.1, 0.9, P['blouse'], None, P['blouse_sh'], target=tf, bend=-1)
+    ell(A, ea, 0.9, 0.85, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    if prop_f: prop_f(A, ea)
+    _merge(L, A)
+    T = Layer(cam)
+    ell(T, H(0.3, 9.0), 3.6, 3.0, (60, 60, 70))                                         # skirt
+    ell(T, H(0.4, 13.6), 3.9, 4.4, P['blouse'], 0, None, P['blouse_sh'])               # blouse / bust
+    ell(T, H(0.1, 12.9), 3.8, 4.3, P['vest'], 0, P['vest_hi'], P['vest_sh'])
+    ell(T, H(1.3, 14.6), 1.1, 2.4, P['blouse'], 0.1)                                  # blouse opening
+    cap(T, H(2.2, 14.4), H(3.3, 14.2), 0.55, 0.55, P['badge'])                           # name badge
+    _merge(L, T)
+    Hd = Layer(cam)
+    hc = H(0.8, 20.6 + br)
+    def F(x, h): return H(x, h + br)
+    cap(Hd, F(0.5, 17.2), F(0.7, 18.8), 1.2, 1.2, P['skin'], P['skin_hi'], P['skin_sh'])
+    for (x, h, rx, ry) in ((-1.9, 21.6, 1.9, 2.1), (-0.3, 23.0, 2.0, 1.7), (1.6, 22.9, 1.8, 1.6), (-2.4, 19.6, 1.5, 1.8),
+                           (2.6, 21.9, 1.3, 1.3), (-0.8, 21.2, 2.4, 2.4)):
+        ell(Hd, F(x, h), rx, ry, P['hair'], 0, P['hair_hi'], P['hair_sh'])           # perm cloud (back)
+    ell(Hd, F(0.9, 20.4), 2.6, 2.9, P['skin'], 0, P['skin_hi'], P['skin_sh'])        # face
+    for (x, h, r) in ((-0.6, 22.6, 1.0), (0.6, 23.1, 1.0), (1.8, 22.7, 0.9), (2.7, 22.0, 0.8), (-1.3, 21.9, 0.9)):
+        ell(Hd, F(x, h), r, r * 0.9, P['hair'], 0, P['hair_hi'], P['hair_sh'])       # curls on top
+    ell(Hd, F(-0.8, 20.2), 0.5, 0.75, P['skin'], 0, None, P['skin_sh'])              # ear
+    ell(Hd, F(-0.8, 19.2), 0.32, 0.4, P['gold'])                                        # earring
+    lid = {'bored': 0.55, 'annoyed': 0.45, 'smug': 0.5, 'sigh': 0.8}.get(expr, 0.55)
+    for (x, h, r) in ((1.35, 21.0, 0.42), (2.55, 20.95, 0.48)):
+        e_ = F(x + 0.1 * look, h)
+        ell(Hd, (e_[0], e_[1] + r * 0.15), r, r * 0.8, P['white'])
+        dot(Hd, (e_[0] + 0.08 + 0.1 * look, e_[1] + r * 0.3), P['eye'], r * 0.48)
+        lt = e_[1] - r * 0.65 + lid * r * 1.25                                        # heavy blue-shadowed upper lid
+        poly(Hd, [(e_[0] - r * 1.15, e_[1] - r * 0.9), (e_[0] + r * 1.15, e_[1] - r * 0.9),
+                  (e_[0] + r * 1.15, lt), (e_[0] - r * 1.15, lt)], P['shadow'])
+        cap(Hd, (e_[0] - r * 1.1, lt), (e_[0] + r * 1.15, lt - 0.05), 0.09, 0.09, P['eye'])          # lash line
+        cap(Hd, (e_[0] - r, e_[1] - r * 1.45), (e_[0] + r * 1.1, e_[1] - r * (1.6 if expr != 'annoyed' else 1.2)), 0.09, 0.09, P['roots'])
+    ell(Hd, F(3.35, 20.0), 0.45, 0.55, P['skin'], 0, P['skin_hi'], P['skin_sh'])      # nose
+    dot(Hd, F(1.2, 19.6), (120, 60, 50), 0.12)                                         # beauty mark
+    m = max(mouth, ch)
+    mc = F(2.7, 18.8)
+    if m > 0.08:
+        ell(Hd, mc, 0.55 + 0.2 * m, 0.2 + 0.45 * m, (110, 20, 30))
+        ell(Hd, (mc[0], mc[1] - 0.12 - 0.3 * m), 0.6, 0.16, P['lips']); ell(Hd, (mc[0], mc[1] + 0.12 + 0.3 * m), 0.55, 0.18, P['lips'])
+    else:
+        ell(Hd, mc, 0.62, 0.22, P['lips'])
+        if expr == 'smug': cap(Hd, (mc[0] + 0.3, mc[1]), (mc[0] + 0.7, mc[1] - 0.2), 0.1, 0.1, (110, 20, 30))
+    if gum > 0.05:
+        g = min(gum, 1.0)
+        ell(Hd, (mc[0] + 0.3 + g * 0.8, mc[1]), 0.4 + 1.4 * g, 0.4 + 1.3 * g, P['gum'], 0, (255, 190, 220), (220, 110, 160))
+    _merge(L, Hd)
+    A = Layer(cam)
+    tn = hand_n if hand_n is not None else H(3.6, 10.8)
+    kn, en = _limb(A, sh_n, 0, 0, 3.6, 3.4, 1.15, 0.95, P['blouse'], None, P['blouse_sh'], target=tn, bend=1)
+    ell(A, en, 0.95, 0.9, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    if prop_n: prop_n(A, en)
+    _merge(L, A)
+    outline(L, OL)
+    CH.add(L)
+    return dict(head=hc, mouth=mc, hand_n=en, hand_f=ea)
+
+
+# ======================================================================================= GRANNIES
+GZ = dict(skin=(236, 196, 172), skin_hi=(250, 216, 196), skin_sh=(204, 160, 138), coat=(74, 58, 70), coat_hi=(98, 80, 94),
+          coat_sh=(54, 42, 52), fur=(104, 74, 52), fur_hi=(140, 104, 76), hat=(86, 58, 42), hat_hi=(118, 84, 62),
+          glass=(210, 230, 240), frame=(60, 40, 30), lips=(184, 70, 80), boot=(52, 44, 40), bag=(236, 214, 120))
+GL = dict(skin=(242, 200, 176), skin_hi=(252, 220, 200), skin_sh=(210, 162, 140), coat=(70, 96, 84), coat_hi=(90, 120, 104),
+          coat_sh=(50, 72, 62), shawl=(176, 172, 168), shawl_hi=(206, 202, 198), shawl_sh=(140, 136, 134), cheek=(236, 134, 124),
+          boot=(92, 84, 76), thermos=(196, 60, 50))
+
+
+def babushka(CH, cam, t=0.0, who='zina', pose='sit', mouth=0.0, expr='normal', look=0.0, hand_n=None, prop_n=None,
+             knit=False, tint=None):
+    """grannies of the entrance bench. who: zina (thin, tall fur hat, big glasses) | lyuba (round, grey shawl, valenki).
+    pose: sit (on a bench at h=0, anchor = bench seat point under the hips... feet hang to h=-6) | stand."""
+    P = dict(GZ if who == 'zina' else GL)
+    if tint is not None: P = {k: tuple(int(min(255, c * m)) for c, m in zip(v, tint)) for k, v in P.items()}
+    L = Layer(cam)
+    br = 0.1 * math.sin(t * 1.7 + (0 if who == 'zina' else 1.3))
+    sit = pose == 'sit'
+    base = 0.0 if sit else 7.0                                   # hip height above the anchor
+    fat = 1.0 if who == 'zina' else 1.3
+    # legs / boots
+    A = Layer(cam)
+    if sit:
+        for sx, c0 in ((-0.9, P['coat_sh']), (0.9, P['coat'])):
+            cap(A, H(sx, 0.4), H(sx + 3.0, 0.2), 1.2 * fat, 1.1 * fat, c0)
+            cap(A, H(sx + 3.0, 0.2), H(sx + 3.1, -4.6), 1.0 * fat, 0.9 * fat, c0)
+            ell(A, H(sx + 3.5, -5.2), 1.4 * fat, 0.8, P['boot'])
+    else:
+        for sx, c0 in ((-0.9, P['coat_sh']), (0.9, P['coat'])):
+            cap(A, H(sx, 7.0), H(sx, 0.8), 1.0 * fat, 0.9 * fat, c0)
+            ell(A, H(sx + 0.5, 0.5), 1.3 * fat, 0.7, P['boot'])
+    _merge(L, A)
+    # body (coat)
+    T = Layer(cam)
+    ell(T, H(0.3, base + 4.0), 3.4 * fat, 4.6, P['coat'], 0, P['coat_hi'], P['coat_sh'])
+    ell(T, H(0.4, base + 7.4), 3.0 * fat, 2.6, P['coat'], 0, P['coat_hi'], P['coat_sh'])
+    if who == 'zina':
+        ell(T, H(0.6, base + 9.3), 3.0, 1.2, P['fur'], 0, P['fur_hi'], None)             # fur collar
+    else:
+        ell(T, H(0.4, base + 8.6), 3.8, 2.4, P['shawl'], 0, P['shawl_hi'], P['shawl_sh'])  # shawl over shoulders
+    _merge(L, T)
+    # head
+    Hd = Layer(cam)
+    hy = base + 11.8 + br
+    def F(x, h): return H(x, hy + h)
+    if who == 'zina':
+        ell(Hd, F(0.7, 0.0), 2.1, 2.4, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+        ell(Hd, F(0.5, 2.6), 2.4, 1.9, P['hat'], 0, P['hat_hi'], None)                      # tall fur hat
+        ell(Hd, F(0.4, 3.7), 2.1, 1.3, P['hat'], 0, P['hat_hi'], None)
+        cap(Hd, F(2.5, 0.2), F(3.6, -0.6), 0.45, 0.2, P['skin'])                              # sharp nose
+        for x in (1.1, 2.3):                                                                   # big glasses
+            ell(Hd, F(x + 0.1 * look, 0.45), 0.72, 0.68, P['frame']); ell(Hd, F(x + 0.1 * look, 0.45), 0.58, 0.54, P['glass'])
+            dot(Hd, F(x + 0.15 + 0.15 * look, 0.4), (30, 24, 30), 0.2)
+        cap(Hd, F(1.6, 0.5), F(1.8, 0.5), 0.1, 0.1, P['frame'])
+        mc = F(2.2, -1.4)
+        if mouth > 0.08: ell(Hd, mc, 0.45, 0.2 + 0.4 * mouth, (110, 30, 40))
+        else: cap(Hd, (mc[0] - 0.4, mc[1]), (mc[0] + 0.4, mc[1] - (0.12 if expr == 'smug' else 0)), 0.12, 0.12, P['lips'])
+        for k in range(3): cap(Hd, F(-0.5 + k * 0.4, -1.1 - k * 0.2), F(-0.1 + k * 0.4, -1.3 - k * 0.2), 0.05, 0.05, P['skin_sh'])
+    else:
+        ell(Hd, F(0.6, 0.6), 3.0, 3.2, P['shawl'], 0, P['shawl_hi'], P['shawl_sh'])          # shawl around the head
+        ell(Hd, F(0.9, 0.0), 2.0, 2.1, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+        cap(Hd, F(-0.8, -2.2), F(2.4, -2.4), 0.7, 0.7, P['shawl_sh'])                           # knot
+        for x in (0.5, 1.8):
+            cap(Hd, F(x - 0.3, 0.45), F(x + 0.3, 0.45), 0.12, 0.12, (30, 24, 30))               # squinty eyes
+        ell(Hd, F(0.2, -0.5), 0.55, 0.35, P['cheek']); ell(Hd, F(2.2, -0.5), 0.5, 0.33, P['cheek'])
+        ell(Hd, F(2.4, -0.1), 0.45, 0.45, P['skin'], 0, P['skin_hi'], P['skin_sh'])           # round nose
+        mc = F(1.5, -1.1)
+        if mouth > 0.08: ell(Hd, mc, 0.4, 0.18 + 0.35 * mouth, (110, 30, 40))
+        else: cap(Hd, (mc[0] - 0.35, mc[1]), (mc[0] + 0.35, mc[1]), 0.1, 0.1, (150, 70, 70))
+    _merge(L, Hd)
+    # near arm
+    A = Layer(cam)
+    shn = H(2.0, base + 8.6)
+    tn = hand_n if hand_n is not None else (H(3.8, base + 4.6) if sit else H(3.0, base + 3.4))
+    kn, en = _limb(A, shn, 0, 0, 2.8, 2.7, 1.0 * fat, 0.8 * fat, P['coat'], P['coat_hi'], P['coat_sh'], target=tn, bend=1)
+    ell(A, en, 0.75, 0.7, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    if prop_n: prop_n(A, en)
+    if knit and who == 'lyuba':
+        ph = t * 6
+        cap(A, (en[0] - 1.5, en[1] - 0.3), (en[0] + 1.5 + 0.3 * math.sin(ph), en[1] - 1.6), 0.08, 0.08, (220, 220, 230))
+        ell(A, (en[0] - 0.4, en[1] + 0.8), 1.3, 0.9, (190, 70, 70))                              # knitting
+    _merge(L, A)
+    outline(L, OL)
+    CH.add(L)
+    return dict(head=F(1.0, 0.0), mouth=mc, hand_n=en)
+
+
+def plastic_bag(L, hand, open_=1.0):
+    """white 'майка' bag with red stripes hanging from the hand"""
+    c = (hand[0], hand[1] + 2.4)
+    ell(L, c, 1.8 + 0.4 * open_, 2.3, (240, 240, 236), 0, (255, 255, 255), (206, 206, 204))
+    cap(L, (hand[0] - 0.6, hand[1] + 0.2), (c[0] - 1.2, c[1] - 1.4), 0.25, 0.25, (240, 240, 236))
+    cap(L, (hand[0] + 0.6, hand[1] + 0.2), (c[0] + 1.2, c[1] - 1.4), 0.25, 0.25, (240, 240, 236))
+    for dy in (0.3, 1.1): cap(L, (c[0] - 1.9, c[1] + dy), (c[0] + 1.9, c[1] + dy), 0.18, 0.18, (200, 50, 50))
+
+
+def string_bag(L, hand):
+    """авоська with a loaf and a bottle of kefir"""
+    c = (hand[0], hand[1] + 2.6)
+    ell(L, (c[0] - 0.6, c[1]), 1.4, 0.8, (220, 170, 100)); cap(L, (c[0] + 0.8, c[1] - 1.2), (c[0] + 0.8, c[1] + 1.0), 0.5, 0.5, (244, 244, 250))
+    for k in range(5):
+        cap(L, (hand[0], hand[1]), (c[0] - 2.0 + k, c[1] + 1.8), 0.07, 0.07, (60, 60, 60))
+    for dy in (0.0, 1.0): cap(L, (c[0] - 2.1, c[1] + dy), (c[0] + 2.1, c[1] + dy), 0.07, 0.07, (60, 60, 60))
