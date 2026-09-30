@@ -289,7 +289,7 @@ def flamingo(CH, cam, t=0.0, vest=True, shades=True, wob=0.0, tilt=0.0):
     CH.add(L)
 
 
-def binder(L, h, ang=-0.1, w=6.0, hh=8.0, title='BYLAWS'):
+def binder(L, h, ang=-0.1, w=6.0, hh=8.0, title='BYLAWS', pages='4,212 PG'):
     """thick HOA rulebook"""
     cx, cy = h[0] + 0.6, h[1] - 0.8
     rect(L, cx + 0.4, cy + 0.4, w + 1.0, hh + 0.6, ang, (18, 30, 70))
@@ -297,7 +297,7 @@ def binder(L, h, ang=-0.1, w=6.0, hh=8.0, title='BYLAWS'):
     rect(L, cx - w * 0.46, cy, 0.9, hh, ang, (24, 50, 120))                                  # spine
     rect(L, cx + 0.3, cy - hh * 0.12, w * 0.7, hh * 0.34, ang, (250, 250, 246))              # label
     ltext(L, title, (cx + 0.3, cy - hh * 0.12), min(1.3, w * 0.62 / len(title)), (30, 40, 90), ang)
-    ltext(L, '4,212 PG', (cx + 0.3, cy + hh * 0.30), 0.9, (200, 210, 240), ang)
+    ltext(L, pages, (cx + 0.3, cy + hh * 0.30), 0.9, (200, 210, 240), ang)
 
 
 def cert_insert(big, t, hl=0.0):
@@ -505,12 +505,12 @@ def cooler(CH, cam):
     CH.add(L)
 
 
-def umbrella(CH, cam, hand_x=3.4, hand_h=13.0, top_h=31.0):
+def umbrella(CH, cam, hand_x=3.4, hand_h=13.0, top_h=31.0, col=((120, 226, 190), (190, 250, 224), (70, 168, 136))):
     """pastel-mint umbrella held above the hero (canopy + handle), drawn over the hero"""
     L = Layer(cam)
     cap(L, H(hand_x, hand_h), H(1.4, top_h - 1.0), 0.28, 0.28, (170, 176, 190))
-    ell(L, H(1.4, top_h), 12.0, 3.6, (120, 226, 190), 0, (190, 250, 224), (70, 168, 136))
-    for k in range(-2, 3): cap(L, H(1.4 + k * 4.4, top_h - 1.0), H(1.4 + k * 3.0, top_h + 2.6), 0.14, 0.14, (70, 168, 136))
+    ell(L, H(1.4, top_h), 12.0, 3.6, col[0], 0, col[1], col[2])
+    for k in range(-2, 3): cap(L, H(1.4 + k * 4.4, top_h - 1.0), H(1.4 + k * 3.0, top_h + 2.6), 0.14, 0.14, col[2])
     cap(L, H(1.4, top_h + 3.0), H(1.4, top_h + 4.2), 0.3, 0.2, (170, 176, 190))
     outline(L, OL)
     CH.add(L)

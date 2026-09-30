@@ -1,11 +1,11 @@
 """Full-resolution (1080x1920) overlays shared by episodes: pixel titles in the cover style, season badge,
 word-by-word karaoke captions, bouncing stickers, flash / mosaic transitions."""
-import math, re
+import math, os, re
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import paths as P
 
-OUT_W, OUT_H = 1080, 1920
+OUT_W, OUT_H = (1920, 1080) if os.environ.get('PV_WIDE') == '1' else (1080, 1920)
 _pf = {}
 
 
