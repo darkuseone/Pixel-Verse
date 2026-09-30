@@ -17,3 +17,17 @@
 
 Источники: napoleoncat.com/blog/trending-memes, brobible.com (51 best memes of 2026), Wikipedia «Internet memes introduced in 2026», aol.com (Saxophone explainer), 8newsnow.com (tipping 2026), prnewswire.com (Popmenu study), mentalfloss.com (Gen Alpha slang 2026).
 Правило: мем — специя. Шутка должна работать без знания мема.
+
+## Накопительная база (правило владельца, 30.09.2026)
+Каждая разведка перед новым американским мультом дописывается сюда новым разделом с датой; ничего не удаляем. Перед новым мультом читаю файл целиком, не повторяю уже использованные мемы и гэги и беру новые. Цель: коллекция того, над чем смеются американцы, отдельно от русской базы `docs/trends.md`.
+
+### Использовано в «Sunny Palms HOA», сезон 1 (не повторять в других US мультах)
+- Saxophone gets louder: сквозной гэг (E01, E03, E06 и др.; ассет `sax_sting_swell`)
+- Aura ±9999: стикеры на победах/провалах Дейла (E03, E05, E06 и др.)
+- Florida Man, «I watched a video», HOA/Karen: основа сезона
+- Emotional support animal (сертификат за $19.99): E02
+- Соседское приложение / доп. камера: E03
+- Штраф урагану, «Category 5 — is that the good one?»: E04
+- Tip fatigue, экран чаевых, «no tip» в 4 пикселя: E05
+- Выборы в HOA, голос аллигатора «resident since 1987»: E06
+- «Bless your heart» (+ «TRANSLATION: YOU IDIOT»), TOTAL FINES, Beautification Fund, Earl «grandfathered in»: сквозные гэги

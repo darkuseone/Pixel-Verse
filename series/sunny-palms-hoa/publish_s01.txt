@@ -1,0 +1,247 @@
+SUNNY PALMS HOA - SEASON 1 "RULES ARE RULES" (6 episodes)
+PUBLISHING FILE FOR THE US CHANNEL (YouTube, TikTok, Instagram)
+Version 30.09.2026. Titles, descriptions and comments below are ready to copy.
+
+
+==================================================
+1. PUBLISH TIME (set once)
+==================================================
+Your time = Moldova (Europe/Chisinau). US time = Eastern (Florida), Central, Mountain, Pacific (Los Angeles).
+Now (until 25.10.2026) Moldova is 7 hours ahead of Florida and 10 hours ahead of Los Angeles.
+
+EVENING SLOT - every day, Mon-Sun (one video per day; on weekends it is the second video)
+  YouTube    Moldova 01:45   =  Florida 18:45  |  Central 17:45  |  Mountain 16:45  |  Los Angeles 15:45
+  TikTok     Moldova 02:05   =  Florida 19:05  |  Central 18:05  |  Mountain 17:05  |  Los Angeles 16:05
+  Instagram  Moldova 02:20   =  Florida 19:20  |  Central 18:20  |  Mountain 17:20  |  Los Angeles 16:20
+  (01:45 / 02:05 / 02:20 is the night AFTER the US evening: for Monday evening in the US you schedule Tuesday 01:45 Moldova.)
+
+WEEKEND LUNCH SLOT - Saturday and Sunday, first video of the day
+  YouTube    Moldova 20:00   =  Florida 13:00  |  Central 12:00  |  Mountain 11:00  |  Los Angeles 10:00
+  TikTok     Moldova 20:20   =  Florida 13:20  |  Central 12:20  |  Mountain 11:20  |  Los Angeles 10:20
+  Instagram  Moldova 20:35   =  Florida 13:35  |  Central 12:35  |  Mountain 11:35  |  Los Angeles 10:35
+  (same day in Moldova: Saturday lunch in the US = Saturday 20:00-20:35 Moldova.)
+  Note: you said "8-9" for lunch; I read it as 20:00-21:00 in the evening in Moldova (8-9 in the morning would be 1-2 a.m. in Florida).
+
+Order of episodes (suggestion): Mon E01, Tue E02, Wed E03, Thu E04, Fri E05, Sat evening E06 (finale in the strongest weekend slot).
+The Saturday lunch slot and all Sunday slots: clips/teasers/season recap (made on request).
+One video per day per platform, order of posting: YouTube first, then TikTok (+20 min), then Instagram (+15 min).
+
+WHY THIS TIME (research 30.09.2026, checked - your plan is right, no change needed)
+- Population by time zone (approx., Lance Lambert, X, July 2026): Eastern 47%, Central 33%, Mountain 5%, Pacific 14%. Eastern + Central = about 80% of the audience: for them 17:45-19:20 is after-work evening prime time.
+- Instagram (Buffer, 9.6M posts, local time): weekday evenings 6-9 p.m. are the peak for Reels (Thursday is the exception: mornings are better). TikTok (Sprout Social, Buffer): afternoon/evening on weekdays, strong Fri/Sat evening. YouTube Shorts (several 2026 studies): 3-6 p.m. and 5-9 p.m. Eastern.
+- 18:45-19:20 Eastern falls into the evening window of all three networks; on the West Coast it is 15:45-16:20, the after-school / after-work window. So one time slot covers Florida to California.
+- Weekend lunch 13:00 Eastern = 10:00 in Los Angeles: people are awake on both coasts (TikTok data: Sat afternoon and Sun around 12-1 p.m. are strong).
+- Caveat: these are averages from big studies, not our data. After the first posts check the audience hours in YouTube Studio / TikTok Analytics and shift the slot if the numbers say so.
+
+DAYLIGHT-SAVING CHANGE (important, it breaks the 7-hour difference)
+- Moldova switches to winter time on Sun 25.10.2026, the US only on Sun 01.11.2026. For 1 week the difference is 6 hours.
+- To keep the same US time, publish 1 hour EARLIER on these days:
+    Evening slots, Moldova dates 26.10 - 01.11:  YouTube 00:45, TikTok 01:05, Instagram 01:20
+    Weekend lunch slots, Moldova dates 25.10 - 31.10:  YouTube 19:00, TikTok 19:20, Instagram 19:35
+- From 02.11 (evening) and 01.11 (lunch) back to the usual 01:45 / 02:05 / 02:20 and 20:00 / 20:20 / 20:35.
+- Spring 2027 is the same story: the US switches on 14.03, Moldova on 28.03 (2 weeks, minus 1 hour).
+
+SETTINGS FOR EVERY POST
+- YouTube: category Film & Animation, no "AI" label (as agreed), cover = cover.png set manually (Shorts).
+- TikTok / Instagram: the cover is already burned into the first 0.2 s of the video (thumbnail offset 100 ms).
+- Hashtags: exactly 3 per post. Titles and descriptions are different on each network on purpose.
+- Files: series/sunny-palms-hoa/episodes/epNN/final.mp4 and cover.png (NN = 01...06).
+
+
+==================================================
+2. YOUTUBE (Shorts)  -  evening slot: Moldova 01:45 = Florida 18:45
+==================================================
+
+--- EPISODE 1/6 "Ecru Whisper" ---
+Title:
+Fined $250 for a Mailbox (Florida Man vs. HOA)
+Description:
+Sunny Palms HOA - Season 1, Episode 1/6.
+Dale is fined $250 because his mailbox is "Bone" and the approved color is "Ecru Whisper", which is exactly the same color. He repaints it anyway, and the HOA has a form for that too.
+#shorts #FloridaMan #HOA
+Pinned comment:
+Are "Bone" and "Ecru Whisper" the same color? YES or NO 👇 (Earl says he's grandfathered in.)
+
+--- EPISODE 2/6 "Emotional Support Flamingo" ---
+Title:
+My Emotional Support Flamingo (HOA Says No)
+Description:
+Sunny Palms HOA - Season 1, Episode 2/6.
+Dale shows up with Kevin, a plastic emotional support flamingo, and a $19.99 online certificate. The certificate turns out to be legal, so the HOA answers with a $300 fee.
+#shorts #FloridaMan #EmotionalSupportAnimal
+Pinned comment:
+Should a plastic flamingo count as an emotional support animal? LEGAL or NOT LEGAL 👇
+
+--- EPISODE 3/6 "Suspicious Man (Walking)" ---
+Title:
+Suspicious Man (Walking) - HOA Neighborhood App
+Description:
+Sunny Palms HOA - Season 1, Episode 3/6.
+The HOA president posts Dale on the neighborhood app as a "suspicious man (walking)" for taking out the trash. His doorbell camera caught what really happened at 3 a.m., but the footage is not admissible.
+#shorts #HOA #NeighborhoodApp
+Pinned comment:
+Should doorbell camera footage count in an HOA dispute? YES or ONLY IF IT'S BEIGE 👇
+
+--- EPISODE 4/6 "Category 5 (Permit)" ---
+Title:
+The HOA Fined a Hurricane (Category 5)
+Description:
+Sunny Palms HOA - Season 1, Episode 4/6.
+Dale throws a hurricane party, and Brenda fines Hurricane Kevin for having no permit. The storm actually leaves, and the bill goes to Dale.
+#shorts #Hurricane #FloridaMan
+Pinned comment:
+Who scares you more: Hurricane Kevin or Brenda? 👇
+
+--- EPISODE 5/6 "Suggested Tip" ---
+Title:
+A "Free" Hot Dog Costs $47.63 (Tip Screen)
+Description:
+Sunny Palms HOA - Season 1, Episode 5/6.
+The HOA barbecue serves free hot dogs, but the payment tablet adds a convenience fee, a bun surcharge and three tip buttons. Then it turns to the camera and asks you for a tip.
+#shorts #Tipping #FloridaMan
+Pinned comment:
+Be honest: do you ever tap the biggest tip button because the screen is staring at you? YES or NEVER 👇
+
+--- EPISODE 6/6 "Vote Earl" (season finale) ---
+Title:
+Florida Man Runs for HOA President (Alligator Votes)
+Description:
+Sunny Palms HOA - Season 1, Episode 6/6, season finale.
+Dale runs for HOA president on a platform of fewer fines, and any resident may vote, including the alligator who has lived in the pond since 1987. The new president puts on the visor and writes his first ticket.
+#shorts #Election #HOA
+Pinned comment:
+Who should be HOA president: DALE, BRENDA or the ALLIGATOR? 👇 (If this season hits, Season 2 is coming.)
+
+
+==================================================
+3. TIKTOK  -  evening slot: Moldova 02:05 = Florida 19:05
+==================================================
+
+--- EPISODE 1/6 "Ecru Whisper" ---
+Title:
+$250 fine for a MAILBOX?! Florida Man vs. HOA 📬
+Description:
+Sunny Palms HOA, Season 1, Ep. 1/6.
+Florida Man Dale vs. the HOA president: his mailbox is "Bone," her approved color is "Ecru Whisper," and they are the same color. "I watched a video," he says, and it gets worse.
+#floridaman #hoa #cartoon
+Pinned comment:
+Team "Bone" or team "Ecru Whisper"? Choose wisely 📬
+
+--- EPISODE 2/6 "Emotional Support Flamingo" ---
+Title:
+Emotional support FLAMINGO?! 🦩 Florida Man vs. HOA
+Description:
+Sunny Palms HOA, Season 1, Ep. 2/6.
+His emotional support animal is a plastic flamingo with a $19.99 certificate. The HOA checked the rules: it's legal, so now it costs $300 a year.
+#floridaman #flamingo #cartoon
+Pinned comment:
+Would your HOA let you register a flamingo? Comment 🦩 if yes.
+
+--- EPISODE 3/6 "Suspicious Man (Walking)" ---
+Title:
+"Suspicious man. Walking." 😳 Florida Man vs. the neighborhood app
+Description:
+Sunny Palms HOA, Season 1, Ep. 3/6.
+One trash bag, 147 comments, one "suspicious man (walking)." Dale has video of Brenda moving his mailbox six inches at 3 a.m., but his doorbell is the wrong color.
+#hoa #neighbors #cartoon
+Pinned comment:
+Has your neighborhood app ever called someone "suspicious"? Tell us the worst one 👀
+
+--- EPISODE 4/6 "Category 5 (Permit)" ---
+Title:
+Category 5: is that the GOOD one? 🌀 HOA fines a hurricane
+Description:
+Sunny Palms HOA, Season 1, Ep. 4/6.
+A hurricane party, a $4,750 bill, and an HOA that fines the weather. "Category five? Is that the good one?"
+#hurricane #floridaman #cartoon
+Pinned comment:
+Category 5: the GOOD one or the bad one? 🌀 Vote below.
+
+--- EPISODE 5/6 "Suggested Tip" ---
+Title:
+Free hot dog?! $47.63 after tip screen 🌭 Florida Man vs. HOA
+Description:
+Sunny Palms HOA, Season 1, Ep. 5/6.
+A free hot dog costs $47.63 once the tip screen is done with you. "Twenty percent of free is zero. I did the math."
+#tipping #floridaman #cartoon
+Pinned comment:
+What's the worst tip screen you've ever seen? 🌭
+
+--- EPISODE 6/6 "Vote Earl" (season finale) ---
+Title:
+Florida Man becomes HOA president 🐊🗳️ The alligator was the deciding vote
+Description:
+Sunny Palms HOA, Season 1, Ep. 6/6 - season finale.
+"I will fine nobody. Except Brenda." The whole HOA votes, and the deciding ballot comes out of a pond.
+#election #hoa #cartoon
+Pinned comment:
+Vote in the comments: Dale, Brenda or Earl? 🐊🗳️
+
+
+==================================================
+4. INSTAGRAM (Reels)  -  evening slot: Moldova 02:20 = Florida 19:20
+==================================================
+
+--- EPISODE 1/6 "Ecru Whisper" ---
+Title:
+The HOA fined him $250 for a mailbox. It's the same color.
+Description:
+Sunny Palms HOA - Season 1, Ep. 1/6.
+Dale finds out what Form 27-B is the hard way. The color the HOA wants is the color he already had.
+#hoa #floridaman #pixelart
+Pinned comment:
+Would you fight your HOA over a mailbox color? Tell us below 👇
+
+--- EPISODE 2/6 "Emotional Support Flamingo" ---
+Title:
+He got a $19.99 certificate for a plastic flamingo. The HOA had a plan.
+Description:
+Sunny Palms HOA - Season 1, Ep. 2/6.
+Kevin the flamingo is plastic. Kevin the flamingo is also valid, and the HOA has a registration fee ready.
+#hoa #flamingo #pixelart
+Pinned comment:
+Kevin the flamingo: valid or not valid? Vote in the comments 🦩
+
+--- EPISODE 3/6 "Suspicious Man (Walking)" ---
+Title:
+The neighborhood app reported him for taking out the trash.
+Description:
+Sunny Palms HOA - Season 1, Ep. 3/6.
+Trash day is Tuesday, it was Wednesday, so the app called him suspicious. His own camera has the evidence, but the doorbell is black and only beige is approved.
+#neighborhood #hoa #pixelart
+Pinned comment:
+What's the most ridiculous post you've ever seen on a neighborhood app? 👇
+
+--- EPISODE 4/6 "Category 5 (Permit)" ---
+Title:
+Florida Man threw a hurricane party. The HOA fined the hurricane.
+Description:
+Sunny Palms HOA - Season 1, Ep. 4/6.
+She fined a hurricane for having no permit, and the hurricane obeyed. She has never fined the alligator, though.
+#hurricane #floridaman #pixelart
+Pinned comment:
+If your HOA could fine one thing in your town, what would it be? (Weather counts.) 👇
+
+--- EPISODE 5/6 "Suggested Tip" ---
+Title:
+The tip screen asked him for a tip on a FREE hot dog.
+Description:
+Sunny Palms HOA - Season 1, Ep. 5/6.
+The tablet says the hot dog is free, but the tip screen disagrees. The "no tip" button is four pixels wide.
+#tipping #floridaman #pixelart
+Pinned comment:
+Big tip button or "no tip"? Be honest 👇 (Earl says: "Don't.")
+
+--- EPISODE 6/6 "Vote Earl" (season finale) ---
+Title:
+He ran on "fewer fines." Then he fined Brenda.
+Description:
+Sunny Palms HOA - Season 1, Ep. 6/6, season finale.
+Rules are rules: any resident may vote, and Earl has lived in the pond since 1987. Guess who cast the deciding vote.
+#election #hoa #pixelart
+Pinned comment:
+Your vote counts: DALE, BRENDA or EARL? 👇
+
+
+==================================================
+Sources of the time research: sproutsocial.com/insights/best-times-to-post-on-tiktok, buffer.com/resources/best-time-to-post-on-tiktok, buffer.com/resources/when-is-the-best-time-to-post-on-instagram, hopperhq.com/blog/best-time-to-post-youtube-shorts, miraflow.ai/blog/best-time-to-post-youtube-shorts-2026, x.com/NewsLambert (US population by time zone).
