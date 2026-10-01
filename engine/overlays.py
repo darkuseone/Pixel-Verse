@@ -1,11 +1,13 @@
 """Full-resolution (1080x1920) overlays shared by episodes: pixel titles in the cover style, season badge,
 word-by-word karaoke captions, bouncing stickers, flash / mosaic transitions."""
-import math, os, re
+import math, re
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import paths as P
 
-OUT_W, OUT_H = (1920, 1080) if os.environ.get('PV_WIDE') == '1' else (1080, 1920)
+import os
+WIDE = os.environ.get('PV_WIDE') == '1'
+OUT_W, OUT_H = (1920, 1080) if WIDE else (1080, 1920)
 _pf = {}
 
 
@@ -54,32 +56,6 @@ def pixel_title(lines, size=64, width=OUT_W):
             reg[yy][m[yy]] = col + (255,)
         reg[m & ~np.roll(m, 8, 0)] = (255, 250, 214, 255)
         y += th + 44
-    return out
-
-
-def winter_title(lines, size=64, width=OUT_W, outline=(18, 24, 52), shadow=(8, 10, 26)):
-    """«Валера и кот» title style: same proven yellow->orange stepped gradient, navy outline + shadow, snow caps on top"""
-    f = pfont(size)
-    out = np.zeros((len(lines) * (size + 48) + 44, width, 4), np.uint8)
-    y = 26
-    for line in lines:
-        bb = f.getbbox(line); tw = bb[2] - bb[0]; th = bb[3] - bb[1]
-        img = Image.new('L', (width, th + 44), 0); d = ImageDraw.Draw(img); d.fontmode = '1'
-        d.text(((width - tw) // 2 - bb[0], 18 - bb[1]), line, font=f, fill=255)
-        m = np.array(img) > 127
-        dil = _dilate(m, 8)
-        shd = np.roll(np.roll(dil, 10, 0), 6, 1)
-        reg = out[y:y + m.shape[0]]
-        reg[shd] = shadow + (255,); reg[dil] = outline + (255,)
-        rows = np.where(m.any(1))[0]; r0, r1 = rows[0], rows[-1]
-        for yy in range(m.shape[0]):
-            k = (yy - r0) / max(1, r1 - r0)
-            col = (255, 236, 120) if k < 0.34 else (255, 200, 70) if k < 0.67 else (255, 150, 50)
-            reg[yy][m[yy]] = col + (255,)
-        cap = m & ~np.roll(m, 10, 0)                       # snow on the top edges of the glyphs
-        cap2 = np.roll(cap, -6, 0) & ~m & np.roll(dil, 0, 0)
-        reg[cap] = (250, 252, 255, 255); reg[cap2] = (236, 244, 255, 255)
-        y += th + 48
     return out
 
 
@@ -217,32 +193,3 @@ def mosaic(big, block):
     hb, wb = h // block, w // block
     small = big[:hb * block, :wb * block].reshape(hb, block, wb, block, 3).mean((1, 3)).astype(np.uint8)
     big[:hb * block, :wb * block] = np.repeat(np.repeat(small, block, 0), block, 1)
-
-
-# ---------------------------------------------------------------- «Sunny Palms HOA» (US channel): neon-motel title
-NEON = dict(fill=((255, 255, 255), (255, 176, 236), (255, 72, 176)), outline=(40, 10, 88), shadow=(0, 214, 232), cap=(255, 255, 255))
-
-
-def neon_title(lines, size=64, width=OUT_W, pal=NEON):
-    """US-channel title: white -> pink -> hot-pink stepped gradient, deep purple outline, aqua offset shadow (retro chromatic look)"""
-    f = pfont(size)
-    out = np.zeros((len(lines) * (size + 48) + 44, width, 4), np.uint8)
-    y = 26
-    for line in lines:
-        bb = f.getbbox(line); tw = bb[2] - bb[0]; th = bb[3] - bb[1]
-        img = Image.new('L', (width, th + 44), 0); d = ImageDraw.Draw(img); d.fontmode = '1'
-        d.text(((width - tw) // 2 - bb[0], 18 - bb[1]), line, font=f, fill=255)
-        m = np.array(img) > 127
-        dil = _dilate(m, 8)
-        shd = np.roll(np.roll(dil, 10, 0), 8, 1)
-        reg = out[y:y + m.shape[0]]
-        reg[shd] = pal['shadow'] + (255,); reg[dil] = pal['outline'] + (255,)
-        rows = np.where(m.any(1))[0]; r0, r1 = rows[0], rows[-1]
-        for yy in range(m.shape[0]):
-            k = (yy - r0) / max(1, r1 - r0)
-            col = pal['fill'][0] if k < 0.30 else pal['fill'][1] if k < 0.62 else pal['fill'][2]
-            reg[yy][m[yy]] = col + (255,)
-        cap_ = m & ~np.roll(m, 8, 0)
-        reg[cap_] = pal['cap'] + (255,)
-        y += th + 48
-    return out

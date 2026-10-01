@@ -1,0 +1,154 @@
+{
+ "x2": [
+  "molniya",
+  "[deadpan, to camera] Э́то Би́лли. Он лети́т в ка́ктус."
+ ],
+ "x3": [
+  "molniya",
+  "[deadpan, dry] Как он туда́ попа́л? Придётся отмота́ть три го́да."
+ ],
+ "x4": [
+  "billy",
+  "[muffled, frozen, panicking] Мо-о-о́лния, сними́ с па́узы!"
+ ],
+ "x5": [
+  "molniya",
+  "[deadpan] Не сейча́с. [pause] Ты повися́шь."
+ ],
+ "x6": [
+  "molniya",
+  "[deadpan, proud] Режиссёрская ве́рсия. Режиссёр — я."
+ ],
+ "a1": [
+  "billy",
+  "[rehearsing, heroic, then unsure] Сдава́йся, Криво́й Сэм! ...Нет. [shouting] СДАВА́ЙСЯ, Криво́й Сэм!"
+ ],
+ "a2": [
+  "molniya",
+  "[deadpan] Репети́рует тре́тий год. [pause] Интона́ция не растёт."
+ ],
+ "a3": [
+  "molniya",
+  "[deadpan, to camera] Морко́вка пе́рвая. [pause] Запо́мните це́ну."
+ ],
+ "r1": [
+  "sam",
+  "[smooth announcer, smug] Криво́й Сэм. Страхова́ние от Криво́го Сэ́ма."
+ ],
+ "r2": [
+  "sam",
+  "[smooth announcer] Огра́бил Сэм? Звони́те Сэ́му. Он перезвони́т. [pause] Попо́зже."
+ ],
+ "r3": [
+  "sam",
+  "[very fast, mumbling] Усло́вия — ме́лким шри́фтом. На ва́шем кошельке́."
+ ],
+ "b1": [
+  "billy",
+  "[pain, then triumphant] Ай! [pause] Ай... [pause] Ай! [shouting] ГЕНИА́ЛЬНО!"
+ ],
+ "b2": [
+  "molniya",
+  "[deadpan] Ка́ктус с челове́ческим лицо́м. [pause] Сме́ло."
+ ],
+ "d1": [
+  "billy",
+  "[paranoid whisper] Он всегда́ ря́дом. Всегда́ исчеза́ет. Сла́бых мест нет."
+ ],
+ "d2": [
+  "molniya",
+  "[deadpan, to camera] Есть. Он плати́т во́время."
+ ],
+ "d3": [
+  "billy",
+  "[whispering, intense] Мо́лния, ты ви́дишь здесь связь?"
+ ],
+ "d4": [
+  "molniya",
+  "[deadpan] Ничего́ не ви́жу. [pause] Уже́ неде́лю."
+ ],
+ "e1": [
+  "molniya",
+  "[deadpan, narrator] Пы́льный Ка́ктус. Населе́ние — двена́дцать. Ка́ктусов — бо́льше."
+ ],
+ "f1": [
+  "billy",
+  "[pompous, reading aloud] Прика́з но́мер оди́н. Ло́шадь уво́лить. По́дпись: Би́лли."
+ ],
+ "f2": [
+  "molniya",
+  "[deadpan] Я не в шта́те. [pause] Я на аутсо́рсе."
+ ],
+ "f3": [
+  "billy",
+  "[reading, voice fading, worried] Пункт четы́рнадцать: «Би́лли. [pause] Всё.»?"
+ ],
+ "f4": [
+  "sam",
+  "[cheerful, polite] Ме́лкий шрифт, сэр. [pause] Ме́лкий шрифт."
+ ],
+ "g1": [
+  "molniya",
+  "[deadpan, to camera] Подпиши́тесь. [pause] Отме́на — то́лько письмо́м."
+ ],
+ "g2": [
+  "molniya",
+  "[deadpan, to camera] Коммента́рии чита́ю я. Лайк беспла́тный. [pause] Пока́."
+ ],
+ "h1": [
+  "billy",
+  "[amazed, shouting] Мо́лния, ты лети́шь?!"
+ ],
+ "h2": [
+  "molniya",
+  "[deadpan, dry] Я всегда́ лечу́. [pause] Э́то ты па́даешь."
+ ],
+ "i1": [
+  "billy",
+  "[panting, straining] Раз! Два! [groan] ...Ка́ктус тяжёлый."
+ ],
+ "i2": [
+  "molniya",
+  "[deadpan] Трениро́вка — э́то бо́льно и без морко́вки."
+ ],
+ "i3": [
+  "billy",
+  "[dramatic, intense, close] Я ста́ну быстре́е ве́тра!"
+ ],
+ "z1": [
+  "molniya",
+  "[deadpan, to camera] Долете́л. [pause] Три го́да, шесть глав и оди́н ка́ктус."
+ ],
+ "z2": [
+  "billy",
+  "[groggy, weak] Кто-нибу́дь... вы́тащит?"
+ ],
+ "z3": [
+  "molniya",
+  "[deadpan] Вы́таскивание — по тари́фу."
+ ],
+ "z4": [
+  "sam",
+  "[polite, then embarrassed] Прия́тного аппе... [pause] Прости́те. Ду́бль."
+ ],
+ "z5": [
+  "billy",
+  "[exhausted, annoyed] Дубль семна́дцатый... Мо́лния, ну хва́тит!"
+ ],
+ "z6": [
+  "molniya",
+  "[deadpan, very slight smile] Э́то не счита́ется."
+ ],
+ "p1": [
+  "bartender",
+  "[deadpan, very slow, low] Я всё ви́дел."
+ ],
+ "p2": [
+  "molniya",
+  "[deadpan] Тепе́рь тебе́ пла́тят."
+ ],
+ "p3": [
+  "bartender",
+  "[deadpan, very slow, low] ...Ничего́ не ви́дел."
+ ]
+}
