@@ -14,6 +14,7 @@ from stage import OUT_W, OUT_H
 
 COL = dict(billy=(255, 222, 96), molniya=(255, 255, 255), sam=(214, 170, 255))
 CRF = '20'
+COVER_SEC = 0.1  # длительность вшитой обложки в начале ролика (правило владельца, 01.10.2026)
 
 
 class Episode:
@@ -48,8 +49,9 @@ class Episode:
                                  '-r', str(s.fps), '-i', '-', '-c:v', 'libx264', '-preset', 'medium', '-crf', CRF,
                                  '-pix_fmt', 'yuv420p', out], stdin=subprocess.PIPE)
         cov = s.cover_frame()
+        cover_n = max(1, round(COVER_SEC * s.fps))  # обложка вшита в первые 0,1 с (3 кадра при 30 fps)
         for i in range(a0, a1):
-            fr = cov if (i < 6 and cov is not None) else render(i / s.fps)
+            fr = cov if (i < cover_n and cov is not None) else render(i / s.fps)
             proc.stdin.write(fr.tobytes())
         proc.stdin.close(); proc.wait()
 
