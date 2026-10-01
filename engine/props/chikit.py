@@ -136,10 +136,21 @@ def shot(world, light, cx, cy, Z, acts=(), back=(), front=(), fx_=None, sx=180, 
     lt = light(v) if light else None
     for group in (back, acts, ghost, front):
         if not group: continue
-        CH = Chars()
-        for a in group: a(CH, v)
-        if group is ghost: ghost_comp(CH, big, lt, ghost_a, t=t)
-        else: CH.comp(big, lt)
+        CH = Chars(); n = 0
+
+        def flush(CH, n):
+            if not n: return
+            if group is ghost: ghost_comp(CH, big, lt, ghost_a, t=t)
+            else: CH.comp(big, lt)
+
+        for a in group:
+            if getattr(a, 'direct', False):                     # v2 pixel-puppet heroes (props/dibspix.Act) paint straight onto the frame
+                flush(CH, n); CH = Chars(); n = 0
+                if group is ghost and a.ghost is None: a.ghost = ghost_a
+                a(big, v, lt)
+            else:
+                a(CH, v); n += 1
+        flush(CH, n)
     if emit: emit(big, v)
     if fx_: fx_(big, v)
     if vig: fx.vignette(big, vig)
