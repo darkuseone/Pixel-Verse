@@ -707,3 +707,34 @@ LADIES = dict(
 
 def lady(CH, cam, who='mrs_w', pose=None, t=0.0, mouth=0.0, expr='deadpan', look=0.0, **kw):
     return human(CH, cam, LADIES[who], pose, t, mouth, expr, look, **kw)
+
+
+# ====================================================================================================== STREETS WORKER (E03)
+def _worker_torso(T, bc, br, ln):
+    J = T3((70, 74, 88), 0.26); V = T3((255, 132, 24), 0.26)
+    ellt(T, bc, 5.4, 5.6, J); ellt(T, H(0.2 + ln, 16.6 + br), 4.8, 3.0, J)
+    ellt(T, bc, 4.7, 5.3, V); ellt(T, H(0.5 + ln, 16.2 + br), 4.0, 2.8, V)
+    for yy in (9.6, 12.8): cap(T, H(-3.9 + ln, yy), H(4.6 + ln, yy - 0.2), 0.55, 0.55, (236, 246, 150))
+    cap(T, H(1.7 + ln, 18.0 + br), H(1.5 + ln, 8.0), 0.45, 0.45, (236, 246, 150))
+
+
+def _worker_boot(A, e, ang):
+    ell(A, (e[0] + 1.0, e[1] + 0.3), 2.3, 1.2, (110, 76, 40), 0, (150, 110, 64), (66, 44, 22))
+    ell(A, (e[0] + 1.0, e[1] + 1.0), 2.4, 0.4, (40, 40, 44))
+
+
+def _worker_front(Hd, F, shades=False, expr='normal', t=0.0, ctx=None):
+    ell(Hd, F(0.2, 3.0), 3.5, 2.0, (255, 214, 60), 0, (255, 240, 150), (200, 150, 20))
+    cap(Hd, F(-3.0, 2.2), F(3.9, 2.4), 0.8, 0.6, (255, 214, 60), (255, 240, 150), (200, 150, 20))
+    cap(Hd, F(0.0, 5.0), F(0.4, 2.2), 0.45, 0.45, (230, 184, 30))
+
+
+WORKER_HS = dict(skin=T3((206, 150, 116), 0.28), skull=(3.1, 3.4), jaw=(1.1, -1.9, 2.6, 1.9), nose=(1.1, (210, 120, 100)), eye=((90, 96, 100), 1.0),
+                 brow=((120, 120, 126), 0.42), stache=((150, 150, 156), 1.2), lip=(150, 76, 76), front=_worker_front)
+WORKER = dict(skin=WORKER_HS['skin'], sleeve=T3((70, 74, 88), 0.26), pants=T3((52, 56, 70), 0.3), torso=_worker_torso, boot=_worker_boot,
+              HS=WORKER_HS, glove=T3((236, 200, 90), 0.2))
+
+
+def worker(CH, cam, pose=None, t=0.0, mouth=0.0, expr='deadpan', look=0.0, **kw):
+    """Streets Department worker: hard hat, orange hi-vis vest, grey moustache. expr: deadpan blank normal sleepy"""
+    return human(CH, cam, WORKER, pose, t, mouth, expr, look, **kw)

@@ -333,3 +333,19 @@ def digits(big, txt, cx=540, cy=700, size=420, col=(255, 236, 110), pulse=1.0):
     out = np.zeros((m.shape[0], m.shape[1], 4), np.uint8)
     out[dil] = RED + (255,); out[m] = col + (255,)
     O.overlay(big, out, int(cx - out.shape[1] / 2), int(cy - out.shape[0] / 2), 1.0)
+
+
+def rot_chars(CH, ang, px, py):
+    """rotate everything drawn on a Chars canvas by `ang` radians (clockwise on screen) around the logical-canvas point (px, py)"""
+    h, w = CH.m.shape
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    ca, sa = math.cos(ang), math.sin(ang)
+    dx, dy = xx + 0.5 - px, yy + 0.5 - py
+    sx = ca * dx + sa * dy + px
+    sy = -sa * dx + ca * dy + py
+    ix = np.floor(sx).astype(np.int32); iy = np.floor(sy).astype(np.int32)
+    ok = (ix >= 0) & (ix < w) & (iy >= 0) & (iy < h)
+    ix = np.clip(ix, 0, w - 1); iy = np.clip(iy, 0, h - 1)
+    m = CH.m[iy, ix] & ok
+    col = np.where(m[..., None], CH.col[iy, ix], 0).astype(np.uint8)
+    CH.m, CH.col = m, col

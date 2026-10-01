@@ -178,8 +178,9 @@ def phone_old(L, h):
     dot(L, (h[0] + 1.0, h[1] - 2.4), (140, 230, 150), 0.3)
 
 
-def chicago_dog(CH, cam, t=0.0, s=1.0):
-    """big hero-prop Chicago dog on a paper tray: poppy-seed bun, sausage, neon relish, tomatoes, pickle spear, sport peppers, onions, mustard"""
+def chicago_dog(CH, cam, t=0.0, s=1.0, bite=0.0):
+    """big hero-prop Chicago dog on a paper tray: poppy-seed bun, sausage, neon relish, tomatoes, pickle spear, sport peppers, onions, mustard.
+    bite = 0..1 eaten from the +x end"""
     L = Layer(cam)
     rect(L, H(0.0, -0.4), 17.0 * s, 1.6 * s, 0.0, (250, 250, 246))                                   # paper tray
     rect(L, H(0.0, -0.4), 17.0 * s, 0.5 * s, 0.0, (214, 40, 50))
@@ -194,6 +195,16 @@ def chicago_dog(CH, cam, t=0.0, s=1.0):
     for x in (-5.0, 4.6): cap(L, H(x * s, 6.4 * s), H(x * s + 2.2 * s, 6.8 * s), 0.55 * s, 0.4 * s, (110, 170, 60))          # sport peppers
     for k in range(8): dot(L, H(-6.4 * s + k * 1.8 * s, 6.9 * s - 0.15 * (k % 2)), (255, 222, 40), 0.3 * s)                 # mustard zigzag
     for k in range(10): dot(L, H(-6.0 * s + k * 1.3 * s + 0.4 * (k % 3), 7.4 * s - 0.4 * (k % 2)), (250, 250, 236), 0.12 * s)    # celery salt
+    if bite > 0.01:                                                                                  # big bite taken out of the +x end
+        xc = cam.p(1000.0 + (8.4 - 16.8 * bite) * s, 1000.0)[0]
+        yy_, xx_ = np.mgrid[0:L.m.shape[0], 0:L.m.shape[1]]
+        rr = 3.2 * s * cam.sc
+        for k in range(3):
+            cy_ = cam.p(1000.0, 1000.0 - (1.8 + 2.2 * k) * s)[1]
+            cxx = xc + (rr * 0.5 if not cam.flip else -rr * 0.5)
+            L.m[(xx_ - cxx) ** 2 + (yy_ - cy_) ** 2 < rr * rr] = False
+        if cam.flip: L.m[:, :int(xc)] = False
+        else: L.m[:, int(xc) + int(rr * 0.5):] = False
     outline(L, OL)
     CH.add(L)
 
@@ -505,3 +516,67 @@ def phone_ad(L, h, t=0.0):
     rect(L, h[0] + 0.6, h[1] - 0.4, 2.1, 3.9, 0.0, (60, 70, 150))
     rect(L, h[0] + 0.6, h[1] + 0.6, 1.7, 0.9, 0.0, (236, 120, 150))
     dot(L, (h[0] + 0.6, h[1] - 1.6), (255, 240, 170), 0.35)
+
+
+# ====================================================================================================== E03 props
+def sign_board(CH, cam, lines, w=24.0, col=(250, 214, 60), tcol=(30, 30, 40), pole=14.0):
+    """street sign on a pole; lines = [(text, height_units), ...]"""
+    L = Layer(cam)
+    hh = 2.6 + sum(sz * 1.35 + 0.5 for _, sz in lines)
+    cap(L, H(0.0, 0.0), H(0.0, pole), 0.5, 0.5, (96, 98, 110))
+    rect(L, H(0.0, pole + hh / 2), w + 1.2, hh + 1.2, 0.0, (28, 28, 34))
+    rect(L, H(0.0, pole + hh / 2), w, hh, 0.0, col)
+    y = pole + hh - 1.8
+    for r, sz in lines:
+        ltext(L, r, H(0.0, y), sz, tcol); y -= sz * 1.35 + 0.5
+    outline(L, OL)
+    CH.add(L)
+
+
+def headset(L):
+    """call-centre headset over the head of a character whose head centre is H(0.9, 21.3)"""
+    c = (40, 44, 58)
+    cap(L, H(-0.9, 22.4), H(-0.5, 24.8), 0.3, 0.3, c)
+    cap(L, H(-0.5, 24.8), H(2.8, 25.1), 0.3, 0.3, c)
+    cap(L, H(2.8, 25.1), H(3.5, 23.6), 0.3, 0.3, c)
+    ell(L, H(-0.85, 21.0), 1.0, 1.35, c, 0, (90, 96, 118), (20, 22, 30))
+    cap(L, H(-0.6, 20.0), H(3.0, 18.5), 0.15, 0.15, (30, 30, 38))
+    dot(L, H(3.2, 18.4), (46, 46, 56), 0.5)
+
+
+def beard(L, k, col=(116, 92, 70)):
+    """growing beard (k = 0..1) under the chin of Dibs (head centre H(0.9, 21.3))"""
+    if k <= 0.02: return
+    hi, sh = tuple(min(255, int(x * 1.3)) for x in col), tuple(int(x * 0.7) for x in col)
+    ell(L, H(1.5, 19.4 - 2.4 * k), 1.3 + 2.0 * k, 0.9 + 3.6 * k, col, 0, hi, sh)
+    cap(L, H(-0.2, 19.8), H(2.9, 19.6), 0.5 + 0.35 * k, 0.5 + 0.2 * k, col)
+
+
+def cards(L, h):
+    """fan of three playing cards held at h"""
+    for k, a in enumerate((-0.35, 0.0, 0.35)):
+        rect(L, h[0] + 0.8 + (k - 1) * 0.9, h[1] - 1.8, 2.0, 3.0, a, (252, 252, 248))
+        dot(L, (h[0] + 0.8 + (k - 1) * 0.9, h[1] - 1.8), (214, 40, 50) if k != 1 else (30, 30, 40), 0.45)
+
+
+def mustard(L, h, ang=0.0):
+    """yellow mustard squeeze bottle used as a sniper rifle (with a scope), held at h"""
+    ca, sa = math.cos(ang), math.sin(ang)
+    c = (h[0] + ca * 1.0, h[1] + sa * 1.0)
+    cap(L, (c[0] - ca * 3.0, c[1] - sa * 3.0), (c[0] + ca * 3.2, c[1] + sa * 3.2), 1.25, 0.95, (255, 214, 28), (255, 240, 120), (200, 150, 10))
+    cap(L, (c[0] + ca * 3.2, c[1] + sa * 3.2), (c[0] + ca * 6.4, c[1] + sa * 6.4), 0.35, 0.3, (255, 214, 28), None, (200, 150, 10))
+    cap(L, (c[0] + ca * 0.2, c[1] + sa * 0.2 - 1.6), (c[0] + ca * 2.6, c[1] + sa * 2.6 - 1.6), 0.5, 0.5, (40, 44, 56), (90, 96, 116), (20, 22, 30))
+    dot(L, (c[0] + ca * 2.9, c[1] + sa * 2.9 - 1.6), (120, 220, 255), 0.5)
+
+
+def counter_sign(CH, cam, lines, w=22.0, col=(250, 244, 226), tcol=(190, 30, 40)):
+    """hand-painted sign leaning on the counter; lines = [(text, height_units)]"""
+    L = Layer(cam)
+    hh = 1.8 + sum(sz * 1.35 + 0.4 for _, sz in lines)
+    rect(L, H(0.0, hh / 2), w + 1.0, hh + 1.0, 0.0, (36, 28, 24))
+    rect(L, H(0.0, hh / 2), w, hh, 0.0, col)
+    y = hh - 1.2
+    for r, sz in lines:
+        ltext(L, r, H(0.0, y), sz, tcol); y -= sz * 1.35 + 0.4
+    outline(L, OL)
+    CH.add(L)
