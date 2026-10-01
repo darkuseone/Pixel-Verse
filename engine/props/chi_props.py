@@ -463,3 +463,40 @@ def smoke_puff(big, cx, cy, r, a, col=(40, 38, 42)):
     """soot-grey puff on the output frame"""
     from props.bytfx import puff
     puff(big, cx, cy, r, a, col)
+
+
+# ====================================================================================================== E02 hand props
+def shovel(L, h, ang=-1.25):
+    """snow shovel (red blade, wooden handle with a D-grip), held at h; ang = handle direction (0 = +x)"""
+    ca, sa = math.cos(ang), math.sin(ang)
+    cap(L, (h[0] - ca * 3.2, h[1] - sa * 3.2), (h[0] + ca * 7.6, h[1] + sa * 7.6), 0.3, 0.3, (176, 134, 84), (214, 176, 116), (112, 80, 44))
+    cap(L, (h[0] - ca * 3.2 - sa * 0.9, h[1] - sa * 3.2 + ca * 0.9), (h[0] - ca * 3.2 + sa * 0.9, h[1] - sa * 3.2 - ca * 0.9), 0.3, 0.3, (112, 80, 44))
+    bx, by = h[0] + ca * 9.4, h[1] + sa * 9.4
+    rect(L, bx, by, 3.4, 5.2, ang, (226, 56, 50))
+    rect(L, bx - ca * 0.4, by - sa * 0.4, 2.6, 4.4, ang, (250, 96, 84))
+
+
+def sandwich(L, h, bites=0, t=0.0):
+    """big sub sandwich (bun, lettuce, tomato, cheese), `bites` chunks missing from the +x end"""
+    cx, cy = h[0] + 1.2, h[1] - 0.2
+    e = 3.4 - 0.7 * bites
+    cap(L, (cx - 3.4, cy + 0.9), (cx + e, cy + 0.9), 0.95, 0.95, (222, 170, 94), (250, 214, 140), (170, 118, 54))
+    cap(L, (cx - 3.5, cy + 0.2), (cx + e + 0.1, cy + 0.2), 0.45, 0.45, (120, 220, 80))
+    cap(L, (cx - 3.3, cy - 0.15), (cx + e, cy - 0.15), 0.4, 0.4, (230, 80, 70))
+    cap(L, (cx - 3.3, cy - 0.45), (cx + e - 0.2, cy - 0.45), 0.35, 0.35, (250, 206, 90))
+    cap(L, (cx - 3.4, cy - 1.0), (cx + e, cy - 1.0), 0.85, 0.85, (222, 170, 94), (250, 214, 140), (170, 118, 54))
+
+
+def guard_badge(L):
+    """yellow SECURITY plate pinned on the chest (Gary at the lobby desk)"""
+    rect(L, H(2.9, 12.2), 5.2, 1.7, 0.0, (36, 36, 44))
+    rect(L, H(2.9, 12.2), 4.8, 1.3, 0.0, (250, 214, 60))
+    ltext(L, 'SECURITY', H(2.9, 12.2), 0.8, (36, 36, 44))
+
+
+def phone_ad(L, h, t=0.0):
+    """smartphone showing the mattress ad (Terry walks off to watch it)"""
+    rect(L, h[0] + 0.6, h[1] - 0.4, 2.6, 4.4, 0.0, (22, 22, 28))
+    rect(L, h[0] + 0.6, h[1] - 0.4, 2.1, 3.9, 0.0, (60, 70, 150))
+    rect(L, h[0] + 0.6, h[1] + 0.6, 1.7, 0.9, 0.0, (236, 120, 150))
+    dot(L, (h[0] + 0.6, h[1] - 1.6), (255, 240, 170), 0.35)

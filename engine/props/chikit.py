@@ -257,7 +257,7 @@ def window_cut(t, u, who='mrs_w', open_t=0.12, prop='binoculars', expr='deadpan'
     """full-frame cutaway: moonlit brick wall, lit window, curtains snap open at open_t and a lady leans out (binoculars / popcorn)"""
     wall = (brick_bg() * np.array([0.36, 0.42, 0.62])).astype(np.uint8)
     big = wall.copy()
-    x0, y0, x1, y1 = 240 + shift[0], 380 + shift[1], 840 + shift[0], 1180 + shift[1]
+    x0, y0, x1, y1 = 150 + shift[0], 330 + shift[1], 930 + shift[0], 1250 + shift[1]
     big[y0 - 70:y0, x0 - 90:x1 + 90] = (226, 232, 240)                                              # snow on the lintel
     big[y0 - 22:y1 + 22, x0 - 22:x1 + 22] = (30, 26, 30)                                            # frame
     big[y0:y1, x0:x1] = (255, 206, 120)                                                              # warm light
@@ -271,8 +271,8 @@ def window_cut(t, u, who='mrs_w', open_t=0.12, prop='binoculars', expr='deadpan'
     if k > 0.02:
         ST.set_px(2)
         pk = ST.PX[0]; f = ST.UP * pk
-        unit_out = 44.0
-        ax_o, ay_o = (x0 + x1) / 2 + (40 if flip else -40), 740 + 21.3 * unit_out + 30 * (1 - k)         # head ~ window centre
+        unit_out = 58.0
+        ax_o, ay_o = (x0 + x1) / 2 + (50 if flip else -50), (y0 + y1) / 2 - 110 + 21.3 * unit_out + 40 * (1 - k)    # head a bit above window centre
         cam = ST.ACam(1000.0, 1000.0, ax_o / f, ay_o / f, unit_out / f, flip)
         CH = Chars()
         pr = None

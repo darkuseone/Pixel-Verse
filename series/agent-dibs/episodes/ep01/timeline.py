@@ -38,8 +38,8 @@ SFX = [
     (S + 'cartoon_boom_big.mp3', 27.30, 1.0),
     (S + 'wind_gust.mp3', 28.40, 0.35),
     (S + 'minivan_door_slide.mp3', 30.60, 0.7),
-    (S + 'record_scratch.mp3', 31.00, 0.8),
-    (S + 'cloth_flap.mp3', 31.00, 0.5), (S + 'cloth_flap.mp3', 31.08, 0.45), (S + 'cloth_flap.mp3', 31.16, 0.45), (S + 'cloth_flap.mp3', 31.24, 0.4),
+    (S + 'record_scratch.mp3', 31.55, 0.8),
+    (S + 'cloth_flap.mp3', 31.62, 0.5), (S + 'cloth_flap.mp3', 31.99, 0.5), (S + 'cloth_flap.mp3', 32.36, 0.5),
 ]
 
 # (path, loop_len, t0, t1, gain, duck_under_speech)

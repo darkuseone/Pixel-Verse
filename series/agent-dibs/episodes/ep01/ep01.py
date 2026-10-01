@@ -236,8 +236,8 @@ def r_count(t, u):
     return K.shot(WORLD, K.light_street, 695.0, 520.0, 1.35 + 0.1 * u, acts=acts, fx_=snow_fx(t), sy=340)
 
 
-def r_window(t, u, who, prop, flip=False):
-    return K.window_cut(t, u, who, open_t=0.04, prop=prop, flip=flip)
+def r_window(t, u, who, prop, flip=False, shift=(0, 0)):
+    return K.window_cut(t, u, who, open_t=0.04, prop=prop, flip=flip, shift=shift)
 
 
 def blast_pre(p):
@@ -313,7 +313,7 @@ def r_crater(t, u, Z=1.5):
     smoke = max(0.0, 1.0 - u / 2.2)
     acts = [lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X, CH_Y, cu_), t=t),
             lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, mouth('dibs', t, 1.8), 'deadpan', 0.0, True, chair=False,
-                                 hand_n=C.H(5.4, 14.4), prop_n=PR.coffee_cup, soot=0.88)]
+                                 hand_n=C.H(5.4, 14.4), prop_n=PR.coffee_cup, soot=0.78)]
     def fx_(big, v):
         snow_fx(t, 40)(big, v)
         hx, hy = v.opt(ax + 1.0 * un, ay - 26 * un)
@@ -324,26 +324,35 @@ def r_crater(t, u, Z=1.5):
 
 
 def r_van(t, u):
-    k = sm(min(1.0, u / 1.0))
-    x = lerp(1160.0, 880.0, k)
+    k = sm(min(1.0, u / 0.75))
+    x = lerp(985.0, 805.0, k)
     un = 8.0
     ax, ay = sit_anchor(un)
     cu_ = un * CHU
     acts = [lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X, CH_Y, cu_), t=t),
-            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, 0.0, 'deadpan', 0.0, True, chair=False, hand_n=C.H(5.4, 14.4), prop_n=PR.coffee_cup, soot=0.88),
+            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, 0.0, 'deadpan', 0.0, True, chair=False, hand_n=C.H(5.4, 14.4), prop_n=PR.coffee_cup, soot=0.78),
             lambda CH, v: PR.minivan(CH, v.cam(x, 700.0, 5.0, True), t, rot=-x * 0.2, driver=False, blinker=True),
-            lambda CH, v: C.brad(CH, v.cam(x - 5.2 * 5.0 * 0.0 - 1.0 * 5.0 * 0.0 + 4.3 * 5.0 * 0.0 + (5.0 * 5.2) * 0.0 - 26.0, 700.0, 3.1, True),
+            lambda CH, v: C.brad(CH, v.cam(x - 26.0, 700.0, 3.1, True),
                                  dict(C.POSE['hold'], n=(5.2, 14.4), f=(4.4, 14.6)), t, mouth('brad', t, 1.7), 'grin', 0.0, legs=False, clip_h=16.0)]
-    return K.shot(WORLD, K.light_street, 740.0, 540.0, 1.15, acts=acts, pre=crater_pre(0.0), fx_=snow_fx(t, 40), sy=350)
+    def fx_(big, v):
+        snow_fx(t, 40)(big, v)
+        if u < 0.9:
+            for i in range(5):
+                ph = u - i * 0.07
+                if ph < 0: continue
+                ox_, oy_ = v.opt(x + 80 + 16 * i, 706 - 40 * ph)
+                B.puff(big, ox_, oy_, (22 + 40 * ph) * 3 * v.Z, 0.55 * max(0.0, 1 - ph / 0.9), (232, 238, 248))
+    return K.shot(WORLD, K.light_street, 725.0, 540.0, 1.15, acts=acts, pre=crater_pre(0.0), fx_=fx_, sy=300)
 
 
 def r_brad(t, u):
     Zt = 2.3 + 0.05 * u
     un = 13.0
-    acts = [lambda CH, v: C.brad(CH, v.cam(800.0, 700.0, un, True), C.POSE['hold'], t, mouth('brad', t, 1.7), 'ope' if u > 0.3 else 'grin', legs=False, look=-0.8)]
+    pose = C.blend(C.POSE['stand'], C.POSE['point'], sm(min(1.0, u / 0.5)))
+    acts = [lambda CH, v: C.brad(CH, v.cam(800.0, 700.0, un, True), pose, t, mouth('brad', t, 1.7), 'smile', legs=False, look=-0.8)]
     def emit(big, v):
-        big[0:140, :] = (60, 66, 76)                                                            # van roof edge
-        big[1560:1920, 0:150] = (60, 66, 76)                                                    # door pillar
+        big[0:150, :] = (46, 52, 64); big[150:166, :] = (92, 102, 118)                          # van window frame (roof edge)
+        big[1500:1920, 0:130] = (46, 52, 64); big[1500:1920, 130:146] = (92, 102, 118)          # door pillar
     return K.shot(WORLD, K.light_street, 800.0 - 1.5 * un, 700.0 - 21.0 * un, Zt, acts=acts, fx_=snow_fx(t, 40), sx=180, sy=262, emit=emit)
 
 
@@ -352,7 +361,7 @@ def r_dreact(t, u):
     ax, ay = sit_anchor(un)
     cu_ = un * CHU
     acts = [lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X, CH_Y, cu_), t=t),
-            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, 0.0, 'deadpan', 0.0, True, chair=False, hand_n=C.H(5.4, 14.4), prop_n=PR.coffee_cup, soot=0.88)]
+            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, 0.0, 'deadpan', 0.0, True, chair=False, hand_n=C.H(5.4, 14.4), prop_n=PR.coffee_cup, soot=0.78)]
     return K.shot(WORLD, K.light_street, ax + 1.5 * un, ay - 21.0 * un - 10, 2.2 + 0.15 * u, acts=acts, pre=crater_pre(0.0), fx_=snow_fx(t, 40), sx=180, sy=300)
 
 
@@ -373,7 +382,7 @@ def r_tail(t, u):
     ax, ay = sit_anchor(un)
     cu_ = un * CHU
     acts = [lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X, CH_Y, cu_), t=t),
-            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, 0.0, 'smug', 0.0, True, chair=False, hand_n=C.H(3.4, 17.8), prop_n=PR.coffee_cup, soot=0.88)]
+            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, 0.0, 'smug', 0.0, True, chair=False, hand_n=C.H(3.4, 17.8), prop_n=PR.coffee_cup, soot=0.78)]
     return K.shot(WORLD, K.light_street, 680.0, 540.0, Z, acts=acts, pre=crater_pre(0.0), fx_=snow_fx(t, 60), sy=350)
 
 
@@ -409,7 +418,7 @@ def render_scene(t):
     if name == 'sit': return r_sit(t, u)
     if name == 'dsit': return r_dsit(t, u)
     if name in ('count1', 'count2'): return r_count(t, u)
-    if name == 'win_pop': return r_window(t, u, 'rose', 'popcorn', True)
+    if name == 'win_pop': return r_window(t, u, 'rose', 'popcorn', True, shift=(0, 110))
     if name == 'boom': return r_boom(t, u)
     if name == 'crater': return r_crater(t, u)
     if name == 'van': return r_van(t, u)
@@ -439,13 +448,13 @@ SHOW = K.Show(EPI, 1, ['DIBS ON', 'THE BOMB'], hook_t=(0.15, 2.4),
                   (st('28 MILES. DIFFERENT PLANET.', (255, 236, 120), 34), 35.90, 37.40, 540, 1090),
               ],
               flashes=[], mosaics=[], cap_default=1400,
-              cap_y={'insert': 1450, 'sit': 1450, 'crater': 1500, 'tail': 1500, 'boom': 1500, 'squad': 1450, 'tank': 1450, 'suv': 1450})
+              cap_y={'van': 1180, 'insert': 1450, 'sit': 1450, 'crater': 1500, 'tail': 1500, 'boom': 1500, 'squad': 1450, 'tank': 1450, 'suv': 1450})
 
 
 def render(t):
     big = render_scene(t)
     if 25.30 <= t < 25.9: K.digits(big, '3', 540, 760, 420, pulse=1.0 + 0.12 * math.sin((t - 25.3) * 14))
-    if 25.95 <= t < 26.5: K.digits(big, '2', 540, 760, 420, pulse=1.0 + 0.12 * math.sin((t - 25.95) * 14))
+    if 25.95 <= t < 26.5: K.digits(big, '2', 540, 250, 300, pulse=1.0 + 0.12 * math.sin((t - 25.95) * 14))
     if 26.55 <= t < BOOM_T: K.digits(big, '1', 540, 760, 420, pulse=1.0 + 0.12 * math.sin((t - 26.55) * 14))
     SHOW.apply(big, t, shot_at(t)[2])
     return big
