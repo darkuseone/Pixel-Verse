@@ -262,10 +262,13 @@ def sedan(CH, cam, t=0.0, body=(214, 196, 150), drivers=(('dibs', 3.0),), rot=0.
     CH.add(L)
 
 
-def suv(CH, cam, t=0.0, rot=0.0, shake=0.0, drivers=(), lights=True, doors=0.0):
-    """black SUV facing +x, ~32 units long, tinted windows"""
+def suv(CH, cam, t=0.0, rot=0.0, shake=0.0, drivers=(), lights=True, doors=0.0, signal=False, antenna=0.0):
+    """black SUV facing +x, ~32 units long, tinted windows; signal = blinking orange blinkers, antenna = rear aerial length (units)"""
     L = Layer(cam)
     sh = shake * math.sin(t * 40)
+    if antenna > 0:
+        cap(L, H(-13.0, 14.0 + sh), H(-13.4, 14.0 + antenna + sh), 0.14, 0.14, (70, 70, 80))
+        dot(L, H(-13.4, 14.2 + antenna + sh), (230, 60, 60), 0.4)
     b = T3((30, 32, 42), 0.28)
     poly(L, [H(-15.6, 3.6 + sh), H(15.8, 3.6 + sh), H(16.0, 7.4 + sh), H(-15.8, 8.0 + sh)], b[0])
     poly(L, [H(-15.4, 8.0 + sh), H(-14.0, 14.2 + sh), H(8.0, 14.4 + sh), H(12.6, 8.4 + sh)], b[0])
@@ -277,6 +280,8 @@ def suv(CH, cam, t=0.0, rot=0.0, shake=0.0, drivers=(), lights=True, doors=0.0):
     if lights:
         ell(L, H(15.8, 7.4 + sh), 1.2, 0.9, (255, 246, 190)); ell(L, H(-15.6, 7.0 + sh), 0.8, 1.2, (230, 40, 40))
     cap(L, H(-15.4, 3.6 + sh), H(15.6, 3.6 + sh), 0.7, 0.7, (130, 132, 142))
+    if signal and int(t * 3) % 2 == 0:
+        ell(L, H(15.9, 5.2 + sh), 0.7, 0.6, (255, 170, 30)); ell(L, H(-15.8, 5.6 + sh), 0.8, 0.7, (255, 170, 30))
     _wheel(L, -9.8, 3.4 + sh, 3.5, rot); _wheel(L, 10.0, 3.4 + sh, 3.5, rot)
     outline(L, OL)
     CH.add(L)
@@ -489,9 +494,9 @@ def sandwich(L, h, bites=0, t=0.0):
 
 def guard_badge(L):
     """yellow SECURITY plate pinned on the chest (Gary at the lobby desk)"""
-    rect(L, H(2.9, 12.2), 5.2, 1.7, 0.0, (36, 36, 44))
-    rect(L, H(2.9, 12.2), 4.8, 1.3, 0.0, (250, 214, 60))
-    ltext(L, 'SECURITY', H(2.9, 12.2), 0.8, (36, 36, 44))
+    rect(L, H(2.9, 12.2), 6.6, 1.7, 0.0, (36, 36, 44))
+    rect(L, H(2.9, 12.2), 6.2, 1.3, 0.0, (250, 214, 60))
+    ltext(L, 'SECURITY', H(2.9, 12.2), 0.62, (36, 36, 44))
 
 
 def phone_ad(L, h, t=0.0):

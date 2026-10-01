@@ -124,19 +124,22 @@ def hit(t, t0, dur=0.35):
     return max(0.0, 1 - (t - t0) / dur) if t >= t0 else 0.0
 
 
-def shot(world, light, cx, cy, Z, acts=(), back=(), front=(), fx_=None, sx=180, sy=330, vig=0.26, emit=None, pre=None):
-    """render one frame: background view (cx, cy at screen (sx, sy)), back / acts / front groups of callables a(CH, v),
-    each group composited with the scene light, then emit(big, v) (unlit overlays), fx_(big, v), vignette"""
+def shot(world, light, cx, cy, Z, acts=(), back=(), front=(), fx_=None, sx=180, sy=330, vig=0.26, emit=None, pre=None,
+         ghost=(), ghost_a=0.30, t=0.0):
+    """render one frame: background view (cx, cy at screen (sx, sy)), back / acts / (ghost) / front groups of callables a(CH, v),
+    each group composited with the scene light, then emit(big, v) (unlit overlays), fx_(big, v), vignette.
+    `ghost` = invisible characters (semi-transparent with a shimmering cyan outline), drawn after `acts`"""
     ST.set_px(ST.px_for_zoom(Z))
     v = view_at(world, cx, cy, Z, sx, sy)
     big = v.bg()
     if pre: pre(big, v)
     lt = light(v) if light else None
-    for group in (back, acts, front):
+    for group in (back, acts, ghost, front):
         if not group: continue
         CH = Chars()
         for a in group: a(CH, v)
-        CH.comp(big, lt)
+        if group is ghost: ghost_comp(CH, big, lt, ghost_a, t=t)
+        else: CH.comp(big, lt)
     if emit: emit(big, v)
     if fx_: fx_(big, v)
     if vig: fx.vignette(big, vig)
@@ -300,21 +303,23 @@ def popcorn(L, h, t=0.0):
 
 
 # ---------------------------------------------------------------- invisibility (ghost composite) and big pixel digits
-def ghost_comp(CH, big, light, alpha=0.30, edge=(120, 240, 255), t=0.0):
-    """composite a Chars canvas semi-transparent with a shimmering cyan outline (invisibility cloak)"""
+def ghost_comp(CH, big, light, alpha=0.30, edge=(120, 240, 255), t=0.0, w=7):
+    """composite a Chars canvas semi-transparent (glassy cyan tint) with a shimmering cyan outline (invisibility cloak)"""
     if not CH.m.any():
         CH.col[:] = 0; CH.m[:] = False; return
     col = CH.col.astype(np.float32)
     if light is not None: col = light.apply(col, CH.m, CH.k)
+    col = col * 0.86 + np.array(edge, np.float32) * 0.14
     f = ST.UP * CH.k
     m = np.repeat(np.repeat(CH.m, f, 0), f, 1)
     c = np.repeat(np.repeat(np.clip(col, 0, 255).astype(np.uint8), f, 0), f, 1)
     b = big[m].astype(np.float32)
     big[m] = np.clip(b * (1 - alpha) + c[m].astype(np.float32) * alpha, 0, 255).astype(np.uint8)
-    ed = m & ~np.roll(np.roll(m, 6, 0), 6, 1)
+    ed = (m & ~np.roll(np.roll(m, w, 0), w, 1)) | (m & ~np.roll(np.roll(m, -w, 0), -w, 1))
     yy, xx = np.nonzero(ed)
-    sh = ((xx // 18 + yy // 18 + int(t * 8)) % 2 == 0)
+    sh = ((xx // 14 + yy // 14 + int(t * 8)) % 3 != 0)
     big[yy[sh], xx[sh]] = edge
+    big[yy[~sh], xx[~sh]] = (210, 250, 255)
     CH.col[:] = 0; CH.m[:] = False
 
 

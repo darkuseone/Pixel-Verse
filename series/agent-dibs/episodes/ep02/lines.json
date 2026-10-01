@@ -1,0 +1,18 @@
+{
+ "d1": ["dibs", "[whispering, smug] I'm invisible."],
+ "deb1": ["deb", "[cheerful] How long's the trial, hon?"],
+ "d2": ["dibs", "[whispering] Seven days."],
+ "deb2": ["deb", "[gentle, patient] And which day is it?"],
+ "d3": ["dibs", "[whispering, uneasy] Seven."],
+ "g1": ["gary", "[polite, mouth full] Ope. Sir? You've got a pop-up."],
+ "g2": ["gary", "[helpful] Top right."],
+ "d4": ["dibs", "[whispering, confused] That's a BIRD."],
+ "g3": ["gary", "[dreamy] That's actually a good mattress."],
+ "t1": ["terry", "[wistful] My back's been killing me."],
+ "d5": ["dibs", "[hushed, impressed] A hundred-night trial."],
+ "t2": ["terry", "[exasperated] Guys?"],
+ "t3": ["terry", "[tired] You know what? Take the disk."],
+ "d6": ["dibs", "[stunned] That's it?"],
+ "t4": ["terry", "[deadpan, tired] I've got a mattress to look at."],
+ "g4": ["gary", "[wistful] Can you send me the link?"]
+}

@@ -52,8 +52,8 @@ def hud(big, x, y, secs, t=0.0, label='FREE TRIAL', k=1.0, scale=1.0):
 
 
 # ---------------------------------------------------------------- pop-up window
-def popup(big, cx, cy, t, w=700, k=1.0, dodge=0.0, bird=True, shake=0.0):
-    """YOUR FREE TRIAL HAS ENDED. window with a microscopic close button (and a tiny bird on its corner that looks the same)"""
+def popup(big, cx, cy, t, w=700, k=1.0, dodge=0.0, bird=True, shake=0.0, xs=1.0):
+    """YOUR FREE TRIAL HAS ENDED. window with a microscopic close button (xs scales the X) and a tiny bird sitting next to it"""
     h = int(w * 0.64)
     img, d = _canvas(w + 40, h + 40)
     d.rectangle([22, 22, w + 22, h + 22], fill=(0, 0, 0, 120))                               # drop shadow
@@ -61,13 +61,17 @@ def popup(big, cx, cy, t, w=700, k=1.0, dodge=0.0, bird=True, shake=0.0):
     d.rectangle([5, 5, w - 5, h - 5], fill=(232, 234, 240, 255))
     d.rectangle([5, 5, w - 5, 60], fill=NAVY + (255,))
     _txt(d, (22, 20), 'CLOAKIFY', 26, (255, 255, 255))
-    xx, yy = w - 30, 24                                                                      # the tiny X: 14 px
-    d.rectangle([xx - 3, yy - 3, xx + 15, yy + 15], fill=(200, 50, 56, 255))
-    for i in range(10): d.point((xx + 2 + i, yy + 2 + i), fill=(255, 255, 255, 255)); d.point((xx + 11 - i, yy + 2 + i), fill=(255, 255, 255, 255))
-    if bird:                                                                                  # a tiny black "bird" next to the X
-        bx, by = xx - 58, yy + 6
-        for i in range(7):
-            d.rectangle([bx + i * 2, by - (3 - abs(i - 3)) * 2 + 4, bx + i * 2 + 1, by - (3 - abs(i - 3)) * 2 + 5], fill=(10, 10, 14, 255))
+    s_ = max(6, int(round(14 * xs)))
+    xx, yy = w - 22 - s_ - int(8 * xs), 30 - s_ // 2                                         # the tiny X (14 px at xs = 1)
+    b_ = max(1, int(round(3 * xs)))
+    d.rectangle([xx - b_, yy - b_, xx + s_ + b_, yy + s_ + b_], fill=(200, 50, 56, 255))
+    lw = max(2, int(round(2 * xs)))
+    d.line([(xx + 2 * xs, yy + 2 * xs), (xx + s_ - 2 * xs, yy + s_ - 2 * xs)], fill=(255, 255, 255, 255), width=lw)
+    d.line([(xx + s_ - 2 * xs, yy + 2 * xs), (xx + 2 * xs, yy + s_ - 2 * xs)], fill=(255, 255, 255, 255), width=lw)
+    if bird:                                                                                  # a tiny black seagull "M" next to the X
+        bx, by = xx - int(44 * xs), yy - int(1 * xs)
+        d.line([(bx, by + 7 * xs), (bx + 6 * xs, by), (bx + 12 * xs, by + 7 * xs)], fill=(10, 10, 14, 255), width=lw)
+        d.line([(bx + 12 * xs, by + 7 * xs), (bx + 18 * xs, by), (bx + 24 * xs, by + 7 * xs)], fill=(10, 10, 14, 255), width=lw)
     _txt(d, (w // 2, 118), 'YOUR FREE TRIAL', int(w * 0.060), (150, 20, 34), 'mm')
     _txt(d, (w // 2, 118 + int(w * 0.075)), 'HAS ENDED.', int(w * 0.060), (150, 20, 34), 'mm')
     _txt(d, (w // 2, int(h * 0.60)), 'Keep being invisible', int(w * 0.036), NAVY_D, 'mm')
@@ -75,10 +79,10 @@ def popup(big, cx, cy, t, w=700, k=1.0, dodge=0.0, bird=True, shake=0.0):
     bw, bh = int(w * 0.62), int(h * 0.15)
     _bevel(d, (w - bw) // 2, int(h * 0.76), (w + bw) // 2, int(h * 0.76) + bh, (70, 200, 100), (170, 255, 190), (30, 120, 56))
     _txt(d, (w // 2, int(h * 0.76) + bh // 2 + 2), 'UPGRADE', int(w * 0.046), (255, 255, 255), 'mm')
-    _txt(d, (30, h - 22), 'maybe later', 16, (140, 144, 160), 'lm')
+    _txt(d, (30, h - 22), 'maybe later', max(12, int(w * 0.024)), (140, 144, 160), 'lm')
     ox = dodge * 60 * math.sin(t * 14) + shake * math.sin(t * 60) * 6
     blit(big, img, cx - w // 2 + ox, cy - h // 2, k)
-    return (cx - w // 2 + xx + 6 + ox, cy - h // 2 + yy + 6)                                 # centre of the X in output px
+    return (cx - w // 2 + xx + s_ // 2 + ox, cy - h // 2 + yy + s_ // 2)                     # centre of the X in output px
 
 
 # ---------------------------------------------------------------- Sleepytime Mattress ad
@@ -95,7 +99,7 @@ def _ad_art():
         d.line([(0, y), (W_, y)], fill=(int(24 + 60 * k), int(18 + 24 * k), int(78 + 52 * k)))
     rng = np.random.default_rng(4)
     for _ in range(46): d.point((int(rng.integers(0, W_)), int(rng.integers(0, 70))), fill=(240, 240, 255))
-    d.ellipse([132, 12, 156, 36], fill=(255, 238, 170)); d.ellipse([140, 8, 162, 32], fill=(34, 26, 92))   # crescent
+    d.ellipse([150, 30, 172, 52], fill=(255, 238, 170)); d.ellipse([157, 26, 177, 48], fill=(34, 26, 92))   # crescent
     d.rectangle([14, 86, 166, 104], fill=(70, 74, 150)); d.rectangle([14, 86, 166, 90], fill=(120, 126, 214))   # mattress
     d.rectangle([14, 104, 166, 110], fill=(40, 44, 100))
     d.rectangle([22, 110, 30, 124], fill=(60, 40, 30)); d.rectangle([150, 110, 158, 124], fill=(60, 40, 30))
@@ -105,7 +109,7 @@ def _ad_art():
     d.ellipse([28, 62, 46, 78], fill=(236, 190, 160))                                                         # sleeping spy: head
     d.rectangle([20, 60, 54, 66], fill=(40, 40, 50)); d.rectangle([26, 52, 48, 60], fill=(40, 40, 50))        # fedora over the eyes
     d.rectangle([28, 66, 44, 68], fill=(30, 30, 38))
-    for i, (zx, zy, s) in enumerate(((62, 56, 5), (72, 44, 7), (86, 30, 9))):                                 # Z z Z
+    for i, (zx, zy, s) in enumerate(((62, 62, 5), (71, 54, 7), (82, 44, 9))):                                 # Z z Z
         d.line([(zx, zy), (zx + s, zy), (zx, zy + s), (zx + s, zy + s)], fill=(255, 255, 255), width=2)
     _AD['art'] = img.resize((1080, 810), Image.NEAREST)
     return _AD['art']
@@ -119,10 +123,10 @@ def ad_full(big, t, n=5, skip=False, t0=0.0, pulse=0.0):
     big[y0:y0 + 810] = art
     img, d = _canvas(1080, 810)
     bob = int(6 * math.sin((t - t0) * 6))
-    _txt(d, (540, 70 + bob), 'SLEEPYTIME', 112, (255, 226, 90), 'mm', outline=(40, 20, 80))
-    _txt(d, (540, 176 + bob), 'MATTRESS', 92, (255, 255, 255), 'mm', outline=(40, 20, 80))
-    _txt(d, (540, 700), 'SLEEP LIKE A SPY!', 54, (110, 240, 255), 'mm', outline=(10, 14, 60))
-    _txt(d, (540, 770), '*NOT A REAL SPY', 22, (170, 176, 230), 'mm')
+    _txt(d, (540, 70 + bob), 'SLEEPYTIME', 94, (255, 226, 90), 'mm', outline=(40, 20, 80))
+    _txt(d, (540, 166 + bob), 'MATTRESS', 80, (255, 255, 255), 'mm', outline=(40, 20, 80))
+    _txt(d, (540, 626), 'SLEEP LIKE A SPY!', 54, (110, 240, 255), 'mm', outline=(10, 14, 60))
+    _txt(d, (540, 690), '*NOT A REAL SPY', 22, (170, 176, 230), 'mm')
     blit(big, img, 0, y0)
     _skip_ui(big, 1080 - 30, y0 + 810 - 30, n, skip, pulse)
     pb = int(1080 * min(1.0, max(0.0, (t - t0) / 8.0)))
@@ -162,7 +166,7 @@ def ad_pip(big, t, n, box=(640, 330, 1040, 630), t0=0.0, skip=False, pulse=0.0):
         _txt(d, (w - 96, 31), 'SKIP >', 26, (10, 10, 10), 'mm')
     else:
         d.rectangle([w - 190, 6, w - 2, 54], fill=(20, 20, 24, 230), outline=(210, 210, 214, 255), width=3)
-        _txt(d, (w - 96, 31), f'Skip in {n}', 22, (255, 255, 255), 'mm')
+        _txt(d, (w - 96, 31), f'Skip in {n}', 18, (255, 255, 255), 'mm')
     blit(big, img, x0, y1 + 12)
     pb = int(w * min(1.0, max(0.0, (t - t0) / 8.0)))
     big[y1 - 6:y1, x0:x0 + pb] = (255, 214, 60)
@@ -173,7 +177,7 @@ def cookies(big, cy, t, k=1.0):
     w, h = 980, 330
     img, d = _canvas(w, h)
     d.rectangle([0, 0, w - 1, h - 1], fill=(250, 250, 252, 255), outline=(20, 24, 40, 255), width=8)
-    _txt(d, (w // 2, 66), 'ACCEPT ALL COOKIES?', 52, (20, 24, 40), 'mm')
+    _txt(d, (w // 2, 66), 'ACCEPT ALL COOKIES?', 44, (20, 24, 40), 'mm')
     _txt(d, (w // 2, 120), 'we promise nothing', 22, (120, 124, 140), 'mm')
     for i, x in enumerate((260, 720)):
         _bevel(d, x - 190, 168, x + 190, 292, (70, 200, 100), (170, 255, 190), (30, 120, 56))
@@ -225,3 +229,20 @@ def disk_labeled(w=420):
     _txt(d, (w // 2, int(w * 0.76)), '(FINAL', 28, (20, 20, 30), 'mm')
     _txt(d, (w // 2, int(w * 0.85)), 'FINAL v2)', 28, (20, 20, 30), 'mm')
     return np.array(img)
+
+
+def lens(big, cx, cy, R=190, z=3.0):
+    """round magnifier centred on (cx, cy): the content under it, z times bigger, with a white rim"""
+    r = int(R / z)
+    x0, y0 = int(cx - r), int(cy - r)
+    src = big[max(0, y0):y0 + 2 * r, max(0, x0):x0 + 2 * r].copy()
+    if src.shape[0] != 2 * r or src.shape[1] != 2 * r: return
+    mag = np.array(Image.fromarray(src).resize((2 * R, 2 * R), Image.NEAREST))
+    yy, xx = np.ogrid[:2 * R, :2 * R]
+    d2 = (xx - R) ** 2 + (yy - R) ** 2
+    ox, oy = int(cx - R), int(cy - R)
+    reg = big[oy:oy + 2 * R, ox:ox + 2 * R]
+    if reg.shape[0] != 2 * R or reg.shape[1] != 2 * R: return
+    reg[d2 < R * R] = mag[d2 < R * R]
+    reg[(d2 >= (R - 9) ** 2) & (d2 < R * R)] = (255, 255, 255)
+    reg[(d2 >= R * R) & (d2 < (R + 8) ** 2)] = (12, 14, 30)

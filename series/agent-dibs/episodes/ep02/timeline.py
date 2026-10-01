@@ -46,7 +46,7 @@ SFX = [
     (S + 'ui_tap_chirp.mp3', 29.62, 0.9), (S + 'tv_static_blip.mp3', 29.66, 0.55, 0.0, 0.5),
     (S + 'whoosh.mp3', 31.35, 0.45, 0.0, 0.8),
     (S + 'book_thud.mp3', 32.20, 0.55),
-    (S + 'receipt_printer.mp3', 33.40, 0.7),
+    (S + 'receipt_printer.mp3', 34.45, 0.7), (S + 'stamp.mp3', 35.02, 0.8),
     (S + 'cloak_shimmer.mp3', 37.00, 0.75), (S + 'app_notify_ping.mp3', 37.45, 0.6),
 ]
 
