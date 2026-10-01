@@ -39,6 +39,7 @@
 «Can we talk about…», «Not gonna lie», общие «literally», «OK boomer». Дополнять по ходу.
 
 ## 7. Уже использовано (не повторять в других US мультах)
+- «Agent Dibs» S01 (сценарий на согласовании, гэги в резерве): полный список внизу, блок «Использовано в Agent Dibs».
 - «Sunny Palms HOA» S01: Saxophone gets louder (`sax_sting_swell`), Aura ±9999, Florida Man, «I watched a video», HOA/Karen, emotional support animal (сертификат $19.99), соседское приложение, штраф урагану, tip fatigue, выборы в HOA, «Bless your heart» + «TRANSLATION: YOU IDIOT», TOTAL FINES, Beautification Fund / Bahamas, Earl «grandfathered in».
 
 ---
@@ -122,3 +123,47 @@
 - Tip fatigue, экран чаевых, «no tip» в 4 пикселя: E05
 - Выборы в HOA, голос аллигатора «resident since 1987»: E06
 - «Bless your heart» (+ «TRANSLATION: YOU IDIOT»), TOTAL FINES, Beautification Fund, Earl «grandfathered in»: сквозные гэги
+
+---
+
+## 01.10.2026 — разведка для «Agent Dibs» (спецагент из Чикаго)
+Поиск 01.10.2026 (WebSearch, выдача US; плюс проверка ниши через vidIQ). Формат: мем → смысл → как вкладываем → дата → статус. Точных цифр просмотров конкурентов нет; даты отдельных новостных статей в выдаче не проверял.
+
+| Мем / явление | Смысл | Как вкладываем | Дата | Статус |
+|---|---|---|---|---|
+| **Dibs (стул на расчищенном месте)** | Чикагская зимняя традиция: после снегопада место закрепляют стулом, конусом, любым хламом. Формально запрещено, на практике терпят. Слово «dibs» («I call dibs») знает любой американец | Главный крючок сериала: все уважают стул, бомба нет (E01); крыса и «Where's your chair?» (E04); «Not in writing.» (E05); чужой стул ловит Брэда (E06) | evergreen | основа сериала |
+| **«Ope» / «Midwest nice»** | «Ope, sorry!», когда ты ни в чём не виноват; вежливая пассивная агрессия: «that's different», «interesting», «good luck with that» (Wikipedia «Ope (interjection)», Midstory, RAYGUN) | Брэд, Терри, Гари («Ope. Sorry.»), Деб («Oh. That's different.») | evergreen | используем |
+| **Чикагский хот-дог: 7 начинок, кетчуп недопустим** | Горчица, лук, неоново-зелёный релиш, огурец, помидор, острые перцы, сельдерейная соль; «dragged through the garden»; Wikipedia: кетчуп «unacceptable», вывески «no ketchup». Спор «кетчуп: да/нет» провоцирует комментарии | E04 «Hostage»: кетчуп оказался для фри («Fries are fine.») | evergreen | запланировано (E04) |
+| **Italian beef: «dipped», «hot/sweet», поза над сэндвичем** | Заказ звучит как шифр; массово известен по сериалу «The Bear» («Yes, chef», «Corner!», «Behind!», «Hands!» вошли в быт, KnowYourMeme) | В банке на сезон 2: заказ как пароль на явке; поза «beef stance» как боевая стойка; шпионские «Corner!/Behind!» при крадущемся ходе | 2022–2026 | в банке |
+| **Ямы, 311, «закрыто как дубликат», «это другой отдел»** | Вечная боль. По выдаче: Чикаго должен городу >$2,6 млрд штрафов (WGN), споры о камерах скорости (NBC Chicago), «slow zones» на L, ямы после зимы | E03: «Please state your pothole.», «Request closed. Duplicate.», один конус вместо ремонта | 2026 | запланировано (E03) |
+| **Подписки, «free trial», всплывающие окна, непропускаемая реклама матрасов** | Усталость от подписок, «как будто в жизни тоже есть всплывашки» | E02: невидимка по пробной подписке | 2026 | запланировано (E02) |
+| **«Supportive disappointed challenge» (июнь 2026)** | Одна и та же фраза в поддерживающем и разочарованном тоне | Деб в E05: «Proud of you, hon. Truly.» | июнь 2026 | специя |
+| **Оверсайз-наручники (SpongeBob handcuffs, авг 2026)** | Безвыходное положение, из которого можно просто выйти | E05: наручники сами падают с руки Дибса | авг 2026 | специя |
+| **«Kinda chic» (сент 2026)** | Подпись к скромному достижению с уверенностью | В банке: бейдж «22 YRS PROBATIONARY» можно подать как «kinda chic» | сент 2026 | в банке |
+| **Рекорд «rattiest city»** | Orkin: Чикаго 10 лет подряд №1 по крысам, в 2025 уступил Лос-Анджелесу (ABC7/CBS Chicago/WGN); «Rat Hole» на Roscoe Village (вирус 2024, убран в апреле 2024) | В банке: Marty — «Ten years number one. Then L.A.» (перед использованием свериться с годом) | 2024–2025 | в банке |
+| **Gen Alpha slang 2026** («cooked», «6-7», «chud», «crine», «aura») | Сленг, который взрослый агент не понимает | Не используем (риск кринжа, аура уже в Sunny Palms) | 2026 | ждём |
+| **KitKat heist, Jimothy, Heatwave Star Wars** | Разовые мемы года | В S1 не используем | 2026 | не используем |
+
+**Проверка ниши (vidIQ, 01.10.2026).** Канала/ролика «Agent Dibs» в выдаче нет (на запрос выпал «Dib» из Invader Zim, не наш случай). По «secret agent» в Shorts за три месяца выше всего играют Roblox- и «animal hospital»-эдиты (14 с, 1–5 млн просмотров, аудитория детская) и киноподборки; взрослой пиксельной шпионской пародии с постоянным кастом в выдаче нет. Это не доказательство спроса, а ставка: данных по удержанию аналогов нет.
+
+Правило: мем — специя. Шутка должна работать без мема.
+
+### Банк «Чикаго» (фольклор и детали, пополняется)
+- **Места:** the Bean (зеркальная «фасоль»), «L» над улицей с искрами, the Loop, колесо на Navy Pier, башни Marina City «початки кукурузы», две антенны «самой высокой башни» (бренд-название не используем), Lake Shore Drive, переулки и «gangway», двухэтажные «two-flat» и серые каменные дома, деревянные задние крыльца, Дибс-ряды зимой.
+- **Еда:** чикагский хот-дог, Italian beef, deep dish против tavern cut (квадратные куски), Chicago mix (сыр + карамель), mild sauce, горький ликёр (бренд не называем).
+- **Слова:** dibs, «da», gym shoes (кроссовки), pop (газировка), the L, the Loop, Chiberia, the Hawk (ветер), gangway, frunchroom, «What high school did you go to?» (так выясняют, кто ты), «I got a guy». Осторожно: «jagoff» (мягкая ругань, не в хук и не в название).
+- **Типажи:** бабушки в окнах с биноклем («block ladies»), сосед с вечной табличкой «THIS SPOT: …», рабочий в жилетке с одним конусом, вежливый житель пригорода («Ope!»).
+- **Быт:** 311, штрафы и колодки на колёса, камеры скорости, парковочные зоны, «slow zones» на L, зимние перебои, ветер с озера, lake-effect снег.
+- **Не трогаем:** реальные команды и бренды (подмена пародиями), реальных политиков и людей, трагедии, религиозные приходы.
+
+### Новые пародийные бренды (банк §4 пополняется)
+«Cloakify» (аренда плаща-невидимки), «Sleepytime Mattress», «Beige Line» (несуществующая ветка L), «Sal's Beef & Intel», «Cul-de-Sac Players» (любительский театр; реальный «Community Players of Naperville» не используем), «BSB — Bureau of Serious Business», «Doom Industries».
+
+### Использовано в «Agent Dibs», сезон 1 (резерв, не повторять в других US мультах; сценарий на согласовании 01.10.2026)
+- Dibs-стул как закон + стикер «RESPECT +1»; «Spot's still mine.»; «Where's your chair?»; «Not in writing.»
+- «Ope» и «He's from Naperville.» / «He's from New York.»
+- Любительский театр «Cul-de-Sac Players» играет злодеев; «Quick recap. Every villain this season? Community theatre.»
+- «Please state your pothole.», «Frank. Linda. Big Steve.», «Request closed. Duplicate.», «It's marked.»
+- Free trial невидимки, всплывающее окно с крошечным крестиком, реклама матраса, «Can you send me the link?»
+- Чикагский хот-дог («the garden», 7 начинок), «Fries are fine.», «Tension.», «I had dibs.»
+- Ветер «The Hawk», оверсайз-наручники, «Proud of you, hon. Truly.», бейдж «22 YRS PROBATIONARY».
