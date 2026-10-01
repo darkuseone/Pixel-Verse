@@ -1,0 +1,17 @@
+{
+ "d1": ["dibs", "[calm, cop negotiator] Put the ketchup down, son."],
+ "t1": ["terry", "[panicking] Stay back! I'll do it!"],
+ "deb1": ["deb", "[horrified whisper] Agent, is that ketchup?"],
+ "d2": ["dibs", "[soft, gentle] Think about your mother."],
+ "t2": ["terry", "[desperate] She puts ketchup on EVERYTHING!"],
+ "mw1": ["mrs_w", "[disgusted, muttering] Naperville."],
+ "d3": ["dibs", "[intense, low] Seven toppings, son. Don't ruin the garden."],
+ "t3": ["terry", "[cracking] It's just a HOT DOG!"],
+ "t4": ["terry", "[breathless, bewildered] I just wanted ketchup for my fries."],
+ "mw2": ["mrs_w", "[shrugging] Fries are fine."],
+ "t5": ["terry", "[bewildered] Then why did everybody FREAK OUT?"],
+ "d4": ["dibs", "[deadpan, sipping coffee] Tension."],
+ "d5": ["dibs", "[mouth full, deadpan] Evidence."],
+ "m1": ["marty", "[deadpan, to camera] I had dibs."],
+ "d6": ["dibs", "[mouth full] Where's your chair?"]
+}

@@ -30,6 +30,9 @@ class Episode:
             for i, c in enumerate(ch):
                 s0 = c[0][1]; e0 = ch[i + 1][0][1] if i + 1 < len(ch) else max(c[-1][2] + 0.35, t0 + (b - a))
                 items.append((s0, e0, [w[0] for w in c], colors[who]))
+        items.sort(key=lambda it: it[0])
+        items = [(a, min(b, items[i + 1][0]) if i + 1 < len(items) and items[i + 1][0] > a else b, w, c)       # a caption never overlaps the next one
+                 for i, (a, b, w, c) in enumerate(items)]
         s.captions = O.Captions(items)
 
     def talk(s, who, t):

@@ -1,0 +1,238 @@
+{
+  "cartoon": "Agent Dibs",
+  "slug": "agent-dibs",
+  "lang": "en",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "dibs": {
+      "name": "Dibs",
+      "color_caption": [
+        255,
+        150,
+        40
+      ],
+      "style": "[shouting] [smug] [deadpan] — loud, hearty, always sure he has it handled",
+      "design": {
+        "description": "A loud, gravelly American man in his mid-fifties with a thick old-school Chicago accent (flat vowels, 'da' for 'the'), blue-collar, hearty, confident, always sure he has it handled, sounds like he is talking over a cold wind. Expressive, comedic, mid-low baritone, native American English speaker.",
+        "text": "Dibs! Does it have a chair on it? Then it's mine, pal. I shoveled that spot for two hours and nobody, I mean NOBODY, touches da chair. Don't worry about it, I got a guy. Da guy's on lunch. Okay, I'm sitting on it. Spot's still mine.",
+        "picked": {
+          "i": 1,
+          "dur": 16.67,
+          "f0": 163.3,
+          "f0_iqr": 57.1,
+          "rate": 19.1,
+          "loud_sd": 4.9
+        }
+      },
+      "voice_id": "5C0bHt6GhA0my3bZoLJf",
+      "voice": "Agent Dibs — Dibs"
+    },
+    "deb": {
+      "name": "Deb",
+      "color_caption": [
+        80,
+        230,
+        255
+      ],
+      "style": "[cheerful] [supportive] [quietly disappointed] — Midwest nice, calls everybody hon",
+      "design": {
+        "description": "A warm, bright American woman in her sixties with a gentle Midwestern accent, relentlessly kind, says 'hon' and 'oh geez', can sound supportive and quietly disappointed in the same breath. Friendly mid-high voice, a little nasal, knitting-circle energy, native American English speaker.",
+        "text": "Oh, hon, that's different. Is something sizzling? Seatbelt, hon. Oh geez, I think the hotdish is done. Hold on. Agent, you have ten seconds, so please do something, hon. Proud of you, Agent. Truly.",
+        "picked": {
+          "i": 2,
+          "dur": 16.12,
+          "f0": 210.5,
+          "f0_iqr": 80.6,
+          "rate": 18.1,
+          "loud_sd": 6.2
+        }
+      },
+      "voice_id": "rDUAka3HaW9ATyqCs7fi",
+      "voice": "Agent Dibs — Deb"
+    },
+    "marty": {
+      "name": "Marty",
+      "color_caption": [
+        150,
+        255,
+        80
+      ],
+      "style": "[deadpan] [weary] — retired-union-guy rat, last word is the punchline",
+      "design": {
+        "description": "An old, raspy, tired American man with a Chicago accent, deadpan and slow, unbothered, sounds like a retired union guy telling you the truth. Dry, low, gravelly, very little pitch variation, native American English speaker.",
+        "text": "Ten years, number one. Then L.A. took it. You think that's easy to live with? Look, I'm just the rat. Everybody knows it. It's literally my job. Nobody ever asks the rat how he's doing. He's from Naperville.",
+        "picked": {
+          "i": 2,
+          "dur": 24.61,
+          "f0": 290.9,
+          "f0_iqr": 276.2,
+          "rate": 13.7,
+          "loud_sd": 5.2
+        }
+      },
+      "voice_id": "cI8n4KiVHQvXcAVhs2wo",
+      "voice": "Agent Dibs — Marty"
+    },
+    "terry": {
+      "name": "Terry",
+      "color_caption": [
+        255,
+        100,
+        100
+      ],
+      "style": "[nervous] [apologetic] — a community-theater actor playing a tough guy",
+      "design": {
+        "description": "A tall, polite, nervous American man in his thirties with a deep soft baritone and a suburban Midwestern accent, apologizes constantly, a community-theater actor playing a tough guy and not quite pulling it off. Warm, slightly shaky, native American English speaker.",
+        "text": "Ope, sorry. That's, uh, that's our bomb. Hold on, let me just, sorry, what's my motivation here? Okay. Okay. Stay back! I'll do it. I mean it. I'm really sorry about this. I just wanted ketchup for my fries.",
+        "picked": {
+          "i": 0,
+          "dur": 14.37,
+          "f0": 105.3,
+          "f0_iqr": 64.5,
+          "rate": 26.0,
+          "loud_sd": 7.2
+        }
+      },
+      "voice_id": "EUq8L3QnRf1VZ3o46Rqy",
+      "voice": "Agent Dibs — Terry"
+    },
+    "gary": {
+      "name": "Gary",
+      "color_caption": [
+        190,
+        150,
+        255
+      ],
+      "style": "[earnest] [helpful] — cheerful guard, always trying to be useful",
+      "design": {
+        "description": "A short, round, cheerful American man in his thirties with a higher nasal tenor and a suburban Midwestern accent, earnest and helpful, always trying to be useful, a bit dreamy. Friendly, light, native American English speaker.",
+        "text": "Ope. Sir? You've got a pop-up. Top right, I think? No, the other top right. Oh, that's actually a really good mattress. Hey, can you send me the link? I would really appreciate that. We're okay!",
+        "picked": {
+          "i": 1,
+          "dur": 15.07,
+          "f0": 217.7,
+          "f0_iqr": 111.4,
+          "rate": 22.0,
+          "loud_sd": 5.4
+        }
+      },
+      "voice_id": "2RpVmTUANdkCGLgvjh2O",
+      "voice": "Agent Dibs — Gary"
+    },
+    "brad": {
+      "name": "Brad",
+      "color_caption": [
+        60,
+        225,
+        170
+      ],
+      "style": "[bright] [chirpy] [tight smile] — suburban Midwest nice, secretly staged everything",
+      "design": {
+        "description": "A bright, upbeat American man in his early thirties with a suburban Midwestern accent, gleaming positivity, podcast-polite, says 'ope' and 'you bet', a slight tightness under the smile. Clear tenor, always smiling audibly, native American English speaker.",
+        "text": "Ope! Hi there! Is this spot open? Is that a chair? You bet! I'd love to discuss, but I have a thing. Great job, team! Plus snacks. Oh, thank goodness. Ope. Ope. Ope!",
+        "picked": {
+          "i": 0,
+          "dur": 11.39,
+          "f0": 173.9,
+          "f0_iqr": 129.8,
+          "rate": 25.7,
+          "loud_sd": 7.0
+        }
+      },
+      "voice_id": "1U7R8ztWDP1r2BuAL8Dz",
+      "voice": "Agent Dibs — Brad"
+    },
+    "mrs_w": {
+      "name": "Mrs. Wozniak",
+      "color_caption": [
+        255,
+        238,
+        200
+      ],
+      "style": "[flat] [verdict] — elderly block lady, short verdicts",
+      "design": {
+        "description": "An elderly American woman in her eighties, raspy, with a flat Chicago-Polish accent, unimpressed, speaks in short verdicts. Low, dry, slow, no nonsense, native American English speaker.",
+        "text": "Naperville. Shoveled it himself, that one. Fries are fine. You hear me? Fries are fine. In my day, nobody touched a chair. Nobody. Now go on and get off my lawn.",
+        "picked": {
+          "i": 1,
+          "dur": 17.48,
+          "f0": 160.0,
+          "f0_iqr": 25.8,
+          "rate": 13.0,
+          "loud_sd": 5.5
+        }
+      },
+      "voice_id": "pP2cFkzWZzNw0LkjA4ec",
+      "voice": "Agent Dibs — Mrs. Wozniak"
+    },
+    "chief": {
+      "name": "The Chief",
+      "color_caption": [
+        255,
+        214,
+        74
+      ],
+      "style": "[formal] [flat] — tired bureaucrat reading the minutes",
+      "design": {
+        "description": "A gruff, formal, tired middle-aged American bureaucrat with a deep voice, speaks like he is reading minutes from a meeting, monotone, authoritative, native American English speaker.",
+        "text": "Agent Dibs. First to arrive. The committee has reviewed the matter. The trophy goes to whoever is holding it. Not in writing. Brad's trophy is revoked. Agent Dibs, you're permanent. Meeting adjourned.",
+        "picked": {
+          "i": 2,
+          "dur": 15.57,
+          "f0": 320.0,
+          "f0_iqr": 279.1,
+          "rate": 20.1,
+          "loud_sd": 5.2
+        }
+      },
+      "voice_id": "rEkmbL8g1KnVDXo1RoDN",
+      "voice": "Agent Dibs — The Chief"
+    },
+    "operator": {
+      "name": "311 Operator",
+      "color_caption": [
+        205,
+        210,
+        220
+      ],
+      "style": "[bored] [monotone] — call-center chewing gum energy",
+      "design": {
+        "description": "A bored American woman in her twenties with a flat monotone call-center voice, chewing-gum energy, no emotion at all, polite but dead inside. Native American English speaker.",
+        "text": "Three-one-one. Please state your pothole. We can't fill a pothole with a car in it. That's Towing. This is Streets. Please hold. Thanks for holding. Your request is closed. Duplicate of request four five one two three three oh.",
+        "picked": {
+          "i": 1,
+          "dur": 21.71,
+          "f0": 190.5,
+          "f0_iqr": 42.1,
+          "rate": 16.4,
+          "loud_sd": 5.7
+        }
+      },
+      "voice_id": "eT8Vk9u6kd8OzYpIosfG",
+      "voice": "Agent Dibs — 311 Operator"
+    },
+    "cabbie": {
+      "name": "NY Cabbie",
+      "color_caption": [
+        255,
+        220,
+        60
+      ],
+      "style": "[bored] [gravelly] — Brooklyn cab driver, season 2 hook",
+      "design": {
+        "description": "A bored, gravelly New York City cab driver in his fifties with a thick Brooklyn accent, impatient, a little hoarse, native American English speaker.",
+        "text": "Yo. This spot open? I'm double-parked, I'm in a hurry, my meter's running. What, is that a chair? Whaddaya mean it's reserved? It's a street!",
+        "picked": {
+          "i": 1,
+          "dur": 8.99,
+          "f0": 161.6,
+          "f0_iqr": 82.2,
+          "rate": 21.1,
+          "loud_sd": 6.2
+        }
+      },
+      "voice_id": "PpmimHEhUDo0e4uO8FFz",
+      "voice": "Agent Dibs — NY Cabbie"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+ "d1": [
+  "dibs",
+  "[shouting, exhilarated] HOLD ON, DEB! I'M IN A PURSUIT!"
+ ],
+ "deb1": [
+  "deb",
+  "[sweetly] Seatbelt, hon."
+ ],
+ "d2": [
+  "dibs",
+  "[smug, rhythmic] Frank. Linda. Big Steve."
+ ],
+ "t1": [
+  "terry",
+  "[muffled, from far below] Ope?"
+ ],
+ "g1": [
+  "gary",
+  "[small, cheerful, echoing] We're okay!"
+ ],
+ "op1": [
+  "operator",
+  "[bored] Three-one-one. Please state your pothole."
+ ],
+ "d3": [
+  "dibs",
+  "[flat, matter-of-fact] There's a car in Big Steve."
+ ],
+ "op2": [
+  "operator",
+  "[bored, flat] We can't fill a pothole with a car in it."
+ ],
+ "d4": [
+  "dibs",
+  "[rising, exasperated] So remove the car!"
+ ],
+ "op3": [
+  "operator",
+  "[flat] That's Towing. This is Streets. Please hold."
+ ],
+ "op4": [
+  "operator",
+  "[cheerfully bored] Your request is closed. Duplicate."
+ ],
+ "d5": [
+  "dibs",
+  "[betrayed, shouting] DUPLICATE OF WHAT?!"
+ ],
+ "op5": [
+  "operator",
+  "[flat] Four-five-one-two-three-three-oh. Pothole."
+ ],
+ "d6": [
+  "dibs",
+  "[stunned] That's it?!"
+ ],
+ "w1": [
+  "chief",
+  "[flat, not looking up] It's marked."
+ ]
+}
