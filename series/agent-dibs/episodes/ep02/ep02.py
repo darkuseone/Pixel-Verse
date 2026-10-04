@@ -1,4 +1,4 @@
-"""S01E02 «Free Trial» — Dibs is invisible on a free trial (Cloakify). The trial ends mid-lobby, the pop-up has a microscopic X, an unskippable
+"""S01E02 «Free Trial» (v2 cast) — Dibs is invisible on a free trial (Cloakify). The trial ends mid-lobby, the pop-up has a microscopic X, an unskippable
 mattress ad freezes everybody, and the villains hand over the Doomsday disk just to get back to the mattress.
   python3 ep02.py test 1 5 20 | frame 12 | all [4]      then  python3 mix.py <noaudio.mp4> final.mp4"""
 import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[4] / 'engine'))
@@ -12,12 +12,13 @@ from scene import sm, lerp
 import overlays as O
 import fx
 from episode import Episode
-from props import chi_cast as C
+from props import dibspix as DX
+from props import dibscast as DC
+from props import dibskit as DK
 from props import chi_props as PR
 from props import chikit as K
 from props import chiui as UI
 from props import bytfx as B
-from props import folk
 from timeline import DUR, FPS, VOICE, SLUG, DING_T
 
 EPI = Episode('ep02', VOICE, DUR, FPS, colors=K.COL, slug=SLUG)
@@ -41,31 +42,34 @@ def secs_left(t):
     return max(0, int(math.ceil(DING_T - t - 1e-6)))
 
 
-# ================================================================== poses
-def tiptoe(t, sp=4.2):
-    s = math.sin(t * sp)
-    return dict(n=(4.6, 12.6), f=(-3.0, 10.4), bn=1, bf=-1, nleg=(0.55 * s + 0.2, 0.6 * max(0.0, -s)), fleg=(-0.55 * s + 0.2, 0.6 * max(0.0, s)))
+# ================================================================== helpers (v2 sprite cast)
+CU_S = 12.5                                 # sprite scale of the close-ups (head ~ 400 px wide)
 
 
-FROZEN = dict(n=(5.2, 13.6), f=(-3.2, 14.8), bn=1, bf=-1, nleg=(1.25, 0.1), fleg=(-0.04, 0.0))
-PINCH = dict(n=(9.2, 16.4), f=(7.6, 15.6), bn=1, bf=1, nleg=(0.12, 0.0), fleg=(-0.12, 0.0))
-LEAP = dict(n=(10.4, 17.6), f=(8.0, 15.4), bn=1, bf=1, nleg=(1.0, 0.5), fleg=(-0.5, 0.9))
-STORK = FROZEN
+def A(fn, wx, wy, un=None, s=None, flip=False, pin=None, **P):
+    return DX.Act(fn, wx, wy, s_=s, un=un, flip=flip, pin=pin, **P)
+
+
+def sandwich(bites):
+    return {'R': lambda sp, h, a, tt: DC.p_sandwich(sp, h, a, tt, bites=bites)}
+
+
+SHOVEL = {'R': lambda sp, h, a, tt: DC.p_shovel(sp, h, a, tt, a=-0.9)}
 
 
 # ================================================================== reusable shot pieces
-def lobby(t, cx, acts=(), ghost=(), back=(), fx_=None, emit=None, Z=1.0, sy=320, ghost_a=GHOST_A, cy=400.0):
-    return K.shot(WORLD, K.light_lobby, cx, cy, Z, acts=acts, ghost=ghost, back=back, fx_=fx_, emit=emit, sx=180, sy=sy, ghost_a=ghost_a, t=t)
+def lobby(t, cx, acts=(), ghost=(), back=(), fx_=None, emit=None, Z=1.0, sy=320, ghost_a=GHOST_A, cy=400.0, pre=None):
+    return K.shot(WORLD, K.light_lobby, cx, cy, Z, acts=acts, ghost=ghost, back=back, fx_=fx_, emit=emit, sx=180, sy=sy, ghost_a=ghost_a, t=t, pre=pre)
 
 
-def cu(fn, head, un, t, u, who, expr, Z=2.3, zoom=0.06, pose=None, flip=False, k=1.7, sy=262, hy=21.0, extra=(), ghost_=False, emit=None,
-       ghost_a=GHOST_CU, front=(), look=0.0, **kw):
+def cu(fn, head, t, u, who, expr, Z=2.3, zoom=0.06, pose='stand', flip=False, k=1.7, sy=262, extra=(), ghost_=False, emit=None,
+       ghost_a=GHOST_CU, front=(), look=0.0, s=CU_S, **kw):
     """close-up of one character; `head` = world position of the head (decides which part of the lobby is behind it)"""
-    sgn = -1 if flip else 1
-    ax, ay = head[0] - sgn * 1.5 * un, head[1] + hy * un
-    call = lambda CH, v: fn(CH, v.cam(ax, ay, un, flip), pose or C.POSE['stand'], t, mouth(who, t, k) if who else 0.0, expr, look, **kw)
-    acts = list(extra) + ([] if ghost_ else [call])
-    return K.shot(WORLD, K.light_lobby, head[0], head[1], Z + zoom * u, acts=acts, ghost=[call] if ghost_ else (), front=front, emit=emit,
+    Zt = Z + zoom * u
+    a = A(fn, head[0], head[1], s=s * Zt / Z, flip=flip, pin='head', pose=pose, t=t, mouth_=mouth(who, t, k) if who else 0.0, expr=expr,
+          look=look, **kw)
+    acts = list(extra) + ([] if ghost_ else [a])
+    return K.shot(WORLD, K.light_lobby, head[0], head[1], Zt, acts=acts, ghost=[a] if ghost_ else (), front=front, emit=emit,
                   sx=180, sy=sy, ghost_a=ghost_a, t=t)
 
 
@@ -74,19 +78,16 @@ GARY_HEAD = (300.0, 440.0)
 TERRY_HEAD = (1010.0, 262.0)
 
 
-def dibs_cu(t, u, expr='smug', ghost_=True, pose=None, shades=True, hud=True, k=1.8, Z=2.3, zoom=0.06, extra=(), alpha=GHOST_CU, **kw):
-    un = 13.0
+def dibs_cu(t, u, expr='smug', ghost_=True, pose='stand', shades=True, hud=True, k=1.8, Z=2.3, zoom=0.06, extra=(), alpha=GHOST_CU, **kw):
     def emit(big, v):
         if hud and ghost_:
             UI.hud(big, 800, 300, secs_left(t), t, scale=0.70)
-    return cu(C.dibs, DIBS_HEAD, un, t, u, 'dibs', expr, Z=Z, zoom=zoom, pose=pose, k=k, ghost_=ghost_, emit=emit, ghost_a=alpha,
-              shades=shades, chair=False, extra=extra, **kw)
+    return cu(DC.dibs, DIBS_HEAD, t, u, 'dibs', expr, Z=Z, zoom=zoom, pose=pose, k=k, ghost_=ghost_, emit=emit, ghost_a=alpha,
+              shades=shades, extra=extra, **kw)
 
 
-def gary_cu(t, u, expr='normal', pose=None, prop=None, k=1.7, hand=None, flip=False, bites=0, on=True, head=GARY_HEAD, **kw):
-    un = 13.0
-    return cu(C.gary, head, un, t, u, 'gary', expr, Z=2.3, zoom=0.05, pose=pose, flip=flip, k=k, hy=19.6, prop_n=prop, hand_n=hand,
-              front=(), **kw)
+def gary_cu(t, u, expr='normal', pose='hold', props=None, k=1.7, flip=False, head=GARY_HEAD, look=0.0, **kw):
+    return cu(DC.gary, head, t, u, 'gary', expr, Z=2.3, zoom=0.05, pose=pose, flip=flip, k=k, props=props, badge=True, look=look, **kw)
 
 
 def parapet(wy, t):
@@ -107,35 +108,34 @@ def parapet(wy, t):
     return emit
 
 
-def terry_cu(t, u, expr, hand=None, prop=None, pose=None, cat=True, cat_pose='sit', k=1.7, flip=True, extra_emit=None, cat_lid=0.55, tail=0.5):
-    """Terry on the mezzanine (skyline behind him), a white cat on the parapet next to him"""
-    un = 13.0
+def terry_cu(t, u, expr, pose='hold', cat=True, k=1.7, flip=True, extra_emit=None, cat_lid=0.55, tail=0.5, props=None):
+    """Terry on the mezzanine (skyline behind him), the villain's white cat on the parapet next to him"""
+    Z = 2.3 + 0.05 * u
+    sc = CU_S * Z / 2.3
     sgn = -1 if flip else 1
-    ax, ay = TERRY_HEAD[0] - sgn * 1.5 * un, TERRY_HEAD[1] + 22.3 * un
-    par = ay - 15.2 * un
+    par = TERRY_HEAD[1] + 92.0
     pe = parapet(par, t)
     def emit(big, v):
         pe(big, v)
         if extra_emit: extra_emit(big, v)
-    cats = []
-    if cat:
-        cats = [lambda CH, v: folk.cat(CH, v.cam(TERRY_HEAD[0] + sgn * 50.0, par + 2.0, 6.2, not flip), t, pose=cat_pose, lid=cat_lid, expr='smug', tail=tail)]
-    acts = [lambda CH, v: C.terry(CH, v.cam(ax, ay, un, flip), pose or C.POSE['hold'], t, mouth('terry', t, k), expr, 0.0,
-                                  hand_n=hand, prop_n=prop)]
-    # the cat is drawn in front of the parapet block but behind the rail posts -> it goes through `front` before emit paints the marble below the top
-    return K.shot(WORLD, K.light_lobby, TERRY_HEAD[0], TERRY_HEAD[1], 2.3 + 0.05 * u, acts=acts, front=cats, emit=emit, sx=180, sy=262)
+    cats = [A(DC.cat, TERRY_HEAD[0] + sgn * 46.0, par + 1.0, s=sc * 0.55, flip=not flip, t=t, lid=cat_lid, tail=tail)] if cat else []
+    acts = [A(DC.terry, TERRY_HEAD[0], TERRY_HEAD[1], s=sc, flip=flip, pin='head', pose=pose, t=t, mouth_=mouth('terry', t, k), expr=expr, props=props)]
+    return K.shot(WORLD, K.light_lobby, TERRY_HEAD[0], TERRY_HEAD[1], Z, acts=acts, front=cats, emit=emit, sx=180, sy=262)
+
+
+def balcony(t, expr='sly', lid=0.55):
+    """Terry and the cat far away on the mezzanine (wide shots)"""
+    return [A(DC.terry, 700.0, BAL_Y, un=4.3, flip=True, pose='hips', t=t, expr=expr),
+            A(DC.cat, 742.0, BAL_Y, un=2.3, t=t, lid=lid)]
 
 
 # ================================================================== the shots
 def r_hook(t, u):
-    un, Z = 13.0, 2.3
-    ax, ay = DIBS_HEAD[0] - 1.5 * un, DIBS_HEAD[1] + 21.0 * un
-    gx, gy, gu = ax + 66.0, 520.0, 8.2
+    Z = 2.3 + 0.05 * u
     bites = int(t * 1.5) % 3
-    acts = [lambda CH, v: C.gary(CH, v.cam(gx, gy, gu), C.POSE['hold'], t, chew(t), 'normal', 0.0, hand_n=C.H(5.2, 16.6),
-                                 prop_n=lambda L, h: PR.sandwich(L, h, bites=bites, t=t), front=PR.guard_badge)]
-    ghost = [lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['stand'], t, mouth('dibs', t, 1.9), 'smug', 0.0, True, chair=False)]
-    big = K.shot(WORLD, K.light_lobby, DIBS_HEAD[0], DIBS_HEAD[1], Z + 0.05 * u, acts=acts, ghost=ghost, ghost_a=GHOST_A, t=t, sx=180, sy=262)
+    acts = [A(DC.gary, 640.0, 470.0, un=4.8, flip=True, pose='hold', t=t, mouth_=chew(t), expr='normal', props=sandwich(bites), badge=True)]
+    ghost = [A(DC.dibs, DIBS_HEAD[0], DIBS_HEAD[1], s=CU_S * Z / 2.3, pin='head', pose='stand', t=t, mouth_=mouth('dibs', t, 1.9), expr='smug', shades=True)]
+    big = K.shot(WORLD, K.light_lobby, DIBS_HEAD[0], DIBS_HEAD[1], Z, acts=acts, ghost=ghost, ghost_a=GHOST_A, t=t, sx=180, sy=262)
     if t > 0.1: B.shake(big, t, 1.5, 21)
     return big
 
@@ -146,15 +146,8 @@ def r_sneak(t, u):
     cx = lerp(600.0, 690.0, sm(k))
     un = 8.4
     dy = FY + 38.0
-    gx = 585.0
-    acts = [
-        lambda CH, v: C.terry(CH, v.cam(700.0, BAL_Y, 4.3), C.POSE['hips'], t, 0.0, 'sly', 0.0, front=None),
-        lambda CH, v: folk.cat(CH, v.cam(742.0, BAL_Y, 2.1), t, pose='sit', lid=0.55, expr='smug', tint=(1.12, 1.16, 1.28)),
-        lambda CH, v: C.gary(CH, v.cam(gx, FY, 8.0), C.POSE['hold'], t, chew(t), 'normal', 0.0, hand_n=C.H(5.2, 16.6),
-                             prop_n=lambda L, h: PR.sandwich(L, h, bites=int(t) % 3, t=t), front=PR.guard_badge),
-    ]
-    ghost = [lambda CH, v: C.dibs(CH, v.cam(x, dy, un), tiptoe(t), t, mouth('dibs', t, 1.6), 'smug', 0.0, True, chair=False,
-                                  prop_n=lambda L, h: PR.shovel(L, h, -1.15), hand_n=C.H(4.6, 12.6))]
+    acts = balcony(t) + [A(DC.gary, 585.0, FY, un=8.0, pose='hold', t=t, mouth_=chew(t), expr='normal', props=sandwich(int(t) % 3), badge=True, shadow=0.3)]
+    ghost = [A(DC.dibs, x, dy, un=un, pose=DC.walk('tiptoe', t), t=t, mouth_=mouth('dibs', t, 1.6), expr='smug', shades=True, props=SHOVEL)]
     def emit(big, v):
         hx, hy = v.opt(x + 30, dy - 22 * un)
         UI.hud(big, int(hx + 150), int(hy - 30), secs_left(t), t, scale=0.95)
@@ -166,7 +159,7 @@ def r_d2(t, u):
 
 
 def r_deb(t, u, expr='smile'):
-    return K.deb_frame(t, expr, mouth('deb', t, 1.6), Z=2.0, u=u)
+    return DK.deb_frame(t, expr, mouth('deb', t, 1.6), Z=2.0, u=u)
 
 
 def r_d3(t, u):
@@ -177,15 +170,9 @@ def r_d3(t, u):
 def r_frozen(t, u):
     un = 8.4
     x, dy = 640.0, FY + 30.0
-    acts = [
-        lambda CH, v: C.terry(CH, v.cam(700.0, BAL_Y, 4.3), C.POSE['hips'], t, 0.0, 'smug', 0.0),
-        lambda CH, v: folk.cat(CH, v.cam(742.0, BAL_Y, 2.1), t, pose='sit', lid=0.45, expr='smug', tint=(1.12, 1.16, 1.28)),
-        lambda CH, v: C.gary(CH, v.cam(710.0, FY - 10, 8.0, True), C.POSE['hold'], t, chew(t), 'normal', 0.0, hand_n=C.H(5.2, 16.6),
-                             prop_n=lambda L, h: PR.sandwich(L, h, bites=1, t=t), front=PR.guard_badge),
-    ]
-    ghost = [lambda CH, v: C.dibs(CH, v.cam(x, dy, un), FROZEN, t, 0.0, 'nervous', 0.0, True, chair=False,
-                                  prop_n=lambda L, h: PR.shovel(L, h, -0.7), hand_n=C.H(5.2, 14.2),
-                                  sweat=0.8)]
+    acts = balcony(t, 'smug', 0.45) + [A(DC.gary, 710.0, FY - 10, un=8.0, flip=True, pose='hold', t=t, mouth_=chew(t), expr='normal',
+                                           props=sandwich(1), badge=True, shadow=0.3)]
+    ghost = [A(DC.dibs, x, dy, un=un, pose='frozen', t=t, expr='nervous', shades=True, props=SHOVEL, sweat=0.8)]
     alpha = 0.36 + 0.14 * math.sin(t * 30)
     def emit(big, v):
         hx, hy = v.opt(x + 30, dy - 22 * un)
@@ -194,7 +181,7 @@ def r_frozen(t, u):
 
 
 def r_terry_cat(t, u):
-    return terry_cu(t, u, 'sly', pose=C.POSE['hold'], hand=C.H(6.4, 12.4))
+    return terry_cu(t, u, 'sly', pose='hold')
 
 
 def r_hud_cu(t, u):
@@ -212,10 +199,9 @@ def r_popup(t, u, who='wide'):
     un = 8.4
     x = 600.0
     dy = FY + 30.0
-    dib = lambda CH, v: C.dibs(CH, v.cam(x, dy, un), C.POSE['shrug'], t, 0.0, 'shock', 0.0, True, chair=False, sweat=0.4)
-    acts = [dib,
-            lambda CH, v: C.gary(CH, v.cam(745.0, FY - 5, 8.0, True), C.POSE['hold'], t, mouth('gary', t, 1.7) if t > 12.1 else chew(t), 'normal', -0.5,
-                                 hand_n=C.H(4.4, 12.8), prop_n=lambda L, h: PR.sandwich(L, h, bites=2, t=t), front=PR.guard_badge)]
+    acts = [A(DC.dibs, x, dy, un=un, pose='shrug', t=t, expr='shock', shades=True, sweat=0.4, shadow=0.3),
+            A(DC.gary, 745.0, FY - 5, un=8.0, flip=True, pose='hold', t=t, mouth_=mouth('gary', t, 1.7) if t > 12.1 else chew(t), expr='normal',
+              look=-0.5, props=sandwich(2), badge=True, shadow=0.3)]
     def emit(big, v):
         pop = sm(min(1.0, u / 0.12))
         UI.popup(big, 540, 400, t, w=int(720 * (0.4 + 0.6 * pop)), k=min(1.0, pop * 1.4), shake=max(0.0, 1 - u / 0.4))
@@ -226,16 +212,13 @@ def r_popup(t, u, who='wide'):
 
 
 def r_gary_cu(t, u):
-    chewing = t < 12.0 or t > 14.1
-    return gary_cu(t, u, 'normal', pose=C.POSE['hold'], prop=lambda L, h: PR.sandwich(L, h, bites=2, t=t), hand=C.H(4.2, 12.4), k=1.7, look=0.3)
+    return gary_cu(t, u, 'normal', props=sandwich(2), k=1.7, look=0.3)
 
 
 def r_swat(t, u):
     d = u / 0.95
     sx = lerp(0.0, 1.0, sm(min(1.0, d * 1.4)))
-    un = 13.0
-    arm = C.blend(C.POSE['stand'], C.POSE['reach'], sm(min(1.0, d * 3)))
-    big = dibs_cu(t, u, 'angry', ghost_=False, pose=arm, hud=False, k=1.6, Z=2.1, zoom=0.04)
+    big = dibs_cu(t, u, 'angry', ghost_=False, pose=DC.blend('stand', 'reach', sm(min(1.0, d * 3))), hud=False, k=1.6, Z=2.1, zoom=0.04)
     px = 760 + 330 * sx + 30 * math.sin(t * 28)
     UI.popup(big, int(px), 1020, t, w=620, dodge=1.0)
     return big
@@ -244,7 +227,7 @@ def r_swat(t, u):
 def r_bird(t, u):
     # squinting Dibs, then the X and the bird
     if u < 0.75:
-        return dibs_cu(t, u, 'deadpan', ghost_=False, hud=False, k=1.6, Z=2.6, zoom=0.04)
+        return dibs_cu(t, u, 'squint', ghost_=False, hud=False, k=1.6, Z=2.6, zoom=0.04, s=14.0)
     big = np.zeros((OUT_H, OUT_W, 3), np.uint8)
     big[:] = (22, 26, 56)
     w = 2400
@@ -264,8 +247,8 @@ def r_bird(t, u):
 def r_pinch(t, u):
     un = 8.4
     if u < 1.0:
-        acts = [lambda CH, v: C.dibs(CH, v.cam(560.0, FY + 30, un), PINCH, t, 0.0, 'nervous', 0.0, True, chair=False, sweat=0.6),
-                lambda CH, v: C.gary(CH, v.cam(715.0, FY - 5, 8.0, True), PINCH, t, 0.0, 'nervous', front=PR.guard_badge)]
+        acts = [A(DC.dibs, 560.0, FY + 30, un=un, pose='pinch', t=t, expr='nervous', shades=True, sweat=0.6, shadow=0.3),
+                A(DC.gary, 715.0, FY - 5, un=8.0, flip=True, pose='pinch', t=t, expr='nervous', badge=True, shadow=0.3)]
         def emit(big, v):
             UI.popup(big, 540, 380, t, w=600, k=0.95)
             yy, xx = np.ogrid[:OUT_H, :OUT_W]
@@ -275,8 +258,8 @@ def r_pinch(t, u):
                     dd = np.sqrt((xx - cx_) ** 2 + (yy - 1150) ** 2)
                     big[(dd > rr - 5) & (dd < rr + 5)] = (255, 255, 255)
         return lobby(t, 640.0, acts=acts, emit=emit, Z=1.1, sy=330)
-    big = lobby(t, 640.0, acts=[lambda CH, v: C.dibs(CH, v.cam(540.0, FY + 30, un), PINCH, t, 0.0, 'nervous', 0.0, True, chair=False),
-                                lambda CH, v: C.gary(CH, v.cam(735.0, FY - 5, 8.0, True), PINCH, t, 0.0, 'nervous', front=PR.guard_badge)], Z=1.1, sy=330)
+    big = lobby(t, 640.0, acts=[A(DC.dibs, 540.0, FY + 30, un=un, pose='pinch', t=t, expr='nervous', shades=True, shadow=0.3),
+                                A(DC.gary, 735.0, FY - 5, un=8.0, flip=True, pose='pinch', t=t, expr='nervous', badge=True, shadow=0.3)], Z=1.1, sy=330)
     w = 760
     xc, yc = UI.popup(big, 430, 440, t, w=w, k=1.0, bird=False)
     z = 1.0 + 2.2 * sm((u - 1.0) / 0.9)
@@ -305,18 +288,17 @@ def pip(n, t, u, skip=False):
 
 def r_gary_dream(t, u):
     n = 5 - int((t - 19.2) / 1.0)
-    return cu(C.gary, GARY_HEAD, 13.0, t, u, 'gary', 'content', pose=C.POSE['hold'], hy=19.6, k=1.5, emit=pip(max(1, n), t, u),
-              prop_n=lambda L, h: PR.sandwich(L, h, bites=2, t=t), hand_n=C.H(5.0, 14.6), look=-0.4)
+    return gary_cu(t, u, 'content', props=sandwich(2), k=1.5, look=-0.4, emit=pip(max(1, n), t, u))
 
 
 def r_terry_wist(t, u):
     n = 5 - int((t - 19.2) / 1.0)
-    return terry_cu(t, u, 'sad', pose=C.POSE['hold'], hand=C.H(6.4, 12.4), extra_emit=pip(max(1, n), t, u), cat_lid=0.8)
+    return terry_cu(t, u, 'sad', pose='hold', extra_emit=pip(max(1, n), t, u), cat_lid=0.8)
 
 
 def r_dibs_hush(t, u):
     n = 5 - int((t - 19.2) / 1.0)
-    return cu(C.dibs, DIBS_HEAD, 13.0, t, u, 'dibs', 'stunned', k=1.5, emit=pip(max(1, n), t, u), shades=False, chair=False, pose=C.POSE['hold'])
+    return cu(DC.dibs, DIBS_HEAD, t, u, 'dibs', 'stunned', k=1.5, emit=pip(max(1, n), t, u), shades=False, pose='hold')
 
 
 def r_skip_on(t, u):
@@ -333,19 +315,18 @@ def r_fight(t, u):
         dx = lerp(470.0, 590.0, k)
         gx = lerp(790.0, 645.0, k)
         arc = 90 * math.sin(math.pi * k)
-        acts = [lambda CH, v: C.dibs(CH, v.cam(dx, FY + 40 - arc, un), LEAP, t, 0.0, 'angry', 0.0, True, chair=False),
-                lambda CH, v: C.gary(CH, v.cam(gx, FY + 35 - arc * 0.9, 8.4, True), LEAP, t, 0.0, 'angry', 0.0, front=PR.guard_badge)]
+        acts = [A(DC.dibs, dx, FY + 40 - arc, un=un, pose='leap', t=t, expr='angry', shades=True),
+                A(DC.gary, gx, FY + 35 - arc * 0.9, un=8.4, flip=True, pose='leap', t=t, expr='angry', badge=True)]
         def pre(big, v):
             UI.ad_pip(big, t, 1, box=(300, 720, 780, 1080), t0=19.2, skip=True, pulse=0.0)
         def emit(big, v): fx.speed_lines(big, t, 0.6)
-        big = K.shot(WORLD, K.light_lobby, 650.0, 400.0, 1.0, acts=acts, pre=pre, emit=emit, sx=180, sy=320)
-        return big
+        return K.shot(WORLD, K.light_lobby, 650.0, 400.0, 1.0, acts=acts, pre=pre, emit=emit, sx=180, sy=320)
     def pre(big, v): UI.ad_pip(big, t, 1, box=(290, 560, 790, 935), t0=19.2, skip=True)
     def emit(big, v):
         if 28.75 <= t < 29.35: UI.cookies(big, 1150, t)
     big = K.shot(WORLD, K.light_lobby, 640.0, 400.0, 1.7, acts=[
-        lambda CH, v: C.dibs(CH, v.cam(590.0, 585.0, 11.0), C.POSE['reach'], t, 0.0, 'angry', 0.0, True, chair=False),
-        lambda CH, v: C.gary(CH, v.cam(700.0, 582.0, 11.0, True), C.POSE['reach'], t, 0.0, 'angry', 0.0, front=PR.guard_badge)],
+        A(DC.dibs, 590.0, 585.0, un=9.5, pose='reach', t=t, expr='angry', shades=True),
+        A(DC.gary, 700.0, 582.0, un=9.5, flip=True, pose='reach', t=t, expr='angry', badge=True)],
         pre=pre, emit=emit, sx=180, sy=300)
     B.shake(big, t, 6, 40)
     return big
@@ -368,13 +349,11 @@ def r_tvoff(t, u):
 
 def r_terry_disk(t, u):
     toss = max(0.0, (t - 31.2) / 0.25)
-    arm = C.blend(C.POSE['hold'], C.POSE['reach'], sm(min(1.0, toss)))
-    return terry_cu(t, u, 'sly' if u < 0.4 else 'sad', pose=arm, hand=None, cat=True, k=1.5, cat_lid=0.7)
+    return terry_cu(t, u, 'sly' if u < 0.4 else 'sad', pose=DC.blend('hold', 'reach', sm(min(1.0, toss))), cat=True, k=1.5, cat_lid=0.7)
 
 
 def r_dibs_disk(t, u):
-    un = 13.0
-    big = cu(C.dibs, DIBS_HEAD, un, t, u, 'dibs', 'stunned', k=1.6, shades=True, chair=False, pose=C.POSE['hold'])
+    big = cu(DC.dibs, DIBS_HEAD, t, u, 'dibs', 'stunned', k=1.6, shades=True, pose='hold')
     d = UI.disk_labeled(400)
     k = sm(min(1.0, u / 0.25))
     ang = 8 * (1 - k)
@@ -384,7 +363,7 @@ def r_dibs_disk(t, u):
 
 
 def r_terry_shrug(t, u):
-    return terry_cu(t, u, 'deadpan', pose=C.POSE['shrug'], hand=None, cat=True, k=1.6, cat_lid=0.9)
+    return terry_cu(t, u, 'deadpan', pose='shrug', cat=True, k=1.6, cat_lid=0.9)
 
 
 def r_receipt(t, u):
@@ -409,8 +388,7 @@ def r_receipt(t, u):
 
 
 def r_gary_link(t, u):
-    return cu(C.gary, GARY_HEAD, 13.0, t, u, 'gary', 'sad', pose=C.POSE['hold'], hy=19.6, k=1.5,
-              prop_n=lambda L, h: PR.phone_ad(L, h), hand_n=C.H(5.6, 13.0), look=0.2)
+    return gary_cu(t, u, 'sad', props={'R': 'phone_ad'}, k=1.5, look=0.2)
 
 
 def r_loop(t, u):

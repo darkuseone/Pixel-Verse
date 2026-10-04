@@ -153,3 +153,25 @@ def calm_night(big):
         x = int(rng.integers(0, 1068)); y = int(rng.integers(0, 760)); s = int(rng.choice((6, 9, 12)))
         big[y:y + s, x:x + s] = (240, 246, 255)
     return big
+
+
+# ---------------------------------------------------------------- v2 covers (04.10.2026): xAI makes the environment only, heroes come from the sprite engine
+ENV_PROMPT = ("Redraw this image as a highly detailed, vivid HD pixel art scene from a modern indie pixel-art adventure game (crisp visible pixels, "
+              "rich environment detail, cold deep-blue Chicago winter night palette with warm orange and neon accents). Keep the same vertical "
+              "composition and the same objects. {scene} NO people, NO characters, NO animals: keep the lower half open for characters. "
+              "Keep the top third calm and simple for a title. No text, no letters, no numbers, no watermark.")
+
+
+def ai_env(ref_png, raw_png, scene):
+    return xai.generate(ENV_PROMPT.format(scene=scene), [raw_png], aspect='9:16', ref_png=ref_png)
+
+
+def hero(F, fn, head, s, flip=False, ghost=None, light=None, **P_):
+    """paste a sprite hero on the 540x960 cover canvas, its head centre at `head` (canvas px)"""
+    from props import dibspix as DX
+    from stage import Light
+    sp = DX.Spr(); sp.mirror_text = flip
+    fn(sp, **P_)
+    hx, hy = sp.anchors['head']
+    lt = light or Light(amb=(0.98, 0.98, 1.06), rim=(-1 if flip else 1, -0.4, (255, 206, 150), 0.45), grad=(1.04, 0.92))
+    DX.blit(F, sp, head[0] - (-hx if flip else hx) * s, head[1] + hy * s, s, lt, flip, ghost=ghost)

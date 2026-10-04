@@ -269,7 +269,7 @@ EXPR = dict(
 
 # ======================================================================================== face kit
 def eye(sp, cx, cy, w, h, X, iris, look=(0.0, 0.0), blink=False, lash=(30, 20, 30), skin=(230, 180, 150), lidc=None,
-        bold=1, bag=None, white=WHITE, flick=False):
+        bold=1, bag=None, white=WHITE, flick=False, slit=False):
     """detailed eye centred at (cx, cy) (sprite px), w x h px"""
     eo = X['eo']
     if blink or X.get('shut'):
@@ -295,7 +295,7 @@ def eye(sp, cx, cy, w, h, X, iris, look=(0.0, 0.0), blink=False, lash=(30, 20, 3
     sp.fill(mi, iris, keep=True)
     sp.fill(mi & (YC < iy - ri * 0.2), dark(iris, 0.72), keep=True)
     rp = max(0.7, ri * (0.35 + 0.5 * X['pu']))
-    mp, _, _ = sp.m_ell(ix, iy, rp, rp)
+    mp, _, _ = sp.m_ell(ix, iy, max(0.6, rp * 0.35) if slit else rp, ri * 0.95 if slit else rp)
     sp.fill(mp & m, (14, 12, 18), keep=True)
     sp.dot(int(math.floor(ix - ri * 0.45)), int(math.floor(iy + ri * 0.35)), (255, 255, 255), keep=True)   # highlight
     if w >= 7: sp.dot(int(math.floor(ix + ri * 0.4)), int(math.floor(iy - ri * 0.5)), (220, 230, 255), keep=True)

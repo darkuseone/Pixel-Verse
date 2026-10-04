@@ -74,8 +74,25 @@ def legs_for(pose, hipL, hipR, ll, sit=False, step=0.0):
 
 
 def hand_targets(pose, G):
+    """pose -> hand targets (sprite px); pose may carry blend=(other_name, k) to move the hands between two poses"""
+    if 'blend' in pose:
+        nb, k = pose['blend']
+        a = _hand_targets(dict(pose, blend=None, name=pose.get('name', 'stand')), G)
+        b = _hand_targets(dict(pose, blend=None, name=nb), G)
+        lp = lambda p_, q_: (p_[0] + (q_[0] - p_[0]) * k, p_[1] + (q_[1] - p_[1]) * k)
+        return lp(a[0], b[0]), lp(a[1], b[1]), (b if k > 0.5 else a)[2], (b if k > 0.5 else a)[3]
+    return _hand_targets(pose, G)
+
+
+def blend(a, b, k):
+    """arm pose between named poses a and b (k = 0..1)"""
+    return P_(a, blend=(b, max(0.0, min(1.0, k))))
+
+
+def _hand_targets(pose, G):
     """pose -> hand targets (sprite px) from the rig geometry G (shL, shR, head, hip, belly, rx = torso half width)"""
     shL, shR, hd, hip, rx = G['shL'], G['shR'], G['head'], G['hip'], G['rx']
+    G.setdefault('swing', pose.get('swing', 0.0))
     L, R = G['arm'], G['arm']
     p = pose.get('name', 'stand')
     if p == 'stand':   tl, tr, bl, br = (shL[0] - 4, shL[1] - L * 0.9), (shR[0] + 4, shR[1] - L * 0.9), -1, 1
@@ -93,6 +110,13 @@ def hand_targets(pose, G):
     elif p == 'wave':  tl, tr, bl, br = (shL[0] - 4, shL[1] - L * 0.9), (shR[0] + 8, shR[1] + L * 0.8), -1, 1
     elif p == 'phone': tl, tr, bl, br = (shL[0] - 4, shL[1] - L * 0.9), (hd[0] - G['hrx'] * 0.7, hd[1] - 2), -1, -1
     elif p == 'sip':   tl, tr, bl, br = (shL[0] - 4, shL[1] - L * 0.9), (hd[0] + G['hrx'] * 0.6, hd[1] - G['hry'] * 0.75), -1, -1
+    elif p == 'tiptoe': tl, tr, bl, br = (shL[0] + 6, shL[1] - L * 0.15), (shR[0] + L * 0.55, shR[1] - L * 0.1), 1, 1
+    elif p == 'pinch': tl, tr, bl, br = (hd[0] + G['hrx'] * 0.9, hd[1] - G['hry'] * 0.2), (hd[0] + G['hrx'] * 1.5, hd[1] - G['hry'] * 0.1), 1, 1
+    elif p == 'leap':  tl, tr, bl, br = (shL[0] + L * 0.5, shL[1] + L * 0.55), (shR[0] + L * 0.8, shR[1] + L * 0.5), -1, 1
+    elif p == 'gun':   tl, tr, bl, br = (shR[0] + L * 0.55, shR[1] - L * 0.05), (shR[0] + L * 0.9, shR[1] + L * 0.05), 1, 1
+    elif p == 'wheel': tl, tr, bl, br = (shR[0] + L * 0.55, shR[1] - L * 0.25), (shR[0] + L * 0.75, shR[1] - L * 0.15), 1, 1
+    elif p == 'run':   tl, tr, bl, br = (shL[0] + G['swing'] * L * 0.5, shL[1] - L * 0.6), (shR[0] - G['swing'] * L * 0.5, shR[1] - L * 0.6), -1, 1
+    elif p == 'tears': tl, tr, bl, br = (hd[0] - G['hrx'] * 0.3, hd[1] - G['hry'] * 0.2), (hd[0] + G['hrx'] * 0.9, hd[1] - G['hry'] * 0.1), 1, 1
     else:              tl, tr, bl, br = (shL[0] - 4, shL[1] - L * 0.9), (shR[0] + 4, shR[1] - L * 0.9), -1, 1
     return tl, tr, bl, br
 
@@ -101,9 +125,17 @@ def P_(name, **kw):
     d = dict(name=name); d.update(kw); return d
 
 
-POSE = {n: P_(n) for n in ('stand', 'hips', 'reach', 'point', 'shout', 'arms_up', 'hold', 'hat', 'ears', 'cover', 'shrug', 'wave', 'phone', 'sip')}
+def walk(name, t, speed=4.2, amp=0.55, lift=0.6):
+    """walk/tiptoe/run cycle on top of a named arm pose"""
+    s_ = math.sin(t * speed)
+    return P_(name, stepL=amp * s_ + 0.15, stepR=-amp * s_ + 0.15, liftR=lift * 4 * max(0.0, -s_), swing=s_)
+
+
+POSE = {n: P_(n) for n in ('stand', 'hips', 'reach', 'point', 'shout', 'arms_up', 'hold', 'hat', 'ears', 'cover', 'shrug', 'wave', 'phone', 'sip',
+                           'tiptoe', 'pinch', 'leap', 'gun', 'wheel', 'run', 'tears')}
 POSE['sit'] = P_('sit', sit=True)
-POSE['frozen'] = P_('arms_up', liftR=7.0)
+POSE['frozen'] = P_('tiptoe', liftR=7.0, stepR=0.5)
+POSE['leap'] = P_('leap', stepL=0.8, stepR=-0.5, liftR=5.0)
 
 
 # ======================================================================================== hand props (drawn at the hand)
@@ -168,7 +200,46 @@ def p_phone(sp, h, ang, t=0.0):
     sp.dot(x, y - 2, (90, 94, 108))
 
 
-PROPS = dict(coffee=p_coffee, card=p_card, beanie=p_beanie, binoculars=p_binoculars, popcorn=p_popcorn, knit=p_knit, phone=p_phone)
+def p_shovel(sp, h, ang, t=0.0, a=-0.75):
+    """snow shovel held like a gun: wooden handle with a D-grip, red plastic blade (a = handle direction, 0 = forward)"""
+    ca, sa = math.cos(a), math.sin(a)
+    x, y = h
+    wood = [(110, 74, 40), (150, 106, 60), (190, 144, 88), (226, 186, 124)]
+    sp.cap((x - ca * 7, y - sa * 7), (x + ca * 24, y + sa * 24), 1.7, 1.7, wood)
+    sp.cap((x - ca * 7 - sa * 3, y - sa * 7 + ca * 3), (x - ca * 7 + sa * 3, y - sa * 7 - ca * 3), 1.5, 1.5, wood)
+    bx, by = x + ca * 30, y + sa * 30
+    blade = sp.m_poly([(bx - sa * 9 - ca * 5, by + ca * 9 - sa * 5), (bx + sa * 9 - ca * 5, by - ca * 9 - sa * 5),
+                       (bx + sa * 10 + ca * 8, by - ca * 10 + sa * 8), (bx - sa * 10 + ca * 8, by + ca * 10 + sa * 8)])
+    sp.paint(blade, [(130, 24, 30), (190, 40, 44), (232, 70, 62), (255, 130, 110)], np.clip(0.75 - (XC - bx) * 0.03, 0, 1))
+    sp.line((bx - sa * 6 + ca * 5, by + ca * 6 + sa * 5), (bx + sa * 6 + ca * 5, by - ca * 6 + sa * 5), (236, 242, 252))
+
+
+def p_sandwich(sp, h, ang, t=0.0, bites=0):
+    """big sub: bun, lettuce, tomato, cheese; `bites` chunks gone from the front end"""
+    x, y = h[0] + 2, h[1] + 1
+    e = 13 - 3 * bites
+    bun = [(150, 96, 40), (204, 146, 70), (236, 186, 104), (252, 222, 150)]
+    sp.cap((x - 8, y - 2.2), (x + e, y - 2.2), 2.4, 2.4, bun)
+    sp.rect(x - 9, y - 0.8, x + e + 1, y + 0.4, (110, 210, 80)); sp.rect(x - 8, y + 0.2, x + e, y + 1.2, (220, 70, 64))
+    sp.rect(x - 8, y + 1.0, x + e - 1, y + 1.8, (250, 206, 90))
+    sp.cap((x - 8, y + 3.2), (x + e, y + 3.2), 2.6, 2.6, bun)
+    for k in range(3): sp.dot(x - 5 + k * 4, y + 5, (255, 240, 200))
+    if bites:
+        for k in range(bites): sp.ell(x + e + 1.5, y + 1.0 - 2.4 + k * 2.4, 1.6, 1.4, [(0, 0, 0)] * 4, ol=False)
+        sp.m[(XC > x + e + 0.5) & (np.abs(YC - (y + 1)) < 6) & (np.abs(XC - (x + e + 1.5)) < 2.5)] = False
+
+
+def p_phone_ad(sp, h, ang, t=0.0):
+    """smartphone playing the mattress ad"""
+    x, y = h
+    sp.rect(x - 3, y - 4, x + 4, y + 9, (22, 22, 28))
+    sp.rect(x - 2, y - 3, x + 3, y + 8, (60, 70, 150))
+    sp.rect(x - 2, y + 1, x + 3, y + 4, (236, 120, 150))
+    sp.dot(x, y + 6, (255, 240, 170)); sp.dot(x + 1, y + 6, (255, 240, 170))
+
+
+PROPS = dict(coffee=p_coffee, card=p_card, beanie=p_beanie, binoculars=p_binoculars, popcorn=p_popcorn, knit=p_knit, phone=p_phone,
+             shovel=p_shovel, sandwich=p_sandwich, phone_ad=p_phone_ad)
 
 
 def _prop(sp, which, h, ang, t):
@@ -378,7 +449,7 @@ G_SKIN = [(148, 92, 66), (194, 132, 96), (226, 168, 126), (246, 204, 164)]
 
 
 def gary(sp, pose='stand', t=0.0, mouth_=0.0, expr='normal', look=0.0, blink=None, shades=False, hands=None, props=None,
-         soot=0.0, sweat=0.0, legs=True, clip_h=None, breath=True, hat=True):
+         soot=0.0, sweat=0.0, legs=True, clip_h=None, breath=True, hat=True, badge=False):
     pose = POSE[pose] if isinstance(pose, str) else pose
     X = EXPR.get(expr, EXPR['normal'])
     br = (0.7 * math.sin(t * 2.0 + 2)) if breath else 0.0
@@ -396,6 +467,9 @@ def gary(sp, pose='stand', t=0.0, mouth_=0.0, expr='normal', look=0.0, blink=Non
         leg(sp, hipL, kL, aL, 5.2, dk, [(16, 16, 20), (30, 30, 36), (46, 46, 56), (74, 74, 90)], 10, 5)
         leg(sp, hipR, kR, aR, 5.2, dk, [(16, 16, 20), (30, 30, 36), (46, 46, 56), (74, 74, 90)], 10, 5)
     thug_torso(sp, 0.0, 31.0, 22.5, 18.5, br, n=2.0)
+    if badge:                                                                                   # yellow SECURITY plate on the chest
+        sp.rect(-17, 36 + int(br), 6, 44 + int(br), (36, 36, 44)); sp.rect(-16, 37 + int(br), 5, 43 + int(br), (250, 214, 60))
+        text3(sp, 'GUARD', -15, 42 + int(br), (36, 36, 44), keep=True)
     hx, hy = G['head']
     face = sp.union([sp.m_ell(hx, hy, 15.5, 14.5), sp.m_ell(hx + 3, hy - 11.5, 12.5, 5.5)], G_SKIN)      # moon face + double chin
     sp.line((hx - 5, hy - 12), (hx + 10, hy - 12), G_SKIN[1])
@@ -766,5 +840,40 @@ def tech(sp, pose='stand', t=0.0, mouth_=0.0, expr='nervous', look=0.0, blink=No
     hr_, ar_ = arm(sp, G['shR'], tr, 13, 12, 6.2, 5.6, T_SUIT, bR, D_GLOVE, 4.0, quilt=True)
     _prop(sp, props.get('R'), hr_, ar_, t)
     sp.anchors.update(head=(hx, hy), handR=hr_, handL=hl)
+    if clip_h is not None: sp.clip_below(clip_h)
+    sp.outline()
+
+
+# ======================================================================================== the villain's cat (white, smug, diamond collar)
+C_FUR = [(150, 150, 178), (198, 198, 218), (234, 234, 244), (255, 255, 255)]
+
+
+def cat(sp, pose='sit', t=0.0, mouth_=0.0, expr='smug', look=0.0, blink=None, lid=0.55, tail=0.5, legs=True, clip_h=None, **_):
+    X = dict(EXPR.get(expr, EXPR['normal'])); X['lid'] = lid * 0.75; X['eo'] = 1.0
+    br = 0.3 * math.sin(t * 2.0)
+    # tail curling around the paws
+    sw = math.sin(t * 2.3) * tail
+    pts = [(-10 - 3 * math.sin(k * 0.4) + k * 0.9, 2 + k * 0.6 + 4 * math.sin(k * 0.35 + sw)) for k in range(16)]
+    for a, b in zip(pts[:-1], pts[1:]): sp.cap(a, b, 2.6, 2.6, C_FUR)
+    body = sp.union([sp.m_ell(0, 10 + br * 0.3, 10.5, 11.0), sp.m_ell(1, 4, 9.5, 5.0)], C_FUR, dither=0.3)
+    for k in range(-8, 9, 3): sp.dot(k, int(20 + br), C_FUR[1])
+    for x in (-4, 4): sp.ell(x, 1.6, 3.0, 1.8, C_FUR)                                              # front paws
+    hx, hy = 1.0, 26.0 + br
+    for ex in (-6.5, 6.5):                                                                         # ears
+        ear = sp.m_poly([(hx + ex - 3.5, hy + 5), (hx + ex + 3.5, hy + 5), (hx + ex + ex * 0.15, hy + 12)])
+        sp.paint(ear, C_FUR, None)
+        sp.fill(ear & erode(ear) & (YC < hy + 10), (240, 160, 176))
+    sp.union([sp.m_ell(hx, hy, 10.0, 8.5), sp.m_ell(hx, hy - 3, 11.5, 5.5)], C_FUR, dither=0.28)     # fluffy round face
+    bl_ = _blink(t, blink)
+    for ex, w in ((-4.2, 6.0), (4.6, 6.0)):
+        eye(sp, hx + ex, hy + 1.0, w, 6.5, X, (214, 196, 60), (look, 0.0), bl_, (60, 50, 70), C_FUR[2], lidc=C_FUR[1], slit=True)
+    sp.poly([(hx - 1.4, hy - 2.5), (hx + 1.6, hy - 2.5), (hx + 0.1, hy - 4.2)], [(170, 80, 100), (220, 120, 140), (244, 160, 176), (255, 200, 210)])
+    sp.line((hx, hy - 4.2), (hx - 1.6, hy - 5.6), (120, 90, 110)); sp.line((hx, hy - 4.2), (hx + 1.6, hy - 5.6), (120, 90, 110))
+    for k, dy in enumerate((-3.0, -4.6)):                                                          # whiskers
+        sp.line((hx - 4, hy + dy), (hx - 13, hy + dy + 1 - k), (236, 236, 246)); sp.line((hx + 4, hy + dy), (hx + 13, hy + dy + 1 - k), (236, 236, 246))
+    sp.cap((hx - 7, hy - 8.5), (hx + 7, hy - 8.5), 1.2, 1.2, [(150, 104, 24), (210, 160, 40), (244, 204, 80), (255, 240, 160)])   # gold collar
+    sp.ell(hx + 0.5, hy - 10.6, 1.6, 1.8, [(90, 160, 220), (150, 210, 250), (210, 240, 255), (255, 255, 255)])                    # diamond
+    sp.dot(hx, hy - 10, (255, 255, 255), keep=True)
+    sp.anchors.update(head=(hx, hy))
     if clip_h is not None: sp.clip_below(clip_h)
     sp.outline()
