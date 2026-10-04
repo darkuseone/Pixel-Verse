@@ -877,3 +877,200 @@ def cat(sp, pose='sit', t=0.0, mouth_=0.0, expr='smug', look=0.0, blink=None, li
     sp.anchors.update(head=(hx, hy))
     if clip_h is not None: sp.clip_below(clip_h)
     sp.outline()
+
+
+# ======================================================================================== more hand props (E03–E06)
+def p_cards(sp, h, ang, t=0.0):
+    """a fan of playing cards"""
+    x, y = h
+    for k, a in enumerate((-0.5, -0.17, 0.17, 0.5)):
+        cx, cy = x + 1 + math.sin(a) * 5, y + 4 + math.cos(a) * 3
+        m = sp.m_poly([(cx - 2.6, cy - 4), (cx + 2.6, cy - 4), (cx + 2.6 + a * 2, cy + 4), (cx - 2.6 + a * 2, cy + 4)])
+        sp.paint(m, [(170, 170, 176), (220, 220, 226), (250, 250, 250), (255, 255, 255)], None, olc=(60, 60, 70))
+        sp.dot(int(cx), int(cy + 1), (214, 40, 50) if k % 2 else (30, 30, 40))
+
+
+def p_clipboard(sp, h, ang, t=0.0, title='DONE'):
+    x, y = h[0] - 1, h[1] - 6
+    sp.rect(x - 1, y - 1, x + 18, y + 22, (40, 30, 24))
+    sp.rect(x, y, x + 17, y + 21, (150, 110, 70))
+    sp.rect(x + 2, y + 2, x + 15, y + 18, (250, 250, 244))
+    sp.rect(x + 6, y + 18, x + 11, y + 22, (170, 170, 180))
+    text3(sp, title, x + 3, y + 16, (214, 40, 50), keep=True)
+    for k in range(3): sp.rect(x + 3, y + 9 - k * 3, x + 14 - (k % 2) * 3, y + 10 - k * 3, (120, 126, 150))
+
+
+def p_flip(sp, h, ang, t=0.0):
+    """old flip phone held at the ear"""
+    x, y = h
+    sp.rect(x - 2, y - 5, x + 3, y + 8, (60, 64, 80))
+    sp.rect(x - 1, y + 1, x + 2, y + 6, (150, 205, 140))
+    sp.line((x + 2, y + 8), (x + 3, y + 13), (40, 42, 52))
+    sp.dot(x + 3, y + 13, (214, 40, 50))
+
+
+def p_ketchup(sp, h, ang, t=0.0, squeeze=0.0):
+    """red squeeze bottle, cap pointing forward-down"""
+    x, y = h
+    m = sp.m_poly([(x - 3, y - 6), (x + 3, y - 6), (x + 3.5 + squeeze, y + 6), (x - 3.5 - squeeze, y + 6)])
+    sp.paint(m, [(120, 10, 20), (180, 24, 32), (224, 44, 48), (255, 120, 110)], np.clip(0.8 - (XC - x) * 0.05, 0, 1))
+    sp.rect(x - 2, y - 9, x + 3, y - 6, (250, 250, 246)); sp.rect(x - 0.5, y - 12, x + 1.5, y - 9, (250, 250, 246))
+    sp.rect(x - 2, y - 2, x + 3, y + 2, (250, 250, 246)); sp.dot(x, y, (214, 40, 50))
+
+
+def p_mustard(sp, h, ang, t=0.0):
+    x, y = h
+    m = sp.m_poly([(x - 3, y - 6), (x + 3, y - 6), (x + 3, y + 6), (x - 3, y + 6)])
+    sp.paint(m, [(150, 110, 10), (210, 170, 20), (246, 214, 50), (255, 244, 140)], np.clip(0.8 - (XC - x) * 0.05, 0, 1))
+    sp.rect(x - 1, y + 6, x + 2, y + 10, (246, 214, 50))
+
+
+def p_dog(sp, h, ang, t=0.0, bites=0):
+    """Chicago-style hot dog: poppy-seed bun, green relish, onions, tomato wedges, pickle spear, sport peppers, mustard"""
+    x, y = h[0] + 2, h[1]
+    e = 9 - 4 * bites
+    if e < -8: return
+    bun = [(150, 96, 40), (204, 146, 70), (236, 186, 104), (252, 222, 150)]
+    sp.cap((x - 8, y - 1), (x + e, y - 1), 2.6, 2.6, bun)
+    for k in range(-7, e, 3): sp.dot(k + x, int(y + 1), (40, 30, 30))
+    sp.cap((x - 9, y + 2.0), (x + e + 1, y + 2.0), 1.6, 1.6, [(120, 40, 30), (170, 60, 44), (206, 90, 64), (236, 140, 110)])     # sausage
+    sp.cap((x - 7, y + 3.4), (x + e - 1, y + 3.4), 0.9, 0.9, [(150, 130, 10), (214, 190, 20), (246, 222, 60), (255, 246, 150)])   # mustard
+    for k in range(-6, e - 1, 3):
+        sp.dot(x + k, int(y + 4.5), (40, 220, 80)); sp.dot(x + k + 1, int(y + 4.5), (250, 250, 240))
+    sp.cap((x - 6, y + 5.5), (x + e - 3, y + 6.0), 0.8, 0.8, [(30, 90, 30), (50, 140, 50), (80, 180, 70), (140, 220, 120)])     # pickle spear
+    if e > 0: sp.ell(x + e - 2, y + 5.2, 1.4, 1.0, [(160, 30, 30), (210, 50, 44), (240, 90, 80), (255, 160, 150)])               # tomato
+
+
+def p_fries(sp, h, ang, t=0.0):
+    x, y = h
+    for k in range(5): sp.rect(x - 4 + k * 2, y + 3, x - 3 + k * 2, y + 9 + (k % 2) * 2, (246, 204, 80))
+    m = sp.m_poly([(x - 5, y + 4), (x + 6, y + 4), (x + 5, y - 5), (x - 4, y - 5)])
+    sp.paint(m, [(140, 20, 24), (200, 36, 40), (232, 60, 60), (255, 130, 120)], None)
+    sp.rect(x - 2, y - 2, x + 3, y + 2, (255, 214, 60))
+
+
+PROPS.update(cards=p_cards, clipboard=p_clipboard, flip=p_flip, ketchup=p_ketchup, mustard=p_mustard, dog=p_dog, fries=p_fries)
+
+
+# ======================================================================================== BEA (311 operator, at her console)
+BEA_SKIN = [(96, 58, 44), (140, 88, 64), (176, 118, 86), (206, 154, 118)]
+BEA_HAIR = [(14, 10, 14), (30, 22, 26), (52, 40, 44), (86, 70, 72)]
+BEA_CARD = [(90, 70, 130), (130, 104, 176), (166, 140, 210), (206, 186, 240)]
+
+
+def bea(sp, pose='hold', t=0.0, mouth_=0.0, expr='deadpan', look=0.0, blink=None, hands=None, props=None, legs=False, clip_h=None,
+        breath=True, gum=0.0, **_):
+    pose = POSE[pose] if isinstance(pose, str) else pose
+    X = EXPR.get(expr, EXPR['normal'])
+    br = (0.4 * math.sin(t * 1.8)) if breath else 0.0
+    G = dict(shL=(-14.0, 46.0 + br), shR=(12.0, 46.0 + br), head=(2.0, 66.0 + br), hip=16.0, rx=16.0, arm=21.0, hrx=12.0, hry=13.0)
+    tl, tr, bl, bR = hand_targets(pose, G)
+    if pose.get('name') == 'hold': tl, tr, bl, bR = (-2.0, 30.0), (12.0, 31.0), 1, 1
+    if hands: tl = hands.get('L', tl); tr = hands.get('R', tr)
+    props = props or {}
+    hl, al = arm(sp, G['shL'], tl, 11, 11, 4.2, 3.6, BEA_CARD, bl, BEA_SKIN, 2.8)
+    sp.cap((1.0, 38 + br), (2.0, 54 + br), 3.8, 3.6, BEA_SKIN)                                              # neck
+    tm = sp.sup(0.0, 30.0 + br * 0.5, 16.0, 17.5, BEA_CARD, n=2.2)
+    sp.fill(tm & CHECK & ((YC.astype(int) % 4) == 0), BEA_CARD[1])
+    polo = sp.m_poly([(-5, 48.5 + br), (9, 48.5 + br), (2, 34 + br)])
+    sp.paint(polo, [(20, 90, 110), (30, 130, 150), (50, 170, 186), (120, 220, 230)], None)
+    sp.rect(-11, 38 + int(br), -2, 43 + int(br), (250, 250, 244)); text3(sp, '311', -10, 42 + int(br), (214, 40, 50), keep=True)
+    hx, hy = G['head']
+    sp.ell(hx - 2, hy + 2, 13.5, 13.0, BEA_HAIR, dither=0.3)                                                # hair behind
+    face = sp.union([sp.m_ell(hx, hy, 11.5, 12.5), sp.m_ell(hx + 1.5, hy - 6, 10.5, 7.0)], BEA_SKIN)
+    sp.ell(hx - 10.5, hy - 1, 2.4, 3.4, BEA_SKIN)
+    ring = sp.m_ell(hx - 10.5, hy - 6.5, 2.6, 3.2)[0]; sp.fill(ring & ~erode(ring), (246, 200, 60))         # gold hoop earring
+    bl_ = _blink(t, blink)
+    X2 = dict(X); X2['lid'] = min(0.42, max(X.get('lid', 0.0), 0.26)); X2['eo'] = max(X['eo'], 1.1) if not X.get('shut') else X['eo']   # bored lids, eyes open
+    eye(sp, hx - 2.5, hy + 1.0, 7, 6, X2, (70, 44, 30), (look, 0.0), bl_, LASH, BEA_SKIN[2], lidc=BEA_SKIN[1], flick=True, bold=2)
+    eye(sp, hx + 7.0, hy + 1.0, 6, 5.5, X2, (70, 44, 30), (look, 0.0), bl_, LASH, BEA_SKIN[2], lidc=BEA_SKIN[1], bold=2)
+    sp.line((hx - 6.5, hy + 3), (hx - 8.5, hy + 4.5), LASH)                                                 # winged liner
+    brow(sp, hx - 2.5, hy + 6.5, 7, X, +1, BEA_HAIR[0], th=1.4, arch=1.6)
+    brow(sp, hx + 7.0, hy + 6.5, 5, X, -1, BEA_HAIR[0], th=1.4, arch=1.4)
+    sp.ell(hx + 4.5, hy - 3.5, 2.6, 2.6, BEA_SKIN, olc=BEA_SKIN[0]); sp.dot(hx + 3, hy - 2, BEA_SKIN[3])
+    mouth(sp, hx + 3.5, hy - 8.5, 7, X, mouth_, (150, 50, 80), skin=BEA_SKIN[2], maxh=6)
+    if gum > 0.05:                                                                                          # pink bubble
+        r = 1.5 + 5.0 * gum
+        sp.ell(hx + 4.5 + r * 0.4, hy - 8.5, r, r, [(200, 80, 130), (240, 120, 170), (255, 170, 210), (255, 230, 246)])
+    hair_cloud(sp, hx - 1, hy + 5, 12.5, 8.0, BEA_HAIR, a0=-0.05, a1=math.pi + 0.15, r=2.8, n=12, inner=False, seed=4)
+    bun = sp.union([sp.m_ell(hx - 2, hy + 16, 6.5, 5.5), sp.m_ell(hx + 1, hy + 18, 5, 4.5)], BEA_HAIR, dither=0.3)
+    sp.line((hx - 9, hy + 14), (hx + 7, hy + 21), (246, 200, 60), 1); sp.dot(hx + 7, hy + 21, (250, 140, 160))   # pencil in the bun
+    sp.line((hx - 12, hy + 2), (hx - 8, hy + 14), (40, 40, 48), 2)                                         # headset band
+    sp.ell(hx - 11.5, hy + 0.5, 2.4, 3.2, [(20, 20, 26), (40, 40, 50), (64, 64, 78), (100, 100, 120)])
+    sp.line((hx - 10, hy - 2), (hx - 3, hy - 8), (40, 40, 48)); sp.ell(hx - 2.5, hy - 8.5, 1.2, 1.0, [(20, 20, 26)] * 3 + [(90, 90, 100)], ol=False)
+    hr_, ar_ = arm(sp, G['shR'], tr, 11, 11, 4.4, 3.8, BEA_CARD, bR, BEA_SKIN, 2.9)
+    for k in range(3): sp.dot(int(hr_[0] + 2 + k), int(hr_[1] + 2), (214, 40, 120))                         # long nails
+    _prop(sp, props.get('R'), hr_, ar_, t)
+    sp.anchors.update(head=(hx, hy), handR=hr_, handL=hl)
+    if clip_h is not None: sp.clip_below(clip_h)
+    sp.outline()
+
+
+# ======================================================================================== WORKER (Streets crew foreman)
+W_SKIN = [(150, 86, 70), (198, 128, 104), (230, 168, 138), (248, 204, 176)]
+W_VEST = [(150, 50, 10), (210, 84, 16), (250, 124, 30), (255, 186, 90)]
+W_FLAN = [(90, 20, 24), (140, 34, 36), (180, 54, 50), (220, 100, 90)]
+W_BEARD = [(110, 104, 100), (150, 144, 140), (190, 186, 182), (226, 224, 222)]
+W_HAT = [(150, 110, 10), (210, 170, 20), (246, 210, 50), (255, 244, 150)]
+W_JEANS = [(30, 44, 80), (44, 64, 110), (62, 90, 146), (100, 130, 186)]
+
+
+def worker(sp, pose='stand', t=0.0, mouth_=0.0, expr='deadpan', look=0.0, blink=None, hands=None, props=None, legs=True, clip_h=None,
+           breath=True, **_):
+    pose = POSE[pose] if isinstance(pose, str) else pose
+    X = EXPR.get(expr, EXPR['normal'])
+    br = (0.6 * math.sin(t * 1.9)) if breath else 0.0
+    hipy = 24.0
+    hipL, hipR = (-8.0, hipy), (8.0, hipy)
+    G = dict(shL=(-19.0, 56.0 + br), shR=(17.0, 56.0 + br), head=(3.0, 78.0 + br), hip=hipy, rx=21.0, arm=25.0, hrx=13.0, hry=13.0)
+    tl, tr, bl, bR = hand_targets(pose, G)
+    if hands: tl = hands.get('L', tl); tr = hands.get('R', tr)
+    props = props or {}
+    hl, al = arm(sp, G['shL'], tl, 13, 12, 5.0, 4.4, W_FLAN, bl, [(90, 70, 40), (140, 110, 60), (180, 150, 90), (210, 190, 130)], 3.6)
+    _prop(sp, props.get('L'), hl, al, t)
+    if legs:
+        (kL, aL), (kR, aR) = legs_for(pose, hipL, hipR, 12.0)
+        boot = [(60, 40, 24), (100, 70, 40), (140, 100, 60), (180, 140, 90)]
+        leg(sp, hipL, kL, aL, 6.4, W_JEANS, boot, 12, 7)
+        leg(sp, hipR, kR, aR, 6.4, W_JEANS, boot, 12, 7)
+    sp.cap((1.5, 58 + br), (2.5, 68 + br), 6.0, 6.0, W_SKIN)                                                  # thick neck
+    tm = sp.sup(0.0, 40.0 + br * 0.5, 21.0, 19.5, W_FLAN, n=2.3)
+    sp.fill(tm & (((XC.astype(int) // 3) + (YC.astype(int) // 3)) % 2 == 0), W_FLAN[1])                      # flannel check
+    vest = sp.m_poly([(-20, 56 + br), (-5, 58 + br), (2, 40), (9, 58 + br), (19, 56 + br), (20, 24), (-21, 24)])
+    vest &= tm
+    sp.paint(vest, W_VEST, np.clip((YC - 22) / 38 * 0.6 + 0.2, 0, 1))
+    sp.fill(vest & ((np.abs(YC - 36) < 1.2) | (np.abs(YC - 44) < 1.2)), (214, 220, 230))                     # reflective stripes
+    text3(sp, 'STREETS', -16, 31, (30, 30, 30))
+    hx, hy = G['head']
+    face = sp.union([sp.m_ell(hx, hy, 13.0, 13.0), sp.m_ell(hx + 2, hy - 7, 12.0, 8.0)], W_SKIN)
+    sp.ell(hx - 12.5, hy, 2.6, 3.6, W_SKIN)
+    beard_m = sp.union([sp.m_ell(hx + 2.5, hy - 10.0, 12.5, 7.5), sp.m_ell(hx - 6, hy - 5, 4.5, 5)], W_BEARD, dither=0.3,
+                       exclude=sp.m_ell(hx + 4.5, hy - 7.5, 4.6, 2.6 + mouth_ * 2.5 + X['mo'] * 2)[0])
+    for k in range(-8, 13, 3): sp.dot(hx + k, int(hy - 12 - (k % 2)), W_BEARD[0])
+    bl_ = _blink(t, blink)
+    X2 = dict(X); X2['lid'] = min(0.4, max(X.get('lid', 0.0), 0.25)); X2['eo'] = max(X['eo'], 0.95) if not X.get('shut') else X['eo']
+    eye(sp, hx - 2.5, hy + 1.5, 6.5, 5.5, X2, (90, 110, 120), (look, 0.0), bl_, LASH, W_SKIN[2], lidc=W_SKIN[1], bag=W_SKIN[1])
+    eye(sp, hx + 7.0, hy + 1.5, 5.5, 5.0, X2, (90, 110, 120), (look, 0.0), bl_, LASH, W_SKIN[2], lidc=W_SKIN[1], bag=W_SKIN[1])
+    brow(sp, hx - 2.5, hy + 6.0, 7, X, +1, W_BEARD[0], th=2.2, bushy=True)
+    brow(sp, hx + 7.0, hy + 6.0, 5, X, -1, W_BEARD[0], th=2.2, bushy=True)
+    sp.ell(hx + 6.0, hy - 2.5, 3.6, 3.2, [(150, 60, 60), (200, 96, 90), (232, 136, 122), (250, 180, 164)])   # red nose
+    mouth(sp, hx + 4.5, hy - 7.5, 6, X, mouth_, (120, 50, 50), skin=W_SKIN[2], maxh=5)
+    sp.line((hx + 7, hy - 7.5), (hx + 13, hy - 6), (230, 200, 140))                                         # toothpick
+    hat = sp.union([sp.m_ell(hx - 0.5, hy + 12, 13.5, 8.0), sp.m_ell(hx + 1, hy + 8.8, 16.0, 2.4)], W_HAT)
+    sp.fill(hat & (np.abs(XC - hx) < 1.0) & (YC > hy + 10), W_HAT[3])
+    hr_, ar_ = arm(sp, G['shR'], tr, 13, 12, 5.2, 4.6, W_FLAN, bR, [(90, 70, 40), (140, 110, 60), (180, 150, 90), (210, 190, 130)], 3.8)
+    _prop(sp, props.get('R'), hr_, ar_, t)
+    sp.anchors.update(head=(hx, hy), handR=hr_, handL=hl)
+    if clip_h is not None: sp.clip_below(clip_h)
+    sp.outline()
+
+
+def driver(fn, car_x, car_y, car_un, dx, flip=False, h=9.6, size=3.6, **P):
+    """a sprite hero seen through a car window (vehicle props in chi_props are ~30 units long, windows at 7.6–11.8 units)"""
+    sp = Spr(); fn(sp, **P)
+    hy = sp.anchors['head'][1]
+    head_px = 34.0
+    un_act = 4.0 * size * car_un / head_px
+    clip = hy - 2.0 * car_un / (size * car_un / head_px)
+    from props.dibspix import Act
+    return Act(fn, car_x + dx * car_un * (-1 if flip else 1), car_y - h * car_un, un=un_act, flip=flip, pin='head', clip_h=clip, **P)

@@ -1,4 +1,4 @@
-"""S01E03 «Pothole» — a car chase at 12 mph under the L. The villains drive into «Big Steve» and sink; Dibs calls 311
+"""S01E03 «Pothole» (v2 cast) — a car chase at 12 mph under the L. The villains drive into «Big Steve» and sink; Dibs calls 311
 («Please state your pothole.»), spends four months on hold and gets «Request closed: duplicate». One cone arrives. «It's marked.»
   python3 ep03.py test 1 5 20 | frame 12 | all [4]      then  python3 mix.py <noaudio.mp4> final.mp4"""
 import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[4] / 'engine'))
@@ -12,7 +12,8 @@ from scene import sm, lerp, Layer
 import overlays as O
 import fx
 from episode import Episode
-from props import chi_cast as C
+from props import dibspix as DX
+from props import dibscast as DC
 from props import chi_props as PR
 from props import chikit as K
 from props import chiui as UI
@@ -71,12 +72,24 @@ SMALL_HOLES = [(470.0, 590.0, 24.0, 6.0), (560.0, 574.0, 18.0, 5.0), (790.0, 596
 
 
 # ================================================================== vehicles on the road
-def sedan(t, x, y=LANE_Y, un=4.6, rot=0.0, shake=0.4, tilt=0.0, drivers=(('dibs', 3.0),)):
-    return lambda CH, v: PR.sedan(CH, v.cam(x, y, un), t, rot=rot, shake=shake, drivers=drivers, text='BUREAU')
+def A(fn, wx, wy, un=None, s=None, flip=False, pin=None, **P):
+    return DX.Act(fn, wx, wy, s_=s, un=un, flip=flip, pin=pin, **P)
 
 
-def suv(t, x, y=LANE_Y, un=4.6, rot=0.0, shake=0.3, antenna=0.0, signal=True):
-    return lambda CH, v: PR.suv(CH, v.cam(x, y, un), t, rot=rot, shake=shake, drivers=(('terry', -6.0), ('gary', 2.0)), signal=signal, antenna=antenna)
+def sedan(t, x, y=LANE_Y, un=4.6, rot=0.0, shake=0.4, tilt=0.0, driver=True, expr='shout'):
+    """Dibs's Bureau sedan; returns a list of actors (the car + Dibs through the window)"""
+    acts = [lambda CH, v: PR.sedan(CH, v.cam(x, y, un), t, rot=rot, shake=shake, drivers=(), text='BUREAU')]
+    if driver: acts.append(DC.driver(DC.dibs, x, y, un, 3.0, pose='wheel', t=t, expr=expr, shades=True))
+    return acts
+
+
+def suv(t, x, y=LANE_Y, un=4.6, rot=0.0, shake=0.3, antenna=0.0, signal=True, crew=True, expr='nervous'):
+    """the villains' SUV; returns a list of actors (the car + Terry and Gary through the windows)"""
+    acts = [lambda CH, v: PR.suv(CH, v.cam(x, y, un), t, rot=rot, shake=shake, drivers=(), signal=signal, antenna=antenna)]
+    if crew:
+        acts += [DC.driver(DC.terry, x, y, un, -6.0, h=10.6, pose='wheel', t=t, expr=expr, shades=True),
+                 DC.driver(DC.gary, x, y, un, 2.0, h=10.6, size=3.4, pose='hold', t=t, expr=expr, shades=True)]
+    return acts
 
 
 def signs(t):
@@ -149,13 +162,12 @@ def r_hook(t, u):
     un = 13.0
     head = (500.0, 470.0)
     ax, ay = head[0] - 0.9 * un, head[1] + 21.3 * un
-    ahead = [lambda CH, v: PR.suv(CH, v.cam(700.0 + 6 * u, 507.0, 1.7), t, signal=True, drivers=(('terry', -6.0), ('gary', 2.0)))]
+    ahead = suv(t, 700.0 + 6 * u, 507.0, 1.7, signal=True)
     wheel, dash = interior_parts(ax, ay, un, t)
-    def dibs(CH, v):
-        C.dibs(CH, v.cam(ax, ay, un), DRIVE_POSE, t, mouth('dibs', t, 1.9), 'shout', 0.0, True, chair=False, flap=t * 9)
+    dibs = A(DC.dibs, ax, ay, un=un, pose='wheel', t=t, mouth_=mouth('dibs', t, 1.9), expr='shout', shades=True, flap=t * 9)
     def pre(big, v):
         big[0:120, :] = (24, 26, 36); big[120:138, :] = (70, 76, 92)                # roof edge of the windshield frame
-    big = K.shot(WORLD, K.light_avenue, head[0] + 40.0, head[1], 1.1, acts=[dibs], back=ahead + [wheel], front=[dash], pre=pre, sx=150, sy=330,
+    big = K.shot(WORLD, K.light_avenue, 515.0, 522.0, 1.35, acts=[dibs], back=ahead + [wheel], front=[dash], pre=pre, sx=180, sy=330,
                  fx_=sparks(t, 3))
     rx, ry = RATTLE(t, 7.0)
     return np.roll(np.roll(big, int(ry), 0), int(rx), 1)
@@ -165,7 +177,7 @@ def r_hook(t, u):
 def r_chase(t, u):
     x_s = SUV_X0 + 12.0 * u
     x_d = 470.0 + 11.0 * u
-    acts = signs(t) + [suv(t, x_s), sedan(t, x_d, shake=0.5)]
+    acts = signs(t) + suv(t, x_s) + sedan(t, x_d, shake=0.5)
     def fx_(big, v):
         K.snow(big, v, t, 70)
         sparks(t, 1)(big, v)
@@ -178,7 +190,7 @@ def r_slalom(t, u, a, b, name):
     k = (t - a) / (b - a)
     x = lerp(430.0, 640.0, k) if name != 'big' else lerp(500.0, 560.0, k)
     y = LANE_Y + 8.0 * math.sin(k * math.pi * 2.0)
-    acts = signs(t) + [suv(t, 735.0 + 18.0 * (t - 6.15)), sedan(t, x, y, rot=0.0, shake=0.5)]
+    acts = signs(t) + suv(t, 735.0 + 18.0 * (t - 6.15)) + sedan(t, x, y, rot=0.0, shake=0.5)
     def fx_(big, v):
         K.snow(big, v, t, 60); sparks(t, 5)(big, v); puff_trail(t, x - 22, y)(big, v)
     if name == 'sl1': return road_shot(t, x + 80.0, acts, pre=holes_pre(SMALL_HOLES + [BIG], t), fx_=fx_, Z=1.25, sy=330)
@@ -195,9 +207,8 @@ def r_drop(t, u):
     def pre(big, v):
         holes_pre(SMALL_HOLES + [BIG], t)(big, v)
         stash['bg'] = big.copy()
-    acts = signs(t)[:2] + [lambda CH, v: PR.suv(CH, v.cam(x_s, LANE_Y + sink, 4.6), t, shake=0.8 * max(0.0, 1 - d), signal=True,
-                                                 drivers=(('terry', -6.0), ('gary', 2.0)), antenna=9.0),
-                           sedan(t, 380.0 + 6.0 * max(0.0, 1 - u * 2), shake=0.0)]
+    acts = signs(t)[:2] + suv(t, x_s, LANE_Y + sink, shake=0.8 * max(0.0, 1 - d), antenna=9.0, expr='panic' if d > 0.2 else 'nervous') + \
+        sedan(t, 380.0 + 6.0 * max(0.0, 1 - u * 2), shake=0.0, expr='stunned')
     def emit(big, v):
         # the front lip of the hole hides everything that sank below the road line
         ox, oy = v.opt(BIG[0], BIG[1] + BIG[3] * 0.1)
@@ -243,13 +254,18 @@ def r_antenna(t, u):
 
 
 # ================================================================== S6: Dibs peers over the edge
+CU_S = 12.5
+HEAD = (590.0, 470.0)
+
+
+def cu_shot(t, u, act, Z=2.3, zoom=0.05, head=HEAD, sx=180, front=()):
+    return K.shot(WORLD, K.light_avenue, head[0], head[1], Z + zoom * u, acts=[act], front=front,
+                  pre=lambda big, v: draw_hole(big, v, 640.0, 585.0, 82.0, 15.0, t), fx_=lambda big, v: K.snow(big, v, t, 40), sx=sx, sy=262)
+
+
 def r_peek(t, u):
-    un = 13.0
-    head = (590.0, 470.0)
-    ax, ay = head[0] - 1.5 * un, head[1] + 21.0 * un
-    acts = [lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['stand'], t, 0.0, 'deadpan', -0.6, True, chair=False, lean=0.0)]
-    return K.shot(WORLD, K.light_avenue, head[0], head[1], 2.3 + 0.05 * u, acts=acts, pre=lambda big, v: draw_hole(big, v, 640.0, 585.0, 82.0, 15.0, t),
-                  fx_=lambda big, v: K.snow(big, v, t, 40), sx=180, sy=262)
+    Z = 2.3 + 0.05 * u
+    return cu_shot(t, u, A(DC.dibs, HEAD[0], HEAD[1], s=CU_S * Z / 2.3, pin='head', pose='stand', t=t, expr='deadpan', look=-0.6, shades=True))
 
 
 # ================================================================== S7: dialling 311 on a flip phone
@@ -313,30 +329,27 @@ def cubicle(big, t):
 
 
 def operator_frame(t, expr='deadpan', mth=0.0, Z=2.0, u=0.0, dx=0.0, zoom=0.05, shake=0.0, hold=False):
+    """Bea, the 311 operator, in her beige cubicle (frame drawn in output px; the desk hides everything below her waist)"""
     Zt = Z + zoom * u
-    ST.set_px(ST.px_for_zoom(Zt))
-    un = 14.0
+    s = 13.0 * Zt / 2.0
     big = np.zeros((OUT_H, OUT_W, 3), np.uint8)
     cubicle(big, t)
-    v = view_at(WORLD, 500.0 + 1.4 * un + dx, 560.0 - 21.0 * un, Zt, 180, 300)
-    CH = Chars()
-    C.lady(CH, v.cam(500.0, 560.0, un), 'bea', C.POSE['hold'], t, mth, expr, 0.0, legs=False, hand_n=C.H(6.0, 14.0), hand_f=C.H(5.0, 14.6),
-           front=PR.headset)
-    CH.comp(big, K.Light(amb=(1.04, 1.02, 0.96), rim=(1, -0.3, (255, 240, 200), 0.3)) if hasattr(K, 'Light') else None)
+    under = big.copy()
+    sp = DX.Spr()
+    DC.bea(sp, 'hold', t, mth, expr, gum=max(0.0, math.sin(t * 1.3)) ** 6 if mth < 0.05 else 0.0)
+    hx, hy = sp.anchors['head']
+    DX.blit(big, sp, 560 + dx * 3 - hx * s, 760 + hy * s, s, ST.Light(amb=(1.04, 1.02, 0.96), rim=(1, -0.3, (255, 240, 200), 0.3)))
+    big[1560:] = under[1560:]
     fx.vignette(big, 0.26)
     if shake: B.shake(big, t, shake, 35)
     return big
 
 
 # ================================================================== S9: Dibs on the phone
-def dibs_phone(t, u, expr, k=1.7, Z=2.3, zoom=0.06, prop=True, pose=None, hand=None):
-    un = 13.0
-    head = (590.0, 470.0)
-    ax, ay = head[0] - 1.5 * un, head[1] + 21.0 * un
-    acts = [lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), pose or dict(C.POSE['stand'], bn=-1), t, mouth('dibs', t, k), expr, 0.0, True, chair=False,
-                                 hand_n=hand or C.H(-0.6, 20.8), prop_n=(lambda L, h: PR.phone_old(L, h)) if prop else None)]
-    return K.shot(WORLD, K.light_avenue, head[0], head[1], Z + zoom * u, acts=acts, pre=lambda big, v: draw_hole(big, v, 640.0, 585.0, 82.0, 15.0, t),
-                  fx_=lambda big, v: K.snow(big, v, t, 40), sx=180, sy=262)
+def dibs_phone(t, u, expr, k=1.7, Z=2.3, zoom=0.06, prop=True, pose='phone'):
+    Zt = Z + zoom * u
+    return cu_shot(t, u, A(DC.dibs, HEAD[0], HEAD[1], s=CU_S * Zt / 2.3, pin='head', pose=pose if prop else 'stand', t=t, mouth_=mouth('dibs', t, k),
+                           expr=expr, shades=True, props={'R': 'flip'} if prop else None), Z=Z, zoom=zoom)
 
 
 # ================================================================== S10: time-lapse «ON HOLD: 4 MONTHS»
@@ -354,18 +367,20 @@ def r_lapse(t, u):
     BEARD = min(1.0, k * 1.15)
     x_s = BIG[0]
     chair_x = 515.0
+    ueq = 3.8 / 0.62
     acts = [
         lambda CH, v: PR.dibs_chair(CH, v.cam(chair_x, LANE_Y + 26, 3.8), t=t),
-        lambda CH, v: C.dibs(CH, v.cam(chair_x - 2.0 * 6.2, LANE_Y + 30 + 2.3 * 6.2, 6.2), C.POSE['sit'], t, 0.0, 'sleepy' if int(t * 2) % 2 else 'deadpan', 0.0, True,
-                             chair=False, front=lambda L: PR.beard(L, BEARD), hand_n=C.H(4.8, 11.4)),
+        A(DC.dibs, chair_x + 1.5 * ueq, LANE_Y + 26 + 0.2 * ueq, un=ueq, pose='sit', t=t, expr='sleepy' if int(t * 2) % 2 else 'deadpan', shades=True,
+          beard=BEARD, hands={'R': (17.0, 40.0)}),
+        lambda CH, v: PR.dibs_chair(CH, v.cam(chair_x, LANE_Y + 26, 3.8), t=t, only_sign=True),
     ]
     stash = {}
     def pre(big, v):
         holes_pre(SMALL_HOLES + [BIG], t)(big, v)
         stash['bg'] = big.copy()
     cars = [lambda CH, v: PR.suv(CH, v.cam(x_s, LANE_Y + 70.0, 4.6), t, signal=True, antenna=9.0)]
-    heads = [lambda CH, v: C.terry(CH, v.cam(x_s - 20.0, LANE_Y + 86.0, 4.4), C.POSE['hold'], t, 0.0, 'smug', 0.0, hand_n=C.H(6.4, 14.0), prop_n=PR.cards, clip_h=18.0),
-             lambda CH, v: C.gary(CH, v.cam(x_s + 22.0, LANE_Y + 88.0, 4.4, True), C.POSE['hold'], t, 0.0, 'smug', 0.0, hand_n=C.H(6.4, 14.0), prop_n=PR.cards, clip_h=17.0)]
+    heads = [A(DC.terry, x_s - 20.0, LANE_Y + 86.0, un=4.4, pose='hold', t=t, expr='smug', props={'R': 'cards'}, hat=True, clip_h=66.0),
+             A(DC.gary, x_s + 22.0, LANE_Y + 88.0, un=4.4, flip=True, pose='hold', t=t, expr='smug', props={'R': 'cards'}, clip_h=40.0)]
     def emit(big, v):
         ox, oy = v.opt(BIG[0], BIG[1] + BIG[3] * 0.1)
         x0, x1 = int(v.opt(BIG[0] - BIG[2] * 1.25, 0)[0]), int(v.opt(BIG[0] + BIG[2] * 1.25, 0)[0])
@@ -396,11 +411,9 @@ def r_lapse(t, u):
                 big[y:y + 18, x:x + 18] = [(224, 120, 30), (186, 70, 24), (240, 180, 40)][i % 3]
     big = road_shot(t, 580.0, acts, back=cars, pre=pre, fx_=fx_, emit=emit, Z=1.25, sy=360)
     # heads of the card players are drawn over the lip (they stand in the hole)
-    CH = Chars()
-    ST.set_px(ST.px_for_zoom(1.25))
     v = view_at(WORLD, 580.0, 400.0, 1.25, 180, 360)
-    for a in heads: a(CH, v)
-    CH.comp(big, K.light_avenue(v))
+    lt = K.light_avenue(v)
+    for a in heads: a(big, v, lt)
     # day / night tint
     tint = np.array((1.0, 1.0, 1.0)) * (0.62 + 0.55 * dayk) + np.array((0.04, 0.0, -0.10)) * dayk
     big[:] = np.clip(big.astype(np.float32) * tint, 0, 255).astype(np.uint8)
@@ -429,8 +442,7 @@ def r_crew(t, u, part):
     if part == 0:                                                            # truck rolls in
         k = sm(min(1.0, (t - a) / 0.55))
         tx = lerp(1020.0, 790.0, k)
-        acts = [lambda CH, v: PR.city_truck(CH, v.cam(tx, LANE_Y + 14, 4.6, True), t),
-                suv(t, BIG[0], LANE_Y + 70.0, 4.6, antenna=9.0, signal=True)]
+        acts = [lambda CH, v: PR.city_truck(CH, v.cam(tx, LANE_Y + 14, 4.6, True), t)] + suv(t, BIG[0], LANE_Y + 70.0, 4.6, antenna=9.0, signal=True, crew=False)
         stash = {}
         def pre(big, v):
             holes_pre(SMALL_HOLES + [BIG], t)(big, v); stash['bg'] = big.copy()
@@ -455,9 +467,9 @@ def r_crew(t, u, part):
                     x = 735.0 + i * 1.3 * s_ * 0 + (i - 15) * 1.0; y = 610.0 + (i - 15) * 0.5 * s_
                     ox, oy = v.opt(x, y); big[int(oy):int(oy) + 8, int(ox):int(ox) + 8] = (255, 130, 20)
         stash['bg'] = big.copy()
-    acts = [suv(t, BIG[0], LANE_Y + 70.0, 4.6, antenna=9.0, signal=False),
+    acts = suv(t, BIG[0], LANE_Y + 70.0, 4.6, antenna=9.0, signal=False, crew=False) + [
             lambda CH, v: PR.cone(CH, v.cam(BIG[0] - 4.0, LANE_Y + 4.0 - 40 * (1 - k), 4.6)) if t > 36.35 else None,
-            lambda CH, v: C.worker(CH, v.cam(wx, LANE_Y + 14, 4.8, True), C.POSE['walk'] if 'walk' in C.POSE else C.POSE['stand'], t, 0.0, 'deadpan', 0.0)]
+            A(DC.worker, wx, LANE_Y + 14, un=4.8, flip=True, pose=DC.walk('stand', t, 5.0, 0.45, 0.4) if t < 36.7 else 'stand', t=t, expr='deadpan', shadow=0.3)]
     acts = [a for a in acts if a is not None]
     def emit(big, v):
         ox, oy = v.opt(BIG[0], BIG[1] + BIG[3] * 0.1)
@@ -471,20 +483,16 @@ def r_crew(t, u, part):
 
 
 def r_worker(t, u):
-    un = 13.0
-    head = (590.0, 470.0)
-    ax, ay = head[0] + 1.5 * un, head[1] + 21.0 * un
-    acts = [lambda CH, v: C.worker(CH, v.cam(ax, ay, un, True), C.POSE['hold'], t, mouth('chief', t, 1.5), 'deadpan', -0.7,
-                                   hand_n=C.H(5.6, 14.2), prop_n=lambda L, h: clipboard(L, h, -0.1, 6.0, 8.2, 'DONE'))]
-    return K.shot(WORLD, K.light_avenue, head[0], head[1], 2.3 + 0.04 * u, acts=acts, pre=lambda big, v: draw_hole(big, v, 640.0, 585.0, 82.0, 15.0, t),
-                  fx_=lambda big, v: K.snow(big, v, t, 40), sx=225, sy=262)
+    Z = 2.3 + 0.04 * u
+    return cu_shot(t, u, A(DC.worker, HEAD[0], HEAD[1], s=CU_S * Z / 2.3, flip=True, pin='head', pose='hold', t=t, mouth_=mouth('chief', t, 1.5),
+                           expr='deadpan', look=-0.7, props={'R': 'clipboard'}), zoom=0.04, sx=225)
 
 
 def r_final(t, u):
     stash = {}
     def pre(big, v):
         holes_pre(SMALL_HOLES + [BIG], t)(big, v); stash['bg'] = big.copy()
-    acts = [suv(t, BIG[0], LANE_Y + 70.0, 4.6, antenna=9.0, signal=False, shake=0.0),
+    acts = suv(t, BIG[0], LANE_Y + 70.0, 4.6, antenna=9.0, signal=False, shake=0.0, crew=False) + [
             lambda CH, v: PR.cone(CH, v.cam(BIG[0] + 6.0, LANE_Y + 4.0, 5.2))]
     def emit(big, v):
         ox, oy = v.opt(BIG[0], BIG[1] + BIG[3] * 0.1)
@@ -526,19 +534,16 @@ def shot_at(t):
 
 def r_seatbelt(t, u):
     # Dibs in the car: the belt clicks on at the end of the line
-    un = 13.0
-    head = (590.0, 470.0)
-    ax, ay = head[0] - 1.5 * un, head[1] + 21.0 * un
     belt = sm(max(0.0, (t - 4.16) / 0.12))
-    def dibs(CH, v):
-        C.dibs(CH, v.cam(ax, ay, un), C.POSE['stand'], t, 0.0, 'shock' if belt < 0.5 else 'smug', 0.0, True, chair=False)
-    def belt_(CH, v):
-        L = Layer(v.cam(ax, ay, un))
-        if belt > 0.0:
-            cap(L, H(-2.4, 18.6), H(-2.4 + 5.6 * belt, 8.0 + 0.0 * belt), 0.9, 0.9, (46, 48, 60), (90, 94, 110), (22, 24, 30))
-            ell(L, H(-2.4 + 5.6 * belt, 8.0), 0.9, 0.9, (214, 200, 90)) if belt > 0.9 else None
-        outline(L, OL); CH.add(L)
-    return K.shot(WORLD, K.light_avenue, head[0], head[1], 2.3 + 0.05 * u, acts=[dibs], front=[belt_], fx_=lambda big, v: K.snow(big, v, t, 40), sx=180, sy=262)
+    def belt_(sp):
+        if belt <= 0.0: return
+        a, b = (-15.0, 58.0), (-15.0 + 32.0 * belt, 58.0 - 34.0 * belt)
+        sp.cap(a, b, 2.2, 2.2, [(22, 24, 30), (46, 48, 60), (70, 74, 90), (110, 114, 130)])
+        if belt > 0.9: sp.rect(b[0] - 2, b[1] - 2, b[0] + 3, b[1] + 3, (214, 200, 90))
+        sp.outline()
+    Z = 2.3 + 0.05 * u
+    a = A(DC.dibs, HEAD[0], HEAD[1], s=CU_S * Z / 2.3, pin='head', pose='stand', t=t, expr='shock' if belt < 0.5 else 'smug', shades=True, post=belt_)
+    return K.shot(WORLD, K.light_avenue, HEAD[0], HEAD[1], Z, acts=[a], fx_=lambda big, v: K.snow(big, v, t, 40), sx=180, sy=262)
 
 
 def render_scene(t):
@@ -564,7 +569,7 @@ def render_scene(t):
     if name == 'op5': return operator_frame(t, 'blank', mouth('operator', t, 1.5), Z=2.3, u=u, dx=6.0)
     if name == 'crew1': return r_crew(t, u, 0)
     if name == 'crew2': return r_crew(t, u, 1)
-    if name == 'd6': return dibs_phone(t, u, 'stunned', k=1.5, prop=False, pose=C.POSE['stand'], hand=C.H(3.6, 10.2))
+    if name == 'd6': return dibs_phone(t, u, 'stunned', k=1.5, prop=False)
     if name == 'worker': return r_worker(t, u)
     return r_final(t, u)
 
