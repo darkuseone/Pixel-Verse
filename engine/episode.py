@@ -4,7 +4,7 @@ Usage in epNN.py:
     talk = EPI.talk
     ...
     if __name__ == '__main__': EPI.main(render, __file__)"""
-import subprocess, sys
+import os, subprocess, sys
 import numpy as np
 from PIL import Image
 import paths as P
@@ -13,7 +13,7 @@ import overlays as O
 from stage import OUT_W, OUT_H
 
 COL = dict(billy=(255, 222, 96), molniya=(255, 255, 255), sam=(214, 170, 255))
-CRF = '20'
+CRF = os.environ.get('PV_CRF', '20')              # chat upload limit is 30 MiB: if final.mp4 > 29 MiB re-render with PV_CRF=23
 COVER_SEC = 0.1  # длительность вшитой обложки в начале ролика (правило владельца, 01.10.2026)
 
 
