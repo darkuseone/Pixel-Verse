@@ -683,7 +683,7 @@ LADIES = dict(
 
 
 def lady(sp, who='mrs_w', pose='hold', t=0.0, mouth_=0.0, expr='deadpan', look=0.0, blink=None, hands=None, props=None, legs=False,
-         clip_h=24.0, breath=True):
+         clip_h=24.0, breath=True, step=0.0):
     pose = POSE[pose] if isinstance(pose, str) else pose
     L = LADIES[who]
     X = EXPR.get(expr, EXPR['normal'])
@@ -695,6 +695,13 @@ def lady(sp, who='mrs_w', pose='hold', t=0.0, mouth_=0.0, expr='deadpan', look=0
     props = props or {}
     robe = ramp(L['robe'])
     hl, al = arm(sp, G['shL'], tl, 11, 10, 4.4, 4.0, robe, bl, L_SKIN, 2.8)
+    _prop(sp, props.get('L'), hl, al, t)
+    if legs:                                                                                    # shins, fuzzy slippers, long robe hem
+        for x0, ph in ((-6.0, 0.0), (6.0, math.pi)):
+            dx = 2.5 * math.sin(step + ph) if step else 0.0
+            sp.cap((x0, 14.0), (x0 + dx, 2.5), 3.0, 2.8, L_SKIN)
+            sp.ell(x0 + dx + 1.5, 1.8, 5.0, 2.4, ramp((250, 170, 200)), dither=0.35)
+        sp.poly([(-14, 22), (14, 22), (12, 9), (-12, 9)], robe, grad=(22, 9))
     sp.cap((1.0, 38 + br), (2.0, 52 + br), 4.0, 3.8, L_SKIN)
     tm = sp.sup(0.0, 30.0, 16.5, 17.0, robe, n=2.2)
     sp.fill(tm & CHECK & ((YC.astype(int) + XC.astype(int)) % 6 == 0), robe[3])                                # terry-cloth dots
@@ -1074,3 +1081,107 @@ def driver(fn, car_x, car_y, car_un, dx, flip=False, h=9.6, size=3.6, **P):
     clip = hy - 2.0 * car_un / (size * car_un / head_px)
     from props.dibspix import Act
     return Act(fn, car_x + dx * car_un * (-1 if flip else 1), car_y - h * car_un, un=un_act, flip=flip, pin='head', clip_h=clip, **P)
+
+
+
+# ======================================================================================== TOWNIES (crowd extras, parametric) and SAL
+TOWN_COATS = [(52, 60, 120), (120, 40, 40), (40, 90, 80), (40, 40, 70), (90, 60, 30), (60, 60, 60), (110, 50, 90), (30, 100, 130), (150, 110, 40)]
+TOWN_HATS = [(220, 70, 70), (70, 160, 90), (250, 200, 60), (240, 120, 60), (120, 190, 240), (220, 90, 150), (240, 220, 110), (240, 240, 240)]
+TOWN_SKIN = [[(150, 100, 84), (204, 146, 122), (236, 190, 164), (252, 222, 200)], [(96, 58, 44), (140, 88, 64), (176, 118, 86), (206, 154, 118)],
+             [(130, 84, 60), (180, 124, 90), (214, 162, 120), (240, 200, 160)], [(70, 44, 36), (106, 70, 52), (140, 98, 72), (176, 136, 104)]]
+
+
+def townie(sp, variant=0, pose='stand', t=0.0, mouth_=0.0, expr='normal', look=0.0, blink=None, hands=None, props=None, legs=True, clip_h=None,
+           breath=True, **_):
+    """a Chicagoan bundled up for winter; variant picks coat, hat, skin, facial hair, glasses"""
+    pose = POSE[pose] if isinstance(pose, str) else pose
+    X = EXPR.get(expr, EXPR['normal'])
+    r = np.random.default_rng(variant * 7 + 3)
+    coat = ramp(TOWN_COATS[variant % len(TOWN_COATS)]); hatc = ramp(TOWN_HATS[(variant * 3) % len(TOWN_HATS)])
+    skin = TOWN_SKIN[(variant * 5 + 1) % len(TOWN_SKIN)]
+    tall = 1.0 + 0.12 * ((variant * 37) % 5 - 2) / 2
+    br = (0.5 * math.sin(t * 2.2 + variant)) if breath else 0.0
+    hipy = 26.0 * tall
+    hipL, hipR = (-6.0, hipy), (6.0, hipy)
+    G = dict(shL=(-15.0, 58.0 * tall + br), shR=(13.0, 58.0 * tall + br), head=(2.0, 58.0 * tall + 20.0 + br), hip=hipy, rx=16.0, arm=24.0, hrx=11.0, hry=12.0)
+    tl, tr, bl, bR = hand_targets(pose, G)
+    if hands: tl = hands.get('L', tl); tr = hands.get('R', tr)
+    props = props or {}
+    mit = ramp(TOWN_HATS[(variant * 5 + 2) % len(TOWN_HATS)])
+    hl, al = arm(sp, G['shL'], tl, 12, 12, 4.4, 3.8, coat, bl, mit, 3.0, quilt=True)
+    _prop(sp, props.get('L'), hl, al, t)
+    if legs:
+        (kL, aL), (kR, aR) = legs_for(pose, hipL, hipR, 13.0 * tall)
+        pants = ramp((40, 44, 60) if variant % 2 else (60, 70, 100))
+        boot = ramp((60, 44, 34) if variant % 3 else (30, 30, 36))
+        leg(sp, hipL, kL, aL, 4.8, pants, boot, 10, 6); leg(sp, hipR, kR, aR, 4.8, pants, boot, 10, 6)
+    thug = sp.sup(0.0, (hipy + G['shL'][1]) / 2 + 1, 16.0, (G['shL'][1] - hipy) / 2 + 6, coat, n=2.3)
+    for k in range(4):
+        yq = hipy + 4 + k * ((G['shL'][1] - hipy) / 4)
+        sp.fill(thug & erode(erode(thug)) & (np.abs(YC - yq) < 0.5), coat[0])
+    hx, hy = G['head']
+    scarf = ramp(TOWN_HATS[(variant * 2 + 4) % len(TOWN_HATS)])
+    face = sp.union([sp.m_ell(hx, hy, 10.5, 11.5), sp.m_ell(hx + 1.5, hy - 6, 9.5, 6.5)], skin)
+    sp.ell(hx - 9.5, hy - 1, 2.2, 3.2, skin)
+    bl_ = _blink(t + variant * 0.37, blink)
+    eye(sp, hx - 2.5, hy + 1.0, 5.5, 5.0, X, (60 + 30 * (variant % 3), 70, 60), (look, 0.0), bl_, LASH, skin[2], lidc=skin[1])
+    eye(sp, hx + 6.0, hy + 1.0, 5.0, 4.5, X, (60 + 30 * (variant % 3), 70, 60), (look, 0.0), bl_, LASH, skin[2], lidc=skin[1])
+    hair = [(40, 30, 26), (90, 60, 30), (150, 110, 60), (200, 196, 200)][variant % 4]
+    brow(sp, hx - 2.5, hy + 5.5, 6, X, +1, dark(hair, 0.8), th=1.6); brow(sp, hx + 6.0, hy + 5.5, 4, X, -1, dark(hair, 0.8), th=1.6)
+    sp.ell(hx + 4.0, hy - 3.0, 2.4, 2.4, skin, olc=skin[0]); sp.dot(hx + 5, hy - 4, (226, 110, 104))                 # cold nose
+    blush(sp, hx - 4, hy - 4, 2.6, 1.8, (226, 110, 104))
+    if variant % 4 == 1: sp.poly([(hx - 1, hy - 6), (hx + 9, hy - 6), (hx + 8, hy - 8.5), (hx, hy - 8.5)], ramp(dark(hair, 0.9)))   # moustache
+    if variant % 5 == 2:                                                                                                  # glasses
+        rings(sp, hx - 2.5, hy + 1.0, 3.8, (30, 30, 36)); rings(sp, hx + 6.0, hy + 1.0, 3.4, (30, 30, 36))
+    mouth(sp, hx + 3.5, hy - 9.0, 6, X, mouth_, (150, 70, 70), skin=skin[2], maxh=5)
+    sp.cap((hx - 9, hy - 12.5), (hx + 9, hy - 12.5), 2.6, 2.6, scarf)                                                       # scarf
+    kind = variant % 3
+    if kind == 0:                                                                                                         # beanie with a pompom
+        sp.ell(hx - 0.5, hy + 8, 11.5, 7.0, hatc); sp.cap((hx - 11, hy + 5), (hx + 10, hy + 5), 2.2, 2.2, hatc)
+        sp.ell(hx - 1, hy + 15.5, 2.6, 2.4, ramp((250, 250, 250)), dither=0.4)
+    elif kind == 1:                                                                                                       # earmuffs over hair
+        hair_cloud(sp, hx - 1, hy + 5, 10.5, 6.0, ramp(hair), a0=0.0, a1=math.pi, r=2.4, n=9, inner=False, seed=variant)
+        sp.line((hx - 9, hy + 2), (hx - 4, hy + 12), (40, 40, 48), 1); sp.line((hx - 4, hy + 12), (hx + 8, hy + 11), (40, 40, 48), 1)
+        sp.ell(hx - 9.5, hy, 3.0, 3.6, hatc, dither=0.35)
+    else:                                                                                                                 # knit cap with flaps
+        sp.ell(hx - 0.5, hy + 7, 11.5, 6.5, hatc); sp.cap((hx - 10, hy + 4), (hx - 10.5, hy - 3), 2.4, 2.0, hatc)
+        for k in range(-8, 9, 4): sp.dot(hx + k, hy + 8, hatc[0])
+    hr_, ar_ = arm(sp, G['shR'], tr, 12, 12, 4.6, 4.0, coat, bR, mit, 3.1, quilt=True)
+    _prop(sp, props.get('R'), hr_, ar_, t)
+    sp.anchors.update(head=(hx, hy), handR=hr_, handL=hl)
+    if clip_h is not None: sp.clip_below(clip_h)
+    sp.outline()
+
+
+S_SKIN = [(150, 96, 74), (200, 140, 108), (232, 182, 146), (250, 216, 184)]
+
+
+def sal(sp, t=0.0, look=0.0, expr='nervous', blink=None, **_):
+    """Sal hiding behind his counter: tall pleated chef hat, bushy brows, worried eyes (the rest is under the ledge)"""
+    X = EXPR.get(expr, EXPR['normal'])
+    hx, hy = 2.0, 20.0
+    face = sp.union([sp.m_ell(hx, hy, 11.0, 11.5), sp.m_ell(hx + 1.0, hy - 6, 10.0, 7.0)], S_SKIN)
+    bl_ = _blink(t + 1.3, blink)
+    eye(sp, hx - 3.0, hy + 1.5, 6.0, 5.5, X, (70, 50, 30), (look, 0.0), bl_, LASH, S_SKIN[2], lidc=S_SKIN[1], bag=S_SKIN[1])
+    eye(sp, hx + 6.0, hy + 1.5, 5.5, 5.0, X, (70, 50, 30), (look, 0.0), bl_, LASH, S_SKIN[2], lidc=S_SKIN[1], bag=S_SKIN[1])
+    brow(sp, hx - 3.0, hy + 6.5, 8, X, +1, (30, 24, 24), th=2.6, bushy=True); brow(sp, hx + 6.0, hy + 6.5, 6, X, -1, (30, 24, 24), th=2.6, bushy=True)
+    sp.ell(hx + 4.5, hy - 3.5, 3.4, 3.0, S_SKIN, olc=S_SKIN[0])
+    sp.poly([(hx - 4, hy - 6), (hx + 11, hy - 6), (hx + 12, hy - 10), (hx + 4, hy - 8.5), (hx - 5, hy - 10)], ramp((40, 30, 28)))
+    toque = sp.union([sp.m_super(hx - 0.5, hy + 18, 10.5, 9.5, 2.4), sp.m_ell(hx - 0.5, hy + 25, 12.0, 5.0)], ramp((236, 236, 240)), dither=0.25)
+    for k in range(-8, 9, 4): sp.line((hx + k, hy + 10), (hx + k * 1.1, hy + 27), (190, 190, 200))
+    sp.cap((hx - 11, hy + 9.5), (hx + 10, hy + 9.5), 2.0, 2.0, ramp((214, 214, 222)))
+    sp.anchors.update(head=(hx, hy))
+    sp.outline()
+
+
+def p_mustard_rifle(sp, h, ang, t=0.0):
+    """a giant mustard bottle held like a sniper rifle, scope on top"""
+    x, y = h[0] - 6, h[1]
+    sp.cap((x - 4, y), (x + 22, y), 3.0, 3.0, [(150, 110, 10), (210, 170, 20), (246, 214, 50), (255, 244, 140)])
+    sp.cap((x + 22, y), (x + 30, y - 1), 1.2, 0.8, [(150, 110, 10), (210, 170, 20), (246, 214, 50), (255, 244, 140)])
+    sp.cap((x + 4, y + 5), (x + 14, y + 5), 1.6, 1.6, [(20, 20, 26), (40, 40, 50), (64, 64, 78), (100, 100, 120)])
+    sp.dot(x + 14, y + 5, (150, 220, 255), keep=True)
+    text3(sp, 'MUSTRD', x - 1, y + 2, (150, 40, 20))
+
+
+PROPS.update(mustard_rifle=p_mustard_rifle)

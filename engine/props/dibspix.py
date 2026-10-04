@@ -264,6 +264,9 @@ EXPR = dict(
     blank=dict(eo=0.9, pu=0.5, bt=0.0, bl=0.0, mo=0.0, mc=-0.1),
     sleepy=dict(eo=0.45, pu=0.6, bt=0.0, bl=0.0, mo=0.0, mc=0.0, lid=0.75),
     squint=dict(eo=0.5, pu=0.6, bt=0.4, bl=-0.2, mo=0.0, mc=-0.2, lid=0.5),
+    glare=dict(eo=0.85, pu=0.45, bt=0.85, bl=-0.3, mo=0.0, mc=-0.35, lid=0.3),
+    teary=dict(eo=1.0, pu=0.7, bt=-0.7, bl=0.3, mo=0.2, mc=-0.4, tears=True),
+    wind=dict(eo=0.6, pu=0.5, bt=-0.4, bl=0.6, mo=0.7, mc=-0.2, tears=True),
 )
 
 
@@ -477,13 +480,29 @@ def blit(big, sp, ox, oy, s, lt=None, flip=False, alpha=1.0, ghost=None, shadow=
         reg[mm] = np.clip(reg[mm] * (1 - alpha) + u[mm] * alpha, 0, 255).astype(np.uint8)
 
 
+def rotate(sp, deg, pivot=(0.0, 0.0)):
+    """rotate a finished sprite in place (nearest neighbour) around pivot (sprite px from the feet anchor, y up); anchors follow"""
+    cx, cy = OX + pivot[0], OY - pivot[1]
+    rgba = np.zeros((H, W, 4), np.uint8); rgba[..., :3] = sp.col; rgba[..., 3] = sp.m * 255
+    img = Image.fromarray(rgba).rotate(deg, resample=Image.NEAREST, center=(cx, cy))
+    a = np.array(img)
+    sp.col = a[..., :3].copy(); sp.m = a[..., 3] > 127; sp.keep = sp.keep & sp.m
+    ca, sa = math.cos(math.radians(deg)), math.sin(math.radians(deg))
+    for k, (x, y) in list(sp.anchors.items()):
+        if isinstance(x, (int, float)) and isinstance(y, (int, float)):
+            dx, dy = x - pivot[0], y - pivot[1]
+            sp.anchors[k] = (pivot[0] + dx * ca - dy * sa, pivot[1] + dx * sa + dy * ca)
+
+
 class Act:
     """direct-draw actor for chikit.shot: Act(draw_fn, wx, wy, s=..., **params); draw_fn(sp, **params) paints a Spr"""
     direct = True
 
-    def __init__(s, fn, wx, wy, s_=None, un=None, flip=False, shadow=0.0, ghost=None, alpha=1.0, post=None, pin=None, **P):
-        """(wx, wy) = world position of the feet anchor, or of the sprite anchor named by `pin` (e.g. pin='head' for close-ups)"""
+    def __init__(s, fn, wx, wy, s_=None, un=None, flip=False, shadow=0.0, ghost=None, alpha=1.0, post=None, pin=None, rot=0.0, pivot=(0.0, 0.0), **P):
+        """(wx, wy) = world position of the feet anchor, or of the sprite anchor named by `pin` (e.g. pin='head' for close-ups);
+        rot = degrees counter-clockwise around `pivot` (sprite px from the feet anchor, y up)"""
         s.fn, s.wx, s.wy, s.s, s.un, s.flip, s.shadow, s.ghost, s.alpha, s.post, s.pin, s.P = fn, wx, wy, s_, un, flip, shadow, ghost, alpha, post, pin, P
+        s.rot, s.pivot = rot, pivot
 
     def scale(s, v):
         if s.s is not None: return float(s.s)
@@ -494,6 +513,7 @@ class Act:
         sp.mirror_text = s.flip
         s.fn(sp, **s.P)
         if s.post: s.post(sp)
+        if s.rot: rotate(sp, s.rot, s.pivot)
         ox, oy = v.opt(s.wx, s.wy)
         sc = s.scale(v)
         if s.pin:

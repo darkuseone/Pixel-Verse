@@ -1,4 +1,4 @@
-"""S01E04 «Hostage» — a standoff at Sal's: Terry holds a ketchup bottle over a Chicago dog («seven toppings, son»). The whole block holds its breath.
+"""S01E04 «Hostage» (v2 cast) — a standoff at Sal's: Terry holds a ketchup bottle over a Chicago dog («seven toppings, son»). The whole block holds its breath.
 He only wanted ketchup for his fries. Dibs eats the hostage as evidence. Marty: «I had dibs.»
   python3 ep04.py test 1 5 20 | frame 12 | all [4]      then  python3 mix.py <noaudio.mp4> final.mp4"""
 import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[4] / 'engine'))
@@ -12,7 +12,9 @@ from scene import sm, lerp, Layer
 import overlays as O
 import fx
 from episode import Episode
-from props import chi_cast as C
+from props import dibspix as DX
+from props import dibscast as DC
+from props import dibskit as DK
 from props import chi_props as PR
 from props import chikit as K
 from props import bytfx as B
@@ -92,19 +94,26 @@ CROWD = [(250, 570, 8.2, False, (52, 60, 120), (220, 70, 70)), (320, 584, 8.8, F
          (860, 578, 8.4, True, (110, 50, 90), (240, 220, 110))]
 
 
-def crowd(t, look=None, skip=(), fall=None, hat_look=None):
+CU_S = 12.5
+
+
+def A(fn, wx, wy, un=None, s=None, flip=False, pin=None, **P):
+    return DX.Act(fn, wx, wy, s_=s, un=un, flip=flip, pin=pin, **P)
+
+
+def crowd(t, look=None, skip=(), fall=None, hat_look=None, expr='shock'):
+    """the block holding its breath: townies with mittens at their mouths"""
     out = []
     for i, (x, y, un, flip, col, hat) in enumerate(CROWD):
         if i in skip: continue
-        lk = (-1 if flip else 1) if look is None else look
-        out.append(lambda CH, v, x=x, y=y, un=un, flip=flip, col=col, hat=hat, i=i, lk=lk:
-                   PR.puffer_person(CH, v.cam(x, y, un, flip), col, hat, t, phase=i * 0.7, look=lk, hands_up=1.0))
+        lk = 0.6 if look is None else look
+        out.append(A(DC.townie, x, y, un=un, flip=flip, variant=i, pose='cover', t=t, expr=expr, look=lk, shadow=0.25))
     return out
 
 
 def sal(t, peek=True):
     """Sal hides behind the counter: only the chef hat and two eyes above the ledge"""
-    return lambda CH, v: C.silhouette(CH, v.cam(545.0, LEDGE_Y + 19.0 * 8.0, 8.0), 'sal', C.POSE['stand'], t, 0.0, clip_h=19.0)
+    return A(DC.sal, 545.0, LEDGE_Y + 36.0, un=8.0, t=t, look=-0.5 * math.sin(t * 3), clip_h=18.0)
 
 
 def food(t, bite=0.0, dog=True, fries=True):
@@ -118,17 +127,19 @@ TERRY_POSE = dict(n=(5.0, 19.6), f=(-3.0, 10.4), bn=1, bf=-1, nleg=(0.18, 0.0), 
 
 
 def terry_standoff(t, mouth_=0.0, expr='panic', squeeze=0.0, reach=0.0, sweat=1.0, look=0.0):
-    hand = C.H(lerp(5.0, 11.8, reach), lerp(19.6, 17.2, reach))
-    prop = lambda L, h: PR.ketchup(L, h, 1.35, squeeze)
-    return lambda CH, v: C.terry(CH, v.cam(TERRY_X, GY, PU), TERRY_POSE, t, mouth_, expr, look, sweat=sweat, hand_n=hand, prop_n=prop)
+    """Terry holds the ketchup bottle high over the Chicago dog on the ledge"""
+    hand = (lerp(31.0, 46.0, reach), lerp(93.0, 74.0, reach))
+    prop = lambda sp, h, a, tt: DC.p_ketchup(sp, h, a, tt, squeeze=squeeze)
+    return A(DC.terry, TERRY_X, GY, un=PU, pose='stand', t=t, mouth_=mouth_, expr=expr, look=look, sweat=sweat, hands={'R': hand}, props={'R': prop},
+             shadow=0.3)
 
 
-def cu(fn, head, un, t, u, who, expr, Z=2.3, zoom=0.05, pose=None, flip=False, k=1.7, sy=262, hy=21.0, extra=(), front=(), emit=None, look=0.0,
-       pre_extra=None, fx_=None, **kw):
-    sgn = -1 if flip else 1
-    ax, ay = head[0] - sgn * 1.5 * un, head[1] + hy * un
-    acts = list(extra) + [lambda CH, v: fn(CH, v.cam(ax, ay, un, flip), pose or C.POSE['stand'], t, mouth(who, t, k) if who else 0.0, expr, look, **kw)]
-    return stand_shot(t, head[0], acts=acts, front=front, emit=emit, pre_extra=pre_extra, fx_=fx_, Z=Z + zoom * u, cy=head[1], sy=sy)
+def cu(fn, head, t, u, spk, expr, Z=2.3, zoom=0.05, pose='stand', flip=False, k=1.7, sy=262, extra=(), front=(), emit=None, look=0.0,
+       pre_extra=None, fx_=None, s=CU_S, **kw):
+    Zt = Z + zoom * u
+    m_ = kw.pop('mouth_', mouth(spk, t, k) if spk else 0.0)
+    a = A(fn, head[0], head[1], s=s * Zt / Z, flip=flip, pin='head', pose=pose, t=t, mouth_=m_, expr=expr, look=look, **kw)
+    return stand_shot(t, head[0], acts=list(extra) + [a], front=front, emit=emit, pre_extra=pre_extra, fx_=fx_, Z=Zt, cy=head[1], sy=sy)
 
 
 # ================================================================== shots
@@ -147,11 +158,10 @@ def r_wide(t, u):
 def r_walkin(t, u):
     k = sm(u / 1.65)
     x = lerp(170.0, 392.0, k)
-    pose = dict(C.POSE['arms_up'])
     acts = crowd(t, skip=(2,)) + [sal(t)] + food(t) + [terry_standoff(t, 0.0, 'panic', sweat=0.8),
-                                                    lambda CH, v: C.dibs(CH, v.cam(x, GY + 12, PU), pose, t, 0.0, 'normal', 0.3, True, chair=False,
-                                                                         hand_n=C.H(4.4, 28.4),
-                                                                         prop_n=lambda L, h: (PR.shovel(L, h, -1.4), [dot(L, (h[0] + 0.6 * k_ + 0.3, h[1] - 8.0 - 1.4 * k_ + 0.2), (96, 160, 60), 0.55) for k_ in range(4)]))]
+                                                    A(DC.dibs, x, GY + 12, un=PU, pose=DC.walk('arms_up', t, 5.0, 0.4, 0.3) if k < 0.98 else 'arms_up', t=t,
+                                                      expr='normal', look=0.3, shades=True, shadow=0.3,
+                                                      props={'R': lambda sp, h, a, tt: DC.p_shovel(sp, h, a, tt, a=1.45)})]
     return stand_shot(t, lerp(380.0, 460.0, k), acts=acts, Z=1.15, cy=420.0, sy=330)
 
 
@@ -164,26 +174,21 @@ def r_deb(t, u):
                 for k in range(-90, 91, 3):
                     xx = int(x0 + math.sin(a) * k); yy = int(y + math.cos(a) * k)
                     if 0 <= xx < OUT_W - 6 and 0 <= yy < OUT_H - 6: big[yy:yy + 6, xx:xx + 6] = (216, 220, 232)
-    return K.deb_frame(t, 'panic', mouth('deb', t, 1.2), Z=2.0, u=u, pose=C.POSE['cover'], hand_n=C.H(3.2, 21.0), hand_f=C.H(-1.0, 21.0), prop_n=lambda L, h: None, fx_=needles,
-                       sweat=0.6)
+    return DK.deb_frame(t, 'panic', mouth('deb', t, 1.2), Z=2.0, u=u, pose='cover', props={}, fx_=needles, sweat=0.6)
 
 
 def r_dibs_soft(t, u):
-    return cu(C.dibs, (610.0, 410.0), 13.0, t, u, 'dibs', 'sad', pose=C.POSE['arms_up'], k=1.5, shades=True, chair=False)
+    return cu(DC.dibs, (610.0, 410.0), t, u, 'dibs', 'sad', pose='arms_up', k=1.5, shades=True)
 
 
 def r_terry_mom(t, u):
-    return cu(C.terry, (520.0, 410.0), 13.0, t, u, 'terry', 'cry', pose=C.POSE['stand'], hy=22.3, k=1.6, sweat=1.0,
-              extra=food(t, dog=False, fries=False))
+    return cu(DC.terry, (520.0, 410.0), t, u, 'terry', 'cry', k=1.6, sweat=1.0, hands={'R': (27.0, 101.0)},
+              props={'R': lambda sp, h, a, tt: DC.p_ketchup(sp, h, a, tt)})
 
 
 def r_gasp(t, u):
     ang = min(1.35, 1.6 * u * u / 0.3)
-    def fall(CH, v):
-        cam = v.cam(330.0, 584.0, 8.8)
-        PR.puffer_person(CH, cam, (120, 40, 40), (70, 160, 90), t, 0.0, 1.0, 1.0)
-        px, py = cam.p(1000.0, 1000.0)
-        K.rot_chars(CH, -ang, px, py)
+    fall = A(DC.townie, 330.0, 584.0, un=8.8, variant=1, pose='cover', t=t, expr='stunned', rot=math.degrees(ang))
     acts = crowd(t, skip=(1,), look=0) + food(t) + [terry_standoff(t, 0.0, 'panic', sweat=0.8)]
     def fx_(big, v):
         K.snow(big, v, t, 40)
@@ -191,11 +196,11 @@ def r_gasp(t, u):
         for i in range(12):
             ph = (u * 2.0 + i * 0.09)
             big[int(oy - 160 * ph + 20 * math.sin(i)):int(oy - 160 * ph + 20 * math.sin(i)) + 12, int(ox + (i - 6) * 26):int(ox + (i - 6) * 26) + 12] = (236, 244, 255)
-    return stand_shot(t, 465.0, acts=acts, front=[fall], fx_=fx_, Z=1.1, cy=420.0, sy=330)
+    return stand_shot(t, 465.0, acts=acts + [fall], fx_=fx_, Z=1.1, cy=420.0, sy=330)
 
 
 def r_mrsw(t, u):
-    return cu(C.mrs_w, (700.0, 425.0), 13.0, t, u, 'mrs_w', 'deadpan', pose=C.POSE['stand'], k=1.4, hy=21.0)
+    return cu(DC.lady, (700.0, 425.0), t, u, 'mrs_w', 'deadpan', pose='hips', k=1.4, who='mrs_w', legs=True, clip_h=None)
 
 
 def garden(big, t, t0, t1):
@@ -215,13 +220,14 @@ def garden(big, t, t0, t1):
 
 
 def r_dibs_garden(t, u):
-    big = cu(C.dibs, (700.0, 410.0), 13.0, t, u, 'dibs', 'angry', pose=C.POSE['point'], k=1.5, shades=True, chair=False, sy=250)
+    big = cu(DC.dibs, (700.0, 410.0), t, u, 'dibs', 'angry', pose='point', k=1.5, shades=True, sy=250)
     garden(big, t, 12.95, 15.9)
     return big
 
 
 def r_terry_crack(t, u):
-    return cu(C.terry, (520.0, 410.0), 13.0, t, u, 'terry', 'cry' if u < 1.2 else 'shock', pose=C.POSE['stand'], hy=22.3, k=1.7, sweat=1.0)
+    return cu(DC.terry, (520.0, 410.0), t, u, 'terry', 'cry' if u < 1.2 else 'shock', k=1.7, sweat=1.0, hands={'R': (27.0, 101.0)},
+              props={'R': lambda sp, h, a, tt: DC.p_ketchup(sp, h, a, tt)})
 
 
 def r_turn_heads(t, u):
@@ -243,8 +249,7 @@ def crosshair(big, cx, cy, t, r=170):
 
 def r_roof(t, u):
     if u < 0.55:                                                                                # Gary lies behind the roof snow with a mustard rifle
-        big = cu(C.gary, (440.0, 150.0), 13.0, t, u, 'gary', 'sly', pose=C.POSE['hold'], hy=19.6, k=1.2, flip=False,
-                 prop_n=lambda L, h: PR.mustard(L, h, 0.1), hand_n=C.H(5.6, 14.0), look=0.5)
+        big = cu(DC.gary, (440.0, 150.0), t, u, 'gary', 'sly', pose='gun', k=1.2, props={'R': 'mustard_rifle'}, look=0.5)
         yy, xx = np.mgrid[1260:OUT_H, 0:OUT_W]
         big[1260:] = (226, 236, 250)
         big[1260:1290] = (250, 252, 255)
@@ -284,14 +289,14 @@ def r_dog(t, u):
 
 
 def r_dibs_eye(t, u):
-    return cu(C.dibs, (620.0, 410.0), 13.0, t, u, 'dibs', 'normal', Z=3.3, zoom=0.1, k=0.0, shades=True, chair=False, sweat=1.0, sy=300)
+    return cu(DC.dibs, (620.0, 410.0), t, u, 'dibs', 'normal', Z=3.3, zoom=0.1, k=0.0, shades=False, sweat=1.0, sy=300, s=22.0)
 
 
 def r_marty_eyes(t, u):
     un = 10.0
     ax, ay = 985.0, 380.0
     look = (math.sin(t * 5.0) * 0.9, 0.2)
-    acts = [lambda CH, v: C.marty(CH, v.cam(ax, ay, un), t, 0.0, 'glare', look)]
+    acts = [A(DC.marty, ax, ay, s=22.0, t=t, expr='glare', look=look[0])]
     return stand_shot(t, ax + 3.0 * un, acts=acts, Z=2.6, cy=ay - 9.0 * un, sy=300)
 
 
@@ -328,48 +333,45 @@ def r_squirt(t, u):
 
 
 def r_terry_fries(t, u):
-    return cu(C.terry, (520.0, 410.0), 13.0, t, u, 'terry', 'stunned', pose=C.POSE['stand'], hy=22.3, k=1.6, sweat=0.0)
+    return cu(DC.terry, (520.0, 410.0), t, u, 'terry', 'stunned', pose='shrug', k=1.6, sweat=0.0)
 
 
 def r_mrsw_shrug(t, u):
-    big = cu(C.mrs_w, (700.0, 425.0), 13.0, t, u, 'mrs_w', 'deadpan', pose=C.POSE['shrug'], k=1.4, hy=21.0)
+    big = cu(DC.lady, (700.0, 425.0), t, u, 'mrs_w', 'deadpan', pose='shrug', k=1.4, who='mrs_w', legs=True, clip_h=None)
     return big
 
 
 def r_terry_freak(t, u):
-    return cu(C.terry, (520.0, 410.0), 13.0, t, u, 'terry', 'nervous', pose=C.POSE['shrug'], hy=22.3, k=1.6, sweat=0.0)
+    return cu(DC.terry, (520.0, 410.0), t, u, 'terry', 'nervous', pose='shrug', k=1.6, sweat=0.0)
 
 
 def r_dibs_tension(t, u):
-    return cu(C.dibs, (620.0, 410.0), 13.0, t, u, 'dibs', 'deadpan', pose=C.POSE['stand'], k=1.4, shades=True, chair=False, hand_n=C.H(4.4, 19.4),
-              prop_n=PR.coffee_cup)
+    return cu(DC.dibs, (620.0, 410.0), t, u, 'dibs', 'deadpan', k=1.4, shades=True, hands={'R': (18.0, 48.0)}, props={'R': 'coffee'})
 
 
 def r_bite(t, u):
-    un = 13.0
     head = (620.0, 410.0)
-    ax, ay = head[0] - 1.5 * un, head[1] + 21.0 * un
-    bite = sm(min(1.0, u / 0.35)) * 0.55
-    acts = [lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['stand'], t, chew(t) if u > 0.3 else 0.9, 'content', 0.0, True, chair=False, hand_n=C.H(5.0, 18.2)),
-            lambda CH, v: PR.chicago_dog(CH, v.cam(ax + 5.4 * un, ay - 16.8 * un, 4.0), t, 1.0, bite=bite)]
-    return stand_shot(t, head[0], acts=acts, Z=2.3, cy=head[1], sy=262)
+    bites = 0 if u < 0.15 else (1 if u < 0.35 else 2)
+    dog = lambda sp, h, a, tt: DC.p_dog(sp, h, a, tt, bites=bites)
+    a = A(DC.dibs, head[0], head[1], s=CU_S, pin='head', pose='stand', t=t, mouth_=chew(t) if u > 0.3 else 0.9, expr='content', shades=True,
+          hands={'R': (12.0, 64.0)}, props={'R': dog})
+    return stand_shot(t, head[0], acts=[a], Z=2.3, cy=head[1], sy=262)
 
 
 def r_dibs_evidence(t, u):
-    return cu(C.dibs, (620.0, 410.0), 13.0, t, u, 'dibs', 'smug', pose=C.POSE['stand'], k=0.0, shades=True, chair=False, hand_n=C.H(5.0, 18.2),
-              prop_n=lambda L, h: None, front=())
+    return cu(DC.dibs, (620.0, 410.0), t, u, 'dibs', 'smug', k=0.0, shades=True, mouth_=chew(t) * 0.6)
 
 
 def r_marty(t, u):
     un = 10.0
     ax, ay = 985.0, 380.0
-    acts = [lambda CH, v: C.marty(CH, v.cam(ax, ay, un), t, mouth('marty', t, 1.7), 'deadpan', (0.8, 0.0))]
+    acts = [A(DC.marty, ax, ay, s=18.0 * (2.0 + 0.05 * u) / 2.0, t=t, mouth_=mouth('marty', t, 1.7), expr='deadpan', look=0.8)]
     def fx_(big, v): B.steam(big, v, t, 960.0, 372.0, n=4, rise=90, size=34, a=0.35)
     return stand_shot(t, ax + 3.0 * un, acts=acts, Z=2.0 + 0.05 * u, cy=ay - 9.0 * un, sy=330, fx_=fx_)
 
 
 def r_dibs_chair(t, u):
-    return cu(C.dibs, (620.0, 410.0), 13.0, t, u, 'dibs', 'smug', pose=C.POSE['stand'], k=1.6, shades=True, chair=False, hand_n=C.H(5.0, 18.2))
+    return cu(DC.dibs, (620.0, 410.0), t, u, 'dibs', 'smug', k=1.6, shades=True)
 
 
 def r_tail(t, u):
@@ -416,8 +418,8 @@ def st(text, fg=(255, 236, 120), size=56):
 
 SHOW = K.Show(EPI, 4, ['NO', 'KETCHUP'], hook_t=(0.15, 1.85),
               stickers=[
-                  (st('CLEAR SHOT', (255, 90, 90), 56), 18.85, 19.70, 540, 560),
-                  (st('TENSION', (255, 255, 255), 56), 32.15, 33.30, 540, 520),
+                  (st('CLEAR SHOT', (255, 90, 90), 56), 18.85, 19.70, 540, 330),
+                  (st('TENSION', (255, 255, 255), 56), 32.15, 33.30, 540, 330),
               ],
               flashes=[], mosaics=[], cap_default=1400,
               cap_y={'wide': 1450, 'walkin': 1450, 'gasp': 1450, 'turn_heads': 1450, 'freeze': 1500, 'squirt': 1500, 'dibs_garden': 1560})
