@@ -126,9 +126,11 @@ def title(F, lines, top, sizes, max_w=500, gap=4, slant=0.16, icicles=True):
     return y
 
 
-def make(raw_png, src_jpg, out_pngs, n, title_lines, sizes, series='AGENT DIBS', extra=None, total=6):
+def make(raw_png, src_jpg, out_pngs, n, title_lines, sizes, series='AGENT DIBS', extra=None, total=6, pre=None):
+    """pre(F): drawn right after pixelizing, under the plaque and the title (v2: heroes pasted from the sprite engine)"""
     Image.open(raw_png).convert('RGB').save(src_jpg, quality=93)
     F = pixelize(Image.open(src_jpg))
+    if pre: pre(F)
     for yy in range(0, 132, 4):                                                  # darken the very top slightly for text contrast
         F[yy:yy + 4] = (F[yy:yy + 4].astype(np.float32) * (0.72 + 0.28 * yy / 132)).clip(0, 255).astype(np.uint8)
     yb = flag_plank(F, f'{series}\nEPISODE {n}/{total}', 126, 20)                # just below the 3:4 grid crop line

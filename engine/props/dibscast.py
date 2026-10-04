@@ -117,12 +117,14 @@ def p_coffee(sp, h, ang, t=0.0):
         sp.dot(x - 1 + k + int(1.5 * math.sin(t * 3 + k)), y + 8 + k * 2 + int(2 * ((t * 1.5 + k * 0.33) % 1.0)), (230, 236, 246))
 
 
-def p_card(sp, h, ang, t=0.0, txt='LINE:'):
-    x, y = h
-    sp.rect(x - 1, y - 1, x + 10, y + 7, (40, 30, 30))
-    sp.rect(x, y, x + 9, y + 6, (252, 250, 240))
-    sp.rect(x, y + 4, x + 9, y + 6, (214, 50, 60))
-    for k in range(2): sp.rect(x + 1, y + 1 + k * 2, x + 8 - k * 2, y + 2 + k * 2, (90, 96, 130))
+def p_card(sp, h, ang, t=0.0, lines=('LINE:', "THAT'S", 'OUR BOMB')):
+    """big cue card held up (Terry reads his line)"""
+    x, y = h[0] - 2, h[1] - 3
+    w = 4 * max(len(l) for l in lines) + 3; hh = 6 * len(lines) + 4
+    sp.rect(x - 1, y - 1, x + w + 1, y + hh + 1, (40, 30, 30))
+    sp.rect(x, y, x + w, y + hh, (252, 250, 240))
+    sp.rect(x, y + hh - 2, x + w, y + hh, (214, 50, 60))
+    for k, l in enumerate(lines): text3(sp, l, x + 2, y + hh - 4 - 6 * k, (214, 50, 60) if k == 0 else (30, 34, 60), keep=True)
 
 
 def p_beanie(sp, h, ang, t=0.0):
@@ -204,7 +206,7 @@ def dibs(sp, pose='stand', t=0.0, mouth_=0.0, expr='normal', look=0.0, blink=Non
     _prop(sp, props.get('L'), hl, al, t)
     # legs
     if legs:
-        (kL, aL), (kR, aR) = legs_for(pose, hipL, hipR, 11.0)
+        (kL, aL), (kR, aR) = legs_for(pose, hipL, hipR, 25.0 if pose.get('sit') else 11.0)
         leg(sp, hipL, kL, aL, 6.4, D_PANTS, D_BOOT, 11, 7)
         leg(sp, hipR, kR, aR, 6.4, D_PANTS, D_BOOT, 11, 7)
         for a in (aL, aR):                                                       # snow on the boot toes

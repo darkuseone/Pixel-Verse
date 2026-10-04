@@ -11,9 +11,12 @@ from props.chi_cast import T3
 
 
 # ====================================================================================================== chairs, bomb, small things
-def dibs_chair(CH, cam, sign=True, towel=True, t=0.0, tape=True, wob=0.0):
-    """the sacred dibs chair: aluminium lawn chair, green/white webbing, striped towel on the back, duct tape, cardboard sign"""
+def dibs_chair(CH, cam, sign=True, towel=True, t=0.0, tape=True, wob=0.0, only_sign=False):
+    """the sacred dibs chair: aluminium lawn chair, green/white webbing, striped towel on the back, duct tape, cardboard sign.
+    only_sign=True draws just the cardboard sign (to put it in front of a hero sitting on the chair)"""
     L = Layer(cam)
+    if only_sign:
+        _chair_sign(L, sign); outline(L, OL); CH.add(L); return
     fr, frh, frs = T3((196, 202, 212), 0.3)
     for x, sg in ((-5.2, -1), (4.8, 1)):                                      # legs
         cap(L, H(x, 0.0), H(x + 0.5 * sg * -1, 9.0), 0.42, 0.42, fr, frh, frs)
@@ -34,15 +37,19 @@ def dibs_chair(CH, cam, sign=True, towel=True, t=0.0, tape=True, wob=0.0):
     if tape:
         cap(L, H(-5.0, 4.0), H(-4.0, 5.2), 0.6, 0.6, (150, 156, 164))
         cap(L, H(4.4, 3.4), H(5.2, 4.6), 0.5, 0.5, (150, 156, 164))
-    if sign:                                                                   # cardboard sign taped to the seat front
-        rect(L, H(0.0, 5.6), 11.4, 5.6, 0.0, (176, 134, 84))
-        rect(L, H(0.0, 5.6), 10.8, 5.0, 0.0, (206, 164, 108))
-        rows = sign if isinstance(sign, (list, tuple)) else [('DIBS.', 2.0), ('I SHOVELED', 0.95), ('THIS. -STOSH', 0.8)]
-        yy = 7.5
-        for r, hh in rows:
-            ltext(L, r, H(0.0, yy), hh, (40, 30, 20)); yy -= hh * 1.2 + 0.7
+    if sign: _chair_sign(L, sign)
     outline(L, OL)
     CH.add(L)
+
+
+def _chair_sign(L, sign):
+    """cardboard sign taped to the seat front"""
+    rect(L, H(0.0, 5.6), 11.4, 5.6, 0.0, (176, 134, 84))
+    rect(L, H(0.0, 5.6), 10.8, 5.0, 0.0, (206, 164, 108))
+    rows = sign if isinstance(sign, (list, tuple)) else [('DIBS.', 2.0), ('I SHOVELED', 0.95), ('THIS. -STOSH', 0.8)]
+    yy = 7.5
+    for r, hh in rows:
+        ltext(L, r, H(0.0, yy), hh, (40, 30, 20)); yy -= hh * 1.2 + 0.7
 
 
 def bomb(CH, cam, t=0.0, fuse=1.0, r=3.4):

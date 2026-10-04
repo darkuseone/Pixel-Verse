@@ -1,5 +1,6 @@
-"""S01E01 «Dibs» — Special Agent Dibs covers a bomb with his lawn chair and calls dibs. The villains, the bomb squad and a tank respect the
-chair; the bomb does not, but the blast goes AROUND the chair. Brad from Naperville asks if the spot is open.
+"""S01E01 «Dibs» (v2 cast) — Special Agent Dibs covers a bomb with his lawn chair and calls dibs. The villains, the bomb squad and a tank
+respect the chair; the bomb does not, but the blast goes AROUND the chair. Brad from Naperville asks if the spot is open.
+Heroes: pixel-sprite cast of this series (props/dibscast.py, engine props/dibspix.py); props (chair, bomb, vehicles) from chi_props.
   python3 ep01.py test 1 5 20 | frame 12 | all [4]      then  python3 mix.py <noaudio.mp4> final.mp4"""
 import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[4] / 'engine'))
 import math
@@ -12,7 +13,9 @@ from scene import sm, lerp
 import overlays as O
 import fx
 from episode import Episode
-from props import chi_cast as C
+from props import dibspix as DX
+from props import dibscast as DC
+from props import dibskit as DK
 from props import chi_props as PR
 from props import chikit as K
 from props import bytfx as B
@@ -25,6 +28,7 @@ GY = 650.0                              # street line for the main group
 CH_X, CH_Y = 640.0, 654.0               # the chair (and the bomb under it)
 DB_X = 560.0                            # Dibs standing
 BOOM_T = 27.30
+SOOT = 0.55                             # how black Dibs gets after the blast (eyes and teeth stay white)
 CHU = 0.62                              # chair/bomb size relative to a person (a real lawn chair is ~half a man tall)
 
 
@@ -37,18 +41,24 @@ def snow_fx(t, n=70):
 
 
 def sit_anchor(un):
-    """character anchor for Dibs sitting on the chair at (CH_X, CH_Y): hips on the seat, feet just above the ground"""
-    return CH_X - 2.0 * un, CH_Y + 2.3 * un
+    """feet anchor for Dibs sitting on the chair at (CH_X, CH_Y): his hips (sprite y 22) land on the seat (8.4 chair units); shifted a bit
+    forward so the towel and the back post of the chair peek out behind him and the bomb shows under the seat"""
+    return CH_X + 1.5 * un, CH_Y + 0.2 * un
+
+
+def ueq(s, Z):
+    """sprite scale -> equivalent world unit (1 unit = 4 sprite px), so props drawn in units match the sprite heroes"""
+    return s / (Z * 0.75)
+
+
+def A(fn, wx, wy, un=None, s=None, flip=False, pin=None, **P):
+    return DX.Act(fn, wx, wy, s_=s, un=un, flip=flip, pin=pin, **P)
 
 
 # ================================================================== reusable pieces
-def chair_bomb(t, un, ay=CH_Y, ax=CH_X, fuse=1.0, spark=None):
-    """un = the chair's own unit (world px per unit)"""
-    def bomb_(CH, v):
-        sp = PR.bomb(CH, v.cam(ax, ay, un), t, fuse)
-        if spark is not None: spark['p'] = (ax + sp[0] * un, ay - sp[1] * un)
-    def chair_(CH, v): PR.dibs_chair(CH, v.cam(ax, ay, un), t=t)
-    return [bomb_, chair_]
+def spark_bomb(CH, v, sp, ax, ay, un, t, fuse=1.0):
+    q = PR.bomb(CH, v.cam(ax, ay, un), t, fuse)
+    sp['p'] = (ax + q[0] * un, ay - q[1] * un)
 
 
 def spark_glow(spark, t, r=300, a=0.8):
@@ -59,49 +69,52 @@ def spark_glow(spark, t, r=300, a=0.8):
     return emit
 
 
-def cu_dibs(t, u, expr, Z=2.3, shades=True, pose=None, dx=0.0, dy=0.0, zoom=0.06, hand=None, prop=None, k=1.8, ax=500.0, ay=646.0, un=13.0,
-            extra=(), sit=False, soot=0.0, sy=262, front=(), emit=None, light=K.light_street):
-    if sit: ax, ay = sit_anchor(un)
+def chair_acts(t, un, x=CH_X, y=CH_Y, bomb=True):
+    cu_ = un * CHU
+    acts = [lambda CH, v: PR.bomb(CH, v.cam(x, y, cu_), t)] if bomb else []
+    return acts + [lambda CH, v: PR.dibs_chair(CH, v.cam(x, y, cu_), t=t)]
+
+
+def chair_sign(t, un, x=CH_X, y=CH_Y):
+    """the cardboard sign again, in front of Dibs sitting on the chair"""
+    return lambda CH, v: PR.dibs_chair(CH, v.cam(x, y, un * CHU), t=t, only_sign=True)
+
+
+def cu(fn, who, t, u, hx, hy, Z=2.0, s=12.5, zoom=0.06, sx=180, sy=300, flip=False, k=1.8, extra=(), front=(), pre=None, emit=None,
+       light=K.light_street, fxn=70, cdx=0.0, cdy=0.0, **P):
+    """close-up: the hero's head pinned at world (hx, hy); camera on the head (slow push); sprite scale follows the zoom"""
     Zt = Z + zoom * u
-    acts = [lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), pose or C.POSE['stand'], t, mouth('dibs', t, k), expr, 0.0, shades, chair=False,
-                                 hand_n=hand, prop_n=prop, soot=soot)]
-    return K.shot(WORLD, light, ax + 1.5 * un + dx, ay - 21.0 * un + dy, Zt, acts=list(extra) + acts, front=front, fx_=snow_fx(t), sx=180, sy=sy, emit=emit)
+    P.setdefault('mouth_', mouth(who, t, k))
+    a = A(fn, hx, hy, s=s * Zt / Z, flip=flip, pin='head', t=t, **P)
+    return K.shot(WORLD, light, hx + cdx, hy + 30.0 + cdy, Zt, acts=list(extra) + [a], front=front, fx_=snow_fx(t, fxn), sx=sx, sy=sy, pre=pre, emit=emit)
 
 
-def cu_char(fn, who, ax, ay, un, hy, Z, t, u, expr, pose=None, flip=False, dx=0.0, dy=0.0, zoom=0.05, k=1.7, sy=262, **kw):
-    Zt = Z + zoom * u
-    sgn = -1 if flip else 1
-    acts = [lambda CH, v: fn(CH, v.cam(ax, ay, un, flip), pose or C.POSE['stand'], t, mouth(who, t, k), expr, 0.0, **kw)]
-    return K.shot(WORLD, K.light_street, ax + sgn * 1.5 * un + dx, ay - hy * un + dy, Zt, acts=acts, fx_=snow_fx(t), sx=180, sy=sy)
+def cu_dibs(t, u, expr, shades=True, pose='stand', soot=0.0, Z=2.1, s=12.5, zoom=0.07, hands=None, props=None, **kw):
+    return cu(DC.dibs, 'dibs', t, u, 520.0, 420.0, Z=Z, s=s, zoom=zoom, expr=expr, shades=shades, pose=pose, soot=soot, hands=hands, props=props, **kw)
 
 
-def standing_group(t, dibs_expr='smug', dibs_pose='hips', shades=True, chair=True, bomb=True):
+def standing_group(t, dibs_expr='smug', dibs_pose='hips', shades=True, chair=True, bomb=True, un=6.8):
     """Dibs next to the chair, as the base of the wide shots"""
-    acts = []
-    if bomb: acts.append(lambda CH, v: PR.bomb(CH, v.cam(CH_X, CH_Y, 6.8 * CHU), t))
-    if chair: acts.append(lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X, CH_Y, 6.8 * CHU), t=t))
-    acts.append(lambda CH, v: C.dibs(CH, v.cam(DB_X, CH_Y - 4, 6.8), C.POSE[dibs_pose], t, 0.0, dibs_expr, 0.0, shades, chair=False))
+    acts = chair_acts(t, un, bomb=bomb) if chair else []
+    acts.append(A(DC.dibs, DB_X, CH_Y - 4, un=un, pose=dibs_pose, t=t, expr=dibs_expr, shades=shades, shadow=0.35))
     return acts
 
 
 # ================================================================== shots
 def r_hook(t, u):
-    un, ay = 13.0, 646.0
+    Z = 1.7
+    s = 10.5
+    un = ueq(s, Z)
     fall = max(0.0, 1.0 - t / 0.10)
     sp = {}
     cu_ = un * CHU
-    acts = [lambda CH, v: C.dibs(CH, v.cam(540.0, ay, un), C.POSE['reach'], t, mouth('dibs', t, 1.9), 'shout', 0.0, False, chair=False),
-            lambda CH, v: spark_bomb(CH, v, sp, 640.0, ay, cu_, t),
-            lambda CH, v: PR.dibs_chair(CH, v.cam(640.0, ay - fall * 520, cu_), t=t)]
-    big = K.shot(WORLD, K.light_street, 552.0, 369.0, 1.7, acts=acts, emit=spark_glow(sp, t), fx_=snow_fx(t), sx=118, sy=160)
+    acts = [A(DC.dibs, 540.0, 660.0, s=s, pose='point', t=t, mouth_=mouth('dibs', t, 1.9), expr='shout', shadow=0.3),
+            lambda CH, v: spark_bomb(CH, v, sp, 640.0, 662.0, cu_, t),
+            lambda CH, v: PR.dibs_chair(CH, v.cam(640.0, 662.0 - fall * 520, cu_), t=t)]
+    big = K.shot(WORLD, K.light_street, 575.0, 520.0, Z, acts=acts, emit=spark_glow(sp, t), fx_=snow_fx(t), sx=180, sy=330)
     if 0.10 <= t < 0.16: O.flash(big, 0.45)
     if 0.10 < t < 0.5: B.shake(big, t, 12 * max(0.0, 1 - (t - 0.10) / 0.4), 33)
     return big
-
-
-def spark_bomb(CH, v, sp, ax, ay, un, t, fuse=1.0):
-    q = PR.bomb(CH, v.cam(ax, ay, un), t, fuse)
-    sp['p'] = (ax + q[0] * un, ay - q[1] * un)
 
 
 def r_insert(t, u):
@@ -109,12 +122,12 @@ def r_insert(t, u):
     sp = {}
     acts = [lambda CH, v: spark_bomb(CH, v, sp, CH_X + 20.0, 646.0, cu_, t), lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X + 20.0, 646.0, cu_), t=t)]
     big = K.shot(WORLD, K.light_street, CH_X + 20.0, 540.0, 1.5 + 0.10 * u, acts=acts, emit=spark_glow(sp, t, 360), fx_=snow_fx(t), sx=180, sy=330)
-    K.deb_window(big, t, 'smile' if u < 1.5 else 'nervous', mouth('deb', t, 1.6), box=(690, 390, 1030, 730))
+    DK.deb_window(big, t, 'smile' if u < 1.5 else 'nervous', mouth('deb', t, 1.6), box=(690, 390, 1030, 730))
     return big
 
 
 def r_deb(t, u, expr='smile'):
-    return K.deb_frame(t, expr, mouth('deb', t, 1.6), Z=2.0, u=u)
+    return DK.deb_frame(t, expr, mouth('deb', t, 1.6), Z=2.0, u=u)
 
 
 def r_suv(t, u):
@@ -123,8 +136,8 @@ def r_suv(t, u):
     acts = standing_group(t)
     acts += [lambda CH, v: PR.suv(CH, v.cam(x, 706.0, 4.2, True), t, rot=-x * 0.25, shake=0.4 if k < 1 else 0.0)]
     if u > 0.9:
-        acts += [lambda CH, v: C.terry(CH, v.cam(735.0, 668.0, 6.8, True), C.POSE['stand'], t, 0.0, 'nervous'),
-                 lambda CH, v: C.gary(CH, v.cam(695.0, 672.0, 6.8, True), C.POSE['stand'], t, 0.0, 'normal')]
+        acts += [A(DC.gary, 700.0, 674.0, un=6.8, flip=True, t=t, expr='normal', shadow=0.3),
+                 A(DC.terry, 742.0, 668.0, un=6.8, flip=True, t=t, expr='nervous', shadow=0.3)]
     def fx_(big, v):
         snow_fx(t)(big, v)
         if u < 1.1:
@@ -138,31 +151,27 @@ def r_suv(t, u):
     return big
 
 
-def card_prop(t):
-    return lambda L, h: PR.cue_card(L, h, -0.2)
-
-
 def r_two(t, u):
     show_card = 0.45 < u < 1.05
-    acts = [lambda CH, v: PR.bomb(CH, v.cam(CH_X - 10, 678.0, 6.8 * CHU * 1.3), t),
-            lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X - 10, 678.0, 6.8 * CHU * 1.3), t=t),
-            lambda CH, v: C.gary(CH, v.cam(790.0, 668.0, 8.4, True), C.POSE['stand'], t, 0.0, 'nervous', shades=True),
-            lambda CH, v: C.terry(CH, v.cam(728.0, 664.0, 9.0, True), C.POSE['reach'], t, mouth('terry', t, 1.7), 'nervous',
-                                  prop_f=card_prop(t) if show_card else None, hand_f=C.H(1.0, 17.0) if show_card else None, shades=True)]
-    return K.shot(WORLD, K.light_street, 705.0, 540.0, 1.35 + 0.1 * u, acts=acts, fx_=snow_fx(t), sy=340)
+    Z = 1.35 + 0.1 * u
+    un = 8.6
+    acts = chair_acts(t, 6.8 * 1.3, x=CH_X - 30, y=678.0) + [
+        A(DC.gary, 800.0, 674.0, un=un * 0.98, flip=True, t=t, expr='nervous', shades=True, shadow=0.3),
+        A(DC.terry, 735.0, 668.0, un=un, flip=True, pose='reach' if show_card else 'stand', t=t, mouth_=mouth('terry', t, 1.7), expr='nervous',
+          shades=True, props={'R': 'card'} if show_card else None, hands={'R': (17.0, 70.0)} if show_card else None, shadow=0.3)]
+    return K.shot(WORLD, K.light_street, 705.0, 540.0, Z, acts=acts, fx_=snow_fx(t), sy=340)
 
 
 def r_gary(t, u):
-    return cu_char(C.gary, 'gary', 790.0, 662.0, 13.0, 19.6, 2.3, t, u, 'nervous', flip=True, k=1.6)
+    return cu(DC.gary, 'gary', t, u, 800.0, 430.0, Z=2.1, s=13.0, flip=True, k=1.6, expr='nervous', shades=False)
 
 
 def r_sorry(t, u):
     k = sm(u / 1.2)
-    acts = [lambda CH, v: PR.bomb(CH, v.cam(CH_X + 10, CH_Y, 8.0 * CHU), t), lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X + 10, CH_Y, 8.0 * CHU), t=t),
-            lambda CH, v: C.gary(CH, v.cam(lerp(780.0, 850.0, k), 670.0, 8.0, True), C.POSE['hat'], t, 0.0, 'nervous',
-                                 prop_n=PR.hat_in_hand, hand_n=C.H(3.8, 12.5)),
-            lambda CH, v: C.terry(CH, v.cam(lerp(720.0, 790.0, k), 664.0, 8.4, True), C.POSE['hat'], t, mouth('terry', t, 1.8), 'nervous',
-                                  prop_n=PR.hat_in_hand, hand_n=C.H(3.8, 12.5))]
+    acts = chair_acts(t, 8.0, x=CH_X + 10) + [
+        A(DC.gary, lerp(790.0, 860.0, k), 674.0, un=8.0, flip=True, pose='hat', t=t, expr='nervous', hat=False, props={'R': 'beanie'}, shadow=0.3),
+        A(DC.terry, lerp(725.0, 795.0, k), 668.0, un=8.0, flip=True, pose='hat', t=t, mouth_=mouth('terry', t, 1.8), expr='nervous', hat=False,
+          props={'R': 'beanie'}, shadow=0.3)]
     return K.shot(WORLD, K.light_street, 725.0, 520.0, 1.35, acts=acts, fx_=snow_fx(t), sy=340)
 
 
@@ -170,13 +179,14 @@ def r_squad(t, u):
     k = sm(min(1.0, u / 0.6))
     tx = lerp(1250.0, 850.0, 1 - (1 - k) ** 2)
     ofl = u < 1.35
-    helmet = u < 1.3
     ox = 800.0 - 130.0 * sm(min(1.0, max(0.0, (u - 0.45) / 0.65))) + 130.0 * sm(min(1.0, max(0.0, (u - 1.5) / 0.5)))
     rx = 800.0 - 130.0 * sm(min(1.0, max(0.0, (u - 0.5) / 0.7))) + 140.0 * sm(min(1.0, max(0.0, (u - 1.5) / 0.55)))
+    walk = 2.0 * math.sin(u * 14) if (0.45 < u < 1.1 or u > 1.5) else 0.0
     acts = standing_group(t)
     acts += [lambda CH, v: PR.squad_truck(CH, v.cam(tx, 706.0, 4.2, True), t, rot=-tx * 0.25)]
     if u > 0.45:
-        acts += [lambda CH, v: PR.puffer_person(CH, v.cam(ox, 668.0, 7.4, ofl), (24, 60, 140), (240, 240, 246), t, phase=1.0, hat_on=helmet, look=-1 if ofl else 1)]
+        acts += [A(DC.tech, ox, 670.0 - abs(walk) * 0.6, un=7.0, flip=ofl, t=t, expr='nervous' if u < 1.2 else 'stunned',
+                   pose='hat' if 1.1 < u < 1.5 else 'stand', look=-0.6, shadow=0.3)]
     if u > 0.55:
         acts += [lambda CH, v: PR.robot(CH, v.cam(rx, 672.0, 6.0, ofl), t, sad=sm(min(1.0, max(0.0, (u - 1.15) / 0.3))))]
     def fx_(big, v):
@@ -202,42 +212,48 @@ def r_tank(t, u):
     return big
 
 
-def sit_scene(t, un, terry_pose, gary_pose, tprop, gprop, expr='smug', hand=None, prop=PR.coffee_cup, soot=0.0, extra=(), mth=0.0, tx=(780.0, 835.0)):
-    ax, ay = sit_anchor(un)
-    cu_ = un * CHU
-    acts = [lambda CH, v: PR.bomb(CH, v.cam(CH_X, CH_Y, cu_), t), lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X, CH_Y, cu_), t=t),
-            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, mth, expr, 0.0, True, chair=False, hand_n=hand or C.H(5.4, 14.4), prop_n=prop, soot=soot),
-            lambda CH, v: C.terry(CH, v.cam(tx[0], 668.0, un, True), terry_pose, t, 0.0, 'panic' if terry_pose is C.POSE['ears'] else 'nervous', prop_n=tprop),
-            lambda CH, v: C.gary(CH, v.cam(tx[1], 672.0, un * 0.95, True), gary_pose, t, 0.0, 'panic' if gary_pose is C.POSE['ears'] else 'nervous', prop_n=gprop)]
-    return acts + list(extra)
+def sit_dibs(t, un=None, s=None, expr='smug', mth=0.0, soot=0.0, sip=False, look=0.0):
+    """Dibs on the chair with his coffee (sprite); un or s"""
+    ax, ay = sit_anchor(un if un else 8.0)
+    hands = {'R': (17.0, 44.0)} if not sip else {'R': (13.0, 70.0)}
+    return A(DC.dibs, ax, ay, un=un, s=s, pose='sit', t=t, mouth_=mth, expr=expr, shades=True, hands=hands, props={'R': 'coffee'}, soot=soot, look=look)
+
+
+def sit_scene(t, un, tpose, gpose, expr='smug', soot=0.0, mth=0.0, tx=(780.0, 835.0), sip=False):
+    acts = chair_acts(t, un) + [sit_dibs(t, un=un, expr=expr, mth=mth, soot=soot, sip=sip), chair_sign(t, un)]
+    for fn, x, y, p in ((DC.terry, tx[0], 668.0, tpose), (DC.gary, tx[1], 674.0, gpose)):
+        hat = p != 'hat'
+        acts.append(A(fn, x, y, un=un * (0.97 if fn is DC.gary else 1.0), flip=True, pose=p, t=t, expr='panic' if p == 'ears' else 'nervous',
+                      hat=hat, props=None if hat else {'R': 'beanie'}, shadow=0.3))
+    return acts
 
 
 def r_sit(t, u):
-    acts = sit_scene(t, 8.5, C.POSE['ears'] if u > 1.2 else C.POSE['hat'], C.POSE['ears'] if u > 1.3 else C.POSE['hat'],
-                     None if u > 1.2 else PR.hat_in_hand, None if u > 1.3 else PR.hat_in_hand, tx=(780.0, 835.0))
+    acts = sit_scene(t, 8.5, 'ears' if u > 1.2 else 'hat', 'ears' if u > 1.3 else 'hat', tx=(780.0, 835.0))
     big = K.shot(WORLD, K.light_street, 700.0, 520.0, 1.55, acts=acts, fx_=snow_fx(t), sy=340)
-    K.deb_window(big, t, 'panic', mouth('deb', t, 1.7), box=(650, 190, 1010, 550))
+    DK.deb_window(big, t, 'panic', mouth('deb', t, 1.7), box=(650, 190, 1010, 550))
     return big
 
 
 def r_dsit(t, u):
-    s = sm((u - 1.3) / 0.4)
-    hand = C.H(lerp(5.4, 3.4, s), lerp(12.6, 17.8, s))
-    un = 13.0
+    s_ = sm((u - 1.3) / 0.4)
+    un = 7.0
+    Z = 2.1 + 0.06 * u
     ax, ay = sit_anchor(un)
-    cu_ = un * CHU
-    acts = [lambda CH, v: PR.bomb(CH, v.cam(CH_X, CH_Y, cu_), t), lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X, CH_Y, cu_), t=t),
-            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, mouth('dibs', t, 1.8), 'smug', 0.0, True, chair=False, hand_n=hand, prop_n=PR.coffee_cup)]
-    return K.shot(WORLD, K.light_street, ax + 1.5 * un, ay - 21.0 * un - 10, 2.1 + 0.06 * u, acts=acts, fx_=snow_fx(t), sx=180, sy=300)
+    hands = {'R': (lerp(17.0, 13.0, s_), lerp(44.0, 70.0, s_))}
+    acts = chair_acts(t, un) + [A(DC.dibs, ax, ay, un=un, pose='sit', t=t, mouth_=mouth('dibs', t, 1.8), expr='smug', shades=True, hands=hands,
+                                  props={'R': 'coffee'}), chair_sign(t, un)]
+    hx, hy = ax + 3 * un / 4, ay - 82 * un / 4
+    return K.shot(WORLD, K.light_street, hx + 8 * un / 4, hy + 40 * un / 4, Z, acts=acts, fx_=snow_fx(t), sx=180, sy=300)
 
 
 def r_count(t, u):
-    acts = sit_scene(t, 8.2, C.POSE['ears'], C.POSE['ears'], None, None, hand=C.H(3.4, 17.6), tx=(775.0, 830.0))
+    acts = sit_scene(t, 8.2, 'ears', 'ears', tx=(775.0, 830.0), sip=True)
     return K.shot(WORLD, K.light_street, 695.0, 520.0, 1.35 + 0.1 * u, acts=acts, fx_=snow_fx(t), sy=340)
 
 
 def r_window(t, u, who, prop, flip=False, shift=(0, 0)):
-    return K.window_cut(t, u, who, open_t=0.04, prop=prop, flip=flip, shift=shift)
+    return DK.window_cut(t, u, who, open_t=0.04, prop=prop, flip=flip, shift=shift)
 
 
 def blast_pre(p):
@@ -263,12 +279,8 @@ def blast_pre(p):
 def r_boom(t, u):
     p = t - BOOM_T
     un = 8.3
-    ax, ay = sit_anchor(un)
-    cu_ = un * CHU
-    soot = sm(p / 0.35)
-    acts = [lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X, CH_Y, cu_), t=t),
-            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, 0.0, 'shock' if p < 0.2 else 'stunned', 0.0, True, chair=False,
-                                 hand_n=C.H(5.4, 14.4), prop_n=PR.coffee_cup, soot=soot)]
+    soot = SOOT * sm(p / 0.35)
+    acts = chair_acts(t, un, bomb=False) + [sit_dibs(t, un=un, expr='shock' if p < 0.2 else 'stunned', soot=soot), chair_sign(t, un)]
     flung = []
     if p > 0.04:
         q = p - 0.04
@@ -306,34 +318,32 @@ def crater_pre(smoke):
     return pre
 
 
-def r_crater(t, u, Z=1.5):
-    un = 8.5
-    ax, ay = sit_anchor(un)
-    cu_ = un * CHU
-    smoke = max(0.0, 1.0 - u / 2.2)
-    acts = [lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X, CH_Y, cu_), t=t),
-            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, mouth('dibs', t, 1.8), 'deadpan', 0.0, True, chair=False,
-                                 hand_n=C.H(5.4, 14.4), prop_n=PR.coffee_cup, soot=0.78)]
+def smoke_fx(t, ax, ay, un, n=40):
     def fx_(big, v):
-        snow_fx(t, 40)(big, v)
+        snow_fx(t, n)(big, v)
         hx, hy = v.opt(ax + 1.0 * un, ay - 26 * un)
         for i in range(6):
             ph = (t * 0.9 + i / 6) % 1.0
             B.puff(big, hx + 24 * math.sin(i + t * 2) + 20 * ph, hy - 40 - 280 * ph, (40 + 90 * ph) * v.Z, 0.6 * (1 - ph), (70, 66, 70))
-    return K.shot(WORLD, K.light_street, 680.0, 540.0, Z + 0.05 * u, acts=acts, pre=crater_pre(smoke), fx_=fx_, sy=350)
+    return fx_
+
+
+def r_crater(t, u, Z=1.5):
+    un = 8.5
+    ax, ay = sit_anchor(un)
+    smoke = max(0.0, 1.0 - u / 2.2)
+    acts = chair_acts(t, un, bomb=False) + [sit_dibs(t, un=un, expr='deadpan', mth=mouth('dibs', t, 1.8), soot=SOOT), chair_sign(t, un)]
+    return K.shot(WORLD, K.light_street, 680.0, 540.0, Z + 0.05 * u, acts=acts, pre=crater_pre(smoke), fx_=smoke_fx(t, ax, ay, un), sy=350)
 
 
 def r_van(t, u):
     k = sm(min(1.0, u / 0.75))
     x = lerp(985.0, 805.0, k)
     un = 8.0
-    ax, ay = sit_anchor(un)
-    cu_ = un * CHU
-    acts = [lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X, CH_Y, cu_), t=t),
-            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, 0.0, 'deadpan', 0.0, True, chair=False, hand_n=C.H(5.4, 14.4), prop_n=PR.coffee_cup, soot=0.78),
-            lambda CH, v: PR.minivan(CH, v.cam(x, 700.0, 5.0, True), t, rot=-x * 0.2, driver=False, blinker=True),
-            lambda CH, v: C.brad(CH, v.cam(x - 26.0, 700.0, 3.1, True),
-                                 dict(C.POSE['hold'], n=(5.2, 14.4), f=(4.4, 14.6)), t, mouth('brad', t, 1.7), 'grin', 0.0, legs=False, clip_h=16.0)]
+    acts = chair_acts(t, un, bomb=False) + [sit_dibs(t, un=un, expr='deadpan', soot=SOOT), chair_sign(t, un),
+            lambda CH, v: PR.minivan(CH, v.cam(x, 700.0, 5.0, True), t, rot=-x * 0.2, driver=False, blinker=True)]
+    front = [A(DC.brad, x - 26.0, 706.0, un=3.6, flip=True, pose='wave' if u > 0.75 else 'stand', t=t, mouth_=mouth('brad', t, 1.7),
+               expr='grin', legs=False, clip_h=50.0)]
     def fx_(big, v):
         snow_fx(t, 40)(big, v)
         if u < 0.9:
@@ -342,48 +352,35 @@ def r_van(t, u):
                 if ph < 0: continue
                 ox_, oy_ = v.opt(x + 80 + 16 * i, 706 - 40 * ph)
                 B.puff(big, ox_, oy_, (22 + 40 * ph) * 3 * v.Z, 0.55 * max(0.0, 1 - ph / 0.9), (232, 238, 248))
-    return K.shot(WORLD, K.light_street, 725.0, 540.0, 1.15, acts=acts, pre=crater_pre(0.0), fx_=fx_, sy=300)
+    return K.shot(WORLD, K.light_street, 725.0, 540.0, 1.15, acts=acts, front=front, pre=crater_pre(0.0), fx_=fx_, sy=300)
 
 
 def r_brad(t, u):
-    Zt = 2.3 + 0.05 * u
-    un = 13.0
-    pose = C.blend(C.POSE['stand'], C.POSE['point'], sm(min(1.0, u / 0.5)))
-    acts = [lambda CH, v: C.brad(CH, v.cam(800.0, 700.0, un, True), pose, t, mouth('brad', t, 1.7), 'smile', legs=False, look=-0.8)]
+    pose = 'point' if u > 0.35 else 'wave'
     def emit(big, v):
         big[0:150, :] = (46, 52, 64); big[150:166, :] = (92, 102, 118)                          # van window frame (roof edge)
         big[1500:1920, 0:130] = (46, 52, 64); big[1500:1920, 130:146] = (92, 102, 118)          # door pillar
-    return K.shot(WORLD, K.light_street, 800.0 - 1.5 * un, 700.0 - 21.0 * un, Zt, acts=acts, fx_=snow_fx(t, 40), sx=180, sy=262, emit=emit)
+    return cu(DC.brad, 'brad', t, u, 790.0, 430.0, Z=2.1, s=12.5, flip=True, k=1.7, pose=pose, expr='grin',
+              legs=False, look=0.8, ting=max(0.0, 1.0 - abs(u - 0.25) / 0.2), emit=emit, fxn=40)
 
 
 def r_dreact(t, u):
-    un = 13.0
-    ax, ay = sit_anchor(un)
-    cu_ = un * CHU
-    acts = [lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X, CH_Y, cu_), t=t),
-            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, 0.0, 'deadpan', 0.0, True, chair=False, hand_n=C.H(5.4, 14.4), prop_n=PR.coffee_cup, soot=0.78)]
-    return K.shot(WORLD, K.light_street, ax + 1.5 * un, ay - 21.0 * un - 10, 2.2 + 0.15 * u, acts=acts, pre=crater_pre(0.0), fx_=snow_fx(t, 40), sx=180, sy=300)
+    return cu_dibs(t, u, 'deadpan', shades=True, soot=SOOT, Z=2.2, zoom=0.15, pre=crater_pre(0.0), fxn=40)
 
 
 def r_marty(t, u):
-    Zt = 2.0 + 0.05 * u
-    un = 10.0
-    ax, ay = 800.0, 598.0
-    acts = [lambda CH, v: C.marty(CH, v.cam(ax, ay, un), t, mouth('marty', t, 1.7), 'deadpan', (0.7, 0.0), fry=False)]
-    def fx_(big, v):
+    def pre(big, v):
         B.steam(big, v, t, 790.0, 586.0, n=7, rise=170, size=60, a=0.55)
-        snow_fx(t, 40)(big, v)
-    return K.shot(WORLD, K.light_street, ax + 3.0 * un, ay - 9.0 * un, Zt, acts=acts, fx_=fx_, sy=330)
+    Zt = 2.0 + 0.05 * u
+    a = A(DC.marty, 800.0, 598.0, s=18.0 * Zt / 2.0, t=t, mouth_=mouth('marty', t, 1.7), expr='deadpan', look=0.6)
+    return K.shot(WORLD, K.light_street, 812.0, 510.0, Zt, acts=[a], pre=pre, fx_=snow_fx(t, 40), sy=330)
 
 
 def r_tail(t, u):
     Z = lerp(1.9, 1.15, sm(u / 1.7))
     un = 8.5
-    ax, ay = sit_anchor(un)
-    cu_ = un * CHU
-    acts = [lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X, CH_Y, cu_), t=t),
-            lambda CH, v: C.dibs(CH, v.cam(ax, ay, un), C.POSE['sit'], t, 0.0, 'smug', 0.0, True, chair=False, hand_n=C.H(3.4, 17.8), prop_n=PR.coffee_cup, soot=0.78)]
-    return K.shot(WORLD, K.light_street, 680.0, 540.0, Z, acts=acts, pre=crater_pre(0.0), fx_=snow_fx(t, 60), sy=350)
+    acts = chair_acts(t, un, bomb=False) + [sit_dibs(t, un=un, expr='smug', soot=SOOT, sip=True), chair_sign(t, un)]
+    return K.shot(WORLD, K.light_street, 680.0, 540.0, Z, acts=acts, pre=crater_pre(0.0), fx_=snow_fx(t, 60), sy=420)
 
 
 # ================================================================== shot table
@@ -406,11 +403,11 @@ def render_scene(t):
     a, b, name = shot_at(t); u = t - a
     if name == 'hook': return r_hook(t, u)
     if name == 'insert': return r_insert(t, u)
-    if name == 'd2': return cu_dibs(t, u, 'smug', Z=2.3, shades=u > 0.35, zoom=0.07)
+    if name == 'd2': return cu_dibs(t, u, 'smug', shades=u > 0.35)
     if name == 'deb2': return r_deb(t, u, 'nervous' if u < 0.9 else 'smile')
     if name == 'suv': return r_suv(t, u)
     if name == 'two': return r_two(t, u)
-    if name == 'd3': return cu_dibs(t, u, 'deadpan', Z=2.25, zoom=0.08)
+    if name == 'd3': return cu_dibs(t, u, 'deadpan', zoom=0.08)
     if name == 'gary': return r_gary(t, u)
     if name == 'sorry': return r_sorry(t, u)
     if name == 'squad': return r_squad(t, u)
@@ -442,10 +439,10 @@ SHOW = K.Show(EPI, 1, ['DIBS ON', 'THE BOMB'], hook_t=(0.15, 2.4),
                   (st('RESPECT +1', (130, 255, 160), 72), 18.00, 19.05, 540, 560),
                   (st('RESPECT +1', (130, 255, 160), 72), 20.20, 21.25, 540, 560),
                   (st('BOOM', (255, 214, 70), 190), 27.42, 28.30, 540, 760),
-                  (st('BOMB: RESPECT 0', (255, 110, 110), 52), 29.50, 30.70, 540, 700),
-                  (st('MARTY: INFORMANT (RAT)', (150, 255, 80), 34), 34.40, 35.60, 540, 1090),
-                  (st('NAPERVILLE: SUBURB.', (255, 255, 255), 34), 35.70, 37.20, 540, 1020),
-                  (st('28 MILES. DIFFERENT PLANET.', (255, 236, 120), 34), 35.90, 37.40, 540, 1090),
+                  (st('BOMB: RESPECT 0', (255, 110, 110), 52), 29.50, 30.70, 540, 330),
+                  (st('MARTY: INFORMANT (RAT)', (150, 255, 80), 34), 34.40, 35.60, 540, 430),
+                  (st('NAPERVILLE: SUBURB.', (255, 255, 255), 34), 35.70, 37.20, 540, 420),
+                  (st('28 MILES. DIFFERENT PLANET.', (255, 236, 120), 34), 35.90, 37.40, 540, 490),
               ],
               flashes=[], mosaics=[], cap_default=1400,
               cap_y={'van': 1180, 'insert': 1450, 'sit': 1450, 'crater': 1500, 'tail': 1500, 'boom': 1500, 'squad': 1450, 'tank': 1450, 'suv': 1450})
@@ -453,9 +450,9 @@ SHOW = K.Show(EPI, 1, ['DIBS ON', 'THE BOMB'], hook_t=(0.15, 2.4),
 
 def render(t):
     big = render_scene(t)
-    if 25.30 <= t < 25.9: K.digits(big, '3', 540, 760, 420, pulse=1.0 + 0.12 * math.sin((t - 25.3) * 14))
+    if 25.30 <= t < 25.9: K.digits(big, '3', 540, 440, 380, pulse=1.0 + 0.12 * math.sin((t - 25.3) * 14))
     if 25.95 <= t < 26.5: K.digits(big, '2', 540, 250, 300, pulse=1.0 + 0.12 * math.sin((t - 25.95) * 14))
-    if 26.55 <= t < BOOM_T: K.digits(big, '1', 540, 760, 420, pulse=1.0 + 0.12 * math.sin((t - 26.55) * 14))
+    if 26.55 <= t < BOOM_T: K.digits(big, '1', 540, 440, 380, pulse=1.0 + 0.12 * math.sin((t - 26.55) * 14))
     SHOW.apply(big, t, shot_at(t)[2])
     return big
 

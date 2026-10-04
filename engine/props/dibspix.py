@@ -62,6 +62,7 @@ class Spr:
         s.m = np.zeros((H, W), bool)
         s.keep = np.zeros((H, W), bool)             # pixels that survive soot (eye whites, teeth)
         s.anchors = {}
+        s.mirror_text = False                       # set by Act when the sprite will be flipped: text is drawn pre-mirrored
 
     # ---------------------------------------------------------------- painting
     def paint(s, mask, pal, val=None, dither=0.16, bands=(0.26, 0.49, 0.75), ol=True, olc=None):
@@ -200,17 +201,30 @@ FONT3 = {
     'R': ['110', '101', '110', '101', '101'], 'S': ['011', '100', '010', '001', '110'], 'T': ['111', '010', '010', '010', '010'],
     'U': ['101', '101', '101', '101', '111'], 'Y': ['101', '101', '010', '010', '010'], '!': ['010', '010', '010', '000', '010'],
     ' ': ['000', '000', '000', '000', '000'], '.': ['000', '000', '000', '000', '010'], '-': ['000', '000', '111', '000', '000'],
+    'F': ['111', '100', '110', '100', '100'], 'H': ['101', '101', '111', '101', '101'], 'J': ['001', '001', '001', '101', '010'],
+    'M': ['101', '111', '111', '101', '101'], 'Q': ['010', '101', '101', '110', '011'], 'V': ['101', '101', '101', '101', '010'],
+    'W': ['101', '101', '111', '111', '101'], 'X': ['101', '101', '010', '101', '101'], 'Z': ['111', '001', '010', '100', '111'],
+    ':': ['000', '010', '000', '010', '000'], "'": ['010', '010', '000', '000', '000'], '?': ['110', '001', '010', '000', '010'],
+    '0': ['111', '101', '101', '101', '111'], '1': ['010', '110', '010', '010', '111'], '2': ['110', '001', '010', '100', '111'],
+    '3': ['110', '001', '010', '001', '110'], '4': ['101', '101', '111', '001', '001'], '5': ['111', '100', '110', '001', '110'],
+    '6': ['011', '100', '111', '101', '111'], '7': ['111', '001', '010', '010', '010'], '8': ['111', '101', '111', '101', '111'],
+    '9': ['111', '101', '111', '001', '110'], '$': ['011', '110', '010', '011', '110'], '/': ['001', '001', '010', '100', '100'],
 }
 
 
 def text3(sp, txt, i0, j0, c, keep=False):
-    """3x5 pixel text, top-left at (i0, j0)"""
+    """3x5 pixel text, top-left at (i0, j0); pre-mirrored when the sprite will be flipped, so it always reads left to right"""
     x = i0
+    tw = 4 * len(txt) - 1
+    mir = getattr(sp, 'mirror_text', False)
     for ch in txt:
         g = FONT3.get(ch.upper(), FONT3[' '])
         for r, row in enumerate(g):
             for k, b in enumerate(row):
-                if b == '1': sp.dot(x + k, j0 - r, c, keep)
+                if b == '1':
+                    xx = x + k
+                    if mir: xx = 2 * i0 + tw - 1 - xx
+                    sp.dot(xx, j0 - r, c, keep)
         x += 4
 
 
@@ -419,18 +433,19 @@ def light_sprite(col, m, x0, y0, s, lt, scale=1.0):
 
 
 def blit(big, sp, ox, oy, s, lt=None, flip=False, alpha=1.0, ghost=None, shadow=0.0):
-    """paste a finished sprite: (ox, oy) = output px of the feet anchor, s = output px per sprite px (int)"""
-    s = max(1, int(s))
+    """paste a finished sprite: (ox, oy) = output px of the feet anchor, s = output px per sprite px (float ok: nearest sampling)"""
+    s = max(1.0, float(s))
     col, m = sp.col, sp.m
     if flip: col, m = col[:, ::-1], m[:, ::-1]
     rows = np.where(m.any(1))[0]; cols = np.where(m.any(0))[0]
     if len(rows) == 0: return
     r0, r1, c0, c1 = rows[0], rows[-1] + 1, cols[0], cols[-1] + 1
     ax = (W - OX) if flip else OX
-    x0 = int(round(ox + (c0 - ax) * s)); y0 = int(round(oy + (r0 - OY) * s))
+    x0 = ox + (c0 - ax) * s; y0 = oy + (r0 - OY) * s
+    BH, BW = big.shape[:2]
     if shadow > 0:
         rx, ry = 13 * s, 3.2 * s
-        X0, X1 = int(max(0, ox - rx)), int(min(big.shape[1], ox + rx)); Y0, Y1 = int(max(0, oy - ry)), int(min(big.shape[0], oy + ry))
+        X0, X1 = int(max(0, ox - rx)), int(min(BW, ox + rx)); Y0, Y1 = int(max(0, oy - ry)), int(min(BH, oy + ry))
         if X0 < X1 and Y0 < Y1:
             yy, xx = np.mgrid[Y0:Y1, X0:X1].astype(np.float32)
             d = ((xx - ox) / rx) ** 2 + ((yy - oy) / ry) ** 2
@@ -438,19 +453,22 @@ def blit(big, sp, ox, oy, s, lt=None, flip=False, alpha=1.0, ghost=None, shadow=
             reg = big[Y0:Y1, X0:X1]
             reg[:] = (reg * (1 - shadow * q[..., None])).astype(np.uint8)
     sub = col[r0:r1, c0:c1]; sm = m[r0:r1, c0:c1]
-    lc = light_sprite(sub, sm, x0, y0, s, lt)
-    lc = np.clip(lc, 0, 255).astype(np.uint8)
-    up = np.repeat(np.repeat(lc, s, 0), s, 1); um = np.repeat(np.repeat(sm, s, 0), s, 1)
-    hh, ww = um.shape
-    BH, BW = big.shape[:2]
-    X0, Y0 = max(0, x0), max(0, y0); X1, Y1 = min(BW, x0 + ww), min(BH, y0 + hh)
+    hh, ww = sm.shape
+    X0, Y0 = max(0, int(math.floor(x0))), max(0, int(math.floor(y0)))
+    X1, Y1 = min(BW, int(math.ceil(x0 + ww * s))), min(BH, int(math.ceil(y0 + hh * s)))
     if X0 >= X1 or Y0 >= Y1: return
-    u = up[Y0 - y0:Y1 - y0, X0 - x0:X1 - x0]; mm = um[Y0 - y0:Y1 - y0, X0 - x0:X1 - x0]
+    ci = np.floor((np.arange(X0, X1) + 0.5 - x0) / s).astype(int); ri = np.floor((np.arange(Y0, Y1) + 0.5 - y0) / s).astype(int)
+    vx = (ci >= 0) & (ci < ww); vy = (ri >= 0) & (ri < hh)
+    ci = np.clip(ci, 0, ww - 1); ri = np.clip(ri, 0, hh - 1)
+    lc = np.clip(light_sprite(sub, sm, x0, y0, s, lt), 0, 255).astype(np.uint8)
+    u = lc[ri[:, None], ci[None, :]]
+    mm = sm[ri[:, None], ci[None, :]] & vy[:, None] & vx[None, :]
     reg = big[Y0:Y1, X0:X1]
     if ghost is not None:                                                   # invisibility cloak: see-through + shimmering cyan edge
         a = ghost
         reg[mm] = np.clip(reg[mm] * (1 - a) + (u[mm] * 0.86 + np.array((120, 240, 255)) * 0.14) * a, 0, 255).astype(np.uint8)
-        ed = mm & ~(np.roll(mm, s, 0) & np.roll(mm, -s, 0) & np.roll(mm, s, 1) & np.roll(mm, -s, 1))
+        k = max(1, int(round(s)))
+        ed = mm & ~(np.roll(mm, k, 0) & np.roll(mm, -k, 0) & np.roll(mm, k, 1) & np.roll(mm, -k, 1))
         reg[ed] = (150, 244, 255)
         return
     if alpha >= 1.0:
@@ -463,19 +481,25 @@ class Act:
     """direct-draw actor for chikit.shot: Act(draw_fn, wx, wy, s=..., **params); draw_fn(sp, **params) paints a Spr"""
     direct = True
 
-    def __init__(s, fn, wx, wy, s_=None, un=None, flip=False, shadow=0.0, ghost=None, alpha=1.0, post=None, **P):
-        s.fn, s.wx, s.wy, s.s, s.un, s.flip, s.shadow, s.ghost, s.alpha, s.post, s.P = fn, wx, wy, s_, un, flip, shadow, ghost, alpha, post, P
+    def __init__(s, fn, wx, wy, s_=None, un=None, flip=False, shadow=0.0, ghost=None, alpha=1.0, post=None, pin=None, **P):
+        """(wx, wy) = world position of the feet anchor, or of the sprite anchor named by `pin` (e.g. pin='head' for close-ups)"""
+        s.fn, s.wx, s.wy, s.s, s.un, s.flip, s.shadow, s.ghost, s.alpha, s.post, s.pin, s.P = fn, wx, wy, s_, un, flip, shadow, ghost, alpha, post, pin, P
 
     def scale(s, v):
-        if s.s is not None: return int(s.s)
-        return max(1, int(round(s.un * v.Z * 3.0 * 0.25)))
+        if s.s is not None: return float(s.s)
+        return max(1.0, s.un * v.Z * 3.0 * 0.25)
 
     def __call__(s, big, v, lt):
         sp = Spr()
+        sp.mirror_text = s.flip
         s.fn(sp, **s.P)
         if s.post: s.post(sp)
         ox, oy = v.opt(s.wx, s.wy)
-        blit(big, sp, ox, oy, s.scale(v), lt, s.flip, s.alpha, s.ghost, s.shadow)
+        sc = s.scale(v)
+        if s.pin:
+            px, py = sp.anchors[s.pin]
+            ox -= (-px if s.flip else px) * sc; oy += py * sc
+        blit(big, sp, ox, oy, sc, lt, s.flip, s.alpha, s.ghost, s.shadow)
         s.last = sp
 
 
