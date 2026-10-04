@@ -166,12 +166,13 @@ def ai_env(ref_png, raw_png, scene):
     return xai.generate(ENV_PROMPT.format(scene=scene), [raw_png], aspect='9:16', ref_png=ref_png)
 
 
-def hero(F, fn, head, s, flip=False, ghost=None, light=None, **P_):
-    """paste a sprite hero on the 540x960 cover canvas, its head centre at `head` (canvas px)"""
+def hero(F, fn, head, s, flip=False, ghost=None, light=None, rot=0.0, pivot=(0.0, 60.0), **P_):
+    """paste a sprite hero on the 540x960 cover canvas, its head centre at `head` (canvas px); rot = degrees counter-clockwise"""
     from props import dibspix as DX
     from stage import Light
     sp = DX.Spr(); sp.mirror_text = flip
     fn(sp, **P_)
+    if rot: DX.rotate(sp, rot, pivot)
     hx, hy = sp.anchors['head']
     lt = light or Light(amb=(0.98, 0.98, 1.06), rim=(-1 if flip else 1, -0.4, (255, 206, 150), 0.45), grad=(1.04, 0.92))
     DX.blit(F, sp, head[0] - (-hx if flip else hx) * s, head[1] + hy * s, s, lt, flip, ghost=ghost)

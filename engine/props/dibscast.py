@@ -261,7 +261,7 @@ D_STACHE = [(56, 36, 28), (84, 58, 42), (112, 82, 58), (146, 112, 80)]
 
 
 def dibs(sp, pose='stand', t=0.0, mouth_=0.0, expr='normal', look=0.0, blink=None, shades=False, hands=None, props=None,
-         soot=0.0, sweat=0.0, flap=0.0, legs=True, clip_h=None, breath=True, beard=0.0):
+         soot=0.0, sweat=0.0, flap=0.0, legs=True, clip_h=None, breath=True, beard=0.0, wind=0.0, badge22=False):
     pose = POSE[pose] if isinstance(pose, str) else pose
     X = EXPR.get(expr, EXPR['normal'])
     br = (0.6 * math.sin(t * 2.2)) if breath else 0.0
@@ -296,6 +296,9 @@ def dibs(sp, pose='stand', t=0.0, mouth_=0.0, expr='normal', look=0.0, blink=Non
     sp.stamp(['##.##', '#####', '##.##'], 2, 60 + int(br), {'#': (200, 30, 44)})       # red bow tie (the tux under the puffer)
     sp.dot(4, 59 + int(br), (120, 14, 24))
     text3(sp, 'BSB', -13, 50 + int(br), (255, 150, 40))
+    if badge22:                                                                                    # «22 YRS PROBATIONARY» name badge
+        sp.rect(8, 41 + int(br), 21, 50 + int(br), (40, 30, 30)); sp.rect(9, 42 + int(br), 20, 49 + int(br), (250, 250, 240))
+        text3(sp, '22', 10, 48 + int(br), (214, 40, 50), keep=True); sp.rect(18, 43 + int(br), 20, 48 + int(br), (214, 40, 50))
     # head: square block with heavy jowls
     hx, hy = G['head']
     face = sp.union([sp.m_super(hx, hy, 17.5, 16.0, 2.8), sp.m_super(hx + 2.5, hy - 9.5, 17.0, 10.5, 2.2)], D_SKIN)
@@ -339,11 +342,22 @@ def dibs(sp, pose='stand', t=0.0, mouth_=0.0, expr='normal', look=0.0, blink=Non
         for k, (dx, dy) in enumerate(((-12, 10), (15, 8), (-8, 4))):
             yy = hy + dy - 6 * ((t * 1.4 + k * 0.37) % 1.0) * sweat
             sp.ell(hx + dx, yy, 1.4, 2.0, [(80, 140, 210), (120, 180, 240), (170, 220, 255), (236, 248, 255)], ol=True)
-    # ushanka: fur crown above the head, light fur band on the forehead, flaps tied up
+    if wind > 0.02:                                                                                # cheeks flapping, tears streaming back
+        wob = math.sin(t * 31.0)
+        sp.ell(hx - 12.0 - 2.5 * wind, hy - 8.0 + 2.0 * wob * wind, 5.0 * wind + 1.5, 4.0, D_SKIN)
+        for k in range(3):
+            y0 = hy + 1.5 - k * 1.2
+            sp.line((hx - 7, y0), (hx - 14 - 8 * wind - 4 * k, y0 + 1.5 * math.sin(t * 20 + k)), (150, 200, 250))
+    # ushanka: fur crown above the head, light fur band on the forehead, flaps tied up (or blown straight back in the wind)
     fl = 1.5 * math.sin(flap) if flap else 0.0
     sp.ell(hx, hy + 19, 18.0, 8.0, D_FUR, dither=0.3)
-    sp.cap((hx - 18.5, hy + 12 + fl), (hx - 20, hy + 19 + fl), 3.6, 3.0, D_FUR)
-    sp.cap((hx + 19, hy + 11 - fl), (hx + 21, hy + 18 - fl), 3.4, 2.8, D_FUR)
+    if wind > 0.02:
+        wf = 3.0 * math.sin(t * 27.0)
+        sp.cap((hx - 17, hy + 8), (hx - 17 - 22 * wind, hy + 9 + wf), 3.8, 3.0, D_FUR)
+        sp.cap((hx + 15, hy + 13), (hx + 4 - 18 * wind, hy + 22 - wf), 3.2, 2.6, D_FUR)
+    else:
+        sp.cap((hx - 18.5, hy + 12 + fl), (hx - 20, hy + 19 + fl), 3.6, 3.0, D_FUR)
+        sp.cap((hx + 19, hy + 11 - fl), (hx + 21, hy + 18 - fl), 3.4, 2.8, D_FUR)
     band = sp.cap((hx - 17.5, hy + 13.0), (hx + 18.5, hy + 12.5), 3.8, 3.8, D_FURL)
     sp.fill(band & CHECK & (YC > hy + 14) & ~erode(band), D_FURL[1])                     # fluffy edge
     sp.ell(hx + 4, hy + 13, 3.2, 2.7, [(150, 104, 24), (210, 160, 40), (244, 204, 80), (255, 240, 160)])
@@ -351,7 +365,7 @@ def dibs(sp, pose='stand', t=0.0, mouth_=0.0, expr='normal', look=0.0, blink=Non
     # front arm + props
     hr_, ar_ = arm(sp, G['shR'], tr, 14, 13, 5.6, 5.0, D_JACKET, bR, D_GLOVE, 4.0, cuff=D_JACKET[1:] + [D_JACKET[3]], quilt=True)
     _prop(sp, props.get('R'), hr_, ar_, t)
-    sp.anchors.update(head=(hx, hy), handR=hr_, handL=hl, mouth=(hx + 6.0, hy - 15.5))
+    sp.anchors.update(head=(hx, hy), handR=hr_, handL=hl, mouth=(hx + 6.0, hy - 15.5), mid=(0.0, 60.0))
     if clip_h is not None: sp.clip_below(clip_h)
     sp.outline()
     sp.soot(soot)
@@ -1185,3 +1199,124 @@ def p_mustard_rifle(sp, h, ang, t=0.0):
 
 
 PROPS.update(mustard_rifle=p_mustard_rifle)
+
+
+
+# ======================================================================================== E05 props
+def p_briefcase(sp, h, ang, t=0.0, cuff=True, mode='up'):
+    """black briefcase (gold clasps) chained to the wrist with an oversized STANDARD ISSUE handcuff.
+    mode: 'up' = the wind lifts the case above the wrist, 'hang' = case hanging under the cuff, 'floor' = standing on the floor (h = floor point),
+    the empty cuff lying next to it"""
+    x, y = h
+    bx, by = {'up': (x + 3, y + 9), 'hang': (x, y - 25)}.get(mode, (x + 9, y))
+    sp.rect(bx - 9, by, bx + 10, by + 13, (14, 14, 18))
+    m = sp.m_poly([(bx - 8, by + 1), (bx + 9, by + 1), (bx + 9, by + 12), (bx - 8, by + 12)])
+    sp.paint(m, [(16, 16, 22), (34, 34, 44), (56, 56, 70), (96, 96, 116)], np.clip((YC - by) / 12, 0, 1), olc=(8, 8, 12))
+    for cx in (bx - 5, bx + 5): sp.rect(cx, by + 9, cx + 2, by + 11, (246, 204, 80))
+    sp.cap((bx - 3, by + 13), (bx + 4, by + 13), 1.0, 1.0, [(14, 14, 18), (34, 34, 44), (56, 56, 70), (96, 96, 116)])
+    if not cuff: return
+    if mode == 'floor':
+        ring = sp.m_ell(x - 7, y + 1.5, 5.5, 2.2)[0]
+        sp.fill(ring & ~erode(ring), (170, 176, 196))
+        for k in range(3): sp.dot(x - 1 + k * 2, y + 1 + (k % 2), (200, 206, 222))
+        return
+    cy = y if mode == 'hang' else y - 1
+    ring = sp.m_ell(x, cy, 5.5, 5.5)[0]
+    sp.fill(ring & ~erode(erode(ring)), (170, 176, 196)); sp.fill(ring & ~erode(ring), (90, 96, 116))
+    if mode == 'hang':
+        for k in range(3): sp.dot(x + (k % 2), y - 6 - k * 2, (200, 206, 222))
+    else:
+        for k in range(3): sp.dot(x + 1 + k, y + 4 + k * 2, (200, 206, 222))
+
+
+def p_trophy(sp, h, ang, t=0.0, scale=1.0):
+    """«Agent of the Year» trophy: a golden parking sign «P» on a pole and a marble base"""
+    x, y = h
+    gold = [(150, 104, 24), (210, 160, 40), (244, 204, 80), (255, 240, 160)]
+    sp.rect(x - 5, y - 4, x + 6, y + 1, (60, 56, 64)); sp.rect(x - 4, y - 3, x + 5, y, (120, 114, 130))
+    sp.cap((x, y + 1), (x, y + 18), 1.2, 1.2, gold)
+    m = sp.m_super(x, y + 26, 8.0, 8.0, 4.0)[0]
+    sp.paint(m, gold, np.clip((YC - (y + 18)) / 16, 0, 1) * 0.7 + 0.2, olc=(110, 70, 10))
+    sp.stamp(['####.', '##.##', '##.##', '####.', '##...', '##...', '##...'], x - 2, y + 30, {'#': (30, 60, 150)}, keep={'#'},
+             flip=getattr(sp, 'mirror_text', False))
+    sp.dot(x - 6, y + 32, (255, 255, 240), keep=True); sp.dot(x - 5, y + 33, (255, 255, 240), keep=True)
+
+
+PROPS.update(briefcase=p_briefcase, trophy=p_trophy)
+
+
+def pigeon(sp, t=0.0, flap=0.0, **_):
+    """a city pigeon (facing +x), wings flapping"""
+    g = [(70, 74, 92), (110, 114, 134), (150, 154, 176), (196, 200, 220)]
+    sp.ell(0, 6, 6.0, 3.6, g)
+    sp.ell(5, 9, 2.6, 2.4, g); sp.dot(6, 10, (240, 120, 40)); sp.dot(7, 9, (230, 170, 60))
+    sp.rect(5, 7, 7, 8, (90, 170, 140))
+    w = math.sin(flap)
+    sp.poly([(-2, 7), (3, 7), (0 - 2 * w, 13 + 4 * w), (-5, 12 + 3 * w)], g)
+    sp.poly([(-6, 6), (-9, 8), (-9, 4)], g)
+    sp.anchors.update(head=(5.0, 9.0))
+    sp.outline()
+
+
+# ======================================================================================== THE CHIEF (Bureau of Serious Business)
+CHF_SKIN = [(150, 96, 84), (198, 140, 120), (230, 182, 158), (248, 214, 194)]
+CHF_SUIT = [(14, 16, 32), (26, 30, 56), (40, 48, 86), (70, 82, 130)]
+CHF_HAIR = [(120, 120, 130), (164, 164, 174), (204, 204, 212), (236, 236, 242)]
+
+
+def chief(sp, pose='stand', t=0.0, mouth_=0.0, expr='deadpan', look=0.0, blink=None, hands=None, props=None, legs=True, clip_h=None,
+          breath=True, **_):
+    pose = POSE[pose] if isinstance(pose, str) else pose
+    X = EXPR.get(expr, EXPR['normal'])
+    br = (0.4 * math.sin(t * 1.6)) if breath else 0.0
+    hipy = 30.0
+    hipL, hipR = (-7.0, hipy), (7.0, hipy)
+    G = dict(shL=(-18.0, 66.0 + br), shR=(16.0, 66.0 + br), head=(3.0, 90.0 + br), hip=hipy, rx=19.0, arm=28.0, hrx=13.0, hry=14.0)
+    tl, tr, bl, bR = hand_targets(pose, G)
+    if hands: tl = hands.get('L', tl); tr = hands.get('R', tr)
+    props = props or {}
+    hand_c = CHF_SKIN
+    hl, al = arm(sp, G['shL'], tl, 14, 14, 4.6, 4.0, CHF_SUIT, bl, hand_c, 3.2, cuff=[(176, 180, 196), (214, 218, 230), (240, 242, 248), (255, 255, 255)])
+    _prop(sp, props.get('L'), hl, al, t)
+    if legs:
+        (kL, aL), (kR, aR) = legs_for(pose, hipL, hipR, 15.0)
+        shoe = [(10, 10, 12), (24, 24, 28), (44, 44, 52), (90, 90, 104)]
+        leg(sp, hipL, kL, aL, 5.4, CHF_SUIT, shoe, 11, 5, sole=(20, 20, 24)); leg(sp, hipR, kR, aR, 5.4, CHF_SUIT, shoe, 11, 5, sole=(20, 20, 24))
+    sp.cap((1.5, 62 + br), (2.5, 74 + br), 5.0, 4.8, CHF_SKIN)
+    tm = sp.sup(0.0, 48.0 + br * 0.5, 19.0, 21.0, CHF_SUIT, n=2.4)
+    shirt = sp.m_poly([(-5, 69 + br), (9, 69 + br), (2, 46 + br)])
+    sp.paint(shirt, [(176, 180, 196), (214, 218, 230), (240, 242, 248), (255, 255, 255)], None)
+    sp.poly([(1, 66 + br), (3, 66 + br), (4, 50 + br), (2, 47 + br), (0, 50 + br)], ramp((170, 30, 40)))                      # red tie
+    sp.fill(tm & (np.abs((XC + 2) - (YC - 30) * 0.55) < 2.2) & (YC < 66), (214, 40, 50))                                  # sash
+    sp.fill(tm & (np.abs((XC + 2) - (YC - 30) * 0.55) < 0.8) & (YC < 66), (250, 250, 246))
+    for k, c in enumerate(((246, 204, 80), (214, 40, 50), (90, 160, 230))):                                                 # medals
+        sp.rect(-14 + k * 4, 54 + int(br), -12 + k * 4, 57 + int(br), c); sp.dot(-13 + k * 4, 52 + int(br), (246, 204, 80))
+    sp.ell(11, 56 + br, 1.8, 1.8, [(150, 104, 24), (210, 160, 40), (244, 204, 80), (255, 240, 160)])                       # BSB pin
+    hx, hy = G['head']
+    face = sp.union([sp.m_ell(hx, hy, 12.5, 13.5), sp.m_ell(hx + 1, hy - 8, 13.5, 7.5)], CHF_SKIN)                         # big jowls
+    sp.line((hx - 9, hy - 6), (hx - 7, hy - 12), CHF_SKIN[1]); sp.line((hx + 12, hy - 6), (hx + 11, hy - 12), CHF_SKIN[1])
+    sp.ell(hx - 12, hy - 0.5, 3.2, 4.6, CHF_SKIN)                                                                           # big ear
+    bl_ = _blink(t + 0.7, blink)
+    X2 = dict(X); X2['lid'] = max(X.get('lid', 0.0), 0.3)
+    eye(sp, hx - 2.5, hy + 1.5, 5.5, 4.5, X2, (70, 80, 90), (look, 0.0), bl_, LASH, CHF_SKIN[2], lidc=CHF_SKIN[1], bag=CHF_SKIN[1])
+    eye(sp, hx + 7.5, hy + 1.5, 5.0, 4.5, X2, (70, 80, 90), (look, 0.0), bl_, LASH, CHF_SKIN[2], lidc=CHF_SKIN[1], bag=CHF_SKIN[1])
+    for cx, w in ((hx - 2.5, 5.0), (hx + 7.6, 4.6)):                                                                      # big square glasses
+        x0, x1, y0, y1 = int(cx - w), int(cx + w + 1), int(hy - 2.5), int(hy + 5.0)
+        lens = sp.m_poly([(x0 + 1, y0 + 1), (x1 - 1, y0 + 1), (x1 - 1, y1 - 1), (x0 + 1, y1 - 1)]) & sp.m
+        sp.col[lens] = (sp.col[lens] * 0.8 + np.array((150, 190, 230)) * 0.2).astype(np.uint8)              # glass tint over the eye
+        sp.rect(x0, y1 - 2, x1, y1, (24, 20, 24)); sp.rect(x0, y0, x1, y0 + 1, (24, 20, 24))               # thick black frame
+        sp.rect(x0, y0, x0 + 1, y1, (24, 20, 24)); sp.rect(x1 - 1, y0, x1, y1, (24, 20, 24))
+        sp.dot(x0 + 2, y1 - 3, (255, 255, 255), keep=True)
+    sp.line((hx + 2, hy + 2), (hx + 3, hy + 2), (24, 20, 24)); sp.line((hx - 7.5, hy + 3), (hx - 12, hy + 2), (24, 20, 24))
+    brow(sp, hx - 2.5, hy + 7.5, 8, X, +1, CHF_HAIR[1], th=2.6, bushy=True); brow(sp, hx + 7.5, hy + 7.5, 6, X, -1, CHF_HAIR[1], th=2.6, bushy=True)
+    sp.ell(hx + 5.0, hy - 4.0, 4.0, 3.6, [(160, 90, 80), (206, 130, 112), (234, 168, 146), (250, 206, 186)])               # potato nose
+    sp.dot(hx + 3, hy - 3, (250, 220, 206)); sp.dot(hx + 6, hy - 6, (170, 100, 90))
+    mouth(sp, hx + 4.0, hy - 9.5, 8, X, mouth_, (130, 60, 60), skin=CHF_SKIN[2], maxh=6)
+    top = sp.union([sp.m_super(hx - 0.5, hy + 13, 12.0, 4.5, 4.0)], CHF_HAIR, dither=0.3)                                    # grey flat-top
+    sp.fill(top & CHECK & (YC > hy + 15), CHF_HAIR[3])
+    sp.rect(hx - 12, hy + 4, hx - 9, hy + 10, CHF_HAIR[1])
+    hr_, ar_ = arm(sp, G['shR'], tr, 14, 14, 4.8, 4.2, CHF_SUIT, bR, hand_c, 3.3, cuff=[(176, 180, 196), (214, 218, 230), (240, 242, 248), (255, 255, 255)])
+    _prop(sp, props.get('R'), hr_, ar_, t)
+    sp.anchors.update(head=(hx, hy), handR=hr_, handL=hl)
+    if clip_h is not None: sp.clip_below(clip_h)
+    sp.outline()
