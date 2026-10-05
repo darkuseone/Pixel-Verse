@@ -1,0 +1,15 @@
+{
+ "deb1": ["deb", "[calm, sweet, like reading a bedtime story] Whatever you do, hon, don't let go of that briefcase."],
+ "d1": ["dibs", "[shouting over a hurricane wind, strained, cheeks flapping] I'M NOT LETTING GO!"],
+ "deb2": ["deb", "[sweet, encouraging] Deliver it first, and you're Agent of the Year."],
+ "d2": ["dibs", "[yelling against the wind, desperate] What do I WIN?"],
+ "deb3": ["deb", "[sweet, proud, savoring it] A reserved parking spot. Heated."],
+ "d3": ["dibs", "[awed whisper] Heated. [roaring with joy] DIBS!"],
+ "b1": ["brad", "[bright, chirpy, waving from a car window] Ope! Hi, Dibs!"],
+ "ch1": ["chief", "[formal, deep, ceremonial] Agent Dibs. First to arrive."],
+ "d4": ["dibs", "[teary, voice cracking, overwhelmed] Twenty-two years on probation."],
+ "b2": ["brad", "[startled, then delighted] Ope! Got it!"],
+ "d5": ["dibs", "[crushed, outraged shout] I called DIBS!"],
+ "ch2": ["chief", "[flat, bored bureaucrat] Not in writing."],
+ "deb4": ["deb", "[warm, supportive] Proud of you, hon. [pause] [flat, deadpan] Truly."]
+}
