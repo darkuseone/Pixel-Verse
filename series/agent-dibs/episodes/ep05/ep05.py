@@ -5,6 +5,7 @@ into Brad's hands. «I called DIBS!» — «Not in writing.» The oversized cuff
 import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[4] / 'engine'))
 import math
 import numpy as np
+from PIL import Image, ImageFilter
 import stage as ST
 from stage import view_at, OUT_W, OUT_H
 from scene import sm, lerp
@@ -123,12 +124,14 @@ def crowd(t, pose='stand', expr='normal', skip=(), look=0.4, cheer=False):
     return out
 
 
-def plaza(t, cx, cy, Z, acts=(), front=(), emit=None, fx_=None, sy=330, pre=None, pod=True):
+def plaza(t, cx, cy, Z, acts=(), front=(), emit=None, fx_=None, sy=330, pre=None, pod=True, dof=0):
+    """dof = blur radius (output px) of the background only (macro inserts)"""
     def emit2(big, v):
         if emit: emit(big, v)
     def pre2(big, v):
         if pod: podium(big, v)
         if pre: pre(big, v)
+        if dof: big[:] = np.array(Image.fromarray(big).filter(ImageFilter.GaussianBlur(dof)))
     def fx2(big, v):
         K.snow(big, v, t, 50)
         if fx_: fx_(big, v)
@@ -141,12 +144,22 @@ def chief_act(t, x=POD[0], y=POD[1] - 30, un=7.6, pose='hold', trophy=True, mth=
 
 
 # ================================================================== shots
+CU_BG = 1.45                                 # background zoom behind close-ups (rule 05.10.2026); extreme close-ups capped at 1.7
+
+
+def cu_bg(Z):
+    """background zoom for a close-up framed as if at zoom Z (the hero keeps his own scale)"""
+    return min(1.7, CU_BG * Z / 2.3)
+
+
 def cu_wind(t, u, expr='wind', mth=0.0, Z=2.2, rot=-12.0, pan=70.0, cy=170.0, s=14.0):
-    """close-up of Dibs in the wind over the river: background races past, he stays in frame"""
-    cx = 560.0 - pan * u
+    """close-up of Dibs in the wind over the river: background races past, he stays in frame; hero at 2x, the river zoomed less
+    (offsets and pan scaled by Z / zb, so he sits where he did and the river races past as fast on screen)"""
+    zb = cu_bg(Z); f = Z / zb
+    cx = 560.0 - pan * f * u
     a = A(DC.dibs, cx, cy, s=s, pin='head', pose='arms_up', hands=UP, props=CASE, t=t, expr=expr, mouth_=mth, wind=1.0,
-          rot=rot, pivot=(3.0, 82.0))
-    big = K.shot(RIVER, K.light_river, cx, cy + 40.0, Z, acts=[a], fx_=gust(t, 1.0), sx=180, sy=300)
+          rot=rot, pivot=(3.0, 82.0), hires=True)
+    big = K.shot(RIVER, K.light_river, cx, cy + 40.0 * f, zb, acts=[a], fx_=gust(t, 1.0), sx=180, sy=300)
     B.shake(big, t, 5, 41)
     return big
 
@@ -157,10 +170,11 @@ def r_hook(t, u):
 
 def r_kite(t, u):
     k = sm(u / 1.75)
-    Z = lerp(2.0, 1.0, k)
+    Z = lerp(2.0, 1.0, k); zb = lerp(CU_BG, 1.0, k); f = Z / zb                        # pull-back: the river starts at close-up zoom
     x = lerp(520.0, 600.0, k); y = lerp(170.0, 190.0, k)
     a = flyer(x, y, t, s=lerp(14.0, 5.0, k) * 0.8, rot=lerp(-25.0, -80.0, k))
-    return K.shot(RIVER, K.light_river, lerp(560.0, 620.0, k), lerp(200.0, 330.0, k), Z, acts=[a], fx_=gust(t, 0.8), sx=180, sy=320)
+    cx, cy = lerp(560.0, 620.0, k), lerp(200.0, 330.0, k)
+    return K.shot(RIVER, K.light_river, x + (cx - x) * f, y + (cy - y) * f, zb, acts=[a], fx_=gust(t, 0.8), sx=180, sy=320)
 
 
 def r_d1(t, u):
@@ -259,17 +273,18 @@ def r_splat(t, u):
 def r_chief1(t, u):
     Z = 2.3 + 0.05 * u
     a = A(DC.chief, POD[0], 470.0, s=CU_S * Z / 2.3, flip=True, pin='head', pose='hold', hands={'R': (26.0, 52.0)}, props={'R': 'trophy'}, t=t,
-          mouth_=mouth('chief', t, 1.5), expr='deadpan', look=-0.4)
+          mouth_=mouth('chief', t, 1.5), expr='deadpan', look=-0.4, hires=True)
     def emit(big, v):
         confetti(big, t, 23.1)
         if int(t * 10) % 7 == 0: O.flash(big, 0.25)
-    return plaza(t, POD[0], 470.0, Z, acts=[a], emit=emit, sy=262)
+    return plaza(t, POD[0], 470.0, cu_bg(Z), acts=[a], emit=emit, sy=262, pod=False)          # no tiny podium behind his legs
 
 
 def r_teary(t, u):
     Z = 2.3 + 0.06 * u
-    a = A(DC.dibs, 560.0, 470.0, s=CU_S * Z / 2.3, pin='head', pose='tears', t=t, mouth_=mouth('dibs', t, 1.6), expr='teary', badge22=True, look=0.5)
-    return plaza(t, 560.0, 470.0, Z, acts=[a], emit=lambda big, v: confetti(big, t, 23.1, 60), sy=262)
+    a = A(DC.dibs, 560.0, 470.0, s=CU_S * Z / 2.3, pin='head', pose='tears', t=t, mouth_=mouth('dibs', t, 1.6), expr='teary', badge22=True, look=0.5,
+          hires=True)
+    return plaza(t, 560.0, 470.0, cu_bg(Z), acts=[a], emit=lambda big, v: confetti(big, t, 23.1, 60), sy=262)
 
 
 def trophy_sprite(sp, t=0.0, **_):
@@ -305,16 +320,16 @@ def r_catch(t, u):
 
 def r_d5(t, u):
     Z = 2.3 + 0.08 * u
-    a = A(DC.dibs, 560.0, 470.0, s=CU_S * Z / 2.3, pin='head', pose='shout', t=t, mouth_=mouth('dibs', t, 1.9), expr='angry', badge22=True)
-    big = plaza(t, 560.0, 470.0, Z, acts=[a], sy=262)
+    a = A(DC.dibs, 560.0, 470.0, s=CU_S * Z / 2.3, pin='head', pose='shout', t=t, mouth_=mouth('dibs', t, 1.9), expr='angry', badge22=True, hires=True)
+    big = plaza(t, 560.0, 470.0, cu_bg(Z), acts=[a], sy=262)
     B.shake(big, t, 6, 40)
     return big
 
 
 def r_chief2(t, u):
     Z = 2.5 + 0.04 * u
-    a = A(DC.chief, POD[0], 470.0, s=CU_S * 1.1, flip=True, pin='head', pose='stand', t=t, mouth_=mouth('chief', t, 1.5), expr='deadpan', look=-0.6)
-    return plaza(t, POD[0], 470.0, Z, acts=[a], sy=262)
+    a = A(DC.chief, POD[0], 470.0, s=CU_S * 1.1, flip=True, pin='head', pose='stand', t=t, mouth_=mouth('chief', t, 1.5), expr='deadpan', look=-0.6, hires=True)
+    return plaza(t, POD[0], 470.0, cu_bg(Z), acts=[a], sy=262, pod=False)
 
 
 def r_crowd(t, u):
@@ -335,7 +350,7 @@ def r_cuffs(t, u):
     hx, hy = CUFF_HAND
     a = A(DC.dibs, hx, hy, s=s, pin='handR', pose='hold', hands={'R': (36.0, 72.0)}, t=t, expr='sad')
     def emit(big, v):
-        sp = DX.Spr(); DC.p_briefcase(sp, (0.0, 30.0), 0.0, t, mode='hang')      # ring at sprite y=30 (case stays on the canvas)
+        sp = DX.draw(lambda sp_: DC.p_briefcase(sp_, (0.0, 30.0), 0.0, t, mode='hang'), s)   # ring at sprite y=30; 3x at this scale
         ox, oy = v.opt(hx, hy)
         sl = sm((u - 0.16) / 0.20)                                     # ring slides down over the mitten
         dy = 2.0 - 9.0 * sl                                            # ring centre relative to the hand, sprite px (y up)
@@ -348,7 +363,8 @@ def r_cuffs(t, u):
             for _ in range(40):
                 x = int(r.uniform(300, 900)); y = int(OUT_H - r.uniform(0, 260) * q)
                 big[y - 10:y + 10, x - 10:x + 10] = (226, 232, 244)
-    big = plaza(t, hx - 12.0, hy + 20.0, 3.2, acts=[a], emit=emit, sy=300)
+    zb = 1.7; f = 3.2 / zb                                             # the plaza far behind the hand: less zoom, soft focus
+    big = plaza(t, hx - 12.0 * f, hy + 20.0 * f, zb, acts=[a], emit=emit, sy=300, dof=7)
     fx.vignette(big, 0.35)
     if u > CUFF_HIT: B.shake(big, t, 16 * max(0.0, 1 - (u - CUFF_HIT) / 0.12), 40)
     return big
