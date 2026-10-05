@@ -4,7 +4,7 @@ He only wanted ketchup for his fries. Dibs eats the hostage as evidence. Marty: 
 import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[4] / 'engine'))
 import math
 import numpy as np
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
 import paths as P
 import stage as ST
 from stage import Chars, view_at, OUT_W, OUT_H
@@ -80,11 +80,17 @@ def stand_pre(t, extra=None):
     return pre
 
 
-def stand_shot(t, cx, acts=(), back=(), front=(), pre_extra=None, emit=None, fx_=None, Z=1.0, cy=400.0, sy=320, snow=True):
+def stand_shot(t, cx, acts=(), back=(), front=(), pre_extra=None, emit=None, fx_=None, Z=1.0, cy=400.0, sy=320, snow=True, dof=0):
+    """dof = blur radius (output px) of the background only: inserts where the stand cannot be pushed back (hero / food at the same depth)
+    get a soft out-of-focus backdrop instead of zoomed pixel mush; heroes and props stay sharp"""
+    pre0 = stand_pre(t, pre_extra)
+    def pre(big, v):
+        pre0(big, v)
+        if dof: big[:] = np.array(Image.fromarray(big).filter(ImageFilter.GaussianBlur(dof)))
     def fx2(big, v):
         if snow: K.snow(big, v, t, 80)
         if fx_: fx_(big, v)
-    return K.shot(WORLD, K.light_stand, cx, cy, Z, acts=acts, back=back, front=front, pre=stand_pre(t, pre_extra), emit=emit, fx_=fx2, sx=180, sy=sy)
+    return K.shot(WORLD, K.light_stand, cx, cy, Z, acts=acts, back=back, front=front, pre=pre, emit=emit, fx_=fx2, sx=180, sy=sy)
 
 
 # ================================================================== the standoff pieces
@@ -112,8 +118,8 @@ def crowd(t, look=None, skip=(), fall=None, hat_look=None, expr='shock'):
 
 
 def sal(t, peek=True):
-    """Sal hides behind the counter: only the chef hat and two eyes above the ledge"""
-    return A(DC.sal, 545.0, LEDGE_Y + 36.0, un=8.0, t=t, look=-0.5 * math.sin(t * 3), clip_h=18.0)
+    """Sal hides behind the counter: only the chef hat and two worried eyes peek over the Chicago dog"""
+    return A(DC.sal, 545.0, LEDGE_Y + 12.0, un=8.0, t=t, look=-0.5 * math.sin(t * 3), clip_h=18.0)
 
 
 def food(t, bite=0.0, dog=True, fries=True):
@@ -126,26 +132,33 @@ def food(t, bite=0.0, dog=True, fries=True):
 TERRY_POSE = dict(n=(5.0, 19.6), f=(-3.0, 10.4), bn=1, bf=-1, nleg=(0.18, 0.0), fleg=(-0.18, 0.0))
 
 
-def terry_standoff(t, mouth_=0.0, expr='panic', squeeze=0.0, reach=0.0, sweat=1.0, look=0.0):
-    """Terry holds the ketchup bottle high over the Chicago dog on the ledge"""
+def terry_standoff(t, mouth_=0.0, expr='panic', squeeze=0.0, reach=0.0, sweat=1.0, look=0.0, rec=None):
+    """Terry holds the ketchup bottle high over the Chicago dog on the ledge; rec (dict) gets the bottle's hand point 'h' in sprite px"""
     hand = (lerp(31.0, 46.0, reach), lerp(93.0, 74.0, reach))
-    prop = lambda sp, h, a, tt: DC.p_ketchup(sp, h, a, tt, squeeze=squeeze)
+    def prop(sp, h, a, tt):
+        DC.p_ketchup(sp, h, a, tt, squeeze=squeeze)
+        if rec is not None: rec['h'] = h
     return A(DC.terry, TERRY_X, GY, un=PU, pose='stand', t=t, mouth_=mouth_, expr=expr, look=look, sweat=sweat, hands={'R': hand}, props={'R': prop},
              shadow=0.3)
 
 
+CU_BG = 1.45                                 # background zoom behind close-ups (rule 05.10.2026); extreme close-ups capped at 1.7
+
+
 def cu(fn, head, t, u, spk, expr, Z=2.3, zoom=0.05, pose='stand', flip=False, k=1.7, sy=262, extra=(), front=(), emit=None, look=0.0,
        pre_extra=None, fx_=None, s=CU_S, **kw):
+    """close-up: the hero at 2x sprite resolution pinned by the head; the stand behind is zoomed less than the hero"""
     Zt = Z + zoom * u
     m_ = kw.pop('mouth_', mouth(spk, t, k) if spk else 0.0)
-    a = A(fn, head[0], head[1], s=s * Zt / Z, flip=flip, pin='head', pose=pose, t=t, mouth_=m_, expr=expr, look=look, **kw)
-    return stand_shot(t, head[0], acts=list(extra) + [a], front=front, emit=emit, pre_extra=pre_extra, fx_=fx_, Z=Zt, cy=head[1], sy=sy)
+    a = A(fn, head[0], head[1], s=s * Zt / Z, flip=flip, pin='head', pose=pose, t=t, mouth_=m_, expr=expr, look=look, hires=True, **kw)
+    zb = min(1.7, CU_BG * Zt / 2.3)
+    return stand_shot(t, head[0], acts=list(extra) + [a], front=front, emit=emit, pre_extra=pre_extra, fx_=fx_, Z=zb, cy=head[1], sy=sy)
 
 
 # ================================================================== shots
 def r_hook(t, u):
     acts = food(t) + [terry_standoff(t, mouth('terry', t, 1.2), 'panic', sweat=1.0, look=0.5 * math.sin(t * 9))]
-    big = stand_shot(t, 520.0, acts=acts, Z=2.05 + 0.04 * u, cy=410.0, sy=290)
+    big = stand_shot(t, 520.0, acts=acts, Z=1.62 + 0.04 * u, cy=410.0, sy=300)
     B.shake(big, t, 3.0, 47)
     return big
 
@@ -255,7 +268,7 @@ def r_roof(t, u):
         big[1260:1290] = (250, 252, 255)
         big[1290:][((xx[30:] // 18 + yy[30:] // 18) % 4) == 0] = (196, 214, 240)
         return big
-    big = stand_shot(t, 545.0, acts=food(t) + [terry_standoff(t, 0.0, 'panic', sweat=1.0)], Z=2.0, cy=428.0, sy=330)
+    big = stand_shot(t, 545.0, acts=food(t) + [terry_standoff(t, 0.0, 'panic', sweat=1.0)], Z=1.62, cy=428.0, sy=330)
     yy, xx = np.ogrid[:OUT_H, :OUT_W]
     d = np.sqrt((xx - 540) ** 2 + (yy - 960) ** 2)
     big[d > 520] = 0
@@ -267,25 +280,29 @@ def r_roof(t, u):
 
 
 def r_drip(t, u):
+    """insert: a drop swells on the bottle nozzle right above the Chicago dog (nozzle = p_ketchup tip h + (0.5, -12) of the drawn sprite)"""
     k = sm(u / 0.75)
-    nz = (521.0, 424.0)
+    rec = {}
+    terry = terry_standoff(t, 0.0, 'shock', sweat=1.0, rec=rec)
     def emit(big, v):
-        ox, oy = v.opt(nz[0], nz[1] + 2)
-        r = (7 + 20 * k) * v.Z / 3.0 * 3.0 * 0.28
-        r = int(10 + 38 * k)
+        sc = terry.scale(v); fx0, fy0 = v.opt(terry.wx, terry.wy); hx, hy = rec['h']
+        ox, oy = fx0 + (hx + 0.5) * sc, fy0 - (hy - 12.0) * sc
+        r = int(12 + 34 * k)
         yy, xx = np.ogrid[:OUT_H, :OUT_W]
-        dr = ox, oy + r * 0.9 * k
-        dd = np.sqrt((xx - dr[0]) ** 2 / (0.8 * r * 0.8) ** 2 + (yy - dr[1]) ** 2 / (1.3 * r * 0.8) ** 2)
+        dr = ox, oy + r * (0.6 + 0.5 * k)
+        dd = np.sqrt((xx - dr[0]) ** 2 / (0.8 * r) ** 2 + (yy - dr[1]) ** 2 / (1.05 * r) ** 2)
+        big[dd < 1.12] = (120, 10, 22)                                                 # dark rim, like the sprite outlines
+        big[int(oy) - 4:int(dr[1]), int(ox - r * 0.32) - 4:int(ox + r * 0.32) + 4] = (120, 10, 22)
         big[dd < 1.0] = (214, 28, 36)
-        big[(dd < 0.5) & (xx < dr[0]) & (yy < dr[1])] = (255, 120, 120)
-        big[int(oy - 30):int(dr[1]), int(ox) - int(r * 0.35):int(ox) + int(r * 0.35)] = (214, 28, 36)
-    acts = food(t) + [terry_standoff(t, 0.0, 'shock', sweat=1.0)]
-    return stand_shot(t, 530.0, acts=acts, emit=emit, Z=3.5, cy=425.0, sy=300)
+        big[int(oy) - 4:int(dr[1]), int(ox - r * 0.32):int(ox + r * 0.32)] = (214, 28, 36)
+        hl = np.sqrt((xx - (dr[0] - 0.32 * r)) ** 2 + (yy - (dr[1] - 0.3 * r)) ** 2) < 0.2 * r
+        big[hl] = (255, 150, 140)
+    return stand_shot(t, 556.0, acts=food(t) + [terry], emit=emit, Z=3.5, cy=410.0, sy=300, dof=9)
 
 
 def r_dog(t, u):
     def fx_(big, v): B.steam(big, v, t, 548.0, 428.0, n=5, rise=110, size=40, a=0.45)
-    return stand_shot(t, 548.0, acts=food(t, fries=False), fx_=fx_, Z=3.3 + 0.15 * u, cy=438.0, sy=330)
+    return stand_shot(t, 548.0, acts=food(t, fries=False), fx_=fx_, Z=3.3 + 0.15 * u, cy=438.0, sy=330, dof=9)
 
 
 def r_dibs_eye(t, u):
@@ -296,13 +313,14 @@ def r_marty_eyes(t, u):
     un = 10.0
     ax, ay = 985.0, 380.0
     look = (math.sin(t * 5.0) * 0.9, 0.2)
-    acts = [A(DC.marty, ax, ay, s=22.0, t=t, expr='glare', look=look[0])]
-    return stand_shot(t, ax + 3.0 * un, acts=acts, Z=2.6, cy=ay - 9.0 * un, sy=300)
+    acts = [A(DC.marty, ax, ay, s=22.0, t=t, expr='glare', look=look[0], hires=True)]
+    zb = 1.7; f = 2.6 / zb
+    return stand_shot(t, ax + 0.5 * un * f, acts=acts, Z=zb, cy=ay - 9.0 * un * f, sy=300)
 
 
 def r_terry_hand(t, u):
     acts = food(t) + [terry_standoff(t, 0.0, 'cry', squeeze=0.0, sweat=1.0)]
-    big = stand_shot(t, 515.0, acts=acts, Z=3.0, cy=400.0, sy=330)
+    big = stand_shot(t, 515.0, acts=acts, Z=3.0, cy=400.0, sy=330, dof=8)
     B.shake(big, t, 4, 53)
     return big
 
@@ -325,7 +343,7 @@ def r_squirt(t, u):
         FX = Chars()
         B.jet(FX, v, t, TURN_T + 0.35, (nz[0] + 2, nz[1] + 3), (FRY_X - 2, LEDGE_Y - 24), arc=30, col=(214, 28, 36), col2=(255, 96, 96), width=3.0, grow=0.7)
         CH.col[FX.m] = FX.col[FX.m]; CH.m |= FX.m
-    big = stand_shot(t, 565.0, acts=acts, front=[stream], Z=2.1, cy=425.0, sy=330, snow=False)
+    big = stand_shot(t, 540.0, acts=acts, front=[stream], Z=1.7, cy=425.0, sy=330, snow=False)
     # slow-motion feel: desaturate a bit and add speed-line shimmer
     g = big.mean(axis=2, keepdims=True)
     big[:] = (big * 0.7 + g * 0.3).astype(np.uint8)
@@ -354,8 +372,8 @@ def r_bite(t, u):
     bites = 0 if u < 0.15 else (1 if u < 0.35 else 2)
     dog = lambda sp, h, a, tt: DC.p_dog(sp, h, a, tt, bites=bites)
     a = A(DC.dibs, head[0], head[1], s=CU_S, pin='head', pose='stand', t=t, mouth_=chew(t) if u > 0.3 else 0.9, expr='content', shades=True,
-          hands={'R': (12.0, 64.0)}, props={'R': dog})
-    return stand_shot(t, head[0], acts=[a], Z=2.3, cy=head[1], sy=262)
+          hands={'R': (12.0, 64.0)}, props={'R': dog}, hires=True)
+    return stand_shot(t, head[0], acts=[a], Z=CU_BG, cy=head[1], sy=262)
 
 
 def r_dibs_evidence(t, u):
@@ -365,23 +383,46 @@ def r_dibs_evidence(t, u):
 def r_marty(t, u):
     un = 10.0
     ax, ay = 985.0, 380.0
-    acts = [A(DC.marty, ax, ay, s=18.0 * (2.0 + 0.05 * u) / 2.0, t=t, mouth_=mouth('marty', t, 1.7), expr='deadpan', look=0.8)]
+    q = 1.0 + 0.025 * u
+    acts = [A(DC.marty, ax, ay, s=18.0 * q, t=t, mouth_=mouth('marty', t, 1.7), expr='deadpan', look=0.8, hires=True)]
     def fx_(big, v): B.steam(big, v, t, 960.0, 372.0, n=4, rise=90, size=34, a=0.35)
-    return stand_shot(t, ax + 3.0 * un, acts=acts, Z=2.0 + 0.05 * u, cy=ay - 9.0 * un, sy=330, fx_=fx_)
+    f = 2.0 / CU_BG
+    return stand_shot(t, ax + 3.0 * un * f, acts=acts, Z=CU_BG * q, cy=ay - 9.0 * un * f, sy=330, fx_=fx_)
 
 
 def r_dibs_chair(t, u):
     return cu(DC.dibs, (620.0, 410.0), t, u, 'dibs', 'smug', k=1.6, shades=True)
 
 
+def sal_arm(big, x, y, px=7):
+    """Sal's arm reaching in from the right edge: pixel-art white chef sleeve + fist; (x, y) = screen point of the knuckles (left end, middle)"""
+    x, y = int(x), int(y)
+    w, h = (OUT_W - x) // px + 3, 18
+    im = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    ol, skin, skin_d = (60, 48, 46, 255), (236, 190, 150, 255), (190, 136, 104, 255)
+    d.rectangle([9, 3, w + 2, 14], fill=(236, 234, 228, 255), outline=ol)                  # sleeve
+    d.line([10, 13, w, 13], fill=(196, 192, 186, 255)); d.line([10, 4, w, 4], fill=(252, 252, 248, 255))
+    d.rectangle([10, 2, 13, 15], fill=(250, 250, 246, 255), outline=ol)                     # cuff
+    d.ellipse([0, 2, 12, 15], fill=skin, outline=ol)                                        # fist round the bun end
+    d.ellipse([1, 0, 8, 6], fill=skin, outline=ol)                                          # thumb on top of the bun
+    for yy in (8, 11): d.line([2, yy, 8, yy], fill=skin_d)                                  # finger creases
+    a = np.array(im.resize((w * px, h * px), Image.NEAREST))
+    y0 = int(y) - h * px // 2; x0 = int(x)
+    ys, xs = slice(max(0, y0), min(OUT_H, y0 + h * px)), slice(max(0, x0), min(OUT_W, x0 + w * px))
+    sub = a[ys.start - y0:ys.stop - y0, xs.start - x0:xs.stop - x0]
+    m = sub[..., 3] > 0
+    big[ys, xs][m] = sub[..., :3][m]
+
+
 def r_tail(t, u):
+    """loop: Sal's arm slides a fresh Chicago dog back onto the ledge (the dog from the hook)"""
     k = sm(min(1.0, u / 0.35))
-    acts = [lambda CH, v: PR.chicago_dog(CH, v.cam(DOG_X, LEDGE_Y + 40 * (1 - k), 3.3), t, 1.0)]
+    dy = 40 * (1 - k)
+    acts = [lambda CH, v: PR.chicago_dog(CH, v.cam(DOG_X, LEDGE_Y + dy, 3.3), t, 1.0)]
     def arm(big, v):
-        ox, oy = v.opt(DOG_X + 40, LEDGE_Y - 4 + 40 * (1 - k))
-        big[int(oy) - 40:int(oy) + 40, int(ox):OUT_W] = (22, 22, 30)
-        big[int(oy) - 40:int(oy) - 28, int(ox):OUT_W] = (230, 230, 236)
-    return stand_shot(t, 520.0, acts=acts, Z=2.3, cy=420.0, sy=330, emit=arm)
+        ox, oy = v.opt(DOG_X + 30, LEDGE_Y - 6 + dy)
+        sal_arm(big, ox, oy)
+    return stand_shot(t, 548.0, acts=acts, Z=2.3, cy=420.0, sy=330, emit=arm, dof=6)
 
 
 # ================================================================== shot table
@@ -422,7 +463,8 @@ SHOW = K.Show(EPI, 4, ['NO', 'KETCHUP'], hook_t=(0.15, 1.85),
                   (st('TENSION', (255, 255, 255), 56), 32.15, 33.30, 540, 330),
               ],
               flashes=[], mosaics=[], cap_default=1400,
-              cap_y={'wide': 1450, 'walkin': 1450, 'gasp': 1450, 'turn_heads': 1450, 'freeze': 1500, 'squirt': 1500, 'dibs_garden': 1560})
+              cap_y={'wide': 1450, 'walkin': 1450, 'gasp': 1450, 'turn_heads': 1450, 'freeze': 1500, 'squirt': 1500, 'dibs_garden': 1560,
+                     'tail': 1660})
 
 
 def render(t):

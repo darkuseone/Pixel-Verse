@@ -1177,7 +1177,7 @@ def townie(sp, variant=0, pose='stand', t=0.0, mouth_=0.0, expr='normal', look=0
 S_SKIN = [(150, 96, 74), (200, 140, 108), (232, 182, 146), (250, 216, 184)]
 
 
-def sal(sp, t=0.0, look=0.0, expr='nervous', blink=None, **_):
+def sal(sp, t=0.0, look=0.0, expr='nervous', blink=None, clip_h=None, **_):
     """Sal hiding behind his counter: tall pleated chef hat, bushy brows, worried eyes (the rest is under the ledge)"""
     X = EXPR.get(expr, EXPR['normal'])
     hx, hy = 2.0, 20.0
@@ -1193,6 +1193,7 @@ def sal(sp, t=0.0, look=0.0, expr='nervous', blink=None, **_):
     sp.cap((hx - 11, hy + 9.5), (hx + 10, hy + 9.5), 2.0, 2.0, ramp((214, 214, 222)))
     sp.anchors.update(head=(hx, hy))
     sp.outline()
+    if clip_h is not None: sp.clip_below(clip_h)                       # the rest is under the counter
 
 
 def p_mustard_rifle(sp, h, ang, t=0.0):

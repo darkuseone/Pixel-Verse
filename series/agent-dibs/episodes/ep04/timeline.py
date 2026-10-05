@@ -2,7 +2,7 @@
 DUR = 39.8
 FPS = 30
 SLUG = 'agent-dibs'
-MASTER = 0.80
+MASTER = 0.75
 TURN_T = 24.30                                   # the squeeze
 BITE_T = 33.95
 
@@ -33,7 +33,7 @@ SFX = [
     (S + 'record_scratch.mp3', 18.00, 0.85),
     (S + 'wind_gust.mp3', 18.00, 0.45),
     (S + 'slowmo_whoosh.mp3', TURN_T, 0.6, 0.0, 1.5),
-    (S + 'ketchup_squirt.mp3', TURN_T + 0.15, 1.0),
+    (S + 'ketchup_squirt_soft.mp3', TURN_T + 0.15, 1.0),
     (S + 'crowd_sigh.mp3', 27.85, 0.8),
     (S + 'big_bite_chew.mp3', BITE_T, 0.9),
     (S + 'plastic_crunch.mp3', 16.55, 0.4),
@@ -41,6 +41,7 @@ SFX = [
     (S + 'stamp.mp3', 14.2, 0.4),
     (S + 'knitting.mp3', 5.0, 0.5, 0.0, 1.2),
     (S + 'blues_bass_sting.mp3', 36.1, 0.45),
+    (S + 'snow_crawl.mp3', 18.72, 0.40, 0.0, 0.6), (S + 'flashlight_click.mp3', 19.24, 0.55),     # Gary on the roof, scope on
 ]
 
 # (path, loop_len, t0, t1, gain, duck_under_speech)
