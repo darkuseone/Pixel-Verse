@@ -52,8 +52,9 @@ class res:
 
 def res_for(scale, hires=None):
     """sub-pixels per sprite px for an on-screen scale: 2 for close-ups (>= HIRES_AT output px per sprite px), 3 for extreme close-ups
-    (>= HIRES3_AT); hires=True forces at least 2, hires=False forces 1"""
+    (>= HIRES3_AT); hires=True forces at least 2, hires=False forces 1, an int forces exactly that"""
     if hires is False: return 1
+    if hires is not True and isinstance(hires, int): return hires
     k = 3 if scale >= HIRES3_AT else (2 if scale >= HIRES_AT else 1)
     return max(k, 2) if hires else k
 LDIR = np.array([-0.52, 0.56, 0.64], np.float32)    # light from the upper left, a little from the front

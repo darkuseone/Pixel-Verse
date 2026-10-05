@@ -55,13 +55,38 @@ def street(cx, cy, Z, acts=(), front=(), pre=None, emit=None, fx_=None, sx=180, 
     return K.shot(WORLD, K.light_street, cx, cy, Z, acts=list(acts), front=list(front), pre=pre, emit=emit, fx_=fx2, sx=sx, sy=sy)
 
 
+CU_BG = 1.45                                 # background zoom behind close-ups (rule 05.10.2026); extreme close-ups capped at 1.7
+
+
+def cu_bg(Z):
+    """background zoom for a close-up framed as if at zoom Z (the hero keeps his own scale)"""
+    return min(1.7, CU_BG * Z / 2.3)
+
+
 def cu(fn, spk, t, u, hx, hy, Z=2.1, s=12.5, zoom=0.06, sx=180, sy=300, flip=False, k=1.8, extra=(), front=(), pre=None, emit=None,
-       fx_=None, cdx=0.0, cdy=0.0, **P):
-    """close-up: the hero's head pinned at world (hx, hy); camera on the head (slow push); sprite scale follows the zoom"""
+       fx_=None, cdx=0.0, cdy=0.0, near_pre=None, near=None, near_acts=(), **P):
+    """close-up: the hero's head pinned at world (hx, hy); camera on the head (slow push); sprite scale follows the zoom.
+    The hero is drawn at 2x (3x for extreme close-ups) and the street behind is zoomed less (cu_bg); camera offsets scale with it, so the
+    hero sits where he did. near_pre / near(big, v) draw things right next to the hero (ribbon, sign) with the hero-depth view instead,
+    near_acts = Chars props f(CH, v) right behind the hero (his chair), also with the hero-depth view"""
     Zt = Z + zoom * u
+    zb = cu_bg(Zt); f = Zt / zb
+    vh = view_at(WORLD, hx + cdx, hy + 30.0 + cdy, Zt, sx, sy)
     P.setdefault('mouth_', mouth(spk, t, k))
-    a = A(fn, hx, hy, s=s * Zt / Z, flip=flip, pin='head', t=t, **P)
-    return street(hx + cdx, hy + 30.0 + cdy, Zt, acts=list(extra) + [a], front=front, pre=pre, emit=emit, fx_=fx_, sx=sx, sy=sy, t=t, snow=40)
+    a = A(fn, hx, hy, s=s * Zt / Z, flip=flip, pin='head', t=t, hires=True, **P)
+    def pre2(big, v):
+        if pre: pre(big, v)
+        if near_pre: near_pre(big, vh)
+    def emit2(big, v):
+        if emit: emit(big, v)
+        if near: near(big, vh)
+    class Near:                                                                         # a Chars prop painted with the hero-depth view
+        direct = True
+        def __init__(s_, f_): s_.f = f_
+        def __call__(s_, big, v, lt):
+            CH = ST.Chars(); s_.f(CH, vh); CH.comp(big, lt)
+    acts = list(extra) + [Near(f_) for f_ in near_acts] + [a]
+    return street(hx + cdx * f, hy + (30.0 + cdy) * f, zb, acts=acts, front=front, pre=pre2, emit=emit2, fx_=fx_, sx=sx, sy=sy, t=t, snow=40)
 
 
 # ================================================================== world-space drawing (signs, ribbon)
@@ -369,7 +394,7 @@ def r_hook(t, u):
         ribbon(big, v, t, cut)
     big = cu(DC.brad, 'brad', t, u, 640.0, 440.0, Z=2.1, s=12.5, zoom=0.05, pose='hold', hands={'R': (24.0, 60.0)},
              props={'R': lambda sp, h, a, tt: DC.p_scissors(sp, h, a, tt, open_=open_)}, expr='grin', ting=max(0.0, 1 - abs(u - 0.15) / 0.15),
-             mouth_=0.0, pre=lambda big, v: reserved_sign(big, v, 760.0, 600.0), emit=front, cdy=0.0, sy=260)
+             mouth_=0.0, near_pre=lambda big, v: reserved_sign(big, v, 760.0, 600.0), near=front, cdy=0.0, sy=260)
     if u > 0.30:                                                                         # SLAP: the call sheet
         k = min(1.0, (u - 0.30) / 0.07)
         paste_rot(big, callsheet(), 560, 1420 + 400 * (1 - k), -3.0, 1.0 + 0.25 * (1 - k))
@@ -383,15 +408,17 @@ def r_ope(t, u):
     ex = 'ope' if talk('brad', t) > 0.05 else 'grin'
     return cu(DC.brad, 'brad', t, u, 640.0, 440.0, Z=2.7, s=16.0, zoom=0.08, pose='hold', hands={'R': (20.0, 40.0)},
               props={'R': lambda sp, h, a, tt: DC.p_scissors(sp, h, a, tt, open_=0.1, a=-0.3)}, expr=ex, sweat=1.0, mouth_=mouth('brad', t, 1.2),
-              pre=lambda big, v: reserved_sign(big, v, 760.0, 600.0), cdy=0.0)
+              near_pre=lambda big, v: reserved_sign(big, v, 760.0, 600.0), cdy=0.0)
 
 
 def r_marty(t, u, zoom=0.05, Z=2.0, s=18.0):
-    def pre(big, v):
-        B.steam(big, v, t, 790.0, 586.0, n=7, rise=170, size=60, a=0.55)
     Zt = Z + zoom * u
-    a = A(DC.marty, 800.0, 598.0, s=s * Zt / Z, t=t, mouth_=mouth('marty', t, 1.7), expr='deadpan', look=0.6)
-    return street(812.0, 510.0, Zt, acts=[a], pre=pre, t=t, snow=40)
+    zb = cu_bg(Zt); f = Zt / zb
+    vh = view_at(WORLD, 812.0, 510.0, Zt, 180, 330)                                     # hero-depth view (his steam)
+    def pre(big, v):
+        B.steam(big, vh, t, 790.0, 586.0, n=7, rise=170, size=60, a=0.55)
+    a = A(DC.marty, 800.0, 598.0, s=s * Zt / Z, t=t, mouth_=mouth('marty', t, 1.7), expr='deadpan', look=0.6, hires=True)
+    return street(800.0 + 12.0 * f, 598.0 - 88.0 * f, zb, acts=[a], pre=pre, t=t, snow=40)
 
 
 def r_d2(t, u):
@@ -514,7 +541,7 @@ def split4(t, u, open_t=0.05, expr='glare', props=('binoculars', 'popcorn', 'bin
     """2 x 2 split: four windows, four ladies, curtains snap open together"""
     out = np.zeros((OUT_H, OUT_W, 3), np.uint8)
     for i, who in enumerate(('mrs_w', 'rose', 'dot', 'bev')):
-        fr = DK.window_cut(t, u, who, open_t=open_t + 0.03 * i, prop=props[i], expr=expr, flip=i % 2 == 1, s=15.0)
+        fr = DK.window_cut(t, u, who, open_t=open_t + 0.03 * i, prop=props[i], expr=expr, flip=i % 2 == 1, s=15.0, hires=2)   # halved below
         small = fr[::2, ::2]
         y0, x0 = (i // 2) * 960, (i % 2) * 540
         out[y0:y0 + 960, x0:x0 + 540] = small
@@ -526,8 +553,14 @@ def r_curtains(t, u): return split4(t, u)
 
 
 def r_d4(t, u):
-    return cu(DC.dibs, 'dibs', t, u, 520.0, 430.0, Z=2.35, s=13.5, zoom=0.05, pose='sit', hands={'R': (14.0, 52.0)}, props={'R': 'thermos'},
-              expr='sly', mouth_=mouth('dibs', t, 1.5), k=1.5)
+    """Dibs on his chair, sly: the chair is placed under him the way dibs_sitting does it (feet anchor = chair + (1.5, 0.2) un)"""
+    hx, hy, Z, zoom, s = 520.0, 430.0, 2.35, 0.05, 13.5
+    Zt = Z + zoom * u; sc = s * Zt / Z; un = sc / (Zt * 0.75)
+    ax, ay = DX.draw(DC.dibs, 1.0, hires=1, pose='sit', t=t).anchors['head']
+    fx_, fy_ = hx - ax * sc / (3 * Zt), hy + ay * sc / (3 * Zt)                           # feet anchor, hero-depth world px
+    chair = lambda CH, v: PR.dibs_chair(CH, v.cam(fx_ - 1.5 * un, fy_ - 0.2 * un, un * CHU), t=t)
+    return cu(DC.dibs, 'dibs', t, u, hx, hy, Z=Z, s=s, zoom=zoom, pose='sit', hands={'R': (14.0, 52.0)}, props={'R': 'thermos'},
+              expr='sly', mouth_=mouth('dibs', t, 1.5), k=1.5, near_acts=[chair])
 
 
 def r_doors(t, u):
@@ -640,7 +673,7 @@ def r_burrito(t, u):
 
 def r_chief(t, u):
     return cu(DC.chief, 'chief', t, u, 700.0, 430.0, Z=2.3, s=12.5, zoom=0.05, flip=True, pose='stand', expr='deadpan', look=-0.5, k=1.5,
-              pre=lambda big, v: reserved_sign(big, v, 820.0, 610.0))
+              near_pre=lambda big, v: reserved_sign(big, v, 820.0, 610.0))
 
 
 BADGE = None
@@ -670,7 +703,7 @@ def r_cry(t, u):
 def r_heated(t, u):
     """Dibs on his chair on the heated spot, steam rising around him; slow pull back"""
     un = 8.4
-    Z = lerp(2.0, 1.45, sm(u / 2.3))
+    Z = lerp(1.7, 1.35, sm(u / 2.3))
     def pre(big, v):
         reserved_sign(big, v)
         B.steam(big, v, t, SPOT[0] - 40, SPOT[1] - 4, n=6, rise=160, size=50, a=0.45, seed=2)
@@ -762,7 +795,7 @@ SHOW = K.Show(EPI, 6, ['OPE.', 'BUSTED.'], hook_t=(0.15, 2.0),
                   (st('SEASON 2', (110, 210, 255), 84), 40.40, DUR + 1, 540, 360),
               ],
               flashes=[], mosaics=[], cap_default=1400,
-              cap_y={'hook': 900, 'board': 1790, 'thing': 1500, 'chase': 1500, 'snacks2': 1760, 'lap1': 1500, 'point': 1720, 'ope3': 1500, 'burrito': 1500,
+              cap_y={'hook': 520, 'board': 1790, 'thing': 1500, 'chase': 1500, 'snacks2': 1760, 'lap1': 1500, 'point': 1720, 'ope3': 1500, 'burrito': 1500,
                      'taxi': 1500, 'end': 1500, 'cry': 1560, 'curtains': 1780, 'chorus': 1780})
 
 
