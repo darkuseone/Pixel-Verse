@@ -1002,7 +1002,7 @@ def bea(sp, pose='hold', t=0.0, mouth_=0.0, expr='deadpan', look=0.0, blink=None
     sp.fill(tm & CHECK & ((YC.astype(int) % 4) == 0), BEA_CARD[1])
     polo = sp.m_poly([(-5, 48.5 + br), (9, 48.5 + br), (2, 34 + br)])
     sp.paint(polo, [(20, 90, 110), (30, 130, 150), (50, 170, 186), (120, 220, 230)], None)
-    sp.rect(-11, 38 + int(br), -2, 43 + int(br), (250, 250, 244)); text3(sp, '311', -10, 42 + int(br), (214, 40, 50), keep=True)
+    sp.rect(-12, 37 + int(br), 1, 44 + int(br), (250, 250, 244)); text3(sp, '311', -11, 42 + int(br), (214, 40, 50), keep=True)   # badge fits all 3 digits
     hx, hy = G['head']
     sp.ell(hx - 2, hy + 2, 13.5, 13.0, BEA_HAIR, dither=0.3)                                                # hair behind
     face = sp.union([sp.m_ell(hx, hy, 11.5, 12.5), sp.m_ell(hx + 1.5, hy - 6, 10.5, 7.0)], BEA_SKIN)

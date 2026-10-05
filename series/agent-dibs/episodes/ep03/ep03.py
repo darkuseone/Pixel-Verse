@@ -258,8 +258,12 @@ CU_S = 12.5
 HEAD = (590.0, 470.0)
 
 
+CU_BG = 1.45                                 # background zoom behind close-ups (rule 05.10.2026): hero at 2x near the camera, street far and crisp
+
+
 def cu_shot(t, u, act, Z=2.3, zoom=0.05, head=HEAD, sx=180, front=()):
-    return K.shot(WORLD, K.light_avenue, head[0], head[1], Z + zoom * u, acts=[act], front=front,
+    """close-up: the hero (2x sprite, s ~ CU_S) in front of the avenue, which is zoomed less than the hero (CU_BG * relative push)"""
+    return K.shot(WORLD, K.light_avenue, head[0], head[1], CU_BG * (Z + zoom * u) / 2.3, acts=[act], front=front,
                   pre=lambda big, v: draw_hole(big, v, 640.0, 585.0, 82.0, 15.0, t), fx_=lambda big, v: K.snow(big, v, t, 40), sx=sx, sy=262)
 
 
@@ -335,8 +339,7 @@ def operator_frame(t, expr='deadpan', mth=0.0, Z=2.0, u=0.0, dx=0.0, zoom=0.05, 
     big = np.zeros((OUT_H, OUT_W, 3), np.uint8)
     cubicle(big, t)
     under = big.copy()
-    sp = DX.Spr()
-    DC.bea(sp, 'hold', t, mth, expr, gum=max(0.0, math.sin(t * 1.3)) ** 6 if mth < 0.05 else 0.0)
+    sp = DX.draw(DC.bea, s, pose='hold', t=t, mouth_=mth, expr=expr, gum=max(0.0, math.sin(t * 1.3)) ** 6 if mth < 0.05 else 0.0)   # 2x canvas
     hx, hy = sp.anchors['head']
     DX.blit(big, sp, 560 + dx * 3 - hx * s, 760 + hy * s, s, ST.Light(amb=(1.04, 1.02, 0.96), rim=(1, -0.3, (255, 240, 200), 0.3)))
     big[1560:] = under[1560:]
@@ -543,7 +546,7 @@ def r_seatbelt(t, u):
         sp.outline()
     Z = 2.3 + 0.05 * u
     a = A(DC.dibs, HEAD[0], HEAD[1], s=CU_S * Z / 2.3, pin='head', pose='stand', t=t, expr='shock' if belt < 0.5 else 'smug', shades=True, post=belt_)
-    return K.shot(WORLD, K.light_avenue, HEAD[0], HEAD[1], Z, acts=[a], fx_=lambda big, v: K.snow(big, v, t, 40), sx=180, sy=262)
+    return K.shot(WORLD, K.light_avenue, HEAD[0], HEAD[1], CU_BG * Z / 2.3, acts=[a], fx_=lambda big, v: K.snow(big, v, t, 40), sx=180, sy=262)
 
 
 def render_scene(t):

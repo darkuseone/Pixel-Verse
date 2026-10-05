@@ -45,7 +45,7 @@ SFX = [
     (S + 'clock_fast_ticks.mp3', HOLD_T0, 0.55), (S + 'clock_fast_ticks.mp3', HOLD_T0 + 1.5, 0.55),
     (S + 'record_scratch.mp3', 28.90, 0.85),
     (S + 'brake_skid.mp3', 36.00, 0.5), (S + 'book_thud.mp3', 36.45, 0.55),
-    (S + 'spray_paint_hiss.mp3', 36.70, 0.6, 0.0, 1.2), (S + 'pencil_scribble.mp3', 37.00, 0.5, 0.0, 0.8),
+    (S + 'spray_paint_soft.mp3', 36.70, 0.6, 0.0, 1.2), (S + 'pencil_scribble.mp3', 37.00, 0.5, 0.0, 0.8),
     (S + 'blues_bass_sting.mp3', 40.45, 0.7),
 ]
 
