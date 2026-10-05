@@ -53,7 +53,9 @@ def deb_window(big, t, expr='smile', mouth=0.0, box=(660, 520, 1040, 900), label
     if int(t * 2) % 2 == 0: big[y0 + 14:y0 + 34, x1 - 40:x1 - 20] = (240, 50, 60)
 
 
-LADY_HANDS = dict(binoculars=dict(L=(-1.0, 55.5), R=(5.0, 55.5)), popcorn=dict(L=(-3.0, 50.0), R=(7.0, 50.0)))
+LADY_HANDS = dict(binoculars=dict(L=(-1.0, 55.5), R=(5.0, 55.5)), popcorn=dict(L=(-3.0, 50.0), R=(7.0, 50.0)),
+                  rolling_pin=dict(L=(-8.0, 48.0), R=(14.0, 64.0)), casserole=dict(L=(-6.0, 50.0), R=(12.0, 60.0)),
+                  pan=dict(L=(-8.0, 48.0), R=(14.0, 64.0)), mop=dict(L=(-8.0, 48.0), R=(12.0, 58.0)))
 
 
 def window_cut(t, u, who='mrs_w', open_t=0.12, prop='binoculars', expr='deadpan', flip=False, shift=(0, 0), robe_cur=(214, 70, 96), s=13.0):

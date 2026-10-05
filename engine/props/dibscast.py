@@ -627,7 +627,7 @@ B_SHOE = [(170, 174, 186), (214, 218, 228), (244, 246, 250), (255, 255, 255)]
 
 
 def brad(sp, pose='stand', t=0.0, mouth_=0.0, expr='grin', look=0.0, blink=None, hands=None, props=None, legs=True, clip_h=None,
-         breath=True, shades_up=True, ting=0.0):
+         breath=True, shades_up=True, ting=0.0, sweat=0.0):
     pose = POSE[pose] if isinstance(pose, str) else pose
     X = EXPR.get(expr, EXPR['normal'])
     br = (0.5 * math.sin(t * 2.3 + 3)) if breath else 0.0
@@ -682,6 +682,10 @@ def brad(sp, pose='stand', t=0.0, mouth_=0.0, expr='grin', look=0.0, blink=None,
         for d in range(1, int(1 + 4 * ting)): sp.dot(cx_ + d, cy_, c, keep=True); sp.dot(cx_ - d, cy_, c, keep=True); sp.dot(cx_, cy_ + d, c, keep=True); sp.dot(cx_, cy_ - d, c, keep=True)
     hr_, ar_ = arm(sp, G['shR'], tr, 14, 13, 4.6, 4.0, B_SHIRT, bR, B_SKIN, 3.3)
     _prop(sp, props.get('R'), hr_, ar_, t)
+    if sweat > 0.05:                                                                                         # nervous sweat drops
+        for k, (dx, dy) in enumerate(((-12, 9), (14, 10), (-9, 2))):
+            yy = hy + dy - 6 * ((t * 1.4 + k * 0.37) % 1.0) * sweat
+            sp.ell(hx + dx, yy, 1.4, 2.0, [(80, 140, 210), (120, 180, 240), (170, 220, 255), (236, 248, 255)], ol=True)
     sp.anchors.update(head=(hx, hy), handR=hr_, handL=hl)
     if clip_h is not None: sp.clip_below(clip_h)
     sp.outline()
@@ -750,6 +754,10 @@ def lady(sp, who='mrs_w', pose='hold', t=0.0, mouth_=0.0, expr='deadpan', look=0
         sp.cap((hx - 5, hy - 13), (hx - 8, hy - 18), 1.8, 1.4, sc)
     else:
         hair_cloud(sp, hx - 1, hy + 5, 13.0, 8.5, hp, a0=-0.1, a1=math.pi + 0.2, r=3.0, n=12, inner=False, seed=len(who))
+        if L['curlers']:                                                                    # rollers straight on the perm
+            for k in range(5):
+                c = ramp((240, 150, 190)) if k % 2 == 0 else ramp((120, 180, 240))
+                sp.cap((hx - 9 + k * 4.4, hy + 12.5 + (k % 2)), (hx - 7 + k * 4.4, hy + 12.5 + (k % 2)), 1.9, 1.9, c)
         if L.get('net'):
             for k in range(-12, 12, 3): sp.line((hx + k, hy + 13), (hx + k + 3, hy + 6), (70, 60, 60))
     hr_, ar_ = arm(sp, G['shR'], tr, 11, 10, 4.6, 4.2, robe, bR, L_SKIN, 2.9)
@@ -1316,6 +1324,189 @@ def chief(sp, pose='stand', t=0.0, mouth_=0.0, expr='deadpan', look=0.0, blink=N
     sp.fill(top & CHECK & (YC > hy + 15), CHF_HAIR[3])
     sp.rect(hx - 12, hy + 4, hx - 9, hy + 10, CHF_HAIR[1])
     hr_, ar_ = arm(sp, G['shR'], tr, 14, 14, 4.8, 4.2, CHF_SUIT, bR, hand_c, 3.3, cuff=[(176, 180, 196), (214, 218, 230), (240, 242, 248), (255, 255, 255)])
+    _prop(sp, props.get('R'), hr_, ar_, t)
+    sp.anchors.update(head=(hx, hy), handR=hr_, handL=hl)
+    if clip_h is not None: sp.clip_below(clip_h)
+    sp.outline()
+
+
+# ======================================================================================== E06 props (finale «Naperville»)
+STEEL = [(90, 96, 112), (140, 148, 166), (196, 204, 220), (242, 246, 252)]
+GOLD4 = [(150, 104, 24), (210, 160, 40), (244, 204, 80), (255, 240, 160)]
+WOOD4 = [(110, 74, 40), (156, 110, 62), (196, 150, 92), (232, 194, 132)]
+IRON4 = [(14, 14, 18), (32, 32, 40), (56, 56, 68), (96, 96, 116)]
+
+
+def _dir(a):
+    return math.cos(a), math.sin(a)
+
+
+def p_scissors(sp, h, ang, t=0.0, open_=0.45, a=1.15):
+    """giant gold-and-steel ribbon-cutting scissors: finger rings in the fist, long blades pointing up and forward (a = direction)"""
+    x, y = h
+    ca, sa = _dir(a)
+    px, py = x + ca * 7, y + sa * 7                                                           # pivot screw
+    for s_ in (-1, 1):
+        ba = a + s_ * open_ * 0.5
+        cb, sb = _dir(ba)
+        tip = (px + cb * 30, py + sb * 30)
+        nx, ny = -sb, cb
+        blade = sp.m_poly([(px + nx * 2.4, py + ny * 2.4), (px - nx * 1.6, py - ny * 1.6), tip])
+        sp.paint(blade, STEEL, np.clip(0.55 + ((XC - px) * nx + (YC - py) * ny) * 0.12, 0, 1), olc=(60, 64, 80))
+        sp.line((px + nx * 1.6 + cb * 3, py + ny * 1.6 + sb * 3), (tip[0] + nx * 0.4, tip[1] + ny * 0.4), (255, 255, 255))
+        rx, ry = x - ca * 1.5 + s_ * (-sa) * 3.2, y - sa * 1.5 + s_ * ca * 3.2                # gold finger rings at the hand
+        ring = sp.m_ell(rx, ry, 3.6, 3.0, ang=a)[0]
+        sp.fill(ring & ~erode(erode(ring)), GOLD4[2]); sp.fill(ring & ~erode(ring), GOLD4[0])
+        sp.cap((rx, ry), (px, py), 1.3, 1.1, GOLD4)
+    sp.ell(px, py, 1.6, 1.6, GOLD4)
+    sp.dot(px, py, (255, 250, 220), keep=True)
+
+
+def p_rolling_pin(sp, h, ang, t=0.0, a=1.25):
+    """wooden rolling pin raised like a club"""
+    x, y = h
+    ca, sa = _dir(a)
+    sp.cap((x - ca * 4, y - sa * 4), (x - ca * 1, y - sa * 1), 1.2, 1.2, WOOD4)
+    sp.cap((x + ca * 2, y + sa * 2), (x + ca * 20, y + sa * 20), 3.0, 3.0, WOOD4)
+    sp.cap((x + ca * 21, y + sa * 21), (x + ca * 25, y + sa * 25), 1.2, 1.2, WOOD4)
+    for k in (6, 12, 17):                                                                        # flour
+        sp.dot(x + ca * k + 1, y + sa * k, (250, 248, 240))
+
+
+def p_pan(sp, h, ang, t=0.0, a=1.3):
+    """cast-iron frying pan raised high"""
+    x, y = h
+    ca, sa = _dir(a)
+    sp.cap((x - ca * 3, y - sa * 3), (x + ca * 11, y + sa * 11), 1.4, 1.2, IRON4)
+    cx, cy = x + ca * 19, y + sa * 19
+    m = sp.ell(cx, cy, 8.0, 8.0, IRON4, olc=(8, 8, 10))
+    inner = sp.m_ell(cx + 0.5, cy - 0.5, 6.0, 6.0)[0]
+    sp.fill(inner & ~erode(inner) & m, (70, 70, 86))
+    sp.dot(cx - 3, cy + 3, (150, 150, 170)); sp.dot(cx - 2, cy + 4, (150, 150, 170))
+
+
+def p_casserole(sp, h, ang, t=0.0):
+    """glass casserole dish held up in one hand (orange tuna-noodle bake with crispy topping)"""
+    x, y = h[0] - 3, h[1] + 1
+    glass = [(120, 150, 170), (160, 196, 214), (200, 228, 240), (240, 252, 255)]
+    sp.rect(x - 1, y - 1, x + 19, y + 7, (60, 80, 96))
+    m = sp.m_poly([(x, y), (x + 18, y), (x + 18, y + 6), (x, y + 6)])
+    sp.paint(m, glass, np.clip((YC - y) / 6, 0, 1), olc=(70, 96, 112))
+    food = sp.m_poly([(x + 1, y + 2), (x + 17, y + 2), (x + 17, y + 6), (x + 1, y + 6)])
+    sp.paint(food, [(170, 90, 30), (220, 130, 50), (244, 170, 80), (255, 214, 140)], np.clip((YC - y - 2) / 4, 0, 1), ol=False)
+    for k in range(6): sp.dot(x + 2 + k * 3, y + 6, (250, 230, 160)); sp.dot(x + 3 + k * 3, y + 5, (110, 170, 70))
+    sp.rect(x - 3, y + 2, x, y + 4, (60, 80, 96)); sp.rect(x + 18, y + 2, x + 21, y + 4, (60, 80, 96))     # handles
+    for k in range(3): sp.dot(x + 6 + k * 3 + int(math.sin(t * 3 + k)), y + 9 + k + int(2 * ((t + k * 0.3) % 1.0)), (236, 240, 248))
+
+
+def p_mop(sp, h, ang, t=0.0, a=1.38):
+    """string mop held up like a spear, grey strands flopping"""
+    x, y = h
+    ca, sa = _dir(a)
+    sp.cap((x - ca * 10, y - sa * 10), (x + ca * 34, y + sa * 34), 1.1, 1.1, [(150, 110, 60), (196, 156, 96), (226, 196, 136), (246, 226, 180)])
+    cx, cy = x + ca * 36, y + sa * 36
+    mop = [(120, 120, 128), (164, 164, 172), (204, 204, 210), (236, 236, 240)]
+    sp.ell(cx, cy + 2, 6.5, 4.0, mop)
+    for k in range(-5, 6, 2):
+        fl = 1.5 * math.sin(t * 9 + k)
+        sp.cap((cx + k * 0.9, cy + 4), (cx + k * 1.4 + fl, cy + 10 + abs(k) * 0.3), 1.0, 0.9, mop, ol=False)
+    sp.rect(int(cx) - 4, int(cy) - 1, int(cx) + 5, int(cy) + 1, (60, 120, 200))
+
+
+def p_paper(sp, h, ang, t=0.0, header=(214, 50, 60)):
+    """a sheet of paper held up to read (the call sheet): red header band, ruled lines, two tiny headshots"""
+    x, y = h[0] - 1, h[1] - 4
+    sp.rect(x - 1, y - 1, x + 15, y + 19, (60, 50, 44))
+    sp.rect(x, y, x + 14, y + 18, (250, 246, 232))
+    sp.rect(x, y + 14, x + 14, y + 18, header)
+    for k in range(4): sp.rect(x + 2, y + 2 + k * 3, x + 12 - (k % 2) * 3, y + 3 + k * 3, (120, 116, 130))
+    for cx in (x + 4, x + 10): sp.rect(cx - 1, y + 10, cx + 2, y + 13, (30, 30, 40)); sp.dot(cx, y + 11, (240, 200, 170))
+
+
+def p_newspaper(sp, h, ang, t=0.0):
+    """open newspaper held in front (headline blocks, a photo)"""
+    x, y = h[0] - 11, h[1] - 5
+    sp.rect(x - 1, y - 1, x + 23, y + 16, (70, 70, 80))
+    sp.rect(x, y, x + 22, y + 15, (226, 226, 220))
+    sp.rect(x + 11, y, x + 12, y + 15, (180, 180, 178))
+    text3(sp, 'DIBS', x + 2, y + 13, (30, 30, 40)); text3(sp, 'LAW', x + 13, y + 13, (30, 30, 40))
+    for k in range(3):
+        sp.rect(x + 2, y + 2 + k * 2, x + 10, y + 3 + k * 2, (140, 140, 150)); sp.rect(x + 13, y + 2 + k * 2, x + 21, y + 3 + k * 2, (140, 140, 150))
+
+
+def p_thermos(sp, h, ang, t=0.0):
+    """old green plaid steel thermos with the cup on top, steaming"""
+    x, y = h
+    th = [(30, 70, 50), (44, 104, 72), (70, 140, 100), (130, 190, 150)]
+    sp.cap((x, y - 5), (x, y + 6), 2.8, 2.8, th)
+    sp.rect(x - 3, y + 6, x + 4, y + 9, (200, 200, 210))
+    for k in (-2, 1): sp.rect(x + k, y - 4, x + k + 1, y + 6, (190, 40, 50))
+    for k in range(3):
+        sp.dot(x - 1 + k + int(1.5 * math.sin(t * 3 + k)), y + 10 + k * 2 + int(2 * ((t * 1.5 + k * 0.33) % 1.0)), (230, 236, 246))
+
+
+PROPS.update(scissors=p_scissors, rolling_pin=p_rolling_pin, pan=p_pan, casserole=p_casserole, mop=p_mop, paper=p_paper,
+             newspaper=p_newspaper, thermos=p_thermos)
+
+# a fourth neighbour for the finale: Bev, orange perm in pink-and-blue rollers, purple robe, big smoky glasses
+LADIES['bev'] = dict(robe=(140, 92, 190), hair=(222, 124, 64), scarf=None, glasses=(50, 44, 60), curlers=True, iris=(90, 70, 50))
+
+
+# ======================================================================================== NY CABBIE (finale cameo)
+CAB_SKIN = [(130, 84, 62), (176, 120, 88), (210, 156, 116), (236, 192, 150)]
+CAB_CAP = [(56, 52, 50), (88, 82, 78), (122, 114, 106), (160, 152, 140)]
+CAB_JACKET = [(50, 30, 22), (80, 50, 34), (112, 74, 50), (150, 108, 76)]
+CAB_TANK = [(176, 180, 190), (214, 218, 226), (240, 242, 246), (255, 255, 255)]
+
+
+def cabbie(sp, pose='rest', t=0.0, mouth_=0.0, expr='deadpan', look=0.0, blink=None, hands=None, props=None, legs=False, clip_h=None,
+           breath=True, **_):
+    """New York cabbie: tweed flat cap, heavy five-o'clock shadow, hooked nose, toothpick, gold chain, ribbed white tank under an open
+    leather jacket, hairy forearm resting on the window ('rest')"""
+    X = EXPR.get(expr, EXPR['normal'])
+    br = (0.3 * math.sin(t * 1.7)) if breath else 0.0
+    G = dict(shL=(-17.0, 50.0 + br), shR=(16.0, 50.0 + br), head=(3.0, 72.0 + br), hip=18.0, rx=18.0, arm=24.0, hrx=12.5, hry=13.5)
+    if pose == 'rest':
+        tl, tr, bl, bR = (-6.0, 32.0), (30.0, 38.0), 1, -1
+    else:
+        tl, tr, bl, bR = hand_targets(POSE[pose] if isinstance(pose, str) else pose, G)
+    if hands: tl = hands.get('L', tl); tr = hands.get('R', tr)
+    props = props or {}
+    hl, al = arm(sp, G['shL'], tl, 12, 12, 4.8, 4.2, CAB_JACKET, bl, CAB_SKIN, 3.0)
+    _prop(sp, props.get('L'), hl, al, t)
+    sp.cap((1.5, 44 + br), (2.5, 58 + br), 5.6, 5.4, CAB_SKIN)                                                    # thick neck
+    stubble(sp, sp.m_cap((1.5, 46 + br), (2.5, 56 + br), 5.6, 5.4)[0], CAB_SKIN[0], 0.35, seed=4)
+    tm = sp.sup(0.0, 32.0 + br * 0.5, 16.5, 20.0, CAB_JACKET, n=2.3)
+    tank = sp.m_poly([(-8, 50 + br), (11, 50 + br), (9, 14), (-6, 14)]) & tm
+    sp.paint(tank, CAB_TANK, None)
+    for k in range(-6, 10, 2): sp.fill(tank & (np.abs(XC - (k + 0.5)) < 0.5) & CHECK, CAB_TANK[1])                   # ribbing
+    sp.fill(tank & (YC > 44 + br) & ((XC.astype(int) * 7 + YC.astype(int) * 3) % 5 == 0), CAB_SKIN[0])            # chest hair
+    for k in range(9):                                                                                             # gold chain
+        a_ = math.pi * (0.15 + 0.7 * k / 8)
+        sp.dot(2 + 7 * math.cos(a_), 52 + br - 6 * math.sin(a_), GOLD4[2 + (k % 2)], keep=True)
+    hx, hy = G['head']
+    face = sp.union([sp.m_super(hx, hy, 12.5, 13.5, 2.4), sp.m_ell(hx + 1, hy - 8, 12.5, 7.0)], CAB_SKIN)         # square jaw
+    stubble(sp, face & (YC < hy - 6) & ~sp.m_ell(hx + 4.5, hy - 10.0, 5.0, 2.6)[0], (96, 70, 58), 0.42, seed=7)
+    sp.ell(hx - 12, hy - 0.5, 2.6, 4.0, CAB_SKIN)
+    bl_ = _blink(t + 0.4, blink)
+    X2 = dict(X); X2['lid'] = max(X.get('lid', 0.0), 0.45)
+    eye(sp, hx - 2.5, hy + 1.5, 5.0, 4.0, X2, (70, 50, 40), (look, 0.0), bl_, LASH, CAB_SKIN[2], lidc=CAB_SKIN[1], bag=CAB_SKIN[1])
+    eye(sp, hx + 7.5, hy + 1.5, 4.6, 4.0, X2, (70, 50, 40), (look, 0.0), bl_, LASH, CAB_SKIN[2], lidc=CAB_SKIN[1], bag=CAB_SKIN[1])
+    brow(sp, hx - 2.5, hy + 6.5, 8, X, +1, (40, 30, 28), th=2.6, bushy=True); brow(sp, hx + 7.5, hy + 6.5, 6, X, -1, (40, 30, 28), th=2.6, bushy=True)
+    sp.rect(hx + 2, hy + 6, hx + 4, hy + 8, (40, 30, 28))                                                          # nearly a unibrow
+    nose = sp.m_poly([(hx + 3, hy + 3), (hx + 7, hy + 1), (hx + 10, hy - 6), (hx + 6, hy - 7), (hx + 3, hy - 5)])  # hooked nose
+    sp.paint(nose, CAB_SKIN, np.clip(0.75 - (XC - hx - 3) * 0.08, 0, 1), olc=CAB_SKIN[0])
+    sp.dot(hx + 5, hy - 6, (70, 40, 34)); sp.dot(hx + 4, hy - 1, CAB_SKIN[3])
+    mouth(sp, hx + 4.5, hy - 10.0, 7, X, mouth_, (120, 60, 56), skin=CAB_SKIN[2], maxh=5)
+    sp.line((hx + 8, hy - 10), (hx + 14, hy - 8), (226, 200, 150)); sp.dot(hx + 14, hy - 8, (250, 236, 200))      # toothpick
+    cap_ = sp.union([sp.m_ell(hx - 0.5, hy + 10.5, 13.5, 5.6), sp.m_ell(hx + 9, hy + 7.5, 8.0, 2.6)], CAB_CAP, dither=0.35)
+    sp.fill(cap_ & CHECK & ((XC.astype(int) + YC.astype(int)) % 4 == 0), CAB_CAP[3])                              # tweed
+    sp.line((hx - 6, hy + 14), (hx + 6, hy + 12), CAB_CAP[0]); sp.dot(hx, hy + 15, CAB_CAP[0])
+    sp.rect(hx - 13, hy + 3, hx - 10, hy + 8, (40, 30, 28))                                                         # sideburn
+    hr_, ar_ = arm(sp, G['shR'], tr, 12, 12, 5.0, 4.4, CAB_JACKET, bR, CAB_SKIN, 3.2)
+    if pose == 'rest':                                                                                             # hairy forearm on the sill
+        fore = sp.m_cap((hr_[0] - 12, hr_[1] + 1), (hr_[0], hr_[1]), 3.0, 2.8)[0]
+        sp.fill(fore & ((XC.astype(int) * 5 + YC.astype(int) * 3) % 4 == 0) & CHECK, (70, 50, 42))
     _prop(sp, props.get('R'), hr_, ar_, t)
     sp.anchors.update(head=(hx, hy), handR=hr_, handL=hl)
     if clip_h is not None: sp.clip_below(clip_h)
