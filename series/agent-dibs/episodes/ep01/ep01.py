@@ -30,6 +30,8 @@ DB_X = 560.0                            # Dibs standing
 BOOM_T = 27.30
 SOOT = 0.55                             # how black Dibs gets after the blast (eyes and teeth stay white)
 CHU = 0.62                              # chair/bomb size relative to a person (a real lawn chair is ~half a man tall)
+SIGN_Y = 7.4                            # the cardboard sign hangs from the seat, so the bomb under the chair stays visible
+BOMB_R = 4.0
 
 
 def mouth(who, t, k=1.7):
@@ -57,7 +59,7 @@ def A(fn, wx, wy, un=None, s=None, flip=False, pin=None, **P):
 
 # ================================================================== reusable pieces
 def spark_bomb(CH, v, sp, ax, ay, un, t, fuse=1.0):
-    q = PR.bomb(CH, v.cam(ax, ay, un), t, fuse)
+    q = PR.bomb(CH, v.cam(ax, ay, un), t, fuse, r=BOMB_R)
     sp['p'] = (ax + q[0] * un, ay - q[1] * un)
 
 
@@ -71,22 +73,28 @@ def spark_glow(spark, t, r=300, a=0.8):
 
 def chair_acts(t, un, x=CH_X, y=CH_Y, bomb=True):
     cu_ = un * CHU
-    acts = [lambda CH, v: PR.bomb(CH, v.cam(x, y, cu_), t)] if bomb else []
-    return acts + [lambda CH, v: PR.dibs_chair(CH, v.cam(x, y, cu_), t=t)]
+    acts = [lambda CH, v: PR.bomb(CH, v.cam(x, y, cu_), t, r=BOMB_R)] if bomb else []
+    return acts + [lambda CH, v: PR.dibs_chair(CH, v.cam(x, y, cu_), t=t, sign_y=SIGN_Y)]
 
 
 def chair_sign(t, un, x=CH_X, y=CH_Y):
     """the cardboard sign again, in front of Dibs sitting on the chair"""
-    return lambda CH, v: PR.dibs_chair(CH, v.cam(x, y, un * CHU), t=t, only_sign=True)
+    return lambda CH, v: PR.dibs_chair(CH, v.cam(x, y, un * CHU), t=t, only_sign=True, sign_y=SIGN_Y)
+
+
+CU_BG = 1.45     # background zoom behind close-ups: the hero is near the camera (2x sprite), the street stays far and crisp
 
 
 def cu(fn, who, t, u, hx, hy, Z=2.0, s=12.5, zoom=0.06, sx=180, sy=300, flip=False, k=1.8, extra=(), front=(), pre=None, emit=None,
-       light=K.light_street, fxn=70, cdx=0.0, cdy=0.0, **P):
-    """close-up: the hero's head pinned at world (hx, hy); camera on the head (slow push); sprite scale follows the zoom"""
-    Zt = Z + zoom * u
+       light=K.light_street, fxn=70, cdx=0.0, cdy=0.0, bgZ=CU_BG, **P):
+    """close-up: the hero's head pinned at world (hx, hy), drawn at 2x sprite resolution; the background is zoomed less (bgZ) than the
+    hero (a near subject against a far street), so it does not turn into pixel mush; slow push on both"""
+    q = 1.0 + zoom * u / Z
+    Zt = bgZ * q
     P.setdefault('mouth_', mouth(who, t, k))
-    a = A(fn, hx, hy, s=s * Zt / Z, flip=flip, pin='head', t=t, **P)
-    return K.shot(WORLD, light, hx + cdx, hy + 30.0 + cdy, Zt, acts=list(extra) + [a], front=front, fx_=snow_fx(t, fxn), sx=sx, sy=sy, pre=pre, emit=emit)
+    a = A(fn, hx, hy, s=s * q, flip=flip, pin='head', t=t, hires=True, **P)
+    cx, cy = hx + cdx * Z / bgZ, hy + (30.0 + cdy) * Z / bgZ             # the head keeps its old place on screen
+    return K.shot(WORLD, light, cx, cy, Zt, acts=list(extra) + [a], front=front, fx_=snow_fx(t, fxn), sx=sx, sy=sy, pre=pre, emit=emit)
 
 
 def cu_dibs(t, u, expr, shades=True, pose='stand', soot=0.0, Z=2.1, s=12.5, zoom=0.07, hands=None, props=None, **kw):
@@ -107,11 +115,11 @@ def r_hook(t, u):
     un = ueq(s, Z)
     fall = max(0.0, 1.0 - t / 0.10)
     sp = {}
-    cu_ = un * CHU
-    acts = [A(DC.dibs, 540.0, 660.0, s=s, pose='point', t=t, mouth_=mouth('dibs', t, 1.9), expr='shout', shadow=0.3),
-            lambda CH, v: spark_bomb(CH, v, sp, 640.0, 662.0, cu_, t),
-            lambda CH, v: PR.dibs_chair(CH, v.cam(640.0, 662.0 - fall * 520, cu_), t=t)]
-    big = K.shot(WORLD, K.light_street, 575.0, 520.0, Z, acts=acts, emit=spark_glow(sp, t), fx_=snow_fx(t), sx=180, sy=330)
+    cu_ = un * CHU * 1.15
+    acts = [A(DC.dibs, 515.0, 660.0, s=s, pose='point', t=t, mouth_=mouth('dibs', t, 1.9), expr='shout', shadow=0.3, hires=True),
+            lambda CH, v: spark_bomb(CH, v, sp, 612.0, 664.0, cu_, t),
+            lambda CH, v: PR.dibs_chair(CH, v.cam(612.0, 664.0 - fall * 520, cu_), t=t, sign_y=SIGN_Y)]
+    big = K.shot(WORLD, K.light_street, 562.0, 560.0, Z, acts=acts, emit=spark_glow(sp, t), fx_=snow_fx(t), sx=180, sy=330)
     if 0.10 <= t < 0.16: O.flash(big, 0.45)
     if 0.10 < t < 0.5: B.shake(big, t, 12 * max(0.0, 1 - (t - 0.10) / 0.4), 33)
     return big
@@ -120,7 +128,8 @@ def r_hook(t, u):
 def r_insert(t, u):
     cu_ = 12.0
     sp = {}
-    acts = [lambda CH, v: spark_bomb(CH, v, sp, CH_X + 20.0, 646.0, cu_, t), lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X + 20.0, 646.0, cu_), t=t)]
+    acts = [lambda CH, v: spark_bomb(CH, v, sp, CH_X + 20.0, 646.0, cu_, t),
+            lambda CH, v: PR.dibs_chair(CH, v.cam(CH_X + 20.0, 646.0, cu_), t=t, sign_y=SIGN_Y)]
     big = K.shot(WORLD, K.light_street, CH_X + 20.0, 540.0, 1.5 + 0.10 * u, acts=acts, emit=spark_glow(sp, t, 360), fx_=snow_fx(t), sx=180, sy=330)
     DK.deb_window(big, t, 'smile' if u < 1.5 else 'nervous', mouth('deb', t, 1.6), box=(690, 390, 1030, 730))
     return big
@@ -237,12 +246,12 @@ def r_sit(t, u):
 
 def r_dsit(t, u):
     s_ = sm((u - 1.3) / 0.4)
-    un = 7.0
-    Z = 2.1 + 0.06 * u
+    Z = CU_BG + 0.04 * u
+    un = 7.0 * 2.1 / CU_BG                                                   # Dibs + chair near the camera, the street far behind
     ax, ay = sit_anchor(un)
     hands = {'R': (lerp(17.0, 13.0, s_), lerp(44.0, 70.0, s_))}
     acts = chair_acts(t, un) + [A(DC.dibs, ax, ay, un=un, pose='sit', t=t, mouth_=mouth('dibs', t, 1.8), expr='smug', shades=True, hands=hands,
-                                  props={'R': 'coffee'}), chair_sign(t, un)]
+                                  props={'R': 'coffee'}, hires=True), chair_sign(t, un)]
     hx, hy = ax + 3 * un / 4, ay - 82 * un / 4
     return K.shot(WORLD, K.light_street, hx + 8 * un / 4, hy + 40 * un / 4, Z, acts=acts, fx_=snow_fx(t), sx=180, sy=300)
 
@@ -359,7 +368,10 @@ def r_brad(t, u):
     pose = 'point' if u > 0.35 else 'wave'
     def emit(big, v):
         big[0:150, :] = (46, 52, 64); big[150:166, :] = (92, 102, 118)                          # van window frame (roof edge)
-        big[1500:1920, 0:130] = (46, 52, 64); big[1500:1920, 130:146] = (92, 102, 118)          # door pillar
+        big[1330:1920, :] = (196, 202, 214); big[1330:1350, :] = (46, 52, 64)                   # silver sliding door under the window
+        big[1350:1362, :] = (232, 236, 244); big[1560:1572, :] = (150, 156, 170)
+        big[1420:1470, 820:960] = (60, 64, 76); big[1428:1462, 828:952] = (120, 126, 140)         # door handle
+        big[150:1330, 0:130] = (46, 52, 64); big[150:1330, 130:146] = (92, 102, 118)            # door pillar
     return cu(DC.brad, 'brad', t, u, 790.0, 430.0, Z=2.1, s=12.5, flip=True, k=1.7, pose=pose, expr='grin',
               legs=False, look=0.8, ting=max(0.0, 1.0 - abs(u - 0.25) / 0.2), emit=emit, fxn=40)
 
@@ -371,13 +383,14 @@ def r_dreact(t, u):
 def r_marty(t, u):
     def pre(big, v):
         B.steam(big, v, t, 790.0, 586.0, n=7, rise=170, size=60, a=0.55)
-    Zt = 2.0 + 0.05 * u
-    a = A(DC.marty, 800.0, 598.0, s=18.0 * Zt / 2.0, t=t, mouth_=mouth('marty', t, 1.7), expr='deadpan', look=0.6)
-    return K.shot(WORLD, K.light_street, 812.0, 510.0, Zt, acts=[a], pre=pre, fx_=snow_fx(t, 40), sy=330)
+    q = 1.0 + 0.025 * u
+    Zt = CU_BG * q
+    a = A(DC.marty, 800.0, 598.0, s=18.0 * q, t=t, mouth_=mouth('marty', t, 1.7), expr='deadpan', look=0.6, hires=True)
+    return K.shot(WORLD, K.light_street, 800.0 + 12.0 * 2.0 / CU_BG, 598.0 - 88.0 * 2.0 / CU_BG, Zt, acts=[a], pre=pre, fx_=snow_fx(t, 40), sy=330)
 
 
 def r_tail(t, u):
-    Z = lerp(1.9, 1.15, sm(u / 1.7))
+    Z = lerp(1.6, 1.15, sm(u / 1.7))
     un = 8.5
     acts = chair_acts(t, un, bomb=False) + [sit_dibs(t, un=un, expr='smug', soot=SOOT, sip=True), chair_sign(t, un)]
     return K.shot(WORLD, K.light_street, 680.0, 540.0, Z, acts=acts, pre=crater_pre(0.0), fx_=snow_fx(t, 60), sy=420)
@@ -445,7 +458,7 @@ SHOW = K.Show(EPI, 1, ['DIBS ON', 'THE BOMB'], hook_t=(0.15, 2.4),
                   (st('28 MILES. DIFFERENT PLANET.', (255, 236, 120), 34), 35.90, 37.40, 540, 490),
               ],
               flashes=[], mosaics=[], cap_default=1400,
-              cap_y={'van': 1180, 'insert': 1450, 'sit': 1450, 'crater': 1500, 'tail': 1500, 'boom': 1500, 'squad': 1450, 'tank': 1450, 'suv': 1450})
+              cap_y={'hook': 1720, 'brad': 1460, 'van': 1180, 'insert': 1700, 'sit': 1450, 'crater': 1500, 'tail': 1500, 'boom': 1500, 'squad': 1450, 'tank': 1450, 'suv': 1450})
 
 
 def render(t):

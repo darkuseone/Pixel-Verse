@@ -1,5 +1,5 @@
 """Agent Dibs (v2) — pixel-puppet engine. Unique look of this series (other series use the capsule rig of props/folk.py):
-every hero is drawn at SPRITE resolution (one sprite pixel = one big visible pixel), with hand-placed pixel art:
+every hero is drawn at SPRITE resolution (one sprite pixel = one big visible pixel; close-ups at 2x, see res()), with hand-placed pixel art:
 4-tone cel shading broken by Bayer dithering, a darker «sel-out» line around every part, a navy outer outline,
 front-3/4 heads with detailed faces (sclera, iris, pupil, highlight, lids, brows, nose shading, teeth/tongue mouths,
 stubble, blush, wrinkles). The finished sprite is lit by the scene Light at sprite resolution and blown up by an
@@ -11,14 +11,48 @@ import numpy as np
 from PIL import Image, ImageDraw
 from stage import OUT_W, OUT_H
 
-W, H = 220, 176
-OX, OY = 110, 160                                   # feet anchor: column OX, row OY (rows above it are y > 0)
-_RR, _CC = np.mgrid[0:H, 0:W]
-XC = (_CC - OX + 0.5).astype(np.float32)
-YC = (OY - _RR - 0.5).astype(np.float32)
 _B4 = np.array([[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]], np.float32) / 16.0 - 0.47
-BAYER = np.tile(_B4, (H // 4 + 1, W // 4 + 1))[:H, :W]
-CHECK = ((_RR + _CC) % 2 == 0)
+_GRIDS = {}
+
+
+def _grids(k):
+    """canvas + coordinate grids at k sub-pixels per sprite px (k = 1 normal, k = 2 hi-res for close-ups)"""
+    if k not in _GRIDS:
+        w_, h_, ox_, oy_ = 220 * k, 176 * k, 110 * k, 160 * k
+        rr, cc = np.mgrid[0:h_, 0:w_]
+        xc = ((cc - ox_ + 0.5) / k).astype(np.float32)
+        yc = ((oy_ - rr - 0.5) / k).astype(np.float32)
+        bay = np.tile(_B4, (h_ // 4 + 1, w_ // 4 + 1))[:h_, :w_]
+        _GRIDS[k] = (w_, h_, ox_, oy_, rr, cc, xc, yc, bay, (rr + cc) % 2 == 0)
+    return _GRIDS[k]
+
+
+RES = 1                                             # sub-pixels per sprite px of the sprites being drawn now
+W, H, OX, OY, _RR, _CC, XC, YC, BAYER, CHECK = _grids(1)   # feet anchor: column OX, row OY (rows above it are y > 0)
+HIRES_AT = 10.25                                    # output px per sprite px from which heroes are drawn at 2x (close-ups)
+
+
+def set_res(k):
+    """switch the drawing grids (also the copies imported by props.dibscast) to k sub-pixels per sprite px"""
+    global RES, W, H, OX, OY, _RR, _CC, XC, YC, BAYER, CHECK
+    RES = k
+    W, H, OX, OY, _RR, _CC, XC, YC, BAYER, CHECK = _grids(k)
+    import sys
+    dc = sys.modules.get('props.dibscast')
+    if dc is not None: dc.XC, dc.YC, dc.CHECK = XC, YC, CHECK
+
+
+class res:
+    """with res(2): ... — draw sprites at 2x resolution (same geometry in sprite px, twice the pixels): close-ups stay crisp"""
+    def __init__(s, k): s.k = int(k)
+    def __enter__(s): s.prev = RES; set_res(s.k); return s
+    def __exit__(s, *a): set_res(s.prev)
+
+
+def res_for(scale, hires=None):
+    """2 for close-up scales (>= HIRES_AT output px per sprite px) unless forced by hires=True/False"""
+    if hires is None: hires = scale >= HIRES_AT
+    return 2 if hires else 1
 LDIR = np.array([-0.52, 0.56, 0.64], np.float32)    # light from the upper left, a little from the front
 OUTLINE = (24, 18, 40)
 WHITE = (246, 244, 238)
@@ -58,6 +92,7 @@ def lit(nx, ny, flat=0.0):
 # ======================================================================================== the sprite canvas
 class Spr:
     def __init__(s):
+        s.k, s.W, s.H, s.OX, s.OY = RES, W, H, OX, OY           # resolution of this canvas (see res())
         s.col = np.zeros((H, W, 3), np.uint8)
         s.m = np.zeros((H, W), bool)
         s.keep = np.zeros((H, W), bool)             # pixels that survive soot (eye whites, teeth)
@@ -88,26 +123,33 @@ class Spr:
         s.col[mask] = c; s.m |= mask; s.keep[mask] = keep
         return mask
 
+    def _blk(s, hx, hy, n, c, keep=False):
+        """n x n block of canvas pixels, bottom-left at sub-pixel coords (hx, hy) from the feet anchor (y up)"""
+        r1, c0 = s.OY - hy, s.OX + hx
+        r0, c1 = max(0, r1 - n), min(s.W, c0 + n); r1, c0 = min(s.H, r1), max(0, c0)
+        if r0 < r1 and c0 < c1:
+            s.col[r0:r1, c0:c1] = c; s.m[r0:r1, c0:c1] = True; s.keep[r0:r1, c0:c1] = keep
+
     def dot(s, i, j, c, keep=False):
-        r, cc = OY - 1 - int(j), OX + int(i)
-        if 0 <= r < H and 0 <= cc < W:
-            s.col[r, cc] = c; s.m[r, cc] = True; s.keep[r, cc] = keep
+        """one sprite px (k x k canvas px at hi-res): details and the tiny font keep their size at any resolution"""
+        s._blk(int(i) * s.k, int(j) * s.k, s.k, c, keep)
 
     def rect(s, i0, j0, i1, j1, c, keep=False):
         """pixels i0..i1-1, j0..j1-1"""
-        r0, r1 = OY - int(j1), OY - int(j0); c0, c1 = OX + int(i0), OX + int(i1)
-        r0, r1 = max(0, r0), min(H, r1); c0, c1 = max(0, c0), min(W, c1)
+        k = s.k
+        r0, r1 = s.OY - int(j1 * k), s.OY - int(j0 * k); c0, c1 = s.OX + int(i0 * k), s.OX + int(i1 * k)
+        r0, r1 = max(0, r0), min(s.H, r1); c0, c1 = max(0, c0), min(s.W, c1)
         if r0 < r1 and c0 < c1:
             s.col[r0:r1, c0:c1] = c; s.m[r0:r1, c0:c1] = True; s.keep[r0:r1, c0:c1] = keep
 
     def line(s, a, b, c, th=1, keep=False):
+        """line th sprite px thick; at hi-res it steps on the finer grid, so diagonals come out smoother"""
         (x0, y0), (x1, y1) = a, b
-        n = int(max(abs(x1 - x0), abs(y1 - y0)) * 2) + 1
-        for k in range(n + 1):
-            x = x0 + (x1 - x0) * k / n; y = y0 + (y1 - y0) * k / n
-            for dx in range(th):
-                for dy in range(th):
-                    s.dot(math.floor(x) + dx - th // 2, math.floor(y) + dy - th // 2, c, keep)
+        k = s.k
+        n = int(max(abs(x1 - x0), abs(y1 - y0)) * 2 * k) + 1
+        for q in range(n + 1):
+            x = x0 + (x1 - x0) * q / n; y = y0 + (y1 - y0) * q / n
+            s._blk(math.floor(x * k) - (th * k) // 2, math.floor(y * k) - (th * k) // 2, th * k, c, keep)
 
     def stamp(s, rows, i0, j0, pal, flip=False, keep=None):
         """ASCII stamp: rows top->bottom, pal maps chars -> colours ('.' / ' ' transparent); (i0, j0) = top-left pixel"""
@@ -137,8 +179,8 @@ class Spr:
         return ex * ex + ey * ey <= r * r, ex / np.maximum(r, 0.6), ey / np.maximum(r, 0.6)
 
     def m_poly(s, pts):
-        img = Image.new('L', (W, H), 0)
-        ImageDraw.Draw(img).polygon([(OX + x, OY - y) for x, y in pts], fill=255)
+        img = Image.new('L', (s.W, s.H), 0)
+        ImageDraw.Draw(img).polygon([(s.OX + x * s.k, s.OY - y * s.k) for x, y in pts], fill=255)
         return np.array(img) > 127
 
     # ---------------------------------------------------------------- shaded primitives
@@ -159,7 +201,7 @@ class Spr:
 
     def union(s, parts, pal, flat=0.0, ol=True, olc=None, dither=0.16, exclude=None):
         """several shapes painted as ONE volume (no inner outlines): parts = [(mask, nx, ny), ...] from m_ell/m_super"""
-        M = np.zeros((H, W), bool); V = np.full((H, W), -1.0, np.float32); Z = np.full((H, W), -1.0, np.float32)
+        M = np.zeros((s.H, s.W), bool); V = np.full((s.H, s.W), -1.0, np.float32); Z = np.full((s.H, s.W), -1.0, np.float32)
         for m, nx, ny in parts:
             nz = np.sqrt(np.clip(1.0 - nx * nx - ny * ny, 0.0, 1.0))
             take = m & (nz > Z)
@@ -188,8 +230,8 @@ class Spr:
 
     def clip_below(s, h):
         """erase everything below height h (a hero leaning out of a window)"""
-        r = OY - int(h)
-        if r < H: s.m[max(0, r):] = False
+        r = s.OY - int(h * s.k)
+        if r < s.H: s.m[max(0, r):] = False
 
 
 # ======================================================================================== tiny pixel font (labels, badges)
@@ -314,7 +356,7 @@ def eye(sp, cx, cy, w, h, X, iris, look=(0.0, 0.0), blink=False, lash=(30, 20, 3
     e = m & ~erode(m)
     top = e & (YC > cy - 0.2)
     sp.fill(top, lash)
-    if bold > 1: sp.fill(dilate(top) & ~m & (YC > cy), lash)
+    for _ in range((bold - 1) + (sp.k - 1)): top = top | (dilate(top) & ~m & (YC > cy)); sp.fill(top, lash)
     if flick: sp.dot(int(math.floor(cx - w / 2 - 1)), int(math.floor(cy + hh * 0.25)), lash)
     sp.fill(e & (YC <= cy - 0.2), mix(skin, lash, 0.45))
     if bag is not None:
@@ -405,7 +447,7 @@ def mouth(sp, mx, my, w, X, m, lipc, inside=(92, 22, 34), teeth=WHITE, tongue=(2
 
 def stubble(sp, mask, col, density=0.5, seed=1):
     rng = np.random.default_rng(seed)
-    r = rng.random((H, W)) < density
+    r = rng.random(mask.shape) < density
     sp.fill(mask & r & CHECK, col)
 
 
@@ -438,13 +480,14 @@ def light_sprite(col, m, x0, y0, s, lt, scale=1.0):
 def blit(big, sp, ox, oy, s, lt=None, flip=False, alpha=1.0, ghost=None, shadow=0.0):
     """paste a finished sprite: (ox, oy) = output px of the feet anchor, s = output px per sprite px (float ok: nearest sampling)"""
     s = max(1.0, float(s))
+    k = getattr(sp, 'k', 1)
     col, m = sp.col, sp.m
     if flip: col, m = col[:, ::-1], m[:, ::-1]
     rows = np.where(m.any(1))[0]; cols = np.where(m.any(0))[0]
     if len(rows) == 0: return
     r0, r1, c0, c1 = rows[0], rows[-1] + 1, cols[0], cols[-1] + 1
-    ax = (W - OX) if flip else OX
-    x0 = ox + (c0 - ax) * s; y0 = oy + (r0 - OY) * s
+    ax = (sp.W - sp.OX) if flip else sp.OX
+    x0 = ox + (c0 - ax) * s / k; y0 = oy + (r0 - sp.OY) * s / k
     BH, BW = big.shape[:2]
     if shadow > 0:
         rx, ry = 13 * s, 3.2 * s
@@ -455,6 +498,7 @@ def blit(big, sp, ox, oy, s, lt=None, flip=False, alpha=1.0, ghost=None, shadow=
             q = np.floor(np.clip(1 - d, 0, 1) * 3) / 3
             reg = big[Y0:Y1, X0:X1]
             reg[:] = (reg * (1 - shadow * q[..., None])).astype(np.uint8)
+    s = s / k                                                               # output px per canvas px
     sub = col[r0:r1, c0:c1]; sm = m[r0:r1, c0:c1]
     hh, ww = sm.shape
     X0, Y0 = max(0, int(math.floor(x0))), max(0, int(math.floor(y0)))
@@ -482,8 +526,8 @@ def blit(big, sp, ox, oy, s, lt=None, flip=False, alpha=1.0, ghost=None, shadow=
 
 def rotate(sp, deg, pivot=(0.0, 0.0)):
     """rotate a finished sprite in place (nearest neighbour) around pivot (sprite px from the feet anchor, y up); anchors follow"""
-    cx, cy = OX + pivot[0], OY - pivot[1]
-    rgba = np.zeros((H, W, 4), np.uint8); rgba[..., :3] = sp.col; rgba[..., 3] = sp.m * 255
+    cx, cy = sp.OX + pivot[0] * sp.k, sp.OY - pivot[1] * sp.k
+    rgba = np.zeros((sp.H, sp.W, 4), np.uint8); rgba[..., :3] = sp.col; rgba[..., 3] = sp.m * 255
     img = Image.fromarray(rgba).rotate(deg, resample=Image.NEAREST, center=(cx, cy))
     a = np.array(img)
     sp.col = a[..., :3].copy(); sp.m = a[..., 3] > 127; sp.keep = sp.keep & sp.m
@@ -498,24 +542,27 @@ class Act:
     """direct-draw actor for chikit.shot: Act(draw_fn, wx, wy, s=..., **params); draw_fn(sp, **params) paints a Spr"""
     direct = True
 
-    def __init__(s, fn, wx, wy, s_=None, un=None, flip=False, shadow=0.0, ghost=None, alpha=1.0, post=None, pin=None, rot=0.0, pivot=(0.0, 0.0), **P):
+    def __init__(s, fn, wx, wy, s_=None, un=None, flip=False, shadow=0.0, ghost=None, alpha=1.0, post=None, pin=None, rot=0.0, pivot=(0.0, 0.0),
+                 hires=None, **P):
         """(wx, wy) = world position of the feet anchor, or of the sprite anchor named by `pin` (e.g. pin='head' for close-ups);
-        rot = degrees counter-clockwise around `pivot` (sprite px from the feet anchor, y up)"""
+        rot = degrees counter-clockwise around `pivot` (sprite px from the feet anchor, y up);
+        hires: None = 2x sprite resolution automatically from HIRES_AT (close-ups), True / False = force for the whole shot"""
         s.fn, s.wx, s.wy, s.s, s.un, s.flip, s.shadow, s.ghost, s.alpha, s.post, s.pin, s.P = fn, wx, wy, s_, un, flip, shadow, ghost, alpha, post, pin, P
-        s.rot, s.pivot = rot, pivot
+        s.rot, s.pivot, s.hires = rot, pivot, hires
 
     def scale(s, v):
         if s.s is not None: return float(s.s)
         return max(1.0, s.un * v.Z * 3.0 * 0.25)
 
     def __call__(s, big, v, lt):
-        sp = Spr()
-        sp.mirror_text = s.flip
-        s.fn(sp, **s.P)
-        if s.post: s.post(sp)
-        if s.rot: rotate(sp, s.rot, s.pivot)
-        ox, oy = v.opt(s.wx, s.wy)
         sc = s.scale(v)
+        with res(res_for(sc, s.hires)):
+            sp = Spr()
+            sp.mirror_text = s.flip
+            s.fn(sp, **s.P)
+            if s.post: s.post(sp)
+            if s.rot: rotate(sp, s.rot, s.pivot)
+        ox, oy = v.opt(s.wx, s.wy)
         if s.pin:
             px, py = sp.anchors[s.pin]
             ox -= (-px if s.flip else px) * sc; oy += py * sc
@@ -523,10 +570,18 @@ class Act:
         s.last = sp
 
 
+def draw(fn, s=6.0, flip=False, hires=None, **P):
+    """a finished sprite at the resolution its on-screen scale s needs (2x for close-ups)"""
+    with res(res_for(s, hires)):
+        sp = Spr(); sp.mirror_text = flip
+        fn(sp, **P)
+    return sp
+
+
 def render(fn, s=6, bg=(60, 70, 96), size=(1080, 1920), at=None, flip=False, **P):
     """test helper: one sprite on a plain frame"""
     big = np.zeros((size[1], size[0], 3), np.uint8); big[:] = bg
-    sp = Spr(); fn(sp, **P)
+    sp = draw(fn, s, **P)
     ox, oy = at or (size[0] // 2, size[1] - 60)
     blit(big, sp, ox, oy, s, None, flip)
     return big

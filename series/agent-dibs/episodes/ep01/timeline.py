@@ -25,13 +25,12 @@ VOICE = [
 S = 'library/sfx/'
 SFX = [
     (S + 'chair_slam_snow.mp3', 0.05, 1.0),
-    (S + 'fuse_hiss.mp3', 0.00, 0.50), (S + 'fuse_hiss.mp3', 2.00, 0.45),
-] + [(S + 'fuse_hiss.mp3', 4.0 + 2.0 * k, 0.26) for k in range(0, 11)] + [
+    (S + 'fuse_crackle.mp3', 0.00, 0.50), (S + 'fuse_crackle.mp3', 2.40, 0.32), (S + 'fuse_crackle.mp3', 25.30, 0.40),
     (S + 'golf_cart_screech.mp3', 8.55, 0.8, 0.0, 1.3),
     (S + 'book_thud.mp3', 9.95, 0.5),
     (S + 'ui_tap_chirp.mp3', 16.30, 0.8), (S + 'ui_tap_chirp.mp3', 18.00, 0.8), (S + 'ui_tap_chirp.mp3', 20.20, 0.8),
     (S + 'brake_skid.mp3', 16.95, 0.7),
-    (S + 'scanner_beep.mp3', 18.40, 0.5), (S + 'scanner_beep.mp3', 18.75, 0.4),
+    (S + 'snow_steps.mp3', 17.30, 0.6), (S + 'scanner_beep.mp3', 18.40, 0.5), (S + 'scanner_beep.mp3', 18.75, 0.4),
     (S + 'tank_reverse_beeps.mp3', 19.00, 0.8),
     (S + 'water_pour_head.mp3', 22.00, 0.4, 0.0, 1.2),
     (S + 'clock_fast_ticks.mp3', 25.30, 0.7), (S + 'clock_fast_ticks.mp3', 26.80, 0.5, 0.0, 0.5),
@@ -44,6 +43,7 @@ SFX = [
 
 # (path, loop_len, t0, t1, gain, duck_under_speech)
 BEDS = [
+    ('library/sfx/fuse_crackle.mp3', 4.0, 0.0, 27.3, 0.26, True),             # the lit fuse under the chair: warm crackle, ducked under lines
     ('series/agent-dibs/music/agent_dibs_theme_15s.mp3', 14.6, 0.0, 27.3, 0.24, True),
     ('series/agent-dibs/music/agent_dibs_theme_15s.mp3', 14.6, 30.6, 37.8, 0.24, True),
     ('library/sfx/amb_winter_yard.mp3', 7.8, 0.0, 37.8, 0.30, False),

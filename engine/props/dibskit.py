@@ -73,8 +73,8 @@ def window_cut(t, u, who='mrs_w', open_t=0.12, prop='binoculars', expr='deadpan'
         big[y0:y1, x0 + q:x0 + q + 6] = (170, 40, 68); big[y0:y1, x1 - q - 6:x1 - q] = (170, 40, 68)
     base_below = big.copy()
     if k > 0.02:
-        sp = DX.Spr()
-        DC.lady(sp, who, 'hold', t, 0.0, expr, look=0.0, hands=LADY_HANDS.get(prop), props={'R': prop}, clip_h=None)
+        sp = DX.draw(DC.lady, s, flip=flip, who=who, pose='hold', t=t, mouth_=0.0, expr=expr, look=0.0, hands=LADY_HANDS.get(prop),
+                     props={'R': prop}, clip_h=None)                                        # 2x canvas at close-up scale
         hx, hy = sp.anchors['head']
         cx, cy = (x0 + x1) / 2 + (40 if flip else -40), (y0 + y1) / 2 - 60 + 60 * (1 - k)
         ox = cx + (hx if flip else -hx) * s

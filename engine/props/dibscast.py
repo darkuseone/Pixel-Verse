@@ -535,9 +535,8 @@ def hair_cloud(sp, cx, cy, rx, ry, pal, a0=-0.35, a1=math.pi + 0.35, r=3.6, n=14
 def rings(sp, cx, cy, r, col, th=1):
     """thin ring (glasses frames)"""
     m, _, _ = sp.m_ell(cx, cy, r, r * 0.92)
-    e = m & ~erode(m)
-    if th > 1: e = e | (dilate(e) & m & ~erode(erode(m)))
-    sp.fill(e, col)
+    inner = sp.m_ell(cx, cy, r - 0.85 * th, r * 0.92 - 0.85 * th)[0]          # frame th sprite px thick at any resolution
+    sp.fill(m & ~inner, col)
     return m
 
 
