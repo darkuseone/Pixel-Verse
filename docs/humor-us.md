@@ -159,7 +159,7 @@
 ### Новые пародийные бренды (банк §4 пополняется)
 «Cloakify» (аренда плаща-невидимки), «Sleepytime Mattress», «Beige Line» (несуществующая ветка L), «Sal's Beef & Intel», «Cul-de-Sac Players» (любительский театр; реальный «Community Players of Naperville» не используем), «BSB — Bureau of Serious Business», «Doom Industries».
 
-### Использовано в «Agent Dibs», сезон 1 (резерв, не повторять в других US мультах; сценарий на согласовании 01.10.2026)
+### Использовано в «Agent Dibs», сезон 1 (не повторять в других US мультах; сезон снят 05.10.2026)
 - Dibs-стул как закон + стикер «RESPECT +1»; «Spot's still mine.»; «Where's your chair?»; «Not in writing.»
 - «Ope» и «He's from Naperville.» / «He's from New York.»
 - Любительский театр «Cul-de-Sac Players» играет злодеев; «Quick recap. Every villain this season? Community theatre.»
@@ -167,3 +167,4 @@
 - Free trial невидимки, всплывающее окно с крошечным крестиком, реклама матраса, «Can you send me the link?»
 - Чикагский хот-дог («the garden», 7 начинок), «Fries are fine.», «Tension.», «I had dibs.»
 - Ветер «The Hawk», оверсайз-наручники, «Proud of you, hon. Truly.», бейдж «22 YRS PROBATIONARY».
+- Финал: call sheet «CUL-DE-SAC PLAYERS — PAY: $400/WK + SNACKS — PRODUCER: BRAD», стол CRAFT SERVICES, стул «MRS. W / SINCE 1974», дамы со скалкой/сковородкой/запеканкой/шваброй, снежный буррито, «You're permanent.», нью-йоркский таксист «Yo. This spot open?».
