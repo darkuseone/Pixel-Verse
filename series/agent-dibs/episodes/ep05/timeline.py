@@ -2,7 +2,7 @@
 DUR = 39.8
 FPS = 30
 SLUG = 'agent-dibs'
-MASTER = 0.64
+MASTER = 0.62
 SPLAT_T = 21.95                                  # Dibs hits the Bean
 TURN_T = 28.05                                   # the wind snatches the trophy
 

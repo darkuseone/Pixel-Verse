@@ -2,7 +2,7 @@
 DUR = 42.0
 FPS = 30
 SLUG = 'agent-dibs'
-MASTER = 0.72
+MASTER = 0.69
 TURN_T = 30.00                                   # the ladies roll Brad into a snow burrito
 
 # (id, voice_ep, key, t_start, clip_in, clip_out, speaker, caption)
@@ -42,7 +42,7 @@ SFX = [
     (S + 'many_doors_open.mp3', 25.50, 0.8), (S + 'blues_bass_sting.mp3', 25.55, 0.8),
     (S + 'snow_crawl.mp3', TURN_T, 0.8), (S + 'whoosh.mp3', TURN_T + 0.05, 0.6),
     (S + 'crowd_cheer_short.mp3', 32.10, 0.35), (S + 'stamp.mp3', 33.85, 0.9),
-    (S + 'steam_hiss.mp3', 34.40, 0.4),
+    (S + 'steam_hiss_soft.mp3', 34.40, 0.5),
     (S + 'taxi_honk.mp3', 36.72, 0.6),
     (S + 'curtain_reveal.mp3', 39.20, 0.8),
     (S + 'title_stinger.mp3', 41.35, 0.6),

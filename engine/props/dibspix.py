@@ -30,6 +30,7 @@ def _grids(k):
 RES = 1                                             # sub-pixels per sprite px of the sprites being drawn now
 W, H, OX, OY, _RR, _CC, XC, YC, BAYER, CHECK = _grids(1)   # feet anchor: column OX, row OY (rows above it are y > 0)
 HIRES_AT = 10.25                                    # output px per sprite px from which heroes are drawn at 2x (close-ups)
+HIRES3_AT = 15.0                                    # ... and at 3x (extreme close-ups / inserts): a sprite px stays <= ~7.5 output px
 
 
 def set_res(k):
@@ -50,9 +51,12 @@ class res:
 
 
 def res_for(scale, hires=None):
-    """2 for close-up scales (>= HIRES_AT output px per sprite px) unless forced by hires=True/False"""
-    if hires is None: hires = scale >= HIRES_AT
-    return 2 if hires else 1
+    """sub-pixels per sprite px for an on-screen scale: 2 for close-ups (>= HIRES_AT output px per sprite px), 3 for extreme close-ups
+    (>= HIRES3_AT); hires=True forces at least 2, hires=False forces 1, an int forces exactly that"""
+    if hires is False: return 1
+    if hires is not True and isinstance(hires, int): return hires
+    k = 3 if scale >= HIRES3_AT else (2 if scale >= HIRES_AT else 1)
+    return max(k, 2) if hires else k
 LDIR = np.array([-0.52, 0.56, 0.64], np.float32)    # light from the upper left, a little from the front
 OUTLINE = (24, 18, 40)
 WHITE = (246, 244, 238)
@@ -546,7 +550,7 @@ class Act:
                  hires=None, **P):
         """(wx, wy) = world position of the feet anchor, or of the sprite anchor named by `pin` (e.g. pin='head' for close-ups);
         rot = degrees counter-clockwise around `pivot` (sprite px from the feet anchor, y up);
-        hires: None = 2x sprite resolution automatically from HIRES_AT (close-ups), True / False = force for the whole shot"""
+        hires: None = 2x / 3x sprite resolution automatically from HIRES_AT / HIRES3_AT (close-ups), True = at least 2x, False = 1x"""
         s.fn, s.wx, s.wy, s.s, s.un, s.flip, s.shadow, s.ghost, s.alpha, s.post, s.pin, s.P = fn, wx, wy, s_, un, flip, shadow, ghost, alpha, post, pin, P
         s.rot, s.pivot, s.hires = rot, pivot, hires
 
@@ -571,7 +575,7 @@ class Act:
 
 
 def draw(fn, s=6.0, flip=False, hires=None, **P):
-    """a finished sprite at the resolution its on-screen scale s needs (2x for close-ups)"""
+    """a finished sprite at the resolution its on-screen scale s needs (2x for close-ups, 3x for extreme close-ups)"""
     with res(res_for(s, hires)):
         sp = Spr(); sp.mirror_text = flip
         fn(sp, **P)

@@ -58,7 +58,8 @@ LADY_HANDS = dict(binoculars=dict(L=(-1.0, 55.5), R=(5.0, 55.5)), popcorn=dict(L
                   pan=dict(L=(-8.0, 48.0), R=(14.0, 64.0)), mop=dict(L=(-8.0, 48.0), R=(12.0, 58.0)))
 
 
-def window_cut(t, u, who='mrs_w', open_t=0.12, prop='binoculars', expr='deadpan', flip=False, shift=(0, 0), robe_cur=(214, 70, 96), s=13.0):
+def window_cut(t, u, who='mrs_w', open_t=0.12, prop='binoculars', expr='deadpan', flip=False, shift=(0, 0), robe_cur=(214, 70, 96), s=13.0,
+               hires=None):
     """full-frame cutaway: moonlit brick wall, lit window, curtains snap open at open_t and a lady leans out (binoculars / popcorn)"""
     wall = (K.brick_bg() * np.array([0.36, 0.42, 0.62])).astype(np.uint8)
     big = wall.copy()
@@ -73,7 +74,7 @@ def window_cut(t, u, who='mrs_w', open_t=0.12, prop='binoculars', expr='deadpan'
         big[y0:y1, x0 + q:x0 + q + 6] = (170, 40, 68); big[y0:y1, x1 - q - 6:x1 - q] = (170, 40, 68)
     base_below = big.copy()
     if k > 0.02:
-        sp = DX.draw(DC.lady, s, flip=flip, who=who, pose='hold', t=t, mouth_=0.0, expr=expr, look=0.0, hands=LADY_HANDS.get(prop),
+        sp = DX.draw(DC.lady, s, flip=flip, hires=hires, who=who, pose='hold', t=t, mouth_=0.0, expr=expr, look=0.0, hands=LADY_HANDS.get(prop),
                      props={'R': prop}, clip_h=None)                                        # 2x canvas at close-up scale
         hx, hy = sp.anchors['head']
         cx, cy = (x0 + x1) / 2 + (40 if flip else -40), (y0 + y1) / 2 - 60 + 60 * (1 - k)

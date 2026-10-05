@@ -62,14 +62,18 @@ def lobby(t, cx, acts=(), ghost=(), back=(), fx_=None, emit=None, Z=1.0, sy=320,
     return K.shot(WORLD, K.light_lobby, cx, cy, Z, acts=acts, ghost=ghost, back=back, fx_=fx_, emit=emit, sx=180, sy=sy, ghost_a=ghost_a, t=t, pre=pre)
 
 
+CU_BG = 1.45                                 # background zoom behind close-ups (rule 05.10.2026): hero near the camera at 2x, lobby far and crisp
+
+
 def cu(fn, head, t, u, who, expr, Z=2.3, zoom=0.06, pose='stand', flip=False, k=1.7, sy=262, extra=(), ghost_=False, emit=None,
        ghost_a=GHOST_CU, front=(), look=0.0, s=CU_S, **kw):
-    """close-up of one character; `head` = world position of the head (decides which part of the lobby is behind it)"""
-    Zt = Z + zoom * u
-    a = A(fn, head[0], head[1], s=s * Zt / Z, flip=flip, pin='head', pose=pose, t=t, mouth_=mouth(who, t, k) if who else 0.0, expr=expr,
-          look=look, **kw)
+    """close-up of one character drawn at 2x sprite resolution; `head` = world position of the head (decides which part of the lobby is
+    behind it); the lobby is zoomed less than the hero (CU_BG), so it stays a readable room instead of pixel mush"""
+    q = 1.0 + zoom * u / Z
+    a = A(fn, head[0], head[1], s=s * q, flip=flip, pin='head', pose=pose, t=t, mouth_=mouth(who, t, k) if who else 0.0, expr=expr,
+          look=look, hires=True, **kw)
     acts = list(extra) + ([] if ghost_ else [a])
-    return K.shot(WORLD, K.light_lobby, head[0], head[1], Zt, acts=acts, ghost=[a] if ghost_ else (), front=front, emit=emit,
+    return K.shot(WORLD, K.light_lobby, head[0], head[1], CU_BG * q, acts=acts, ghost=[a] if ghost_ else (), front=front, emit=emit,
                   sx=180, sy=sy, ghost_a=ghost_a, t=t)
 
 
@@ -110,17 +114,19 @@ def parapet(wy, t):
 
 def terry_cu(t, u, expr, pose='hold', cat=True, k=1.7, flip=True, extra_emit=None, cat_lid=0.55, tail=0.5, props=None):
     """Terry on the mezzanine (skyline behind him), the villain's white cat on the parapet next to him"""
-    Z = 2.3 + 0.05 * u
-    sc = CU_S * Z / 2.3
+    q = 1.0 + 0.05 * u / 2.3
+    sc = CU_S * q
+    f = 2.3 / CU_BG                                                       # world offsets that keep their screen size at the lower bg zoom
     sgn = -1 if flip else 1
-    par = TERRY_HEAD[1] + 92.0
+    par = TERRY_HEAD[1] + 92.0 * f
     pe = parapet(par, t)
     def emit(big, v):
         pe(big, v)
         if extra_emit: extra_emit(big, v)
-    cats = [A(DC.cat, TERRY_HEAD[0] + sgn * 46.0, par + 1.0, s=sc * 0.55, flip=not flip, t=t, lid=cat_lid, tail=tail)] if cat else []
-    acts = [A(DC.terry, TERRY_HEAD[0], TERRY_HEAD[1], s=sc, flip=flip, pin='head', pose=pose, t=t, mouth_=mouth('terry', t, k), expr=expr, props=props)]
-    return K.shot(WORLD, K.light_lobby, TERRY_HEAD[0], TERRY_HEAD[1], Z, acts=acts, front=cats, emit=emit, sx=180, sy=262)
+    cats = [A(DC.cat, TERRY_HEAD[0] + sgn * 46.0 * f, par + 1.0 * f, s=sc * 0.55, flip=not flip, t=t, lid=cat_lid, tail=tail, hires=True)] if cat else []
+    acts = [A(DC.terry, TERRY_HEAD[0], TERRY_HEAD[1], s=sc, flip=flip, pin='head', pose=pose, t=t, mouth_=mouth('terry', t, k), expr=expr, props=props,
+              hires=True)]
+    return K.shot(WORLD, K.light_lobby, TERRY_HEAD[0], TERRY_HEAD[1], CU_BG * q, acts=acts, front=cats, emit=emit, sx=180, sy=262)
 
 
 def balcony(t, expr='sly', lid=0.55):
@@ -131,11 +137,12 @@ def balcony(t, expr='sly', lid=0.55):
 
 # ================================================================== the shots
 def r_hook(t, u):
-    Z = 2.3 + 0.05 * u
+    q = 1.0 + 0.05 * u / 2.3
     bites = int(t * 1.5) % 3
-    acts = [A(DC.gary, 640.0, 470.0, un=4.8, flip=True, pose='hold', t=t, mouth_=chew(t), expr='normal', props=sandwich(bites), badge=True)]
-    ghost = [A(DC.dibs, DIBS_HEAD[0], DIBS_HEAD[1], s=CU_S * Z / 2.3, pin='head', pose='stand', t=t, mouth_=mouth('dibs', t, 1.9), expr='smug', shades=True)]
-    big = K.shot(WORLD, K.light_lobby, DIBS_HEAD[0], DIBS_HEAD[1], Z, acts=acts, ghost=ghost, ghost_a=GHOST_A, t=t, sx=180, sy=262)
+    acts = [A(DC.gary, 676.0, 470.0, un=5.6, flip=True, pose='hold', t=t, mouth_=chew(t), expr='normal', props=sandwich(bites), badge=True)]
+    ghost = [A(DC.dibs, DIBS_HEAD[0], DIBS_HEAD[1], s=CU_S * q, pin='head', pose='stand', t=t, mouth_=mouth('dibs', t, 1.9), expr='smug', shades=True,
+               hires=True)]
+    big = K.shot(WORLD, K.light_lobby, DIBS_HEAD[0], DIBS_HEAD[1], CU_BG * q, acts=acts, ghost=ghost, ghost_a=GHOST_A, t=t, sx=180, sy=262)
     if t > 0.1: B.shake(big, t, 1.5, 21)
     return big
 
@@ -358,7 +365,7 @@ def r_dibs_disk(t, u):
     k = sm(min(1.0, u / 0.25))
     ang = 8 * (1 - k)
     img = Image.fromarray(d).rotate(-12 + ang, expand=True, resample=Image.NEAREST)
-    O.overlay(big, np.array(img), 640, int(lerp(-200, 1010, k)))
+    O.overlay(big, np.array(img), 590, int(lerp(-200, 1010, k)))
     return big
 
 
