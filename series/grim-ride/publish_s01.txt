@@ -1,0 +1,165 @@
+GRIM RIDE — SEASON 1 «HALLOWEEN WEEK» (6 серий)
+ФАЙЛ ВЫКЛАДКИ ДЛЯ US-КАНАЛА (YouTube, TikTok, Instagram)
+Версия 06.10.2026. Названия, описания, хэштеги и закреп ниже готовы к копированию (английский).
+
+
+==================================================
+1. ВРЕМЯ ВЫКЛАДКИ (ставится один раз)
+==================================================
+Твоё время = Молдова (Europe/Chisinau).
+ВЕСЬ СЕЗОН ВЫХОДИТ В НЕДЕЛЮ РАССИНХРОНА ЧАСОВ: Молдова переходит на зимнее время в вс 25.10.2026, США только в вс 01.11.2026.
+Поэтому разница с Нью-Йорком всю эту неделю 6 часов (а не 7, как обычно). Время ниже уже пересчитано, ничего не сдвигай.
+
+ВЕЧЕРНИЙ СЛОТ — E01–E05
+  YouTube    Молдова 00:45  =  Нью-Йорк 18:45 | Чикаго 17:45 | Денвер 16:45 | Лос-Анджелес 15:45
+  TikTok     Молдова 01:00  =  Нью-Йорк 19:00 | Чикаго 18:00 | Денвер 17:00 | Лос-Анджелес 16:00
+  Instagram  Молдова 01:15  =  Нью-Йорк 19:15 | Чикаго 18:15 | Денвер 17:15 | Лос-Анджелес 16:15
+  (это ночь ПОСЛЕ американского вечера: вечер понедельника в США = вторник 00:45 по Молдове.)
+
+ОБЕДЕННЫЙ СЛОТ ХЭЛЛОУИНА — E06, суббота 31.10
+  YouTube    Молдова 19:00  =  Нью-Йорк 13:00 | Чикаго 12:00 | Денвер 11:00 | Лос-Анджелес 10:00
+  TikTok     Молдова 19:15  =  Нью-Йорк 13:15 | Чикаго 12:15 | Денвер 11:15 | Лос-Анджелес 10:15
+  Instagram  Молдова 19:30  =  Нью-Йорк 13:30 | Чикаго 12:30 | Денвер 11:30 | Лос-Анджелес 10:30
+
+КАЛЕНДАРЬ (даты совпадают с табличкой Тодда «HALLOWEEN IN: N DAYS» в сериях)
+  E01  «Class 3»               США пн 26.10 вечер  →  Молдова вт 27.10  00:45 / 01:00 / 01:15
+  E02  «Verify You're Human»   США вт 27.10 вечер  →  Молдова ср 28.10  00:45 / 01:00 / 01:15
+  E03  «Full Size»             США ср 28.10 вечер  →  Молдова чт 29.10  00:45 / 01:00 / 01:15
+  E04  «The Plug»              США чт 29.10 вечер  →  Молдова пт 30.10  00:45 / 01:00 / 01:15
+  E05  «Best Yard»             США пт 30.10 вечер  →  Молдова сб 31.10  00:45 / 01:00 / 01:15
+  E06  «Fall Back» (финал)     США сб 31.10 обед   →  Молдова сб 31.10  19:00 / 19:15 / 19:30
+  Порядок в каждый день: сначала YouTube, через 15 минут TikTok, ещё через 15 минут Instagram.
+
+ПОЧЕМУ ТАК
+- Будний вечер 18:00–21:00 по местному — сильное окно всех трёх сетей (проверено поиском 05.10.2026 для Agent Dibs,
+  совпадает с исследованием 30.09.2026). Восток + Центр ≈ 80 % населения США.
+- Финал не вечером 31.10: вечер Хэллоуина вся страна на улице (trick-or-treat, вечеринки). Днём 31.10 лента
+  забита хэллоуинским контентом и люди его ищут; к вечеру ролик уже набирает показы. И сюжет E06 — ночь
+  31.10→01.11, когда США переводят часы назад: зритель смотрит серию за несколько часов до того самого «лишнего часа».
+- Если хочешь стартовать раньше (больше времени до Хэллоуина): пн 19.10 – сб 24.10, вечер США = Молдова 01:45 / 02:00 /
+  02:15 (до 25.10 разница 7 часов), финал сб 24.10 обед = Молдова 20:00 / 20:15 / 20:30. Но тогда табличка «N DAYS» не совпадёт
+  с реальными днями — я бы оставил неделю Хэллоуина.
+- Оговорка: это средние по большим выборкам. После первых постов смотрю часы аудитории (ты присылаешь статистику,
+  я пишу в docs/stats-us.md) и сдвигаю слот, если цифры скажут.
+
+ПОСЛЕ 01.11 (если будешь перезаливать / постить расширенную версию)
+- С 02.11 разница снова 7 часов: вечер Нью-Йорк 18:45 = Молдова 01:45; обед Нью-Йорк 13:00 = Молдова 20:00.
+- Весной 2027 опять рассинхрон: США переходят 14.03, Молдова 28.03 (две недели минус 1 час).
+
+НАСТРОЙКИ ДЛЯ КАЖДОГО ПОСТА
+- YouTube: категория Film & Animation, метку «ИИ» не ставим, обложку cover.png ставишь вручную.
+- TikTok / Instagram: обложка уже вшита в первые 0,1 с ролика, кадр обложки — самое начало (0 мс).
+- Хэштеги: 4 на пост. Названия и описания в каждой сети разные специально (не дубли).
+- Файлы: final.mp4 и cover.png каждой серии — те, что я присылал в чат.
+- Слова «kill», «dead», «die» в названиях и описаниях не пишем (платформы режут показы): Смерть «забирает», «приходит за».
+
+
+==================================================
+2. YOUTUBE (Shorts)
+==================================================
+
+--- СЕРИЯ 1/6 «Class 3» ---
+Death Got an E-Bike. Grandpa Got a Mod.
+Grim Ride, Season 1, Episode 1/6. The Grim Reaper finally upgrades from a pale horse to a Class 3 e-bike to pick up Harold, 97. Harold has a mobility trike, a helmet, and a little secret under the tarp. Who wins the race: DEATH or GRANDPA?
+#shorts #halloween #ebike #cartoon
+Закреп: Who wins: DEATH or GRANDPA? 👇 (Edgar has money on Harold.)
+
+--- СЕРИЯ 2/6 «Verify You're Human» ---
+Death vs. a Captcha: Select All Squares With a Pulse
+Grim Ride, Season 1, Episode 2/6. To unlock more speed, the Grim Reaper has to pass the DoomDash captcha and get past Dashley, the cheerful support bot. Spoiler: the app does not believe he is human. What's the worst captcha you've ever failed: BUSES or TRAFFIC LIGHTS?
+#shorts #halloween #captcha #cartoon
+Закреп: Buses or traffic lights: which captcha beats you every time? 👇
+
+--- СЕРИЯ 3/6 «Full Size» ---
+Death Waits in Line for the Full-Size Candy Bar House
+Grim Ride, Season 1, Episode 3/6. Harold gives out full-size bars, so the whole neighborhood lines up at his door, and the Grim Reaper gets in line with a pillowcase. The bar he gets is a lot less "full" than he hoped. Full-size bar or a whole bag of fun-size: which one do you take?
+#shorts #halloween #trickortreat #cartoon
+Закреп: One full-size bar or a whole bag of fun-size? 👇 (Raisins are not an option. Raisins are a warning.)
+
+--- СЕРИЯ 4/6 «The Plug» ---
+The Grim Reaper Goes Looking for the E-Bike Plug
+Grim Ride, Season 1, Episode 4/6. To catch Harold, the Grim Reaper needs 40 mph, so he goes to the masked e-bike crew in the alley to find the guy who sells unlock dongles. The plug is someone he knows very well. Did you see it coming: YES or NO?
+#shorts #halloween #ebike #cartoon
+Закреп: Did you see who the plug was? YES or NO 👇 (No refunds.)
+
+--- СЕРИЯ 5/6 «Best Yard» ---
+The Grim Reaper Pretends to Be a Halloween Decoration
+Grim Ride, Season 1, Episode 5/6. Disguised as a lawn decoration in Harold's yard, the Grim Reaper waits for his moment while the neighborhood judges BEST YARD. Todd gives him seven out of ten. He needs fog. Would you put him in YOUR yard: YES or TACKY?
+#shorts #halloween #halloweendecor #cartoon
+Закреп: Would you put this Reaper in your yard? YES or TACKY 👇 (Kevin says yes.)
+
+--- СЕРИЯ 6/6 «Fall Back» (финал сезона) ---
+Death Has One Minute Left on Halloween Night
+Grim Ride, Season 1, Episode 6/6, season finale. It's 1:59 AM, Harold is finally ready, and the whole neighborhood shows up to help the Grim Reaper make his last pickup. But tonight the clocks in America do something strange. What would you do with an extra hour?
+#shorts #halloween #daylightsavingtime #cartoon
+Закреп: What would YOU do with an extra hour? 👇 (Season 2: Spring Forward. Somebody loses an hour.)
+
+
+==================================================
+3. TIKTOK
+==================================================
+
+--- СЕРИЯ 1/6 «Class 3» ---
+Grim Ride ep 1/6: the Reaper upgraded to a Class 3 e-bike 💀🚲
+Harold is 97, rides a mobility trike, and never takes off his helmet. Death thinks this pickup is easy. Team DEATH or team GRANDPA?
+#halloween #ebike #grimreaper #animation
+
+--- СЕРИЯ 2/6 «Verify You're Human» ---
+Grim Ride ep 2/6: Death can't pass the captcha 🤖💀
+DoomDash wants him to select every square with a pulse, and Dashley the support bot keeps saying "Oopsie!" Which captcha do you hate most: buses or traffic lights?
+#halloween #captcha #grimreaper #animation
+
+--- СЕРИЯ 3/6 «Full Size» ---
+Grim Ride ep 3/6: the full-size candy bar house 🍫💀
+The whole block is lined up at Harold's door, and Death is at the very back with a pillowcase. Full-size bar or a bag of fun-size?
+#halloween #trickortreat #grimreaper #animation
+
+--- СЕРИЯ 4/6 «The Plug» ---
+Grim Ride ep 4/6: Death needs the unlock guy 🔌💀
+40 mph or no pickup. The masked e-bike crew knows a plug, and Death knows the plug. Did you guess who it was?
+#halloween #ebike #grimreaper #animation
+
+--- СЕРИЯ 5/6 «Best Yard» ---
+Grim Ride ep 5/6: Death is undercover as a lawn decoration 🎃💀
+Rule one of the disguise: DON'T MOVE. Rule two: don't let Todd judge you. Would this Reaper win best yard on your street?
+#halloween #halloweendecor #grimreaper #animation
+
+--- СЕРИЯ 6/6 «Fall Back» (финал сезона) ---
+Grim Ride ep 6/6: Death's last minute on Halloween night ⏰💀
+1:59 AM. Harold is ready. The whole block came to help. Then the clocks do the thing America does every November. What would you do with one more hour?
+#halloween #daylightsaving #grimreaper #animation
+
+
+==================================================
+4. INSTAGRAM (Reels)
+==================================================
+
+--- СЕРИЯ 1/6 «Class 3» ---
+Grim Ride • Episode 1/6 • Class 3
+The pale horse is retired. The Grim Reaper rolls up to Harold's porch on a brand new Class 3 e-bike, and Harold, 97, is already wearing his helmet. Tag the friend who drives like Harold 👇
+#halloween #grimreaper #ebike #cartoon
+
+--- СЕРИЯ 2/6 «Verify You're Human» ---
+Grim Ride • Episode 2/6 • Verify You're Human
+Death needs a speed unlock, and the app needs proof he is human. Every square he taps flatlines. Dashley from support is doing her best. Tag the friend who fails every captcha 👇
+#halloween #grimreaper #captcha #cartoon
+
+--- СЕРИЯ 3/6 «Full Size» ---
+Grim Ride • Episode 3/6 • Full Size
+The legendary full-size bar house is open, the line goes down the block, and the Grim Reaper has been waiting longer than anybody. Candy prices this year, though. Tag the neighbor who gives out raisins 👇
+#halloween #trickortreat #grimreaper #cartoon
+
+--- СЕРИЯ 4/6 «The Plug» ---
+Grim Ride • Episode 4/6 • The Plug
+Harold's trike is unlocked, so Death goes to the masked e-bike crew in the alley to find who sells the dongles. The answer was there the whole season. Tag the friend who saw it coming 👇
+#halloween #grimreaper #ebike #cartoon
+
+--- СЕРИЯ 5/6 «Best Yard» ---
+Grim Ride • Episode 5/6 • Best Yard
+The Grim Reaper hides among Harold's fake tombstones as a "decoration" right when the neighborhood comes by to judge the best yard. Seven out of ten. Needs fog. Tag the neighbor with the 12-foot skeleton 👇
+#halloween #halloweendecor #grimreaper #cartoon
+
+--- СЕРИЯ 6/6 «Fall Back» (финал сезона) ---
+Grim Ride • Episode 6/6 • Fall Back (season finale)
+Halloween night, 1:59 AM, one minute left. Harold is ready, Kayden's crew and Todd's fog machine are here to help, and then 2:00 turns into something else. Tag the friend who always needs one more hour 👇
+#halloween #grimreaper #daylightsavingtime #cartoon
