@@ -1,0 +1,94 @@
+{
+  "cartoon": "Grim Ride",
+  "slug": "grim-ride",
+  "lang": "en",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "grim": {
+      "name": "Grim",
+      "color_caption": [
+        200,
+        170,
+        255
+      ],
+      "style": "[booming, theatrical] / [smug] / [panicking, high-pitched] — pompous stage actor who cracks under pressure",
+      "design": {
+        "description": "The Grim Reaper as a pompous Shakespearean stage actor: a deep, booming, theatrical male voice, rich old-fashioned British stage accent, resonant bass-baritone, grand, self-important and dramatic, but it cracks into a whiny, panicky higher register when things go wrong. Comedic, expressive, crisp diction.",
+        "text": "Behold! I am DEATH, harbinger of the end, rider of the pale horse. Well. Pale Horse Two. It's electric. Do NOT laugh. I have collected kings, pharaohs, and one very rude accountant. Harold will be no problem. None. Whatsoever. Oh no. Oh no no no.",
+        "preferred_preview": 2
+      },
+      "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+      "voice": "George (premade, British storyteller)",
+      "temp_premade": true
+    },
+    "edgar": {
+      "name": "Edgar",
+      "color_caption": [
+        170,
+        255,
+        90
+      ],
+      "style": "[deadpan] [flat] — one or two words straight to the camera",
+      "design": {
+        "description": "An old raven with a dry, raspy, low male voice, utterly bored and sardonic, flat monotone deadpan, slightly gravelly and nasal, speaks slowly in very short sentences like a tired late-night radio host who has seen everything. General American accent.",
+        "text": "Nevermore. Look, I've been sitting on this guy's shoulder for six hundred years. Short king. Dead battery. Ironic. Four easy payments. I don't get paid enough for this. Actually, I don't get paid at all. Nevermore.",
+        "preferred_preview": 1
+      },
+      "voice_id": "N2lVS1w4EtoT3dr4eOWO",
+      "voice": "Callum (premade, husky gravelly)",
+      "temp_premade": true
+    },
+    "harold": {
+      "name": "Harold",
+      "color_caption": [
+        255,
+        160,
+        60
+      ],
+      "style": "[unbothered, crusty] — slow, dry, mischievous; calls Death 'Bones' and 'kid'",
+      "design": {
+        "description": "A crusty, gravelly ninety-seven-year-old American man with a thick old New England accent, slow and completely unbothered, dry wit, a short wheezy chuckle, sharp and mischievous, not frail at all. Natural, characterful, comedic.",
+        "text": "Over my dead body, Bones. Ninety-seven years, kid, and I've outlived three doctors, two wives and a parrot. Catch me if you can. Happy Halloween! Here, take a raisin box, they're good for you. Now get off my porch.",
+        "preferred_preview": 2
+      },
+      "voice_id": "pqHfZKP75CvOlQylNhV4",
+      "voice": "Bill (premade, old American)",
+      "temp_premade": true
+    },
+    "todd": {
+      "name": "Todd",
+      "color_caption": [
+        90,
+        225,
+        255
+      ],
+      "style": "[hyped, bro] / [gently pitying] — oblivious suburban decoration dad",
+      "design": {
+        "description": "An over-enthusiastic American suburban dad in his early forties, upbeat slightly nasal tenor, says bro and buddy a lot, fast excited delivery, friendly and totally oblivious, light Southern California bro accent. Comedic and natural.",
+        "text": "Bro! Sick costume! Where's your fog machine? Dude, I got twelve inflatables, two fog machines and Kevin. Kevin's twelve feet. Three hundred bucks, sold out by Labor Day. Not even twelve feet, buddy? That's okay. Not everybody can be Kevin.",
+        "preferred_preview": 0
+      },
+      "voice_id": "TX3LPaxmHKxFdv7VOQHJ",
+      "voice": "Liam (premade, energetic young American)",
+      "temp_premade": true
+    },
+    "kayden": {
+      "name": "Kayden",
+      "color_caption": [
+        255,
+        100,
+        190
+      ],
+      "style": "[bored, flat] — 13-year-old, unimpressed, a little muffled by the ski mask",
+      "design": {
+        "description": "A young American guy in his early twenties with a bored, flat, mumbly monotone, slightly nasal, totally unimpressed slacker energy, talks a little muffled and lazy. Natural and comedic.",
+        "text": "Relax, pal. It's a class three. Mine does forty. Nice skin, where'd you get it? Bro, you're cooked. Relax. Relax, pal. We ride at nine. Don't be weird about it, okay? Whatever. Relax, pal.",
+        "preferred_preview": 1
+      },
+      "voice_id": "bIHbv24MWmeRgasZH58o",
+      "voice": "Will (premade, chill young American)",
+      "temp_premade": true
+    }
+  },
+  "note": "06.10.2026: account custom-voice limit 30/30 (all slots used by other series + owner's personal clones). Pilot voiced with premade voices (temp_premade). Designed previews are in build/voices/grim-ride/*_previews.json; after the owner frees 5 slots: python3 engine/voicedesign.py save grim-ride <char> <preferred_preview> and re-voice."
+}
