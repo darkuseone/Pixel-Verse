@@ -398,7 +398,8 @@ def hatch_mask_():
 CAR_COLS = [(232, 228, 214), (196, 60, 52), (206, 186, 140), (100, 46, 80), (70, 120, 170), (86, 132, 90)]
 
 
-def lada(sp, col=(232, 228, 214), t=0.0, honk=0.0, rust=0, spin=0.0, driver=True, web=False, sign=None, tint=False, trunk=0.0, rims=False):
+def lada(sp, col=(232, 228, 214), t=0.0, honk=0.0, rust=0, spin=0.0, driver=True, web=False, sign=None, tint=False, trunk=0.0, rims=False,
+         police=False):
     """boxy Soviet sedan «six», side view facing +x, ~64 px long"""
     body = sp.m_poly([(-30.0, 6.0), (32.0, 6.0), (33.0, 14.0), (30.0, 17.0), (12.0, 18.0), (6.0, 27.0), (-14.0, 27.0), (-20.0, 18.0),
                       (-30.0, 17.0), (-31.0, 12.0)])
@@ -417,6 +418,13 @@ def lada(sp, col=(232, 228, 214), t=0.0, honk=0.0, rust=0, spin=0.0, driver=True
         a = math.radians(20 + 70 * trunk)
         sp.line((-15.0, 18.0), (-15.0 - math.cos(a) * 17, 18.0 + math.sin(a) * 17), dark(col, 0.7), 2)
     sp.line((-30.0, 12.0), (33.0, 12.0), dark(col, 0.65))
+    if police:                                                                # patrol «six»: blue stripe, «ДПС», light bar
+        sp.fill(body & (DX.YC > 10.0) & (DX.YC < 13.5), (40, 80, 190))
+        sp.ptext('ДПС', 6.0, 18.0, (40, 80, 190), size=4, center=True)
+        on = int(t * 6) % 2 == 0
+        sp.rect(-8.0, 27.0, -1.0, 29.5, (255, 60, 60) if on else (120, 30, 30))
+        sp.rect(-1.0, 27.0, 6.0, 29.5, (60, 120, 255) if not on else (30, 50, 120))
+        sp.rect(-8.0, 26.6, 6.0, 27.2, (60, 60, 66))
     sp.rect(31.0, 6.0, 35.0, 9.0, (200, 200, 196)); sp.rect(-33.0, 6.0, -29.0, 9.0, (200, 200, 196))   # chrome bumpers
     sp.rect(30.5, 12.0, 33.0, 15.0, (255, 240, 190))                           # headlight
     sp.rect(-31.0, 12.0, -29.5, 15.0, (220, 40, 40))
@@ -705,4 +713,22 @@ def inspector(sp, t=0.0, expr='glare', mouth_=0.0, look=(0.7, 0.0), blink=None, 
     sp.ell(*Hp(1.0, 11.0), 2.0 * hs, 2.0 * hs, tones((240, 200, 60)))         # cockade
     sp.anchors['head'] = Hp(1.0, 0.0); sp.anchors['hand'] = e
     if clip is not None: sp.clip_below(clip)
+    sp.outline(INK, 2)
+
+
+def sign20(sp, k=1.0):
+    """a speed-limit «20» sign on a crooked pole, stuck in the ground right where the patrol stands"""
+    sp.line((0.0, 0.0), (1.0, 34.0), (150, 150, 156), 2)
+    sp.ell(1.0, 40.0, 8.0, 8.0, tones((220, 40, 40)))
+    sp.ell(1.0, 40.0, 6.0, 6.0, tones((246, 246, 240)), ol=False)
+    sp.ptext('20', 1.0, 44.0, INK, size=6, center=True)
+    sp.outline(INK, 2)
+
+
+def bush(sp, w=30.0, seed=1):
+    rng = np.random.default_rng(seed)
+    parts = [sp.m_ell(-w / 2 + i * w / 4 + rng.random() * 3, 6 + rng.random() * 8, 7 + rng.random() * 4, 6 + rng.random() * 4) for i in range(5)]
+    sp.union(parts, tones((70, 100, 50)))
+    for i in range(14):
+        sp.dot(-w / 2 + rng.random() * w, 4 + rng.random() * 14, (120, 150, 60))
     sp.outline(INK, 2)

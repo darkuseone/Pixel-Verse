@@ -1,0 +1,15 @@
+{
+  "c1": ["cop", "[stern, shouting after a whistle] Стоя́ть! Превыша́ем, граждани́н!"],
+  "m1": ["maz", "[deadpan, calm] Два́дцать пять в час."],
+  "c2": ["cop", "[stern, pointing, smug] Знак ви́дим?"],
+  "c3": ["cop", "[official, slow, bureaucratic] Права́ катего́рии «Мо́но» есть?"],
+  "m2": ["maz", "[dry] Тако́й нет."],
+  "c4": ["cop", "[satisfied, writing a fine] Зна́чит, без прав."],
+  "w1": ["wheel", "[robotic, proud] У меня́ есть права́, дру́га. Кита́йский."],
+  "c5": ["cop", "[official, holding out a hand] Докуме́нтики на тра́нспорт!"],
+  "m3": ["maz", "[proud, handing it over] Вот. От шестёрки."],
+  "c6": ["cop", "[looking around, whispering, conspiratorial] Ла́дно... Дота́щишь — отпущу́."],
+  "c7": ["cop", "[sad whisper, embarrassed] Тре́тий день без бензи́на."],
+  "d1": ["tolik", "[laughing, shouting from a passing truck] Мужики́, а кто кого́ останови́л?!"],
+  "c8": ["cop", "[deadpan, imitating a police siren with his mouth] Уи́-у! Уи́-у!"]
+}
