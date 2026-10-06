@@ -10,14 +10,20 @@ import paths as P
 API = 'https://api.elevenlabs.io/v1'
 
 
-def _post(url, body):
+class LimitError(Exception):
+    pass
+
+
+def _post(url, body, soft=False):
     req = urllib.request.Request(url, json.dumps(body).encode(), {
         'xi-api-key': os.environ['ELEVENLABS_API_KEY'], 'Content-Type': 'application/json'})
     try:
         with urllib.request.urlopen(req, timeout=300) as r:
             return json.loads(r.read()), r.headers
     except urllib.error.HTTPError as e:
-        sys.exit(f'HTTP {e.code}: {e.read()[:600]!r}')
+        msg = e.read()[:600]
+        if soft and b'voice_limit' in msg: raise LimitError(msg)
+        sys.exit(f'HTTP {e.code}: {msg!r}')
 
 
 def pcm(path, sr=16000):
@@ -80,11 +86,20 @@ def save(slug, char, n):
     body = {'voice_name': f"{V['cartoon']} — {c['name']}", 'voice_description': c['design']['description'][:1000],
             'generated_voice_id': prev[n]['generated_voice_id'],
             'played_not_selected_voice_ids': [p['generated_voice_id'] for p in prev if p['i'] != n]}
-    r, _ = _post(f'{API}/text-to-voice', body)
+    try:
+        r, _ = _post(f'{API}/text-to-voice', body, soft=True)
+    except LimitError:                                                    # account full: free one slot by the registry rules, retry
+        import voices
+        if not voices.free(1, keep=(slug,), go=True, reason=f'auto: room for {slug}/{char}'):
+            sys.exit('voice limit reached and nothing may be deleted automatically')
+        r, _ = _post(f'{API}/text-to-voice', body)
+    c.pop('temp_premade', None)
     c['voice_id'] = r['voice_id']; c['voice'] = body['voice_name']
     c['design']['picked'] = {k: prev[n][k] for k in ('i', 'dur', 'f0', 'f0_iqr', 'rate', 'loud_sd')}
     json.dump(V, open(vj, 'w'), ensure_ascii=False, indent=2)
     print(char, '->', r['voice_id'])
+    import voices
+    voices.sync(quiet=True)                                               # the registry docs/voices.* always knows who has which voice
 
 
 if __name__ == '__main__':

@@ -1,0 +1,1431 @@
+{
+ "protected": {
+  "14NozJq5eoBmDc1FXFDq": "NIKITA2",
+  "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
+  "Em7IfQCID6d4WZTp4VkN": "Cartman"
+ },
+ "voices": [
+  {
+   "slug": "agent-dibs",
+   "char": "dibs",
+   "voice_id": "5C0bHt6GhA0my3bZoLJf",
+   "status": "active",
+   "name": "Dibs",
+   "voice_name": "Agent Dibs — Dibs",
+   "lines": 33,
+   "episodes": 6,
+   "samples": [
+    "series/agent-dibs/voice/ep04/d3.mp3",
+    "series/agent-dibs/voice/ep03/d2.mp3",
+    "series/agent-dibs/voice/ep05/d4.mp3",
+    "series/agent-dibs/voice/ep03/d1.mp3",
+    "series/agent-dibs/voice/ep01/d2.mp3",
+    "series/agent-dibs/voice/ep05/d3.mp3",
+    "series/agent-dibs/voice/ep06/d4.mp3",
+    "series/agent-dibs/voice/ep01/d4.mp3"
+   ],
+   "design": {
+    "description": "A loud, gravelly American man in his mid-fifties with a thick old-school Chicago accent (flat vowels, 'da' for 'the'), blue-collar, hearty, confident, always sure he has it handled, sounds like he is talking over a cold wind. Expressive, comedic, mid-low baritone, native American English speaker.",
+    "text": "Dibs! Does it have a chair on it? Then it's mine, pal. I shoveled that spot for two hours and nobody, I mean NOBODY, touches da chair. Don't worry about it, I got a guy. Da guy's on lunch. Okay, I'm sitting on it. Spot's still mine.",
+    "picked": {
+     "i": 1,
+     "dur": 16.67,
+     "f0": 163.3,
+     "f0_iqr": 57.1,
+     "rate": 19.1,
+     "loud_sd": 4.9
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A loud, gravelly American man in his mid-fifties with a thick old-school Chicago accent (flat vowels, 'da' for 'the'), blue-collar, hearty, confident, always sure he has it handled, sounds like he is talking over a cold wind. Expressive, comedic, mid-low baritone, native American English speaker.",
+    "settings": null,
+    "created_at_unix": 1790850333
+   }
+  },
+  {
+   "slug": "agent-dibs",
+   "char": "terry",
+   "voice_id": "EUq8L3QnRf1VZ3o46Rqy",
+   "status": "active",
+   "name": "Terry",
+   "voice_name": "Agent Dibs — Terry",
+   "lines": 12,
+   "episodes": 4,
+   "samples": [
+    "series/agent-dibs/voice/ep04/t3.mp3",
+    "series/agent-dibs/voice/ep04/t4.mp3",
+    "series/agent-dibs/voice/ep01/t2.mp3",
+    "series/agent-dibs/voice/ep04/t2.mp3",
+    "series/agent-dibs/voice/ep04/t5.mp3",
+    "series/agent-dibs/voice/ep02/t1.mp3",
+    "series/agent-dibs/voice/ep02/t3.mp3",
+    "series/agent-dibs/voice/ep02/t4.mp3"
+   ],
+   "design": {
+    "description": "A tall, polite, nervous American man in his thirties with a deep soft baritone and a suburban Midwestern accent, apologizes constantly, a community-theater actor playing a tough guy and not quite pulling it off. Warm, slightly shaky, native American English speaker.",
+    "text": "Ope, sorry. That's, uh, that's our bomb. Hold on, let me just, sorry, what's my motivation here? Okay. Okay. Stay back! I'll do it. I mean it. I'm really sorry about this. I just wanted ketchup for my fries.",
+    "picked": {
+     "i": 0,
+     "dur": 14.37,
+     "f0": 105.3,
+     "f0_iqr": 64.5,
+     "rate": 26.0,
+     "loud_sd": 7.2
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A tall, polite, nervous American man in his thirties with a deep soft baritone and a suburban Midwestern accent, apologizes constantly, a community-theater actor playing a tough guy and not quite pulling it off. Warm, slightly shaky, native American English speaker.",
+    "settings": null,
+    "created_at_unix": 1790850339
+   }
+  },
+  {
+   "slug": "agent-dibs",
+   "char": "deb",
+   "voice_id": "rDUAka3HaW9ATyqCs7fi",
+   "status": "active",
+   "name": "Deb",
+   "voice_name": "Agent Dibs — Deb",
+   "lines": 11,
+   "episodes": 5,
+   "samples": [
+    "series/agent-dibs/voice/ep01/deb3.mp3",
+    "series/agent-dibs/voice/ep05/deb1.mp3",
+    "series/agent-dibs/voice/ep05/deb2.mp3",
+    "series/agent-dibs/voice/ep05/deb3.mp3",
+    "series/agent-dibs/voice/ep05/deb4.mp3",
+    "series/agent-dibs/voice/ep01/deb1.mp3",
+    "series/agent-dibs/voice/ep04/deb1.mp3",
+    "series/agent-dibs/voice/ep01/deb2.mp3"
+   ],
+   "design": {
+    "description": "A warm, bright American woman in her sixties with a gentle Midwestern accent, relentlessly kind, says 'hon' and 'oh geez', can sound supportive and quietly disappointed in the same breath. Friendly mid-high voice, a little nasal, knitting-circle energy, native American English speaker.",
+    "text": "Oh, hon, that's different. Is something sizzling? Seatbelt, hon. Oh geez, I think the hotdish is done. Hold on. Agent, you have ten seconds, so please do something, hon. Proud of you, Agent. Truly.",
+    "picked": {
+     "i": 2,
+     "dur": 16.12,
+     "f0": 210.5,
+     "f0_iqr": 80.6,
+     "rate": 18.1,
+     "loud_sd": 6.2
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A warm, bright American woman in her sixties with a gentle Midwestern accent, relentlessly kind, says 'hon' and 'oh geez', can sound supportive and quietly disappointed in the same breath. Friendly mid-high voice, a little nasal, knitting-circle energy, native American English speaker.",
+    "settings": null,
+    "created_at_unix": 1790850335
+   }
+  },
+  {
+   "slug": "agent-dibs",
+   "char": "brad",
+   "voice_id": "1U7R8ztWDP1r2BuAL8Dz",
+   "status": "active",
+   "name": "Brad",
+   "voice_name": "Agent Dibs — Brad",
+   "lines": 9,
+   "episodes": 3,
+   "samples": [
+    "series/agent-dibs/voice/ep06/b3.mp3",
+    "series/agent-dibs/voice/ep06/b5.mp3",
+    "series/agent-dibs/voice/ep06/b2.mp3",
+    "series/agent-dibs/voice/ep06/b1.mp3",
+    "series/agent-dibs/voice/ep05/b2.mp3",
+    "series/agent-dibs/voice/ep01/b1.mp3",
+    "series/agent-dibs/voice/ep05/b1.mp3",
+    "series/agent-dibs/voice/ep06/b4.mp3"
+   ],
+   "design": {
+    "description": "A bright, upbeat American man in his early thirties with a suburban Midwestern accent, gleaming positivity, podcast-polite, says 'ope' and 'you bet', a slight tightness under the smile. Clear tenor, always smiling audibly, native American English speaker.",
+    "text": "Ope! Hi there! Is this spot open? Is that a chair? You bet! I'd love to discuss, but I have a thing. Great job, team! Plus snacks. Oh, thank goodness. Ope. Ope. Ope!",
+    "picked": {
+     "i": 0,
+     "dur": 11.39,
+     "f0": 173.9,
+     "f0_iqr": 129.8,
+     "rate": 25.7,
+     "loud_sd": 7.0
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A bright, upbeat American man in his early thirties with a suburban Midwestern accent, gleaming positivity, podcast-polite, says 'ope' and 'you bet', a slight tightness under the smile. Clear tenor, always smiling audibly, native American English speaker.",
+    "settings": null,
+    "created_at_unix": 1790850343
+   }
+  },
+  {
+   "slug": "agent-dibs",
+   "char": "gary",
+   "voice_id": "2RpVmTUANdkCGLgvjh2O",
+   "status": "deleted",
+   "name": "Gary",
+   "voice_name": "Agent Dibs — Gary",
+   "lines": 6,
+   "episodes": 3,
+   "samples": [
+    "series/agent-dibs/voice/ep02/g3.mp3",
+    "series/agent-dibs/voice/ep02/g1.mp3",
+    "series/agent-dibs/voice/ep01/g1.mp3",
+    "series/agent-dibs/voice/ep02/g4.mp3",
+    "series/agent-dibs/voice/ep03/g1.mp3",
+    "series/agent-dibs/voice/ep02/g2.mp3"
+   ],
+   "design": {
+    "description": "A short, round, cheerful American man in his thirties with a higher nasal tenor and a suburban Midwestern accent, earnest and helpful, always trying to be useful, a bit dreamy. Friendly, light, native American English speaker.",
+    "text": "Ope. Sir? You've got a pop-up. Top right, I think? No, the other top right. Oh, that's actually a really good mattress. Hey, can you send me the link? I would really appreciate that. We're okay!",
+    "picked": {
+     "i": 1,
+     "dur": 15.07,
+     "f0": 217.7,
+     "f0_iqr": 111.4,
+     "rate": 22.0,
+     "loud_sd": 5.4
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A short, round, cheerful American man in his thirties with a higher nasal tenor and a suburban Midwestern accent, earnest and helpful, always trying to be useful, a bit dreamy. Friendly, light, native American English speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790850341
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/2RpVmTUANdkCGLgvjh2O/b1af56eb-1a32-4b28-b3f0-523419b3ceda.mp3",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "agent-dibs",
+   "char": "operator",
+   "voice_id": "eT8Vk9u6kd8OzYpIosfG",
+   "status": "deleted",
+   "name": "311 Operator",
+   "voice_name": "Agent Dibs — 311 Operator",
+   "lines": 5,
+   "episodes": 1,
+   "samples": [
+    "series/agent-dibs/voice/ep03/op1.mp3",
+    "series/agent-dibs/voice/ep03/op5.mp3",
+    "series/agent-dibs/voice/ep03/op3.mp3",
+    "series/agent-dibs/voice/ep03/op2.mp3",
+    "series/agent-dibs/voice/ep03/op4.mp3"
+   ],
+   "design": {
+    "description": "A bored American woman in her twenties with a flat monotone call-center voice, chewing-gum energy, no emotion at all, polite but dead inside. Native American English speaker.",
+    "text": "Three-one-one. Please state your pothole. We can't fill a pothole with a car in it. That's Towing. This is Streets. Please hold. Thanks for holding. Your request is closed. Duplicate of request four five one two three three oh.",
+    "picked": {
+     "i": 1,
+     "dur": 21.71,
+     "f0": 190.5,
+     "f0_iqr": 42.1,
+     "rate": 16.4,
+     "loud_sd": 5.7
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A bored American woman in her twenties with a flat monotone call-center voice, chewing-gum energy, no emotion at all, polite but dead inside. Native American English speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790850350
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/eT8Vk9u6kd8OzYpIosfG/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiZDU2OGFlZTktZTNjMC00YzMwLThmZDMtZDZkYjgwOTAyYzcyLm1wMyIsInRpbWVzdGFtcCI6MTc5MTMxNjgwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "agent-dibs",
+   "char": "marty",
+   "voice_id": "cI8n4KiVHQvXcAVhs2wo",
+   "status": "deleted",
+   "name": "Marty",
+   "voice_name": "Agent Dibs — Marty",
+   "lines": 4,
+   "episodes": 3,
+   "samples": [
+    "series/agent-dibs/voice/ep06/m1.mp3",
+    "series/agent-dibs/voice/ep01/m1.mp3",
+    "series/agent-dibs/voice/ep04/m1.mp3",
+    "series/agent-dibs/voice/ep06/m2.mp3"
+   ],
+   "design": {
+    "description": "An old, raspy, tired American man with a Chicago accent, deadpan and slow, unbothered, sounds like a retired union guy telling you the truth. Dry, low, gravelly, very little pitch variation, native American English speaker.",
+    "text": "Ten years, number one. Then L.A. took it. You think that's easy to live with? Look, I'm just the rat. Everybody knows it. It's literally my job. Nobody ever asks the rat how he's doing. He's from Naperville.",
+    "picked": {
+     "i": 2,
+     "dur": 24.61,
+     "f0": 290.9,
+     "f0_iqr": 276.2,
+     "rate": 13.7,
+     "loud_sd": 5.2
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "An old, raspy, tired American man with a Chicago accent, deadpan and slow, unbothered, sounds like a retired union guy telling you the truth. Dry, low, gravelly, very little pitch variation, native American English speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790850337
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/cI8n4KiVHQvXcAVhs2wo/5f78556f-b08d-4ff3-8402-c9e44e44be66.mp3",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "agent-dibs",
+   "char": "chief",
+   "voice_id": "rEkmbL8g1KnVDXo1RoDN",
+   "status": "deleted",
+   "name": "The Chief",
+   "voice_name": "Agent Dibs — The Chief",
+   "lines": 4,
+   "episodes": 3,
+   "samples": [
+    "series/agent-dibs/voice/ep05/ch1.mp3",
+    "series/agent-dibs/voice/ep06/ch1.mp3",
+    "series/agent-dibs/voice/ep03/w1.mp3",
+    "series/agent-dibs/voice/ep05/ch2.mp3"
+   ],
+   "design": {
+    "description": "A gruff, formal, tired middle-aged American bureaucrat with a deep voice, speaks like he is reading minutes from a meeting, monotone, authoritative, native American English speaker.",
+    "text": "Agent Dibs. First to arrive. The committee has reviewed the matter. The trophy goes to whoever is holding it. Not in writing. Brad's trophy is revoked. Agent Dibs, you're permanent. Meeting adjourned.",
+    "picked": {
+     "i": 2,
+     "dur": 15.57,
+     "f0": 320.0,
+     "f0_iqr": 279.1,
+     "rate": 20.1,
+     "loud_sd": 5.2
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A gruff, formal, tired middle-aged American bureaucrat with a deep voice, speaks like he is reading minutes from a meeting, monotone, authoritative, native American English speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790850348
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/rEkmbL8g1KnVDXo1RoDN/755d64ed-a43a-4832-8683-c4e679cd1706.mp3",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "agent-dibs",
+   "char": "mrs_w",
+   "voice_id": "pP2cFkzWZzNw0LkjA4ec",
+   "status": "deleted",
+   "name": "Mrs. Wozniak",
+   "voice_name": "Agent Dibs — Mrs. Wozniak",
+   "lines": 3,
+   "episodes": 2,
+   "samples": [
+    "series/agent-dibs/voice/ep04/mw2.mp3",
+    "series/agent-dibs/voice/ep04/mw1.mp3",
+    "series/agent-dibs/voice/ep06/mw1.mp3"
+   ],
+   "design": {
+    "description": "An elderly American woman in her eighties, raspy, with a flat Chicago-Polish accent, unimpressed, speaks in short verdicts. Low, dry, slow, no nonsense, native American English speaker.",
+    "text": "Naperville. Shoveled it himself, that one. Fries are fine. You hear me? Fries are fine. In my day, nobody touched a chair. Nobody. Now go on and get off my lawn.",
+    "picked": {
+     "i": 1,
+     "dur": 17.48,
+     "f0": 160.0,
+     "f0_iqr": 25.8,
+     "rate": 13.0,
+     "loud_sd": 5.5
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "An elderly American woman in her eighties, raspy, with a flat Chicago-Polish accent, unimpressed, speaks in short verdicts. Low, dry, slow, no nonsense, native American English speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790850345
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/pP2cFkzWZzNw0LkjA4ec/bb69cb29-0264-495a-a840-ea41c0fe8c1b.mp3",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "agent-dibs",
+   "char": "cabbie",
+   "voice_id": "PpmimHEhUDo0e4uO8FFz",
+   "status": "deleted",
+   "name": "NY Cabbie",
+   "voice_name": "Agent Dibs — NY Cabbie",
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/agent-dibs/voice/ep06/cab1.mp3"
+   ],
+   "design": {
+    "description": "A bored, gravelly New York City cab driver in his fifties with a thick Brooklyn accent, impatient, a little hoarse, native American English speaker.",
+    "text": "Yo. This spot open? I'm double-parked, I'm in a hurry, my meter's running. What, is that a chair? Whaddaya mean it's reserved? It's a street!",
+    "picked": {
+     "i": 1,
+     "dur": 8.99,
+     "f0": 161.6,
+     "f0_iqr": 82.2,
+     "rate": 21.1,
+     "loud_sd": 6.2
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A bored, gravelly New York City cab driver in his fifties with a thick Brooklyn accent, impatient, a little hoarse, native American English speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790850352
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/PpmimHEhUDo0e4uO8FFz/a835eae8-8470-410b-9608-ed7456b1ba96.mp3",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "grim-ride",
+   "char": "grim",
+   "voice_id": "sdQf2r6zfX32hvp25Auj",
+   "status": "active",
+   "name": "Grim",
+   "voice_name": "Grim Ride — Grim",
+   "lines": 7,
+   "episodes": 1,
+   "samples": [
+    "series/grim-ride/voice/ep01/g2.mp3",
+    "series/grim-ride/voice/ep01/g1.mp3",
+    "series/grim-ride/voice/ep01/g4.mp3",
+    "series/grim-ride/voice/ep01/g6.mp3",
+    "series/grim-ride/voice/ep01/g3.mp3",
+    "series/grim-ride/voice/ep01/g5.mp3",
+    "series/grim-ride/voice/ep01/g7.mp3"
+   ],
+   "design": {
+    "description": "The Grim Reaper as a pompous Shakespearean stage actor: a deep, booming, theatrical male voice, rich old-fashioned British stage accent, resonant bass-baritone, grand, self-important and dramatic, but it cracks into a whiny, panicky higher register when things go wrong. Comedic, expressive, crisp diction.",
+    "text": "Behold! I am DEATH, harbinger of the end, rider of the pale horse. Well. Pale Horse Two. It's electric. Do NOT laugh. I have collected kings, pharaohs, and one very rude accountant. Harold will be no problem. None. Whatsoever. Oh no. Oh no no no.",
+    "picked": {
+     "i": 2,
+     "dur": 33.15,
+     "f0": 166.7,
+     "f0_iqr": 161.5,
+     "rate": 11.9,
+     "loud_sd": 5.9
+    }
+   },
+   "history": [
+    {
+     "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+     "until": "2026-10-06"
+    }
+   ],
+   "account": {
+    "category": "generated",
+    "description": "The Grim Reaper as a pompous Shakespearean stage actor: a deep, booming, theatrical male voice, rich old-fashioned British stage accent, resonant bass-baritone, grand, self-important and dramatic, but it cracks into a whiny, panicky higher register when things go wrong. Comedic, expressive, crisp diction.",
+    "settings": null,
+    "created_at_unix": 1791318868
+   }
+  },
+  {
+   "slug": "grim-ride",
+   "char": "edgar",
+   "voice_id": "QxBrp3fXvoJ3Zvl8DXHD",
+   "status": "active",
+   "name": "Edgar",
+   "voice_name": "Grim Ride — Edgar",
+   "lines": 3,
+   "episodes": 1,
+   "samples": [
+    "series/grim-ride/voice/ep01/e3.mp3",
+    "series/grim-ride/voice/ep01/e1.mp3",
+    "series/grim-ride/voice/ep01/e2.mp3"
+   ],
+   "design": {
+    "description": "An old raven with a dry, raspy, low male voice, utterly bored and sardonic, flat monotone deadpan, slightly gravelly and nasal, speaks slowly in very short sentences like a tired late-night radio host who has seen everything. General American accent.",
+    "text": "Nevermore. Look, I've been sitting on this guy's shoulder for six hundred years. Short king. Dead battery. Ironic. Four easy payments. I don't get paid enough for this. Actually, I don't get paid at all. Nevermore.",
+    "picked": {
+     "i": 1,
+     "dur": 20.27,
+     "f0": 363.6,
+     "f0_iqr": 150.0,
+     "rate": 14.1,
+     "loud_sd": 4.8
+    }
+   },
+   "history": [
+    {
+     "voice_id": "N2lVS1w4EtoT3dr4eOWO",
+     "until": "2026-10-06"
+    }
+   ],
+   "account": {
+    "category": "generated",
+    "description": "An old raven with a dry, raspy, low male voice, utterly bored and sardonic, flat monotone deadpan, slightly gravelly and nasal, speaks slowly in very short sentences like a tired late-night radio host who has seen everything. General American accent.",
+    "settings": null,
+    "created_at_unix": 1791318871
+   }
+  },
+  {
+   "slug": "grim-ride",
+   "char": "harold",
+   "voice_id": "UScN6kcNEVzdo1v1Nl6W",
+   "status": "active",
+   "name": "Harold",
+   "voice_name": "Grim Ride — Harold",
+   "lines": 3,
+   "episodes": 1,
+   "samples": [
+    "series/grim-ride/voice/ep01/h2.mp3",
+    "series/grim-ride/voice/ep01/h1.mp3",
+    "series/grim-ride/voice/ep01/h3.mp3"
+   ],
+   "design": {
+    "description": "A crusty, gravelly ninety-seven-year-old American man with a thick old New England accent, slow and completely unbothered, dry wit, a short wheezy chuckle, sharp and mischievous, not frail at all. Natural, characterful, comedic.",
+    "text": "Over my dead body, Bones. Ninety-seven years, kid, and I've outlived three doctors, two wives and a parrot. Catch me if you can. Happy Halloween! Here, take a raisin box, they're good for you. Now get off my porch.",
+    "picked": {
+     "i": 2,
+     "dur": 19.96,
+     "f0": 153.8,
+     "f0_iqr": 98.9,
+     "rate": 15.5,
+     "loud_sd": 6.1
+    }
+   },
+   "history": [
+    {
+     "voice_id": "pqHfZKP75CvOlQylNhV4",
+     "until": "2026-10-06"
+    }
+   ],
+   "account": {
+    "category": "generated",
+    "description": "A crusty, gravelly ninety-seven-year-old American man with a thick old New England accent, slow and completely unbothered, dry wit, a short wheezy chuckle, sharp and mischievous, not frail at all. Natural, characterful, comedic.",
+    "settings": null,
+    "created_at_unix": 1791318873
+   }
+  },
+  {
+   "slug": "grim-ride",
+   "char": "todd",
+   "voice_id": "9rXbTqAmpdfkBx20G31c",
+   "status": "active",
+   "name": "Todd",
+   "voice_name": "Grim Ride — Todd",
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/grim-ride/voice/ep01/t1.mp3",
+    "series/grim-ride/voice/ep01/t2.mp3"
+   ],
+   "design": {
+    "description": "An over-enthusiastic American suburban dad in his early forties, upbeat slightly nasal tenor, says bro and buddy a lot, fast excited delivery, friendly and totally oblivious, light Southern California bro accent. Comedic and natural.",
+    "text": "Bro! Sick costume! Where's your fog machine? Dude, I got twelve inflatables, two fog machines and Kevin. Kevin's twelve feet. Three hundred bucks, sold out by Labor Day. Not even twelve feet, buddy? That's okay. Not everybody can be Kevin.",
+    "picked": {
+     "i": 0,
+     "dur": 12.28,
+     "f0": 225.4,
+     "f0_iqr": 87.6,
+     "rate": 26.9,
+     "loud_sd": 7.1
+    }
+   },
+   "history": [
+    {
+     "voice_id": "TX3LPaxmHKxFdv7VOQHJ",
+     "until": "2026-10-06"
+    }
+   ],
+   "account": {
+    "category": "generated",
+    "description": "An over-enthusiastic American suburban dad in his early forties, upbeat slightly nasal tenor, says bro and buddy a lot, fast excited delivery, friendly and totally oblivious, light Southern California bro accent. Comedic and natural.",
+    "settings": null,
+    "created_at_unix": 1791318875
+   }
+  },
+  {
+   "slug": "grim-ride",
+   "char": "kayden",
+   "voice_id": "wISugChlyIgdUxhS0vFR",
+   "status": "active",
+   "name": "Kayden",
+   "voice_name": "Grim Ride — Kayden",
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/grim-ride/voice/ep01/k1.mp3"
+   ],
+   "design": {
+    "description": "A young American guy in his early twenties with a bored, flat, mumbly monotone, slightly nasal, totally unimpressed slacker energy, talks a little muffled and lazy. Natural and comedic.",
+    "text": "Relax, pal. It's a class three. Mine does forty. Nice skin, where'd you get it? Bro, you're cooked. Relax. Relax, pal. We ride at nine. Don't be weird about it, okay? Whatever. Relax, pal.",
+    "picked": {
+     "i": 1,
+     "dur": 17.01,
+     "f0": 100.0,
+     "f0_iqr": 8.3,
+     "rate": 19.0,
+     "loud_sd": 5.2
+    }
+   },
+   "history": [
+    {
+     "voice_id": "bIHbv24MWmeRgasZH58o",
+     "until": "2026-10-06"
+    }
+   ],
+   "account": {
+    "category": "generated",
+    "description": "A young American guy in his early twenties with a bored, flat, mumbly monotone, slightly nasal, totally unimpressed slacker energy, talks a little muffled and lazy. Natural and comedic.",
+    "settings": null,
+    "created_at_unix": 1791318877
+   }
+  },
+  {
+   "slug": "mazutych",
+   "char": "maz",
+   "voice_id": "xSY5jZDD2Tge1l2uwiQn",
+   "status": "active",
+   "name": "Мазутыч",
+   "voice_name": "Мазутыч — Мазутыч",
+   "lines": 26,
+   "episodes": 6,
+   "samples": [
+    "series/mazutych/voice/ep01/m1.mp3",
+    "series/mazutych/voice/ep05/m2.mp3",
+    "series/mazutych/voice/ep03/m3.mp3",
+    "series/mazutych/voice/ep01/m25.mp3",
+    "series/mazutych/voice/ep02/m1.mp3",
+    "series/mazutych/voice/ep06/m1.mp3",
+    "series/mazutych/voice/ep01/m3.mp3",
+    "series/mazutych/voice/ep05/m1.mp3"
+   ],
+   "design": {
+    "description": "A weary Russian refinery worker in his early fifties. Low, dry, slightly nasal and tired baritone with a soft smoker's rasp, very slow, flat and dignified deadpan delivery with pauses, quietly sarcastic, never shouts. Light rural northern Russian accent with a hint of okanye. Native Russian speaker.",
+    "text": "Два́дцать пять лет де́лаю бензи́н. А запра́виться — не́где. Щёлк-щёлк. Бензово́з... Мы на заво́де пла́н перевыполня́ем, а у меня́ в ба́ке — ве́тер. Оди́н и тот же.",
+    "picked": {
+     "i": 2,
+     "dur": 23.25,
+     "f0": 98.2,
+     "f0_iqr": 33.5,
+     "rate": 14.0,
+     "loud_sd": 5.2
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A weary Russian refinery worker in his early fifties. Low, dry, slightly nasal and tired baritone with a soft smoker's rasp, very slow, flat and dignified deadpan delivery with pauses, quietly sarcastic, never shouts. Light rural northern Russian accent with a hint of okanye. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1791272632
+   }
+  },
+  {
+   "slug": "mazutych",
+   "char": "zoya",
+   "voice_id": "aNpGfBJ5tarP9jXqryIk",
+   "status": "active",
+   "name": "Зоя (АЗС)",
+   "voice_name": "Мазутыч — Зоя (АЗС)",
+   "lines": 13,
+   "episodes": 4,
+   "samples": [
+    "series/mazutych/voice/ep05/z1.mp3",
+    "series/mazutych/voice/ep02/z4.mp3",
+    "series/mazutych/voice/ep01/z3.mp3",
+    "series/mazutych/voice/ep01/z1.mp3",
+    "series/mazutych/voice/ep06/z3.mp3",
+    "series/mazutych/voice/ep02/z1.mp3",
+    "series/mazutych/voice/ep01/z2.mp3",
+    "series/mazutych/voice/ep06/z1.mp3"
+   ],
+   "design": {
+    "description": "A loud, bored Russian gas station cashier woman around fifty. Husky, smoky, slightly hoarse contralto, lazy and unimpressed, chewing gum, speaks with the tired authority of the person behind the window, a light southern Russian accent with a soft fricative g. Native Russian speaker.",
+    "text": "Бензи́на нет! Ждём бензово́з! Мужчи́на, не стучи́те в око́шко. Ми́мо. Хот-до́г бу́дете? Тало́ны принима́ем по чётным. Сле́дующий!",
+    "picked": {
+     "i": 2,
+     "dur": 18.99,
+     "f0": 246.2,
+     "f0_iqr": 78.2,
+     "rate": 11.4,
+     "loud_sd": 5.2
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A loud, bored Russian gas station cashier woman around fifty. Husky, smoky, slightly hoarse contralto, lazy and unimpressed, chewing gum, speaks with the tired authority of the person behind the window, a light southern Russian accent with a soft fricative g. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1791272637
+   }
+  },
+  {
+   "slug": "mazutych",
+   "char": "wheel",
+   "voice_id": "Kp5sQTqr3PnriPusCHEb",
+   "status": "active",
+   "name": "Дин-Дон (моноколесо)",
+   "voice_name": "Мазутыч — Дин-Дон (моноколесо)",
+   "lines": 8,
+   "episodes": 6,
+   "samples": [
+    "series/mazutych/voice/ep06/w2.mp3",
+    "series/mazutych/voice/ep01/w2.mp3",
+    "series/mazutych/voice/ep04/w1.mp3",
+    "series/mazutych/voice/ep06/w1.mp3",
+    "series/mazutych/voice/ep05/w1.mp3",
+    "series/mazutych/voice/ep01/w1.mp3",
+    "series/mazutych/voice/ep02/w1.mp3",
+    "series/mazutych/voice/ep03/w1.mp3"
+   ],
+   "design": {
+    "description": "A cheerful synthetic female voice assistant of a cheap gadget, bright, slightly metallic and robotic, evenly spaced syllables, overly polite, speaks broken machine-translated Russian with a light East Asian accent. Clear and comedic.",
+    "text": "Здра́вствуй, дру́га! Я твой помо́щник Ди́н-до́н. Заря́д три проце́нт. Ты е́хать ти́ше, дру́га. Ско́рость о́чень мно́го. Всё. Я спать. Ди́н-до́н!",
+    "picked": {
+     "i": 1,
+     "dur": 10.45,
+     "f0": 275.9,
+     "f0_iqr": 80.6,
+     "rate": 19.1,
+     "loud_sd": 5.0
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A cheerful synthetic female voice assistant of a cheap gadget, bright, slightly metallic and robotic, evenly spaced syllables, overly polite, speaks broken machine-translated Russian with a light East Asian accent. Clear and comedic.",
+    "settings": null,
+    "created_at_unix": 1791272643
+   }
+  },
+  {
+   "slug": "mazutych",
+   "char": "cop",
+   "voice_id": "F85lAHK9jOYsP9VeSqFY",
+   "status": "deleted",
+   "name": "Инспектор Столбов (ДПС)",
+   "voice_name": "Мазутыч — Инспектор Столбов (ДПС)",
+   "lines": 8,
+   "episodes": 1,
+   "samples": [
+    "series/mazutych/voice/ep04/c3.mp3",
+    "series/mazutych/voice/ep04/c6.mp3",
+    "series/mazutych/voice/ep04/c1.mp3",
+    "series/mazutych/voice/ep04/c4.mp3",
+    "series/mazutych/voice/ep04/c8.mp3",
+    "series/mazutych/voice/ep04/c5.mp3",
+    "series/mazutych/voice/ep04/c7.mp3",
+    "series/mazutych/voice/ep04/c2.mp3"
+   ],
+   "design": {
+    "description": "A stern Russian traffic police inspector in his forties. Loud, official, barking voice with bureaucratic cadence, self-important, slightly hoarse from shouting at drivers, then can drop to a conspiratorial whisper. Native Russian speaker.",
+    "text": "Стоя́ть! Превыша́ем, граждани́н? Знак ви́дим? Права́ катего́рии «Мо́но» есть? Зна́чит, без прав. Ла́дно... Дота́щишь — отпущу́. Тре́тий день без бензи́на. Уи́-у! Уи́-у!",
+    "picked": {
+     "i": 1,
+     "dur": 12.75,
+     "f0": 231.9,
+     "f0_iqr": 91.2,
+     "rate": 17.8,
+     "loud_sd": 4.6
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A stern Russian traffic police inspector in his forties. Loud, official, barking voice with bureaucratic cadence, self-important, slightly hoarse from shouting at drivers, then can drop to a conspiratorial whisper. Native Russian speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1791279481
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/F85lAHK9jOYsP9VeSqFY/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiMDc3NDE2MjUtMTgxMS00NGMxLThlZjMtMzM1NjQ2N2RiYzMxLm1wMyIsInRpbWVzdGFtcCI6MTc5MTMxNjgwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "mazutych",
+   "char": "tolik",
+   "voice_id": "X8jm2orhZd79nRAehKy9",
+   "status": "deleted",
+   "name": "Толик (водитель бензовоза)",
+   "voice_name": "Мазутыч — Толик (водитель бензовоза)",
+   "lines": 7,
+   "episodes": 3,
+   "samples": [
+    "series/mazutych/voice/ep04/d1.mp3",
+    "series/mazutych/voice/ep01/d2.mp3",
+    "series/mazutych/voice/ep05/d3.mp3",
+    "series/mazutych/voice/ep01/d1.mp3",
+    "series/mazutych/voice/ep01/d3.mp3",
+    "series/mazutych/voice/ep05/d1.mp3",
+    "series/mazutych/voice/ep05/d2.mp3"
+   ],
+   "design": {
+    "description": "A cheerful, simple Russian truck driver in his forties. Hoarse, friendly, slightly husky baritone, fast and loud, easy-going and folksy, a little rough, sounds like he is shouting from a truck window with a grin. Native Russian speaker, plain provincial accent.",
+    "text": "Мужики́, кто кра́йний? Пусто́й я, с весны́ не запра́влялся. А я его́ вожу́, бензи́н-то! Куда́ — сам не зна́ю, но вожу́ испра́вно, два́дцать лет за рулём, ни одно́й ава́рии!",
+    "picked": {
+     "i": 0,
+     "dur": 13.09,
+     "f0": 258.1,
+     "f0_iqr": 88.6,
+     "rate": 18.2,
+     "loud_sd": 5.9
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A cheerful, simple Russian truck driver in his forties. Hoarse, friendly, slightly husky baritone, fast and loud, easy-going and folksy, a little rough, sounds like he is shouting from a truck window with a grin. Native Russian speaker, plain provincial accent.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1791275120
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/X8jm2orhZd79nRAehKy9/c43d33a2-4923-4ad8-9d7d-3b8c51dcee35.mp3",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "mazutych",
+   "char": "vadik",
+   "voice_id": "kBGudMWVfIgAw0ySF5rq",
+   "status": "deleted",
+   "name": "Вадик (барыга)",
+   "voice_name": "Мазутыч — Вадик (барыга)",
+   "lines": 7,
+   "episodes": 1,
+   "samples": [
+    "series/mazutych/voice/ep03/v2.mp3",
+    "series/mazutych/voice/ep03/v6.mp3",
+    "series/mazutych/voice/ep03/v4.mp3",
+    "series/mazutych/voice/ep03/v1.mp3",
+    "series/mazutych/voice/ep03/v5.mp3",
+    "series/mazutych/voice/ep03/v7.mp3",
+    "series/mazutych/voice/ep03/v3.mp3"
+   ],
+   "design": {
+    "description": "A sly, smooth-talking Russian street hustler in his thirties. Breathy, nasal, slightly hoarse voice, speaks mostly in a conspiratorial half-whisper, quick and slippery, with a smug grin you can hear, a light street slang manner. Native Russian speaker.",
+    "text": "Бензи́н ну́жен? Девяно́сто пя́тый. Свежа́к. Пятьсо́т. За посмотре́ть. Ну а что ты хоте́л, брат, дефици́т. Я ж у твоего́ нача́льника беру́, всё по-че́стному. Ски́дка!",
+    "picked": {
+     "i": 2,
+     "dur": 12.36,
+     "f0": 162.4,
+     "f0_iqr": 66.2,
+     "rate": 19.5,
+     "loud_sd": 6.1
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A sly, smooth-talking Russian street hustler in his thirties. Breathy, nasal, slightly hoarse voice, speaks mostly in a conspiratorial half-whisper, quick and slippery, with a smug grin you can hear, a light street slang manner. Native Russian speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1791279478
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/kBGudMWVfIgAw0ySF5rq/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiZDAyZmFmMDUtMGRkZS00OTQ5LWI2ZjEtN2U4OTc0NDVmYjFhLm1wMyIsInRpbWVzdGFtcCI6MTc5MTMxNjgwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "mazutych",
+   "char": "boss",
+   "voice_id": "vxP9EoBM29o2m1aWHQNV",
+   "status": "deleted",
+   "name": "Борис Борисыч",
+   "voice_name": "Мазутыч — Борис Борисыч",
+   "lines": 6,
+   "episodes": 3,
+   "samples": [
+    "series/mazutych/voice/ep06/b2.mp3",
+    "series/mazutych/voice/ep02/b1.mp3",
+    "series/mazutych/voice/ep06/b1.mp3",
+    "series/mazutych/voice/ep03/b1.mp3",
+    "series/mazutych/voice/ep06/b3.mp3",
+    "series/mazutych/voice/ep03/b2.mp3"
+   ],
+   "design": {
+    "description": "A pompous Russian factory boss in his sixties making a triumphant announcement over a factory loudspeaker. Booming, fat, self-satisfied baritone with a solemn Soviet-style ceremonial cadence, loud and proud. Native Russian speaker.",
+    "text": "Ура́, това́рищи! Пла́н — сто со́рок оди́н проце́нт! Заво́д «Фа́кел Труда́» опя́ть впереди́. Бензи́н вы́пущен, учтён и отпра́влен! Ура́!",
+    "picked": {
+     "i": 2,
+     "dur": 15.49,
+     "f0": 271.2,
+     "f0_iqr": 28.6,
+     "rate": 13.1,
+     "loud_sd": 5.7
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A pompous Russian factory boss in his sixties making a triumphant announcement over a factory loudspeaker. Booming, fat, self-satisfied baritone with a solemn Soviet-style ceremonial cadence, loud and proud. Native Russian speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1791272644
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/vxP9EoBM29o2m1aWHQNV/5ba4261e-8b11-4152-abfc-d089fd73aba1.mp3",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "pochti-dikiy-zapad",
+   "char": "molniya",
+   "voice_id": "WzVKtqQpTUUQ2JNx8YxI",
+   "status": "library_or_premade",
+   "name": "Лошадь Молния",
+   "voice_name": "Silas - Weathered Villain",
+   "lines": 36,
+   "episodes": 7,
+   "samples": [
+    "series/pochti-dikiy-zapad/voice/ep01/h1.mp3",
+    "series/pochti-dikiy-zapad/voice/ep02/m3.mp3",
+    "series/pochti-dikiy-zapad/voice/ep03/m2.mp3",
+    "series/pochti-dikiy-zapad/voice/movie/e1.mp3",
+    "series/pochti-dikiy-zapad/voice/movie/z1.mp3",
+    "series/pochti-dikiy-zapad/voice/ep03/m1.mp3",
+    "series/pochti-dikiy-zapad/voice/movie/g2.mp3",
+    "series/pochti-dikiy-zapad/voice/movie/a2.mp3"
+   ]
+  },
+  {
+   "slug": "pochti-dikiy-zapad",
+   "char": "billy",
+   "voice_id": "KTPVrSVAEUSJRClDzBw7",
+   "status": "library_or_premade",
+   "name": "Ковбой Билли",
+   "voice_name": "Bob - Rugged and Warm Cowboy",
+   "lines": 35,
+   "episodes": 7,
+   "samples": [
+    "series/pochti-dikiy-zapad/voice/ep02/b2.mp3",
+    "series/pochti-dikiy-zapad/voice/ep01/c1.mp3",
+    "series/pochti-dikiy-zapad/voice/ep01/c3.mp3",
+    "series/pochti-dikiy-zapad/voice/movie/i1.mp3",
+    "series/pochti-dikiy-zapad/voice/ep02/b5.mp3",
+    "series/pochti-dikiy-zapad/voice/ep01/n1.mp3",
+    "series/pochti-dikiy-zapad/voice/movie/a1.mp3",
+    "series/pochti-dikiy-zapad/voice/movie/f1.mp3"
+   ]
+  },
+  {
+   "slug": "pochti-dikiy-zapad",
+   "char": "sam",
+   "voice_id": "N2lVS1w4EtoT3dr4eOWO",
+   "status": "library_or_premade",
+   "name": "Кривой Сэм",
+   "voice_name": "Callum - Husky Trickster",
+   "lines": 20,
+   "episodes": 7,
+   "samples": [
+    "series/pochti-dikiy-zapad/voice/ep03/s3.mp3",
+    "series/pochti-dikiy-zapad/voice/ep04/s1.mp3",
+    "series/pochti-dikiy-zapad/voice/movie/r2.mp3",
+    "series/pochti-dikiy-zapad/voice/ep02/s3.mp3",
+    "series/pochti-dikiy-zapad/voice/ep02/s1.mp3",
+    "series/pochti-dikiy-zapad/voice/ep04/s3.mp3",
+    "series/pochti-dikiy-zapad/voice/movie/z4.mp3",
+    "series/pochti-dikiy-zapad/voice/ep03/s1.mp3"
+   ]
+  },
+  {
+   "slug": "pochti-dikiy-zapad",
+   "char": "bartender",
+   "voice_id": "LTkx8oHrUXaND7aaxdTA",
+   "status": "library_or_premade",
+   "name": "Бармен",
+   "voice_name": "Alexander - Deep Mature Narrator",
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/pochti-dikiy-zapad/voice/movie/p3.mp3",
+    "series/pochti-dikiy-zapad/voice/movie/p1.mp3"
+   ]
+  },
+  {
+   "slug": "sunny-palms-hoa",
+   "char": "brenda",
+   "voice_id": "SK1BhvqG7RGgUrYJyInI",
+   "status": "active",
+   "name": "Brenda",
+   "voice_name": "Sunny Palms HOA — Brenda",
+   "lines": 48,
+   "episodes": 7,
+   "samples": [
+    "series/sunny-palms-hoa/voice/movie/r2.mp3",
+    "series/sunny-palms-hoa/voice/movie/p2.mp3",
+    "series/sunny-palms-hoa/voice/movie/a1.mp3",
+    "series/sunny-palms-hoa/voice/movie/bl3.mp3",
+    "series/sunny-palms-hoa/voice/ep04/b6.mp3",
+    "series/sunny-palms-hoa/voice/ep02/b5.mp3",
+    "series/sunny-palms-hoa/voice/ep03/b2.mp3",
+    "series/sunny-palms-hoa/voice/ep04/b3.mp3"
+   ],
+   "design": {
+    "description": "A cheerful, syrupy-sweet American woman in her late fifties, a passive-aggressive suburban HOA president. Bright, slightly high-pitched, slightly nasal voice with a gentle Southern lilt, relentlessly polite with an edge of steel underneath, smiling audibly while she delivers bad news. Says 'bless your heart' as an insult. Native American English speaker.",
+    "text": "Good morning, Dale! Your mailbox is Bone. The approved color is Ecru Whisper. Form twenty-seven B. Thirty days before painting. Oh, sweetie. Bless your heart.",
+    "picked": {
+     "i": 1,
+     "dur": 14.37,
+     "f0": 238.8,
+     "f0_iqr": 73.7,
+     "rate": 16.4,
+     "loud_sd": 5.7
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A cheerful, syrupy-sweet American woman in her late fifties, a passive-aggressive suburban HOA president. Bright, slightly high-pitched, slightly nasal voice with a gentle Southern lilt, relentlessly polite with an edge of steel underneath, smiling audibly while she delivers bad news. Says 'bless your heart' as an insult. Native American English speaker.",
+    "settings": null,
+    "created_at_unix": 1790665829
+   }
+  },
+  {
+   "slug": "sunny-palms-hoa",
+   "char": "dale",
+   "voice_id": "Ii27fPpQjUvsObpI9Ex2",
+   "status": "active",
+   "name": "Dale",
+   "voice_name": "Sunny Palms HOA — Dale",
+   "lines": 46,
+   "episodes": 7,
+   "samples": [
+    "series/sunny-palms-hoa/voice/movie/i1.mp3",
+    "series/sunny-palms-hoa/voice/movie/a4.mp3",
+    "series/sunny-palms-hoa/voice/ep06/d3.mp3",
+    "series/sunny-palms-hoa/voice/ep03/d3.mp3",
+    "series/sunny-palms-hoa/voice/ep04/d0.mp3",
+    "series/sunny-palms-hoa/voice/ep03/d1.mp3",
+    "series/sunny-palms-hoa/voice/movie/bl1.mp3",
+    "series/sunny-palms-hoa/voice/movie/c1.mp3"
+   ],
+   "design": {
+    "description": "A loud, cocky, raspy American man in his late forties, a sunburnt Florida guy with a slightly nasal bro accent. Overconfident, easily outraged, prone to shouting, hoarse from cheap beer and cigarettes, sounds like he says 'trust me' right before every disaster. Expressive, comedic, mid-pitched baritone, native American English speaker.",
+    "text": "Two hundred fifty dollars?! For a MAILBOX?! Relax. I'll repaint it myself. I watched a video. It's fine. Everything's fine. Hold on... is that mailbox on fire? Okay. That was not in the video.",
+    "picked": {
+     "i": 2,
+     "dur": 18.68,
+     "f0": 266.7,
+     "f0_iqr": 98.9,
+     "rate": 19.9,
+     "loud_sd": 5.8
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A loud, cocky, raspy American man in his late forties, a sunburnt Florida guy with a slightly nasal bro accent. Overconfident, easily outraged, prone to shouting, hoarse from cheap beer and cigarettes, sounds like he says 'trust me' right before every disaster. Expressive, comedic, mid-pitched baritone, native American English speaker.",
+    "settings": null,
+    "created_at_unix": 1790665827
+   }
+  },
+  {
+   "slug": "sunny-palms-hoa",
+   "char": "earl",
+   "voice_id": "LnoWNLqEhWQWVHwQFlpP",
+   "status": "active",
+   "name": "Earl the Gator",
+   "voice_name": "Sunny Palms HOA — Earl the Gator",
+   "lines": 27,
+   "episodes": 7,
+   "samples": [
+    "series/sunny-palms-hoa/voice/movie/f2.mp3",
+    "series/sunny-palms-hoa/voice/ep04/e1.mp3",
+    "series/sunny-palms-hoa/voice/movie/s2.mp3",
+    "series/sunny-palms-hoa/voice/movie/x1.mp3",
+    "series/sunny-palms-hoa/voice/movie/t1.mp3",
+    "series/sunny-palms-hoa/voice/movie/f1.mp3",
+    "series/sunny-palms-hoa/voice/movie/m5.mp3",
+    "series/sunny-palms-hoa/voice/movie/c2.mp3"
+   ],
+   "design": {
+    "description": "A very old, very deep, slow, gravelly Southern American man's voice for a cartoon alligator. Extremely dry deadpan delivery, tired and unbothered like he has seen everything twice, long pauses, low rumbling bass, Florida cracker drawl. Native American English speaker.",
+    "text": "Seventeen years in this pond. Never paid a fine. Grandfathered in. Nobody asked me. Nobody ever asks the alligator. Well. That's Florida.",
+    "picked": {
+     "i": 2,
+     "dur": 16.51,
+     "f0": 246.2,
+     "f0_iqr": 279.3,
+     "rate": 12.9,
+     "loud_sd": 4.7
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A very old, very deep, slow, gravelly Southern American man's voice for a cartoon alligator. Extremely dry deadpan delivery, tired and unbothered like he has seen everything twice, long pauses, low rumbling bass, Florida cracker drawl. Native American English speaker.",
+    "settings": null,
+    "created_at_unix": 1790665831
+   }
+  },
+  {
+   "slug": "sunny-palms-hoa",
+   "char": "tablet",
+   "voice_id": "pmf8vtu31xjkFqYKEPwq",
+   "status": "deleted",
+   "name": "Payment Tablet",
+   "voice_name": "Sunny Palms HOA — Payment Tablet",
+   "lines": 5,
+   "episodes": 1,
+   "samples": [
+    "series/sunny-palms-hoa/voice/ep05/t5.mp3",
+    "series/sunny-palms-hoa/voice/ep05/t1.mp3",
+    "series/sunny-palms-hoa/voice/ep05/t3.mp3",
+    "series/sunny-palms-hoa/voice/ep05/t2.mp3",
+    "series/sunny-palms-hoa/voice/ep05/t4.mp3"
+   ],
+   "design": {
+    "description": "A relentlessly cheerful, bright, slightly synthetic customer-service voice of a payment tablet: young, upbeat, fast and chirpy, smiling audibly, a touch robotic, can switch to a wounded whimper when guilt-tripping. Native American English speaker.",
+    "text": "Would you like to add a tip? Twenty. Twenty-five. Thirty percent. Are you sure? Brenda worked really hard. Great! Would you like to leave a review? Your total is forty-seven sixty-three!",
+    "picked": {
+     "i": 1,
+     "dur": 15.39,
+     "f0": 285.7,
+     "f0_iqr": 90.4,
+     "rate": 19.5,
+     "loud_sd": 5.4
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A relentlessly cheerful, bright, slightly synthetic customer-service voice of a payment tablet: young, upbeat, fast and chirpy, smiling audibly, a touch robotic, can switch to a wounded whimper when guilt-tripping. Native American English speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790686387
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/pmf8vtu31xjkFqYKEPwq/536e76bf-eed2-4a24-b9cc-64a8cf292e4a.mp3",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "valera",
+   "voice_id": "rBeJLZF1kJdbvH3OTV0M",
+   "status": "active",
+   "name": "Валера",
+   "voice_name": "Валера и кот — Валера",
+   "lines": 33,
+   "episodes": 6,
+   "samples": [
+    "series/valera-i-kot/voice/ep06/v1.mp3",
+    "series/valera-i-kot/voice/ep01/v2.mp3",
+    "series/valera-i-kot/voice/ep01/v4.mp3",
+    "series/valera-i-kot/voice/ep02/v2.mp3",
+    "series/valera-i-kot/voice/ep05/v1.mp3",
+    "series/valera-i-kot/voice/ep05/v2.mp3",
+    "series/valera-i-kot/voice/ep03/v2.mp3",
+    "series/valera-i-kot/voice/ep06/v4.mp3"
+   ],
+   "design": {
+    "description": "Deep, low-pitched, hoarse bass-baritone voice of a heavyset Russian man in his mid-fifties, a retired army warrant officer. Gravelly smoker's rasp, chesty and booming, bossy and blunt like giving orders, self-important, but not screaming. Native Russian speaker, plain provincial Russian accent.",
+    "text": "Так, Де́мбель. Слу́шай мою́ кома́нду. Горя́чую во́ду отключи́ли, но пра́порщик не сдаётся. Я два́дцать лет в а́рмии. Опера́ция «Та́зик» начина́ется пря́мо сейча́с. Отста́вить смех!",
+    "picked": {
+     "i": 1,
+     "dur": 18.91,
+     "f0": 333.3,
+     "f0_iqr": 300.9,
+     "rate": 14.6,
+     "loud_sd": 5.9
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "Deep, low-pitched, hoarse bass-baritone voice of a heavyset Russian man in his mid-fifties, a retired army warrant officer. Gravelly smoker's rasp, chesty and booming, bossy and blunt like giving orders, self-important, but not screaming. Native Russian speaker, plain provincial Russian accent.",
+    "settings": null,
+    "created_at_unix": 1790647550
+   }
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "cat",
+   "voice_id": "0SYrGzuYVNDS2OD4YroI",
+   "status": "active",
+   "name": "Кот Дембель",
+   "voice_name": "Валера и кот — Кот Дембель",
+   "lines": 14,
+   "episodes": 6,
+   "samples": [
+    "series/valera-i-kot/voice/ep02/c1.mp3",
+    "series/valera-i-kot/voice/ep03/c1.mp3",
+    "series/valera-i-kot/voice/ep05/c1.mp3",
+    "series/valera-i-kot/voice/ep04/c1.mp3",
+    "series/valera-i-kot/voice/ep05/c3.mp3",
+    "series/valera-i-kot/voice/ep01/c4.mp3",
+    "series/valera-i-kot/voice/ep06/c2.mp3",
+    "series/valera-i-kot/voice/ep01/c2.mp3"
+   ],
+   "design": {
+    "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
+    "text": "На скла́де. К весне́ помо́ется. Копчёный. Ещё четы́рнадцать дней. Я своё отслужи́л, тепе́рь я лежу́ на батаре́е. Тради́ция. Двадцать лет в армии... спалился за двадцать секунд.",
+    "picked": {
+     "i": 1,
+     "dur": 21.08,
+     "f0": 132.2,
+     "f0_iqr": 39.3,
+     "rate": 12.1,
+     "loud_sd": 5.3
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1790647553
+   }
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "zina",
+   "voice_id": "YLwEzYleYhWwRlkHH8jA",
+   "status": "deleted",
+   "name": "Баба Зина",
+   "voice_name": "Валера и кот — Баба Зина",
+   "lines": 6,
+   "episodes": 2,
+   "samples": [
+    "series/valera-i-kot/voice/ep03/z4.mp3",
+    "series/valera-i-kot/voice/ep05/z1.mp3",
+    "series/valera-i-kot/voice/ep03/z1.mp3",
+    "series/valera-i-kot/voice/ep03/z2.mp3",
+    "series/valera-i-kot/voice/ep03/z3.mp3",
+    "series/valera-i-kot/voice/ep05/z2.mp3"
+   ],
+   "design": {
+    "description": "A sharp, nosy Russian grandmother in her late seventies. Thin, slightly shrill and crackly elderly female voice, quick sarcastic gossiping delivery, sounds like she knows everyone's business. Native Russian speaker.",
+    "text": "Лю́ба, сугро́б ползёт. Сугро́б, ты куда́ собра́лся? Мы тебя́ не ви́дели. Алло́, Тама́ра? Вале́ра идёт, гото́вь паке́т! Я всё ви́жу, я тут с утра́ сижу́.",
+    "picked": {
+     "i": 0,
+     "dur": 11.96,
+     "f0": 313.7,
+     "f0_iqr": 109.8,
+     "rate": 17.9,
+     "loud_sd": 6.9
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A sharp, nosy Russian grandmother in her late seventies. Thin, slightly shrill and crackly elderly female voice, quick sarcastic gossiping delivery, sounds like she knows everyone's business. Native Russian speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790647557
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/YLwEzYleYhWwRlkHH8jA/dfcd7f13-0eb9-4a35-8bcd-d0f4290771b9.mp3",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "tamara",
+   "voice_id": "3ce56pY2fyj9q7ajgqw6",
+   "status": "deleted",
+   "name": "Кассирша Тамара",
+   "voice_name": "Валера и кот — Кассирша Тамара",
+   "lines": 6,
+   "episodes": 1,
+   "samples": [
+    "series/valera-i-kot/voice/ep02/t4.mp3",
+    "series/valera-i-kot/voice/ep02/t2.mp3",
+    "series/valera-i-kot/voice/ep02/t1.mp3",
+    "series/valera-i-kot/voice/ep02/t3.mp3",
+    "series/valera-i-kot/voice/ep02/t6.mp3",
+    "series/valera-i-kot/voice/ep02/t5.mp3"
+   ],
+   "design": {
+    "description": "A tired Russian supermarket cashier woman in her early fifties. Flat, slightly nasal and husky voice, bored deadpan delivery, chewing gum, completely unimpressed by customers. Native Russian speaker.",
+    "text": "Две́сти во́семьдесят де́вять. Кру́пно — по ка́рте, ме́лко — по пра́вде. А я три́дцать лет на ка́ссе. Паке́т — девяно́сто. Ка́рта магази́на есть? Сле́дующий!",
+    "picked": {
+     "i": 1,
+     "dur": 15.15,
+     "f0": 183.9,
+     "f0_iqr": 35.9,
+     "rate": 17.2,
+     "loud_sd": 5.7
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A tired Russian supermarket cashier woman in her early fifties. Flat, slightly nasal and husky voice, bored deadpan delivery, chewing gum, completely unimpressed by customers. Native Russian speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790647555
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/3ce56pY2fyj9q7ajgqw6/aced8126-d428-48b3-99f2-4b85b5235770.mp3",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "nina",
+   "voice_id": "9dk6dPXhLLtqmUWeVU6p",
+   "status": "deleted",
+   "name": "Нина Петровна (ЖЭК)",
+   "voice_name": "Валера и кот — Нина Петровна (ЖЭК)",
+   "lines": 5,
+   "episodes": 1,
+   "samples": [
+    "series/valera-i-kot/voice/ep04/n5.mp3",
+    "series/valera-i-kot/voice/ep04/n1.mp3",
+    "series/valera-i-kot/voice/ep04/n2.mp3",
+    "series/valera-i-kot/voice/ep04/n4.mp3",
+    "series/valera-i-kot/voice/ep04/n3.mp3"
+   ],
+   "design": {
+    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
+    "text": "ЖЭК, слу́шаю. В труба́х, мужчи́на. До пятна́дцатого. Зна́чит, до сле́дующего. Э́то вода́. Служе́бная. Заявле́ния принима́ем по вто́рникам, с двух до двух пятна́дцати.",
+    "picked": {
+     "i": 1,
+     "dur": 13.56,
+     "f0": 177.8,
+     "f0_iqr": 41.3,
+     "rate": 16.2,
+     "loud_sd": 5.0
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790647561
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/9dk6dPXhLLtqmUWeVU6p/1c3dc72a-57d2-4a0e-a964-2879386a5c09.mp3",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "lyuba",
+   "voice_id": "e0TVxkt3XGwbs1DJmz5O",
+   "status": "deleted",
+   "name": "Баба Люба",
+   "voice_name": "Валера и кот — Баба Люба",
+   "lines": 3,
+   "episodes": 2,
+   "samples": [
+    "series/valera-i-kot/voice/ep03/l2.mp3",
+    "series/valera-i-kot/voice/ep05/l1.mp3",
+    "series/valera-i-kot/voice/ep03/l1.mp3"
+   ],
+   "design": {
+    "description": "A slow, heavy Russian grandmother around eighty. Low, raspy and breathy elderly female voice, very slow deadpan delivery with long pauses, dry and unimpressed. Native Russian speaker.",
+    "text": "С пу́зом. Хлеб в буты́лках не продаю́т. Всё включено́. Ой, да ла́дно тебе́, Зи́на, сиди́ уже́, не тарато́рь. Моро́з сего́дня, а мы сиди́м.",
+    "picked": {
+     "i": 1,
+     "dur": 22.6,
+     "f0": 166.7,
+     "f0_iqr": 125.6,
+     "rate": 9.2,
+     "loud_sd": 4.7
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A slow, heavy Russian grandmother around eighty. Low, raspy and breathy elderly female voice, very slow deadpan delivery with long pauses, dry and unimpressed. Native Russian speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790647559
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/e0TVxkt3XGwbs1DJmz5O/fa6d10ce-6577-4508-bd20-d4a0796137d0.mp3",
+   "deleted_on": "2026-10-06",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "robot",
+   "voice_id": "uQiZyJqZ7ePaB8bwME8n",
+   "status": "library_or_premade",
+   "name": "Автоответчик ЖЭКа",
+   "voice_name": "Marusya G – Persuasive Outbound Caller",
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/valera-i-kot/voice/ep04/r1.mp3",
+    "series/valera-i-kot/voice/ep04/r2.mp3"
+   ]
+  }
+ ],
+ "unlisted_account_voices": {
+  "14NozJq5eoBmDc1FXFDq": "NIKITA2",
+  "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
+  "Em7IfQCID6d4WZTp4VkN": "Cartman"
+ },
+ "updated": "2026-10-06 20:34"
+}
