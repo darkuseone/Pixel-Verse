@@ -732,3 +732,34 @@ def bush(sp, w=30.0, seed=1):
     for i in range(14):
         sp.dot(-w / 2 + rng.random() * w, 4 + rng.random() * 14, (120, 150, 60))
     sp.outline(INK, 2)
+
+
+def still(sp, t=0.0, shake=0.0, gauge=0.2, level=0.0, drop=-1.0):
+    """the home-made «biofuel» rig: brass samovar + pressure cooker + gauge + copper coil into a glass jar; a bucket of husks.
+    shake 0..1 rattles it, gauge 0..1 moves the needle into the red, level = golden liquid in the jar, drop 0..1 = a falling drop"""
+    j = shake * math.sin(t * 60.0) * 1.2
+    sp.ell(-26.0, 6.0, 7.0, 6.0, tones((140, 140, 150)))                     # bucket of sunflower husks
+    sp.rect(-32.0, 10.0, -20.0, 13.0, (40, 36, 30))
+    for k in range(6): sp.dot(-31.0 + k * 2, 12.5 + (k % 2), (230, 228, 210))
+    body = sp.union([sp.m_ell(0.0 + j, 18.0, 12.0, 14.0), sp.m_ell(0.0 + j, 32.0, 7.0, 3.0)], tones((214, 150, 60)))   # samovar
+    sp.rect(-9.0 + j, 2.0, 9.0 + j, 5.0, tones((180, 120, 50))[1])
+    sp.line((11.0 + j, 14.0), (16.0 + j, 12.0), (180, 120, 50), 2)          # tap
+    pot = sp.sup(0.0 + j, 40.0, 10.0, 6.0, tones((170, 174, 184)), n=3.0)   # pressure cooker
+    sp.rect(-11.0 + j, 46.0, 11.0 + j, 48.0, (90, 92, 100))
+    gx, gy = 0.0 + j, 53.0                                                   # gauge
+    sp.ell(gx, gy, 4.5, 4.5, tones((246, 246, 240)))
+    sp.fill(sp.m_ell(gx, gy, 4.0, 4.0)[0] & (DX.XC > gx + 1.5) & (DX.YC > gy - 1), (220, 60, 60))
+    a = math.radians(160 - 150 * gauge)
+    sp.line((gx, gy), (gx + math.cos(a) * 3.4, gy + math.sin(a) * 3.4), INK)
+    for k in range(5):                                                       # copper coil down to the jar
+        y = 44.0 - k * 6.0
+        sp.line((10.0 + j, 44.0 - k * 6.0 + 3), (24.0, y), (200, 110, 60), 2)
+        sp.line((24.0, y), (14.0 + j, y - 3), (170, 90, 50), 2)
+    sp.line((24.0, 18.0), (30.0, 14.0), (200, 110, 60), 2)
+    jar = sp.m_super(32.0, 6.0, 6.0, 7.0, 3.0)[0]                           # glass jar
+    sp.fill(jar, (150, 190, 210)); sp.fill(jar & (DX.YC < 0.0 + 13.0 * level), (240, 200, 70))
+    sp.fill(jar & ~erode(jar), INK)
+    if 0 <= drop <= 1:
+        sp.ell(30.0, 14.0 - drop * 7.0, 1.2, 1.6, tones((250, 210, 70)))
+    sp.anchors['steam'] = (0.0 + j, 50.0); sp.anchors['jar'] = (32.0, 8.0)
+    sp.outline(INK, 2)
