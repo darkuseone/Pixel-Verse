@@ -1,0 +1,100 @@
+{
+  "cartoon": "Мазутыч",
+  "slug": "mazutych",
+  "lang": "ru",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "maz": {
+      "name": "Мазутыч",
+      "color_caption": [
+        255,
+        156,
+        40
+      ],
+      "style": "[deadpan] [tired] [whispering] — медленно, сухо, с паузой, как памятник самому себе",
+      "design": {
+        "description": "A weary Russian refinery worker in his early fifties. Low, dry, slightly nasal and tired baritone with a soft smoker's rasp, very slow, flat and dignified deadpan delivery with pauses, quietly sarcastic, never shouts. Light rural northern Russian accent with a hint of okanye. Native Russian speaker.",
+        "text": "Два́дцать пять лет де́лаю бензи́н. А запра́виться — не́где. Щёлк-щёлк. Бензово́з... Мы на заво́де пла́н перевыполня́ем, а у меня́ в ба́ке — ве́тер. Оди́н и тот же.",
+        "picked": {
+          "i": 2,
+          "dur": 23.25,
+          "f0": 98.2,
+          "f0_iqr": 33.5,
+          "rate": 14.0,
+          "loud_sd": 5.2
+        }
+      },
+      "voice_id": "xSY5jZDD2Tge1l2uwiQn",
+      "voice": "Мазутыч — Мазутыч"
+    },
+    "zoya": {
+      "name": "Зоя (АЗС)",
+      "color_caption": [
+        255,
+        120,
+        200
+      ],
+      "style": "[bored] [flat] [megaphone] — скучающая власть окошка, жвачка",
+      "design": {
+        "description": "A loud, bored Russian gas station cashier woman around fifty. Husky, smoky, slightly hoarse contralto, lazy and unimpressed, chewing gum, speaks with the tired authority of the person behind the window, a light southern Russian accent with a soft fricative g. Native Russian speaker.",
+        "text": "Бензи́на нет! Ждём бензово́з! Мужчи́на, не стучи́те в око́шко. Ми́мо. Хот-до́г бу́дете? Тало́ны принима́ем по чётным. Сле́дующий!",
+        "picked": {
+          "i": 2,
+          "dur": 18.99,
+          "f0": 246.2,
+          "f0_iqr": 78.2,
+          "rate": 11.4,
+          "loud_sd": 5.2
+        }
+      },
+      "voice_id": "aNpGfBJ5tarP9jXqryIk",
+      "voice": "Мазутыч — Зоя (АЗС)"
+    },
+    "wheel": {
+      "name": "Дин-Дон (моноколесо)",
+      "color_caption": [
+        90,
+        230,
+        255
+      ],
+      "style": "[robotic] [cheerful] — голосовой помощник, ломаный машинный русский",
+      "design": {
+        "description": "A cheerful synthetic female voice assistant of a cheap gadget, bright, slightly metallic and robotic, evenly spaced syllables, overly polite, speaks broken machine-translated Russian with a light East Asian accent. Clear and comedic.",
+        "text": "Здра́вствуй, дру́га! Я твой помо́щник Ди́н-до́н. Заря́д три проце́нт. Ты е́хать ти́ше, дру́га. Ско́рость о́чень мно́го. Всё. Я спать. Ди́н-до́н!",
+        "picked": {
+          "i": 1,
+          "dur": 10.45,
+          "f0": 275.9,
+          "f0_iqr": 80.6,
+          "rate": 19.1,
+          "loud_sd": 5.0
+        }
+      },
+      "voice_id": "Kp5sQTqr3PnriPusCHEb",
+      "voice": "Мазутыч — Дин-Дон (моноколесо)"
+    },
+    "boss": {
+      "name": "Борис Борисыч",
+      "color_caption": [
+        255,
+        230,
+        80
+      ],
+      "style": "[triumphant] [loudspeaker] — начальственный, торжественный, как на митинге",
+      "design": {
+        "description": "A pompous Russian factory boss in his sixties making a triumphant announcement over a factory loudspeaker. Booming, fat, self-satisfied baritone with a solemn Soviet-style ceremonial cadence, loud and proud. Native Russian speaker.",
+        "text": "Ура́, това́рищи! Пла́н — сто со́рок оди́н проце́нт! Заво́д «Фа́кел Труда́» опя́ть впереди́. Бензи́н вы́пущен, учтён и отпра́влен! Ура́!",
+        "picked": {
+          "i": 2,
+          "dur": 15.49,
+          "f0": 271.2,
+          "f0_iqr": 28.6,
+          "rate": 13.1,
+          "loud_sd": 5.7
+        }
+      },
+      "voice_id": "vxP9EoBM29o2m1aWHQNV",
+      "voice": "Мазутыч — Борис Борисыч"
+    }
+  }
+}

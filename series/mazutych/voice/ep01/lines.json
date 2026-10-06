@@ -1,0 +1,12 @@
+{
+  "m1": ["maz", "[deadpan, slow, tired] Два́дцать пять лет де́лаю бензи́н."],
+  "m2": ["maz", "[sighs, dry] А запра́виться — не́где."],
+  "z1": ["zoya", "[bored, loud, through a megaphone] Бензи́на нет! Ждём бензово́з!"],
+  "m3": ["maz", "[awed whisper] Бензово́з..."],
+  "m4": ["maz", "[determined, quick, imitating a turn signal] Щёлк-щёлк."],
+  "z2": ["zoya", "[flat, unimpressed] Ми́мо."],
+  "w1": ["wheel", "[robotic, cheerful] Заря́д три проце́нт. Ты е́хать ти́ше, дру́га."],
+  "b1": ["boss", "[triumphant, booming over a factory loudspeaker] Ура́, това́рищи! План — сто со́рок оди́н проце́нт!"],
+  "w2": ["wheel", "[robotic, cheerful] Всё. Я спать."],
+  "m5": ["maz", "[slow, deadpan, quiet realization] Оди́н и тот же."]
+}
