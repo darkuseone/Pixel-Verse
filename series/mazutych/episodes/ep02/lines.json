@@ -1,0 +1,16 @@
+{
+  "m1": ["maz", "[joyful, tearful, voice trembling with happiness] Преми́я! Тало́н на де́сять ли́тров!"],
+  "b1": ["boss", "[pompous, jovial, slapping his shoulder] Заслужи́л! То́лько не пей сра́зу."],
+  "m2": ["maz", "[proud, shouting while riding past] Посторони́сь! У меня́ тало́н!"],
+  "z1": ["zoya", "[bored, chewing gum] Тало́ны принима́ем."],
+  "z2": ["zoya", "[flat, chewing gum] По чётным."],
+  "m3": ["maz", "[hopeful, quiet] А сего́дня?"],
+  "z3": ["zoya", "[deadpan, popping gum] Нечётное."],
+  "m4": ["maz", "[waking up, ecstatic] Чётное!"],
+  "z4": ["zoya", "[bored, flat, stamping] Вот. Тало́н на тало́н."],
+  "m5": ["maz", "[confused, desperate] А бензи́н когда́?"],
+  "z5": ["zoya", "[flat] В четве́рг."],
+  "m6": ["maz", "[suspicious, narrowing eyes] Како́й?"],
+  "z6": ["zoya", "[deadpan, final] Чётный."],
+  "w1": ["wheel", "[robotic, gentle, sympathetic] Тако́го нет, дру́га."]
+}

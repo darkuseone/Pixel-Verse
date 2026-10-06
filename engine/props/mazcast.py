@@ -227,7 +227,12 @@ def maz(sp, t=0.0, expr='deadpan', mouth_=0.0, ride=True, spin=0.0, wind=0.0, st
     sp.fill(sp.m_cap(kN, eN, 3.2, 2.8)[0] & (np.abs(DX.YC - (kN[1] + eN[1]) / 2) < 1.0), STRIPE)   # sleeve stripe
     glove(sp, *eN, flat=blinker > 0)
     sp.anchors['hand'] = eN
-    if card:
+    if card == 'talon':                                                      # the fuel coupon: pink paper with a red stamp
+        cx_, cy_ = eN[0] + 1.0, eN[1] + 3.0
+        sp.rect(cx_ - 8, cy_, cx_ + 8, cy_ + 10, (250, 214, 214)); sp.rect(cx_ - 8, cy_ + 8, cx_ + 8, cy_ + 10, (220, 120, 140))
+        sp.ptext('10Л', cx_ - 0.5, cy_ + 7.0, (180, 30, 40), size=4, center=True)
+        sp.ell(cx_ + 4.5, cy_ + 2.5, 2.0, 2.0, tones((200, 40, 60)), ol=False)
+    elif card:
         cx_, cy_ = eN[0] + 1.0, eN[1] + 3.0
         sp.rect(cx_ - 7, cy_, cx_ + 7, cy_ + 10, (246, 244, 236)); sp.rect(cx_ - 7, cy_ + 7, cx_ + 7, cy_ + 10, (200, 40, 40))
         sp.rect(cx_ - 6, cy_ + 1, cx_ - 2, cy_ + 6, (120, 150, 190))
@@ -506,5 +511,185 @@ def tolik(sp, t=0.0, expr='grin', mouth_=0.0, look=(0.5, 0.0), blink=None, pull=
     sp.line(Hp(-8.0, 9.5), Hp(6.0, 10.5), (96, 96, 104))
     sp.anchors['head'] = Hp(2.0, 0.0)
     sp.anchors['shoulder'] = sh
+    if clip is not None: sp.clip_below(clip)
+    sp.outline(INK, 2)
+
+
+# ======================================================================================== БОРИС БОРИСЫЧ (boss)
+SUIT = (92, 98, 124)
+BSKIN = (236, 168, 140)
+
+
+def boss(sp, t=0.0, expr='smug', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='stand', clip=None, money=False):
+    """Борис Борисыч, «ball»: round belly in a grey-blue suit over the orange robe, white helmet (bosses wear white), no neck,
+    double chin, tiny eyes, thin mustache, gold watch. pose: stand / pat (arm out to the right) / podium (both arms up) / key"""
+    E = X(expr)
+    if blink is None: blink = (t % 3.9) < 0.12
+    br = 0.6 * math.sin(t * 2.0)
+    for dx in (-5.0, 5.0):                                                    # short legs + shoes
+        sp.cap((dx, 4.0), (dx * 0.8, 16.0), 4.2, 4.6, tones((54, 56, 70)))
+        sp.ell(dx + 2.5, 2.0, 5.0, 2.4, tones((30, 26, 28)))
+    body = sp.union([sp.m_ell(0.0, 32.0 + br * 0.3, 21.0, 21.0), sp.m_ell(2.0, 22.0, 18.0, 12.0)], tones(SUIT))
+    sp.poly([(0.0, 52.0), (10.0, 52.0), (5.0, 30.0)], tones(ROBE))           # orange robe in the jacket's V
+    sp.line((5.0, 30.0), (5.0, 14.0), dark(SUIT, 0.6))
+    for y in (24.0, 34.0): sp.dot(7.0, y, (220, 200, 120))                    # buttons strain on the belly
+    sp.rect(12.0, 40.0, 17.0, 43.0, (240, 240, 236))                          # pen in the breast pocket
+    hatch_fill(sp, body & (DX.XC < -12), dark(SUIT, 0.55))
+    # arms
+    sh = (14.0, 44.0); shf = (-12.0, 44.0)
+    if pose == 'pat': hn = (36.0, 50.0)
+    elif pose == 'podium': hn = (22.0, 70.0)
+    elif pose == 'key': hn = (30.0, 40.0)
+    else: hn = (20.0, 22.0)
+    hf = (-24.0, 66.0) if pose == 'podium' else (-18.0, 22.0)
+    for s_, h_, c in ((shf, hf, dark(SUIT, 0.8)), (sh, hn, SUIT)):
+        k, e = ik(s_, h_, 11.0, 11.0, -1.0 if s_ is sh else 1.0)
+        sp.cap(s_, k, 4.6, 4.0, tones(c)); sp.cap(k, e, 4.0, 3.6, tones(c))
+        sp.ell(*e, 3.4, 3.0, tones(BSKIN))
+        if s_ is sh: sp.rect(e[0] - 4.0, e[1] - 1.0, e[0] - 1.5, e[1] + 1.5, (250, 210, 70)); hand = e
+    if money:
+        sp.rect(hand[0] - 3, hand[1] - 7, hand[0] + 6, hand[1] - 1, (70, 50, 40))   # barsetka
+        sp.rect(hand[0] - 2, hand[1] - 2, hand[0] + 5, hand[1] + 3, (120, 180, 110))
+    # head straight on the shoulders: wide, double chin, red cheeks
+    hs = 1.3
+    hx, hy = 4.0, 60.0
+    def Hp(dx, dy): return (hx + dx * hs, hy + dy * hs)
+    face = sp.union([sp.m_ell(*Hp(0, 0), 11.5 * hs, 10.0 * hs), sp.m_ell(*Hp(1.0, -8.0), 10.0 * hs, 4.5 * hs)], tones(BSKIN))
+    sp.line(Hp(-6.0, -6.5), Hp(8.0, -6.5), dark(BSKIN, 0.68))                # chin fold
+    DX.blush(sp, *Hp(7.0, -2.0), 3.0 * hs, 2.0 * hs, (230, 110, 110))
+    DX.blush(sp, *Hp(-5.0, -2.0), 2.4 * hs, 2.0 * hs, (230, 110, 110))
+    DX.eye(sp, *Hp(4.6, 2.5), 4.0 * hs, 3.2 * hs, E, (70, 90, 120), look, blink, lash=INK, skin=BSKIN, bag=dark(BSKIN, 0.7))
+    DX.eye(sp, *Hp(-2.4, 2.5), 3.4 * hs, 3.0 * hs, E, (70, 90, 120), look, blink, lash=INK, skin=BSKIN, bag=dark(BSKIN, 0.7))
+    DX.brow(sp, *Hp(4.6, 5.6), 4.4 * hs, E, +1, (90, 70, 60), th=1)
+    DX.brow(sp, *Hp(-2.4, 5.6), 3.6 * hs, E, -1, (90, 70, 60), th=1)
+    sp.ell(*Hp(8.0, -0.5), 2.8 * hs, 2.4 * hs, tones((222, 140, 120)))       # button nose
+    mx, my = Hp(5.5, -4.5)
+    DX.mouth(sp, mx, my, 5.5 * hs, E, mouth_, INK, skin=BSKIN, maxh=4 * hs)
+    sp.line(Hp(2.0, -2.8), Hp(9.0, -2.8), (110, 90, 80))                     # thin mustache
+    # white helmet + badge
+    hcx, hcy = Hp(0.0, 9.5)
+    hm = sp.m_ell(hcx, hcy, 12.5 * hs, 7.5 * hs)[0] & (DX.YC > hy + 7.0 * hs)
+    sp.paint(hm, tones((248, 248, 244)), DX.lit(np.clip((DX.XC - hcx) / (12 * hs), -1, 1), np.clip((DX.YC - hcy) / (8 * hs), -1, 1)))
+    sp.ell(*Hp(1.0, 7.5), 14.5 * hs, 2.0 * hs, tones((248, 248, 244)))
+    sp.rect(*Hp(-1.5, 11.0), *Hp(2.5, 14.0), (220, 40, 40))                   # badge
+    sp.anchors['head'] = Hp(2.0, 0.0); sp.anchors['hand'] = hand
+    if clip is not None: sp.clip_below(clip)
+    sp.outline(INK, 2)
+
+
+# ======================================================================================== ВАДИК (garage dealer)
+VTRACK = (40, 40, 48)
+VSKIN = (214, 170, 140)
+
+
+def vadik(sp, t=0.0, expr='sly', mouth_=0.0, look=(0.7, 0.0), blink=None, pose='stand', clip=None, bottle=False):
+    """Вадик, «hooded pole»: tall thin, black tracksuit with red stripes, hood up under an eight-panel cap, narrow face,
+    pencil mustache, sunflower husk on the lip, man-bag on the wrist, pointy shoes. pose: stand / offer (bottle forward) / nod"""
+    E = X(expr)
+    if blink is None: blink = (t % 3.1) < 0.12
+    for dx, c in ((-3.0, dark(VTRACK, 0.8)), (3.0, VTRACK)):
+        sp.cap((dx, 4.0), (dx * 0.6, 36.0), 3.2, 3.6, tones(c))
+        sp.line((dx + 2.0, 6.0), (dx * 0.6 + 2.0, 35.0), (210, 40, 40))
+        sp.poly([(dx - 3.0, 0.0), (dx + 7.0, 0.0), (dx + 3.0, 4.0), (dx - 3.0, 4.0)], tones((24, 22, 24)))   # pointy shoes
+    body = sp.sup(0.0, 50.0, 10.0, 16.0, tones(VTRACK), n=2.6)
+    sp.line((4.0, 36.0), (5.0, 66.0), (180, 180, 186))                         # zipper
+    sp.line((-9.0, 40.0), (-7.0, 64.0), (210, 40, 40))
+    sh = (6.0, 62.0)
+    hn = (24.0, 52.0) if pose == 'offer' else (10.0, 38.0)
+    k, e = ik(sh, hn, 12.0, 11.0, -1.0)
+    sp.cap(sh, k, 3.2, 3.0, tones(VTRACK)); sp.cap(k, e, 3.0, 2.8, tones(VTRACK))
+    sp.ell(*e, 2.6, 2.4, tones(VSKIN))
+    if pose != 'offer':
+        sp.rect(e[0] - 3, e[1] - 6, e[0] + 4, e[1] - 1, (70, 50, 40)); sp.line((e[0], e[1] - 1), (e[0], e[1]), (70, 50, 40))   # man-bag
+    if bottle:
+        bottle_prop(sp, e[0] + 1.0, e[1] - 2.0)
+    # head: narrow, hooded, cap
+    hs = 1.3
+    hx, hy = 4.0, 78.0
+    def Hp(dx, dy): return (hx + dx * hs, hy + dy * hs)
+    sp.ell(*Hp(-1.0, 1.0), 10.0 * hs, 12.5 * hs, tones(VTRACK))               # the hood around the face
+    face = sp.union([sp.m_ell(*Hp(1.5, -1.0), 7.0 * hs, 10.0 * hs)], tones(VSKIN))
+    DX.eye(sp, *Hp(4.0, 2.0), 3.8 * hs, 2.8 * hs, E, (70, 60, 40), look, blink, lash=INK, skin=VSKIN, bag=dark(VSKIN, 0.7))
+    DX.eye(sp, *Hp(-1.5, 2.0), 3.0 * hs, 2.6 * hs, E, (70, 60, 40), look, blink, lash=INK, skin=VSKIN)
+    DX.brow(sp, *Hp(4.0, 4.6), 3.8 * hs, E, +1, (40, 30, 26), th=1)
+    DX.brow(sp, *Hp(-1.5, 4.6), 3.0 * hs, E, -1, (40, 30, 26), th=1)
+    sp.poly([Hp(6.0, 1.0), Hp(10.0, -3.0), Hp(6.5, -3.5)], tones((200, 150, 120)))   # long nose
+    mx, my = Hp(5.0, -6.0)
+    DX.mouth(sp, mx, my, 4.5 * hs, E, mouth_, INK, skin=VSKIN, maxh=3 * hs)
+    sp.line(Hp(3.0, -4.6), Hp(8.0, -4.6), (50, 36, 30))                       # pencil mustache
+    if mouth_ < 0.15: sp.dot(*Hp(8.0, -6.5), (230, 230, 220))                # sunflower husk
+    cap = sp.ell(*Hp(-0.5, 10.0), 9.5 * hs, 4.0 * hs, tones((70, 66, 70)))   # eight-panel cap
+    sp.ell(*Hp(7.0, 8.0), 4.5 * hs, 1.4 * hs, tones((60, 56, 60)), ang=-0.15)
+    sp.dot(*Hp(-0.5, 13.6), (200, 40, 40))
+    sp.anchors['head'] = Hp(1.0, 0.0); sp.anchors['hand'] = e
+    if clip is not None: sp.clip_below(clip)
+    sp.outline(INK, 2)
+
+
+def bottle_prop(sp, x, y, k=1.0, full=True):
+    """plastic «Родниковая» water bottle full of golden gasoline"""
+    sp.rect(x - 2 * k, y - 1 * k, x + 2 * k, y + 9 * k, (230, 200, 90) if full else (200, 220, 230))
+    sp.rect(x - 2 * k, y + 3 * k, x + 2 * k, y + 5 * k, (60, 120, 220))
+    sp.rect(x - 1 * k, y + 9 * k, x + 1 * k, y + 11 * k, (40, 110, 200))
+    sp.dot(x - 1 * k, y + 7 * k, (255, 250, 210))
+
+
+# ======================================================================================== ИНСПЕКТОР ДПС СТОЛБОВ
+COP = (44, 56, 90)
+VEST = (190, 240, 60)
+CSKIN = (226, 160, 128)
+
+
+def inspector(sp, t=0.0, expr='glare', mouth_=0.0, look=(0.7, 0.0), blink=None, pose='stand', whistle=False, clip=None):
+    """Инспектор Столбов, «post in a cap»: tall rectangle, huge aerodrome cap with a red band, acid-green reflective vest,
+    striped baton, whistle, square jaw, red cheeks. pose: stand / stop (baton up) / wave (baton waving) / point"""
+    E = X(expr)
+    if blink is None: blink = (t % 3.5) < 0.12
+    for dx, c in ((-4.0, dark(COP, 0.8)), (4.0, COP)):
+        sp.cap((dx, 4.0), (dx * 0.7, 34.0), 4.0, 4.4, tones(c))
+        sp.line((dx + 3.0, 6.0), (dx * 0.7 + 3.0, 33.0), (200, 40, 40))       # red trouser piping
+        sp.ell(dx + 2.5, 2.0, 5.0, 2.4, tones((24, 22, 26)))
+    body = sp.sup(0.0, 52.0, 12.5, 19.0, tones(COP), n=4.0)
+    vest = sp.m_super(0.0, 50.0, 11.5, 16.0, 4.0)[0]
+    sp.paint(vest, tones(VEST), DX.lit(np.clip(DX.XC / 12, -1, 1) * 0.6, np.clip((DX.YC - 50) / 16, -1, 1)))
+    for y in (42.0, 54.0): sp.fill(vest & (np.abs(DX.YC - y) < 1.2), (230, 232, 230))
+    sp.ptext('ДПС', 0.0, 51.0, INK, size=5, center=True)
+    sh = (9.0, 66.0); shf = (-9.0, 66.0)
+    if pose == 'stop': hn = (25.0, 80.0)
+    elif pose == 'wave': hn = (26.0, 76.0 + 4.0 * math.sin(t * 16))
+    elif pose == 'point': hn = (30.0, 64.0)
+    else: hn = (14.0, 44.0)
+    k, e = ik(sh, hn, 13.0, 12.0, -1.0)
+    sp.cap(shf, (-14.0, 44.0), 3.6, 3.2, tones(dark(COP, 0.8))); sp.ell(-14.0, 43.0, 3.0, 2.8, tones(CSKIN))
+    sp.cap(sh, k, 3.8, 3.4, tones(COP)); sp.cap(k, e, 3.4, 3.0, tones(COP))
+    sp.ell(*e, 3.0, 2.8, tones(CSKIN))
+    if pose in ('stop', 'wave', 'point'):                                     # striped baton
+        a = math.radians(70 if pose == 'stop' else 20)
+        for i in range(6):
+            p0 = (e[0] + math.cos(a) * i * 2.4, e[1] + math.sin(a) * i * 2.4)
+            p1 = (e[0] + math.cos(a) * (i + 1) * 2.4, e[1] + math.sin(a) * (i + 1) * 2.4)
+            sp.line(p0, p1, (250, 250, 246) if i % 2 else (30, 30, 34), 2)
+    hs = 1.3
+    hx, hy = 3.0, 82.0
+    def Hp(dx, dy): return (hx + dx * hs, hy + dy * hs)
+    sp.cap((2.0, 68.0), (3.0, 74.0), 5.0, 5.0, tones(CSKIN))
+    face = sp.union([sp.m_super(*Hp(1.0, -1.0), 9.5 * hs, 10.0 * hs, 3.2)], tones(CSKIN))   # square jaw
+    DX.blush(sp, *Hp(6.5, -3.0), 2.6 * hs, 2.0 * hs, (230, 100, 100))
+    DX.blush(sp, *Hp(-4.5, -3.0), 2.2 * hs, 2.0 * hs, (230, 100, 100))
+    DX.eye(sp, *Hp(4.6, 2.0), 4.2 * hs, 3.4 * hs, E, (60, 80, 110), look, blink, lash=INK, skin=CSKIN)
+    DX.eye(sp, *Hp(-2.6, 2.0), 3.6 * hs, 3.2 * hs, E, (60, 80, 110), look, blink, lash=INK, skin=CSKIN)
+    DX.brow(sp, *Hp(4.6, 5.0), 4.6 * hs, E, +1, (60, 46, 40), th=2)
+    DX.brow(sp, *Hp(-2.6, 5.0), 3.8 * hs, E, -1, (60, 46, 40), th=2)
+    sp.ell(*Hp(8.0, -1.0), 2.6 * hs, 2.6 * hs, tones((214, 130, 110)))
+    mx, my = Hp(5.0, -6.0)
+    DX.mouth(sp, mx, my, 5.0 * hs, E, mouth_, INK, skin=CSKIN, maxh=4 * hs)
+    if whistle:
+        sp.rect(mx, my - 1.0, mx + 5.0, my + 1.4, (220, 220, 210)); sp.dot(mx + 5.0, my - 1.4, (240, 240, 230))
+    # the aerodrome cap
+    sp.ell(*Hp(0.5, 10.5), 14.0 * hs, 5.5 * hs, tones(COP))
+    sp.rect(*Hp(-9.0, 6.0), *Hp(10.0, 9.0), (200, 40, 40))                    # red band
+    sp.ell(*Hp(7.0, 6.0), 6.0 * hs, 1.6 * hs, tones((20, 20, 24)), ang=-0.1)  # visor
+    sp.ell(*Hp(1.0, 11.0), 2.0 * hs, 2.0 * hs, tones((240, 200, 60)))         # cockade
+    sp.anchors['head'] = Hp(1.0, 0.0); sp.anchors['hand'] = e
     if clip is not None: sp.clip_below(clip)
     sp.outline(INK, 2)
