@@ -1,12 +1,13 @@
-"""S01E01 «Круговорот» — Мазутыч 25 years makes gasoline but cannot fill up anywhere. He rides his monowheel (holding a Lada steering
-wheel) past the queue at АЗС «ЛУК-ОЙ», chases the tanker truck that leaves the refinery... and the truck drives back into the same
-gate: the plan grows to 141 %. «Двадцать пять лет делаю бензин... Один и тот же.»
+"""S01E01 «Кто крайний?» (v2, 06.10.2026) — there is no gasoline anywhere. Мазутыч tows his dead «six» to the АЗС «ГАЗПРОПАЛ»
+with his monowheel. «Бензина нет.» — «Я — нефтяник!» — «А я — балерина.» Then the tanker truck arrives... and joins the queue:
+«Мужики, кто крайний?» It is empty, its driver has not filled up since spring. Finale: the monowheel dies, Мазутыч and the driver
+haul the tanker like the Volga barge haulers. «А я его вожу.» — «А я — балерина!»
 Heroes: props/mazcast.py in the «Мазутная гравюра» manner (props/mazpix.py); kit: props/mazkit.py.
   python3 ep01.py test 1 5 20 | frame 12 | all [4]      then  python3 mix.py <noaudio.mp4> final.mp4"""
 import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[4] / 'engine'))
 import math
 import numpy as np
-from PIL import Image, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter
 import paths as P
 import stage as ST
 from stage import view_at, OUT_W, OUT_H
@@ -23,10 +24,7 @@ from timeline import DUR, FPS, VOICE, SLUG, CUTS
 EPI = Episode('ep01', VOICE, DUR, FPS, colors=K.COL, slug=SLUG)
 talk = EPI.talk
 HW = K.world('highway_azs')
-GATE = K.world('refinery_gate')
 WIN = K.world('azs_window')
-TRUCK_GO = 0
-PCT = 140
 
 
 def mouth(who, t, k=1.8):
@@ -42,32 +40,63 @@ def wpt(v, ox, oy):
     return v.X0 + ox / (3 * v.Z), v.Y0 + (oy / 3 - v.oy) / v.Z
 
 
+def aout(act, v, name):
+    """output px of a named sprite anchor of an actor that has been drawn"""
+    sp = act.last
+    px, py = sp.anchors[name]
+    ox, oy = v.opt(act.wx, act.wy)
+    sc = act.scale(v)
+    if act.pin:
+        qx, qy = sp.anchors[act.pin]
+        ox -= (-qx if act.flip else qx) * sc; oy += qy * sc
+    return ox + (-px if act.flip else px) * sc, oy - py * sc
+
+
+def rope(big, a, b, sag=40, w=10, col=(206, 172, 110)):
+    """a thick rope with a little sag between two output points"""
+    (x0, y0), (x1, y1) = a, b
+    n = int(max(abs(x1 - x0), abs(y1 - y0)) / 4) + 2
+    pts = []
+    for i in range(n + 1):
+        q = i / n
+        pts.append((x0 + (x1 - x0) * q, y0 + (y1 - y0) * q + sag * 4 * q * (1 - q)))
+    for pad, colf in ((3, lambda i: MX.INK), (0, lambda i: col if (i // 3) % 2 else (176, 140, 84))):
+        for i, (x, y) in enumerate(pts):
+            xa, ya = int(x - w / 2) - pad, int(y - w / 2) - pad
+            xb, yb = xa + w + 2 * pad, ya + w + 2 * pad
+            if xb > 0 and yb > 0 and xa < OUT_W and ya < OUT_H:
+                big[max(0, ya):min(OUT_H, yb), max(0, xa):min(OUT_W, xb)] = colf(i)
+
+
 # highway lanes (the road slopes down to the right)
 def y_far(x): return 548.0 + 0.0625 * x
 def y_near(x): return 590.0 + 0.0625 * x
 def y_sh(x): return 618.0 + 0.0625 * x            # the shoulder where Мазутыч rides
 
 
-SP = 4.2                                           # Мазутыч: output px per sprite px at Z = 1 (= one background px per sprite px)
-CAR = 6.0                                          # cars / truck are drawn bigger than the (big-headed) hero
+SP = 4.2                                           # Мазутыч: output px per sprite px at Z = 1
+CAR = 6.0
 TRK = 7.0
-QUEUE = [(40, 'lada', 0), (175, 'buh', 1), (300, 'lada', 2), (430, 'lada', 3), (560, 'buh', 4), (690, 'lada', 5), (815, 'lada', 1)]
+QUEUE = [(450, 'lada', 0), (570, 'buh', 1), (690, 'lada', 2), (800, 'lada', 3), (905, 'lada', 5)]
+TK_X = 92.0                                        # where the tanker stops: right behind the last car (the one «since May»)
+JOY = (18.0, 19.4)
 
 
 def queue_acts(t, Z, honk=0.0):
     acts = []
     for i, (x, kind, c) in enumerate(QUEUE):
-        b = (abs(math.sin(t * 30 + i)) * 1.2 if honk > 0 else 0.0)
+        b = (abs(math.sin(t * 30 + i)) * 1.5 if honk > 0 else 0.0)
         y = y_far(x) - b
         if kind == 'lada':
-            acts.append(A(MC.lada, x, y, CAR * Z * 0.92, col=MC.CAR_COLS[c], rust=i + 1))
+            last = i == 0
+            acts.append(A(MC.lada, x, y, CAR * Z, col=MC.CAR_COLS[c], rust=i + 1, web=last, sign='С МАЯ' if last else None))
         else:
-            acts.append(A(MC.buhanka, x, y, CAR * Z * 0.92))
+            acts.append(A(MC.buhanka, x, y, CAR * Z))
     return acts
 
 
 def honk_k(t):
-    return 1.0 if any(a <= t < a + 1.2 for a in (3.7, 14.2, 18.15)) else 0.0
+    return 1.0 if any(a <= t < a + 1.2 for a in (4.7, 18.25)) else 0.0
 
 
 def maz_act(t, x, y, Z, s=None, **kw):
@@ -76,60 +105,88 @@ def maz_act(t, x, y, Z, s=None, **kw):
     return A(MC.maz, x, y, s or SP * Z, **kw)
 
 
-def hw_fx(t, k_wind=0.0, flare_k=1.0):
-    def f(big, v):
-        K.flare(big, v, t, 664, 205, flare_k, 0.6)
-        if k_wind: K.wind_lines(big, t, k_wind)
-    return f
-
-
 def dof(big, r=6):
     return np.array(Image.fromarray(big).filter(ImageFilter.GaussianBlur(r)))
 
 
+def sparks(big, ox, oy, t, n=18, spread=220):
+    r = np.random.default_rng(int(t * 30))
+    for i in range(n):
+        d = r.random() * spread; a = r.random()
+        px, py = int(ox - 20 - d), int(oy - 6 - a * 60 + d * 0.15)
+        if 0 <= px < OUT_W - 12 and 0 <= py < OUT_H - 12: big[py:py + 12, px:px + 12] = (255, 220, 120) if i % 3 else (255, 140, 60)
+
+
 # ================================================================== shots
 def cu_maz(t, u, world=None, cx=420.0, cy=330.0, Z=1.45, s=17.0, head=(560, 980), wind=1.0, pan=40.0, bob=6.0, light=K.light_hw,
-           blur=0, conf=0, flare=(664, 205), **kw):
+           blur=0, flare=(664, 205), extra_fx=None, **kw):
     """close-up of Мазутыч: the head pinned at an output point; background zoomed less (CU_BG rule) and optionally soft"""
     world = HW if world is None else world
     v0 = view_at(world, cx + pan * u, cy, Z, 180, 320)
     hx, hy = wpt(v0, head[0], head[1] + bob * math.sin(t * 8.0))
     kw.setdefault('mouth_', mouth('maz', t, 1.6))
-    a = A(MC.maz, hx, hy, s, pin='head', t=t, wind=wind, confetti=conf, **kw)
+    a = A(MC.maz, hx, hy, s, pin='head', t=t, wind=wind, **kw)
     def pre(big, v):
         if flare: K.flare(big, v, t, flare[0], flare[1], 1.0, 0.6)
         if blur: big[:] = dof(big, blur)
-    big = K.shot(world, light, cx + pan * u, cy, Z, acts=[a], pre=pre, sx=180, sy=320)
-    if wind: K.wind_lines(big, t, 0.5 * wind)
+    def f(big, v):
+        if extra_fx: extra_fx(big, v, a)
+    big = K.shot(world, light, cx + pan * u, cy, Z, acts=[a], pre=pre, fx_=f, sx=180, sy=320)
+    if wind: K.wind_lines(big, t, 0.4 * wind)
     return big
 
 
 def r_hook(t, u):
-    big = cu_maz(t, u, expr='deadpan', wind=1.0)
-    if t < 0.25: B.shake(big, t, 10 * (1 - t / 0.25), 30)
+    """0.0: his face straining, sweat flying, a rope over the shoulder pulled taut out of frame"""
+    def f(big, v, a):
+        bx, by = aout(a, v, 'belt')
+        rope(big, (bx, by), (-60, by + 260), sag=-20, w=16)
+    big = cu_maz(t, u, expr='strain', sweat=1.0, wind=0.8, pan=12.0, bob=10.0, rot=-6.0, extra_fx=f, beacon=True)
+    B.shake(big, t, 5, 26)
     return big
 
 
-def r_cross(t, u):
-    """wide crossing: he rolls in from the left past the queue, the camera ends on «БЕНЗИНА НЕТ»"""
-    Z = 1.15
-    k = u / (CUTS[2] - CUTS[1])
-    cx = lerp(420.0, 1075.0, sm(k))
-    x = lerp(300.0, 930.0, k)
-    acts = queue_acts(t, Z, honk_k(t)) + [maz_act(t, x, y_sh(x), Z, expr='deadpan', wind=0.6, spin=t * 12, shadow=0.3)]
+def tow_group(t, x, Z, expr='strain', lean=-12.0):
+    """Мазутыч on the monowheel towing the dead «six» on a rope; returns (acts, fx) for a highway shot"""
+    car_x = x - 150.0
+    car = A(MC.lada, car_x, y_sh(car_x) - 2 + 0.6 * abs(math.sin(t * 7)), CAR * Z, col=(232, 228, 214), driver=False, spin=-t * 4)
+    m = maz_act(t, x, y_sh(x), Z, expr=expr, wind=0.5, spin=t * 22, rot=lean, sweat=1.0, beacon=True, shadow=0.3)
     def f(big, v):
+        rope(big, aout(m, v, 'belt'), aout(car, v, 'front'), sag=18, w=10)
+        ox, oy = v.opt(x, y_sh(x))
+        sparks(big, ox, oy, t, 14, 160)
         K.flare(big, v, t, 664, 205, 1.0, 0.6)
-        K.dust_trail(big, v, t, x - 10, y_sh(x) - 4)
-    cy = lerp(455.0, 392.0, sm((k - 0.62) / 0.38))                 # tilt up to the sign at the end
-    return K.shot(HW, K.light_hw, cx, cy, Z, acts=acts, fx_=f, sx=180, sy=330)
+    return [car, m], f
 
 
-def zoya_shot(t, u, mega=True, Z0=1.45, push=0.05, gum=0.0, expr='bored', look=(0.3, 0.0)):
+def r_reveal(t, u):
+    """fast pull-back: the monowheel is towing a whole car"""
+    k = sm(min(1.0, u / 0.7))
+    Z = lerp(2.4, 1.1, k)
+    x = 330.0 + 26.0 * u
+    acts, f = tow_group(t, x, Z)
+    return K.shot(HW, K.light_hw, x - lerp(10.0, 50.0, k), lerp(470.0, 520.0, k), Z, acts=acts, fx_=f, sx=180, sy=380)
+
+
+def r_queue(t, u):
+    """crossing along the queue: the last car is covered in cobwebs, «С МАЯ»"""
+    Z = 1.15
+    x = 250.0 + 40.0 * u
+    acts, f = tow_group(t, x, Z)
+    acts = queue_acts(t, Z, honk_k(t)) + acts
+    return K.shot(HW, K.light_hw, lerp(330.0, 420.0, u / 1.5), 470.0, Z, acts=acts, fx_=f, sx=180, sy=330)
+
+
+def r_sign(t, u):
+    def f(big, v): K.flare(big, v, t, 664, 205, 1.0, 0.6)
+    return K.shot(HW, K.light_hw, 1098.0, 230.0, 1.5 + 0.08 * u, fx_=f, sx=180, sy=330)
+
+
+def zoya_shot(t, u, who='zoya', mega=False, Z0=1.45, push=0.05, gum=0.0, expr='bored', look=(0.3, 0.0), pose='desk'):
     Z = Z0 + push * u
     s = 4.0 * 3 * Z
-    a = A(MC.zoya, 600.0, 470.0, s, t=t, mega=mega, mouth_=mouth('zoya', t, 1.7), gum=gum, expr=expr, look=look)
+    a = A(MC.zoya, 600.0, 470.0, s, t=t, mega=mega, mouth_=mouth(who, t, 1.7), gum=gum, expr=expr, look=look, pose=pose)
     big = K.shot(WIN, K.light_win, 618.0, 300.0, Z, acts=[a], sx=180, sy=300)
-    # put the glass back in front of her: speaking grille + tray restored from the background, light reflections
     v = view_at(WIN, 618.0, 300.0, Z, 180, 300)
     xs, ys = v.grid()
     orig = v.bg()
@@ -142,275 +199,181 @@ def zoya_shot(t, u, mega=True, Z0=1.45, push=0.05, gum=0.0, expr='bored', look=(
     return big
 
 
-def r_zoya(t, u):
-    return zoya_shot(t, u, mega=True)
+def r_nogas(t, u):
+    return zoya_shot(t, u, gum=sm((t - 9.0) / 0.2) * 0.8)
 
 
-def gate_world(open_k=0.0):
-    """refinery gate with the two leaves slid apart by open_k (0 shut .. 1 open), dark yard behind"""
-    W = GATE.copy()
-    if open_k <= 0: return W
-    x0, x1, y0, y1, mid = 462, 838, 392, 556, 650
-    left = GATE[y0:y1, x0:mid].copy(); right = GATE[y0:y1, mid:x1].copy()
-    yy = np.linspace(0, 1, y1 - y0)[:, None, None]
-    inside = (np.array([22, 16, 30]) * (1 - yy) + np.array([60, 44, 50]) * yy).astype(np.uint8)
-    W[y0:y1, x0:x1] = inside
-    for px in range(x0 + 20, x1, 46):                                                   # lit pipes and columns in the yard
-        W[y0:y1 - 50, px:px + 10] = (96, 60, 50); W[y0:y1 - 50, px + 7:px + 10] = (230, 140, 70)
-    W[y0 + 26:y0 + 34, x0:x1] = (110, 70, 56); W[y0 + 26:y0 + 28, x0:x1] = (240, 160, 90)
-    W[y1 - 50:y1, x0:x1] = (74, 62, 66)                                                 # yard asphalt
-    for px in range(x0 + 10, x1, 40): W[y1 - 22:y1 - 18, px:px + 20] = (200, 180, 120)
-    for lx in (x0 + 60, x0 + 200, x0 + 320): W[y0 + 6:y0 + 12, lx:lx + 14] = (255, 220, 140)   # yard lamps
-    d = int((mid - x0) * open_k)
-    lx0 = x0 - d
-    W[y0:y1, max(380, lx0):max(380, lx0) + (mid - x0) - max(0, 380 - lx0)] = left[:, max(0, 380 - lx0):]
-    rx0 = mid + d
-    wr = min(x1 + 90, rx0 + (x1 - mid)) - rx0
-    W[y0:y1, rx0:rx0 + wr] = right[:, :wr]
-    return W
-
-
-def r_gate_out(t, u):
-    """the gate rolls open, the tanker truck drives out to the right"""
-    ok = sm(min(1.0, u / 0.6))
-    W = gate_world(ok)
-    Z = 1.05
-    tx = lerp(380.0, 980.0, sm(max(0.0, (u - 0.35) / 1.3)))
-    acts = [A(MC.tanker, tx, 606.0, TRK * Z, t=t, spin=-t * 14, bounce=0.6 * abs(math.sin(t * 9)))]
-    def pre(big, v):
-        K.flare(big, v, t, 1105, 60, 1.2, 1.0)
-        K.plan_banner(big, v, PCT)
-    def f(big, v):
-        K.exhaust(big, v, t, tx + 150, 470)
-    big = K.shot(W, K.light_gate, 640.0, 400.0, Z, acts=acts, pre=pre, fx_=f, sx=180, sy=330)
-    v = view_at(W, 640.0, 400.0, Z, 180, 330)
-    xs, ys = v.grid()
-    wall = v.bg()
-    m = (xs[None, :] < 462) & (ys[:, None] > 300) & (ys[:, None] < 620)
-    big[m] = wall[m]
-    if u > 0.45 and u < 0.9: B.shake(big, t, 5, 30)
+def r_badge(t, u):
+    big = cu_maz(t, u, cx=900.0, cy=330.0, Z=1.45, s=15.5, head=(470, 900), wind=0.2, pan=0.0, bob=0.0, expr='proud', card=True,
+                 look=(1.0, 0.0), beacon=True)
+    if 0.05 < u < 0.3: B.shake(big, t, 9, 30)
     return big
 
 
-def r_eyes(t, u):
-    """extreme close-up: his eyes widen, the tanker glints in them"""
-    big = cu_maz(t, u, cx=520.0, cy=420.0, Z=1.45, s=26.0 + 2.0 * u, head=(470, 1220), wind=0.3, pan=10.0, bob=2.0, blur=7,
-                 expr='stunned', look=(1.0, 0.1), blink=False, beacon=True)
-    sp_x, sp_y = 640 + 2.0 * u * 10, 860
+def r_ballet(t, u):
+    return zoya_shot(t, u, Z0=1.35, push=0.08, pose='ballet', expr='bored', look=(1.0, 0.0))
+
+
+def r_point(t, u):
+    return zoya_shot(t, u, Z0=1.4, push=0.03, pose='point', expr='bored', look=(1.0, 0.0))
+
+
+def r_flare(t, u):
+    """«там»: the refinery flare roars on the horizon"""
+    def f(big, v):
+        K.flare(big, v, t, 664, 205, 2.2, 1.0)
+    return K.shot(HW, K.light_hw, 664.0, 260.0, 2.4 + 0.2 * u, fx_=f, sx=180, sy=360)
+
+
+def r_awe(t, u):
+    """the horn: he turns, tears of joy, the choir"""
+    big = cu_maz(t, u, cx=900.0, cy=330.0, Z=1.45, s=16.0 + 1.5 * u, head=(560, 960), wind=0.3, pan=0.0, bob=0.0,
+                 expr='joy', look=(-1.0, 0.2), beacon=True)
     k = 0.6 + 0.4 * math.sin(t * 20)
-    for (dx, dy, r) in ((0, 0, 46), (-140, 18, 30)):
-        cx, cy = int(sp_x + dx), int(sp_y + dy)
-        big[cy - 6:cy + 6, cx - r:cx + r] = (255, 250, 220); big[cy - r:cy + r, cx - 6:cx + 6] = (255, 250, 220)
-    fx.glow(big, sp_x, sp_y, 200 * k, (255, 170, 60), 0.35)
+    fx.glow(big, 300, 600, 420 * k, (255, 230, 160), 0.25)
+    for (cx, cy, r) in ((760, 860, 40), (300, 700, 30), (860, 600, 24)):
+        r = int(r * k)
+        big[cy - 5:cy + 5, cx - r:cx + r] = (255, 250, 220); big[cy - r:cy + r, cx - 5:cx + 5] = (255, 250, 220)
     return big
 
 
-def r_turn(t, u):
-    """medium: the tanker zooms past behind him; he cranks the steering wheel and clicks the «turn signal»"""
-    Z = 1.6
-    cx = 500.0 + 60 * u
-    x = cx - 10
-    tk = (u - 0.0) / 0.6
-    acts = []
-    if 0 <= tk <= 1.2:
-        tx = lerp(cx - 420, cx + 420, tk)
-        acts.append(A(MC.tanker, tx, y_near(tx), TRK * Z, t=t, spin=-t * 30))
-    st_ = 0.55 * sm((u - 0.7) / 0.3)
-    bl = 1.0 if 0.75 < u < 1.75 else 0.0
-    acts.append(maz_act(t, x, y_sh(x) + 10, Z, expr='glare' if u > 0.6 else 'shock', wind=0.8, steer=st_, blinker=bl, beacon=u > 0.7,
-                        spin=t * 14, look=(1.0, 0.0)))
-    big = K.shot(HW, K.light_hw, cx, 560.0, Z, acts=acts, fx_=hw_fx(t, 0.5), sx=180, sy=300)
-    if 0 <= tk <= 1: big[:] = np.clip(big * 0.92 + np.roll(big, 40, 1) * 0.08, 0, 255).astype(np.uint8)
-    return big
+def tanker_x(t):
+    return lerp(-260.0, TK_X, sm(min(1.0, (t - JOY[0]) / 1.2)))
 
 
-def r_chase(t, u):
-    """crossing chase: the truck ahead, Мазутыч behind, the queue flies by"""
-    Z = 1.1
-    cx = lerp(180.0, 700.0, u / 1.6)
-    tx = cx + 110; x = cx - 60 + 8 * math.sin(t * 3)
-    acts = queue_acts(t, Z, honk_k(t)) + [A(MC.tanker, tx, y_near(tx), TRK * Z, t=t, spin=-t * 30, bounce=0.5 * abs(math.sin(t * 13))),
-                                          maz_act(t, x, y_sh(x) + 6, Z, expr='glare', wind=1.0, spin=t * 30, rot=-10.0, beacon=True)]
+def r_arrive(t, u):
+    """the tanker rolls in — the whole queue honks with joy... and it stops at the END of the queue"""
+    Z = 0.95
+    tx = tanker_x(t)
+    acts = [A(MC.tanker, tx, y_far(tx + 140), TRK * Z, t=t, spin=-t * 14 * (1 - sm(u / 1.2)), bounce=0.4 * abs(math.sin(t * 9)))]
+    acts = acts + queue_acts(t, Z, 1.0)
     def f(big, v):
         K.flare(big, v, t, 664, 205, 1.0, 0.6)
-        K.dust_trail(big, v, t, x - 8, y_sh(x) + 2)
-        K.exhaust(big, v, t, tx + 2, y_near(tx) - 120)
-        fx.speed_lines(big, t, 0.8)
-    big = K.shot(HW, K.light_hw, cx, 470.0, Z, acts=acts, fx_=f, sx=180, sy=330)
+        K.exhaust(big, v, t, tx + 155, y_far(tx) - 120)
+    big = K.shot(HW, K.light_hw, 285.0, 440.0, Z, acts=acts, fx_=f, sx=180, sy=330)
+    K.confetti(big, t, JOY[0] + 0.25, n=70, seed=3)
     return big
 
 
-def r_pothole(t, u):
-    """low and close: the wheel drops into a pothole puddle and he flies over it"""
-    Z = 1.7
-    x = lerp(420.0, 700.0, u / 1.4)
-    cx = x + 20
-    j = max(0.0, min(1.0, (u - 0.35) / 0.7))
-    hop = math.sin(j * math.pi) * 60 if 0 < j < 1 else 0.0
-    rot = -18 * math.sin(j * math.pi) if 0 < j < 1 else 0.0
-    acts = [maz_act(t, x, y_sh(x) + 8 - hop, Z, expr='shock' if 0 < j < 1 else 'glare', wind=1.0, spin=t * 30, rot=rot, beacon=True)]
-    def f(big, v):
-        if 0.30 < u < 1.2:
-            for i in range(10):
-                ph = (u - 0.30) * 1.4 + i * 0.03
-                a = i * 0.6
-                ox, oy = v.opt(500 + math.cos(a) * 60 * ph, y_sh(500) + 6 - math.sin(a * 0.7) * 120 * ph + 140 * ph * ph)
-                B.puff(big, ox, oy, 20 * v.Z, max(0.0, 0.8 - ph), (170, 120, 200) if i % 2 else (120, 200, 230))
-        fx.speed_lines(big, t, 0.6)
-    big = K.shot(HW, K.light_hw, cx, 560.0, Z, acts=acts, fx_=f, sx=180, sy=330)
-    if 0.55 < u < 0.8: B.shake(big, t, 10, 30)
-    return big
+def cab_pos():
+    """world point of the tanker's cab window (the tanker parked at TK_X)"""
+    return TK_X + 86 * TRK / 3, y_far(TK_X + 140) - 35 * TRK / 3
 
 
-def r_past_azs(t, u):
-    """static wide on the station: the tanker shoots past without stopping"""
-    Z = 1.1
-    tx = lerp(600.0, 1500.0, u / 0.6)
-    acts = queue_acts(t, Z, 1.0) + [A(MC.tanker, tx, y_near(tx), TRK * Z, t=t, spin=-t * 30)]
+def tolik_window(t, Z, look=(1.0, 0.0)):
+    wxw, wyw = cab_pos()
+    return A(MC.tolik, wxw - 4.0, wyw + 10 + 44 * SP / 3, SP * Z, t=t, lean=True, wave=1.0, mouth_=mouth('tolik', t), clip=34.0, expr='grin',
+             look=look)
+
+
+def r_twist(t, u):
+    """close on the cab: Толик leans out of the window — «Мужики, кто крайний?»"""
+    Z = 2.2 + 0.06 * u
+    tank = A(MC.tanker, TK_X, y_far(TK_X + 140), TRK * Z, t=t)
+    wxw, wyw = cab_pos()
+    return K.shot(HW, K.light_hw, wxw + 20.0, wyw - 10.0, Z, acts=[tank, tolik_window(t, Z)], sx=180, sy=380)
+
+
+def r_react(t, u):
+    return cu_maz(t, u, cx=700.0, cy=330.0, Z=1.45, s=16.0, head=(540, 960), wind=0.0, pan=0.0, bob=0.0, expr='deadpan', look=(0.0, -0.3))
+
+
+def r_knock(t, u):
+    """he knocks on the tank: hollow «БО-ОМ»; Толик from the window: «Пустой.»"""
+    Z = 1.75
+    knock = 0.1 < u < 0.7
+    tank = A(MC.tanker, TK_X, y_far(TK_X + 140), TRK * Z, t=t)
+    tol = tolik_window(t, Z, look=(-1.0, 0.0))
+    mx = 210.0
+    m = maz_act(t, mx, y_sh(mx) + 8, Z, flip=True, expr='deadpan' if u > 0.7 else 'squint', blinker=1.0 if knock else 0.0,
+                look=(1.0, 0.0), shadow=0.3)
     def f(big, v):
         K.flare(big, v, t, 664, 205, 1.0, 0.6)
-        K.exhaust(big, v, t, tx, y_near(tx) - 120)
-    return K.shot(HW, K.light_hw, 1010.0, 430.0, Z, acts=acts, fx_=f, sx=180, sy=330)
+        if 0.12 < u < 1.2:
+            hx, hy = aout(m, v, 'hand')
+            for i in range(3):
+                ph = (u - 0.12) * 1.6 - i * 0.18
+                if 0 < ph < 1:
+                    r = int(40 + 220 * ph); a = 1 - ph
+                    yy, xx = np.ogrid[-r:r + 1, -r:r + 1]
+                    ring = (np.abs(np.sqrt(xx * xx + yy * yy) - r) < 6)
+                    ys, xs = np.nonzero(ring)
+                    ys = ys + int(hy - r); xs = xs + int(hx - 30 - r)
+                    ok = (ys >= 0) & (ys < OUT_H) & (xs >= 0) & (xs < OUT_W)
+                    big[ys[ok], xs[ok]] = (big[ys[ok], xs[ok]] * (1 - 0.7 * a) + np.array([255, 240, 200]) * 0.7 * a).astype(np.uint8)
+    big = K.shot(HW, K.light_hw, 230.0, 470.0, Z, acts=[tank, tol, m], fx_=f, sx=180, sy=360)
+    if 0.12 < u < 0.3: B.shake(big, t, 7, 30)
+    return big
 
 
-def r_mimo(t, u):
-    return zoya_shot(t, u, mega=False, Z0=1.7, push=0.06, gum=sm((u - 0.6) / 0.35) * 0.9, look=(1.0, -0.1))
-
-
-def lcd(big, t, y0=0, y1=OUT_H // 2):
-    """the wheel display insert: battery 3 %, worried face"""
-    h = y1 - y0
+def lcd(big, t, y0=0, y1=OUT_H // 2, pct='0%', dead=False):
+    """the wheel display insert: battery, sad face; goes black when dead"""
     big[y0:y1] = (16, 18, 22)
     big[y0 + 40:y1 - 40, 60:OUT_W - 60] = (40, 44, 52)
     sx0, sy0, sx1, sy1 = 120, y0 + 100, OUT_W - 120, y1 - 100
-    big[sy0:sy1, sx0:sx1] = (14, 40, 46)
+    big[sy0:sy1, sx0:sx1] = (14, 40, 46) if not dead else (6, 8, 10)
+    if dead:
+        big[(sy0 + sy1) // 2 - 3:(sy0 + sy1) // 2 + 3, OUT_W // 2 - 40:OUT_W // 2 + 40] = (200, 220, 230)
+        return big
     yy = np.arange(sy0, sy1)[:, None]
-    big[sy0:sy1, sx0:sx1][((yy - sy0) % 9 < 2).repeat(sx1 - sx0, 1)] = (10, 30, 34)       # scanlines
+    big[sy0:sy1, sx0:sx1][((yy - sy0) % 9 < 2).repeat(sx1 - sx0, 1)] = (10, 30, 34)
     on = int(t * 4) % 2 == 0
     red = (255, 70, 60) if on else (150, 40, 40)
     bx0, by0 = 200, sy0 + 90
     big[by0:by0 + 200, bx0:bx0 + 420] = red; big[by0 + 16:by0 + 184, bx0 + 16:bx0 + 404] = (14, 40, 46)
     big[by0 + 60:by0 + 140, bx0 + 420:bx0 + 460] = red
-    big[by0 + 30:by0 + 170, bx0 + 30:bx0 + 52] = red                                         # 3 % sliver
-    img = Image.fromarray(big[sy0:sy1, sx0:sx1]); from PIL import ImageDraw
-    d = ImageDraw.Draw(img); d.fontmode = '1'
-    d.text((560, 120), '3%', font=O.pfont(120), fill=red)
+    img = Image.fromarray(big[sy0:sy1, sx0:sx1]); d = ImageDraw.Draw(img); d.fontmode = '1'
+    d.text((560, 120), pct, font=O.pfont(120), fill=red)
     d.text((120, 340), 'ДИН-ДОН 3000', font=O.pfont(40), fill=(90, 230, 255))
     big[sy0:sy1, sx0:sx1] = np.array(img)
-    # worried pixel face
-    fxo, fyo = 820, sy0 + 330
+    fxo, fyo = 820, sy0 + 330                                                           # sad pixel face
     for dx in (-40, 40): big[fyo:fyo + 30, fxo + dx:fxo + dx + 22] = (90, 230, 255)
-    big[fyo + 60:fyo + 72, fxo - 30:fxo + 52] = (90, 230, 255)
-    big[fyo + 50:fyo + 62, fxo - 42:fxo - 30] = (90, 230, 255); big[fyo + 50:fyo + 62, fxo + 52:fxo + 64] = (90, 230, 255)
-    big[fyo - 30:fyo - 6, fxo + 90:fxo + 102] = (120, 200, 255)                              # sweat drop
+    big[fyo + 50:fyo + 62, fxo - 30:fxo + 52] = (90, 230, 255)
+    big[fyo + 62:fyo + 74, fxo - 42:fxo - 30] = (90, 230, 255); big[fyo + 62:fyo + 74, fxo + 52:fxo + 64] = (90, 230, 255)
     return big
 
 
 def r_battery(t, u):
-    big = cu_maz(t, u, cx=640.0, cy=360.0, Z=1.45, s=15.5, head=(560, 1480), wind=1.0, pan=60.0, expr='glare', beacon=True)
-    lcd(big, t, 0, 900)
+    dead = t > 28.35
+    big = cu_maz(t, u, cx=640.0, cy=360.0, Z=1.45, s=15.5, head=(560, 1480 + 40 * sm((t - 28.0) / 0.4)), wind=0.0, pan=0.0, bob=0.0,
+                 expr='sad', dead=dead, wheel_face='low')
+    lcd(big, t, 0, 900, '0%', dead)
     big[900:930] = MX.INK
     return big
 
 
-def r_low(t, u):
-    """low angle: wheel big in the foreground, sparks, he leans into it"""
-    Z = 2.0
-    x = lerp(600.0, 820.0, u)
-    acts = [maz_act(t, x, y_sh(x) + 4, Z, expr='glare', wind=1.0, spin=t * 40, rot=-14.0, beacon=True, look=(1.0, 0.2))]
+def r_haul(t, u):
+    """finale: Мазутыч and Толик haul the tanker by ropes like the Volga barge haulers, into the sunset"""
+    Z = 1.3
+    w = u * 5.0
+    tx = 60.0 + 34.0 * u
+    tank = A(MC.tanker, tx, y_near(tx + 140), TRK * Z, t=t, spin=-t * 2)
+    xm = tx + 385.0; xt = tx + 325.0
+    m = maz_act(t, xm, y_sh(xm), Z, pull=True, walk=w, expr='strain', sweat=1.0, rot=-24.0, mouth_=0.0, wind=0.2, shadow=0.3)
+    tl = A(MC.tolik, xt, y_sh(xt) - 6, SP * Z, t=t, pull=True, walk=w + 1.6, expr='grin', mouth_=mouth('tolik', t), rot=-20.0, look=(1.0, 0.0))
     def f(big, v):
-        ox, oy = v.opt(x, y_sh(x) + 4)
-        r = np.random.default_rng(int(t * 30))
-        for i in range(26):
-            a = r.random(); d = r.random() * 260
-            px, py = int(ox - 30 - d), int(oy - 10 - a * 80 + d * 0.2)
-            if 0 <= px < OUT_W - 12 and 0 <= py < OUT_H - 12: big[py:py + 12, px:px + 12] = (255, 220, 120) if i % 3 else (255, 140, 60)
-        fx.speed_lines(big, t, 1.0)
-        K.wind_lines(big, t, 1.0)
-    return K.shot(HW, K.light_hw, x + 30, 560.0, Z, acts=acts, fx_=f, sx=180, sy=420)
+        front = aout(tank, v, 'front')
+        rope(big, aout(m, v, 'shoulder'), front, sag=30, w=10)
+        rope(big, aout(tl, v, 'shoulder'), (front[0], front[1] - 10), sag=24, w=10)
+        K.flare(big, v, t, 664, 205, 1.3, 0.6)
+        K.dust_trail(big, v, t, xm - 10, y_sh(xm) - 4)
+    return K.shot(HW, K.light_hw, tx + 362.0, 520.0, Z, acts=[tank, tl, m], fx_=f, sx=180, sy=380)
 
 
-def r_twist(t, u):
-    """the tanker comes back from the right and drives into the same gate; the leaves close; Мазутыч rolls in and stops"""
-    ck = 1.0 - sm(max(0.0, (u - 1.45) / 0.5))
-    W = gate_world(ck)
-    Z = 1.05
-    tx = lerp(1350.0, 160.0, min(1.0, u / 1.5) ** 1.3)
-    mx = lerp(1150.0, 770.0, sm(min(1.0, max(0.0, (u - 0.9) / 0.9))))
-    ccx = lerp(980.0, 650.0, sm(min(1.0, u / 1.3)))
-    acts = [A(MC.tanker, tx, 606.0, TRK * Z, flip=True, t=t, spin=t * 14)]
-    if u > 0.9: acts.append(maz_act(t, mx, 640.0, Z * 1.05, flip=True, expr='stunned', wind=0.3, spin=-t * 10, look=(1.0, 0.0), shadow=0.3))
-    def pre(big, v):
-        K.flare(big, v, t, 1105, 60, 1.2, 1.0)
-        K.plan_banner(big, v, PCT)
-    big = K.shot(W, K.light_gate, ccx, 400.0, Z, pre=pre, acts=acts, sx=180, sy=330)
-    v = view_at(W, ccx, 400.0, Z, 180, 330)
-    xs, ys = v.grid()
-    wall = v.bg()
-    m = (xs[None, :] < 462) & (ys[:, None] > 300) & (ys[:, None] < 640)
-    big[m] = wall[m]
-    if ck < 1:                                                    # the leaves slide shut over the truck
-        lv = (xs[None, :] >= 462) & (xs[None, :] <= 838) & (ys[:, None] >= 392) & (ys[:, None] < 556)
-        cl = view_at(gate_world(ck), ccx, 400.0, Z, 180, 330).bg()
-        gm = lv & (np.abs(cl.astype(int) - wall.astype(int)).sum(2) < 1)
-        big[lv & ~gm] = cl[lv & ~gm]
-    if 0.75 < u < 1.0: B.shake(big, t, 4, 30)
-    return big
+def r_callback(t, u):
+    return zoya_shot(t, u, who='zoyam', mega=True, Z0=1.45, push=0.06, expr='bored', look=(1.0, 0.0))
 
 
-def r_banner(t, u):
-    """close on the plan banner: 140 % flips to 141 %, confetti, the flare roars"""
-    Z = 0.95 + 0.10 * u
-    fk = sm((t - 25.45) / 0.35)
-    def pre(big, v):
-        K.flare(big, v, t, 1105, 60, 1.0 + 1.2 * sm((t - 25.8) / 0.6), 1.0)
-        K.plan_banner(big, v, 141, fk if fk < 1 else 1.0)
-    big = K.shot(GATE, K.light_gate, 650.0, 260.0, Z, pre=pre, sx=180, sy=360, vig=0.3)
-    K.confetti(big, t, 25.8)
-    if 25.4 < t < 25.9: B.shake(big, t, 6, 30)
-    return big
+SHOTS = [r_hook, r_reveal, r_queue, r_sign, r_nogas, r_badge, r_ballet, r_point, r_flare, r_awe, r_arrive, r_twist, r_react, r_knock,
+         r_battery, r_haul, r_callback]
+NAMES = ['hook', 'reveal', 'queue', 'sign', 'nogas', 'badge', 'ballet', 'point', 'flare', 'awe', 'arrive', 'twist', 'react', 'knock',
+         'battery', 'haul', 'callback']
+CAP = dict(reveal=1080, haul=1080, nogas=1640, ballet=1640, point=1640, callback=1640, battery=1720, queue=1600, twist=1560)
 
-
-def r_lookup(t, u):
-    big = cu_maz(t, u, world=GATE, cx=720.0, cy=260.0, Z=1.45, s=17.0, head=(560, 1060), wind=0.0, pan=0.0, bob=0.0, light=K.light_gate,
-                 flare=(1105, 60), expr='stunned', look=(0.3, 1.0), mouth_=0.0, conf=int(u * 6) + 1, beacon=True)
-    K.confetti(big, t, 25.8, seed=9)
-    return big
-
-
-def r_dead(t, u):
-    """medium at the gate: the wheel goes to sleep, he stays standing like a monument"""
-    Z = 2.0
-    dead = t > 30.3
-    face = 'low' if not dead else 'smile'
-    acts = [maz_act(t, 830.0, 640.0, Z * 1.05, flip=True, expr='deadpan', wind=0.0, dead=dead, wheel_face=face, confetti=7, look=(1.0, 0.0),
-                    mouth_=0.0, shadow=0.3)]
-    def pre(big, v):
-        K.flare(big, v, t, 1105, 60, 1.5, 1.0)
-        K.plan_banner(big, v, 141)
-    big = K.shot(GATE, K.light_gate, 830.0, 520.0, Z, pre=pre, acts=acts, sx=180, sy=380)
-    K.confetti(big, t, 25.8, n=60, seed=11)
-    return big
-
-
-def r_end(t, u):
-    """the same close-up as the hook (loop), confetti on the hard hat, no wind: «Один и тот же.»"""
-    big = cu_maz(t, u, world=GATE, cx=760.0, cy=300.0, Z=1.45, s=17.0 + 0.6 * u, head=(560, 980), wind=0.15, pan=4.0, bob=0.0,
-                 light=K.light_gate, flare=(1105, 60), expr='deadpan' if t < 33.9 else 'sad', conf=5, look=(0.6, -0.2))
-    return big
-
-
-SHOTS = [r_hook, r_cross, r_zoya, r_gate_out, r_eyes, r_turn, r_chase, r_pothole, r_past_azs, r_mimo, r_battery, r_low, r_twist,
-         r_banner, r_lookup, r_dead, r_end]
-NAMES = ['hook', 'cross', 'zoya', 'gate', 'eyes', 'turn', 'chase', 'pothole', 'past', 'mimo', 'battery', 'low', 'twist', 'banner', 'lookup',
-         'dead', 'end']
-CAP = dict(zoya=1640, mimo=1640, battery=1720, cross=1560, banner=1560)
-
-SHOW = K.Show(EPI, 1, ['НЕФТЯНИК', 'БЕЗ БЕНЗИНА'], hook_t=(0.10, 2.9), hook_y=130, cap_default=1600, cap_y=CAP,
-              stickers=[(K.st('БИИП!', (255, 236, 120)), 3.75, 5.3, 760, 1180),
-                        (K.st('КРУГОВОРОТ', (90, 230, 255), 60), 23.5, 24.9, 540, 1150),
-                        (K.st('+1%', (255, 90, 90), 80), 25.6, 27.1, 840, 560)],
-              flashes=[8.85, 22.80], mosaics=[24.9])
+SHOW = K.Show(EPI, 1, ['ДОТАЩИТ', 'ДО ЗАПРАВКИ?'], hook_t=(0.10, 2.6), hook_y=120, cap_default=1600, cap_y=CAP,
+              stickers=[(K.st('БИИП!', (255, 236, 120)), 4.75, 6.0, 760, 1150),
+                        (K.st('ПУСТОЙ', (255, 90, 90), 70), 22.85, 25.4, 700, 420)],
+              flashes=[18.0, 28.5], mosaics=[21.5])
 
 
 def render(t):

@@ -95,6 +95,29 @@
       },
       "voice_id": "vxP9EoBM29o2m1aWHQNV",
       "voice": "Мазутыч — Борис Борисыч"
+    },
+    "tolik": {
+      "name": "Толик (водитель бензовоза)",
+      "color_caption": [
+        120,
+        255,
+        140
+      ],
+      "style": "[cheerful] [loud] [simple] — дальнобойщик, простой и весёлый, ему всё нипочём",
+      "design": {
+        "description": "A cheerful, simple Russian truck driver in his forties. Hoarse, friendly, slightly husky baritone, fast and loud, easy-going and folksy, a little rough, sounds like he is shouting from a truck window with a grin. Native Russian speaker, plain provincial accent.",
+        "text": "Мужики́, кто кра́йний? Пусто́й я, с весны́ не запра́влялся. А я его́ вожу́, бензи́н-то! Куда́ — сам не зна́ю, но вожу́ испра́вно, два́дцать лет за рулём, ни одно́й ава́рии!",
+        "picked": {
+          "i": 0,
+          "dur": 13.09,
+          "f0": 258.1,
+          "f0_iqr": 88.6,
+          "rate": 18.2,
+          "loud_sd": 5.9
+        }
+      },
+      "voice_id": "X8jm2orhZd79nRAehKy9",
+      "voice": "Мазутыч — Толик (водитель бензовоза)"
     }
   }
 }

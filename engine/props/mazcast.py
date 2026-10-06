@@ -21,7 +21,10 @@ HS = 1.38                       # head scale: caricature, the head is a third of
 
 
 XTRA = dict(bored=dict(eo=0.85, pu=0.55, bt=0.05, bl=0.1, mo=0.0, mc=-0.1, lid=0.32),
-            awe=dict(eo=1.3, pu=0.75, bt=-0.5, bl=0.7, mo=0.3, mc=0.1, round_mouth=True))
+            awe=dict(eo=1.3, pu=0.75, bt=-0.5, bl=0.7, mo=0.3, mc=0.1, round_mouth=True),
+            strain=dict(eo=0.35, pu=0.5, bt=0.9, bl=-0.3, mo=0.35, mc=-0.5, lid=0.45),
+            proud=dict(eo=0.85, pu=0.6, bt=0.2, bl=0.3, mo=0.0, mc=0.6, lid=0.25),
+            joy=dict(eo=1.2, pu=0.8, bt=-0.6, bl=0.7, mo=0.4, mc=0.6, tears=True))
 
 
 def X(expr):
@@ -80,31 +83,37 @@ def glove(sp, x, y, flat=False):
 # ======================================================================================== МАЗУТЫЧ
 def maz(sp, t=0.0, expr='deadpan', mouth_=0.0, ride=True, spin=0.0, wind=0.0, steer=0.0, blinker=0.0, look=(0.6, 0.0),
         wheel_face='smile', dead=False, beacon=False, confetti=0, soot=0.0, blink=None, wheel=True, hold=True, lean_head=0.0,
-        far_hold=True):
+        far_hold=True, card=False, pull=False, walk=0.0, sweat=0.0):
     """Мазутыч, 3/4 to the right. ride: standing on the monowheel (feet on the pedals at y 13); wind: mustache flutter 0..1;
-    steer: steering-wheel angle; blinker 0..1: the near arm sticks out and flaps (a mouth-clicked turn signal)"""
+    steer: steering-wheel angle; blinker 0..1: the near arm sticks out and flaps (a mouth-clicked turn signal);
+    card: holds up the refinery pass «НПЗ»; pull: walking and hauling a rope over the near shoulder (walk = gait phase);
+    sweat 0..1: drops of effort"""
     E = X(expr)
     if blink is None: blink = (t % 3.7) < 0.12
     B = 13.0 if ride else 0.0
+    if pull: ride, hold, far_hold = False, False, False
+    sw = math.sin(walk) * 3.0 if pull else 0.0                                # gait: boots swing
+    lf, ln = max(0.0, math.sin(walk)) * 1.5 if pull else 0.0, max(0.0, -math.sin(walk)) * 1.5 if pull else 0.0
     br = 0.6 * math.sin(t * 2.2)                                              # breathing
     # ---------------------------------------------------------------- far boot + leg
-    sp.sup(-2.0, B + 6.0, 4.0, 6.0, tones(dark(RUBBER, 0.8)), n=2.4)
-    sp.ell(1.0, B + 2.2, 5.0, 2.4, tones(dark(RUBBER, 0.8)))
-    sp.cap((-2.0, B + 11.0), (-0.5, B + 24.0), 3.6, 4.0, tones(ROBE_D))
+    sp.sup(-2.0 - sw, B + 6.0 + lf, 4.0, 6.0, tones(dark(RUBBER, 0.8)), n=2.4)
+    sp.ell(1.0 - sw, B + 2.2 + lf, 5.0, 2.4, tones(dark(RUBBER, 0.8)))
+    sp.cap((-2.0 - sw, B + 11.0 + lf), (-0.5, B + 24.0), 3.6, 4.0, tones(ROBE_D))
     if ride and wheel:
         monowheel(sp, t, spin, face=wheel_face, dead=dead)
     # ---------------------------------------------------------------- far arm (behind the torso)
     shF = (0.5, B + 57.0 + br * 0.4)
     wc = (32.0, B + 45.5)                                                     # steering wheel centre
     hF = (wc[0] - 2.0 + 3.0 * math.sin(steer), wc[1] + 10.0 - 1.5 * abs(math.sin(steer))) if far_hold else (8.0, B + 30.0)
+    if pull: hF = (13.0, B + 50.0)
     kF, eF = ik(shF, hF, 12.0, 11.5, -1.0)
     sp.cap(shF, kF, 3.4, 3.0, tones(ROBE_D)); sp.cap(kF, eF, 3.0, 2.6, tones(ROBE_D))
     glove(sp, *eF)
     # ---------------------------------------------------------------- near leg + boot
-    sp.cap((5.0, B + 11.0), (3.5, B + 24.0), 3.8, 4.2, tones(ROBE))
-    sp.sup(5.0, B + 6.0, 4.2, 6.0, tones(RUBBER), n=2.4)
-    sp.ell(8.2, B + 2.2, 5.4, 2.6, tones(RUBBER))
-    sp.line((1.5, B + 10.0), (8.5, B + 10.0), (90, 100, 86))                  # boot rim
+    sp.cap((5.0 + sw, B + 11.0 + ln), (3.5, B + 24.0), 3.8, 4.2, tones(ROBE))
+    sp.sup(5.0 + sw, B + 6.0 + ln, 4.2, 6.0, tones(RUBBER), n=2.4)
+    sp.ell(8.2 + sw, B + 2.2 + ln, 5.4, 2.6, tones(RUBBER))
+    sp.line((1.5 + sw, B + 10.0 + ln), (8.5 + sw, B + 10.0 + ln), (90, 100, 86))   # boot rim
     # ---------------------------------------------------------------- torso: long hunched «poker»
     parts = [sp.m_ell(1.5, B + 29.0, 12.5, 8.5), sp.m_ell(3.0, B + 44.0 + br * 0.3, 13.0, 14.0), sp.m_ell(5.5, B + 56.0 + br * 0.5, 12.0, 7.5)]
     tm = sp.union(parts, tones(ROBE))
@@ -190,13 +199,25 @@ def maz(sp, t=0.0, expr='deadpan', mouth_=0.0, ride=True, spin=0.0, wind=0.0, st
     sp.anchors['eyes'] = Hp(1.0, 3.0)
     sp.anchors['beacon'] = (bj[0], bj[1] + 3.0 * q)
     sp.anchors['helmet'] = (hcx, hcy)
+    sp.anchors['belt'] = (-10.0, B + 28.0)
+    sp.anchors['shoulder'] = (9.0, B + 58.0)
+    if sweat > 0:                                                             # drops of effort fly off the forehead
+        for k in range(3):
+            ph = (t * 2.2 + k * 0.33) % 1.0
+            dx_, dy_ = Hp(-6.0 - 10 * ph - 3 * k, 9.0 + 4 * ph - 6 * ph * ph)
+            if ph < 0.8 * sweat + 0.2:
+                sp.ell(dx_, dy_, 1.2 * hs, 1.7 * hs, tones((150, 210, 255)), ol=True)
     # ---------------------------------------------------------------- steering wheel + near arm
     sp.outline(INK, 2)                                                        # the double ink line goes around the body before the wheel
     before = sp.m.copy()
     shN = (9.0, B + 56.0 + br * 0.4)
     if hold:
         steering(sp, *wc, steer=steer)
-    if blinker > 0:                                                           # near arm out to the side, hand flaps: «щёлк-щёлк»
+    if card:                                                                  # the refinery pass held up proudly
+        hN = (shN[0] + 17.0, shN[1] + 1.0)
+    elif pull:
+        hN = (shN[0] + 7.0, shN[1] - 3.0)
+    elif blinker > 0:                                                         # near arm out to the side, hand flaps: «щёлк-щёлк»
         flap = math.sin(t * 22.0) * 2.0 * blinker
         hN = (shN[0] + 21.0 * blinker + 4.0, shN[1] + 3.0 + flap)
     else:
@@ -205,6 +226,15 @@ def maz(sp, t=0.0, expr='deadpan', mouth_=0.0, ride=True, spin=0.0, wind=0.0, st
     sp.cap(shN, kN, 3.6, 3.2, tones(ROBE)); sp.cap(kN, eN, 3.2, 2.8, tones(ROBE))
     sp.fill(sp.m_cap(kN, eN, 3.2, 2.8)[0] & (np.abs(DX.YC - (kN[1] + eN[1]) / 2) < 1.0), STRIPE)   # sleeve stripe
     glove(sp, *eN, flat=blinker > 0)
+    sp.anchors['hand'] = eN
+    if card:
+        cx_, cy_ = eN[0] + 1.0, eN[1] + 3.0
+        sp.rect(cx_ - 7, cy_, cx_ + 7, cy_ + 10, (246, 244, 236)); sp.rect(cx_ - 7, cy_ + 7, cx_ + 7, cy_ + 10, (200, 40, 40))
+        sp.rect(cx_ - 6, cy_ + 1, cx_ - 2, cy_ + 6, (120, 150, 190))
+        sp.ptext('НПЗ', cx_ - 1.5, cy_ + 6.0, INK, size=4)
+        sp.ell(eN[0], eN[1] + 0.5, 2.0, 1.8, tones(GLOVE))                    # thumb over the card
+    if pull:                                                                  # the rope over the near shoulder
+        sp.line((shN[0] - 2, shN[1] + 2), (eN[0], eN[1]), (200, 170, 110), 2)
     new = sp.m & ~before
     o = new.copy()
     for _ in range(sp.k): o = dilate(o)
@@ -225,7 +255,13 @@ HAIR = (118, 40, 88)
 ZSKIN = (232, 176, 146)
 
 
-def zoya(sp, t=0.0, expr='deadpan', mouth_=0.0, mega=False, mega_up=1.0, gum=0.0, look=(0.3, 0.0), blink=None, chew=True):
+def gas_logo(sp, x, y, k=1.0):
+    """the «ГАЗПРОПАЛ» logo: a blue gas flame that has gone out (a wisp of smoke)"""
+    sp.poly([(x - 2.5 * k, y), (x + 2.5 * k, y), (x + 1.2 * k, y + 4.5 * k), (x, y + 6.5 * k), (x - 1.6 * k, y + 4.0 * k)], tones((60, 120, 230)))
+    sp.line((x + 0.5 * k, y + 7.0 * k), (x - 0.5 * k, y + 9.0 * k), (170, 170, 176)); sp.line((x - 0.5 * k, y + 9.0 * k), (x + 0.6 * k, y + 11 * k), (170, 170, 176))
+
+
+def zoya(sp, t=0.0, expr='deadpan', mouth_=0.0, mega=False, mega_up=1.0, gum=0.0, look=(0.3, 0.0), blink=None, chew=True, pose='desk'):
     """Зоя from the waist up (y 0 = desk line): pyramid body, aubergine beehive tower, gold hoops, blue eyeshadow, megaphone"""
     E = X(expr)
     if blink is None: blink = (t % 4.1) < 0.12
@@ -234,9 +270,7 @@ def zoya(sp, t=0.0, expr='deadpan', mouth_=0.0, mega=False, mega_up=1.0, gum=0.0
     sp.poly([(-3.0, 30.0), (5.0, 30.0), (1.0, 18.0)], tones((236, 236, 230)))                  # shirt V
     sp.line((1.0, 18.0), (1.0, 0.0), INK)
     sp.rect(8.0, 16.0, 16.0, 20.0, (240, 240, 232)); sp.line((9, 18), (15, 18), (60, 60, 70))   # name tag
-    sp.ell(-9.0, 18.0, 3.2, 3.6, tones((176, 120, 210)))                                          # onion logo «ЛУК-ОЙ»
-    sp.line((-9.0, 21.0), (-9.5, 23.5), (90, 190, 70)); sp.line((-9.0, 21.0), (-8.0, 23.5), (90, 190, 70))
-    sp.dot(-10.0, 16.6, (120, 200, 255))                                                          # the onion's tear
+    gas_logo(sp, -9.0, 15.0)                                                                       # «ГАЗПРОПАЛ» gone-out flame
     hatch_fill(sp, body & (DX.XC < -12), dark(JACKET, 0.6))
     # head
     hx, hy = 2.0, 42.0
@@ -287,6 +321,17 @@ def zoya(sp, t=0.0, expr='deadpan', mouth_=0.0, mega=False, mega_up=1.0, gum=0.0
         sp.rect(mx + 2, my - 7.0, mx + 4.5, my - 2.5, (40, 40, 44))           # handle
         sp.ell(mx + 2.5, my - 7.0, 3.0, 2.6, tones(ZSKIN))
         sp.cap((12.0, 18.0), (mx + 2.0, my - 7.5), 3.4, 3.0, tones(JACKET))
+    elif pose == 'ballet':                                                    # deadpan port de bras over the beehive, pinky out
+        sh = (14.0, 24.0); el = (27.0, 58.0); wr = (16.0, 86.0); hd = (4.0, 93.0)
+        sp.cap(sh, el, 3.6, 3.2, tones(JACKET)); sp.cap(el, wr, 3.2, 2.8, tones(JACKET))
+        sp.cap(wr, hd, 2.6, 2.2, tones(ZSKIN))
+        sp.ell(*hd, 3.0, 2.6, tones(ZSKIN)); sp.line((hd[0] - 2, hd[1] + 2), (hd[0] - 5, hd[1] + 4), ZSKIN)
+        sp.dot(hd[0] - 5, hd[1] + 4, (255, 120, 200), keep=True)
+    elif pose == 'point':                                                     # lazy point out of the window, to the refinery
+        sh = (14.0, 24.0)
+        sp.cap(sh, (30.0, 30.0), 3.6, 3.2, tones(JACKET)); sp.cap((30.0, 30.0), (44.0, 38.0), 3.2, 2.8, tones(JACKET))
+        sp.ell(46.0, 39.0, 2.8, 2.4, tones(ZSKIN)); sp.line((47.0, 40.0), (52.0, 42.0), ZSKIN)
+        sp.dot(52.0, 42.0, (255, 120, 200), keep=True)
     else:
         sp.ell(10.0, 2.0, 4.0, 2.4, tones(ZSKIN))
         for k in range(3): sp.dot(12.0 + k * 0.0, 1.0 + k, (255, 120, 200), keep=True)
@@ -330,6 +375,8 @@ def tanker(sp, t=0.0, spin=0.0, bounce=0.0, lights=True):
     for x in (-4.0, 8.0, 100.0): _wheel(sp, x, 7.5, 7.5, spin)
     sp.ell(100.0, 12.0 + b, 9.5, 5.0, tones((40, 40, 44)), clip=DX.YC > 12.0 + b)   # mudguard
     sp.anchors['exhaust'] = (67.0, 52.0 + b)
+    sp.anchors['window'] = (86.0, 35.0 + b)
+    sp.anchors['tank'] = (26.0, 30.0 + b)
     sp.anchors['front'] = (121.0, 12.0)
     sp.outline(INK, 2)
 
@@ -341,7 +388,7 @@ def hatch_mask_():
 CAR_COLS = [(232, 228, 214), (196, 60, 52), (206, 186, 140), (100, 46, 80), (70, 120, 170), (86, 132, 90)]
 
 
-def lada(sp, col=(232, 228, 214), t=0.0, honk=0.0, rust=0, spin=0.0, driver=True):
+def lada(sp, col=(232, 228, 214), t=0.0, honk=0.0, rust=0, spin=0.0, driver=True, web=False, sign=None):
     """boxy Soviet sedan «six», side view facing +x, ~64 px long"""
     body = sp.m_poly([(-30.0, 6.0), (32.0, 6.0), (33.0, 14.0), (30.0, 17.0), (12.0, 18.0), (6.0, 27.0), (-14.0, 27.0), (-20.0, 18.0),
                       (-30.0, 17.0), (-31.0, 12.0)])
@@ -360,6 +407,19 @@ def lada(sp, col=(232, 228, 214), t=0.0, honk=0.0, rust=0, spin=0.0, driver=True
         rng = np.random.default_rng(rust)
         for k in range(6): sp.dot(-28 + rng.random() * 56, 7 + rng.random() * 6, (150, 80, 40))
     for x in (-19.0, 20.0): _wheel(sp, x, 5.0, 5.2, spin)
+    if sign:                                                                  # cardboard in the rear window
+        sp.rect(-13.0, 27.0, 11.0, 36.0, (214, 186, 140)); sp.line((-13.0, 27.0), (11.0, 27.0), (150, 120, 80))
+        sp.ptext(sign, -1.0, 34.0, (190, 30, 36), size=4, center=True)
+    if web:                                                                   # cobwebs: it has been here since spring
+        for (cx_, cy_) in ((-28.0, 16.0), (8.0, 26.0), (30.0, 15.0)):
+            for a in range(5):
+                an = a * 0.6 + 0.3
+                sp.line((cx_, cy_), (cx_ + math.cos(an) * 6 * (1 if cx_ < 0 else -1), cy_ - math.sin(an) * 6), (236, 236, 240))
+            for r in (2.5, 4.5):
+                sp.line((cx_ + (r if cx_ < 0 else -r), cy_), (cx_, cy_ - r), (236, 236, 240))
+        sp.rect(-3.0, 4.0, -1.5, 5.0, (200, 200, 200))
+    sp.anchors['front'] = (35.0, 8.0)
+    sp.anchors['back'] = (-33.0, 8.0)
     sp.outline(INK, 2)
 
 
@@ -380,4 +440,71 @@ def buhanka(sp, col=(90, 120, 80), t=0.0, spin=0.0):
 def monowheel_solo(sp, t=0.0, spin=0.0, face='smile'):
     """the wheel alone (model sheet, inserts)"""
     monowheel(sp, t, spin, face=face if face != 'dead' else 'smile', dead=face == 'dead')
+    sp.outline(INK, 2)
+
+
+# ======================================================================================== ТОЛИК (tanker driver)
+LEATHER = (66, 48, 42)
+TRACK = (44, 56, 130)
+TSKIN = (226, 156, 124)
+
+
+def tolik(sp, t=0.0, expr='grin', mouth_=0.0, look=(0.5, 0.0), blink=None, pull=False, walk=0.0, lean=False, wave=0.0, clip=None):
+    """Толик, tanker driver: «square» — stocky in a leather jacket, three-stripe tracksuit, slippers over white socks, flat cap,
+    round bald head, toothpick, gold chain. lean: leaning out of the cab window (arm on the door); clip: erase below this height"""
+    E = X(expr)
+    if blink is None: blink = (t % 3.3) < 0.12
+    sw = math.sin(walk) * 3.0 if pull else 0.0
+    # legs: tracksuit + socks + slippers
+    for side, dx, c in ((-1, -4.0, dark(TRACK, 0.8)), (1, 4.0, TRACK)):
+        x = dx + side * sw
+        sp.cap((x, 5.0), (dx * 0.6, 26.0), 4.4, 4.8, tones(c))
+        sp.line((x + 2.5, 6.0), (dx * 0.6 + 2.5, 25.0), (236, 236, 236))
+        sp.line((x + 3.5, 6.0), (dx * 0.6 + 3.5, 25.0), (236, 236, 236))
+        sp.rect(x - 3, 1.0, x + 3, 5.0, (246, 246, 240))                     # white socks
+        sp.ell(x + 2.0, 0.8, 5.0, 1.6, tones((40, 40, 46)))                   # slipper
+    # torso: square leather jacket with a belly
+    body = sp.sup(0.0, 38.0, 15.0, 15.0, tones(LEATHER), n=3.0)
+    sp.ell(4.0, 30.0, 10.0, 8.0, tones(LEATHER), ol=False)
+    sp.line((6.0, 23.0), (8.0, 52.0), (30, 22, 20))
+    for y in (30.0, 40.0): sp.dot(10.0, y, (200, 190, 170))                   # press studs
+    sp.rect(-14.0, 22.5, 14.0, 25.0, dark(LEATHER, 0.7))                      # jacket hem
+    sp.poly([(-2.0, 53.0), (10.0, 53.0), (4.0, 46.0)], tones((236, 230, 220)))   # vest under the jacket
+    sp.line((0.0, 51.0), (8.0, 51.0), (250, 210, 70)); sp.dot(4.0, 49.0, (250, 210, 70))   # gold chain
+    # arms
+    sh = (9.0, 49.0)
+    if pull: hn = (sh[0] + 7.0, sh[1] - 4.0)
+    elif lean: hn = (sh[0] + 16.0, sh[1] - 8.0 + wave * 3 * math.sin(t * 14))
+    else: hn = (sh[0] + 6.0, 30.0)
+    k, e = ik(sh, hn, 11.0, 10.0, -1.0)
+    sp.cap(sh, k, 4.0, 3.6, tones(LEATHER)); sp.cap(k, e, 3.6, 3.2, tones(LEATHER))
+    sp.ell(*e, 3.0, 2.8, tones(TSKIN))
+    if pull: sp.line((sh[0] - 2, sh[1] + 2), e, (200, 170, 110), 2)
+    # head: round, bald, cap, stubble, toothpick
+    hs = 1.3
+    hx, hy = 6.0, 64.0
+    def Hp(dx, dy): return (hx + dx * hs, hy + dy * hs)
+    sp.cap((4.0, 52.0), (5.0, 58.0), 6.0, 6.0, tones(TSKIN))
+    face = sp.union([sp.m_ell(*Hp(0, 0), 10.5 * hs, 10.0 * hs), sp.m_ell(*Hp(1.5, -6.0), 9.0 * hs, 5.5 * hs)], tones(TSKIN))
+    rng = np.random.default_rng(5)
+    sp.fill(face & (DX.YC < hy - 3 * hs) & erode(face) & (rng.random(face.shape) < 0.5) & DX.CHECK, (160, 120, 104))
+    sp.ell(*Hp(-9.5, 0.5), 2.6 * hs, 3.6 * hs, tones(TSKIN))                  # ear
+    DX.eye(sp, *Hp(4.8, 1.5), 4.6 * hs, 4.0 * hs, E, (90, 70, 50), look, blink, lash=INK, skin=TSKIN)
+    DX.eye(sp, *Hp(-2.5, 1.5), 3.8 * hs, 3.8 * hs, E, (90, 70, 50), look, blink, lash=INK, skin=TSKIN)
+    DX.brow(sp, *Hp(4.8, 5.0), 5.0 * hs, E, +1, (70, 46, 36), th=2)
+    DX.brow(sp, *Hp(-2.5, 5.0), 4.0 * hs, E, -1, (70, 46, 36), th=2)
+    sp.ell(*Hp(8.5, -1.5), 3.4 * hs, 3.0 * hs, tones((214, 128, 104)))       # broad nose
+    sp.dot(*Hp(9.5, -3.0), INK)
+    mx, my = Hp(5.0, -6.0)
+    DX.mouth(sp, mx, my, 6.0 * hs, E, mouth_, INK, skin=TSKIN, maxh=4 * hs)
+    if mouth_ < 0.15:
+        sp.line((mx + 2, my), (mx + 9, my + 1.5), (220, 200, 150))           # toothpick
+    DX.blush(sp, *Hp(7.0, -3.0), 2.4 * hs, 1.6 * hs, (230, 120, 110))
+    # flat cap
+    cap = sp.union([sp.m_ell(*Hp(-0.5, 8.0), 11.5 * hs, 4.5 * hs, -0.08)], tones((72, 72, 80)))
+    sp.ell(*Hp(9.0, 6.0), 5.0 * hs, 1.6 * hs, tones((60, 60, 68)), ang=-0.15)
+    sp.line(Hp(-8.0, 9.5), Hp(6.0, 10.5), (96, 96, 104))
+    sp.anchors['head'] = Hp(2.0, 0.0)
+    sp.anchors['shoulder'] = sh
+    if clip is not None: sp.clip_below(clip)
     sp.outline(INK, 2)

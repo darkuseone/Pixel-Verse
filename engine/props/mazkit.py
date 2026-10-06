@@ -1,4 +1,4 @@
-"""«Мазутыч» episode kit: speaker colours, dusk lights, worlds (xAI backgrounds + code-painted signs: АЗС «ЛУК-ОЙ», «БЕНЗИНА НЕТ»,
+"""«Мазутыч» episode kit: speaker colours, dusk lights, worlds (xAI backgrounds + code-painted signs: АЗС «ГАЗПРОПАЛ», «БЕНЗИНА НЕТ»,
 the refinery plan banner), the series hook title (oil-slick gradient + crude-oil outline with drips), overlays pass, flare / exhaust FX.
 Shot compositing reuses props/chikit.shot (generic: world view + direct actors + fx + vignette)."""
 import math
@@ -14,7 +14,7 @@ from props import bytfx as B
 from props import chikit as CK
 
 SLUG = 'mazutych'
-COL = dict(maz=(255, 156, 40), zoya=(255, 120, 200), wheel=(90, 230, 255), boss=(255, 230, 80))
+COL = dict(maz=(255, 156, 40), zoya=(255, 120, 200), wheel=(90, 230, 255), boss=(255, 230, 80), tolik=(120, 255, 140), zoyam=(255, 120, 200))
 INK = (30, 20, 16)
 SLICK = ((210, 90, 230), (90, 220, 230), (255, 214, 90))      # oil-slick: purple -> teal -> gold
 shot = CK.shot
@@ -61,11 +61,11 @@ def world(name):
         _text(d, (1198, 146), 'БЕНЗИНА', 11, (196, 30, 36))
         _text(d, (1198, 176), 'НЕТ', 22, (196, 30, 36))
         d.line([(1168, 194), (1228, 191)], fill=(196, 30, 36), width=2)
-        # canopy fascia «ЛУК-ОЙ» with the crying onion
-        d.rectangle([960, 256, 1110, 280], fill=(236, 232, 220)); d.rectangle([960, 256, 1110, 280], outline=(196, 30, 36), width=2)
-        _text(d, (1046, 268), 'ЛУК-ОЙ', 13, (196, 30, 36))
-        d.ellipse([966, 259, 984, 279], fill=(170, 110, 200)); d.line([(975, 259), (973, 254)], fill=(80, 170, 60), width=2)
-        d.point([(970, 270), (971, 271)], fill=(120, 200, 255))
+        # canopy fascia «ГАЗПРОПАЛ» with a gone-out blue flame
+        d.rectangle([944, 254, 1124, 282], fill=(236, 236, 230)); d.rectangle([944, 254, 1124, 282], outline=(40, 90, 200), width=2)
+        _text(d, (1042, 268), 'ГАЗПРОПАЛ', 12, (40, 90, 200))
+        d.polygon([(950, 278), (962, 278), (959, 268), (956, 262), (952, 269)], fill=(60, 120, 230))
+        d.line([(957, 260), (955, 256), (958, 252)], fill=(170, 170, 176), width=1)
         # pump screens: «---»
         for x in (905, 985): _text(d, (x, 409), '---', 7, (255, 80, 60))
     if name == 'refinery_gate':
