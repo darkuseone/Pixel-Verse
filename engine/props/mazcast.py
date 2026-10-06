@@ -83,7 +83,7 @@ def glove(sp, x, y, flat=False):
 # ======================================================================================== МАЗУТЫЧ
 def maz(sp, t=0.0, expr='deadpan', mouth_=0.0, ride=True, spin=0.0, wind=0.0, steer=0.0, blinker=0.0, look=(0.6, 0.0),
         wheel_face='smile', dead=False, beacon=False, confetti=0, soot=0.0, blink=None, wheel=True, hold=True, lean_head=0.0,
-        far_hold=True, card=False, pull=False, walk=0.0, sweat=0.0):
+        far_hold=True, card=False, pull=False, walk=0.0, sweat=0.0, bottle=False):
     """Мазутыч, 3/4 to the right. ride: standing on the monowheel (feet on the pedals at y 13); wind: mustache flutter 0..1;
     steer: steering-wheel angle; blinker 0..1: the near arm sticks out and flaps (a mouth-clicked turn signal);
     card: holds up the refinery pass «НПЗ»; pull: walking and hauling a rope over the near shoulder (walk = gait phase);
@@ -213,7 +213,9 @@ def maz(sp, t=0.0, expr='deadpan', mouth_=0.0, ride=True, spin=0.0, wind=0.0, st
     shN = (9.0, B + 56.0 + br * 0.4)
     if hold:
         steering(sp, *wc, steer=steer)
-    if card:                                                                  # the refinery pass held up proudly
+    if bottle:                                                                # sniffing a bottle like a sommelier
+        hN = (shN[0] + 15.0, shN[1] + 12.0)
+    elif card:                                                                # the refinery pass held up proudly
         hN = (shN[0] + 17.0, shN[1] + 1.0)
     elif pull:
         hN = (shN[0] + 7.0, shN[1] - 3.0)
@@ -227,6 +229,9 @@ def maz(sp, t=0.0, expr='deadpan', mouth_=0.0, ride=True, spin=0.0, wind=0.0, st
     sp.fill(sp.m_cap(kN, eN, 3.2, 2.8)[0] & (np.abs(DX.YC - (kN[1] + eN[1]) / 2) < 1.0), STRIPE)   # sleeve stripe
     glove(sp, *eN, flat=blinker > 0)
     sp.anchors['hand'] = eN
+    if bottle:                                                                # a «Родниковая» bottle of gasoline under the nose
+        bottle_prop(sp, eN[0] + 1.0, eN[1] - 2.0, 1.2)
+        sp.ell(eN[0], eN[1] + 0.5, 2.0, 1.8, tones(GLOVE))
     if card == 'talon':                                                      # the fuel coupon: pink paper with a red stamp
         cx_, cy_ = eN[0] + 1.0, eN[1] + 3.0
         sp.rect(cx_ - 8, cy_, cx_ + 8, cy_ + 10, (250, 214, 214)); sp.rect(cx_ - 8, cy_ + 8, cx_ + 8, cy_ + 10, (220, 120, 140))
@@ -393,7 +398,7 @@ def hatch_mask_():
 CAR_COLS = [(232, 228, 214), (196, 60, 52), (206, 186, 140), (100, 46, 80), (70, 120, 170), (86, 132, 90)]
 
 
-def lada(sp, col=(232, 228, 214), t=0.0, honk=0.0, rust=0, spin=0.0, driver=True, web=False, sign=None):
+def lada(sp, col=(232, 228, 214), t=0.0, honk=0.0, rust=0, spin=0.0, driver=True, web=False, sign=None, tint=False, trunk=0.0, rims=False):
     """boxy Soviet sedan «six», side view facing +x, ~64 px long"""
     body = sp.m_poly([(-30.0, 6.0), (32.0, 6.0), (33.0, 14.0), (30.0, 17.0), (12.0, 18.0), (6.0, 27.0), (-14.0, 27.0), (-20.0, 18.0),
                       (-30.0, 17.0), (-31.0, 12.0)])
@@ -401,8 +406,16 @@ def lada(sp, col=(232, 228, 214), t=0.0, honk=0.0, rust=0, spin=0.0, driver=True
     w1 = sp.m_poly([(-12.0, 19.0), (-3.0, 19.0), (-3.0, 25.5), (-12.0, 25.5), (-17.0, 19.0)])
     w2 = sp.m_poly([(-1.0, 19.0), (10.0, 19.0), (5.0, 25.5), (-1.0, 25.5)])
     for w in (w1, w2):
-        sp.fill(w, (150, 190, 214)); sp.fill(w & hatch_mask_(), (110, 150, 180)); sp.fill(w & ~erode(w), INK)
-    if driver: sp.ell(3.0, 21.0, 2.4, 2.8, tones((40, 34, 40)), ol=False, clip=w2)
+        if tint:
+            sp.fill(w, (18, 18, 24)); sp.fill(w & hatch_mask_() & (DX.YC > 22), (44, 46, 60)); sp.fill(w & ~erode(w), INK)
+        else:
+            sp.fill(w, (150, 190, 214)); sp.fill(w & hatch_mask_(), (110, 150, 180)); sp.fill(w & ~erode(w), INK)
+    if driver and not tint: sp.ell(3.0, 21.0, 2.4, 2.8, tones((40, 34, 40)), ol=False, clip=w2)
+    if trunk > 0:                                                             # open boot full of «Родниковая» bottles
+        sp.rect(-31.0, 13.0, -15.0, 18.0, (20, 16, 18))
+        for k in range(5): bottle_prop(sp, -29.0 + k * 3.2, 14.5, 0.55)
+        a = math.radians(20 + 70 * trunk)
+        sp.line((-15.0, 18.0), (-15.0 - math.cos(a) * 17, 18.0 + math.sin(a) * 17), dark(col, 0.7), 2)
     sp.line((-30.0, 12.0), (33.0, 12.0), dark(col, 0.65))
     sp.rect(31.0, 6.0, 35.0, 9.0, (200, 200, 196)); sp.rect(-33.0, 6.0, -29.0, 9.0, (200, 200, 196))   # chrome bumpers
     sp.rect(30.5, 12.0, 33.0, 15.0, (255, 240, 190))                           # headlight
@@ -411,7 +424,7 @@ def lada(sp, col=(232, 228, 214), t=0.0, honk=0.0, rust=0, spin=0.0, driver=True
     if rust:
         rng = np.random.default_rng(rust)
         for k in range(6): sp.dot(-28 + rng.random() * 56, 7 + rng.random() * 6, (150, 80, 40))
-    for x in (-19.0, 20.0): _wheel(sp, x, 5.0, 5.2, spin)
+    for x in (-19.0, 20.0): _wheel(sp, x, 5.0, 5.2, spin, rim=(220, 220, 230) if rims else (170, 170, 160))
     if sign:                                                                  # cardboard in the rear window
         sp.rect(-13.0, 27.0, 11.0, 36.0, (214, 186, 140)); sp.line((-13.0, 27.0), (11.0, 27.0), (150, 120, 80))
         sp.ptext(sign, -1.0, 34.0, (190, 30, 36), size=4, center=True)

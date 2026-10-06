@@ -27,6 +27,17 @@ BG = {
                   'a few blank faded stickers on the glass, inside a warm-lit cramped room with shelves of snacks, a coffee machine, a small TV '
                   'and a calendar (blank); the area just behind the glass in the middle is empty where a cashier would sit; a dusty ledge '
                   'in the foreground.',
+    'garages': 'Night in a Soviet garage cooperative: a long row of old metal garages with rusty swing doors, side view running left to '
+               'right, a single weak street lamp, a muddy dirt alley with puddles in the lower third, tires stacked, an old fridge, '
+               'graffiti-free walls with blank paper notices, power lines, panel apartment blocks dark on the horizon, the distant refinery '
+               'flare glowing orange in the sky, deep purple night sky. Empty alley.',
+    'garage_inside': 'Interior of a cramped Soviet garage workshop at night, front view: concrete walls with shelves of jars, tools hanging '
+                     'on a pegboard, a bare bulb, an old workbench on the left, sacks and buckets on the floor, a calendar (blank), an '
+                     'inspection pit in the floor, the closed double garage doors at the back, warm yellow light and deep shadows, empty '
+                     'space in the middle of the floor.',
+    'assembly_hall': 'A Soviet-era factory assembly hall interior: a wooden stage with red velvet curtains and a podium, a long blank '
+                     'banner above the stage, rows of wooden seats in the foreground seen from behind, wall-mounted lamps, a bust pedestal '
+                     'without any statue, a framed blank honor board, warm stage lights and dust in the air, empty stage floor.',
 }
 
 if __name__ == '__main__':

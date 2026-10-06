@@ -118,6 +118,52 @@
       },
       "voice_id": "X8jm2orhZd79nRAehKy9",
       "voice": "Мазутыч — Толик (водитель бензовоза)"
+    },
+    "vadik": {
+      "name": "Вадик (барыга)",
+      "color_caption": [
+        200,
+        160,
+        255
+      ],
+      "style": "[whispering] [sly] [smooth] — шепчет, как будто продаёт секрет; барыга-«свой парень»",
+      "design": {
+        "description": "A sly, smooth-talking Russian street hustler in his thirties. Breathy, nasal, slightly hoarse voice, speaks mostly in a conspiratorial half-whisper, quick and slippery, with a smug grin you can hear, a light street slang manner. Native Russian speaker.",
+        "text": "Бензи́н ну́жен? Девяно́сто пя́тый. Свежа́к. Пятьсо́т. За посмотре́ть. Ну а что ты хоте́л, брат, дефици́т. Я ж у твоего́ нача́льника беру́, всё по-че́стному. Ски́дка!",
+        "picked": {
+          "i": 2,
+          "dur": 12.36,
+          "f0": 162.4,
+          "f0_iqr": 66.2,
+          "rate": 19.5,
+          "loud_sd": 6.1
+        }
+      },
+      "voice_id": "kBGudMWVfIgAw0ySF5rq",
+      "voice": "Мазутыч — Вадик (барыга)"
+    },
+    "cop": {
+      "name": "Инспектор Столбов (ДПС)",
+      "color_caption": [
+        190,
+        240,
+        60
+      ],
+      "style": "[stern] [official] [loud] — строгий казённый тон, свисток, а потом шёпотом",
+      "design": {
+        "description": "A stern Russian traffic police inspector in his forties. Loud, official, barking voice with bureaucratic cadence, self-important, slightly hoarse from shouting at drivers, then can drop to a conspiratorial whisper. Native Russian speaker.",
+        "text": "Стоя́ть! Превыша́ем, граждани́н? Знак ви́дим? Права́ катего́рии «Мо́но» есть? Зна́чит, без прав. Ла́дно... Дота́щишь — отпущу́. Тре́тий день без бензи́на. Уи́-у! Уи́-у!",
+        "picked": {
+          "i": 1,
+          "dur": 12.75,
+          "f0": 231.9,
+          "f0_iqr": 91.2,
+          "rate": 17.8,
+          "loud_sd": 4.6
+        }
+      },
+      "voice_id": "F85lAHK9jOYsP9VeSqFY",
+      "voice": "Мазутыч — Инспектор Столбов (ДПС)"
     }
   }
 }
