@@ -30,7 +30,7 @@ mouth = KIT.mouth
 PORCH, YARD = KIT.PORCH, KIT.YARD
 LP, LY = K.light_porch, K.light_yard
 DAYS = 1
-LAWN_VIEW = (840.0, 420.0, 1.2)                 # Harold's front lawn (right part of the porch background)
+LAWN_VIEW = (990.0, 420.0, 1.2)                 # Harold's front lawn (right part of the porch background)
 
 
 def lawn_view():
@@ -39,8 +39,8 @@ def lawn_view():
 
 
 def lawn_props(v, t):
-    return [put(v, GC.tombstone, 150, 1640, 6.5, text='RIP'), put(v, GC.tombstone, 930, 1600, 6.0, text='BOO'),
-            put(v, GC.pumpkin_inflatable, 980, 1840, 5.0, t=t), put(v, GC.tombstone, 330, 1880, 7.5, text='R.I.P')]
+    return [put(v, GC.tombstone, 130, 1620, 8.0, text='RIP'), put(v, GC.tombstone, 900, 1600, 7.5, text='BOO'),
+            put(v, GC.pumpkin_inflatable, 990, 1860, 6.4, t=t), put(v, GC.tombstone, 340, 1900, 9.0, text='R.I.P')]
 
 
 def stick(big, x0, y0, x1, y1, w=10):
@@ -61,12 +61,12 @@ def frozen_grim(v, t, ox=560, oy=1820, s=8.6, expr='deadpan', look=(0.0, 0.0), s
 def r_hook(t, u, loop=False):
     """0.0: Death frozen among Harold's fake tombstones; a ghost kid pokes him with a stick"""
     v = lawn_view()
-    kid = put(v, GC.trick_or_treater, 200, 1840, 6.4, t=t, costume='ghost', n=0, pail=False)
+    kid = put(v, GC.trick_or_treater, 190, 1880, 8.6, t=t, costume='ghost', n=0, pail=False)
     g = frozen_grim(v, t, look=(-0.6, -0.4), mouth_=mouth('grim', t) * 0.3)
     def f(big, v_):
         poke = 0.5 + 0.5 * math.sin(t * 9)
         hx, hy = aout(g, v_, 'pocket')
-        stick(big, 300, 1640, lerp(hx - 140, hx - 40, poke), hy + 40)
+        stick(big, 330, 1600, lerp(hx - 140, hx - 40, poke), hy + 40)
         K.fog(big, t, 1500, OUT_H, 0.25)
     return K.shot(PORCH, LP, *LAWN_VIEW[:2], LAWN_VIEW[2], acts=lawn_props(v, t) + [kid, g], fx_=f, sx=180, sy=320)
 
@@ -75,25 +75,25 @@ def r_judge(t, u):
     """Todd arrives with a clipboard: BEST YARD judging"""
     v = lawn_view()
     g = frozen_grim(v, t, look=(1.0, 0.0))
-    td = put(v, GC.todd, 860, 1800, 6.8, t=t, flip=True, expr='hype', mouth_=mouth('todd', t), look=(-1.0, -0.2), phone=False, clip=True)
+    td = put(v, GC.todd, 880, 1840, 8.6, t=t, flip=True, expr='hype', mouth_=mouth('todd', t), look=(-1.0, -0.2), phone=False, clip=True)
     def f(big, v_): K.fog(big, t, 1500, OUT_H, 0.25)
     return K.shot(PORCH, LP, *LAWN_VIEW[:2], LAWN_VIEW[2], acts=lawn_props(v, t) + [g, td], fx_=f, sx=180, sy=320)
 
 
 def r_mom(t, u):
-    big, _ = KIT.cu(PORCH, LP, GC.mom, t, 860.0, 430.0, 12.5, (560 + 180 * u, 760), Z=1.4, flip=True, expr='disgust' if False else 'squint',
+    big, _ = KIT.cu(PORCH, LP, GC.mom, t, 990.0, 430.0, 12.5, (560 + 180 * u, 760), Z=1.4, flip=True, expr='disgust' if False else 'squint',
                     mouth_=mouth('mom', t), look=(-1.0, 0.0))
     return big
 
 
 def r_whisper(t, u):
-    big, _ = KIT.cu(PORCH, LP, GC.grim, t, 860.0, 430.0, 13.0, (540, 900), Z=1.4, ride=False, pose='loom', scythe=False, expr='angry',
+    big, _ = KIT.cu(PORCH, LP, GC.grim, t, 990.0, 430.0, 13.0, (540, 900), Z=1.4, ride=False, pose='loom', scythe=False, expr='angry',
                     mouth_=mouth('grim', t) * 0.25, look=(1.0, 0.0), blink=False)
     return big
 
 
 def r_score(t, u):
-    big, _ = KIT.cu(PORCH, LP, GC.todd, t, 860.0, 430.0, 13.0, (560, 820), Z=1.4, flip=True, expr='pity', mouth_=mouth('todd', t),
+    big, _ = KIT.cu(PORCH, LP, GC.todd, t, 990.0, 430.0, 13.0, (560, 820), Z=1.4, flip=True, expr='pity', mouth_=mouth('todd', t),
                     look=(-1.0, -0.4), phone=False, clip='7/10')
     return big
 
@@ -114,12 +114,12 @@ def r_harold(t, u):
     v = lawn_view()
     hx = lerp(1250, 800, sm(min(1.0, u / 1.0)))
     g = frozen_grim(v, t, look=(1.0, 0.0), expr='sly')
-    h = put(v, GC.harold, hx, 1860, 7.0, t=t, pose='stand', flip=u < 1.0, expr='content', look=(1.0, -0.3))
+    h = put(v, GC.harold, hx, 1880, 9.0, t=t, pose='stand', flip=u < 1.0, expr='content', look=(1.0, -0.3))
     def f(big, v_): K.fog(big, t, 1500, OUT_H, 0.25)
     return K.shot(PORCH, LP, *LAWN_VIEW[:2], LAWN_VIEW[2], acts=lawn_props(v, t) + [g, h], fx_=f, sx=180, sy=320)
 
 
-def r_finally(t, u):
+def r_fin(t, u):
     v = view_at(PORCH, 860.0, 470.0, 1.6, 180, 320)
     big = K.dof(v.bg(), 8)
     sp = GX.draw(GC.tombstone, 22.0, text='RIP')
@@ -137,7 +137,7 @@ def r_raise(t, u):
         K.glow_ring(big, hx, hy, 240, GC.GLOW, 0.3 + 0.2 * math.sin(t * 20))
     v = view_at(PORCH, 860.0, 430.0, 1.4, 180, 320)
     har = put(v, GC.harold, 860, 2050, 12.0, t=t, pose='stand', expr='content', look=(1.0, -0.3))
-    big, _ = KIT.cu(PORCH, LP, GC.grim, t, 860.0, 430.0, 12.0, (440, 760), Z=1.4, fx_=f, extra=[har], ride=False, pose='loom', scythe=True,
+    big, _ = KIT.cu(PORCH, LP, GC.grim, t, 990.0, 430.0, 12.0, (440, 760), Z=1.4, fx_=f, extra=[har], ride=False, pose='loom', scythe=True,
                     expr='menace', mouth_=mouth('grim', t) * 0.6, look=(1.0, 0.6), rot=-12.0 * min(1.0, u / 1.6), pivot=(0.0, 60.0))
     return big
 
@@ -146,11 +146,11 @@ def r_twist(t, u):
     """TWIST: the crowd — «It MOVES! It's ANIMATRONIC!» — phones flash; he freezes mid-swing"""
     v = lawn_view()
     g = frozen_grim(v, t, look=(-1.0, -0.2), expr='stunned', scythe_up=1.0)
-    h = put(v, GC.harold, 800, 1860, 7.0, t=t, pose='stand', expr='stunned', look=(-1.0, 0.0), flip=True)
-    crowd = [put(v, GC.todd, 1000, 1750, 6.4, t=t, flip=True, expr='hype', mouth_=mouth('todd', t), look=(-1.0, 0.0), phone=True),
-             put(v, GC.mom, 120, 1700, 6.2, t=t, expr='shock', look=(1.0, 0.0), mouth_=0.6),
-             put(v, GC.trick_or_treater, 260, 1880, 6.2, t=t, costume='pumpkin', n=1, expr='shock', look=(1.0, 0.0)),
-             put(v, GC.trick_or_treater, 960, 1920, 6.4, t=t, costume='dino', n=2, flip=True, expr='shock', look=(-1.0, 0.0))]
+    h = put(v, GC.harold, 800, 1880, 8.6, t=t, pose='stand', expr='stunned', look=(-1.0, 0.0), flip=True)
+    crowd = [put(v, GC.todd, 1000, 1760, 7.6, t=t, flip=True, expr='hype', mouth_=mouth('todd', t), look=(-1.0, 0.0), phone=True),
+             put(v, GC.mom, 120, 1720, 7.4, t=t, expr='shock', look=(1.0, 0.0), mouth_=0.6),
+             put(v, GC.trick_or_treater, 260, 1900, 7.6, t=t, costume='pumpkin', n=1, expr='shock', look=(1.0, 0.0)),
+             put(v, GC.trick_or_treater, 940, 1940, 7.8, t=t, costume='dino', n=2, flip=True, expr='shock', look=(-1.0, 0.0))]
     def f(big, v_):
         for i, tf in enumerate((0.2, 0.8, 1.6)):
             if tf <= u < tf + 0.12: O.flash(big, 0.75)
@@ -163,8 +163,8 @@ def r_twist(t, u):
 def r_winner(t, u):
     v = lawn_view()
     g = frozen_grim(v, t, look=(-1.0, -0.2), expr='stunned', scythe_up=1.0)
-    h = put(v, GC.harold, 780, 1860, 7.0, t=t, pose='stand', expr='smug', look=(1.0, 0.0), cup=True)
-    td = put(v, GC.todd, 1010, 1780, 6.6, t=t, flip=True, expr='hype', mouth_=mouth('todd', t), look=(-1.0, 0.0), phone=False, point=1.0)
+    h = put(v, GC.harold, 760, 1880, 9.0, t=t, pose='stand', expr='smug', look=(1.0, 0.0), cup=True)
+    td = put(v, GC.todd, 1000, 1800, 8.0, t=t, flip=True, expr='hype', mouth_=mouth('todd', t), look=(-1.0, 0.0), phone=False, point=1.0)
     def f(big, v_):
         K.confetti(big, t, 20.5)
         K.fog(big, t, 1500, OUT_H, 0.25)
@@ -172,13 +172,13 @@ def r_winner(t, u):
 
 
 def r_sell(t, u):
-    big, _ = KIT.cu(PORCH, LP, GC.harold, t, 860.0, 430.0, 13.5, (540, 900), Z=1.4, pose='stand', expr='sly', mouth_=mouth('harold', t),
+    big, _ = KIT.cu(PORCH, LP, GC.harold, t, 990.0, 430.0, 13.5, (540, 900), Z=1.4, pose='stand', expr='sly', mouth_=mouth('harold', t),
                     look=(1.0, 0.0), cup=True)
     return big
 
 
 def r_sold(t, u):
-    big, _ = KIT.cu(PORCH, LP, GC.todd, t, 860.0, 430.0, 13.0, (560, 820), Z=1.4, flip=True, expr='cheer', mouth_=mouth('todd', t),
+    big, _ = KIT.cu(PORCH, LP, GC.todd, t, 990.0, 430.0, 13.0, (560, 820), Z=1.4, flip=True, expr='cheer', mouth_=mouth('todd', t),
                     look=(-1.0, 0.0), phone=False, point=1.0)
     if u < 0.4: B.shake(big, t, 8, 30)
     return big
@@ -218,11 +218,11 @@ def r_chic(t, u):
 def r_loop(t, u): return r_hook(t, u, loop=True)
 
 
-SHOTS = [r_hook, r_judge, r_mom, r_whisper, r_score, r_method, r_harold, r_finally, r_raise, r_twist, r_winner, r_sell, r_sold, r_tied,
+SHOTS = [r_hook, r_judge, r_mom, r_whisper, r_score, r_method, r_harold, r_fin, r_raise, r_twist, r_winner, r_sell, r_sold, r_tied,
          r_help, r_chic, r_loop]
-NAMES = ['hook', 'judge', 'mom', 'whisper', 'score', 'method', 'harold', 'finally', 'raise', 'twist', 'winner', 'sell', 'sold', 'tied',
+NAMES = ['hook', 'judge', 'mom', 'whisper', 'score', 'method', 'harold', 'fin', 'raise', 'twist', 'winner', 'sell', 'sold', 'tied',
          'help', 'chic', 'loop']
-CAP = dict(hook=900, judge=900, method=1100, finally=1100, harold=900, twist=900, winner=900, tied=1060, chic=1180, loop=900)
+CAP = dict(hook=900, judge=900, method=1100, fin=1100, harold=900, twist=900, winner=900, tied=1060, chic=1180, loop=900)
 
 SHOW = K.Show(EPI, 5, ['DEATH PLAYS', 'DECORATION?'], hook_t=(0.10, 2.6), hook_y=150, cap_default=1600, cap_y=CAP,
               stickers=[(K.st('7/10', (255, 90, 80), 80), 10.2, 11.35, 760, 420),

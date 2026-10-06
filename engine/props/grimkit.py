@@ -339,6 +339,28 @@ def phone_app(big, t, mode='pickup', u=0.0, thumb=True, **kw):
         for x, c in ((OUT_W // 2 - 200, (255, 80, 80)), (OUT_W // 2 + 200, (120, 230, 120))):
             d.ellipse([x - 80, sy1 - 260, x + 80, sy1 - 100], fill=c)
         big[:] = np.array(im)
+    elif mode == 'deadline':
+        d.text((sx0 + 40, sy0 + 210), 'FINAL PICKUP', font=_font(48), fill=(255, 200, 90))
+        d.text((sx0 + 40, sy0 + 300), 'HAROLD, 97', font=_font(52), fill=(255, 255, 255))
+        sec = max(0, 59 - int(u * 6))
+        d.text((OUT_W // 2, sy0 + 560), f'0:{sec:02d}', font=_font(150), fill=(255, 90, 80) if int(t * 4) % 2 else (255, 160, 140), anchor='mm')
+        d.text((OUT_W // 2, sy0 + 700), 'DEACTIVATION', font=_font(44), fill=(255, 90, 80), anchor='mm')
+        d.text((sx0 + 40, sy0 + 900), 'YOUR RATING  3.5', font=_font(40), fill=(255, 90, 80))
+        d.text((sx0 + 40, sy0 + 980), '★★★½☆', font=_bold(90), fill=(255, 210, 60))
+        big[:] = np.array(im)
+    elif mode == 'resched':
+        d.text((sx0 + 40, sy0 + 210), 'PICKUP', font=_font(48), fill=(150, 255, 110))
+        d.text((sx0 + 40, sy0 + 280), 'RESCHEDULED:', font=_font(48), fill=(150, 255, 110))
+        d.text((sx0 + 40, sy0 + 370), 'NEXT HALLOWEEN', font=_font(48), fill=(255, 200, 90))
+        k = min(1.0, max(0.0, (u - 0.8) / 0.6))
+        if k > 0:
+            d.text((sx0 + 40, sy0 + 520), 'HAROLD RATED YOU:', font=_font(40), fill=(255, 255, 255))
+            n = int(1 + 4 * k)
+            d.text((sx0 + 40, sy0 + 600), '★' * n + '☆' * (5 - n), font=_bold(130), fill=(255, 210, 60))
+            d.rounded_rectangle([sx0 + 30, sy0 + 800, sx1 - 30, sy0 + 960], 30, fill=(56, 30, 80))
+            d.text((sx0 + 70, sy0 + 850), '"Great ride."', font=_bold(64), fill=(255, 255, 255))
+            d.text((sx0 + 40, sy0 + 1040), 'YOUR RATING  5.0', font=_font(40), fill=(150, 255, 110))
+        big[:] = np.array(im)
     else:
         d.text((sx0 + 40, sy0 + 210), 'PICKUP FAILED', font=_font(48), fill=(255, 90, 80))
         d.text((sx0 + 40, sy0 + 330), 'HAROLD RATED', font=_font(44), fill=(255, 255, 255))
@@ -433,3 +455,53 @@ def captcha(big, t, u, taps, box):
                 if int(t * 8) % 2: big[y0:y0 + 8, x0:x0 + size] = (255, 200, 60); big[y0 + size - 8:y0 + size, x0:x0 + size] = (255, 200, 60)
         if i in tapped:
             big[y0:y0 + 6, x0:x0 + size] = (60, 120, 230); big[y0:y0 + size, x0:x0 + 6] = (60, 120, 230)
+
+
+def confetti(big, t, t0, n=160, seed=4):
+    """Halloween confetti burst (orange / violet / lime / bone) falling from t0"""
+    if t < t0: return
+    r = np.random.default_rng(seed)
+    cols = [(255, 140, 40), (180, 120, 255), (150, 255, 110), (236, 226, 198), (255, 90, 80)]
+    u = t - t0
+    for i in range(n):
+        x0 = r.random() * OUT_W; vy = 260 + r.random() * 380; ph = r.random() * 6
+        x = x0 + math.sin(u * 3 + ph) * 60
+        y = -60 + (u * vy + r.random() * 300) - 300
+        if 0 <= y < OUT_H - 16 and 0 <= x < OUT_W - 16:
+            w = 18 if int((u * 8 + ph) % 2) else 8
+            big[int(y):int(y) + 14, int(x):int(x) + w] = cols[i % len(cols)]
+
+
+def clock(big, txt, sub=None, k=1.0, col=(255, 90, 80), y=760, size=190):
+    """a big digital clock over the frame (pixel font), optional caption under it"""
+    img = Image.new('RGBA', (OUT_W, 560), (0, 0, 0, 0)); d = ImageDraw.Draw(img); d.fontmode = '1'
+    d.rounded_rectangle([60, 40, OUT_W - 60, 340], 40, fill=(10, 6, 18, 230), outline=col + (255,), width=10)
+    d.text((OUT_W // 2, 190), txt, font=_font(size), fill=col + (255,), anchor='mm')
+    for i, ln in enumerate((sub or '').split('\n')):                  # sub lines: white with an ink outline, stacked under the box
+        if ln: d.text((OUT_W // 2, 410 + i * 56), ln, font=_font(44), fill=(255, 255, 255, 255), anchor='mm', stroke_width=5, stroke_fill=(10, 6, 18, 255))
+    O.overlay(big, np.array(img), 0, y - 190, k)
+
+
+def rope_line(big, a, b, sag=60, w=10, col=(206, 172, 110)):
+    (x0, y0), (x1, y1) = a, b
+    n = int(max(abs(x1 - x0), abs(y1 - y0)) / 4) + 2
+    pts = [(x0 + (x1 - x0) * i / n, y0 + (y1 - y0) * i / n + sag * 4 * (i / n) * (1 - i / n)) for i in range(n + 1)]
+    for pad, cf in ((3, lambda i: INK), (0, lambda i: col if (i // 3) % 2 else (176, 140, 84))):
+        for i, (x, y) in enumerate(pts):
+            xa, ya = int(x - w / 2) - pad, int(y - w / 2) - pad
+            xb, yb = xa + w + 2 * pad, ya + w + 2 * pad
+            if xb > 0 and yb > 0 and xa < OUT_W and ya < OUT_H:
+                big[max(0, ya):min(OUT_H, yb), max(0, xa):min(OUT_W, xb)] = cf(i)
+
+
+def fireworks(big, t, t0, bursts=((300, 400), (780, 300), (540, 520)), cols=((255, 140, 40), (180, 120, 255), (150, 255, 110))):
+    for i, (x, y) in enumerate(bursts):
+        u = (t - t0 - i * 0.5) % 1.6
+        if u < 0 or u > 1.2: continue
+        r = 40 + 260 * u; a = 1 - u / 1.2
+        for j in range(16):
+            ang = j / 16 * 2 * math.pi
+            px, py = int(x + math.cos(ang) * r), int(y + math.sin(ang) * r + 60 * u * u)
+            if 0 <= px < OUT_W - 14 and 0 <= py < OUT_H - 14:
+                c = np.array(cols[i % len(cols)]) * a + big[py, px] * (1 - a)
+                big[py:py + 14, px:px + 14] = c.astype(np.uint8)
