@@ -123,6 +123,29 @@
       },
       "voice_id": "wISugChlyIgdUxhS0vFR",
       "voice": "Grim Ride — Kayden"
+    },
+    "dashley": {
+      "name": "Dashley (DoomDash support bot)",
+      "color_caption": [
+        255,
+        210,
+        90
+      ],
+      "style": "[cheerful, chirpy] — relentlessly upbeat AI support assistant",
+      "design": {
+        "description": "A relentlessly cheerful corporate customer-support AI assistant: a young adult American woman's voice, perky, sing-song, bright and a little too polite, slightly synthetic and robotic in rhythm, smiling through every sentence, clean studio sound. Comedic.",
+        "text": "Hi there! I'm Dashley, your DoomDash support assistant! Are you a human? Sorry, I didn't catch that. For your safety, your bike is now Class One! Transferring you to a specialist. Your estimated wait time is eternity. Have a spooktacular day!",
+        "picked": {
+          "i": 0,
+          "dur": 15.73,
+          "f0": 313.7,
+          "f0_iqr": 114.0,
+          "rate": 21.6,
+          "loud_sd": 6.6
+        }
+      },
+      "voice_id": "hvKhJmx8w6dx2qaLhHC6",
+      "voice": "Grim Ride — Dashley (DoomDash support bot)"
     }
   },
   "note": "06.10.2026: designed voices saved after freeing 15 slots (see docs/voices.md). The pilot was first voiced with premade voices, re-voiced 06.10.2026."

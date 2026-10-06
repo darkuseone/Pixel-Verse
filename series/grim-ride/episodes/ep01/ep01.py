@@ -69,7 +69,7 @@ def put(v, fn, ox, oy, s, **kw):
 
 def r_hook(t, u, loop=False):
     """0.0: Death pops a wheelie on the e-bike down a Halloween street under the full moon, cloak and scythe streaming, lightning"""
-    tt = t if not loop else t - 33.7
+    tt = t if not loop else t - 36.0
     cx = 380.0 + 70.0 * tt
     v = view_at(STREET, cx, 330.0, 1.25, 180, 320)
     bob = 10.0 * math.sin(t * 9.0)
@@ -81,7 +81,7 @@ def r_hook(t, u, loop=False):
         K.speed_streaks(big, t, 0.8)
         K.leaves(big, t, 22, seed=2, speed=1.6)
     big = K.shot(STREET, K.light_street, cx, 330.0, 1.25, acts=[g], fx_=f, sx=180, sy=320)
-    K.lightning(big, t, 0.0 if not loop else 33.72, seed=3)
+    K.lightning(big, t, 0.0 if not loop else 36.02, seed=3)
     B.shake(big, t, 4, 30)
     return big
 
@@ -145,7 +145,7 @@ def r_shout(t, u):
         K.glow_ring(big, hx, hy, 260, K.GC.GLOW, 0.35 * (1 - min(1.0, u / 1.2)))
     big, _ = cu(YARD, K.light_yard, GC.grim, t, 520.0, 430.0, 13.0, (520, 880), Z=1.4, fx_=f,
                 **grim_kw(t, expr='angry', wind=0.9, raven=False, glow=1.0, pose='shout', shake=1.0 if u < 0.6 else 0.0))
-    K.lightning(big, t, 9.05, seed=7)
+    K.lightning(big, t, 9.33, seed=7)
     if u < 0.5: B.shake(big, t, 10, 34)
     return big
 
@@ -298,21 +298,21 @@ def raisin(big, x, y, s=1.0):
 def r_button(t, u):
     """Death stands by the dead bike; Harold laps him, tosses a raisin box — BONK off the hood: «Happy Halloween, KID!»"""
     v = view_at(STREET, 760.0, 380.0, 1.4, 180, 320)
-    bonk = t >= 32.75
+    bonk = t >= 35.17
     g = put(v, GC.grim, 640, 1660, 6.6, t=t, expr='angry' if bonk else 'sad', mouth_=0.0, dead=True, batt=0, raven=True, look=(-0.8, 0.0),
-            jaw_drop=1.5 if bonk and t < 33.1 else 0.0)
+            jaw_drop=1.5 if bonk and t < 35.52 else 0.0)
     hx_ = lerp(-300.0, 1400.0, min(1.0, u / 1.7))
     har = put(v, GC.harold, hx_, 1850, 7.0, t=t, pose='ride', spin=-t * 34, expr='grin', mouth_=mouth('harold', t), look=(1.0, 0.0),
-              flag=1.4, toss=1.0 if 32.2 < t < 32.6 else 0.0)
+              flag=1.4, toss=1.0 if 34.62 < t < 35.02 else 0.0)
     def f(big, v_):
         K.speed_streaks(big, t, 0.4)
         hx, hy = aout(g, v_, 'hood_top')
-        if 32.3 <= t < 32.75:
-            q = (t - 32.3) / 0.45
+        if 34.72 <= t < 35.17:
+            q = (t - 34.72) / 0.45
             sx, sy = hx_ + 60, 1500
             raisin(big, lerp(sx, hx, q), lerp(sy, hy, q) - 240 * 4 * q * (1 - q), 1.6)
-        elif 32.75 <= t < 33.2:
-            q = (t - 32.75) / 0.45
+        elif 35.17 <= t < 35.62:
+            q = (t - 35.17) / 0.45
             raisin(big, hx + 120 * q, hy - 200 * q + 400 * q * q, 1.6)
             for i in range(5):
                 a = i * 1.26 + t * 4
@@ -331,13 +331,13 @@ NAMES = ['hook', 'reveal', 'display', 'app', 'todd', 'arrive', 'shout', 'compare
          'chase', 'gang', 'dead', 'rated', 'button', 'loop']
 CAP = dict(hook=1640, display=1120, app=1760, rated=1760, todd=1560, shout=1560, harold=1600, smug=1560, shortking=1180, dead=900)
 
-SHOW = K.Show(EPI, 1, ['DEATH GOT', 'AN E-BIKE?'], hook_t=(0.10, 2.7), hook_y=150, cap_default=1600, cap_y=CAP,
-              stickers=[(K.st('AFTERLIFEPAY x4', (200, 170, 255), 46), 3.35, 4.8, 540, 1080),
-                        (K.st('EASY PICKUP!', (150, 255, 110), 52), 5.0, 5.6, 540, 420),
-                        (K.st('12 FT', (255, 236, 120), 70), 11.0, 12.6, 640, 330),
-                        (K.st('28 MPH?!', (255, 140, 40), 72), 20.45, 21.9, 560, 420),
-                        (K.st('BATTERY 4%', (255, 90, 80), 52), 23.7, 25.4, 540, 380)],
-              flashes=[20.35], mosaics=[3.05, 30.05])
+SHOW = K.Show(EPI, 1, ['DEATH GOT', 'AN E-BIKE?'], hook_t=(0.10, 3.0), hook_y=150, cap_default=1600, cap_y=CAP,
+              stickers=[(K.st('AFTERLIFEPAY x4', (200, 170, 255), 46), 3.85, 5.5, 540, 1080),
+                        (K.st('EASY PICKUP!', (150, 255, 110), 52), 5.62, 6.3, 540, 420),
+                        (K.st('12 FT', (255, 236, 120), 70), 11.7, 13.4, 640, 330),
+                        (K.st('28 MPH?!', (255, 140, 40), 72), 21.9, 23.6, 560, 420),
+                        (K.st('BATTERY 4%', (255, 90, 80), 52), 25.6, 27.5, 540, 380)],
+              flashes=[21.80], mosaics=[3.60, 32.55])
 
 
 def render(t):

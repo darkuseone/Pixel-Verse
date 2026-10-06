@@ -427,16 +427,15 @@
    "status": "active",
    "name": "Grim",
    "voice_name": "Grim Ride — Grim",
-   "lines": 7,
-   "episodes": 1,
+   "lines": 13,
+   "episodes": 2,
    "samples": [
-    "series/grim-ride/voice/ep01/g2.mp3",
     "series/grim-ride/voice/ep01/g1.mp3",
     "series/grim-ride/voice/ep01/g4.mp3",
     "series/grim-ride/voice/ep01/g6.mp3",
     "series/grim-ride/voice/ep01/g3.mp3",
-    "series/grim-ride/voice/ep01/g5.mp3",
-    "series/grim-ride/voice/ep01/g7.mp3"
+    "series/grim-ride/voice/ep01/g7.mp3",
+    "series/grim-ride/voice/ep01/g5.mp3"
    ],
    "design": {
     "description": "The Grim Reaper as a pompous Shakespearean stage actor: a deep, booming, theatrical male voice, rich old-fashioned British stage accent, resonant bass-baritone, grand, self-important and dramatic, but it cracks into a whiny, panicky higher register when things go wrong. Comedic, expressive, crisp diction.",
@@ -465,13 +464,42 @@
   },
   {
    "slug": "grim-ride",
+   "char": "dashley",
+   "voice_id": "hvKhJmx8w6dx2qaLhHC6",
+   "status": "active",
+   "name": "Dashley (DoomDash support bot)",
+   "voice_name": "Grim Ride — Dashley (DoomDash support bot)",
+   "lines": 6,
+   "episodes": 1,
+   "samples": [],
+   "design": {
+    "description": "A relentlessly cheerful corporate customer-support AI assistant: a young adult American woman's voice, perky, sing-song, bright and a little too polite, slightly synthetic and robotic in rhythm, smiling through every sentence, clean studio sound. Comedic.",
+    "text": "Hi there! I'm Dashley, your DoomDash support assistant! Are you a human? Sorry, I didn't catch that. For your safety, your bike is now Class One! Transferring you to a specialist. Your estimated wait time is eternity. Have a spooktacular day!",
+    "picked": {
+     "i": 0,
+     "dur": 15.73,
+     "f0": 313.7,
+     "f0_iqr": 114.0,
+     "rate": 21.6,
+     "loud_sd": 6.6
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A relentlessly cheerful corporate customer-support AI assistant: a young adult American woman's voice, perky, sing-song, bright and a little too polite, slightly synthetic and robotic in rhythm, smiling through every sentence, clean studio sound. Comedic.",
+    "settings": null,
+    "created_at_unix": 1791319087
+   }
+  },
+  {
+   "slug": "grim-ride",
    "char": "edgar",
    "voice_id": "QxBrp3fXvoJ3Zvl8DXHD",
    "status": "active",
    "name": "Edgar",
    "voice_name": "Grim Ride — Edgar",
-   "lines": 3,
-   "episodes": 1,
+   "lines": 5,
+   "episodes": 2,
    "samples": [
     "series/grim-ride/voice/ep01/e3.mp3",
     "series/grim-ride/voice/ep01/e1.mp3",
@@ -509,8 +537,8 @@
    "status": "active",
    "name": "Harold",
    "voice_name": "Grim Ride — Harold",
-   "lines": 3,
-   "episodes": 1,
+   "lines": 4,
+   "episodes": 2,
    "samples": [
     "series/grim-ride/voice/ep01/h2.mp3",
     "series/grim-ride/voice/ep01/h1.mp3",
@@ -1427,5 +1455,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-06 20:34"
+ "updated": "2026-10-06 20:38"
 }
