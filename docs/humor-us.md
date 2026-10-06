@@ -40,7 +40,7 @@
 
 ## 7. Уже использовано (не повторять в других US мультах)
 - «Agent Dibs» S01 (сценарий на согласовании, гэги в резерве): полный список внизу, блок «Использовано в Agent Dibs».
-- «Grim Ride» S01 (пилот 06.10.2026, сезон на согласовании): блок «Использовано в Grim Ride» внизу.
+- «Grim Ride» S01 (готов 06.10.2026): блок «Использовано в Grim Ride» внизу.
 - «Sunny Palms HOA» S01: Saxophone gets louder (`sax_sting_swell`), Aura ±9999, Florida Man, «I watched a video», HOA/Karen, emotional support animal (сертификат $19.99), соседское приложение, штраф урагану, tip fatigue, выборы в HOA, «Bless your heart» + «TRANSLATION: YOU IDIOT», TOTAL FINES, Beautification Fund / Bahamas, Earl «grandfathered in».
 
 ---
@@ -204,8 +204,11 @@ time.com / abc7ny.com (age limits), knowyourmeme.com / napoleoncat.com (сент
 - Пилот E01: Смерть на прокатном Class 3 в рассрочку («Four easy payments»), DoomDash и рейтинг от жертвы, 12-футовый скелет Кевин
   («Not even twelve feet, buddy.», «Short king.»), «Over my dead body.» — «That's the PLAN.», трайк «UNLOCKED», «Relax, pal.»,
   «Dead battery. Ironic.», изюм, «Happy Halloween, KID!».
-- Запланировано E02–E06 (сценарий на согласовании): капча «with a PULSE», чат-бот и «wait time: eternity», конфеты по $17 и «full size NOW»,
-  «too old to trick-or-treat», донгл и ворон-барыга, конкурс «Best Yard», перевод часов в ночь Хэллоуина.
+- E02–E06: капча «Select all squares with a PULSE», бот поддержки «Oopsie!» / «Sorry, I didn't catch that!», «specialist: you», «wait time is
+  ETERNITY» — «That's MY line.», «Class ONE»; очередь к full-size bar house, «Seventeen bucks a BAG», «Inflation.», батончик-ноготь,
+  «too old to trick-or-treat»; «the plug», донглы $40 CASH, «A bird's gotta EAT», «No REFUNDS»; Best Yard, «Ugh. TACKY.», «Needs FOG»,
+  «Method ACTING», «It's ANIMATRONIC!», «Kinda CHIC»; 1:59 AM, «Fall Back» (2:00 → 1:00), «Pickup rescheduled. Next HALLOWEEN», «Five. STARS.»,
+  крючок «Spring Forward».
 
 ### Новые пародийные бренды (банк §4)
 «DoomDash» (DoorDash), «AfterlifePay» (BNPL), «Home Despot» (уже в банке), «Spirit Halloweenie», «Nextdoom» (Nextdoor), «Pale Horse 2» (байк Смерти).
