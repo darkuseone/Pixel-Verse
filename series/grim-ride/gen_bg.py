@@ -26,6 +26,13 @@ BG = {
              'a warm yellow porch light by the door, a screen door, a doormat, potted dead plants, a single carved jack-o-lantern on the '
              'top step, cobwebs, a wooden floor with empty space in the middle and on the left of the porch for furniture, steps down to '
              'a lawn with fallen leaves in the lower part, a bare tree and the full moon on the right.',
+    'gangway': 'A narrow dark gangway alley between two suburban houses at night seen from its open end: wooden fences on both sides, '
+               'trash and recycling bins, a garden hose, a broken plastic skeleton decoration leaning on the fence, a single dim motion '
+               'light above a side door, puddles on cracked concrete, a strip of violet night sky with the full moon above, fog low on the ground. '
+               'Empty concrete path in the middle and lower part of the frame.',
+    'hilltop': 'A grassy hilltop at night above a small American suburban town: the town lights and glowing jack-o-lanterns far below '
+               'in the valley, a winding road, a single old bare oak tree on the left, a water tower in the distance, a huge full moon low '
+               'over the horizon on the right, deep violet sky with stars, fog in the valley. Empty grass and a dirt path in the lower part.',
 }
 
 if __name__ == '__main__':
