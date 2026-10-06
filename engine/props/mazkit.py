@@ -78,6 +78,17 @@ def world(name):
         d.rectangle([852, 90, 864, 106], fill=(110, 110, 104), outline=INK)
         # checkpoint sign
         d.rectangle([150, 372, 330, 386], fill=(40, 60, 120)); _text(d, (240, 379), 'ПРОХОДНАЯ', 9, (240, 240, 230))
+    if name == 'assembly_hall':
+        _text(d, (692, 112), 'СЛАВА НЕФТЯНИКАМ!', 16, (120, 20, 24))
+        d.rectangle([1162, 312, 1244, 404], fill=(150, 30, 34))                     # «Доска почёта»
+        _text(d, (1203, 324), 'ДОСКА', 8, (250, 220, 120)); _text(d, (1203, 336), 'ПОЧЁТА', 8, (250, 220, 120))
+        for i in range(3):
+            for j in range(2):
+                x, y = 1170 + i * 25, 348 + j * 27
+                d.rectangle([x, y, x + 17, y + 21], fill=(220, 214, 196), outline=(250, 220, 120))
+                d.ellipse([x + 4, y + 3, x + 13, y + 13], fill=(120, 100, 90))
+        d.rectangle([494, 404, 560, 426], fill=(236, 236, 230), outline=(40, 90, 200))   # podium plate
+        _text(d, (527, 415), 'ГАЗПРОПАЛ', 7, (40, 90, 200))
     _W[name] = np.array(im)
     return _W[name]
 

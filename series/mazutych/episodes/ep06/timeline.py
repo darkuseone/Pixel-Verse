@@ -1,0 +1,55 @@
+"""S01E06 «Почётный нефтяник» — timing for video (ep06.py) and audio (mix.py). Voice clips are the tightened takes (voice/ep06_t)."""
+DUR = 34.3
+FPS = 30
+SLUG = 'mazutych'
+MASTER = 0.78
+
+VOICE = [
+    ('b1', 'ep06_t', 'b1', 0.00, 0.00, 2.90, 'bossh', 'За двадцать пять лет — МАШИНА!'),
+    ('m1', 'ep06_t', 'm1', 4.35, 0.00, 2.76, 'maz', 'Двадцать пять лет... СВОЯ!'),
+    ('b2', 'ep06_t', 'b2', 7.30, 0.00, 3.58, 'bossh', 'Ключи. А бензин — по талону на ТАЛОН.'),
+    ('w1', 'ep06_t', 'w1', 11.20, 0.00, 2.22, 'wheel', 'Опять ТОННА, друга.'),
+    ('z1', 'ep06_t', 'z1', 13.70, 0.00, 1.68, 'zoya', 'Бензин ЕСТЬ.'),
+    ('m2', 'ep06_t', 'm2', 16.55, 0.00, 1.06, 'maz', 'ЕСТЬ?!'),
+    ('m3', 'ep06_t', 'm3', 19.20, 0.00, 1.38, 'maz', 'Это ЧТО?'),
+    ('z2', 'ep06_t', 'z2', 20.75, 0.00, 1.36, 'zoya', 'ЭЛЕКТРИЧКА.'),
+    ('m4', 'ep06_t', 'm4', 22.30, 0.00, 1.19, 'maz', 'А ЗАРЯДКА есть?'),
+    ('z3', 'ep06_t', 'z3', 23.65, 0.00, 1.90, 'zoya', 'Зарядки НЕТ.'),
+    ('w2', 'ep06_t', 'w2', 25.75, 0.00, 4.41, 'wheel', 'Я тоже НОЛЬ процент, друга.'),
+    ('b3', 'ep06_t', 'b3', 30.40, 0.00, 2.09, 'boss', 'Розетка — по ТАЛОНУ.'),
+]
+
+#        hook  curtain cry   keys  bosscu tow    zoya1  sign   awe    flap   SOCKET zoya2  hope   zoya3  lcd    trio   bosswin title
+CUTS = [0.0, 2.90, 4.30, 7.20, 9.00, 10.90, 13.55, 15.40, 16.45, 17.70, 18.70, 20.60, 22.20, 23.55, 25.60, 27.90, 30.25, 32.60, DUR]
+
+S = 'library/sfx/'
+SFX = [
+    (S + 'brass_fanfare_short.mp3', 0.00, 0.55),
+    (S + 'crowd_cheer_short.mp3', 0.10, 0.35),
+    (S + 'curtain_reveal.mp3', 2.90, 0.5),
+    (S + 'choir_hallelujah_short.mp3', 3.00, 0.45),
+    (S + 'camera_flash.mp3', 3.40, 0.4),
+    (S + 'coin_clink.mp3', 8.00, 0.6),
+    (S + 'stamp.mp3', 10.30, 0.5),
+    (S + 'rope_strain_creak.mp3', 11.00, 0.5),
+    (S + 'monowheel_whine.mp3', 10.95, 0.35),
+    (S + 'gum_pop.mp3', 15.25, 0.6),
+    (S + 'choir_hallelujah_short.mp3', 15.45, 0.6),
+    (S + 'paper_crumple_slap.mp3', 15.50, 0.4),
+    (S + 'valve_creak.mp3', 18.00, 0.5),
+    (S + 'electric_zap_sparks.mp3', 18.70, 0.8),
+    (S + 'record_scratch.mp3', 18.72, 0.45),
+    (S + 'gum_pop.mp3', 25.30, 0.6),
+    (S + 'battery_die_beeps.mp3', 27.30, 0.5),
+    (S + 'sad_trombone.mp3', 28.70, 0.35),
+    (S + 'cash_register.mp3', 31.60, 0.5),
+    (S + 'title_stinger.mp3', 32.60, 0.6),
+]
+
+BEDS = [
+    ('library/sfx/amb_refinery.mp3', 8.0, 10.9, DUR, 0.25, False),
+    ('series/mazutych/music/mazutych_theme_15s.mp3', 14.6, 0.0, DUR, 0.22, True),
+]
+
+VFX = {'wheel': 'highpass=f=240,aecho=0.6:0.5:12:0.25', 'bossh': 'aecho=0.7:0.5:70:0.18'}
+VGAIN = {'maz': 1.6, 'zoya': 1.5, 'wheel': 1.45, 'boss': 1.5, 'bossh': 1.5}

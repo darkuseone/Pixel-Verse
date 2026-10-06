@@ -463,6 +463,53 @@ def buhanka(sp, col=(90, 120, 80), t=0.0, spin=0.0):
     sp.outline(INK, 2)
 
 
+VESTA = (206, 40, 44)
+
+
+def vesta(sp, col=VESTA, t=0.0, spin=0.0, bow=1.0, flap=0.0, plug=False):
+    """«Веста-Шместа»: the brand-new award hatchback (E06), side view facing +x, ~70 px long. Chrome «X» on the nose,
+    a gift ribbon around the body + a huge bow on the roof (bow 0..1 = how much is left), fuel flap (flap 0..1 open) hides a socket"""
+    body = sp.m_poly([(-33.0, 6.0), (34.0, 6.0), (35.5, 12.0), (34.0, 16.5), (19.0, 20.0), (9.0, 30.0), (-15.0, 31.0), (-27.0, 23.0),
+                      (-34.0, 18.0), (-34.5, 10.0)])
+    sp.paint(body, tones(col), DX.lit(np.clip(DX.XC / 34, -1, 1) * 0.3, np.clip((DX.YC - 17) / 12, -1, 1)))
+    gl = sp.m_poly([(-25.0, 22.0), (16.0, 21.0), (8.0, 28.5), (-14.5, 29.5)])
+    sp.fill(gl, (150, 196, 220)); sp.fill(gl & hatch_mask_(), (110, 156, 186)); sp.fill(gl & ~erode(gl), INK)
+    sp.rect(-5.0, 21.0, -3.5, 29.5, dark(col, 0.55))                         # B-pillar
+    sp.line((-33.0, 14.0), (33.0, 16.0), dark(col, 0.62))                   # sporty character line
+    sp.line((-31.0, 9.5), (33.0, 9.5), dark(col, 0.7))
+    sp.rect(-2.0, 17.0, 1.0, 18.0, (230, 230, 236))                          # door handle
+    for a, b in (((29.0, 8.0), (35.0, 16.0)), ((29.0, 16.0), (35.0, 8.0))):  # the chrome «X» face
+        sp.line(a, b, (236, 236, 244), 2)
+    sp.rect(30.0, 15.0, 34.5, 17.0, (255, 246, 200))                         # slit headlight
+    sp.rect(-34.0, 15.0, -31.0, 18.0, (230, 40, 40))
+    # fuel flap on the rear quarter
+    fx0, fy0, fx1, fy1 = -26.0, 14.5, -21.0, 19.5
+    if flap > 0:
+        sp.rect(fx0, fy0, fx1, fy1, (24, 24, 28))
+        sp.ell(-23.5, 17.0, 2.0, 2.0, tones((60, 60, 66)), ol=False)
+        for dx, dy in ((-0.8, 0.6), (0.8, 0.6), (0.0, -0.8)): sp.dot(-23.5 + dx, 17.0 + dy, (12, 12, 14))
+        w = (fx1 - fx0) * (1 - 0.85 * flap)
+        sp.rect(fx0 - w, fy0, fx0, fy1, dark(col, 0.85)); sp.line((fx0 - w, fy0), (fx0 - w, fy1), INK)
+        if plug: sp.rect(-24.5, 16.0, -14.0, 18.0, (40, 40, 44))
+    else:
+        sp.line((fx0, fy0), (fx1, fy0), dark(col, 0.55)); sp.line((fx0, fy1), (fx1, fy1), dark(col, 0.55))
+        sp.line((fx0, fy0), (fx0, fy1), dark(col, 0.55)); sp.line((fx1, fy0), (fx1, fy1), dark(col, 0.55))
+    for x in (-20.0, 21.0): _wheel(sp, x, 5.0, 5.8, spin, rim=(226, 226, 236))
+    if bow > 0:                                                               # gift ribbon + the bow
+        rb = (250, 214, 60)
+        sp.fill(body & (np.abs(DX.XC + 4.0) < 1.6), rb)
+        sp.fill(body & (np.abs(DX.YC - 12.0) < 1.2), rb)
+        k = bow
+        for sx in (-1.0, 1.0):
+            sp.ell(-4.0 + sx * 6.0 * k, 35.0, 6.0 * k, 4.2 * k, tones((230, 36, 50)), ang=sx * 0.35)
+            sp.cap((-4.0, 32.0), (-4.0 + sx * 7.0 * k, 27.0), 1.4, 1.0, tones((230, 36, 50)))
+        sp.ell(-4.0, 33.5, 2.4, 2.2, tones((200, 26, 40)))
+    sp.anchors['front'] = (36.0, 9.0)
+    sp.anchors['back'] = (-35.0, 9.0)
+    sp.anchors['flap'] = (-23.5, 17.0)
+    sp.outline(INK, 2)
+
+
 def monowheel_solo(sp, t=0.0, spin=0.0, face='smile'):
     """the wheel alone (model sheet, inserts)"""
     monowheel(sp, t, spin, face=face if face != 'dead' else 'smile', dead=face == 'dead')
