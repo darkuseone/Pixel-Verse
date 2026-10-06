@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-06 20:38.
+Обновлено: 2026-10-06 20:45.
 
 ## agent-dibs
 
@@ -25,12 +25,13 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Grim | `grim` | `sdQf2r6zfX32hvp25Auj` | active | 13 / 2 | Grim Ride — Grim |
+| Grim | `grim` | `sdQf2r6zfX32hvp25Auj` | active | 16 / 3 | Grim Ride — Grim |
+| Edgar | `edgar` | `QxBrp3fXvoJ3Zvl8DXHD` | active | 7 / 3 | Grim Ride — Edgar |
 | Dashley (DoomDash support bot) | `dashley` | `hvKhJmx8w6dx2qaLhHC6` | active | 6 / 1 | Grim Ride — Dashley (DoomDash support bot) |
-| Edgar | `edgar` | `QxBrp3fXvoJ3Zvl8DXHD` | active | 5 / 2 | Grim Ride — Edgar |
-| Harold | `harold` | `UScN6kcNEVzdo1v1Nl6W` | active | 4 / 2 | Grim Ride — Harold |
-| Todd | `todd` | `9rXbTqAmpdfkBx20G31c` | active | 2 / 1 | Grim Ride — Todd |
-| Kayden | `kayden` | `wISugChlyIgdUxhS0vFR` | active | 1 / 1 | Grim Ride — Kayden |
+| Harold | `harold` | `UScN6kcNEVzdo1v1Nl6W` | active | 5 / 3 | Grim Ride — Harold |
+| Todd | `todd` | `9rXbTqAmpdfkBx20G31c` | active | 3 / 2 | Grim Ride — Todd |
+| Kayden | `kayden` | `wISugChlyIgdUxhS0vFR` | active | 3 / 2 | Grim Ride — Kayden |
+| Trick-or-treat Mom | `mom` | `UNaE6Ed6rSceF3pSO5yL` | active | 2 / 1 | Grim Ride — Trick-or-treat Mom |
 
 ## mazutych
 

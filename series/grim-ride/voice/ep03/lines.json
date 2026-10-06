@@ -1,0 +1,13 @@
+{
+  "g1": ["grim", "[scheming whisper, delighted] Full-size bars. He HAS to open the door."],
+  "t1": ["todd", "[apologetic, cheerful] One each, buddy. Seventeen bucks a BAG!"],
+  "e1": ["edgar", "[deadpan, flat] Inflation."],
+  "m1": ["mom", "[suspicious, judgmental] Aren't you a little OLD for this?"],
+  "g2": ["grim", "[offended, booming] I am DEATH! I'm four THOUSAND!"],
+  "m2": ["mom", "[flat, final] Then that's a NO."],
+  "e2": ["edgar", "[deadpan, flat] Carded."],
+  "k1": ["kayden", "[bored, flat] Relax, pal."],
+  "h1": ["harold", "[dry, unbothered] That's full size NOW."],
+  "k2": ["kayden", "[bored, flat, accusing] Bro. Did YOU kill full-size?"],
+  "g3": ["grim", "[defensive, small, hurt] I didn't do THIS one."]
+}

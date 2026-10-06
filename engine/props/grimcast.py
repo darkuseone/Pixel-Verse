@@ -244,7 +244,7 @@ GRIM_STYLE = dict(hs=1.25)
 
 def grim(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, ride=True, spin=0.0, crank=None, wind=0.0, batt=13, dead=False,
          raven=False, raven_mouth=0.0, raven_expr='deadpan', pose='bar', glow=1.0, scythe=True, jaw_drop=0.0, hood_back=0.0, shake=0.0,
-         lean=0.0):
+         lean=0.0, carry=0.0):
     """GRIM, 3/4 to the right. ride: on the e-bike (pose 'bar' = both hands on the bar, 'phone' = near hand holds a phone up,
     'shout' = near arm raised with an open claw); ride=False: standing, cloak to the ground, scythe upright in the far hand
     (pose 'stand' / 'point' / 'claw' / 'phone' / 'loom' = arms raised over a victim). wind 0..1: cloak and tatters stream back."""
@@ -324,7 +324,9 @@ def grim(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, ride=
     # ---------------------------------------------------------------- near arm (over the body)
     before = sp.m.copy()
     shN = (neck[0] + 1.0, neck[1] - 6.0)
-    if ride and pose == 'phone':
+    if pose in ('ear', 'twophones'):
+        hN = (hx - 3.5 * hs, hy - 1.5 * hs)
+    elif ride and pose == 'phone':
         hN = (shN[0] + 12.0, shN[1] + 6.0)
     elif ride and pose == 'shout':
         hN = (shN[0] + 8.0, shN[1] + 20.0)
@@ -340,7 +342,7 @@ def grim(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, ride=
         hN = (shN[0] + 12.0, shN[1] + 4.0)
     else:
         hN = (shN[0] + 6.0, shN[1] - 22.0)
-    kN, eN = ik(shN, hN, 13.0, 12.0, -1.0 if not (pose in ('claw', 'loom', 'shout')) else 1.0)
+    kN, eN = ik(shN, hN, 13.0, 12.0, -1.0 if not (pose in ('claw', 'loom', 'shout', 'ear', 'twophones')) else 1.0)
     sp.cap(shN, kN, 3.8, 3.8, CLK); sp.cap(kN, eN, 3.8, 5.0, CLK)
     if pose in ('phone',):
         bony_hand(sp, *eN, d=1.0, grip=False)
@@ -348,9 +350,23 @@ def grim(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, ride=
         sp.rect(eN[0] + 1.2, eN[1] - 0.2, eN[0] + 3.8, eN[1] + 6.2, (120, 255, 200), keep=True)
         sp.dot(eN[0] + 2.0, eN[1] + 4.6, (240, 60, 60), keep=True)
         sp.anchors['phone'] = (eN[0] + 2.5, eN[1] + 3.0)
+    elif pose in ('ear', 'twophones'):                                        # phone pressed to the side of the skull
+        sp.rect(eN[0] - 1.5, eN[1] - 4.0, eN[0] + 2.5, eN[1] + 5.0, (30, 30, 40))
+        sp.rect(eN[0] - 0.8, eN[1] - 3.2, eN[0] + 1.8, eN[1] + 4.2, (120, 255, 200), keep=True)
+        bony_hand(sp, eN[0] + 0.5, eN[1] - 2.0, d=1.0, grip=True)
+        sp.anchors['phone'] = (eN[0] + 0.5, eN[1])
+        if pose == 'twophones':                                               # the second phone held at the jaw
+            px, py = hx + 8.5 * hs, hy - 7.5 * hs
+            sp.cap((shN[0] + 2.0, shN[1] - 4.0), (px - 2.0, py - 3.0), 3.4, 4.2, CLK)
+            sp.rect(px - 2.5, py - 4.5, px + 1.5, py + 4.5, (30, 30, 40))
+            sp.rect(px - 1.8, py - 3.8, px + 0.8, py + 3.8, (255, 200, 90), keep=True)
+            bony_hand(sp, px - 1.0, py - 3.0, d=1.0, grip=True)
+            sp.anchors['phone2'] = (px, py)
     else:
         bony_hand(sp, *eN, d=1.0, grip=(ride and pose == 'bar') or pose == 'stand', point=pose == 'point')
+        if carry: sack(sp, eN[0] + 1.0, eN[1] - 1.0, carry)
     sp.anchors['hand'] = eN
+    sp.anchors['pocket'] = (neck[0] - 3.0, neck[1] - 20.0)
     new = sp.m & ~before
     o = dilate(new) if sp.k == 1 else dilate(dilate(new))
     o &= ~sp.m
@@ -483,7 +499,7 @@ def rocking_chair(sp, rock=0.0):
 
 
 def harold(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='stand', spin=0.0, flag=1.0, rock=0.0, wave=0.0,
-           toss=0.0, wind=0.0):
+           toss=0.0, wind=0.0, offer=0.0):
     """HAROLD, 97: a tiny shrivelled «bobblehead» under a giant black helmet with flames, coke-bottle glasses magnifying the eyes,
     khaki pants belted at the chest, red suspenders, white orthopedic sneakers. pose 'stand' / 'rock' (rocking chair) / 'ride' (e-trike)"""
     E = X(expr)
@@ -533,6 +549,8 @@ def harold(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.6, 0.0), blink=None, pos
         hN = (shN[0] + 6.0 + 2.0 * math.sin(t * 14.0) * wave, shN[1] + 9.0)
     elif toss > 0:
         hN = (shN[0] + 9.0, shN[1] + 2.0 + 8.0 * toss)
+    elif offer > 0:
+        hN = (shN[0] + 10.0 * offer + 2.0, shN[1] - 2.0)
     elif pose == 'rock':
         hN = (shN[0] + 5.0, shN[1] - 9.0)
     else:
@@ -782,3 +800,127 @@ def tarp(sp, t=0.0, lift=0.0):
     sp.rect(-15.0 + dx, 7.0 + dy, 18.0 + dx, 14.0 + dy, (250, 230, 60))                       # the sticker peeks out
     txt(sp, 'UNLOCKED', -14.0 + dx, 12.0 + dy, (200, 20, 30))
     sp.outline(INK, 1)
+
+
+# ======================================================================================== trick-or-treaters, MOM, small props
+KSKIN = [(236, 190, 156), (190, 130, 96), (150, 98, 70), (246, 206, 176)]
+
+
+def kid_face(sp, hx, hy, E, look, blink, skin, mouth_=0.0, hs=1.0):
+    DX.eye(sp, hx + 2.0 * hs, hy + 0.6 * hs, 2.6 * hs, 2.6 * hs, E, (90, 70, 50), look, blink, lash=INK, skin=skin)
+    DX.eye(sp, hx - 1.6 * hs, hy + 0.6 * hs, 2.4 * hs, 2.5 * hs, E, (90, 70, 50), look, blink, lash=INK, skin=skin)
+    DX.mouth(sp, hx + 0.8 * hs, hy - 2.4 * hs, 2.6 * hs, E, mouth_, (170, 70, 70), skin=skin, maxh=3)
+    DX.blush(sp, hx + 3.2 * hs, hy - 1.0 * hs, 1.0, 0.8, (240, 120, 120))
+
+
+def trick_or_treater(sp, t=0.0, costume='ghost', expr='normal', look=(0.6, 0.0), blink=None, n=0, pail=True, groan=0.0, mouth_=0.0):
+    """a kid in a Halloween costume, ~36 sprite px tall: ghost sheet / pumpkin suit / dino onesie / witch / robot box / vampire;
+    groan 0..1: shoulders drop, mouth open (the line's collective «aww»)"""
+    E = X(expr if groan < 0.5 else 'sad')
+    if blink is None: blink = ((t + n * 0.7) % 3.4) < 0.1
+    skin = KSKIN[n % 4]
+    sag = 1.5 * groan
+    for dx in (-2.0, 2.0):                                                        # sneakers
+        sp.sup(dx + 0.8, 1.2, 2.4, 1.4, tones((240, 240, 240) if n % 2 else (60, 60, 200)), n=2.2)
+    hx, hy = 1.0, 28.0 - sag
+    if costume == 'ghost':
+        sh = sp.m_poly([(-7.5, 3.0), (-6.0, 22.0), (-4.0, 31.0 - sag), (1.0, 35.0 - sag), (6.0, 31.0 - sag), (8.0, 22.0), (9.0, 3.0), (6.0, 5.0),
+                        (3.0, 2.5), (0.0, 5.0), (-3.0, 2.5)])
+        sp.paint(sh, tones((236, 236, 240), glow=(255, 200, 150)), vgrad(35, 2, 0.1, 0.25, 0.9))
+        for ex in (hx + 2.4, hx - 1.4):
+            sp.ell(ex, hy + 1.0, 1.3, 1.8 + groan, tones((20, 14, 30)), ol=False)
+        if groan > 0.3: sp.ell(hx + 0.8, hy - 4.0, 1.4, 1.8, tones((20, 14, 30)), ol=False)
+    else:
+        bodyc = {'pumpkin': (255, 130, 30), 'dino': (90, 190, 90), 'witch': (60, 30, 90), 'robot': (170, 176, 190), 'vampire': (30, 26, 40)}[costume]
+        if costume == 'pumpkin':
+            sp.union([sp.m_ell(dx, 11.0, 4.6, 8.5) for dx in (-4.0, 0.5, 5.0)], tones(bodyc, glow=(255, 220, 120)))
+            for dx in (-2.0, 3.0): stroke(sp, [(dx, 4.0), (dx * 1.2, 11.0), (dx, 18.0)], (200, 80, 20))
+        elif costume == 'robot':
+            sp.rect(-6.0, 4.0, 7.0, 20.0, (150, 156, 170)); sp.rect(-6.0, 4.0, 7.0, 5.0, INK)
+            sp.rect(-3.0, 11.0, 4.0, 16.0, (60, 64, 80))
+            for k, c in enumerate(((255, 80, 80), (80, 255, 120), (80, 160, 255))): sp.dot(-2.0 + k * 2.5, 13.0, c, keep=True)
+        else:
+            sp.union([sp.m_ell(1.0, 12.0, 6.0, 9.0)], tones(bodyc, glow=(200, 140, 220)))
+            if costume == 'vampire':
+                sp.poly([(-7.0, 21.0), (-9.0, 3.0), (10.0, 3.0), (8.0, 21.0)], tones((140, 20, 30)), val=vgrad(21, 3, 0.0, 0.2, 0.7))
+                sp.union([sp.m_ell(1.0, 12.0, 5.0, 8.5)], tones((30, 26, 40)))
+                sp.poly([(-1.0, 20.0), (3.0, 20.0), (1.0, 15.0)], tones((240, 240, 240)))
+            if costume == 'dino':
+                for k in range(4): sp.poly([(-5.0 - k * 0.3, 8.0 + k * 4), (-8.0 - k * 0.3, 10.0 + k * 4), (-5.0, 12.0 + k * 4)], tones((240, 200, 60)))
+        sp.ell(hx, hy - 1.0, 5.0, 5.4, tones(skin))
+        kid_face(sp, hx + 0.5, hy - 0.5, E, look, blink, skin, mouth_=max(mouth_, 0.6 * groan))
+        if costume == 'pumpkin':
+            sp.cap((hx, hy + 4.5), (hx + 1.0, hy + 7.0), 1.0, 1.0, tones((60, 120, 40)))
+        elif costume == 'dino':
+            hood = sp.m_ell(hx - 0.5, hy + 0.5, 6.4, 6.8)[0] & ~sp.m_ell(hx + 1.0, hy - 1.0, 4.4, 4.6)[0] & (DX.YC > hy - 4.0)
+            sp.paint(hood, tones(bodyc), vgrad(hy + 7, hy - 4))
+            sp.ell(hx + 1.0, hy + 5.5, 4.0, 1.6, tones((90, 190, 90)))
+            for k in range(3): sp.poly([(hx - 3.0 + k * 2.5, hy + 6.0), (hx - 2.0 + k * 2.5, hy + 9.0), (hx - 1.0 + k * 2.5, hy + 6.0)], tones((240, 200, 60)))
+        elif costume == 'witch':
+            sp.ell(hx, hy + 4.0, 8.0, 1.2, tones((40, 20, 60)))
+            sp.poly([(hx - 4.0, hy + 4.5), (hx + 4.0, hy + 4.5), (hx - 2.0, hy + 14.0)], tones((40, 20, 60)))
+            sp.rect(hx - 4.0, hy + 4.5, hx + 4.0, hy + 5.6, (150, 255, 110))
+        elif costume == 'robot':
+            sp.rect(hx - 5.0, hy - 5.0, hx + 6.0, hy + 5.0, (170, 176, 190)); sp.rect(hx - 3.0, hy - 2.5, hx + 4.0, hy + 2.5, (30, 40, 60))
+            sp.dot(hx - 1.0, hy, (120, 255, 200), keep=True); sp.dot(hx + 2.0, hy, (120, 255, 200), keep=True)
+            sp.line((hx, hy + 5.0), (hx, hy + 8.0), (120, 120, 130)); sp.dot(hx, hy + 8.0, (255, 80, 80), keep=True)
+        elif costume == 'vampire':
+            sp.ell(hx - 0.5, hy + 3.5, 5.0, 2.4, tones((24, 20, 30)))
+            sp.dot(hx + 1.0, hy - 3.6, (250, 250, 250), keep=True); sp.dot(hx + 2.0, hy - 3.6, (250, 250, 250), keep=True)
+    if pail:                                                                      # the jack-o'-lantern candy pail
+        px, py = 7.5, 9.0 - sag
+        sp.ell(px, py, 3.4, 3.0, tones((255, 120, 30)))
+        sp.dot(px - 1.0, py + 0.5, INK); sp.dot(px + 1.0, py + 0.5, INK); sp.line((px - 1.5, py - 1.0), (px + 1.5, py - 1.0), INK)
+        sp.line((px - 3.0, py + 2.5), (px, py + 6.0), (40, 40, 40)); sp.line((px + 3.0, py + 2.5), (px, py + 6.0), (40, 40, 40))
+    sp.anchors['head'] = (hx, hy)
+    sp.outline(INK, 1)
+
+
+MSKIN = (240, 196, 168)
+VEST = (40, 170, 170)
+
+
+def mom(sp, t=0.0, expr='squint', mouth_=0.0, look=(-0.8, 0.0), blink=None, point=0.0):
+    """MOM: tall «exclamation mark» — puffer vest, leggings, white sneakers, high blonde ponytail, giant iced-coffee tumbler"""
+    E = X(expr)
+    if blink is None: blink = (t % 3.2) < 0.1
+    for dx in (-2.5, 2.5):
+        sp.cap((dx * 0.6, 34.0), (dx, 5.0), 2.6, 2.0, tones((40, 36, 50)))
+        sp.sup(dx + 1.4, 2.0, 3.6, 1.8, tones((250, 250, 250)), n=2.2)
+    sp.union([sp.m_ell(0.0, 38.0, 7.0, 6.0)], tones((40, 36, 50)))
+    sp.union([sp.m_ell(0.5, 48.0, 7.6, 9.0)], tones((236, 230, 236)))                           # long-sleeve top
+    vest = sp.union([sp.m_ell(0.5, 48.0, 8.4, 9.4)], tones(VEST))
+    sp.fill(vest & (np.abs(DX.XC - 1.5) < 2.0), (236, 230, 236))
+    for y in (44.0, 48.0, 52.0): sp.line((-7.0, y), (8.0, y), dark(VEST, 0.6))                  # puffer quilting
+    sp.cap((-5.0, 54.0), (-6.0, 40.0), 2.0, 1.8, tones((236, 230, 236)))                         # far arm + the tumbler
+    sp.rect(-8.5, 37.0, -3.5, 46.0, (250, 240, 230)); sp.rect(-8.5, 44.0, -3.5, 45.0, (60, 140, 90))
+    sp.line((-5.0, 46.0), (-4.0, 50.0), (60, 140, 90), 1)
+    hx, hy = 2.0, 63.0
+    sp.cap((1.0, 56.0), (1.5, 58.0), 2.4, 2.4, tones(MSKIN))
+    sp.union([sp.m_ell(hx, hy, 5.6, 6.6), sp.m_ell(hx + 1.0, hy - 4.0, 4.0, 3.0)], tones(MSKIN))
+    DX.eye(sp, hx + 2.4, hy + 1.0, 3.2, 2.8, E, (60, 110, 160), look, blink, lash=INK, skin=MSKIN, flick=True)
+    DX.eye(sp, hx - 1.8, hy + 1.0, 2.8, 2.7, E, (60, 110, 160), look, blink, lash=INK, skin=MSKIN, flick=True)
+    DX.brow(sp, hx + 2.4, hy + 3.6, 3.6, E, +1, (150, 110, 60), th=1, arch=1.2)
+    DX.brow(sp, hx - 1.8, hy + 3.6, 3.2, E, -1, (150, 110, 60), th=1, arch=1.2)
+    sp.ell(hx + 4.2, hy - 1.0, 1.4, 1.4, tones(MSKIN))
+    DX.mouth(sp, hx + 2.2, hy - 3.6, 3.6, E, mouth_, (200, 80, 90), skin=MSKIN, maxh=4)
+    hair = sp.union([sp.m_ell(hx - 0.5, hy + 4.0, 6.4, 4.0), sp.m_ell(hx - 3.0, hy + 2.0, 3.0, 5.0)], tones((236, 200, 110)))
+    sw = 1.5 * math.sin(t * 6.0)
+    sp.union([sp.m_ell(hx - 2.0, hy + 9.0, 2.0, 2.0), sp.m_ell(hx - 4.0 + sw * 0.3, hy + 4.0, 2.2, 5.0, 0.3 + sw * 0.05)], tones((236, 200, 110)))
+    sp.rect(hx - 3.0, hy + 7.0, hx - 1.0, hy + 8.0, (255, 120, 180))                            # scrunchie
+    sp.anchors['head'] = (hx, hy)
+    shN = (5.0, 54.0)
+    hN = (shN[0] + 14.0 * point + 4.0, shN[1] - 8.0 + 10.0 * point)
+    kN, eN = ik(shN, hN, 7.0, 7.0, -1.0)
+    sp.cap(shN, kN, 2.2, 2.0, tones((236, 230, 236))); sp.cap(kN, eN, 2.0, 1.8, tones((236, 230, 236)))
+    sp.ell(*eN, 1.8, 1.6, tones(MSKIN))
+    if point > 0.3: sp.line((eN[0] + 1.0, eN[1]), (eN[0] + 4.0, eN[1] + 0.6), MSKIN, 1)
+    sp.outline(INK, 1)
+
+
+def sack(sp, x, y, fill=0.2):
+    """Death's trick-or-treat pillowcase hanging from a bony hand at (x, y)"""
+    m = sp.m_poly([(x - 2.0, y), (x + 2.0, y), (x + 5.0, y - 8.0), (x + 4.0, y - 16.0 - 4 * fill), (x - 4.0, y - 16.0 - 4 * fill), (x - 5.0, y - 8.0)])
+    sp.paint(m, tones((236, 232, 222)), vgrad(y, y - 20, 0.1))
+    stroke(sp, [(x - 1.0, y - 2.0), (x - 2.0, y - 12.0)], (190, 186, 176))
+    sp.anchors['sack'] = (x, y - 10.0)

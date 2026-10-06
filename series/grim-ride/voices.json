@@ -146,6 +146,29 @@
       },
       "voice_id": "hvKhJmx8w6dx2qaLhHC6",
       "voice": "Grim Ride — Dashley (DoomDash support bot)"
+    },
+    "mom": {
+      "name": "Trick-or-treat Mom",
+      "color_caption": [
+        255,
+        140,
+        140
+      ],
+      "style": "[suspicious, judgmental] / [flat, final] — suburban mom who checks everyone's age",
+      "design": {
+        "description": "A suburban American mom in her late thirties, brisk and judgmental, suspicious side-eye in her voice, clipped polite-but-final delivery, slight vocal fry, holding an iced coffee energy. Natural, comedic.",
+        "text": "Excuse me. Aren't you a little old for this? Sir, this line is for kids. How old are you? Then that's a no. I'm not asking again. Kayden, put your mask back on. No, you can't have another one. Sir. Sir! That's a no.",
+        "picked": {
+          "i": 1,
+          "dur": 13.4,
+          "f0": 213.3,
+          "f0_iqr": 50.6,
+          "rate": 25.8,
+          "loud_sd": 5.4
+        }
+      },
+      "voice_id": "UNaE6Ed6rSceF3pSO5yL",
+      "voice": "Grim Ride — Trick-or-treat Mom"
     }
   },
   "note": "06.10.2026: designed voices saved after freeing 15 slots (see docs/voices.md). The pilot was first voiced with premade voices, re-voiced 06.10.2026."

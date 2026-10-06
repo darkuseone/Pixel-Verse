@@ -17,7 +17,8 @@ from props import grimpix as GX
 from props import grimcast as GC
 
 SLUG = 'grim-ride'
-COL = dict(grim=(200, 170, 255), edgar=(170, 255, 90), harold=(255, 160, 60), todd=(90, 225, 255), kayden=(255, 100, 190))
+COL = dict(grim=(200, 170, 255), edgar=(170, 255, 90), harold=(255, 160, 60), todd=(90, 225, 255), kayden=(255, 100, 190),
+           dashley=(255, 210, 90), grimph=(200, 170, 255), mom=(255, 140, 140), judge=(90, 225, 255))
 INK = GX.INK
 PUMP = ((255, 244, 120), (255, 196, 60), (255, 140, 40))          # hook title fill: neon yellow -> pumpkin
 HALO = (150, 255, 110)
@@ -210,7 +211,7 @@ def _font(sz): return O.pfont(sz)
 def _bold(sz): return ImageFont.truetype(P.FONT_BOLD, sz)
 
 
-def display_insert(big, t, pct=13, dead=False, blink=True, y0=0, y1=OUT_H, label='PALE HORSE 2'):
+def display_insert(big, t, pct=13, dead=False, blink=True, y0=0, y1=OUT_H, label='PALE HORSE 2', mph=None, banner=None):
     """the e-bike handlebar display filling the frame: battery % blinking, «PALE HORSE 2», speed; black when dead"""
     reg = big[y0:y1]
     h = y1 - y0
@@ -238,12 +239,16 @@ def display_insert(big, t, pct=13, dead=False, blink=True, y0=0, y1=OUT_H, label
     d.text((500, H_ // 2 - 120), f'{pct}%', font=_font(130), fill=col)
     d.text((60, 40), label, font=_font(34), fill=(120, 200, 150))
     d.text((60, H_ - 90), 'MPH', font=_font(30), fill=(120, 200, 150))
-    d.text((200, H_ - 110), '28' if pct > 5 else '03', font=_font(60), fill=(200, 255, 220))
-    if low: d.text((W_ - 380, 40), 'LOW BATT', font=_font(34), fill=col)
+    d.text((200, H_ - 110), mph if mph is not None else ('28' if pct > 5 else '03'), font=_font(60), fill=(200, 255, 220))
+    if low and banner is None: d.text((W_ - 380, 40), 'LOW BATT', font=_font(34), fill=col)
+    if banner:
+        on2 = int(t * 3) % 2 == 0
+        d.rectangle([W_ - 470, 24, W_ - 40, 100], fill=(255, 200, 60) if on2 else (200, 140, 40))
+        d.text((W_ - 255, 62), banner, font=_font(34), fill=(30, 16, 40), anchor='mm')
     reg[by0:by1, bx0:bx1] = np.array(img)
 
 
-def phone_app(big, t, mode='pickup', u=0.0, thumb=True):
+def phone_app(big, t, mode='pickup', u=0.0, thumb=True, **kw):
     """the DoomDash courier app, full frame. mode 'pickup' (new pickup: HAROLD, 97) or 'rated' (★ «Too slow.», rating drops)"""
     big[:] = (18, 10, 30)
     im = Image.fromarray(big); d = ImageDraw.Draw(im); d.fontmode = '1'
@@ -276,6 +281,60 @@ def phone_app(big, t, mode='pickup', u=0.0, thumb=True):
         big[y0:y0 + 300, x0:x0 + 300] = tmp[40:340, 30:330]
         big[y0 - 6:y0, x0 - 6:x0 + 306] = (150, 255, 110); big[y0 + 300:y0 + 306, x0 - 6:x0 + 306] = (150, 255, 110)
         big[y0:y0 + 300, x0 - 6:x0] = (150, 255, 110); big[y0:y0 + 300, x0 + 300:x0 + 306] = (150, 255, 110)
+    elif mode == 'captcha':
+        big[:] = np.array(im)
+        captcha(big, t, u, kw.get('taps', ()), (sx0, sy0, sx1, sy1))
+        im = Image.fromarray(big); d = ImageDraw.Draw(im); d.fontmode = '1'
+        big[:] = np.array(im)
+    elif mode == 'chat':
+        msgs = kw.get('msgs', [])
+        d.text((sx0 + 40, sy0 + 170), 'SUPPORT CHAT', font=_font(34), fill=(200, 170, 255))
+        y = sy0 + 250
+        for who, txt_, t0 in msgs:
+            if u < t0: continue
+            k = min(1.0, (u - t0) / 0.15)
+            bot = who == 'bot'
+            f = _bold(48)
+            lines_ = _wrap(d, txt_, f, sx1 - sx0 - 200)
+            h = 70 * len(lines_) + 40
+            x0 = sx0 + 30 if bot else sx0 + 170
+            x1 = sx1 - 170 if bot else sx1 - 30
+            d.rounded_rectangle([x0, y, x1, y + h], 34, fill=(255, 200, 90) if bot else (150, 60, 220))
+            for i, ln in enumerate(lines_):
+                d.text((x0 + 30, y + 22 + 70 * i), ln, font=f, fill=(30, 16, 40) if bot else (255, 255, 255))
+            if bot: d.text((x0, y - 44), 'DASHLEY', font=_font(24), fill=(255, 200, 90))
+            y += h + 70
+        big[:] = np.array(im)
+    elif mode == 'transfer' or mode == 'wait':
+        d.text((OUT_W // 2, sy0 + 330), 'PLEASE HOLD', font=_font(56), fill=(255, 255, 255), anchor='mm')
+        cx, cy = OUT_W // 2, sy0 + 640
+        for i in range(12):                                                     # pixel spinner
+            a = i / 12 * 2 * math.pi
+            on = (int(t * 12) - i) % 12 < 4
+            x, y = cx + math.cos(a) * 140, cy + math.sin(a) * 140
+            d.rectangle([x - 18, y - 18, x + 18, y + 18], fill=(200, 170, 255) if on else (70, 50, 100))
+        if mode == 'transfer':
+            d.text((OUT_W // 2, sy0 + 930), 'Transferring you to', font=_bold(52), fill=(220, 210, 240), anchor='mm')
+            d.text((OUT_W // 2, sy0 + 1010), 'a SPECIALIST...', font=_bold(52), fill=(255, 200, 90), anchor='mm')
+        else:
+            d.text((OUT_W // 2, sy0 + 900), 'ESTIMATED WAIT:', font=_font(40), fill=(220, 210, 240), anchor='mm')
+            k = min(1.0, u / 0.6)
+            d.text((OUT_W // 2, sy0 + 1010), 'ETERNITY', font=_font(int(40 + 40 * k)), fill=(255, 90, 80), anchor='mm')
+            d.text((OUT_W // 2, sy0 + 1110), 'Your call is important to us', font=_bold(40), fill=(160, 140, 190), anchor='mm')
+        big[:] = np.array(im)
+    elif mode == 'incoming':
+        d.rectangle([sx0, sy0, sx1, sy1], fill=(20, 12, 34))
+        d.text((OUT_W // 2, sy0 + 260), 'INCOMING CALL', font=_font(40), fill=(200, 170, 255), anchor='mm')
+        r = 150 + 18 * math.sin(t * 18)
+        d.ellipse([OUT_W // 2 - r, sy0 + 560 - r, OUT_W // 2 + r, sy0 + 560 + r], outline=(150, 255, 110), width=10)
+        d.ellipse([OUT_W // 2 - 120, sy0 + 440, OUT_W // 2 + 120, sy0 + 680], fill=(150, 60, 220))
+        d.text((OUT_W // 2, sy0 + 560), 'DD', font=_font(80), fill=(255, 255, 255), anchor='mm')
+        d.text((OUT_W // 2, sy0 + 800), 'DOOMDASH', font=_font(52), fill=(255, 255, 255), anchor='mm')
+        d.text((OUT_W // 2, sy0 + 880), 'SUPPORT', font=_font(52), fill=(255, 200, 90), anchor='mm')
+        d.text((OUT_W // 2, sy0 + 960), 'calling you, the specialist', font=_bold(40), fill=(160, 140, 190), anchor='mm')
+        for x, c in ((OUT_W // 2 - 200, (255, 80, 80)), (OUT_W // 2 + 200, (120, 230, 120))):
+            d.ellipse([x - 80, sy1 - 260, x + 80, sy1 - 100], fill=c)
+        big[:] = np.array(im)
     else:
         d.text((sx0 + 40, sy0 + 210), 'PICKUP FAILED', font=_font(48), fill=(255, 90, 80))
         d.text((sx0 + 40, sy0 + 330), 'HAROLD RATED', font=_font(44), fill=(255, 255, 255))
@@ -292,3 +351,81 @@ def phone_app(big, t, mode='pickup', u=0.0, thumb=True):
         sp = GX.draw(GC.bony_hand, 22.0, x=0.0, y=0.0, d=-1.0, grip=False)
         from props.dibspix import blit
         blit(big, sp, OUT_W - 160, OUT_H - 120 + 6 * math.sin(t * 3), 22.0)
+
+
+def _wrap(d, txt, f, w):
+    out, cur = [], ''
+    for word in txt.split():
+        nxt = (cur + ' ' + word).strip()
+        if d.textlength(nxt, font=f) > w and cur: out.append(cur); cur = word
+        else: cur = nxt
+    if cur: out.append(cur)
+    return out
+
+
+_ICONS = {}
+
+
+def _icon(key, size):
+    """a captcha tile picture: one of the cast (head close-up) or a prop, drawn by the series' own sprites"""
+    if (key, size) in _ICONS: return _ICONS[(key, size)]
+    from props.dibspix import blit
+    tile = np.zeros((size, size, 3), np.uint8)
+    tile[:] = {'todd': (90, 140, 200), 'kevin': (60, 50, 90), 'harold': (200, 150, 90), 'pumpkin': (40, 90, 60), 'kayden': (150, 80, 140),
+               'edgar': (120, 160, 120), 'grim': (90, 70, 120), 'sign': (60, 100, 140), 'moon': (20, 20, 50)}[key]
+    spec = {'todd': (GC.todd, 'head', 9.0, dict(phone=False, expr='hype')), 'harold': (GC.harold, 'head', 9.0, dict(pose='stand', expr='bored')),
+            'kayden': (GC.kayden, 'head', 9.0, dict(bike=False)), 'edgar': (GC.edgar, 'head', 9.0, dict(perch=False, cam=True)),
+            'grim': (GC.grim, 'head', 7.0, dict(ride=False, scythe=False, expr='bored')), 'kevin': (GC.kevin, 'head', 6.5, {}),
+            'pumpkin': (GC.pumpkin_inflatable, None, 7.0, {}), 'sign': (GC.countdown_sign, None, 6.0, dict(days=4)), 'moon': (None, None, 0, {})}[key]
+    fn, pin, sc, kw = spec
+    if fn is not None:
+        sp = GX.draw(fn, sc, t=0.3, hires=1, **kw) if fn not in (GC.countdown_sign,) else GX.draw(fn, sc, hires=1, **kw)
+        if pin:
+            hx, hy = sp.anchors[pin]
+            blit(tile, sp, size / 2 - hx * sc, size / 2 + 20 + hy * sc, sc)
+        else:
+            blit(tile, sp, size / 2, size - 20, sc)
+    else:
+        yy, xx = np.mgrid[0:size, 0:size]
+        tile[(xx - size / 2) ** 2 + (yy - size / 2) ** 2 < (size * 0.32) ** 2] = (236, 230, 200)
+    _ICONS[(key, size)] = tile
+    return tile
+
+
+CAPTCHA = ['todd', 'kevin', 'harold', 'pumpkin', 'kayden', 'edgar', 'grim', 'sign', 'moon']
+ALIVE = {'todd', 'harold', 'kayden', 'edgar'}
+
+
+def captcha(big, t, u, taps, box):
+    """«SELECT ALL SQUARES WITH A PULSE»: 3x3 tiles of the cast, heartbeat lines under the living ones; a tapped tile flatlines
+    (red line + X) — except Harold's, which keeps beating (ERROR). taps = [(tile_index, u_tap), ...]"""
+    sx0, sy0, sx1, sy1 = box
+    im = Image.fromarray(big); d = ImageDraw.Draw(im); d.fontmode = '1'
+    d.rectangle([sx0 + 20, sy0 + 170, sx1 - 20, sy0 + 330], fill=(60, 120, 230))
+    d.text((sx0 + 50, sy0 + 195), 'Select all squares', font=_bold(46), fill=(255, 255, 255))
+    d.text((sx0 + 50, sy0 + 255), 'with a PULSE', font=_bold(52), fill=(255, 255, 255))
+    big[:] = np.array(im)
+    size = (sx1 - sx0 - 80) // 3
+    tapped = {i: ut for i, ut in taps if u >= ut}
+    for i, key in enumerate(CAPTCHA):
+        x0 = sx0 + 30 + (i % 3) * (size + 10); y0 = sy0 + 360 + (i // 3) * (size + 10)
+        big[y0:y0 + size, x0:x0 + size] = _icon(key, size)
+        if key in ALIVE:
+            dead = i in tapped and key != 'harold'
+            ly = y0 + size - 40
+            big[ly - 34:ly + 34, x0:x0 + size] = (big[ly - 34:ly + 34, x0:x0 + size] * 0.35).astype(np.uint8)
+            col = (255, 70, 60) if dead else (120, 255, 120)
+            for x in range(0, size, 6):
+                ph = (x / size * 3 - t * 2.5) % 1.0
+                yv = 0 if dead else (-26 if 0.45 < ph < 0.5 else (20 if 0.5 <= ph < 0.55 else 0))
+                big[ly + yv - 3:ly + yv + 3, x0 + x:x0 + x + 6] = col
+            if dead:
+                k = min(1.0, (u - tapped[i]) / 0.12)
+                for q in range(int(size * 0.8 * k)):
+                    for (a, b) in ((q, q), (q, size * 0.8 - q)):
+                        xa, ya = int(x0 + size * 0.1 + a), int(y0 + size * 0.1 + b)
+                        big[ya:ya + 10, xa:xa + 10] = (255, 60, 60)
+            elif i in tapped:
+                if int(t * 8) % 2: big[y0:y0 + 8, x0:x0 + size] = (255, 200, 60); big[y0 + size - 8:y0 + size, x0:x0 + size] = (255, 200, 60)
+        if i in tapped:
+            big[y0:y0 + 6, x0:x0 + size] = (60, 120, 230); big[y0:y0 + size, x0:x0 + 6] = (60, 120, 230)
