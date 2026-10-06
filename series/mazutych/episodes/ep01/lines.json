@@ -1,0 +1,15 @@
+{
+  "m25": ["maz", "[deadpan, slow, tired] Два́дцать пять лет де́лаю бензи́н."],
+  "bz": ["maz", "[awed whisper] Бензово́з..."],
+  "m1": ["maz", "[straining hard, through gritted teeth, grunting] Терпи́, ла́сточка! Щас запра́вимся!"],
+  "w1": ["wheel", "[robotic, cheerful] Ты тащи́ть то́нна, дру́га!"],
+  "z1": ["zoya", "[bored, chewing gum] Бензи́на нет."],
+  "m2": ["maz", "[proud, firm, slapping a badge on the counter] Я — нефтя́ник!"],
+  "z2": ["zoya", "[deadpan, chewing gum, unimpressed] А я — балери́на."],
+  "m3": ["maz", "[indignant, offended] Я его́ де́лаю! Два́дцать пять лет!"],
+  "z3": ["zoya", "[flat, lazy, pointing] Вот там и запра́вляйтесь."],
+  "d1": ["tolik", "[cheerful, loud, shouting from a truck window] Мужики́, кто кра́йний?"],
+  "d2": ["tolik", "[cheerful, matter-of-fact] Пусто́й. С весны́ не запра́влялся."],
+  "w2": ["wheel", "[robotic, cheerful] Заря́д ноль проце́нт. Пока́, дру́га."],
+  "d3": ["tolik", "[proud, simple, straining a bit] А я его́ вожу́."]
+}

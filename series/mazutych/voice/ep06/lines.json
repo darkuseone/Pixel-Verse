@@ -1,0 +1,14 @@
+{
+  "b1": ["boss", "[triumphant, pompous, shouting into a microphone] За два́дцать пять лет — маши́на!"],
+  "m1": ["maz", "[sobbing with joy, voice breaking] Два́дцать пять лет... Своя́!"],
+  "b2": ["boss", "[generous, smug, pompous] Ключи́. А бензи́н — по тало́ну на тало́н."],
+  "w1": ["wheel", "[robotic, tired, sarcastic] Опя́ть то́нна, дру́га."],
+  "z1": ["zoya", "[bored, chewing gum, flat] Бензи́н есть."],
+  "m2": ["maz", "[whispering, trembling with awe] Есть?!"],
+  "m3": ["maz", "[confused, staring] Э́то что?"],
+  "z2": ["zoya", "[bored, chewing gum] Электри́чка."],
+  "m4": ["maz", "[hopeful, pleading] А заря́дка есть?"],
+  "z3": ["zoya", "[bored, flat, popping gum] Заря́дки нет."],
+  "w2": ["wheel", "[robotic, sad, slowing down like a dying battery] Я то́же ноль проце́нт, дру́га."],
+  "b3": ["boss", "[smug, pompous] Розе́тка — по тало́ну."]
+}

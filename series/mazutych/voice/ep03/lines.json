@@ -1,0 +1,16 @@
+{
+  "v1": ["vadik", "[conspiratorial whisper] Бензи́н ну́жен?"],
+  "v2": ["vadik", "[proud whisper, like selling treasure] Девяно́сто пя́тый. Свежа́к."],
+  "m1": ["maz", "[low, cautious] Почём?"],
+  "v3": ["vadik", "[whisper] Пятьсо́т."],
+  "m2": ["maz", "[shocked, loud] За литр?!"],
+  "v4": ["vadik", "[smug whisper] За посмотре́ть."],
+  "m3": ["maz", "[sniffing, slow, expert like a sommelier] Э́то не девяно́сто пя́тый."],
+  "v5": ["vadik", "[nervous whisper] А како́й?"],
+  "m4": ["maz", "[deadpan, proud] Мой. Па́ртия четы́рнадцать."],
+  "v6": ["vadik", "[casual, shrugging] Так я ж у твоего́ нача́льника беру́."],
+  "b1": ["boss", "[jovial, caught but unbothered] Мазу́тыч? Тебе́ — со ски́дкой!"],
+  "b2": ["boss", "[pompous, generous] Литр — по цене́ двух."],
+  "v7": ["vadik", "[nodding, whisper] Ски́дка."],
+  "w1": ["wheel", "[robotic, flat] Э́то не ски́дка, дру́га."]
+}
