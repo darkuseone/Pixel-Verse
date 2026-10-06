@@ -57,6 +57,7 @@ class Kit:
     def __init__(s, epi):
         s.epi = epi
         s.STREET = K.world('street'); s.YARD = K.world('todd_yard'); s.PORCH = K.world('porch')
+        s.GANG = K.world('gangway'); s.HILL = K.world('hilltop')
 
     def mouth(s, who, t, k=1.8):
         return min(1.0, s.epi.talk(who, t) * k)

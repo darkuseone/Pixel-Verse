@@ -377,7 +377,8 @@ def grim(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, ride=
 
 
 # ======================================================================================== EDGAR the raven
-def raven_on(sp, x0, y0, k=1.0, t=0.0, expr='deadpan', mouth_=0.0, look=(1.0, 0.0), blink=None, flap=0.0, bag=True, cam=False, gesture=None):
+def raven_on(sp, x0, y0, k=1.0, t=0.0, expr='deadpan', mouth_=0.0, look=(1.0, 0.0), blink=None, flap=0.0, bag=True, cam=False, gesture=None,
+             stash=False):
     """Edgar standing at (x0, y0) (his feet), k = scale. cam=True: head turned to the camera (both eyes)"""
     E = X(expr)
     if blink is None: blink = (t % 3.3) < 0.1
@@ -395,6 +396,11 @@ def raven_on(sp, x0, y0, k=1.0, t=0.0, expr='deadpan', mouth_=0.0, look=(1.0, 0.
         sp.fill(body & (np.abs(DX.YC - (y0 + 6.0 * k)) < 0.7 * max(1, k)), (30, 30, 34))
         sp.ell(*Q(4.0, 5.6), 2.4 * k, 1.8 * k, tones(PACK))
         sp.line(Q(2.4, 6.4), Q(5.6, 6.4), dark(PACK, 0.5))
+        if stash:                                                             # unzipped: speed-unlock dongles sticking out
+            for j, c in enumerate(((240, 240, 240), LIME, (255, 120, 200))):
+                bx_, by_ = Q(2.6 + j * 1.4, 7.0)
+                sp.rect(bx_ - 0.4 * k, by_, bx_ + 0.6 * k, by_ + (2.4 + j * 0.4) * k, c, keep=True)
+                sp.rect(bx_ - 0.4 * k, by_ + (2.4 + j * 0.4) * k, bx_ + 0.6 * k, by_ + (3.0 + j * 0.4) * k, (150, 150, 160))
     # wing (with a gesture: 'up' = a wing raised like a hand)
     if gesture == 'up':
         sp.poly([Q(-2.0, 13.0), Q(4.0, 26.0), Q(8.0, 27.0), Q(3.0, 16.0), Q(2.0, 9.0)], fe, val=vgrad(y0 + 27 * k, y0 + 8 * k, 0.0, 0.2, 0.7))
@@ -433,11 +439,12 @@ def raven_on(sp, x0, y0, k=1.0, t=0.0, expr='deadpan', mouth_=0.0, look=(1.0, 0.
     sp.anchors['raven_beak'] = (bx + 4 * k, by)
 
 
-def edgar(sp, t=0.0, expr='deadpan', mouth_=0.0, look=(1.0, 0.0), blink=None, flap=0.0, bag=True, cam=False, gesture=None, perch=True):
+def edgar(sp, t=0.0, expr='deadpan', mouth_=0.0, look=(1.0, 0.0), blink=None, flap=0.0, bag=True, cam=False, gesture=None, perch=True,
+          stash=False):
     """Edgar alone (close-ups): standing on a short branch / handlebar stub"""
     if perch:
         sp.cap((-14.0, -0.5), (16.0, -0.5), 1.4, 1.4, tones((70, 70, 80)))
-    raven_on(sp, 0.0, 0.0, 1.0, t, expr, mouth_, look, blink, flap, bag, cam, gesture)
+    raven_on(sp, 0.0, 0.0, 1.0, t, expr, mouth_, look, blink, flap, bag, cam, gesture, stash)
     sp.anchors['head'] = sp.anchors['raven_head']
     sp.outline(INK, 1)
 
@@ -499,7 +506,7 @@ def rocking_chair(sp, rock=0.0):
 
 
 def harold(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='stand', spin=0.0, flag=1.0, rock=0.0, wave=0.0,
-           toss=0.0, wind=0.0, offer=0.0):
+           toss=0.0, wind=0.0, offer=0.0, cup=False):
     """HAROLD, 97: a tiny shrivelled «bobblehead» under a giant black helmet with flames, coke-bottle glasses magnifying the eyes,
     khaki pants belted at the chest, red suspenders, white orthopedic sneakers. pose 'stand' / 'rock' (rocking chair) / 'ride' (e-trike)"""
     E = X(expr)
@@ -549,8 +556,8 @@ def harold(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.6, 0.0), blink=None, pos
         hN = (shN[0] + 6.0 + 2.0 * math.sin(t * 14.0) * wave, shN[1] + 9.0)
     elif toss > 0:
         hN = (shN[0] + 9.0, shN[1] + 2.0 + 8.0 * toss)
-    elif offer > 0:
-        hN = (shN[0] + 10.0 * offer + 2.0, shN[1] - 2.0)
+    elif offer > 0 or cup:
+        hN = (shN[0] + 10.0 * max(offer, 0.6) + 2.0, shN[1] - 2.0 + (6.0 if cup else 0.0))
     elif pose == 'rock':
         hN = (shN[0] + 5.0, shN[1] - 9.0)
     else:
@@ -558,6 +565,12 @@ def harold(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.6, 0.0), blink=None, pos
     kN, eN = ik(shN, hN, 7.0, 7.0, -1.0)
     sp.cap(shN, kN, 2.0, 1.6, tones(CARDI)); sp.cap(kN, eN, 1.6, 1.2, tones(HSKIN))
     sp.ell(*eN, 2.2, 1.9, tones(HSKIN)); sp.dot(eN[0] - 0.6, eN[1] + 0.6, (176, 120, 90))
+    if cup:                                                                   # holding up the BEST YARD trophy
+        cx_, cy_ = eN[0] + 1.0, eN[1] + 1.0
+        sp.rect(cx_ - 3.0, cy_, cx_ + 3.0, cy_ + 2.0, (30, 26, 36)); sp.rect(cx_ - 0.6, cy_ + 2.0, cx_ + 0.6, cy_ + 4.5, (220, 170, 50))
+        cupm = sp.m_ell(cx_, cy_ + 7.5, 3.4, 3.6)[0] & (DX.YC > cy_ + 5.5)
+        sp.paint(cupm, tones((240, 190, 60), glow=(255, 240, 160)), vgrad(cy_ + 11, cy_ + 4, 0.2))
+        sp.ell(*eN, 2.2, 1.9, tones(HSKIN))
     sp.anchors['hand'] = eN
     # head: small wrinkly face, giant ears, big nose, white tufty brows, coke-bottle glasses
     hx, hy = hx0 + 3.0, base + 27.0
@@ -599,7 +612,7 @@ CARGO = (170, 150, 104)
 CAP = (200, 40, 50)
 
 
-def todd(sp, t=0.0, expr='hype', mouth_=0.0, look=(0.6, 0.0), blink=None, phone=True, point=0.0, walk=None):
+def todd(sp, t=0.0, expr='hype', mouth_=0.0, look=(0.6, 0.0), blink=None, phone=True, point=0.0, walk=None, clip=None, cup=False):
     """TODD: a «pear» — narrow shoulders, wide hips in khaki cargo shorts, socks + sandals, teal fanny pack, orange SPOOKY tee,
     backwards red cap with sunglasses on it, goatee; phone held up (filming everything)"""
     E = X(expr)
@@ -658,6 +671,7 @@ def todd(sp, t=0.0, expr='hype', mouth_=0.0, look=(0.6, 0.0), blink=None, phone=
         sp.dot(eN[0] + 0.7, eN[1] + 6.0, (255, 60, 60), keep=True)                            # REC
     elif point:
         sp.line((eN[0] + 1.6, eN[1]), (eN[0] + 4.6, eN[1] + 0.4), TSKIN, 1)
+    if clip: clipboard(sp, eN[0] + 2.0, eN[1] + 3.0, clip if isinstance(clip, str) else None)
     sp.anchors['hand'] = eN
     new = sp.m & ~before
     o = dilate(new) & ~sp.m
@@ -924,3 +938,32 @@ def sack(sp, x, y, fill=0.2):
     sp.paint(m, tones((236, 232, 222)), vgrad(y, y - 20, 0.1))
     stroke(sp, [(x - 1.0, y - 2.0), (x - 2.0, y - 12.0)], (190, 186, 176))
     sp.anchors['sack'] = (x, y - 10.0)
+
+
+def tombstone(sp, text='RIP', w=12.0, h=18.0, tilt=0.0):
+    """a styrofoam yard tombstone (rounded top), mossy foot, pixel-font epitaph"""
+    m = sp.m_ell(0.0, h - w * 0.5, w * 0.5, w * 0.5)[0] | sp.m_poly([(-w / 2, 0.0), (w / 2, 0.0), (w / 2, h - w * 0.5), (-w / 2, h - w * 0.5)])
+    sp.paint(m, tones((150, 146, 170)), vgrad(h, 0, 0.1, 0.25, 0.9))
+    txt(sp, text, -w / 2 + 2.0, h - 6.0, (70, 64, 90))
+    sp.rect(-w / 2 - 1.0, 0.0, w / 2 + 1.0, 1.5, (70, 120, 60))
+    sp.outline(INK, 1)
+
+
+def trophy(sp, k=1.0):
+    """the BEST YARD trophy: a gold cup on a black base"""
+    sp.rect(-5.0 * k, 0.0, 5.0 * k, 3.0 * k, (30, 26, 36))
+    sp.rect(-1.0 * k, 3.0 * k, 1.0 * k, 7.0 * k, (220, 170, 50))
+    cup = sp.m_ell(0.0, 12.0 * k, 5.0 * k, 5.5 * k)[0] & (DX.YC > 9.0 * k)
+    sp.paint(cup, tones((240, 190, 60), glow=(255, 240, 160)), vgrad(17.5 * k, 7 * k, 0.2))
+    for sd in (-1, 1):
+        ring = sp.m_ell(sd * 6.0 * k, 13.0 * k, 2.0 * k, 2.6 * k)[0] & ~sp.m_ell(sd * 6.0 * k, 13.0 * k, 1.0 * k, 1.6 * k)[0]
+        sp.fill(ring, (220, 170, 50))
+    sp.outline(INK, 1)
+
+
+def clipboard(sp, x, y, mark=None):
+    sp.rect(x - 3.0, y - 4.0, x + 3.0, y + 4.0, (150, 100, 60))
+    sp.rect(x - 2.4, y - 3.4, x + 2.4, y + 3.0, (246, 244, 236))
+    sp.rect(x - 1.0, y + 3.0, x + 1.0, y + 4.6, (180, 180, 190))
+    for j in range(3): sp.line((x - 1.8, y + 1.6 - j * 1.4), (x + 1.8, y + 1.6 - j * 1.4), (150, 150, 170))
+    if mark: txt(sp, mark, x - 2.0, y - 0.6, (200, 30, 40))

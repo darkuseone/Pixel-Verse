@@ -1,0 +1,18 @@
+{
+  "g1": ["grim", "[nervous whisper, trying to sound cool] I'm looking for the PLUG."],
+  "k1": ["kayden", "[flat, unimpressed] Who's ASKING?"],
+  "g2": ["grim", "[trying to be menacing, voice cracks at the end] I am DEATH."],
+  "k2": ["kayden", "[flat, sizing him up] Nice costume. Where'd you COP it?"],
+  "g3": ["grim", "[deeply offended] It's NOT a costume!"],
+  "k3": ["kayden", "[flat] Bet."],
+  "g4": ["grim", "[desperate, pleading] I need FORTY miles an hour. Harold's too FAST."],
+  "k4": ["kayden", "[flat, side-eye] Harold's a CUSTOMER."],
+  "e1": ["edgar", "[deadpan, smug] Forty bucks. CASH."],
+  "g5": ["grim", "[shocked shriek] EDGAR?!"],
+  "e2": ["edgar", "[deadpan] A bird's gotta EAT."],
+  "g6": ["grim", "[betrayed, outraged] You sold one to HAROLD?!"],
+  "e3": ["edgar", "[deadpan] He TIPS."],
+  "k5": ["kayden", "[flat] Family discount?"],
+  "e4": ["edgar", "[deadpan, cold] He's not FAMILY."],
+  "e5": ["edgar", "[deadpan, to camera] No REFUNDS."]
+}

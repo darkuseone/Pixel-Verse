@@ -63,6 +63,10 @@ PORCH_LAMPS = ((222, 190, 640, (255, 200, 120), 0.5), (600, 440, 380, (255, 140,
 def light_street(v): return light_night(v, STREET_LAMPS)
 def light_yard(v): return light_night(v, YARD_LAMPS)
 def light_porch(v): return light_night(v, PORCH_LAMPS, amb=(0.92, 0.86, 1.0))
+GANG_LAMPS = ((290, 175, 520, (255, 200, 120), 0.4), (640, 520, 620, (230, 240, 255), 0.4), (210, 570, 300, (255, 140, 50), 0.35))
+HILL_LAMPS = ((1060, 250, 700, (255, 240, 200), 0.3), (820, 580, 300, (255, 140, 50), 0.35), (80, 540, 300, (255, 140, 50), 0.35))
+def light_gang(v): return light_night(v, GANG_LAMPS, amb=(0.84, 0.86, 1.08))
+def light_hill(v): return light_night(v, HILL_LAMPS, amb=(0.9, 0.86, 1.06))
 
 
 # ---------------------------------------------------------------- worlds
