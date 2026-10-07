@@ -1,0 +1,16 @@
+{
+  "g1": ["grim", "[whispering through clenched teeth, frozen still] Don't. Move."],
+  "t1": ["todd", "[hyped, announcing] Best Yard judging! Ooh, a REAPER!"],
+  "m1": ["mom", "[disgusted, walking past] Ugh. TACKY."],
+  "g2": ["grim", "[offended whisper, not moving] I am DEATH."],
+  "t2": ["todd", "[judging, thoughtful] Seven out of ten. Needs FOG."],
+  "e1": ["edgar", "[deadpan] Method acting."],
+  "e2": ["edgar", "[whispering, deadpan] Finally."],
+  "g3": ["grim", "[hushed, triumphant whisper] Harold. It's TIME."],
+  "t3": ["todd", "[gasping, thrilled] It MOVES! It's ANIMATRONIC!"],
+  "t4": ["todd", "[ecstatic, announcing] Harold wins BEST YARD!"],
+  "h1": ["harold", "[dry, businesslike] Wanna buy him? Forty bucks."],
+  "t5": ["todd", "[ecstatic, shouting] SOLD!"],
+  "g4": ["grim", "[tiny defeated whisper] Help."],
+  "e3": ["edgar", "[deadpan, to camera] Kinda chic."]
+}

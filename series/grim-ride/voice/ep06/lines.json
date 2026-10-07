@@ -1,0 +1,15 @@
+{
+  "g1": ["grim", "[tense, solemn, quiet] One minute, Harold."],
+  "d0": ["dashley", "[cheerful, chirpy] Reminder! Deactivation in ONE minute!"],
+  "k1": ["kayden", "[flat, almost warm] Relax, pal. We got you."],
+  "t1": ["todd", "[hyped, shouting] Go, buddy! FOG'S ON!"],
+  "e0": ["edgar", "[deadpan] Tick tock."],
+  "h1": ["harold", "[quiet, warm, tired] Alright, Bones. I'm ready."],
+  "g2": ["grim", "[softly, unsure] I am DEATH."],
+  "h2": ["harold", "[gentle, kind] I know, kid. I know."],
+  "h3": ["harold", "[delighted, mischievous] Extra hour, kid. Wanna RIDE?"],
+  "g3": ["grim", "[laughing, joyful whoop] Woo-HOO!"],
+  "d1": ["dashley", "[cheerful, sing-song] Pickup rescheduled. Next HALLOWEEN!"],
+  "g4": ["grim", "[sniffling, touched] Five. STARS."],
+  "e1": ["edgar", "[deadpan, to camera] Nevermore."]
+}
