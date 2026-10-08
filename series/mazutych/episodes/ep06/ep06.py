@@ -1,4 +1,4 @@
-"""S01E06 «Почётный нефтяник» — season finale. Factory hall, fanfare: «За двадцать пять лет — машина!» The cover slides off a red
+"""S01E06 v2 «Почётный нефтяник» (08.10.2026, по статистике TikTok: hook text «ЗА 25 ЛЕТ — МАШИНА?!», twist at 17.4 s / 54 %, 32.4 s) — season finale. Factory hall, fanfare: «За двадцать пять лет — машина!» The cover slides off a red
 «Веста-Шместа» with a gift bow; Мазутыч sobs «Своя!». Борис Борисыч: «Ключи. А бензин — по талону на талон.» The monowheel tows the
 new car to «ГАЗПРОПАЛ» («Опять тонна, друга»). Зоя: «Бензин есть.» — the cardboard flips to «ЕСТЬ!», the choir. Twist: under the fuel
 flap — a socket, sparks: «Это что? — Электричка. — А зарядка есть? — Зарядки нет.» Дин-Дон: «Я тоже ноль процент.» Button: Борис
@@ -197,7 +197,7 @@ def gum_pop(t, t0):
 
 
 def r_zoya1(t, u):
-    return KIT.zoya(t, u, gum=gum_pop(t, 15.25), look=(1.0, -0.1))
+    return KIT.zoya(t, u, gum=gum_pop(t, 14.55), look=(1.0, -0.1))
 
 
 def r_sign(t, u):
@@ -284,7 +284,7 @@ def r_hope(t, u):
 
 
 def r_zoya3(t, u):
-    return KIT.zoya(t, u, Z0=1.45, push=0.04, gum=gum_pop(t, 25.3), look=(1.0, -0.1))
+    return KIT.zoya(t, u, Z0=1.45, push=0.04, gum=gum_pop(t, 23.85), look=(1.0, -0.1))
 
 
 def lcd(big, t, y0, y1, pct, dead):
@@ -313,8 +313,8 @@ def lcd(big, t, y0, y1, pct, dead):
 
 
 def r_lcd(t, u):
-    dead = t > 27.45
-    big = KIT.cu_maz(t, u, cx=900.0, cy=330.0, sz=15.5, head=(560, 1480 + 40 * sm((t - 27.2) / 0.4)), expr='sad', dead=dead,
+    dead = t > 26.0
+    big = KIT.cu_maz(t, u, cx=900.0, cy=330.0, sz=15.5, head=(560, 1480 + 40 * sm((t - 25.8) / 0.4)), expr='sad', dead=dead,
                      wheel_face='low', look=(0.0, 0.4), mouth_=0.0)
     lcd(big, t, 0, 900, '0%', dead)
     big[900:930] = MC.INK
@@ -345,7 +345,7 @@ def r_bosswin(t, u):
 
 
 def r_title(t, u):
-    big = r_trio(t, u + 2.35)
+    big = r_trio(t, u + 2.3)
     big[:] = (big * 0.35).astype(np.uint8)
     k = sm(u / 0.2)
     O.overlay(big, TITLE, 0, 700, k)
@@ -361,12 +361,12 @@ NAMES = ['hook', 'curtain', 'cry', 'keys', 'bosscu', 'tow', 'zoya1', 'sign', 'aw
 CAP = dict(curtain=1100, keys=1080, tow=1080, zoya1=1640, zoya2=1640, zoya3=1640, bosswin=1640, lcd=1720, trio=1680, socket=1640,
            title=1500)
 
-SHOW = K.Show(EPI, 6, ['ЕМУ ПОДАРИЛИ', 'МАШИНУ'], hook_t=(0.10, 2.8), hook_y=120, cap_default=1600, cap_y=CAP,
-              stickers=[(K.st('ТАЛОН НА ТАЛОН', (90, 230, 255), 52), 9.4, 10.9, 540, 420),
-                        (K.st('ЕСТЬ!', (120, 255, 140), 90), 15.9, 16.45, 540, 1480),
-                        (K.st('ЭЛЕКТРО?!', (255, 236, 90), 70), 19.0, 20.5, 540, 420),
-                        (K.st('0%', (255, 90, 90), 90), 28.2, 30.2, 860, 1300)],
-              flashes=[2.9, TWIST, 32.6], mosaics=[10.9])
+SHOW = K.Show(EPI, 6, ['ЗА 25 ЛЕТ —', 'МАШИНА?!'], hook_t=(0.10, 2.6), hook_y=120, cap_default=1600, cap_y=CAP,
+              stickers=[(K.st('ТАЛОН НА ТАЛОН', (90, 230, 255), 52), 8.6, 10.4, 540, 420),
+                        (K.st('ЕСТЬ!', (120, 255, 140), 90), 15.0, 15.6, 540, 1480),
+                        (K.st('ЭЛЕКТРО?!', (255, 236, 90), 70), 17.6, 19.2, 540, 420),
+                        (K.st('0%', (255, 90, 90), 90), 26.7, 28.7, 860, 1300)],
+              flashes=[2.85, TWIST, 31.1], mosaics=[10.45])
 
 
 def render(t):
