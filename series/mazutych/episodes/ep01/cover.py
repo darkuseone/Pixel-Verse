@@ -1,5 +1,5 @@
 """Cover S01E01 «Кто крайний?»: Мазутыч on the monowheel straining, towing his dead «six» on a rope towards АЗС «ГАЗПРОПАЛ» with
-«БЕНЗИНА НЕТ»; title «ДОТАЩИТ / ДО ЗАПРАВКИ?» (= hook text), hazard plate. Everything from the series' own world and sprites.
+«БЕНЗИНА НЕТ»; title «ГДЕ / БЕНЗИН?!» (= hook text = first line, v3), hazard plate. Everything from the series' own world and sprites.
   python3 cover.py   ->  cover.png (+ copy in series/mazutych/covers/cover_s01e01.png)"""
 import sys, pathlib, shutil; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[4] / 'engine'))
 import paths as P
@@ -24,7 +24,7 @@ def f(big, v_):
     K.wind_lines(big, t, 0.5)
 frame = K.shot(E.HW, K.light_hw, cx, cy, Z, acts=[car, m], fx_=f, sx=180, sy=330)
 out = pathlib.Path(__file__).with_name('cover.png')
-make(frame, ['ДОТАЩИТ', 'ДО ЗАПРАВКИ?'], n=1, out=str(out), title_y=130, title_size=70)
+make(frame, ['ГДЕ', 'БЕНЗИН?!'], n=1, out=str(out), title_y=130, title_size=84)
 dst = P.series(E.SLUG) / 'covers'; dst.mkdir(exist_ok=True)
 shutil.copy(out, dst / 'cover_s01e01.png')
 print(out)

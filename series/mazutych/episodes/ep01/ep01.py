@@ -1,4 +1,4 @@
-"""S01E01 «Кто крайний?» (v2, 06.10.2026) — there is no gasoline anywhere. Мазутыч tows his dead «six» to the АЗС «ГАЗПРОПАЛ»
+"""S01E01 «Кто крайний?» (v3, 09.10.2026: hook outcry «Где бензин?!» = text hook, twist 17.4 s / 58 %, 30.2 s; the wheel visibly talks) — there is no gasoline anywhere. Мазутыч tows his dead «six» to the АЗС «ГАЗПРОПАЛ»
 with his monowheel. «Бензина нет.» — «Я — нефтяник!» — «А я — балерина.» Then the tanker truck arrives... and joins the queue:
 «Мужики, кто крайний?» It is empty, its driver has not filled up since spring. Finale: the monowheel dies, Мазутыч and the driver
 haul the tanker like the Volga barge haulers. «А я его вожу.» — «А я — балерина!»
@@ -19,6 +19,7 @@ from props import mazpix as MX
 from props import mazcast as MC
 from props import mazkit as K
 from props import bytfx as B
+from props import mazshots as M
 from timeline import DUR, FPS, VOICE, SLUG, CUTS
 
 EPI = Episode('ep01', VOICE, DUR, FPS, colors=K.COL, slug=SLUG)
@@ -79,7 +80,7 @@ CAR = 6.0
 TRK = 7.0
 QUEUE = [(450, 'lada', 0), (570, 'buh', 1), (690, 'lada', 2), (800, 'lada', 3), (905, 'lada', 5)]
 TK_X = 92.0                                        # where the tanker stops: right behind the last car (the one «since May»)
-JOY = (18.0, 19.4)
+JOY = (16.1, 17.4)
 
 
 def queue_acts(t, Z, honk=0.0):
@@ -96,12 +97,19 @@ def queue_acts(t, Z, honk=0.0):
 
 
 def honk_k(t):
-    return 1.0 if any(a <= t < a + 1.2 for a in (4.7, 18.25)) else 0.0
+    return 1.0 if any(a <= t < a + 1.2 for a in (3.6, 16.3)) else 0.0
+
+
+def wheel_k(t):
+    """how hard the wheel «talks»: voice envelope, never below 0.5 while its line plays (waves: mazkit.shot)"""
+    on = any(spk == 'wheel' and t0 <= t < t0 + (b - a) for _, _, _, t0, a, b, spk, _ in VOICE)
+    return max(mouth('wheel', t, 1.6), 0.5 if on else 0.0)
 
 
 def maz_act(t, x, y, Z, s=None, **kw):
     kw.setdefault('t', t)
     kw.setdefault('mouth_', mouth('maz', t))
+    kw.setdefault('wheel_talk', wheel_k(t))
     return A(MC.maz, x, y, s or SP * Z, **kw)
 
 
@@ -125,6 +133,7 @@ def cu_maz(t, u, world=None, cx=420.0, cy=330.0, Z=1.45, s=17.0, head=(560, 980)
     v0 = view_at(world, cx + pan * u, cy, Z, 180, 320)
     hx, hy = wpt(v0, head[0], head[1] + bob * math.sin(t * 8.0))
     kw.setdefault('mouth_', mouth('maz', t, 1.6))
+    kw.setdefault('wheel_talk', wheel_k(t))
     a = A(MC.maz, hx, hy, s, pin='head', t=t, wind=wind, **kw)
     def pre(big, v):
         if flare: K.flare(big, v, t, flare[0], flare[1], 1.0, 0.6)
@@ -200,7 +209,7 @@ def zoya_shot(t, u, who='zoya', mega=False, Z0=1.45, push=0.05, gum=0.0, expr='b
 
 
 def r_nogas(t, u):
-    return zoya_shot(t, u, gum=sm((t - 9.0) / 0.2) * 0.8)
+    return zoya_shot(t, u, gum=sm((t - 7.35) / 0.2) * 0.8)
 
 
 def r_badge(t, u):
@@ -334,10 +343,11 @@ def lcd(big, t, y0=0, y1=OUT_H // 2, pct='0%', dead=False):
 
 
 def r_battery(t, u):
-    dead = t > 28.35
-    big = cu_maz(t, u, cx=640.0, cy=360.0, Z=1.45, s=15.5, head=(560, 1480 + 40 * sm((t - 28.0) / 0.4)), wind=0.0, pan=0.0, bob=0.0,
+    dead = t > 25.6
+    big = cu_maz(t, u, cx=640.0, cy=360.0, Z=1.45, s=15.5, head=(560, 1480 + 40 * sm((t - 25.3) / 0.4)), wind=0.0, pan=0.0, bob=0.0,
                  expr='sad', dead=dead, wheel_face='low')
     lcd(big, t, 0, 900, '0%', dead)
+    if not dead: M.lcd_talk(big, 170, 600, 910, 770, t, wheel_k(t))      # the display «speaks»
     big[900:930] = MX.INK
     return big
 
@@ -370,10 +380,10 @@ NAMES = ['hook', 'reveal', 'queue', 'sign', 'nogas', 'badge', 'ballet', 'point',
          'battery', 'haul', 'callback']
 CAP = dict(reveal=1080, haul=1080, nogas=1640, ballet=1640, point=1640, callback=1640, battery=1720, queue=1600, twist=1560)
 
-SHOW = K.Show(EPI, 1, ['ДОТАЩИТ', 'ДО ЗАПРАВКИ?'], hook_t=(0.10, 2.6), hook_y=120, cap_default=1600, cap_y=CAP,
-              stickers=[(K.st('БИИП!', (255, 236, 120)), 4.75, 6.0, 760, 1150),
-                        (K.st('ПУСТОЙ', (255, 90, 90), 70), 22.85, 25.4, 700, 420)],
-              flashes=[18.0, 28.5], mosaics=[21.5])
+SHOW = K.Show(EPI, 1, ['ГДЕ', 'БЕНЗИН?!'], hook_t=(0.10, 2.4), hook_y=120, cap_default=1600, cap_y=CAP,
+              stickers=[(K.st('БИИП!', (255, 236, 120)), 3.65, 4.7, 760, 1150),
+                        (K.st('ПУСТОЙ', (255, 90, 90), 70), 20.6, 22.9, 700, 420)],
+              flashes=[16.1, 25.85], mosaics=[19.35])
 
 
 def render(t):

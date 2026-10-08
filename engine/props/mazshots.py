@@ -140,9 +140,18 @@ class Kit:
     def mouth(s, who, t, k=1.8):
         return min(1.0, s.epi.talk(who, t) * k)
 
+    def speaking(s, who, t):
+        """1 while a line of `who` is playing (pauses between words included), else 0"""
+        return 1.0 if any(spk == who and t0 <= t < t0 + (b - a) for _, _, _, t0, a, b, spk, _ in s.epi.voice) else 0.0
+
+    def wheel_k(s, t):
+        """how hard the wheel «talks» right now: voice envelope, never below 0.5 while its line plays"""
+        return max(s.mouth('wheel', t, 1.6), 0.5 * s.speaking('wheel', t))
+
     def maz_act(s, t, x, y, Z, sz=None, **kw):
         kw.setdefault('t', t)
         kw.setdefault('mouth_', s.mouth('maz', t))
+        kw.setdefault('wheel_talk', s.wheel_k(t))
         return A(MC.maz, x, y, sz or SP * Z, **kw)
 
     def queue_acts(s, t, Z, honk=0.0, xs=None):
@@ -164,6 +173,7 @@ class Kit:
         hx, hy = wpt(v0, head[0], head[1] + bob * math.sin(t * 8.0))
         kw.setdefault('mouth_', s.mouth(who, t, 1.6))
         if fn is MC.maz: kw.setdefault('wind', wind)
+        if fn is MC.maz: kw.setdefault('wheel_talk', s.wheel_k(t))
         a = A(fn, hx, hy, sz, pin='head', t=t, flip=flip, **kw)
         def pre(big, v):
             if flare: K.flare(big, v, t, flare[0], flare[1], 1.0, 0.6)
@@ -221,3 +231,15 @@ class Kit:
                 d.text((398 - (bb[2] - bb[0]) // 2 - bb[0], yy - bb[1]), txt, font=f, fill=col)
             img = np.array(im)
         ST.blit_world(big, v, img, x0, y0)
+
+
+def lcd_talk(big, x0, y0, x1, y1, t, k, col=(90, 230, 255)):
+    """the wheel's display insert while it speaks: an equalizer of bars jumping with the voice (k 0..1)"""
+    if k <= 0.05: return
+    n = 9
+    w = (x1 - x0) // n
+    for i in range(n):
+        h = int((y1 - y0) * min(1.0, k * (0.35 + 0.65 * abs(math.sin(t * 17 + i * 1.7)))))
+        cx = x0 + i * w + w // 4
+        cy = (y0 + y1) // 2
+        big[cy - h // 2:cy + h // 2, cx:cx + w // 2] = col

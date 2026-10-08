@@ -20,3 +20,5 @@
 Обложка: кадр собран кодом из мира сериала (xAI-задник `highway_azs` + спрайты) + заголовок «бензиновая плёнка» + сигнальная табличка (`cover.py`, `engine/covergen_maz.py`). Нейро-лиц нет.
 Бюджет ElevenLabs v2: новый голос Толика (Voice Design) + 11 новых реплик ≈ 81 кредит, 3 новых звука ≈ 83 (tank_knock_hollow, choir_hallelujah_short, rope_strain_creak). Переиспользовано: «Бензовоз...» из v1, «А я — балерина» дважды (второй раз через мегафон), музыка, атмосферы, задники. Расход v1 (≈ 550) — см. историю git.
 Переиспользовано из `library/sfx`: whoosh, car_honks_chorus, fist_slam_counter, gum_pop, truck_horn_old, crowd_cheer_short, brake_skid, record_scratch, sad_trombone, battery_die_beeps, pa_chime_feedback.
+
+v3 09.10.2026: текст обложки ГДЕ / БЕНЗИН?! (= первая реплика «Где бензин?!», 9 кредитов), 30,2 с, поворот 17,4 с (58 %).

@@ -25,8 +25,14 @@ mouth = KIT.mouth
 GAR = K.world('garages')
 GI = K.world('garage_inside')
 DOOR1 = (35, 270, 295, 560)                      # Мазутыч's garage in the cooperative
-RIG = (390.0, 610.0)                             # the still on the garage floor
-CAR_X, CAR_Y = 700.0, 600.0                      # the old «six» over the pit
+RIG = (440.0, 660.0)                             # the still on the garage floor, left of the pit
+CAR_X, CAR_Y = 673.0, 545.0                      # the «six» seen from behind, wheels on the far edges of the inspection pit
+CAR_R = 15.9                                     # rear-view car scale (output px per sprite px at Z = 1): track = the pit width
+PS = 1.9                                         # people / rig scale in the garage (so they match the real-size car)
+
+
+def car_rear(t, Z, shake=0.0, lights=0.0):
+    return A(MC.lada_rear, CAR_X, CAR_Y, CAR_R * Z, t=t, shake=shake, lights=lights)
 
 
 def light_gi(v):
@@ -78,8 +84,17 @@ def r_boom(t, u, again=False):
     return big
 
 
+def pit_lamp(big, v, t):
+    """a work lamp glowing down in the inspection pit: the car clearly stands OVER the pit"""
+    x, y = v.opt(CAR_X + 20, 600)
+    fx.glow(big, x, y, 260 * v.Z, (255, 214, 130), 0.35 + 0.05 * math.sin(t * 7))
+
+
 def interior(t, Z, cx, cy, acts, fx_=None):
-    return K.shot(GI, light_gi, cx, cy, Z, acts=acts, fx_=fx_, sx=180, sy=380)
+    def f(big, v):
+        pit_lamp(big, v, t)
+        if fx_: fx_(big, v)
+    return K.shot(GI, light_gi, cx, cy, Z, acts=acts, fx_=f, sx=180, sy=380)
 
 
 def rig_act(t, sz, shake=0.0, gauge=0.2, level=0.0, drop=-1.0):
@@ -93,13 +108,13 @@ def r_rewind(t, u):
 
 
 def r_lab(t, u):
-    """the garage lab: the rig, the «six» over the pit, Мазутыч presenting like a professor"""
-    Z = 1.15
-    acts = [A(MC.lada, CAR_X, CAR_Y, CAR * Z, col=(232, 228, 214), driver=False), rig_act(t, SP * Z * 1.1),
-            A(MC.tolik, 330.0, 655.0, SP * Z, t=t, expr='grin', mouth_=0.0, look=(1.0, 0.0)),
-            KIT.maz_act(t, 480.0, 655.0, Z, flip=True, expr='proud', ride=False, hold=False, wheel=False, blinker=1.0 if u > 1.2 else 0.0,
-                        look=(1.0, 0.0))]
-    return interior(t, Z + 0.05 * u, 450.0, 520.0, acts)
+    """the garage lab: the rig, the «six» standing over the pit, Мазутыч presenting like a professor"""
+    Z = 0.8
+    acts = [car_rear(t, Z), rig_act(t, SP * Z * 1.1 * PS),
+            A(MC.tolik, 315.0, 720.0, SP * Z * PS, t=t, expr='grin', mouth_=0.0, look=(1.0, 0.0)),
+            KIT.maz_act(t, 575.0, 722.0, Z, sz=SP * Z * PS, flip=True, expr='proud', ride=False, hold=False, wheel=False,
+                        blinker=1.0 if u > 1.2 else 0.0, look=(1.0, 0.0))]
+    return interior(t, Z + 0.04 * u, 505.0, 430.0, acts)
 
 
 def r_seeds(t, u):
@@ -135,20 +150,16 @@ def r_pour(t, u):
 
 
 def r_start(t, u):
-    """the «six» over the pit coughs, shakes and roars to life"""
-    Z = 2.0
+    """the «six» over the pit coughs, shakes and roars to life: smoke from the exhaust straight at us, tail lights flare"""
+    Z = 1.0 + 0.12 * u
     on = t > 12.9
-    sh = 1.2 * math.sin(t * 50) if on else 0.4 * math.sin(t * 20)
-    car = A(MC.lada, CAR_X + sh, CAR_Y, CAR * Z, col=(232, 228, 214), driver=False)
+    car = car_rear(t, Z, shake=1.0 if on else 0.35, lights=1.0 if on else 0.0)
     def f(big, v):
-        ex, ey = v.opt(CAR_X - 70, CAR_Y - 14)
-        for i in range(6):
-            ph = (t * 2 + i / 6) % 1.0
-            B.puff(big, ex - ph * 260, ey - ph * 120, (20 + 60 * ph) * 3, 0.6 * (1 - ph), (80, 76, 80))
-        if on:
-            hx, hy = v.opt(CAR_X + 66, CAR_Y - 22)
-            fx.glow(big, hx, hy, 500, (255, 240, 190), 0.55)
-    return interior(t, Z, CAR_X, 560.0, [car], f)
+        ex, ey = M.aout(car, v, 'exhaust')
+        for i in range(7):
+            ph = (t * 2.2 + i / 7) % 1.0
+            B.puff(big, ex - ph * 120 + 40 * math.sin(i), ey + ph * 160, (24 + 70 * ph) * 3, 0.65 * (1 - ph), (80, 76, 80))
+    return interior(t, Z, CAR_X, 400.0, [car], f)
 
 
 def r_dance(t, u):
@@ -156,9 +167,10 @@ def r_dance(t, u):
     Z = 2.2
     rot = 12.0 * math.sin(t * 9)
     hop = abs(math.sin(t * 9)) * 6
-    car = A(MC.lada, CAR_X + 1.0 * math.sin(t * 50), CAR_Y, CAR * Z, col=(232, 228, 214), driver=False)
-    tol = A(MC.tolik, CAR_X - 80, 650.0 - hop, SP * Z, t=t, expr='cheer', mouth_=mouth('tolik', t), rot=rot, look=(1.0, 0.0))
-    big = interior(t, Z, CAR_X - 60, 580.0, [car, tol])
+    Z = 1.15
+    car = car_rear(t, Z, shake=1.0, lights=1.0)
+    tol = A(MC.tolik, 900.0, 730.0 - hop, SP * Z * PS, t=t, expr='cheer', mouth_=mouth('tolik', t), rot=rot, look=(-1.0, 0.0), flip=True)
+    big = interior(t, Z, 790.0, 460.0, [car, tol])
     K.confetti(big, t, 13.75, n=60, seed=2)
     return big
 
@@ -202,14 +214,14 @@ def r_pressure(t, u):
     """the rig shakes, the needle in the red, steam — the wheel parked next to it: «Давление много, друга.»"""
     Z = 2.3
     k = sm(u / 2.0)
-    acts = [rig_act(t, SP * Z * 1.1, shake=k, gauge=0.5 + 0.5 * k, level=0.1),
-            A(MC.monowheel_solo, RIG[0] + 70, RIG[1] + 8, SP * Z * 1.1, t=t, face='low')]
+    acts = [rig_act(t, SP * Z * 1.4, shake=k, gauge=0.5 + 0.5 * k, level=0.1),
+            A(MC.monowheel_solo, RIG[0] + 62, RIG[1] + 6, SP * Z * 1.4, t=t, face='low', talk=KIT.wheel_k(t))]
     def f(big, v):
-        sx, sy = v.opt(RIG[0], RIG[1] - 52 * SP * Z * 1.1 / 3 / Z)
+        sx, sy = v.opt(RIG[0], RIG[1] - 52 * SP * Z * 1.4 / 3 / Z)
         for i in range(5):
             ph = (t * 3 + i / 5) % 1.0
             B.puff(big, sx + (i - 2) * 30, sy - ph * 300, (20 + 60 * ph) * 3, 0.7 * (1 - ph), (236, 236, 240))
-    big = interior(t, Z + 0.2 * u, RIG[0] + 30, 560.0, acts, f)
+    big = interior(t, Z + 0.2 * u, RIG[0] + 30, 600.0, acts, f)
     B.shake(big, t, 3 + 9 * k, 30)
     if t > 25.9: O.flash(big, (t - 25.9) / 0.2)
     return big
@@ -221,7 +233,7 @@ def r_end(t, u):
 
 SHOTS = [r_boom, r_rewind, r_lab, r_seeds, r_drip, r_pour, r_start, r_dance, r_queue, r_last, r_mine, r_pressure, r_end]
 NAMES = ['boom', 'rewind', 'lab', 'seeds', 'drip', 'pour', 'start', 'dance', 'queue', 'last', 'mine', 'pressure', 'end']
-CAP = dict(last=1760, boom=1640, end=1640, lab=1100, rewind=1100, queue=1120, dance=1640, start=1640)
+CAP = dict(pressure=640, last=1760, lab=1780, boom=1640, end=1640, rewind=1780, queue=1120, dance=1780, start=1640)
 
 SHOW = K.Show(EPI, 5, ['БЕНЗИН', 'ИЗ СЕМЕЧЕК'], hook_t=(0.10, 2.8), hook_y=120, cap_default=1600, cap_y=CAP,
               stickers=[(K.st('2 ЧАСА НАЗАД', (90, 230, 255), 56), 2.9, 3.9, 540, 420),
