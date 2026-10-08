@@ -1,4 +1,4 @@
-"""S01E05 «Биотопливо» — BOOM: the garage doors fly off, sooty Мазутыч in the smoke: «Почти получилось.» VHS rewind «2 часа
+"""S01E05 v2 «Биотопливо» (08.10.2026: after the twist the boss cuts the queue — «Начальству — без очереди!»). BOOM: the garage doors fly off, sooty Мазутыч in the smoke: «Почти получилось.» VHS rewind «2 часа
 назад»: a rig from a samovar and a pressure cooker, sunflower husks. «Лузга. Давление. Наука.» Толик: «Одну тебе, одну мне.»
 A golden drop — «Капает!» — the old «six» over the pit starts: «Завелась, родимая!» Twist: the doors open — the whole district
 queues to his garage, Зоя on the roof with a megaphone: «Бензина нет! Ждём семечки!» «Кто крайний?» — «Это мой гараж!»
@@ -180,8 +180,16 @@ def r_queue(t, u):
 
 
 def r_last(t, u):
-    return KIT.cu(MC.tolik, 'tolik', t, u, blown_world(light=True), 600.0, 400.0, sz=16.0, head=(540, 940), light=light_gar, flare=(1170, 170),
-                  expr='cheer', look=(1.0, 0.0))
+    """the boss shoulders through the queue with an empty red canister: «Начальству — без очереди!»"""
+    big = KIT.cu(MC.boss, 'boss', t, u, blown_world(light=True), 600.0, 400.0, sz=16.5, head=(520, 900), light=light_gar,
+                 flare=(1170, 170), expr='smug', pose='stand', look=(1.0, 0.0), pan=-30.0)
+    cx, cy = 780, 1420 + int(8 * math.sin(t * 10))                      # the empty canister under his arm
+    big[cy - 170:cy + 170, cx - 130:cx + 130] = (30, 20, 16)
+    big[cy - 160:cy + 160, cx - 120:cx + 120] = (196, 36, 40)
+    big[cy - 120:cy + 120, cx - 80:cx + 80] = (170, 28, 34)
+    big[cy - 230:cy - 160, cx - 60:cx + 60] = (30, 20, 16); big[cy - 220:cy - 170, cx - 40:cx + 40] = (196, 36, 40)
+    big[cy - 230:cy - 200, cx + 70:cx + 120] = (230, 200, 60)
+    return big
 
 
 def r_mine(t, u):
@@ -213,7 +221,7 @@ def r_end(t, u):
 
 SHOTS = [r_boom, r_rewind, r_lab, r_seeds, r_drip, r_pour, r_start, r_dance, r_queue, r_last, r_mine, r_pressure, r_end]
 NAMES = ['boom', 'rewind', 'lab', 'seeds', 'drip', 'pour', 'start', 'dance', 'queue', 'last', 'mine', 'pressure', 'end']
-CAP = dict(boom=1640, end=1640, lab=1100, rewind=1100, queue=1120, dance=1640, start=1640)
+CAP = dict(last=1760, boom=1640, end=1640, lab=1100, rewind=1100, queue=1120, dance=1640, start=1640)
 
 SHOW = K.Show(EPI, 5, ['БЕНЗИН', 'ИЗ СЕМЕЧЕК'], hook_t=(0.10, 2.8), hook_y=120, cap_default=1600, cap_y=CAP,
               stickers=[(K.st('2 ЧАСА НАЗАД', (90, 230, 255), 56), 2.9, 3.9, 540, 420),
