@@ -1,4 +1,4 @@
-"""S01E05 «Биотопливо» — timing for video (ep05.py) and audio (mix.py). Voice clips are the tightened takes (voice/ep05_t)."""
+"""S01E05 v2 «Биотопливо» (08.10.2026: boss cuts the queue instead of Толик's callback) — timing for video (ep05.py) and audio (mix.py). Voice clips are the tightened takes (voice/ep05_t)."""
 DUR = 30.6
 FPS = 30
 SLUG = 'mazutych'
@@ -12,13 +12,13 @@ VOICE = [
     ('m3', 'ep05_t', 'm3', 11.05, 0.00, 1.12, 'maz', 'НАЛИВАЙ!'),
     ('d3', 'ep05_t', 'd3', 13.90, 0.00, 2.20, 'tolik', 'Завелась, РОДИМАЯ!'),
     ('z1', 'ep05_t', 'z1', 16.60, 0.00, 3.11, 'zoyam', 'Бензина нет! Ждём СЕМЕЧКИ!'),
-    ('d4', 'ep01_t', 'd1', 20.00, 0.00, 1.86, 'tolik', 'Мужики, кто КРАЙНИЙ?'),
-    ('m4', 'ep05_t', 'm4', 22.10, 0.00, 1.44, 'maz', 'Это МОЙ гараж!'),
-    ('w1', 'ep05_t', 'w1', 23.95, 0.00, 2.02, 'wheel', 'Давление МНОГО, друга.'),
+    ('b1', 'ep05_t', 'b1', 20.00, 0.00, 2.22, 'boss', 'Начальству — БЕЗ ОЧЕРЕДИ!'),
+    ('m4', 'ep05_t', 'm4', 22.35, 0.00, 1.44, 'maz', 'Это МОЙ гараж!'),
+    ('w1', 'ep05_t', 'w1', 24.00, 0.00, 2.02, 'wheel', 'Давление МНОГО, друга.'),
     ('m1b', 'ep05_t', 'm1', 26.70, 0.00, 2.53, 'maz', 'Почти ПОЛУЧИЛОСЬ.'),
 ]
 
-CUTS = [0.0, 2.90, 3.80, 7.30, 9.40, 11.00, 12.30, 13.70, 16.30, 19.90, 22.00, 23.70, 26.10, DUR]
+CUTS = [0.0, 2.90, 3.80, 7.30, 9.40, 11.00, 12.30, 13.70, 16.30, 19.90, 22.25, 23.90, 26.10, DUR]
 
 S = 'library/sfx/'
 SFX = [
@@ -32,7 +32,8 @@ SFX = [
     (S + 'crowd_cheer_short.mp3', 14.00, 0.35),
     (S + 'many_doors_open.mp3', 16.30, 0.5, 0.0, 0.8),
     (S + 'car_honks_chorus.mp3', 16.50, 0.5),
-    (S + 'car_honks_chorus.mp3', 21.20, 0.45),
+    (S + 'car_honks_chorus.mp3', 20.10, 0.45),
+    (S + 'crowd_gasp.mp3', 20.30, 0.4),
     (S + 'pressure_whistle_rattle.mp3', 23.70, 2.6),
     (S + 'pressure_whistle_rattle.mp3', 25.10, 3.0, 0.0, 1.0),
     (S + 'cartoon_boom_big.mp3', 26.10, 0.9),

@@ -1,4 +1,8 @@
-"""S01E03 «Из-под полы» — night, garage cooperative. A tinted «Приора» window rolls down two fingers: «Бензин нужен?»
+"""S01E03 v2 «Из-под полы» (08.10.2026, по статистике TikTok): hook = price shock «Пятьсот?! За литр?!» with the bottle and its
+«500» tag in the frame — «За посмотреть.» Then the same story: the glowing boot, the sommelier sniff, «Мой. Партия четырнадцать.»,
+twist (57 %) the boss sells it, «Литр — по цене двух», «Это не скидка, друга», button «Или — по талону!» (E02 callback) and his
+wallet: a moth flies out.
+v1: night, garage cooperative. A tinted «Приора» window rolls down two fingers: «Бензин нужен?»
 Вадик sells «Родниковая» bottles: «Пятьсот. — За литр?! — За посмотреть.» Мазутыч sniffs like a sommelier: «Это не девяносто
 пятый... Мой. Партия четырнадцать.» Twist: «Так я ж у твоего начальника беру» — Борис Борисыч rolls out of the next garage with
 a man-bag of cash: «Тебе — со скидкой! Литр — по цене двух.» Дин-Дон: «Это не скидка, друга.»
@@ -16,7 +20,7 @@ from props import mazkit as K
 from props import bytfx as B
 from props import mazshots as M
 from props.mazshots import A, wpt, aout, SP
-from timeline import DUR, FPS, VOICE, SLUG, CUTS
+from timeline import DUR, FPS, VOICE, SLUG, CUTS, TWIST
 
 EPI = Episode('ep03', VOICE, DUR, FPS, colors=dict(K.COL, vadik=(200, 160, 255)), slug=SLUG)
 KIT = M.Kit(EPI)
@@ -189,17 +193,71 @@ def r_button(t, u):
     return maz_cu(t, u, 'deadpan', look=(0.0, -0.3), mouth_=0.0, bottle=True, hold=False, sz=13.0, head=(540, 820))
 
 
-SHOTS = [r_hook, r_look, r_trunk, r_price, r_v500, r_shock, r_look500, r_sniff, r_which, r_mine, r_boss_line, r_reveal, r_boss_cu, r_nod,
-         r_button]
-NAMES = ['hook', 'look', 'trunk', 'price', 'v500', 'shock', 'look500', 'sniff', 'which', 'mine', 'bossline', 'reveal', 'bosscu', 'nod',
-         'button']
-CAP = dict(hook=1700, trunk=1080, reveal=1080, nod=1640, button=1640)
+def price_tag(big, t, x, y, k=1.0):
+    """the yellow price tag on the bottle: «500»"""
+    M.paper(big, int(x), int(y), ['500'], w=int(300 * k), h=int(170 * k), rot=6 + 3 * math.sin(t * 9), col=(255, 226, 90),
+            sizes=[int(110 * k)])
 
-SHOW = K.Show(EPI, 3, ['БЕНЗИН', 'ИЗ-ПОД ПОЛЫ'], hook_t=(0.10, 2.8), hook_y=120, cap_default=1600, cap_y=CAP,
-              stickers=[(K.st('500!', (255, 236, 120), 80), 7.6, 8.5, 780, 520),
-                        (K.st('ПАРТИЯ №14', (255, 160, 60), 56), 16.7, 19.0, 540, 420),
-                        (K.st('СКИДКА?', (255, 90, 90), 64), 25.2, 27.1, 540, 420)],
-              flashes=[3.25, 21.6], mosaics=[11.7])
+
+def r_hook0(t, u):
+    """0.0: price shock — the bottle of «gasoline» with a «500» tag right in his face"""
+    big = maz_cu(t, u, 'shock', bottle=True, hold=False, look=(0.4, 0.6), sz=16.5 + 0.8 * u, head=(600, 900), wind=0.5)
+    price_tag(big, t, 560, 1440, 1.45)
+    if u < 0.35: B.shake(big, t, 10, 30)
+    return big
+
+
+def r_money(t, u):
+    """«Литр — по цене двух»: boss + Вадик two-shot, the man-bag full of cash"""
+    Z = 2.8
+    W = door_world(1.0)
+    acts = [A(MC.boss, 560.0, GROUND - 40, SP * Z, t=t, money=True, pose='key', mouth_=mouth('boss', t), expr='grin', look=(1.0, 0.0)),
+            A(MC.vadik, 650.0, GROUND + 4, SP * Z, t=t, mouth_=0.0, expr='sly', look=(-1.0, 0.0), flip=True)]
+    return K.shot(W, light_gar, 605.0, 575.0, Z, acts=acts, sx=180, sy=470)
+
+
+def r_talon(t, u):
+    """button: the boss whips out a pink coupon — «Или — по талону!» (E02 callback)"""
+    big = KIT.cu(MC.boss, 'boss', t, u, door_world(1.0), 560.0, 420.0, sz=17.0, head=(520, 900), light=light_gar, flare=(1170, 170),
+                 expr='grin', money=True, pose='key', look=(1.0, 0.0))
+    k = sm(u / 0.25)
+    M.paper(big, int(lerp(1200, 760, k)), 1380, ['ТАЛОН', '10 Л'], w=320, h=220, rot=-6 + 3 * math.sin(t * 9), col=(250, 200, 210),
+            sizes=[60, 44])
+    return big
+
+
+def r_wallet(t, u):
+    """insert: Мазутыч opens his wallet — empty, a moth flutters out"""
+    big = maz_cu(t, u, 'deadpan', look=(0.0, 0.6), mouth_=0.0, sz=15.0, head=(540, 700), blur=8)
+    im = Image.fromarray(big); d = ImageDraw.Draw(im)
+    x0, y0 = 240, 1060
+    d.rectangle([x0, y0, x0 + 600, y0 + 360], fill=(92, 58, 36), outline=(30, 20, 16), width=10)            # the open wallet
+    d.rectangle([x0 + 40, y0 + 40, x0 + 560, y0 + 320], fill=(60, 36, 24), outline=(30, 20, 16), width=6)
+    d.line([(x0 + 300, y0), (x0 + 300, y0 + 360)], fill=(30, 20, 16), width=8)
+    for i in range(2):                                                                                       # moths
+        ph = u * 1.4 - i * 0.3
+        if ph <= 0: continue
+        mx = int(x0 + 300 + 170 * math.sin(ph * 5 + i) + i * 80)
+        my = int(y0 + 140 - ph * 380)
+        f = 70 if int(t * 12 + i) % 2 else 30
+        for sx in (-1, 1):
+            d.polygon([(mx, my), (mx + sx * 95, my - f), (mx + sx * 80, my + 20)], fill=(214, 204, 182), outline=(40, 30, 24))
+        d.ellipse([mx - 14, my - 34, mx + 14, my + 34], fill=(96, 84, 70), outline=(40, 30, 24), width=3)
+        d.line([(mx - 6, my - 34), (mx - 22, my - 60)], fill=(40, 30, 24), width=4)
+        d.line([(mx + 6, my - 34), (mx + 22, my - 60)], fill=(40, 30, 24), width=4)
+    big = np.array(im)
+    return big
+
+
+SHOTS = [r_hook0, r_v500, r_trunk, r_sniff, r_which, r_mine, r_boss_line, r_reveal, r_boss_cu, r_money, r_nod, r_button, r_talon,
+         r_wallet]
+NAMES = ['hook', 'v500', 'trunk', 'sniff', 'which', 'mine', 'bossline', 'reveal', 'bosscu', 'money', 'nod', 'button', 'talon', 'wallet']
+CAP = dict(hook=1760, trunk=1080, reveal=1080, money=1640, nod=1640, button=1640, talon=1700, wallet=1700)
+
+SHOW = K.Show(EPI, 3, ['БЕНЗИН', 'ПО 500?!'], hook_t=(0.10, 2.4), hook_y=120, cap_default=1600, cap_y=CAP,
+              stickers=[(K.st('ПАРТИЯ №14', (255, 160, 60), 56), 11.0, 13.0, 540, 420),
+                        (K.st('СКИДКА?', (255, 90, 90), 64), 19.3, 21.0, 540, 420)],
+              flashes=[3.3, TWIST], mosaics=[25.7])
 
 
 def render(t):

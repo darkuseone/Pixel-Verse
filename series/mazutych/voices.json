@@ -93,8 +93,11 @@
           "loud_sd": 5.7
         }
       },
-      "voice_id": "vxP9EoBM29o2m1aWHQNV",
-      "voice": "Мазутыч — Борис Борисыч"
+      "voice_id": "iJVGC18PiXCeNoMe4wOM",
+      "voice": "Мазутыч — Борис Борисыч",
+      "previous_voice_ids": [
+        "vxP9EoBM29o2m1aWHQNV"
+      ]
     },
     "tolik": {
       "name": "Толик (водитель бензовоза)",
@@ -116,8 +119,11 @@
           "loud_sd": 5.9
         }
       },
-      "voice_id": "X8jm2orhZd79nRAehKy9",
-      "voice": "Мазутыч — Толик (водитель бензовоза)"
+      "voice_id": "6FfEAtYZ4qqQztCjEr34",
+      "voice": "Мазутыч — Толик (водитель бензовоза)",
+      "previous_voice_ids": [
+        "X8jm2orhZd79nRAehKy9"
+      ]
     },
     "vadik": {
       "name": "Вадик (барыга)",
@@ -139,8 +145,11 @@
           "loud_sd": 6.1
         }
       },
-      "voice_id": "kBGudMWVfIgAw0ySF5rq",
-      "voice": "Мазутыч — Вадик (барыга)"
+      "voice_id": "3YcbIhxRmKe16pBspvSh",
+      "voice": "Мазутыч — Вадик (барыга)",
+      "previous_voice_ids": [
+        "kBGudMWVfIgAw0ySF5rq"
+      ]
     },
     "cop": {
       "name": "Инспектор Столбов (ДПС)",
@@ -162,8 +171,11 @@
           "loud_sd": 4.6
         }
       },
-      "voice_id": "F85lAHK9jOYsP9VeSqFY",
-      "voice": "Мазутыч — Инспектор Столбов (ДПС)"
+      "voice_id": "sqjFPShWaZX3JdS3utu1",
+      "voice": "Мазутыч — Инспектор Столбов (ДПС)",
+      "previous_voice_ids": [
+        "F85lAHK9jOYsP9VeSqFY"
+      ]
     }
   }
 }
