@@ -17,7 +17,67 @@ SLUG = 'mazutych'
 COL = dict(maz=(255, 156, 40), zoya=(255, 120, 200), wheel=(90, 230, 255), boss=(255, 230, 80), tolik=(120, 255, 140), zoyam=(255, 120, 200))
 INK = (30, 20, 16)
 SLICK = ((210, 90, 230), (90, 220, 230), (255, 214, 90))      # oil-slick: purple -> teal -> gold
-shot = CK.shot
+def _anchor_out(a, v, name):
+    sp = a.last
+    px, py = sp.anchors[name]
+    ox, oy = v.opt(a.wx, a.wy)
+    sc = a.scale(v)
+    if a.pin:
+        qx, qy = sp.anchors[a.pin]
+        ox -= (-qx if a.flip else qx) * sc; oy += qy * sc
+    return ox + (-px if a.flip else px) * sc, oy - py * sc, sc
+
+
+def say_waves(big, x, y, t, k, sc, col=(90, 230, 255)):
+    """«it is the wheel who speaks»: pixel sound-wave arcs ))) and ((( flying out of its display, beating with the voice"""
+    if k <= 0.05: return
+    H, W = big.shape[:2]
+    r_max = max(230.0, sc * 30.0)
+    r0 = max(44.0, sc * 6.0)
+    th = max(12.0, sc * 1.4)
+    x0, x1 = int(max(0, x - r_max - th)), int(min(W, x + r_max + th))
+    y0, y1 = int(max(0, y - r_max - th)), int(min(H, y + r_max + th))
+    if x0 >= x1 or y0 >= y1: return
+    yy, xx = np.mgrid[y0:y1, x0:x1]
+    dx, dy = xx - x, yy - y
+    rr = np.hypot(dx, dy)
+    ang = np.arctan2(dy, dx)
+    side = (np.abs(ang) < 0.7) | (np.abs(np.abs(ang) - math.pi) < 0.7)
+    q = max(4, int(th // 2))                                                   # chunky pixels like the sprites
+    blk = ((xx // q) + (yy // q)) % 1 == 0
+    reg = big[y0:y1, x0:x1]
+    for i in range(3):
+        ph = (t * 2.4 + i / 3.0) % 1.0
+        r = r0 + (r_max - r0) * ph
+        a = (1.0 - ph * 0.85) * min(1.0, 0.55 + k)
+        ring = side & blk & (np.abs(rr - r) < th / 2)
+        edge = side & (np.abs(rr - r) < th / 2 + 4) & ~ring
+        reg[edge] = (reg[edge] * (1 - 0.6 * a) + np.array(INK) * 0.6 * a).astype(np.uint8)
+        reg[ring] = (reg[ring] * (1 - a) + np.array(col) * a).astype(np.uint8)
+
+
+def wheel_says(big, v, acts, t):
+    """for every actor with a talking monowheel (maz(wheel_talk=..) / monowheel_solo(talk=..)) draw the sound waves"""
+    from props import mazcast as MC
+    for a in acts:
+        P = getattr(a, 'P', None)
+        if not P or not hasattr(a, 'last'): continue
+        k = P.get('wheel_talk', 0.0) if a.fn is MC.maz else P.get('talk', 0.0) if a.fn is MC.monowheel_solo else 0.0
+        if k <= 0.05 or P.get('dead') or P.get('face') == 'dead' or (a.fn is MC.maz and not P.get('ride', True)): continue
+        if 'screen' not in a.last.anchors: continue
+        x, y, sc = _anchor_out(a, v, 'screen')
+        say_waves(big, x, y, t, k, sc)
+
+
+def shot(world, light, cx, cy, Z, acts=(), fx_=None, t=0.0, **kw):
+    """chikit.shot + the talking-wheel waves (drawn after the actors, before the episode's own fx)"""
+    def f(big, v):
+        tt = t
+        for a in acts:
+            if getattr(a, 'P', None) and 't' in a.P: tt = a.P['t']; break
+        wheel_says(big, v, acts, tt)
+        if fx_: fx_(big, v)
+    return CK.shot(world, light, cx, cy, Z, acts=acts, fx_=f, t=t, **kw)
 J, hit = CK.J, CK.hit
 
 # ---------------------------------------------------------------- lights: dusk, the flare is the key (upper right)

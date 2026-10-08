@@ -40,7 +40,7 @@ SFX = [
     (S + 'electric_zap_sparks.mp3', 17.40, 0.8),
     (S + 'record_scratch.mp3', 17.42, 0.45),
     (S + 'gum_pop.mp3', 23.85, 0.6),
-    (S + 'battery_die_beeps.mp3', 25.90, 0.5),
+    (S + 'battery_die_beeps.mp3', 28.40, 0.5),
     (S + 'sad_trombone.mp3', 26.60, 0.35),
     (S + 'cash_register.mp3', 30.00, 0.5),
     (S + 'title_stinger.mp3', 31.10, 0.6),

@@ -313,10 +313,11 @@ def lcd(big, t, y0, y1, pct, dead):
 
 
 def r_lcd(t, u):
-    dead = t > 26.0
-    big = KIT.cu_maz(t, u, cx=900.0, cy=330.0, sz=15.5, head=(560, 1480 + 40 * sm((t - 25.8) / 0.4)), expr='sad', dead=dead,
+    dead = False                                                       # it dies at the end of its line (r_trio)
+    big = KIT.cu_maz(t, u, cx=900.0, cy=330.0, sz=15.5, head=(560, 1480), expr='sad', dead=dead,
                      wheel_face='low', look=(0.0, 0.4), mouth_=0.0)
     lcd(big, t, 0, 900, '0%', dead)
+    M.lcd_talk(big, 170, 600, 910, 770, t, KIT.wheel_k(t))                # the display «speaks»: equalizer with the voice
     big[900:930] = MC.INK
     return big
 
@@ -325,7 +326,8 @@ def r_trio(t, u):
     """all three stare into the lens: the car plugged into nothing, the dead wheel, Мазутыч; the sign now says «ЗАРЯДКИ НЕТ»"""
     Z = 1.3 + 0.05 * u
     car = car_pumps(t, Z, flap=1.0)
-    m = KIT.maz_act(t, PX_ + 105.0, PY_ + 6, Z, flip=True, expr='deadpan', look=(0.0, -0.5), mouth_=0.0, dead=True, beacon=False, shadow=0.3)
+    m = KIT.maz_act(t, PX_ + 105.0, PY_ + 6, Z, flip=True, expr='deadpan', look=(0.0, -0.5), mouth_=0.0, dead=t > 28.55, wheel_face='low',
+                    beacon=False, shadow=0.3)
     def f(big, v):
         sign_board(big, v, 'зарядки', 1.0)
         hx, hy = aout(m, v, 'hand')

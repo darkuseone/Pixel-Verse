@@ -33,8 +33,9 @@ def X(expr):
 
 
 # ======================================================================================== the monowheel «Дин-Дон 3000»
-def monowheel(sp, t=0.0, spin=0.0, led=True, face='smile', ax=2.0, ay=11.0, dead=False):
-    """electric unicycle seen from the side: tyre, shell with LED arc, pedals; face on the little top display"""
+def monowheel(sp, t=0.0, spin=0.0, led=True, face='smile', ax=2.0, ay=11.0, dead=False, talk=0.0):
+    """electric unicycle seen from the side: tyre, shell with LED arc, pedals; face on the little top display.
+    talk 0..1: it speaks — the display mouth opens with the voice and the LED arc flashes (sound waves: mazkit.shot)"""
     sp.ell(ax, ay, 9.0, 11.0, tones((40, 40, 46)))
     tyre = sp.m_ell(ax, ay, 9.0, 11.0)[0] & ~sp.m_ell(ax, ay, 7.4, 9.4)[0]
     ang = np.arctan2(DX.YC - ay, DX.XC - ax)
@@ -44,7 +45,8 @@ def monowheel(sp, t=0.0, spin=0.0, led=True, face='smile', ax=2.0, ay=11.0, dead
     if led and not dead:
         arc = sp.m_ell(ax, ay + 0.6, 5.4, 7.4)[0] & ~sp.m_ell(ax, ay + 0.6, 4.4, 6.4)[0] & (DX.YC > ay + 1)
         pulse = 0.75 + 0.25 * math.sin(t * 9)
-        sp.fill(arc, (int(80 * pulse), int(230 * pulse), 255), keep=True)
+        if talk > 0.05: pulse = 0.7 + 0.3 * min(1.0, talk * 1.5)
+        sp.fill(arc, (int(min(255, 80 + 175 * talk) * pulse), int(230 * pulse), 255), keep=True)
     sp.rect(ax - 1.5, ay + 0.2, ax + 1.5, ay + 1.6, INK)                     # hub slot
     for px_ in (-1, 1):                                                       # pedals
         sp.rect(ax + px_ * 3 - 3, ay + 1, ax + px_ * 3 + 4, ay + 2.2, (60, 60, 64))
@@ -55,9 +57,12 @@ def monowheel(sp, t=0.0, spin=0.0, led=True, face='smile', ax=2.0, ay=11.0, dead
     if not dead:
         c = (120, 255, 240) if face != 'low' else (255, 90, 70)
         sp.dot(ax - 1, ay + 9.8, c); sp.dot(ax + 1, ay + 9.8, c)
-        if face == 'low': sp.dot(ax, ay + 8.6, c)
+        if talk > 0.25:                                                       # open mouth: it is talking
+            sp.rect(ax - 1, ay + 8.4, ax + 2, ay + 9.2, c)
+        elif face == 'low': sp.dot(ax, ay + 8.6, c)
         else: sp.dot(ax - 1, ay + 8.6, c); sp.dot(ax, ay + 8.4, c); sp.dot(ax + 1, ay + 8.6, c)
     sp.anchors['wheel'] = (ax, ay)
+    sp.anchors['screen'] = (ax + 0.5, ay + 9.6)
 
 
 # ======================================================================================== the Lada steering wheel with a fur cover
@@ -83,7 +88,7 @@ def glove(sp, x, y, flat=False):
 # ======================================================================================== МАЗУТЫЧ
 def maz(sp, t=0.0, expr='deadpan', mouth_=0.0, ride=True, spin=0.0, wind=0.0, steer=0.0, blinker=0.0, look=(0.6, 0.0),
         wheel_face='smile', dead=False, beacon=False, confetti=0, soot=0.0, blink=None, wheel=True, hold=True, lean_head=0.0,
-        far_hold=True, card=False, pull=False, walk=0.0, sweat=0.0, bottle=False):
+        far_hold=True, card=False, pull=False, walk=0.0, sweat=0.0, bottle=False, wheel_talk=0.0):
     """Мазутыч, 3/4 to the right. ride: standing on the monowheel (feet on the pedals at y 13); wind: mustache flutter 0..1;
     steer: steering-wheel angle; blinker 0..1: the near arm sticks out and flaps (a mouth-clicked turn signal);
     card: holds up the refinery pass «НПЗ»; pull: walking and hauling a rope over the near shoulder (walk = gait phase);
@@ -100,7 +105,7 @@ def maz(sp, t=0.0, expr='deadpan', mouth_=0.0, ride=True, spin=0.0, wind=0.0, st
     sp.ell(1.0 - sw, B + 2.2 + lf, 5.0, 2.4, tones(dark(RUBBER, 0.8)))
     sp.cap((-2.0 - sw, B + 11.0 + lf), (-0.5, B + 24.0), 3.6, 4.0, tones(ROBE_D))
     if ride and wheel:
-        monowheel(sp, t, spin, face=wheel_face, dead=dead)
+        monowheel(sp, t, spin, face=wheel_face, dead=dead, talk=wheel_talk)
     # ---------------------------------------------------------------- far arm (behind the torso)
     shF = (0.5, B + 57.0 + br * 0.4)
     wc = (32.0, B + 45.5)                                                     # steering wheel centre
@@ -463,6 +468,42 @@ def buhanka(sp, col=(90, 120, 80), t=0.0, spin=0.0):
     sp.outline(INK, 2)
 
 
+def lada_rear(sp, col=(232, 228, 214), t=0.0, shake=0.0, lights=0.0, plate='А 025 ГП'):
+    """the «six» seen from behind (E05 garage: standing over the inspection pit, wheels on its edges), ~64 px wide, track ±27.
+    shake: engine running (body jitters); lights 0..1: tail lights / reversing glow"""
+    j = shake * math.sin(t * 60.0) * 0.8
+    for sx in (-1.0, 1.0):                                                    # tyres seen from behind, standing on the floor
+        sp.sup(sx * 27.0, 6.0, 4.8, 6.2, tones((104, 104, 112)), n=3.0)
+        for yy in (2.0, 4.5, 7.0, 9.5):                                       # tread blocks
+            sp.rect(sx * 27.0 - 3.0, yy, sx * 27.0 + 3.0, yy + 1.0, (44, 44, 50))
+        sp.rect(sx * 27.0 - 6.0, -0.5, sx * 27.0 + 6.0, 0.8, (24, 20, 18))    # contact shadow on the floor
+    body = sp.m_poly([(-33.0, 9.0 + j), (33.0, 9.0 + j), (33.5, 30.0 + j), (31.0, 33.0 + j), (-31.0, 33.0 + j), (-33.5, 30.0 + j)])
+    sp.paint(body, tones(col), DX.lit(np.clip(DX.XC / 33, -1, 1) * 0.35, np.clip((DX.YC - 20) / 12, -1, 1)))
+    cab = sp.m_poly([(-28.0, 33.0 + j), (28.0, 33.0 + j), (23.0, 52.0 + j), (-23.0, 52.0 + j)])
+    sp.paint(cab, tones(col), DX.lit(np.clip(DX.XC / 28, -1, 1) * 0.35, np.clip((DX.YC - 42) / 10, -1, 1)))
+    gl = sp.m_poly([(-24.0, 35.0 + j), (24.0, 35.0 + j), (20.5, 49.0 + j), (-20.5, 49.0 + j)])
+    sp.fill(gl, (40, 46, 58)); sp.fill(gl & hatch_mask_(), (70, 86, 104)); sp.fill(gl & ~erode(gl), INK)
+    sp.ell(-6.0, 43.0 + j, 3.0, 3.2, tones((40, 34, 40)), ol=False, clip=gl)     # headrests through the rear window
+    sp.ell(8.0, 43.0 + j, 3.0, 3.2, tones((40, 34, 40)), ol=False, clip=gl)
+    sp.line((-31.0, 33.0 + j), (31.0, 33.0 + j), dark(col, 0.6))              # trunk lid edge
+    sp.line((-29.0, 21.0 + j), (29.0, 21.0 + j), dark(col, 0.7))
+    for sx in (-1.0, 1.0):                                                    # big horizontal tail lights
+        x0, x1 = (18.0, 31.5) if sx > 0 else (-31.5, -18.0)
+        on = 0.55 + 0.45 * lights
+        sp.rect(x0, 22.0 + j, x1, 29.0 + j, (int(230 * on), int(40 * on), int(40 * on)))
+        sp.rect(x0, 22.0 + j, x1, 24.0 + j, (240, 160, 40))
+        sp.rect(x0, 27.0 + j, x1, 29.0 + j, (236, 236, 230))
+    sp.rect(-34.0, 8.0 + j, 34.0, 12.0 + j, (206, 206, 202)); sp.line((-34.0, 10.0 + j), (34.0, 10.0 + j), (150, 150, 150))   # chrome bumper
+    sp.rect(-10.0, 13.0 + j, 10.0, 19.0 + j, (240, 240, 232)); sp.line((-10.0, 13.0 + j), (10.0, 13.0 + j), INK)
+    sp.ptext(plate, 0.0, 18.4 + j, INK, size=4, center=True)
+    sp.rect(-24.0, 5.5 + j, -18.0, 7.5 + j, (70, 70, 74))                     # exhaust pipe
+    sp.rect(-33.0, 7.0, 33.0, 9.0, (20, 18, 20))                              # the dark gap under the bumper
+    sp.anchors['exhaust'] = (-21.0, 6.5 + j)
+    sp.anchors['filler'] = (31.0, 30.0 + j)
+    sp.anchors['top'] = (0.0, 52.0 + j)
+    sp.outline(INK, 2)
+
+
 VESTA = (206, 40, 44)
 
 
@@ -510,9 +551,9 @@ def vesta(sp, col=VESTA, t=0.0, spin=0.0, bow=1.0, flap=0.0, plug=False):
     sp.outline(INK, 2)
 
 
-def monowheel_solo(sp, t=0.0, spin=0.0, face='smile'):
-    """the wheel alone (model sheet, inserts)"""
-    monowheel(sp, t, spin, face=face if face != 'dead' else 'smile', dead=face == 'dead')
+def monowheel_solo(sp, t=0.0, spin=0.0, face='smile', talk=0.0):
+    """the wheel alone (model sheet, inserts); talk 0..1 — it speaks (mouth, LED, sound waves)"""
+    monowheel(sp, t, spin, face=face if face != 'dead' else 'smile', dead=face == 'dead', talk=talk)
     sp.outline(INK, 2)
 
 
