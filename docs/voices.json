@@ -828,8 +828,8 @@
   {
    "slug": "mazutych",
    "char": "cop",
-   "voice_id": "F85lAHK9jOYsP9VeSqFY",
-   "status": "deleted",
+   "voice_id": "sqjFPShWaZX3JdS3utu1",
+   "status": "active",
    "name": "Инспектор Столбов (ДПС)",
    "voice_name": "Мазутыч — Инспектор Столбов (ДПС)",
    "lines": 8,
@@ -870,14 +870,20 @@
     "created_at_unix": 1791279481
    },
    "preview_url": "https://api.us.elevenlabs.io/v1/voices/F85lAHK9jOYsP9VeSqFY/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiMDc3NDE2MjUtMTgxMS00NGMxLThlZjMtMzM1NjQ2N2RiYzMxLm1wMyIsInRpbWVzdGFtcCI6MTc5MTMxNjgwMDAwMDAwMH0%3D",
-   "deleted_on": "2026-10-06",
-   "deleted_reason": "free slots"
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "F85lAHK9jOYsP9VeSqFY",
+     "until": "2026-10-08",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
   },
   {
    "slug": "mazutych",
    "char": "tolik",
-   "voice_id": "X8jm2orhZd79nRAehKy9",
-   "status": "deleted",
+   "voice_id": "6FfEAtYZ4qqQztCjEr34",
+   "status": "active",
    "name": "Толик (водитель бензовоза)",
    "voice_name": "Мазутыч — Толик (водитель бензовоза)",
    "lines": 7,
@@ -917,14 +923,20 @@
     "created_at_unix": 1791275120
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/X8jm2orhZd79nRAehKy9/c43d33a2-4923-4ad8-9d7d-3b8c51dcee35.mp3",
-   "deleted_on": "2026-10-06",
-   "deleted_reason": "free slots"
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "X8jm2orhZd79nRAehKy9",
+     "until": "2026-10-08",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
   },
   {
    "slug": "mazutych",
    "char": "vadik",
-   "voice_id": "kBGudMWVfIgAw0ySF5rq",
-   "status": "deleted",
+   "voice_id": "3YcbIhxRmKe16pBspvSh",
+   "status": "active",
    "name": "Вадик (барыга)",
    "voice_name": "Мазутыч — Вадик (барыга)",
    "lines": 7,
@@ -964,14 +976,20 @@
     "created_at_unix": 1791279478
    },
    "preview_url": "https://api.us.elevenlabs.io/v1/voices/kBGudMWVfIgAw0ySF5rq/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiZDAyZmFmMDUtMGRkZS00OTQ5LWI2ZjEtN2U4OTc0NDVmYjFhLm1wMyIsInRpbWVzdGFtcCI6MTc5MTMxNjgwMDAwMDAwMH0%3D",
-   "deleted_on": "2026-10-06",
-   "deleted_reason": "free slots"
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "kBGudMWVfIgAw0ySF5rq",
+     "until": "2026-10-08",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
   },
   {
    "slug": "mazutych",
    "char": "boss",
-   "voice_id": "vxP9EoBM29o2m1aWHQNV",
-   "status": "deleted",
+   "voice_id": "iJVGC18PiXCeNoMe4wOM",
+   "status": "active",
    "name": "Борис Борисыч",
    "voice_name": "Мазутыч — Борис Борисыч",
    "lines": 6,
@@ -1010,8 +1028,14 @@
     "created_at_unix": 1791272644
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/vxP9EoBM29o2m1aWHQNV/5ba4261e-8b11-4152-abfc-d089fd73aba1.mp3",
-   "deleted_on": "2026-10-06",
-   "deleted_reason": "free slots"
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "vxP9EoBM29o2m1aWHQNV",
+     "until": "2026-10-08",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
   },
   {
    "slug": "pochti-dikiy-zapad",
@@ -1522,5 +1546,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-06 21:11"
+ "updated": "2026-10-08 16:03"
 }
