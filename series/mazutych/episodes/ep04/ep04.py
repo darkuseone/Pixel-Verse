@@ -1,4 +1,6 @@
-"""S01E04 «Без прав» — a traffic cop stops the monowheel: «Превышаем! — Двадцать пять в час. — Знак видим?» (a «20» sign stuck
+"""S01E04 v2 «Без прав» (08.10.2026, по статистике TikTok): hook text «ШТРАФ ЗА МОНОКОЛЕСО?!» + the fine slip shoved at the
+lens; «Знак видим?» became a silent visual gag (the «20» sign right next to «Двадцать пять в час»); twist at 59 % (17.45 s).
+v1: a traffic cop stops the monowheel: «Превышаем! — Двадцать пять в час. — Знак видим?» (a «20» sign stuck
 right there). «Права категории "Моно"? — Такой нет. — Значит, без прав.» Дин-Дон: «У меня есть права. Китайский.»
 «Документики на транспорт! — Вот. От шестёрки.» (the steering wheel). Twist: «Ладно... Дотащишь — отпущу. Третий день без
 бензина.» Мазутыч tows the patrol car; Толик passing: «А кто кого остановил?!» Button: the cop does the siren with his mouth.
@@ -17,7 +19,7 @@ from props import mazkit as K
 from props import bytfx as B
 from props import mazshots as M
 from props.mazshots import A, wpt, aout, y_far, y_near, y_sh, SP, CAR, TRK
-from timeline import DUR, FPS, VOICE, SLUG, CUTS
+from timeline import DUR, FPS, VOICE, SLUG, CUTS, TWIST
 
 EPI = Episode('ep04', VOICE, DUR, FPS, colors=dict(K.COL, cop=(190, 240, 60)), slug=SLUG)
 KIT = M.Kit(EPI)
@@ -49,6 +51,10 @@ def maz_cu(t, u, expr, **kw):
 def r_hook(t, u):
     big = cop_cu(t, u, 'glare', 'stop', whistle=t < 0.5, sz=17.0 + 1.5 * u)
     lights(big, t, 0.25)
+    k = sm((u - 0.25) / 0.2)
+    if k > 0:                                                    # the fine slip shoved at the lens
+        M.paper(big, 560, int(lerp(1900, 1440, k)), ['ШТРАФ', 'МОНОКОЛЕСО', '№ 000001'], w=440, h=300, rot=-7 + 2 * math.sin(t * 9),
+                col=(236, 232, 214), sizes=[70, 34, 26])
     if u < 0.3: B.shake(big, t, 10, 30)
     return big
 
@@ -62,10 +68,10 @@ def r_brake(t, u):
 def r_sign(t, u):
     """the «20» sign is stuck in the ground right where they stand"""
     Z = 1.9 + 0.25 * u
-    acts = [A(MC.sign20, PX + 50, y_sh(PX + 50) - 2, SP * Z * 1.2),
-            KIT.maz_act(t, PX + 5, y_sh(PX + 5), Z, expr='deadpan', look=(1.0, 0.0), mouth_=0.0),
-            A(MC.inspector, PX + 118, y_sh(PX + 118) + 2, SP * Z, flip=True, t=t, pose='point', mouth_=mouth('cop', t), expr='smug')]
-    big = K.shot(HW, K.light_hw, PX + 62, 520.0, Z, acts=acts, sx=180, sy=380)
+    acts = [KIT.maz_act(t, PX - 10, y_sh(PX - 10), Z, expr='deadpan', look=(1.0, 0.0)),
+            A(MC.sign20, PX + 62, y_sh(PX + 62) + 4, SP * Z * 1.9),
+            A(MC.inspector, PX + 135, y_sh(PX + 135) + 2, SP * Z, flip=True, t=t, pose='point', mouth_=0.0, expr='smug')]
+    big = K.shot(HW, K.light_hw, PX + 65, 520.0, Z, acts=acts, sx=180, sy=380)
     lights(big, t, 0.15)
     return big
 
@@ -175,15 +181,15 @@ def r_siren(t, u):
     return big
 
 
-SHOTS = [r_hook, r_brake, r_sign, r_cat, r_none, r_fine, r_license, r_docs, r_wheel, r_whisper, r_bushes, r_tow, r_tolik, r_siren]
-NAMES = ['hook', 'brake', 'sign', 'cat', 'none', 'fine', 'license', 'docs', 'wheel', 'whisper', 'bushes', 'tow', 'tolik', 'siren']
-CAP = dict(sign=1100, license=1720, bushes=1100, tow=1100, tolik=1560, siren=1640)
+SHOTS = [r_hook, r_sign, r_cat, r_none, r_fine, r_license, r_docs, r_wheel, r_whisper, r_bushes, r_tow, r_tolik, r_siren]
+NAMES = ['hook', 'sign', 'cat', 'none', 'fine', 'license', 'docs', 'wheel', 'whisper', 'bushes', 'tow', 'tolik', 'siren']
+CAP = dict(hook=1180, sign=1640, license=1720, bushes=1100, tow=1100, tolik=1560, siren=1640)
 
-SHOW = K.Show(EPI, 4, ['ДПС ТОРМОЗИТ', 'МОНОКОЛЕСО'], hook_t=(0.10, 2.3), hook_y=120, cap_default=1600, cap_y=CAP,
+SHOW = K.Show(EPI, 4, ['ШТРАФ ЗА', 'МОНОКОЛЕСО?!'], hook_t=(0.10, 2.3), hook_y=120, cap_default=1600, cap_y=CAP,
               stickers=[(K.st('25 КМ/Ч', (255, 236, 120), 64), 2.5, 4.0, 760, 520),
-                        (K.st('БЕЗ ПРАВ', (255, 90, 90), 70), 10.6, 12.3, 540, 420),
-                        (K.st('ДОТАЩИШЬ?', (190, 240, 60), 60), 19.6, 21.8, 540, 420)],
-              flashes=[19.3, 24.5], mosaics=[21.9])
+                        (K.st('БЕЗ ПРАВ', (255, 90, 90), 70), 8.9, 10.7, 540, 420),
+                        (K.st('ДОТАЩИШЬ?', (190, 240, 60), 60), 17.8, 20.0, 540, 420)],
+              flashes=[TWIST, 22.1], mosaics=[20.1])
 
 
 def render(t):
