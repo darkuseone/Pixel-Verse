@@ -41,6 +41,7 @@
 ## 7. Уже использовано (не повторять в других US мультах)
 - «Agent Dibs» S01 (сценарий на согласовании, гэги в резерве): полный список внизу, блок «Использовано в Agent Dibs».
 - «Grim Ride» S01 (готов 06.10.2026): блок «Использовано в Grim Ride» внизу.
+- «Florida Man: Allegedly» S01 (сценарий на согласовании 08.10.2026, гэги в резерве): блок «Florida Man» внизу.
 - «Sunny Palms HOA» S01: Saxophone gets louder (`sax_sting_swell`), Aura ±9999, Florida Man, «I watched a video», HOA/Karen, emotional support animal (сертификат $19.99), соседское приложение, штраф урагану, tip fatigue, выборы в HOA, «Bless your heart» + «TRANSLATION: YOU IDIOT», TOTAL FINES, Beautification Fund / Bahamas, Earl «grandfathered in».
 
 ---
@@ -212,3 +213,36 @@ time.com / abc7ny.com (age limits), knowyourmeme.com / napoleoncat.com (сент
 
 ### Новые пародийные бренды (банк §4)
 «DoomDash» (DoorDash), «AfterlifePay» (BNPL), «Home Despot» (уже в банке), «Spirit Halloweenie», «Nextdoom» (Nextdoor), «Pale Horse 2» (байк Смерти).
+
+---
+
+## 08.10.2026 — разведка для «Florida Man: Allegedly» (Флорида, цены)
+Поиск 08.10.2026 (WebSearch, выдача US). Формат: мем / тема → смысл → как вкладываем → дата → статус. Мем — специя, шутка работает без него.
+
+| Мем / тема | Смысл | Как вкладываем | Дата | Статус |
+|---|---|---|---|---|
+| **Florida Man + Sunshine Law** | Закон о публичных записях: протоколы и фото задержаний публикуются почти сразу, отсюда поток заголовков (WCTV, NBC Miami); «birthday challenge» — гуглить «Florida Man + свой день рождения» | Каждая серия кончается фото из участка и плашкой «BREAKING: FLORIDA MAN … (ALLEGEDLY)»; табличка «MAN, FLORIDA J.» | evergreen | основа сериала |
+| **Страховка дома во Флориде** | Insurify: $8 292/год, +181 % к средней по США; Bankrate: $5 838 против $2 424; 47 % опрошенных — премия выросла на 50 %+ за 5 лет; страховщики уходят, госстраховщик Citizens сжался (Insurance Business, WFLX, Newsweek) | E04: «EIGHT GRAND?! For a TRAILER?!», страховая уезжает «BYE, FLORIDA!», ветер или наводнение, герой отказывает сам себе | 2026 | запланировано (E04) |
+| **Цены: продукты, бензин, лечение** | Talker Research: продукты раздражают 47 %; Pew (июль 2026): бензин беспокоит 56 % (в январе 34 %); KFF (апрель 2026): лечение — главная тревога | Хук каждой серии — крик о цене (A/C, саб, лёд в больнице, аренда) | 2026 | основа сериала |
+| **Падающие игуаны** | Ниже ~10 °C игуаны цепенеют и падают с деревьев, но живы; холод 1–2 февраля 2026, «пицца с игуаной» (Yahoo, AOL, WLRN) | Где холодно (морозилка, кондиционер) — падает окоченевшая игуана; живая и целая | февр. 2026 / evergreen | визуальный гэг |
+| **Florida Python Challenge 2026** | 10–19 июля, 907 участников, 280 питонов, победитель — 96 питонов и $10 000 (FWC, Fox 13/35, WPTV) | E05: плакат «PYTHON BOUNTY $50 PER FOOT», питон-«шарф», питон снимает трейлер героя («better credit») | июль–авг. 2026 | запланировано (E05) |
+| **Аллигатор гонится за гольф-каром** | Видео из Ave Maria (16.02), пара на гольф-каре (Fox, WFLA) | В банк: фон/камео | 2026 | в банке |
+| **Publix: «Pub Sub», «hurricane cakes»** | Саб с курицей — культ Флориды (из памяти: сайт-мем «are chicken tender subs on sale», поиском не проверял); торты с прогнозом урагана (Publix) | «Hold my sub.», супермаркет-пародия «Pubbix»; штормовые торты не берём (см. ниже) | evergreen | используем |
+| **Ураган Isaias (8.10.2026, кат. 1, идёт на запад Флориды)** | Реальная угроза прямо сейчас | **Никаких ураганных шуток в сезоне**; в E04 вместо шторма мультяшная тучка | окт. 2026 | не используем |
+| **Мемы октября: «Grr Mondays», «Two Fishes», «Be Ok» (please see attached), «Stop the wedding», «You were bought»** | Свежие форматы TikTok (NapoleonCat, NewEngen) | Только надпись «GRR MONDAYS» на кружке Дарлин; остальное не подходит | сент.–окт. 2026 | специя |
+| **Сериал Netflix «Florida Man» (2023)** | Название уже занято (из памяти, не проверял поиском) | Наше название «FLORIDA MAN: ALLEGEDLY» | 2023 | учтено |
+
+Источники: wctv.tv (public records), nbcmiami.com (Florida Man challenge), insurancebusinessmag.com, wflx.com, newsweek.com (страховки 2026), talkerresearch.com, pewresearch.org, emarketer.com/KFF (цены), yahoo.com / aol.com / wlrn.org (игуаны), fox13news.com / fox35orlando.com / wptv.com (Python Challenge 2026), foxnews.com / wfla.com (аллигатор и гольф-кар), wfla.com (Isaias, 8.10.2026), napoleoncat.com / newengen.com (мемы октября 2026).
+
+### Банк «Флорида» (фольклор и детали, пополняется)
+- **Места:** трейлерный парк, супермаркет с сабами и морозильным рядом, эверглейдс и аэроботы, сваи у канала, билборды адвокатов вдоль I-95, ларьки «GATOR JERKY · BOILED PEANUTS · FIREWORKS», участок шерифа со шкалой роста, ветклиника «walk-ins welcome».
+- **Реалии:** Sunshine Law и фото задержаний, страховщики уходят из штата, «wind or flood» (обычный полис не покрывает наводнение), жара и сломанный кондиционер, игуаны, питоны, lovebugs на стекле, гидроциклы, адвокаты «с билбордов», зимой — snowbirds (пенсионеры с севера).
+- **Не трогаем:** реальные ураганы и их жертвы, реальных людей из заголовков, оружие, наркотики, пьяное вождение, вред животным.
+
+### Пародийные бренды (банк §4)
+«Pubbix» (Publix, «Where Shopping Is a Pleasure*» / «*prices may vary»), «Sunsure Mutual» (страховая), «Cool-Rite A/C», «Dr. Paws Animal Clinic», «Sawgrass Acres Mobile Estates», «Sunshine County Jail & Resort», «Mort Pouch, Esq. — 1-800-POUCH-ME».
+
+### Заложено в «Florida Man: Allegedly», сезон 1 (сценарий на согласовании; после выпуска считать использованным)
+- «Hold my sub.» и судьба саба по сериям; карта «FREQUENT GUEST 10 STAYS = 1 FREE NIGHT»; плашка «(ALLEGEDLY)»; имя героя всегда перекрыто звуком; Таннер «No worries!» и «JOB #1…#8».
+- «Want the extended WARRANTY?», «I'm not living, ma'am. I'm BROWSING.», «Broke. Nine GRAND.»; «Fourteen ninety-NINE. Totally different!», «report a ROBBERY» — «Aisle four. DELI.», «So's my PAYCHECK.», ценник в наручниках; «ORGANIC ice», «Out-of-NETWORK water», «SPECIES: FLORIDA», «Who's a GOOD boy?», микрочип; «Was it WIND… or FLOOD?», «Congrats. You're the bad guy NOW.»; «TINY HOME», «My fee is a THIRD», «He's got better CREDIT.», «Take me HOME»; «Jail's CHEAPER than RENT!», «RESORT fee», «Pillow's a SUBSCRIPTION», «My client pleads… FLORIDA.», крючок «SEASON 2: SNOWBIRDS».
+
