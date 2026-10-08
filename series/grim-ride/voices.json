@@ -1,0 +1,175 @@
+{
+  "cartoon": "Grim Ride",
+  "slug": "grim-ride",
+  "lang": "en",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "grim": {
+      "name": "Grim",
+      "color_caption": [
+        200,
+        170,
+        255
+      ],
+      "style": "[booming, theatrical] / [smug] / [panicking, high-pitched] — pompous stage actor who cracks under pressure",
+      "design": {
+        "description": "The Grim Reaper as a pompous Shakespearean stage actor: a deep, booming, theatrical male voice, rich old-fashioned British stage accent, resonant bass-baritone, grand, self-important and dramatic, but it cracks into a whiny, panicky higher register when things go wrong. Comedic, expressive, crisp diction.",
+        "text": "Behold! I am DEATH, harbinger of the end, rider of the pale horse. Well. Pale Horse Two. It's electric. Do NOT laugh. I have collected kings, pharaohs, and one very rude accountant. Harold will be no problem. None. Whatsoever. Oh no. Oh no no no.",
+        "preferred_preview": 2,
+        "picked": {
+          "i": 2,
+          "dur": 33.15,
+          "f0": 166.7,
+          "f0_iqr": 161.5,
+          "rate": 11.9,
+          "loud_sd": 5.9
+        }
+      },
+      "voice_id": "sdQf2r6zfX32hvp25Auj",
+      "voice": "Grim Ride — Grim"
+    },
+    "edgar": {
+      "name": "Edgar",
+      "color_caption": [
+        170,
+        255,
+        90
+      ],
+      "style": "[deadpan] [flat] — one or two words straight to the camera",
+      "design": {
+        "description": "An old raven with a dry, raspy, low male voice, utterly bored and sardonic, flat monotone deadpan, slightly gravelly and nasal, speaks slowly in very short sentences like a tired late-night radio host who has seen everything. General American accent.",
+        "text": "Nevermore. Look, I've been sitting on this guy's shoulder for six hundred years. Short king. Dead battery. Ironic. Four easy payments. I don't get paid enough for this. Actually, I don't get paid at all. Nevermore.",
+        "preferred_preview": 1,
+        "picked": {
+          "i": 1,
+          "dur": 20.27,
+          "f0": 363.6,
+          "f0_iqr": 150.0,
+          "rate": 14.1,
+          "loud_sd": 4.8
+        }
+      },
+      "voice_id": "QxBrp3fXvoJ3Zvl8DXHD",
+      "voice": "Grim Ride — Edgar"
+    },
+    "harold": {
+      "name": "Harold",
+      "color_caption": [
+        255,
+        160,
+        60
+      ],
+      "style": "[unbothered, crusty] — slow, dry, mischievous; calls Death 'Bones' and 'kid'",
+      "design": {
+        "description": "A crusty, gravelly ninety-seven-year-old American man with a thick old New England accent, slow and completely unbothered, dry wit, a short wheezy chuckle, sharp and mischievous, not frail at all. Natural, characterful, comedic.",
+        "text": "Over my dead body, Bones. Ninety-seven years, kid, and I've outlived three doctors, two wives and a parrot. Catch me if you can. Happy Halloween! Here, take a raisin box, they're good for you. Now get off my porch.",
+        "preferred_preview": 2,
+        "picked": {
+          "i": 2,
+          "dur": 19.96,
+          "f0": 153.8,
+          "f0_iqr": 98.9,
+          "rate": 15.5,
+          "loud_sd": 6.1
+        }
+      },
+      "voice_id": "UScN6kcNEVzdo1v1Nl6W",
+      "voice": "Grim Ride — Harold"
+    },
+    "todd": {
+      "name": "Todd",
+      "color_caption": [
+        90,
+        225,
+        255
+      ],
+      "style": "[hyped, bro] / [gently pitying] — oblivious suburban decoration dad",
+      "design": {
+        "description": "An over-enthusiastic American suburban dad in his early forties, upbeat slightly nasal tenor, says bro and buddy a lot, fast excited delivery, friendly and totally oblivious, light Southern California bro accent. Comedic and natural.",
+        "text": "Bro! Sick costume! Where's your fog machine? Dude, I got twelve inflatables, two fog machines and Kevin. Kevin's twelve feet. Three hundred bucks, sold out by Labor Day. Not even twelve feet, buddy? That's okay. Not everybody can be Kevin.",
+        "preferred_preview": 0,
+        "picked": {
+          "i": 0,
+          "dur": 12.28,
+          "f0": 225.4,
+          "f0_iqr": 87.6,
+          "rate": 26.9,
+          "loud_sd": 7.1
+        }
+      },
+      "voice_id": "9rXbTqAmpdfkBx20G31c",
+      "voice": "Grim Ride — Todd"
+    },
+    "kayden": {
+      "name": "Kayden",
+      "color_caption": [
+        255,
+        100,
+        190
+      ],
+      "style": "[bored, flat] — 13-year-old, unimpressed, a little muffled by the ski mask",
+      "design": {
+        "description": "A young American guy in his early twenties with a bored, flat, mumbly monotone, slightly nasal, totally unimpressed slacker energy, talks a little muffled and lazy. Natural and comedic.",
+        "text": "Relax, pal. It's a class three. Mine does forty. Nice skin, where'd you get it? Bro, you're cooked. Relax. Relax, pal. We ride at nine. Don't be weird about it, okay? Whatever. Relax, pal.",
+        "preferred_preview": 1,
+        "picked": {
+          "i": 1,
+          "dur": 17.01,
+          "f0": 100.0,
+          "f0_iqr": 8.3,
+          "rate": 19.0,
+          "loud_sd": 5.2
+        }
+      },
+      "voice_id": "wISugChlyIgdUxhS0vFR",
+      "voice": "Grim Ride — Kayden"
+    },
+    "dashley": {
+      "name": "Dashley (DoomDash support bot)",
+      "color_caption": [
+        255,
+        210,
+        90
+      ],
+      "style": "[cheerful, chirpy] — relentlessly upbeat AI support assistant",
+      "design": {
+        "description": "A relentlessly cheerful corporate customer-support AI assistant: a young adult American woman's voice, perky, sing-song, bright and a little too polite, slightly synthetic and robotic in rhythm, smiling through every sentence, clean studio sound. Comedic.",
+        "text": "Hi there! I'm Dashley, your DoomDash support assistant! Are you a human? Sorry, I didn't catch that. For your safety, your bike is now Class One! Transferring you to a specialist. Your estimated wait time is eternity. Have a spooktacular day!",
+        "picked": {
+          "i": 0,
+          "dur": 15.73,
+          "f0": 313.7,
+          "f0_iqr": 114.0,
+          "rate": 21.6,
+          "loud_sd": 6.6
+        }
+      },
+      "voice_id": "hvKhJmx8w6dx2qaLhHC6",
+      "voice": "Grim Ride — Dashley (DoomDash support bot)"
+    },
+    "mom": {
+      "name": "Trick-or-treat Mom",
+      "color_caption": [
+        255,
+        140,
+        140
+      ],
+      "style": "[suspicious, judgmental] / [flat, final] — suburban mom who checks everyone's age",
+      "design": {
+        "description": "A suburban American mom in her late thirties, brisk and judgmental, suspicious side-eye in her voice, clipped polite-but-final delivery, slight vocal fry, holding an iced coffee energy. Natural, comedic.",
+        "text": "Excuse me. Aren't you a little old for this? Sir, this line is for kids. How old are you? Then that's a no. I'm not asking again. Kayden, put your mask back on. No, you can't have another one. Sir. Sir! That's a no.",
+        "picked": {
+          "i": 1,
+          "dur": 13.4,
+          "f0": 213.3,
+          "f0_iqr": 50.6,
+          "rate": 25.8,
+          "loud_sd": 5.4
+        }
+      },
+      "voice_id": "UNaE6Ed6rSceF3pSO5yL",
+      "voice": "Grim Ride — Trick-or-treat Mom"
+    }
+  },
+  "note": "06.10.2026: designed voices saved after freeing 15 slots (see docs/voices.md). The pilot was first voiced with premade voices, re-voiced 06.10.2026."
+}

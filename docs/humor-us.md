@@ -40,6 +40,7 @@
 
 ## 7. Уже использовано (не повторять в других US мультах)
 - «Agent Dibs» S01 (сценарий на согласовании, гэги в резерве): полный список внизу, блок «Использовано в Agent Dibs».
+- «Grim Ride» S01 (готов 06.10.2026): блок «Использовано в Grim Ride» внизу.
 - «Sunny Palms HOA» S01: Saxophone gets louder (`sax_sting_swell`), Aura ±9999, Florida Man, «I watched a video», HOA/Karen, emotional support animal (сертификат $19.99), соседское приложение, штраф урагану, tip fatigue, выборы в HOA, «Bless your heart» + «TRANSLATION: YOU IDIOT», TOTAL FINES, Beautification Fund / Bahamas, Earl «grandfathered in».
 
 ---
@@ -168,3 +169,46 @@
 - Чикагский хот-дог («the garden», 7 начинок), «Fries are fine.», «Tension.», «I had dibs.»
 - Ветер «The Hawk», оверсайз-наручники, «Proud of you, hon. Truly.», бейдж «22 YRS PROBATIONARY».
 - Финал: call sheet «CUL-DE-SAC PLAYERS — PAY: $400/WK + SNACKS — PRODUCER: BRAD», стол CRAFT SERVICES, стул «MRS. W / SINCE 1974», дамы со скалкой/сковородкой/запеканкой/шваброй, снежный буррито, «You're permanent.», нью-йоркский таксист «Yo. This spot open?».
+
+---
+
+## 06.10.2026 — разведка для «Grim Ride» (Хэллоуин, электробайки)
+Поиск 06.10.2026 (WebSearch, выдача US). Формат: мем → смысл → как вкладываем → дата → статус. Мем — специя, шутка работает без него.
+
+| Мем / явление | Смысл | Как вкладываем | Дата | Статус |
+|---|---|---|---|---|
+| **South Park S29E1 «South American Biker Gangs»** (вышла 16.09.2026) | Картман выпросил Class 3 e-bike за $2 000, худи + маска на лицо, проезд на красный, по тротуару, «speed unlock dongle», продавец «wink wink» при проверке возраста; взрослые велосипедисты в спандексе (Electrek, IGN 8/10) | Идея владельца: герой на электробайке. У нас Смерть на прокатном Class 3 в рассрочку, донгл разгона (E04), банда в балаклавах. Шутки SP не копируем (батарея «60% взорвётся», Denny's, спандекс-банда — не берём) | сент 2026 | основа сериала |
+| **Подростки на e-bike в пригородах** | Новости осени 2026: Лонг-Бич, Ньюпорт-Бич, Орегон, Монтгомери — «storm of chaos», вилли строем, балаклавы, жалобы соседей (CBS LA, KQED, KATU, WJLA) | Банда Кайдена: всегда в вилли строем, страшнее Смерти, «Relax, pal.». Детей не травмируем и не наказываем | 2026 | используем |
+| **Хэллоуин 2026 = суббота + перевод часов** | 31.10 суббота, в 2:00 01.11 часы назад: «лишний час» Хэллоуина (Yahoo Lifestyle) | Финал E06 «Fall Back»: в 1:59:59 часы откатываются на 1:00, у Смерти отнимают дедлайн; крючок «SEASON 2: SPRING FORWARD» | окт 2026 | запланировано (E06) |
+| **Конфеты +70 % с 2021** | Пакет на 100 конфет ~$17 против $9,91 (Totally the Bomb / NRF: $4 млрд на конфеты) | E03: Тодд даёт по одной драже «Seventeen bucks a BAG», «full-size» батончик размером с ноготь — шринкфляция | 2026 | запланировано (E03) |
+| **12-футовый скелет (Home Depot «Skelly»)** | Распродаётся к Дню труда, новые версии с поворотом головы (Axios, NPR, Home Depot) | Кевин у Тодда (бренд — «Home Despot»), голова поворачивается к Смерти; «Not even twelve feet, buddy.», «Short king.» | evergreen | используем |
+| **«Too old to trick-or-treat»** | В ряде городов возрастной лимит (Чесапик: старше 12 — штраф) | E03: «Aren't you a little OLD for this?» — «I'm four THOUSAND!» — «Then that's a NO.» | evergreen | запланировано (E03) |
+| **Гиг-экономика: рейтинги, деактивация, чат-бот поддержки, капча** | Курьерские приложения, «verify you're human», «your call is important» | DoomDash, рейтинг Смерти от собственной жертвы, E02 «Verify You're Human» («select all squares with a PULSE») | evergreen | основа сериала |
+| **BNPL-рассрочка** («4 easy payments») | Покупка всего в рассрочку | «AfterlifePay — Four easy payments.» | evergreen | используем |
+| **«Relax, pal»** (сент 2026), «Kinda chic» (сент 2026), «Things to Say» (мем месяца сент 2026), «Grr Mondays» | Свежие форматы (KnowYourMeme, NapoleonCat) | «Relax, pal.» — фраза Кайдена (работает и без мема); «Kinda chic.» — кнопка Эдгара в E05; остальные не берём | сент–окт 2026 | специя |
+| **Мемные костюмы-2026** (Traitors-комбинезон, Punch the monkey, Empire State) | Тренды костюмов (Her Campus, Honey Pop) | Не используем: реальные люди / трагедийно-рискованные темы | 2026 | не используем |
+
+Источники: electrek.co (South Park e-bike, 21.09.2026), tvtropes / southpark.fandom (S29E1), cbsnews.com/losangeles, kqed.org, katu.com, wjla.com,
+yahoo.com/lifestyle (Halloween 2026 time twist), totallythebomb.com (candy prices 2026), axios.com / npr.org / homedepot (12-ft skeleton),
+time.com / abc7ny.com (age limits), knowyourmeme.com / napoleoncat.com (сентябрь–октябрь 2026).
+
+### Банк «Хэллоуин в пригороде США» (пополняется)
+- **Места:** тупик (cul-de-sac) с перегруженным декором, крыльцо с тыквой, Spirit Halloween в мёртвом торговом центре («Spirit Halloweenie»),
+  trunk-or-treat на парковке школы, haunted hayride, тыквенная ферма, кукурузный лабиринт.
+- **Реквизит:** 12-футовый скелет, надувные тыквы, генератор тумана, фиолетовые прожекторы, фальш-надгробия, паутина на кустах,
+  наволочка для конфет, изюм/зубная щётка от «того самого соседа», батончики «full-size», тил-тыква (аллергия).
+- **Типажи:** папа-декоратор, дед, который даёт изюм, подростки «слишком старые» без костюма, мама-модератор соседского чата.
+- **Не трогаем:** религию (Хэллоуин без церквей), реальные трагедии, отравленные конфеты/лезвия (реальные страхи), реальных людей.
+
+### Использовано в «Grim Ride», сезон 1 (не повторять в других US мультах)
+- Пилот E01: Смерть на прокатном Class 3 в рассрочку («Four easy payments»), DoomDash и рейтинг от жертвы, 12-футовый скелет Кевин
+  («Not even twelve feet, buddy.», «Short king.»), «Over my dead body.» — «That's the PLAN.», трайк «UNLOCKED», «Relax, pal.»,
+  «Dead battery. Ironic.», изюм, «Happy Halloween, KID!».
+- E02–E06: капча «Select all squares with a PULSE», бот поддержки «Oopsie!» / «Sorry, I didn't catch that!», «specialist: you», «wait time is
+  ETERNITY» — «That's MY line.», «Class ONE»; очередь к full-size bar house, «Seventeen bucks a BAG», «Inflation.», батончик-ноготь,
+  «too old to trick-or-treat»; «the plug», донглы $40 CASH, «A bird's gotta EAT», «No REFUNDS»; Best Yard, «Ugh. TACKY.», «Needs FOG»,
+  «Method ACTING», «It's ANIMATRONIC!», «Kinda CHIC»; 1:59 AM, «Fall Back» (2:00 → 1:00), «Pickup rescheduled. Next HALLOWEEN», «Five. STARS.»,
+  крючок «Spring Forward».
+
+### Новые пародийные бренды (банк §4)
+«DoomDash» (DoorDash), «AfterlifePay» (BNPL), «Home Despot» (уже в банке), «Spirit Halloweenie», «Nextdoom» (Nextdoor), «Pale Horse 2» (байк Смерти).

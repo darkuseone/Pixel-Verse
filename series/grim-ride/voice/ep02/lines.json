@@ -1,0 +1,18 @@
+{
+  "g1": ["grim", "[squinting at a tiny screen, offended] Select all squares with a PULSE?"],
+  "e1": ["edgar", "[deadpan, flat] Oops."],
+  "d1": ["dashley", "[cheerful, chirpy] Oopsie! Let's try again. Are you a HUMAN?"],
+  "g2": ["grim", "[furious, booming, thunderous] I am DEATH!"],
+  "d2": ["dashley", "[cheerful, chirpy] Sorry, I didn't catch that!"],
+  "g3": ["grim", "[through gritted teeth, slow, menacing] Speed. Unlock. NOW."],
+  "d3": ["dashley", "[cheerful, sing-song] For your safety, your bike is now Class ONE!"],
+  "g4": ["grim", "[desperate, shouting] Human agent! HUMAN!"],
+  "d4": ["dashley", "[cheerful, chirpy] Transferring you to a specialist!"],
+  "g5": ["grim", "[confused, small] Hello?"],
+  "e2": ["edgar", "[deadpan, flat] Promoted."],
+  "d5": ["dashley", "[cheerful, chirpy] The specialist is unavailable!"],
+  "g6": ["grim", "[screaming, losing it] I'M AVAILABLE!"],
+  "h1": ["harold", "[cheerful, crusty, zooming past] Evening, Bones!"],
+  "d6": ["dashley", "[cheerful, sing-song] Your estimated wait time is ETERNITY!"],
+  "g7": ["grim", "[broken, quiet, hurt] That's MY line."]
+}
