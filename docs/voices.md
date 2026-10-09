@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-09 07:54.
+Обновлено: 2026-10-09 16:27.
 
 ## agent-dibs
 
@@ -25,10 +25,10 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Florida Man | `fm` | `GBn8jPzCnZIbx5Kf8r1J` | active | 6 / 1 | Florida Man — Florida Man |
-| Tanner | `tanner` | `GpiDvTn0zpQeiQA9VdB7` | active | 3 / 1 | Florida Man — Tanner |
-| Deputy Darlene | `darlene` | `dgd3UC679ZtpWOphbJ9Y` | active | 2 / 1 | Florida Man — Deputy Darlene |
-| Mort Pouch, Esq. | `mort` | `d44i4jCJHjBEUuFbGaGy` | active | 1 / 1 | Florida Man — Mort Pouch, Esq. |
+| Florida Man | `fm` | `GBn8jPzCnZIbx5Kf8r1J` | active | 32 / 6 | Florida Man — Florida Man |
+| Tanner | `tanner` | `GpiDvTn0zpQeiQA9VdB7` | active | 20 / 6 | Florida Man — Tanner |
+| Deputy Darlene | `darlene` | `dgd3UC679ZtpWOphbJ9Y` | active | 14 / 6 | Florida Man — Deputy Darlene |
+| Mort Pouch, Esq. | `mort` | `d44i4jCJHjBEUuFbGaGy` | active | 11 / 6 | Florida Man — Mort Pouch, Esq. |
 
 ## grim-ride
 

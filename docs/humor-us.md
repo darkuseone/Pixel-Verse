@@ -41,7 +41,7 @@
 ## 7. Уже использовано (не повторять в других US мультах)
 - «Agent Dibs» S01 (сценарий на согласовании, гэги в резерве): полный список внизу, блок «Использовано в Agent Dibs».
 - «Grim Ride» S01 (готов 06.10.2026): блок «Использовано в Grim Ride» внизу.
-- «Florida Man: Allegedly» S01 (E01 готов 09.10.2026, остальные гэги в резерве): блок «Florida Man» внизу.
+- «Florida Man: Allegedly» S01 (готов 09.10.2026): кондиционер $9 000 и жизнь в морозильном ряду; саб $14.99 и арест ценника (фото в профиль = линия); счёт за лёд $2 000, «organic / out-of-network water», ветклиника и микрочип (SPECIES: FLORIDA); страховщик уходит из штата, своя страховая, «wind or flood?», отказ самому себе, тучка только над героем; аренда $3 400 за «tiny home», питон $50/фут (FWC bounty), «rent's up», питон с лучшим кредитом; тюрьма дешевле аренды, карта постоянного гостя 10/10, resort fee, «Pillow's a SUBSCRIPTION»; сквозные: «Hold my sub.», Таннер JOB #1–#8 и «No worries!», BREAKING … (ALLEGEDLY), «Mornin', [звук]» вместо имени, Pubbix, Sunsure Mutual, Cool-Rite, Dr. Paws, Sawgrass Acres MGMT, Sunshine County Jail & Resort, игуаны, билборд Морта со слоганом серии. В резерве на S2: snowbirds (северяне-пенсионеры), early-bird special, HOA-gate, Publix-подобные «BOGO»-войны, love bugs.
 - «Sunny Palms HOA» S01: Saxophone gets louder (`sax_sting_swell`), Aura ±9999, Florida Man, «I watched a video», HOA/Karen, emotional support animal (сертификат $19.99), соседское приложение, штраф урагану, tip fatigue, выборы в HOA, «Bless your heart» + «TRANSLATION: YOU IDIOT», TOTAL FINES, Beautification Fund / Bahamas, Earl «grandfathered in».
 
 ---

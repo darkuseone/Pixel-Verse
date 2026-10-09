@@ -427,15 +427,17 @@
    "status": "active",
    "name": "Florida Man",
    "voice_name": "Florida Man — Florida Man",
-   "lines": 6,
-   "episodes": 1,
+   "lines": 32,
+   "episodes": 6,
    "samples": [
+    "series/florida-man/voice/ep06/f3.mp3",
     "series/florida-man/voice/ep01/f3.mp3",
     "series/florida-man/voice/ep01/f4.mp3",
+    "series/florida-man/voice/ep02/f2.mp3",
+    "series/florida-man/voice/ep02/f3.mp3",
     "series/florida-man/voice/ep01/f6.mp3",
-    "series/florida-man/voice/ep01/f1.mp3",
-    "series/florida-man/voice/ep01/f5.mp3",
-    "series/florida-man/voice/ep01/f2.mp3"
+    "series/florida-man/voice/ep04/f2.mp3",
+    "series/florida-man/voice/ep05/f1.mp3"
    ],
    "design": {
     "description": "A sun-baked Florida Gulf Coast man in his mid-forties: warm, raspy, gravelly baritone with a slow, lazy Southern Panhandle drawl, totally zen and unbothered, a laid-back boat-ramp philosopher who chuckles under his breath. When he hears a price his voice cracks into a high-pitched, outraged shriek. Natural, characterful, comedic.",
@@ -463,12 +465,17 @@
    "status": "active",
    "name": "Tanner",
    "voice_name": "Florida Man — Tanner",
-   "lines": 3,
-   "episodes": 1,
+   "lines": 20,
+   "episodes": 6,
    "samples": [
     "series/florida-man/voice/ep01/t3.mp3",
-    "series/florida-man/voice/ep01/t1.mp3",
-    "series/florida-man/voice/ep01/t2.mp3"
+    "series/florida-man/voice/ep06/t1.mp3",
+    "series/florida-man/voice/ep06/t2.mp3",
+    "series/florida-man/voice/ep06/t4.mp3",
+    "series/florida-man/voice/ep04/t1.mp3",
+    "series/florida-man/voice/ep05/t1.mp3",
+    "series/florida-man/voice/ep02/t1.mp3",
+    "series/florida-man/voice/ep01/t1.mp3"
    ],
    "design": {
     "description": "A relentlessly chipper young American man in his late twenties, bright upbeat customer-service voice, fast and bubbly with a slight surfer-valley lilt, a huge smile you can hear, sincerely positive even while delivering terrible news. Natural, comedic.",
@@ -496,10 +503,16 @@
    "status": "active",
    "name": "Deputy Darlene",
    "voice_name": "Florida Man — Deputy Darlene",
-   "lines": 2,
-   "episodes": 1,
+   "lines": 14,
+   "episodes": 6,
    "samples": [
+    "series/florida-man/voice/ep06/d2.mp3",
+    "series/florida-man/voice/ep04/d1.mp3",
     "series/florida-man/voice/ep01/d1.mp3",
+    "series/florida-man/voice/ep02/d1.mp3",
+    "series/florida-man/voice/ep04/d3.mp3",
+    "series/florida-man/voice/ep03/d3.mp3",
+    "series/florida-man/voice/ep05/d1.mp3",
     "series/florida-man/voice/ep01/d2.mp3"
    ],
    "design": {
@@ -528,10 +541,17 @@
    "status": "active",
    "name": "Mort Pouch, Esq.",
    "voice_name": "Florida Man — Mort Pouch, Esq.",
-   "lines": 1,
-   "episodes": 1,
+   "lines": 11,
+   "episodes": 6,
    "samples": [
-    "series/florida-man/voice/ep01/m1.mp3"
+    "series/florida-man/voice/ep02/m1.mp3",
+    "series/florida-man/voice/ep02/m2.mp3",
+    "series/florida-man/voice/ep06/m2.mp3",
+    "series/florida-man/voice/ep04/m3.mp3",
+    "series/florida-man/voice/ep03/m1.mp3",
+    "series/florida-man/voice/ep04/m2.mp3",
+    "series/florida-man/voice/ep05/m1.mp3",
+    "series/florida-man/voice/ep04/m1.mp3"
    ],
    "design": {
     "description": "A cynical old personal-injury lawyer in his seventies, a raspy, nasal, fast-talking New Jersey accent, dry deadpan delivery, world-weary and smug, a little wheezy, like a billboard attorney who moved to Florida in 1987 and never left. Natural and comedic.",
@@ -1652,5 +1672,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-09 07:54"
+ "updated": "2026-10-09 16:27"
 }

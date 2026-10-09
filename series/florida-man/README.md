@@ -23,15 +23,24 @@
 ## Как собрать серию
 ```
 python3 engine/tts.py lines florida-man epNN && python3 engine/tighten.py florida-man epNN
-python3 series/florida-man/gen_bg.py [names]                 # задники xAI (yard, store, aisle, cell)
+python3 series/florida-man/gen_bg.py [names]                 # задники xAI (yard store aisle cell deli hospital vet swamp booth jail_ext booking)
 cd series/florida-man/episodes/epNN && python3 epNN.py test 1 5 20 && python3 cover.py && python3 epNN.py all 4
 python3 mix.py ../../../../build/florida-man-epNN/noaudio.mp4 final.mp4
 ```
 Код: `engine/props/fmpix.py` (манера), `fmcast.py` (каст и реквизит), `fmkit.py` (свет, заголовок, плашка, карта, эффекты),
 `engine/covergen_fm.py` (обложка). Масштаб людей по задникам (правило «кадр физически возможен»): двор 10·Z, магазин 5,6·Z,
-морозильный ряд 11,6·Z, камера 15·Z output px на пиксель спрайта.
+морозильный ряд 11,6·Z, камера 15·Z output px на пиксель спрайта; деликатесы: покупатели 20·Z, за прилавком 11,5·Z (прилавок
+перекрывает их, `occlude`); больница: у окошка 20·Z, за стеклом 15·Z; ветклиника: на стуле 22·Z. Вывески задников запекаются
+кодом (`fmkit.BAKE`), слоган билборда — `K.SLOGAN`, вывеска ларька — `K.BOOTH_SIGN` (меняются по сериям).
 
 ## Серии
 | # | Название | Длина | Поворот | Статус |
 |---|---|---|---|---|
 | E01 | «Frozen Foods» | 33,0 с | 54 %: мастер сам живёт в морозилке | готов 09.10.2026 |
+| E02 | «Grand Theft Sub» | 31,2 с | 56 %: Дарлин арестовывает ценник | готов 09.10.2026 |
+| E03 | «Good Boy» | 30,4 с | 55 %: конус и микрочип — сеть видит всё | готов 09.10.2026 |
+| E04 | «Wind or Flood» | 31,8 с | 53 %: герой-страховщик отказывает сам себе | готов 09.10.2026 |
+| E05 | «Python Money» | 32,6 с | 55 %: заработал $1 000 — аренду подняли на $1 000 | готов 09.10.2026 |
+| E06 | «Jail & Resort» | 34,1 с | 51 %: бесплатная ночь + resort fee; петля сезона в хук E01 | готов 09.10.2026 |
+
+Файл выкладки: `publish_s01.txt` (США пн 19.10 – сб 24.10, вечер). Крючок S2: «SEASON 2: SNOWBIRDS».
