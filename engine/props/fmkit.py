@@ -470,10 +470,13 @@ def bake_vet(Wd):
     wtext(Wd, t, 1000, 40, (226, 34, 52), 4)
 
 
+BOOTH_SIGN = ['GATOR JERKY', 'BOILED PEANUTS', 'FIREWORKS']    # E05 turns the booth into the FWC python-bounty window
+
+
 def bake_booth(Wd):
     x0, y0, x1, y1 = 448, 196, 832, 266
     Wd[y0:y1, x0:x1] = (240, 226, 190)
-    for i, t in enumerate(('GATOR JERKY', 'BOILED PEANUTS', 'FIREWORKS')):
+    for i, t in enumerate(BOOTH_SIGN):
         wtext(Wd, t, (x0 + x1 - wtext_w(t, 3)) // 2, y0 + 6 + i * 21, [(226, 34, 52), (14, 44, 54), (255, 120, 40)][i], 3)
 
 

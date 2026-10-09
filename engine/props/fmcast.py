@@ -889,7 +889,7 @@ def truck(sp, t=0.0, text='BYE, FLORIDA!'):
 SNAKE = (150, 130, 70)
 
 
-def python(sp, t=0.0, pts=None, pose='coil', tongue=True, lump=0.0, eyes=True, bow=False, hiss=0.0):
+def python(sp, t=0.0, pts=None, pose='coil', tongue=True, lump=0.0, eyes=True, bow=False, hiss=0.0, thick=1.0):
     """a Burmese python: a thick patterned body along a path (pose 'coil' | 'couch' | 'bow' | custom pts), head at the last point;
     lump > 0 = a swallowed sub bulging at that fraction of the body"""
     if pts is None:
@@ -912,8 +912,8 @@ def python(sp, t=0.0, pts=None, pose='coil', tongue=True, lump=0.0, eyes=True, b
     N = len(seg)
     for i, (x, y) in enumerate(seg):
         k = i / max(1, N - 1)
-        r = 1.2 + 2.2 * math.sin(math.pi * min(1.0, k * 1.05)) ** 0.6
-        if lump and abs(k - lump) < 0.06: r += 1.6
+        r = (1.2 + 2.2 * math.sin(math.pi * min(1.0, k * 1.05)) ** 0.6) * thick
+        if lump and abs(k - lump) < 0.06: r += 1.6 * thick
         y2 = y + sw * math.sin(k * 6.0 + t * 4.0) * 0.4
         c = SNAKE if (i // 3) % 2 else (110, 90, 50)
         sp.ell(x, y2, r, r, tones(c), ol=False)
