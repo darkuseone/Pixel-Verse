@@ -190,7 +190,8 @@ def tv_cart(sp, t=0.0, on=True):
 
 # ======================================================================================== FLORIDA MAN
 def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='stand', hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-       sweat=0.0, frost=0.0, glasses_drop=0.0, walk=None, sway=0.0, shaka=False, belly_jiggle=0.0, legs=True):
+       sweat=0.0, frost=0.0, glasses_drop=0.0, walk=None, sway=0.0, shaka=False, belly_jiggle=0.0, legs=True, tie=False, cone=False,
+       wet=0.0):
     """FLORIDA MAN — «olive on toothpicks»: a round sun-cured belly on stick legs, tiny bald peeling head, neon shield sunglasses that
     never come off (they slide down when prices hit), a braided goatee down to the belly with a fishing lure on the end, gold tooth,
     toothpick, Florida-map tattoo on the belly, frayed jorts, hot-pink fanny pack, ONE neon-orange croc (the other foot bare).
@@ -259,6 +260,13 @@ def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='sta
             yy = y - ((t * 5.0 + i * 1.7) % 6.0)
             sp.ell(*Q(x, yy), 0.9, 1.3, tones((170, 230, 255)), ol=False); sp.dot(*Q(x - 0.2, yy + 0.6), WHITE)
 
+    if tie:                                                                                      # clip-on tie + lanyard badge (insurer mode)
+        sp.cap(Q(3.6, 52.0), Q(4.4, 40.0), 1.0, 2.0, tones((236, 60, 60)))
+        sp.line(Q(1.0, 52.0), Q(-2.0, 40.0), (40, 176, 150)); sp.rect(*Q(-4.0, 36.0), *Q(0.0, 40.0), (255, 206, 70))
+    if cone:                                                                                     # cone of shame: the far wall behind the head
+        hx0, hy0 = Q(4.2, 61.6)
+        CONE = [(hx0 - 3.0, hy0 - 9.0), (hx0 - 3.0, hy0 + 3.0), (hx0 + 10.0, hy0 + 13.0), (hx0 + 10.0, hy0 - 13.0)]
+        sp.paint(sp.m_poly(CONE), tones((226, 234, 240)), np.clip((DX.YC - hy0 + 13) / 26, 0, 1) * 0.6 + 0.25)
     # ---------------------------------------------------------------- head
     hx, hyy = Q(4.2, 61.6)
     sp.cap(Q(2.5, 51.0), Q(3.4, 55.0), 2.8, 2.8, tones(TAN))
@@ -314,6 +322,18 @@ def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='sta
     sp.dot(lx_, ly_ - 1.0, WHITE); sp.dot(lx_ - 0.4, ly_ - 2.0, (20, 20, 20))
     sp.line((lx_, ly_ - 4.2), (lx_ + 0.8, ly_ - 5.2), (196, 200, 210)); sp.line((lx_ + 0.8, ly_ - 5.2), (lx_ + 1.4, ly_ - 4.4), (196, 200, 210))
     sp.anchors['lure'] = (lx_, ly_ - 4.0)
+    if cone:                                                                                     # near wall: see-through plastic (halftone) + a thick rim
+        wall = sp.m_poly(CONE)
+        ht_fill(sp, wall, (246, 250, 252), 0.16)
+        for a, b in ((CONE[0], CONE[3]), (CONE[1], CONE[2])): sp.line(a, b, (200, 210, 220), 1)
+        rim = sp.m_ell(hx0 + 10.0, hy0, 2.6, 13.4)[0] & ~sp.m_ell(hx0 + 10.0, hy0, 1.2, 12.0)[0]
+        sp.fill(rim, (252, 254, 255)); sp.fill(rim & (DX.XC > hx0 + 10.6), (200, 210, 222))
+        neck = sp.m_ell(hx0 - 3.0, hy0 - 3.0, 1.4, 6.4)[0]
+        sp.fill(neck & ~erode(neck), (200, 210, 222))
+    if wet > 0:
+        for q in range(5):
+            yy = hyy + 2.0 - ((t * 6.0 + q * 1.9) % 14.0)
+            sp.ell(hx - 6.0 + q * 3.8, yy, 0.7, 1.1, tones((150, 210, 255)), ol=False)
     sp.outline(INK, 1)
 
     # ---------------------------------------------------------------- near arm (in front)
@@ -462,7 +482,7 @@ HAT = (186, 156, 98)
 
 
 def darlene(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.7, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-            gum=0.0, chew=True, walk=None, aviators=False):
+            gum=0.0, chew=True, walk=None, aviators=False, robe=False, wet=0.0, megaphone=False):
     """DEPUTY DARLENE — «mushroom»: a giant teased blonde cloud under a campaign hat on a boxy tan-and-green uniform; aviators low on
     the nose so heavy bored lids hang over them; pink lips chewing gum (gum 0..1 = the bubble), gold star, shoulder radio, duty belt"""
     E = X(expr)
@@ -478,28 +498,39 @@ def darlene(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.7, 0.0), blink=None, ha
     sp.cap((shF[0] + (kF[0] - shF[0]) * 0.4, shF[1] + (kF[1] - shF[1]) * 0.4), kF, 2.0, 1.9, tones(dark((236, 150, 130), 0.86)))
     sp.cap(kF, eF, 1.9, 1.6, tones(dark((236, 150, 130), 0.86))); sp.ell(*eF, 2.0, 1.9, tones(dark(DSKIN, 0.86)))
     if prop_f: prop_f(sp, eF)
-    # legs + boots
-    for k_, dx in enumerate((-3.6, 4.0)):
-        s_ = sw if k_ else -sw
-        c = TROUS if k_ else dark(TROUS, 0.85)
-        sp.cap((dx * 0.9, 26.0), (dx + s_, 4.0), 3.4, 3.0, tones(c))
-        sp.line((dx + 2.0, 24.0), (dx + s_ + 2.4, 5.0), (196, 170, 90))                       # trouser stripe
-        sp.sup(dx + s_ + 1.2, 2.2, 4.4, 2.4, tones((30, 28, 30)), n=2.4, gloss=0.6)
-    # boxy torso + duty belt + badge + radio
-    tor = sp.union([sp.m_super(0.0, 37.0 + br * 0.2, 10.0, 11.0, 3.2)], tones(SHIRT))
-    sp.rect(-10.0, 26.0, 10.6, 29.0, (30, 30, 32))
-    sp.rect(-1.0, 26.4, 1.6, 28.6, (200, 180, 90))                                              # buckle
-    sp.sup(7.6, 26.6, 2.0, 2.6, tones((40, 40, 44)), n=2.6); sp.sup(-7.0, 26.6, 2.4, 2.4, tones((40, 40, 44)), n=2.6)  # pouches
-    sp.line((0.6, 47.0), (0.6, 29.0), dark(SHIRT, 0.7))                                         # placket
-    for q in range(4): sp.dot(1.4, 45.0 - q * 4.5, (240, 236, 220))
-    sp.rect(2.6, 40.0, 7.6, 45.0, dark(SHIRT, 0.86)); sp.line((2.6, 45.0), (7.6, 45.0), dark(SHIRT, 0.6))    # pocket flap
-    star = [(4.6, 44.4), (5.3, 42.9), (6.9, 42.8), (5.7, 41.8), (6.2, 40.2), (4.6, 41.2), (3.0, 40.2), (3.5, 41.8), (2.3, 42.8), (3.9, 42.9)]
-    sp.fill(sp.m_poly(star), (255, 206, 70)); sp.dot(4.6, 42.4, (255, 250, 200), keep=True)
-    sp.rect(-7.0, 41.0, -2.0, 42.4, (30, 30, 34)); sp.rect(-6.4, 41.4, -2.6, 42.0, (230, 230, 220))      # name plate
-    sp.sup(-6.0, 48.0, 2.0, 2.6, tones((40, 40, 44)), n=2.4); sp.line((-6.0, 50.0), (-6.4, 53.0), (40, 40, 44))  # shoulder radio
-    if not aviators:                                                                            # aviators hooked on the placket
-        for cx_ in (0.0, 2.6):
-            lm = sp.m_ell(cx_, 44.4, 1.3, 1.0)[0]; sp.fill(lm, (40, 56, 76)); sp.fill(lm & ~erode(lm), (214, 176, 60))
+    if robe:                                                                                   # fluffy pink bathrobe, slippers, badge pinned on
+        for dx in (-3.0, 3.6):
+            sp.cap((dx, 12.0), (dx, 3.0), 2.4, 2.2, tones(DSKIN)); sp.sup(dx + 1.0, 1.6, 4.0, 2.0, tones((255, 200, 220)), n=2.0)
+        rb = sp.union([sp.m_super(0.0, 30.0 + br * 0.2, 10.0, 18.0, 2.6)], tones((250, 160, 196)))
+        sp.fill(rb & (DX.CHECK) & (FX.halftone() < -0.2), (255, 200, 226))
+        sp.line((1.0, 47.0), (3.0, 12.0), (220, 120, 160)); sp.rect(-9.0, 28.0, 10.0, 29.6, (220, 120, 160))
+        star = [(4.6, 44.4), (5.3, 42.9), (6.9, 42.8), (5.7, 41.8), (6.2, 40.2), (4.6, 41.2), (3.0, 40.2), (3.5, 41.8), (2.3, 42.8), (3.9, 42.9)]
+        sp.fill(sp.m_poly(star), (255, 206, 70))
+        tor = rb
+    else:
+        # legs + boots
+        for k_, dx in enumerate((-3.6, 4.0)):
+            s_ = sw if k_ else -sw
+            c = TROUS if k_ else dark(TROUS, 0.85)
+            sp.cap((dx * 0.9, 26.0), (dx + s_, 4.0), 3.4, 3.0, tones(c))
+            sp.line((dx + 2.0, 24.0), (dx + s_ + 2.4, 5.0), (196, 170, 90))                       # trouser stripe
+            sp.sup(dx + s_ + 1.2, 2.2, 4.4, 2.4, tones((30, 28, 30)), n=2.4, gloss=0.6)
+        # boxy torso + duty belt + badge + radio
+        tor = sp.union([sp.m_super(0.0, 37.0 + br * 0.2, 10.0, 11.0, 3.2)], tones(SHIRT))
+    if not robe:
+        sp.rect(-10.0, 26.0, 10.6, 29.0, (30, 30, 32))
+        sp.rect(-1.0, 26.4, 1.6, 28.6, (200, 180, 90))                                              # buckle
+        sp.sup(7.6, 26.6, 2.0, 2.6, tones((40, 40, 44)), n=2.6); sp.sup(-7.0, 26.6, 2.4, 2.4, tones((40, 40, 44)), n=2.6)  # pouches
+        sp.line((0.6, 47.0), (0.6, 29.0), dark(SHIRT, 0.7))                                         # placket
+        for q in range(4): sp.dot(1.4, 45.0 - q * 4.5, (240, 236, 220))
+        sp.rect(2.6, 40.0, 7.6, 45.0, dark(SHIRT, 0.86)); sp.line((2.6, 45.0), (7.6, 45.0), dark(SHIRT, 0.6))    # pocket flap
+        star = [(4.6, 44.4), (5.3, 42.9), (6.9, 42.8), (5.7, 41.8), (6.2, 40.2), (4.6, 41.2), (3.0, 40.2), (3.5, 41.8), (2.3, 42.8), (3.9, 42.9)]
+        sp.fill(sp.m_poly(star), (255, 206, 70)); sp.dot(4.6, 42.4, (255, 250, 200), keep=True)
+        sp.rect(-7.0, 41.0, -2.0, 42.4, (30, 30, 34)); sp.rect(-6.4, 41.4, -2.6, 42.0, (230, 230, 220))      # name plate
+        sp.sup(-6.0, 48.0, 2.0, 2.6, tones((40, 40, 44)), n=2.4); sp.line((-6.0, 50.0), (-6.4, 53.0), (40, 40, 44))  # shoulder radio
+        if not aviators:                                                                            # aviators hooked on the placket
+            for cx_ in (0.0, 2.6):
+                lm = sp.m_ell(cx_, 44.4, 1.3, 1.0)[0]; sp.fill(lm, (40, 56, 76)); sp.fill(lm & ~erode(lm), (214, 176, 60))
     # head
     hx, hy = 3.6, 60.0
     sp.cap((2.6, 49.0), (3.0, 53.0), 3.0, 3.0, tones(DSKIN))
@@ -526,11 +557,20 @@ def darlene(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.7, 0.0), blink=None, ha
     if gum > 0.02:                                                                              # the gum bubble
         r = 0.8 + 3.6 * gum
         sp.ell(hx + 5.6 + r * 0.6, hy - 4.4, r, r, tones((255, 140, 190)), gloss=0.8)
-    # the campaign hat on top of the hair
-    sp.union([sp.m_ell(hx - 0.6, hy + 12.4, 14.6, 1.8)], tones(HAT))
-    crown = sp.union([sp.m_super(hx - 0.6, hy + 16.6, 6.0, 4.4, 2.6)], tones(HAT))
-    sp.fill(crown & (DX.YC < hy + 14.0) & (DX.YC > hy + 12.8), (60, 44, 30))                     # band
-    sp.line((hx - 0.6, hy + 20.6), (hx - 0.6, hy + 17.6), dark(HAT, 0.6))                         # the pinch
+    if robe:                                                                                   # curlers instead of the hat
+        for q in range(6):
+            cx_, cy_ = hx - 9.0 + q * 3.4, hy + 9.4 - abs(q - 2.5) * 1.2
+            sp.cap((cx_ - 1.2, cy_), (cx_ + 1.2, cy_), 1.1, 1.1, tones((120, 200, 255)))
+    else:
+        # the campaign hat on top of the hair
+        sp.union([sp.m_ell(hx - 0.6, hy + 12.4, 14.6, 1.8)], tones(HAT))
+        crown = sp.union([sp.m_super(hx - 0.6, hy + 16.6, 6.0, 4.4, 2.6)], tones(HAT))
+        sp.fill(crown & (DX.YC < hy + 14.0) & (DX.YC > hy + 12.8), (60, 44, 30))                     # band
+        sp.line((hx - 0.6, hy + 20.6), (hx - 0.6, hy + 17.6), dark(HAT, 0.6))                         # the pinch
+    if wet > 0:                                                                                # dripping
+        for q in range(5):
+            yy = hy + 6.0 - ((t * 6.0 + q * 1.7) % 12.0)
+            sp.ell(hx - 8.0 + q * 3.6, yy, 0.7, 1.1, tones((150, 210, 255)), ol=False)
     sp.anchors.update(head=(hx, hy), mouth=(hx + 3.6, hy - 4.4))
     sp.outline(INK, 1)
     # near arm
@@ -538,9 +578,13 @@ def darlene(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.7, 0.0), blink=None, ha
     shN = (7.6, 47.0)
     hn = hand_n if hand_n is not None else (11.0, 30.0)
     kN, eN = ik(shN, hn, 8.2, 8.0, -1.0)
-    sp.cap(shN, (shN[0] + (kN[0] - shN[0]) * 0.45, shN[1] + (kN[1] - shN[1]) * 0.45), 2.7, 2.7, tones(SHIRT))
+    sp.cap(shN, (shN[0] + (kN[0] - shN[0]) * 0.45, shN[1] + (kN[1] - shN[1]) * 0.45), 2.7, 2.7, tones(SHIRT if not robe else (250, 160, 196)))
     sp.cap((shN[0] + (kN[0] - shN[0]) * 0.4, shN[1] + (kN[1] - shN[1]) * 0.4), kN, 2.1, 2.0, tones((236, 150, 130)))   # sunburnt forearm
     sp.cap(kN, eN, 2.0, 1.7, tones((236, 150, 130))); sp.ell(*eN, 2.1, 2.0, tones(DSKIN))
+    if megaphone:
+        sp.fill(sp.m_poly([(eN[0] + 0.5, eN[1] + 1.2), (eN[0] + 0.5, eN[1] - 1.2), (eN[0] + 7.0, eN[1] - 3.4), (eN[0] + 7.0, eN[1] + 3.4)]),
+                (246, 246, 240))
+        sp.line((eN[0] + 7.0, eN[1] - 3.4), (eN[0] + 7.0, eN[1] + 3.4), (226, 34, 52))
     if prop_n: prop_n(sp, eN)
     sp.anchors['hand'] = eN
     new = sp.m & ~before
@@ -552,6 +596,9 @@ def darlene(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.7, 0.0), blink=None, ha
 TSKIN = (238, 196, 166)
 POLO = (34, 56, 112)
 KHAKI = (196, 176, 126)
+UNIF = dict(ac=((34, 56, 112), (196, 176, 126)), deli=((240, 240, 234), (60, 60, 70)), billing=((150, 196, 230), (150, 196, 230)),
+            vet=((60, 190, 176), (60, 190, 176)), insurance=((255, 206, 70), (40, 50, 80)), mgmt=((150, 110, 200), (196, 176, 126)),
+            fwc=((190, 170, 110), (70, 100, 60)), warden=((240, 240, 236), (30, 30, 36)))
 HAIRB = (110, 72, 40)
 TIPS = (250, 230, 150)
 JOBS = [('COOL-RITE', (40, 120, 200)), ('PUBBIX', (40, 176, 150)), ('HOSPITAL', (230, 230, 240)), ('DR PAWS', (255, 140, 60)),
@@ -561,8 +608,10 @@ JOBS = [('COOL-RITE', (40, 120, 200)), ('PUBBIX', (40, 176, 150)), ('HOSPITAL', 
 def tanner(sp, t=0.0, expr='chipper', mouth_=0.0, look=(0.7, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
            thumbs=False, jobs=1, uniform='ac', walk=None, frost=0.0, shiver=0.0, sweat=0.0):
     """TANNER — «lit match»: tall and thin, spiky frosted tips, a megawatt grin, Bluetooth earpiece, a lanyard with one badge per job.
-    uniform 'ac' = navy COOL-RITE work polo + khakis (E01)"""
+    uniform: 'ac' navy COOL-RITE polo (E01) | 'deli' white shirt + green apron + paper hat (E02) | 'billing' / 'vet' scrubs (E03) |
+    'insurance' yellow SUNSURE polo (E04) | 'mgmt' purple polo (E05) | 'fwc' ranger khaki (E05) | 'warden' black concierge vest (E06)"""
     E = X(expr)
+    POLO, KHAKI = UNIF.get(uniform, UNIF['ac'])[:2]
     if blink is None: blink = (t % 3.3) < 0.11
     shv = shiver * math.sin(t * 60.0) * 0.6
     sw = math.sin(walk) * 2.6 if walk is not None else 0.0
@@ -581,6 +630,19 @@ def tanner(sp, t=0.0, expr='chipper', mouth_=0.0, look=(0.7, 0.0), blink=None, h
     tor = sp.union([sp.m_super(0.4 + shv, 42.0, 6.6, 11.0, 2.6)], tones(POLO))
     sp.rect(-6.0, 30.0, 7.0, 32.0, (60, 46, 30))                                               # belt
     sp.rect(2.0 + shv, 44.0, 6.4 + shv, 47.0, (240, 240, 240)); txt(sp, 'T', 3.4 + shv, 46.6, (34, 56, 112))   # name patch
+    if uniform == 'deli':                                                                       # green deli apron
+        ap = sp.m_poly([(-4.6 + shv, 46.0), (6.6 + shv, 46.0), (7.4 + shv, 26.0), (-5.4 + shv, 26.0)])
+        sp.paint(ap, tones((34, 150, 110)), np.clip((DX.YC - 26) / 20, 0, 1) * 0.5 + 0.3)
+        sp.line((-4.0 + shv, 46.0), (-1.0 + shv, 53.0), (34, 150, 110)); sp.line((6.0 + shv, 46.0), (4.0 + shv, 53.0), (34, 150, 110))
+    if uniform == 'vet':
+        for q in range(5): sp.dot(-3.0 + shv + q * 2.2, 36.0 + (q % 2) * 3.0, (255, 255, 255))   # paw-print dots
+    if uniform == 'warden':                                                                     # black concierge vest + gold badge
+        sp.fill(tor & ((DX.XC < 0.6 + shv - 1.4) | (DX.XC > 0.6 + shv + 1.4)), (30, 30, 36))
+        star = [(5.0 + shv, 46.0), (5.6 + shv, 44.8), (6.8 + shv, 44.6), (5.9 + shv, 43.8), (6.3 + shv, 42.4), (5.0 + shv, 43.2), (3.7 + shv, 42.4),
+                (4.1 + shv, 43.8), (3.2 + shv, 44.6), (4.4 + shv, 44.8)]
+        sp.fill(sp.m_poly(star), (255, 206, 70))
+    if uniform == 'insurance':
+        sp.cap((1.0 + shv, 51.0), (1.4 + shv, 40.0), 0.9, 1.3, tones((40, 50, 80)))              # tie
     # lanyard + badges
     sp.line((-1.0 + shv, 52.0), (1.6 + shv, 41.0), (40, 176, 150)); sp.line((4.0 + shv, 52.0), (1.6 + shv, 41.0), (40, 176, 150))
     for q in range(max(1, jobs)):
@@ -626,6 +688,9 @@ def tanner(sp, t=0.0, expr='chipper', mouth_=0.0, look=(0.7, 0.0), blink=None, h
             yy = y - ((t * 4.0 + i * 1.3) % 4.0)
             sp.ell(x, yy, 0.8, 1.2, tones((170, 230, 255)), ol=False); sp.dot(x, yy + 0.5, WHITE)
         sp.fill(sp.m_ell(hx - 1.0, 49.0, 3.0, 2.0)[0] & tor, dark(POLO, 0.7))              # sweat patch
+    if uniform == 'deli':                                                                       # paper deli cap on the spikes
+        sp.fill(sp.m_poly([(hx - 5.0, hy + 7.0), (hx + 5.0, hy + 7.0), (hx + 3.0, hy + 10.6), (hx - 3.0, hy + 10.6)]), (250, 250, 246))
+        sp.line((hx - 5.0, hy + 7.6), (hx + 5.0, hy + 7.6), (34, 150, 110))
     sp.anchors.update(head=(hx, hy), mouth=(hx + 2.8, hy - 4.6))
     sp.outline(INK, 1)
     before = sp.m.copy()
@@ -757,3 +822,163 @@ def van(sp, t=0.0, frost=1.0):
     _wheel(sp, -16.0, 4.6, 4.6, 0.0); _wheel(sp, 16.0, 4.6, 4.6, 0.0)
     sp.ell(26.0, 14.0, 1.0, 1.4, tones((255, 236, 160)))
     sp.outline(INK, 1)
+
+
+# ======================================================================================== more props (E02–E06)
+def price_tag(sp, t=0.0, price='$14.99', label='SUB', cuffed=False, side=False):
+    """the deli price card on a little stand; cuffed = steel handcuffs around it; side = seen edge-on (mugshot profile: a thin line)"""
+    if side:
+        sp.rect(-0.6, 0.0, 0.6, 22.0, (250, 250, 244)); sp.rect(-0.6, 0.0, 0.6, 1.0, (40, 40, 44))
+        sp.outline(INK, 1); return
+    sp.rect(-15.0, 4.0, 15.0, 22.0, (250, 250, 244))
+    sp.rect(-15.0, 16.0, 15.0, 22.0, (40, 176, 150)); txt(sp, label, -txt_w(label) // 2, 20.6, (255, 255, 255))
+    txt(sp, price, -txt_w(price) // 2, 14.0, (226, 30, 40))
+    sp.rect(-2.0, 0.0, 2.0, 4.0, (60, 60, 64))
+    if cuffed:
+        for cx_ in (-15.0, 15.0):                                                               # cuffs clamp the card's edges
+            r = sp.m_ell(cx_, 8.0, 3.0, 3.4)[0] & ~sp.m_ell(cx_, 8.0, 1.8, 2.2)[0]
+            sp.fill(r, (200, 206, 214)); sp.fill(r & (DX.YC > 8.6), (240, 244, 250))
+        sp.line((-12.0, 6.0), (12.0, 6.0), (170, 176, 186))
+    sp.outline(INK, 1)
+
+
+def cruiser(sp, t=0.0, lights=True):
+    """the sheriff's cruiser, side view facing +x: white with a green stripe, a red/blue light bar that blinks"""
+    W_ = (244, 244, 240)
+    body = sp.union([sp.m_super(0.0, 9.0, 26.0, 5.0, 3.0), sp.m_super(-2.0, 15.0, 14.0, 4.6, 2.4)], tones(W_))
+    sp.fill(body & (np.abs(DX.YC - 5.6) < 1.1), (40, 120, 70))
+    txt(sp, 'SHERIFF', -txt_w('SHERIFF') // 2 - 2, 12.0, (40, 120, 70))
+    sp.fill(sp.m_poly([(-12.0, 13.0), (8.0, 13.0), (5.0, 18.6), (-10.0, 18.6)]), (90, 130, 170))
+    if lights:
+        on = int(t * 6) % 2
+        sp.rect(-6.0, 19.6, -1.0, 21.4, (226, 40, 52) if on else (110, 30, 40)); sp.rect(-1.0, 19.6, 4.0, 21.4, (60, 110, 255) if not on else (30, 50, 120))
+    _wheel(sp, -16.0, 4.4, 4.4, t * 10); _wheel(sp, 16.0, 4.4, 4.4, t * 10)
+    sp.outline(INK, 1)
+
+
+def card_table(sp, t=0.0, price='$40/YR'):
+    """a folding card table with a hand-painted banner «FLORIDA MAN / MUTUAL» + price, a cash box and a rubber stamp"""
+    sp.line((-24.0, 0.0), (-22.0, 14.0), (120, 120, 126)); sp.line((24.0, 0.0), (22.0, 14.0), (120, 120, 126))
+    sp.rect(-26.0, 14.0, 26.0, 16.0, (60, 60, 66))
+    sp.rect(-25.0, 2.0, 25.0, 14.0, (236, 226, 196))                                              # the banner hangs from the table edge
+    txt(sp, 'FLORIDA MAN', -txt_w('FLORIDA MAN') // 2, 12.6, (226, 34, 52))
+    txt(sp, 'MUTUAL ' + price, -txt_w('MUTUAL ' + price) // 2, 6.6, (20, 120, 130))
+    sp.rect(10.0, 16.0, 17.0, 19.0, (60, 120, 70)); sp.rect(-8.0, 16.0, -5.0, 20.0, (120, 70, 40)); sp.rect(-9.0, 16.0, -4.0, 17.0, (40, 40, 44))
+    sp.outline(INK, 1)
+    sp.anchors.update(top=(0.0, 16.0))
+
+
+def truck(sp, t=0.0, text='BYE, FLORIDA!'):
+    """a white moving truck with an orange stripe and a banner taped on the side"""
+    body = sp.union([sp.m_super(-6.0, 17.0, 22.0, 13.0, 4.0), sp.m_super(21.0, 12.0, 8.0, 8.0, 3.0)], tones((244, 244, 238)))
+    sp.fill(body & (np.abs(DX.YC - 8.0) < 1.6), (255, 130, 40))
+    lines_ = text.split(' ', 1) if txt_w(text) > 34 else [text]
+    sp.rect(-24.0, 27.0 - 6.4 * len(lines_) - 1.0, 12.0, 27.0, (255, 236, 96))
+    for q, ln in enumerate(lines_): txt(sp, ln, -6.0 - txt_w(ln) // 2, 25.6 - q * 6.4, (226, 34, 52))
+    sp.fill(sp.m_poly([(17.0, 12.0), (27.0, 12.0), (27.0, 18.0), (19.0, 18.0)]), (90, 130, 170))
+    _wheel(sp, -18.0, 4.4, 4.4, t * 12); _wheel(sp, 20.0, 4.4, 4.4, t * 12)
+    sp.outline(INK, 1)
+
+
+SNAKE = (150, 130, 70)
+
+
+def python(sp, t=0.0, pts=None, pose='coil', tongue=True, lump=0.0, eyes=True, bow=False, hiss=0.0):
+    """a Burmese python: a thick patterned body along a path (pose 'coil' | 'couch' | 'bow' | custom pts), head at the last point;
+    lump > 0 = a swallowed sub bulging at that fraction of the body"""
+    if pts is None:
+        if pose == 'coil':
+            pts = [(-28.0, 3.0), (-14.0, 2.0), (0.0, 4.0), (10.0, 10.0), (8.0, 20.0), (-2.0, 26.0), (2.0, 34.0), (12.0, 38.0)]
+        elif pose == 'couch':
+            pts = [(-30.0, 16.0), (-16.0, 14.0), (-2.0, 15.0), (10.0, 17.0), (18.0, 22.0), (20.0, 30.0), (26.0, 34.0)]
+        elif pose == 'bow':
+            pts = [(-20.0, 4.0), (-8.0, 10.0), (0.0, 16.0), (-8.0, 22.0), (0.0, 16.0), (8.0, 22.0), (0.0, 16.0), (8.0, 10.0), (20.0, 4.0)]
+        else:
+            pts = [(-20.0, 3.0), (0.0, 3.0), (18.0, 6.0)]
+    sw = 0.8 * math.sin(t * 3.0)
+    seg = []
+    for (a, b) in zip(pts[:-1], pts[1:]):
+        n = max(2, int(math.hypot(b[0] - a[0], b[1] - a[1]) / 1.5))
+        for q in range(n):
+            u = q / n
+            seg.append((a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u))
+    seg.append(pts[-1])
+    N = len(seg)
+    for i, (x, y) in enumerate(seg):
+        k = i / max(1, N - 1)
+        r = 1.2 + 2.2 * math.sin(math.pi * min(1.0, k * 1.05)) ** 0.6
+        if lump and abs(k - lump) < 0.06: r += 1.6
+        y2 = y + sw * math.sin(k * 6.0 + t * 4.0) * 0.4
+        c = SNAKE if (i // 3) % 2 else (110, 90, 50)
+        sp.ell(x, y2, r, r, tones(c), ol=False)
+    sp.outline(INK, 1)
+    hx, hy = seg[-1]
+    ang = math.atan2(seg[-1][1] - seg[-4][1], seg[-1][0] - seg[-4][0])
+    ex, ey = hx + math.cos(ang) * 2.4, hy + math.sin(ang) * 2.4
+    sp.ell(ex, ey, 3.4, 2.4, tones(SNAKE), ang=ang)
+    if eyes: sp.dot(ex + 0.4, ey + 1.0, (255, 220, 60)); sp.dot(ex + 0.6, ey + 1.0, INK)
+    if tongue and int(t * 4) % 2:
+        tx, ty = ex + math.cos(ang) * 4.4, ey + math.sin(ang) * 4.4
+        sp.line((tx, ty), (tx + math.cos(ang) * 2.4, ty + math.sin(ang) * 2.4), (226, 40, 60))
+    if hiss > 0:
+        sp.fill(sp.m_ell(ex + math.cos(ang) * 2.0, ey - 1.0, 1.6, 1.2 + hiss)[0], (120, 20, 30))
+    sp.outline(INK, 1)
+    sp.anchors.update(head=(ex, ey))
+
+
+def airboat(sp, t=0.0, spin=0.0):
+    """an Everglades airboat: flat aluminium hull, raised driver seat, a big caged propeller at the back"""
+    hull = sp.m_poly([(-26.0, 2.0), (22.0, 2.0), (28.0, 6.0), (-26.0, 7.0)])
+    sp.paint(hull, tones((190, 196, 204)), np.clip((DX.YC - 2) / 5, 0, 1) * 0.6 + 0.2)
+    sp.rect(-24.0, 6.0, 20.0, 7.0, (40, 120, 200))
+    sp.cap((-10.0, 7.0), (-10.0, 20.0), 0.8, 0.8, tones((120, 120, 126))); sp.rect(-14.0, 20.0, -5.0, 22.0, (40, 40, 44))   # seat
+    cage = sp.m_ell(-22.0, 18.0, 4.0, 11.0)[0]
+    sp.fill(cage & ~erode(cage), (150, 156, 164))
+    for q in range(3):
+        a = spin + q * 2.09
+        sp.line((-22.0, 18.0), (-22.0 + 0.6 * math.cos(a), 18.0 + 10.0 * math.sin(a)), (90, 70, 50))
+    sp.ell(-22.0, 18.0, 1.0, 1.0, tones((60, 60, 66)))
+    sp.outline(INK, 1)
+    sp.anchors.update(seat=(-10.0, 22.0))
+
+
+def suitcase(sp, h, col=(226, 34, 52)):
+    sp.rect(h[0] - 3.0, h[1] - 9.0, h[0] + 5.0, h[1] - 2.0, col); sp.rect(h[0] - 0.6, h[1] - 2.0, h[0] + 2.0, h[1] + 0.4, (40, 40, 44))
+    sp.rect(h[0] - 2.0, h[1] - 8.0, h[0] + 1.0, h[1] - 5.0, (255, 236, 96))
+
+
+def noodle(sp, h, col=(255, 86, 160)):
+    sp.cap((h[0] - 2.0, h[1] - 10.0), (h[0] + 3.0, h[1] + 12.0), 1.4, 1.4, tones(col))
+
+
+def flyer(sp, t=0.0, kind='retiree'):
+    """a snowbird: a retiree flying with arms out like wings (season 2 tease)"""
+    L = LOCALS[kind]
+    flap = math.sin(t * 9.0) * 4.0
+    sp.union([sp.m_ell(0.0, 0.0, 7.0, 4.0)], tones(L['shirt']))
+    sp.cap((-2.0, 1.0), (-8.0, 4.0 + flap), 1.4, 1.2, tones(L['skin'])); sp.cap((2.0, 1.0), (8.0, 4.0 + flap), 1.4, 1.2, tones(L['skin']))
+    sp.cap((-6.0, -1.0), (-12.0, -2.0), 1.4, 1.2, tones(L['shorts']))
+    sp.ell(8.0, 1.0, 3.4, 3.4, tones(L['skin'])); sp.rect(6.0, 3.4, 11.0, 4.4, (250, 250, 250)); sp.dot(9.4, 1.6, INK)
+    sp.outline(INK, 1)
+
+
+def flip_phone(sp, h, open_=True):
+    """a battered silver flip phone held to the cheek (antenna up)"""
+    sp.rect(h[0] - 1.0, h[1] - 0.6, h[0] + 1.4, h[1] + 4.4, (186, 192, 204))
+    if open_: sp.rect(h[0] - 0.6, h[1] + 4.4, h[0] + 1.0, h[1] + 7.4, (150, 156, 170)); sp.dot(h[0] + 0.2, h[1] + 6.4, (120, 230, 255))
+    sp.line((h[0] + 1.2, h[1] + 4.0), (h[0] + 1.6, h[1] + 9.0), (60, 60, 66))
+
+
+def coupon(sp, h):
+    """a crumpled paper coupon (red dashed border) pinched between the fingers"""
+    sp.rect(h[0] - 0.4, h[1] - 0.6, h[0] + 6.4, h[1] + 3.6, (252, 248, 230))
+    for q in range(0, 7, 2): sp.dot(h[0] - 0.4 + q, h[1] + 3.6, (226, 34, 52)); sp.dot(h[0] - 0.4 + q, h[1] - 0.6, (226, 34, 52))
+    sp.dot(h[0] + 1.6, h[1] + 1.6, (226, 34, 52)); sp.dot(h[0] + 3.4, h[1] + 1.6, (14, 44, 54))
+
+
+def cuffs(sp, h):
+    """open steel handcuffs dangling from the hand"""
+    for cx_, cy_ in ((h[0] + 0.4, h[1] - 2.2), (h[0] + 2.6, h[1] - 4.6)):
+        r = sp.m_ell(cx_, cy_, 1.6, 1.8)[0] & ~sp.m_ell(cx_, cy_, 0.8, 1.0)[0]
+        sp.fill(r, (206, 212, 222))
+    sp.line((h[0] + 1.2, h[1] - 3.0), (h[0] + 1.8, h[1] - 3.8), (150, 156, 166))

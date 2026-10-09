@@ -29,6 +29,29 @@ BG = {
             'green, a plain steel bunk bed attached to the wall at the left with a thin grey mattress, a small high window with bars and a '
             'beam of hot sunlight, a square air-conditioning vent grille high on the right side of the wall, a concrete floor in the lower '
             'third, gritty and plain.',
+    'deli': 'Front view of the deli counter inside a Florida supermarket: a long glass deli display case with trays of sliced meats, '
+            'cheeses and salads in the middle, a meat slicer and a digital scale standing on top of the counter, behind it a wall with a big '
+            'completely blank menu board, shelves with bread rolls and wrapped sandwiches, bright fluorescent lights, a polished floor in the '
+            'lower third in front of the counter, clean and empty.',
+    'hospital': 'Front view of a hospital billing and cashier window: a counter with a thick glass partition and a small speaking hole, a '
+                'blank sign above it, a water cooler, a potted plant, pale green walls with a handrail, fluorescent ceiling lights, a linoleum '
+                'floor in the lower third, a little rope barrier with stanchions, clean, sterile and slightly depressing.',
+    'vet': 'Front view of the waiting room of a small Florida veterinary clinic: a row of plastic waiting chairs along the wall in the middle, '
+           'a reception counter on the right, a big blank poster on the wall, a dog water bowl, a pet scale on the floor, a cat tree, a window '
+           'with palm trees outside, cheerful pastel teal and yellow walls with painted paw prints, tiled floor in the lower third, empty.',
+    'swamp': 'Side view of the Florida Everglades at noon: wide flat sawgrass marsh, a channel of dark still water across the lower third with '
+             'lily pads, mangrove and cypress trees with Spanish moss, a small wooden dock on the left edge, distant herons, big cumulus '
+             'clouds in a hot cyan sky, heat haze.',
+    'booth': 'Front view of a small weathered wooden roadside kiosk booth in the Florida Everglades with a big open service window and a '
+             'counter shelf in the middle, a completely blank sign board above the window, a cooler, wooden dock posts, sawgrass and palm '
+             'trees around, a gravel parking area in the lower third, hot noon sun.',
+    'jail_ext': 'Front view of the outside of a small county jail at night: a tall chain-link fence with a closed gate across the middle of '
+                'the frame, behind it a beige concrete jail building with small barred windows and a completely blank sign, a tall light pole '
+                'with a bright searchlight beam, palm trees, a dark blue night sky with stars, an empty parking lot in the lower third, warm '
+                'yellow sodium lights.',
+    'booking': 'Front view of the booking desk of a small county jail: a long high wooden counter in the middle with a computer monitor, a '
+               'fingerprint pad and a small service bell, behind it a pale green wall with a bulletin board with blank papers and a round '
+               'wall clock, a camera on a tripod on the right, fluorescent lights, a linoleum floor in the lower third, empty.',
 }
 
 if __name__ == '__main__':

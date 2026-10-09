@@ -72,6 +72,12 @@ def light_aisle(v):
                  grad=(1.06, 0.94))
 
 
+def light_deli(v):
+    """deli counter: warm fluorescent ceiling, a bit of window sun from the left"""
+    return Light(amb=(1.02, 1.01, 0.98), keys=_keys(v, ((120, 200, 700, (255, 236, 190), 0.3),)), rim=(0, -1, (255, 250, 236), 0.5),
+                 grad=(1.04, 0.95))
+
+
 def light_cell(v):
     return Light(amb=(0.94, 0.98, 0.90), keys=_keys(v, ((540, 140, 520, (255, 220, 140), 0.45),)), rim=(1, -1, (255, 236, 180), 0.4),
                  grad=(1.04, 0.92))
@@ -411,12 +417,35 @@ def bake_aisle(Wd):
     wtext(Wd, t2, (x0 + x1 - wtext_w(t2, 2)) // 2, y0 + 34, (255, 236, 96), 2)
 
 
+def bake_deli(Wd):
+    """the Pubbix deli menu board (prices!) and the scale's LCD showing Mort's weight and price"""
+    x0, y0, x1, y1 = 360, 80, 968, 216
+    Wd[y0:y1, x0:x1] = (250, 244, 222)
+    t = 'PUBBIX DELI'
+    wtext(Wd, t, (x0 + x1 - wtext_w(t, 4)) // 2, y0 + 6, (34, 150, 110), 4)
+    rows = [('CHICKEN TENDER SUB', '$14.99', (226, 30, 40)), ('ITALIAN SUB', '$15.49', (14, 44, 54)),
+            ('HALF A SUB', '$11.99', (14, 44, 54)), ('SUB-SIZED SUB', '$13.99', (14, 44, 54))]
+    for i, (a, b, c) in enumerate(rows):
+        y = y0 + 34 + i * 20
+        wtext(Wd, a, x0 + 22, y, c, 3)
+        wb = wtext_w(b, 3)
+        wtext(Wd, b, x1 - 22 - wb, y, c, 3)
+        xa = x0 + 22 + wtext_w(a, 3) + 8
+        for xx in range(xa, x1 - 30 - wb, 9): Wd[y + 11:y + 14, xx:xx + 3] = (150, 150, 140)
+    t = '*PRICES MAY VARY. UP.'
+    wtext(Wd, t, (x0 + x1 - wtext_w(t, 2)) // 2, y1 - 14, (226, 30, 40), 2)
+    sx0, sy0, sx1, sy1 = 929, 262, 996, 286                       # the scale's LCD
+    Wd[sy0:sy1, sx0:sx1] = (30, 52, 40)
+    wtext(Wd, '18.2LB', sx0 + 4, sy0 + 2, (140, 255, 160), 1)
+    wtext(Wd, '$72.80', sx0 + 4, sy0 + 10, (140, 255, 160), 2)
+
+
 class ST_res_guard:
     def __enter__(s): s.k = ST.PX[0]; return s
     def __exit__(s, *a): ST.set_px(s.k)
 
 
-BAKE = dict(yard=bake_yard, store=bake_store, aisle=bake_aisle)
+BAKE = dict(yard=bake_yard, store=bake_store, aisle=bake_aisle, deli=bake_deli)
 
 
 def world_baked(name):
