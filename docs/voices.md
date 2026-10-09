@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-08 16:03.
+Обновлено: 2026-10-09 07:54.
 
 ## agent-dibs
 
@@ -20,6 +20,15 @@
 | The Chief | `chief` | `rEkmbL8g1KnVDXo1RoDN` | deleted 2026-10-06 | 4 / 3 | Agent Dibs — The Chief |
 | Mrs. Wozniak | `mrs_w` | `pP2cFkzWZzNw0LkjA4ec` | deleted 2026-10-06 | 3 / 2 | Agent Dibs — Mrs. Wozniak |
 | NY Cabbie | `cabbie` | `PpmimHEhUDo0e4uO8FFz` | deleted 2026-10-06 | 1 / 1 | Agent Dibs — NY Cabbie |
+
+## florida-man
+
+| Герой | char | voice_id | Статус | Реплик / серий | Голос |
+|---|---|---|---|---|---|
+| Florida Man | `fm` | `GBn8jPzCnZIbx5Kf8r1J` | active | 6 / 1 | Florida Man — Florida Man |
+| Tanner | `tanner` | `GpiDvTn0zpQeiQA9VdB7` | active | 3 / 1 | Florida Man — Tanner |
+| Deputy Darlene | `darlene` | `dgd3UC679ZtpWOphbJ9Y` | active | 2 / 1 | Florida Man — Deputy Darlene |
+| Mort Pouch, Esq. | `mort` | `d44i4jCJHjBEUuFbGaGy` | active | 1 / 1 | Florida Man — Mort Pouch, Esq. |
 
 ## grim-ride
 
@@ -37,13 +46,13 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Мазутыч | `maz` | `xSY5jZDD2Tge1l2uwiQn` | active | 26 / 6 | Мазутыч — Мазутыч |
+| Мазутыч | `maz` | `xSY5jZDD2Tge1l2uwiQn` | active | 29 / 6 | Мазутыч — Мазутыч |
 | Зоя (АЗС) | `zoya` | `aNpGfBJ5tarP9jXqryIk` | active | 13 / 4 | Мазутыч — Зоя (АЗС) |
-| Дин-Дон (моноколесо) | `wheel` | `Kp5sQTqr3PnriPusCHEb` | active | 8 / 6 | Мазутыч — Дин-Дон (моноколесо) |
-| Инспектор Столбов (ДПС) | `cop` | `sqjFPShWaZX3JdS3utu1` | active | 8 / 1 | Мазутыч — Инспектор Столбов (ДПС) |
-| Толик (водитель бензовоза) | `tolik` | `6FfEAtYZ4qqQztCjEr34` | active | 7 / 3 | Мазутыч — Толик (водитель бензовоза) |
-| Вадик (барыга) | `vadik` | `3YcbIhxRmKe16pBspvSh` | active | 7 / 1 | Мазутыч — Вадик (барыга) |
-| Борис Борисыч | `boss` | `iJVGC18PiXCeNoMe4wOM` | active | 6 / 3 | Мазутыч — Борис Борисыч |
+| Дин-Дон (моноколесо) | `wheel` | `Kp5sQTqr3PnriPusCHEb` | active | 9 / 6 | Мазутыч — Дин-Дон (моноколесо) |
+| Инспектор Столбов (ДПС) | `cop` | `sqjFPShWaZX3JdS3utu1` | active | 8 / 1 | mazutych — Инспектор Столбов (ДПС) (restored) |
+| Борис Борисыч | `boss` | `iJVGC18PiXCeNoMe4wOM` | active | 8 / 4 | mazutych — Борис Борисыч (restored) |
+| Толик (водитель бензовоза) | `tolik` | `6FfEAtYZ4qqQztCjEr34` | active | 7 / 3 | mazutych — Толик (водитель бензовоза) (restored) |
+| Вадик (барыга) | `vadik` | `3YcbIhxRmKe16pBspvSh` | active | 7 / 1 | mazutych — Вадик (барыга) (restored) |
 
 ## pochti-dikiy-zapad
 

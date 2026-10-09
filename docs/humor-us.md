@@ -41,7 +41,7 @@
 ## 7. Уже использовано (не повторять в других US мультах)
 - «Agent Dibs» S01 (сценарий на согласовании, гэги в резерве): полный список внизу, блок «Использовано в Agent Dibs».
 - «Grim Ride» S01 (готов 06.10.2026): блок «Использовано в Grim Ride» внизу.
-- «Florida Man: Allegedly» S01 (сценарий на согласовании 08.10.2026, гэги в резерве): блок «Florida Man» внизу.
+- «Florida Man: Allegedly» S01 (E01 готов 09.10.2026, остальные гэги в резерве): блок «Florida Man» внизу.
 - «Sunny Palms HOA» S01: Saxophone gets louder (`sax_sting_swell`), Aura ±9999, Florida Man, «I watched a video», HOA/Karen, emotional support animal (сертификат $19.99), соседское приложение, штраф урагану, tip fatigue, выборы в HOA, «Bless your heart» + «TRANSLATION: YOU IDIOT», TOTAL FINES, Beautification Fund / Bahamas, Earl «grandfathered in».
 
 ---
@@ -242,7 +242,7 @@ time.com / abc7ny.com (age limits), knowyourmeme.com / napoleoncat.com (сент
 ### Пародийные бренды (банк §4)
 «Pubbix» (Publix, «Where Shopping Is a Pleasure*» / «*prices may vary»), «Sunsure Mutual» (страховая), «Cool-Rite A/C», «Dr. Paws Animal Clinic», «Sawgrass Acres Mobile Estates», «Sunshine County Jail & Resort», «Mort Pouch, Esq. — 1-800-POUCH-ME».
 
-### Заложено в «Florida Man: Allegedly», сезон 1 (сценарий на согласовании; после выпуска считать использованным)
+### Заложено в «Florida Man: Allegedly», сезон 1 (E01 использован 09.10.2026: «Want the extended WARRANTY?», «What sub?», «I'm BROWSING.», «Broke. Nine GRAND.», «HIS TOO?!», «AISLE 9: FULL»)
 - «Hold my sub.» и судьба саба по сериям; карта «FREQUENT GUEST 10 STAYS = 1 FREE NIGHT»; плашка «(ALLEGEDLY)»; имя героя всегда перекрыто звуком; Таннер «No worries!» и «JOB #1…#8».
 - «Want the extended WARRANTY?», «I'm not living, ma'am. I'm BROWSING.», «Broke. Nine GRAND.»; «Fourteen ninety-NINE. Totally different!», «report a ROBBERY» — «Aisle four. DELI.», «So's my PAYCHECK.», ценник в наручниках; «ORGANIC ice», «Out-of-NETWORK water», «SPECIES: FLORIDA», «Who's a GOOD boy?», микрочип; «Was it WIND… or FLOOD?», «Congrats. You're the bad guy NOW.»; «TINY HOME», «My fee is a THIRD», «He's got better CREDIT.», «Take me HOME»; «Jail's CHEAPER than RENT!», «RESORT fee», «Pillow's a SUBSCRIPTION», «My client pleads… FLORIDA.», крючок «SEASON 2: SNOWBIRDS».
 

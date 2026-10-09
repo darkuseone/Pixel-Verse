@@ -1,7 +1,8 @@
 """Tighten TTS takes: trim leading/trailing silence, shrink inner pauses, optional tempo per speaker.
   python3 engine/tighten.py <slug> <ep>       # voice/<ep>/*.mp3 -> voice/<ep>_t/*.mp3 (+ bounds json)
 Config in series/<slug>/voice/<ep>/tighten.json (optional):
-  {"tempo": {"dale": 1.06}, "gap": 0.10, "keep": {"e2": 0.30}}   # keep: per-line pause to keep (seconds)
+  {"tempo": {"dale": 1.06}, "gap": 0.10, "keep": {"e2": 0.30}, "tempo_key": {"f3": 1.15}}   # keep: per-line pause to keep (seconds);
+                                                                                           # tempo_key: per-line tempo (wins over the speaker's)
 The tightened clips are what timeline.py / mix.py use (a=0, b=dur), so captions and lip-flap stay in sync."""
 import json, subprocess, sys
 import numpy as np
@@ -59,7 +60,7 @@ def run(slug, ep):
     for k, (who, txt) in L.items():
         a = load(base / ep / f'{k}.mp3')
         x = tighten(a, cfg.get('keep', {}).get(k, cfg.get('gap', 0.10)))
-        tempo = cfg.get('tempo', {}).get(who, 1.0)
+        tempo = cfg.get('tempo_key', {}).get(k, cfg.get('tempo', {}).get(who, 1.0))
         write_mp3(x, dst / f'{k}.mp3', tempo)
         d = len(x) / SR / tempo; total += d
         print(f'{k:3s} {who:6s} {len(a) / SR:5.2f}s -> {d:5.2f}s')
