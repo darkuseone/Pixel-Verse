@@ -313,17 +313,18 @@ def booking_board(big, cx, cy, lines, w=640):
 
 
 # ---------------------------------------------------------------- the A/C invoice held up to the camera (screen space)
-def invoice_card(big, x, y, w=520, ang=-6.0, amount='$9,000'):
+def invoice_card(big, x, y, w=520, ang=-6.0, amount='$9,000', head='COOL-RITE A/C', lines=('COMPRESSOR...DEAD', 'WAIT.....3 WEEKS'),
+                 hc=(40, 120, 200)):
     h = int(w * 0.62)
     hb = int(h * 0.27)
     im = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(im); d.fontmode = '1'
     d.rectangle([0, 0, w - 1, h - 1], fill=(14, 44, 54, 255))
     d.rectangle([8, 8, w - 9, h - 9], fill=(252, 252, 244, 255))
-    d.rectangle([8, 8, w - 9, hb], fill=(40, 120, 200, 255))
+    d.rectangle([8, 8, w - 9, hb], fill=hc + (255,))
     fh, fl, ft = O.pfont(max(16, int(w * 0.056))), O.pfont(max(10, int(w * 0.036))), O.pfont(max(12, int(w * 0.044)))
-    d.text((int(w * 0.055), int(hb * 0.36)), 'COOL-RITE A/C', font=fh, fill=(255, 255, 255, 255))
-    d.text((int(w * 0.055), hb + int(h * 0.07)), 'COMPRESSOR...DEAD', font=fl, fill=(70, 70, 80, 255))
-    d.text((int(w * 0.055), hb + int(h * 0.17)), 'WAIT.....3 WEEKS', font=fl, fill=(70, 70, 80, 255))
+    d.text((int(w * 0.055), int(hb * 0.36)), head, font=fh, fill=(255, 255, 255, 255))
+    for i, ln in enumerate(lines[:2]):
+        d.text((int(w * 0.055), hb + int(h * (0.07 + 0.10 * i))), ln, font=fl, fill=(70, 70, 80, 255))
     d.text((int(w * 0.055), hb + int(h * 0.30)), 'TOTAL:', font=ft, fill=(70, 70, 80, 255))
     f = O.pfont(int(w * 0.1)); bb = f.getbbox(amount)
     d.text((w - int(w * 0.055) - (bb[2] - bb[0]) - bb[0], h - int(h * 0.09) - (bb[3] - bb[1]) - bb[1]), amount, font=f, fill=(226, 30, 40, 255))
@@ -380,8 +381,11 @@ def wtext_w(s_, k=1):
     return C.txt_w(s_) * k
 
 
+SLOGAN = ["ARRESTED?", "GATOR'D? MELTED?"]           # Mort's billboard slogan: a new one every episode (set before world_baked('yard'))
+
+
 def bake_yard(Wd):
-    """Mort's billboard across the canal: his face + «MORT POUCH, ESQ. / ARRESTED? GATOR'D? MELTED? / 1-800-POUCH-ME»"""
+    """Mort's billboard across the canal: his face + «MORT POUCH, ESQ. / <slogan> / 1-800-POUCH-ME»"""
     x0, y0, x1, y1 = 812, 218, 1002, 312
     Wd[y0:y1, x0:x1] = (250, 248, 238)
     Wd[y0:y0 + 6, x0:x1] = (40, 196, 196)
@@ -391,8 +395,8 @@ def bake_yard(Wd):
     tx = x0 + 70
     wtext(Wd, 'MORT POUCH', tx, y0 + 14, (14, 44, 54), 2)
     wtext(Wd, 'ESQ.', tx, y0 + 28, (14, 44, 54), 2)
-    wtext(Wd, "ARRESTED?", tx, y0 + 44, (226, 34, 52), 1)
-    wtext(Wd, "GATOR'D? MELTED?", tx, y0 + 52, (226, 34, 52), 1)
+    wtext(Wd, SLOGAN[0], tx, y0 + 44, (226, 34, 52), 1)
+    wtext(Wd, SLOGAN[1], tx, y0 + 52, (226, 34, 52), 1)
     wtext(Wd, '1-800-POUCH-ME', tx, y0 + 66, (20, 140, 150), 1)
     Wd[y1 - 6:y1, x0:x1] = (255, 150, 90)
 
@@ -445,7 +449,35 @@ class ST_res_guard:
     def __exit__(s, *a): ST.set_px(s.k)
 
 
-BAKE = dict(yard=bake_yard, store=bake_store, aisle=bake_aisle, deli=bake_deli)
+def bake_hospital(Wd):
+    x0, y0, x1, y1 = 456, 92, 846, 150
+    Wd[y0:y1, x0:x1] = (246, 246, 238)
+    t = 'BILLING - CASHIER'
+    wtext(Wd, t, (x0 + x1 - wtext_w(t, 3)) // 2, y0 + 8, (14, 44, 54), 3)
+    t = 'SUNSHINE GENERAL - PAY HERE'
+    wtext(Wd, t, (x0 + x1 - wtext_w(t, 2)) // 2, y0 + 34, (226, 34, 52), 2)
+
+
+def bake_vet(Wd):
+    x0, y0, x1, y1 = 634, 92, 888, 258                            # the blank poster: the MICROCHIP SPECIAL (the clue)
+    Wd[y0:y1, x0:x1] = (255, 250, 236)
+    Wd[y0:y0 + 34, x0:x1] = (255, 140, 60)
+    for i, (t, k, c, dy) in enumerate((('MICROCHIP', 4, (255, 255, 255), 6), ('SPECIAL!', 4, (226, 34, 52), 46), ('NEVER LOSE', 2, (14, 44, 54), 84),
+                                        ('YOUR BEST', 2, (14, 44, 54), 100), ('FRIEND!', 2, (14, 44, 54), 116), ('$0 TODAY*', 3, (40, 150, 90), 136))):
+        wtext(Wd, t, (x0 + x1 - wtext_w(t, k)) // 2, y0 + dy, c, k)
+    wtext(Wd, '*SCAN EXTRA', x1 - wtext_w('*SCAN EXTRA', 1) - 6, y1 - 9, (226, 34, 52), 1)
+    t = 'DR. PAWS'
+    wtext(Wd, t, 1000, 40, (226, 34, 52), 4)
+
+
+def bake_booth(Wd):
+    x0, y0, x1, y1 = 448, 196, 832, 266
+    Wd[y0:y1, x0:x1] = (240, 226, 190)
+    for i, t in enumerate(('GATOR JERKY', 'BOILED PEANUTS', 'FIREWORKS')):
+        wtext(Wd, t, (x0 + x1 - wtext_w(t, 3)) // 2, y0 + 6 + i * 21, [(226, 34, 52), (14, 44, 54), (255, 120, 40)][i], 3)
+
+
+BAKE = dict(yard=bake_yard, store=bake_store, aisle=bake_aisle, deli=bake_deli, hospital=bake_hospital, vet=bake_vet, booth=bake_booth)
 
 
 def world_baked(name):

@@ -191,7 +191,7 @@ def tv_cart(sp, t=0.0, on=True):
 # ======================================================================================== FLORIDA MAN
 def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='stand', hand_n=None, hand_f=None, prop_n=None, prop_f=None,
        sweat=0.0, frost=0.0, glasses_drop=0.0, walk=None, sway=0.0, shaka=False, belly_jiggle=0.0, legs=True, tie=False, cone=False,
-       wet=0.0):
+       wet=0.0, bump=False, ice=False, stache=False):
     """FLORIDA MAN — «olive on toothpicks»: a round sun-cured belly on stick legs, tiny bald peeling head, neon shield sunglasses that
     never come off (they slide down when prices hit), a braided goatee down to the belly with a fishing lure on the end, gold tooth,
     toothpick, Florida-map tattoo on the belly, frayed jorts, hot-pink fanny pack, ONE neon-orange croc (the other foot bare).
@@ -275,6 +275,9 @@ def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='sta
     DX.stubble(sp, face & (DX.YC < hyy - 3.4) & ((DX.XC < hx + 0.5) | (DX.YC < hyy - 7.0)), (176, 150, 110), 0.22, 3)
     for q in range(4):                                                                           # sunburn peel on the dome
         sp.dot(hx - 2.4 + q * 1.6, hyy + 5.6 - (q % 2) * 0.6, PEEL)
+    if bump:                                                                                     # a Florida-shaped goose egg on the dome (E03)
+        sp.ell(hx - 1.0, hyy + 7.6, 2.6, 2.2, tones((236, 112, 96)), gloss=0.8)                     # a cartoon goose egg
+        if ice: icepack(sp, (hx - 2.6, hyy + 8.6))                                              # balanced on top, melting
     lx, ly = look
     Eb = dict(E, bl=E['bl'] * 0.35, bt=E['bt'] * 0.55)
     DX.eye(sp, hx + 2.8, hyy + 0.9, 3.4, 3.2, E, (60, 110, 150), (lx, ly), blink, lash=INK, skin=TAN)
@@ -294,6 +297,9 @@ def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='sta
         sp.dot(mx + 0.5, my + 0.4, (255, 206, 60), keep=True)
     if mo < 0.5:
         sp.line((mx + 2.6, my + 0.2), (mx + 5.6, my - 0.9), (226, 196, 140))
+    if stache:                                                                                   # disguise: a huge fake black handlebar moustache
+        sp.union([sp.m_ell(hx + 4.6, hyy - 3.6, 3.6, 1.3), sp.m_ell(hx + 1.0, hyy - 4.4, 1.4, 1.6), sp.m_ell(hx + 8.2, hyy - 4.4, 1.4, 1.6)],
+                 tones((44, 34, 30)))
     # the shield sunglasses (slide down with sweat / panic)
     gd = -2.4 * glasses_drop
     gl = sp.m_poly([(hx - 5.8, hyy + 2.9 + gd), (hx + 7.6, hyy + 2.7 + gd), (hx + 7.4, hyy - 0.9 + gd), (hx + 4.8, hyy - 0.3 + gd),
@@ -982,3 +988,21 @@ def cuffs(sp, h):
         r = sp.m_ell(cx_, cy_, 1.6, 1.8)[0] & ~sp.m_ell(cx_, cy_, 0.8, 1.0)[0]
         sp.fill(r, (206, 212, 222))
     sp.line((h[0] + 1.2, h[1] - 3.0), (h[0] + 1.8, h[1] - 3.8), (150, 156, 166))
+
+
+def icepack(sp, h):
+    """a tiny blue gel ice pack pressed to the bump"""
+    sp.rect(h[0] - 1.6, h[1] + 0.4, h[0] + 2.0, h[1] + 2.6, (150, 214, 255)); sp.dot(h[0] - 0.6, h[1] + 2.0, (236, 248, 255))
+
+
+def syringe(sp, h):
+    """the microchip injector: a fat plastic syringe, needle pointing forward"""
+    sp.rect(h[0] - 1.0, h[1] - 0.8, h[0] + 4.0, h[1] + 0.8, (236, 244, 250)); sp.rect(h[0] + 0.4, h[1] - 0.4, h[0] + 3.0, h[1] + 0.4, (120, 220, 200))
+    sp.line((h[0] + 4.0, h[1]), (h[0] + 7.0, h[1]), (200, 206, 214)); sp.line((h[0] - 2.0, h[1] - 1.4), (h[0] - 2.0, h[1] + 1.4), (60, 60, 66))
+
+
+def pet_scanner(sp, h, on=True):
+    """a pet microchip scanner paddle: grey handle, round head, a little green display"""
+    sp.cap((h[0], h[1]), (h[0] + 3.0, h[1] + 2.0), 0.9, 0.9, tones((90, 96, 108)))
+    sp.ell(h[0] + 5.0, h[1] + 3.4, 2.6, 2.2, tones((236, 200, 60)))
+    sp.rect(h[0] + 0.6, h[1] + 0.6, h[0] + 2.4, h[1] + 1.6, (120, 255, 150) if on else (40, 60, 50))
