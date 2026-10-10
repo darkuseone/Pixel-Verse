@@ -29,11 +29,27 @@ def plate(n, total=6, w=820, h=150):
     return np.array(img)
 
 
-def make(frame, title, n=1, out='cover.png', title_y=250, title_size=78, plate_y=1530):
+GRID = (240, 1680)          # what TikTok / Reels profile grids show of a 9:16 cover (central 3:4)
+SAFE_BOTTOM = 1520          # below this the grid overlays the date / views counter
+
+
+def make(frame, title, n=1, out='cover.png', title_y=None, title_size=78, plate_y=None, shift=0):
+    """Grid-safe layout (10.10.2026, owner's TikTok screenshot): hazard plate on top of the 3:4 zone, title right under it,
+    the scene below; nothing that matters under SAFE_BOTTOM (date / views overlay) or outside the 3:4 zone.
+    shift: move the scene down (px) so faces clear the title; the gap on top is filled with the frame's own top rows."""
     big = frame.copy()
-    t = K.hook_title(title, title_size)
-    O.overlay(big, t, 0, title_y, 1.0)
+    if shift:
+        big = np.concatenate([np.repeat(frame[:1], shift, 0), frame[:-shift]], 0) if shift > 0 else frame
     p = plate(n)
-    O.overlay(big, p, (big.shape[1] - p.shape[1]) // 2, plate_y, 1.0)
+    py = GRID[0] + 20 if plate_y is None else plate_y
+    t = K.hook_title(title, title_size)
+    ty = py + p.shape[0] + 6 if title_y is None else title_y
+    shade = np.zeros((big.shape[0], 1, 1), np.float32)                       # soft dark band behind plate + title
+    y1 = ty + t.shape[0]
+    shade[GRID[0]:y1, 0, 0] = 0.45
+    n_ = len(shade[y1:y1 + 120]); shade[y1:y1 + n_, 0, 0] = np.linspace(0.45, 0.0, 120)[:n_]
+    big = (big * (1 - shade)).astype(np.uint8)
+    O.overlay(big, p, (big.shape[1] - p.shape[1]) // 2, py, 1.0)
+    O.overlay(big, t, 0, ty, 1.0)
     Image.fromarray(big).save(out)
     return big
