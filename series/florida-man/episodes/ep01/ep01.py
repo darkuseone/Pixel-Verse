@@ -141,7 +141,7 @@ def r_doors(t, u):
     Z = 1.75
     x = lerp(470.0, 600.0, min(1.0, u / 1.7))
     cx = x + 60.0
-    v = view_at(STORE, cx, 430.0, Z, 180, 320)
+    v = view_at(STORE, cx, 446.0, Z, 180, 320)                  # sign band fully out of frame (no cut-off letters on top)
     s_ = S_STORE * Z
     un = s_ / (3 * Z)                                            # world px per sprite px
     dolly = A(C.hand_truck, x + 14.0 * un, WALK, s_, t=t, spin=-t * 8)
@@ -151,7 +151,7 @@ def r_doors(t, u):
     def f(big, v_):
         K.heat_haze(big, t, 1450, OUT_H, 4)
         if t >= 14.4: K.cold_blast(big, t, min(1.0, (t - 14.4) / 0.3), dirn=-1)
-    return K.shot(STORE, K.light_store, cx, 430.0, Z, acts=[dolly, chair, fm_], fx_=f, sx=180, sy=320)
+    return K.shot(STORE, K.light_store, cx, 446.0, Z, acts=[dolly, chair, fm_], fx_=f, sx=180, sy=320)
 
 
 def freezer_door(big, v, x0, x1, y0, y1, ang, frost=0.6):
@@ -256,8 +256,11 @@ LOC = [('retiree', 'sit', 448.0), ('tank', 'stand', 690.0), ('grandpa', 'pool', 
 
 def r_reveal(t, u):
     """pull back: the whole freezer aisle is a campsite — lawn chairs, a kiddie pool of ice, folks in curlers; Tanner in his freezer"""
-    Z = lerp(2.2, 0.95, sm(min(1.0, u / 0.5)))
-    v = view_at(AISLE, 560.0, 450.0, Z, 180, 320)
+    k_ = sm(min(1.0, u / 0.5))
+    Z = lerp(2.2, 1.05, k_)
+    CX = lerp(560.0, 575.0, k_)
+    CY = lerp(450.0, 420.0, k_)                                  # end framing: the hanging sign just above the frame (no cut letters)
+    v = view_at(AISLE, CX, CY, Z, 180, 320)
     s_ = S_AISLE * Z
     acts = []
     for kind, pose, x in LOC:
@@ -275,7 +278,7 @@ def r_reveal(t, u):
         blit(big, sp, x, y, s_ * 0.9, K.light_aisle(v_))
     def f(big, v_):
         cold_mist(big, v_, 560.0, 440.0, t)
-    return K.shot(AISLE, K.light_aisle, 560.0, 450.0, Z, acts=acts, pre=pre, fx_=f, sx=180, sy=320)
+    return K.shot(AISLE, K.light_aisle, CX, CY, Z, acts=acts, pre=pre, fx_=f, sx=180, sy=320)
 
 
 def r_darlene_in(t, u):

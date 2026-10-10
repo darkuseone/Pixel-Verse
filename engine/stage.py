@@ -25,6 +25,10 @@ def ell(L, cxy, rx, ry, c, ang=0.0, **kw):
 S.ell = ell
 
 
+DECALS = {}                                        # id(world) -> [world, [(img, wx, wy, ws)], [anim fns]] (props/decals.py)
+T_NOW = [0.0]                                      # time of the frame being rendered (set by episode.Episode), for animated decals
+
+
 class View:
     """world px -> logical screen px. X0,Y0 world top-left, Z zoom (1 = 360 world px across)."""
     def __init__(s, world, X0, Y0, Z, oy=0, hlog=H, wlog=W):
@@ -55,7 +59,11 @@ class View:
         return xs, ys
     def bg(s):
         xs, ys = s.grid()
-        return s.world[ys[:, None], xs[None, :]]
+        out = s.world[ys[:, None], xs[None, :]]
+        if id(s.world) in DECALS:
+            from props import decals
+            decals.draw(out, s)
+        return out
 
 
 def view_at(world, wx, wy, Z, sx=180, sy=400, hlog=H, wlog=W):

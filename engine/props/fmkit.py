@@ -16,6 +16,8 @@ from props import bytfx as B
 from props import fmpix as FX
 from props import fmcast as C
 from props.dibspix import blit
+from props import decals as D
+from props import fmdecor as DEC
 
 SLUG = 'florida-man'
 COL = dict(fm=(255, 132, 110), mort=(90, 230, 225), darlene=(255, 214, 80), tanner=(170, 255, 110))
@@ -88,8 +90,11 @@ _W = {}
 
 
 def world(name):
+    """the quantised xAI world, dressed with hi-res decals + ambience (props/fmdecor.py); the yard is dressed in world_baked
+    (its billboard carries the episode's SLOGAN)"""
     if name not in _W:
         _W[name] = ST.ai_world(P.series(SLUG) / 'bg' / f'{name}.png')
+        if name not in ('yard', 'booth'): DEC.dress(name, _W[name])
     return _W[name]
 
 
@@ -486,7 +491,33 @@ BAKE = dict(yard=bake_yard, store=bake_store, aisle=bake_aisle, deli=bake_deli, 
 def world_baked(name):
     key = name + '+'
     if key not in _W:
-        Wd = world(name).copy()
-        if name in BAKE: BAKE[name](Wd)
+        base = world(name)
+        Wd = base.copy()
+        D.copy_to(base, Wd)
+        if name == 'yard': DEC.dress_yard(Wd, SLOGAN)
+        elif name == 'booth': DEC.dress_booth(Wd, BOOTH_SIGN)
+        elif name not in DEC.DRESS and name in BAKE: BAKE[name](Wd)
         _W[key] = Wd
     return _W[key]
+
+
+def wcopy(Wd):
+    """an episode-local copy of a world (for painting into it) that keeps its decals"""
+    return D.copy_to(Wd, Wd.copy())
+
+
+_SIREN_X = np.linspace(0.0, 1.0, OUT_W, dtype=np.float32)
+
+
+def siren(big, t, k=1.0, strength=0.30):
+    """police-light wash WITHOUT a hard seam: red glow from the left edge and blue from the right, each fading out by mid-frame,
+    pulsing in turn (rule 10.10.2026: no half-screen colour splits)"""
+    ph = (t * 4.0) % 1.0
+    a_r = strength * k * (0.25 + 0.75 * max(0.0, math.cos(ph * 2 * math.pi)))
+    a_b = strength * k * (0.25 + 0.75 * max(0.0, -math.cos(ph * 2 * math.pi)))
+    wr = (np.clip(1.0 - _SIREN_X / 0.62, 0, 1) ** 1.6 * a_r)[None, :, None]
+    wb = (np.clip((_SIREN_X - 0.38) / 0.62, 0, 1) ** 1.6 * a_b)[None, :, None]
+    f = big.astype(np.float32)
+    f = f * (1 - wr) + np.array((255, 40, 50), np.float32) * wr
+    f = f * (1 - wb) + np.array((50, 90, 255), np.float32) * wb
+    big[:] = np.clip(f, 0, 255).astype(np.uint8)

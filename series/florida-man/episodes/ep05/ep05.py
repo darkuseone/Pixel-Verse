@@ -28,7 +28,7 @@ EPI = Episode('ep05', VOICE, DUR, FPS, colors=K.COL, slug=SLUG)
 talk = EPI.talk
 K.SLOGAN[:] = ['SNAKE IN', 'YOUR SHED?']
 K.BOOTH_SIGN[:] = ['FISH - WILDLIFE', 'PYTHON BOUNTY', '$50 PER FOOT']
-YARD = K.world_baked('yard').copy()
+YARD = K.wcopy(K.world_baked('yard'))
 SWAMP = K.world('swamp')
 BOOTH = K.world_baked('booth')
 A, wpt, aout = K.A, K.wpt, K.aout

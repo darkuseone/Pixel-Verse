@@ -120,12 +120,7 @@ def blit_sprite(big, fn, x, y, sc, lt=None, flip=False, **kw):
 
 
 def siren(big, t, k=1.0):
-    """red / blue police light washing over the frame"""
-    on = int(t * 7) % 2
-    col = np.array((255, 40, 60) if on else (50, 90, 255), np.float32)
-    half = slice(0, OUT_W // 2) if on else slice(OUT_W // 2, OUT_W)
-    reg = big[:, half].astype(np.float32)
-    big[:, half] = np.clip(reg * (1 - 0.28 * k) + col * 0.28 * k, 0, 255).astype(np.uint8)
+    K.siren(big, t, k)
 
 
 # ================================================================== shots

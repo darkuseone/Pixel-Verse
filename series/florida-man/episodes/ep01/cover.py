@@ -11,11 +11,11 @@ t = 0.9
 def pre(big, v):
     E.ac_actor(v, t)(big, v, K.light_sun(v))
     E.ac_smoke(big, v, t)
-big, a = E.cu(E.YARD, K.light_sun, C.fm, t, 600.0, 450.0, 31.0, (540, 900), Z=1.35, blur=6, pre_=pre, expr='shriek', mouth_=0.95,
+big, a = E.cu(E.YARD, K.light_sun, C.fm, t, 600.0, 450.0, 31.0, (520, 1010), Z=1.35, blur=6, pre_=pre, expr='shriek', mouth_=0.95,
               sweat=1.0, glasses_drop=1.0, look=(0.0, 0.2))
-K.invoice_card(big, 590, 1150, 440, ang=8.0)
+K.invoice_card(big, 600, 1120, 440, ang=8.0)
 here = pathlib.Path(__file__).parent
-CG.make(big, ['NINE', 'GRAND?!'], n=1, out=str(here / 'cover.png'), title_y=210, plate_y=1450)
+CG.make(big, ['NINE', 'GRAND?!'], n=1, out=str(here / 'cover.png'))
 dst = here.parents[1] / 'covers' / 'cover_s01e01.png'
 dst.parent.mkdir(exist_ok=True)
 shutil.copy(here / 'cover.png', dst)

@@ -16,7 +16,8 @@ PEEL = (246, 186, 170)              # sunburn peel on the scalp
 DENIM = (74, 116, 176)
 CROC = (255, 122, 34)
 PACK = (255, 86, 160)               # hot-pink fanny pack
-BRAID = (214, 194, 150)
+BRAID = (232, 176, 84)              # sun-bleached ginger braid (reads as hair, never as drool)
+BRAID_D = (122, 70, 28)
 SUBBREAD = (222, 168, 92)
 SUBWRAP = (236, 248, 240)
 SUBSTRIPE = (40, 176, 150)
@@ -57,13 +58,109 @@ def txt(sp, s_, i0, j0, c, keep=True):
                 if b == '1':
                     xx = x + k
                     if mir: xx = 2 * i0 + tw - 1 - xx
-                    sp.dot(xx, j0 - r, c, keep)
+                    DX.Spr.dot(sp, xx, j0 - r, c, keep)          # font pixels stay square
         x += len(g[0]) + 1
     return tw
 
 
 def txt_w(s_):
     return sum(len(FONT.get(ch.upper(), FONT[' '])[0]) + 1 for ch in s_) - 1
+
+
+def txt_box(sp, s_, box, c, alt=(), pad=0.5, max_n=1.6, keep=True, scribble=None):
+    """text FITTED into a plate: box = (x0, y0, x1, y1) in sprite px (y up). The 3x5 font is scaled in canvas px (n canvas px per
+    font px), as large as fits inside the box minus pad (capped at max_n sprite px per font px), centred, never past the edges.
+    s_ may hold several lines ('\n'). If it does not fit even at 1 canvas px per font px, the alt strings are tried in order,
+    then the plate gets grey «scribble» dashes (reads as small print on wide shots). Pre-mirrored on flipped sprites."""
+    k = sp.k
+    x0, y0, x1, y1 = box
+    aw, ah = (x1 - x0 - 2 * pad) * k, (y1 - y0 - 2 * pad) * k
+    for cand in (s_,) + tuple(alt):
+        lines = cand.split('\n'); nl = len(lines)
+        tw = max(txt_w(l) for l in lines); th = 5 * nl + (nl - 1)
+        n = int(min(aw / max(tw, 1), ah / th, max_n * k))
+        if n >= 1: break
+    else:
+        sc = scribble or mix(c, (200, 200, 200), 0.5)
+        cy = (y0 + y1) / 2
+        for q in range(max(1, int((y1 - y0 - 2 * pad) // 2))):
+            yy = cy + (q - 0.5 * (int((y1 - y0 - 2 * pad) // 2) - 1)) * 2.0
+            sp.line((x0 + pad + 0.5, yy), (x1 - pad - 1.0 - (q % 2) * 2.0, yy), sc)
+        return 0
+    cxc, cyc = (x0 + x1) / 2 * k, (y0 + y1) / 2 * k
+    mir = getattr(sp, 'mirror_text', False)
+    top = int(round(cyc + th * n / 2))
+    for li, ln in enumerate(lines):
+        lw = txt_w(ln) * n
+        left = int(round(cxc - lw / 2)); x = left
+        ty = top - li * 6 * n
+        for ch in ln:
+            g = FONT.get(ch.upper(), FONT[' '])
+            for r, row in enumerate(g):
+                for q, b in enumerate(row):
+                    if b == '1':
+                        hx = x + q * n
+                        if mir: hx = int(round(2 * cxc)) - hx - n
+                        sp._blk(hx, ty - (r + 1) * n, n, c, keep)
+            x += (len(g[0]) + 1) * n
+    return n
+
+
+FLORIDA_PTS = [(0.0, 0.0), (6.2, 0.0), (6.6, 1.2), (5.4, 1.4), (5.6, 3.0), (6.8, 4.6), (7.8, 6.4), (8.0, 8.4), (7.2, 9.0),
+               (6.0, 7.6), (5.0, 5.8), (4.4, 3.4), (4.2, 1.6), (2.6, 1.8), (0.4, 1.2)]   # the panhandle + peninsula (x right, y down)
+
+
+def thin(sp, a, b, c, w=0.3, keep=False):
+    """a stroke w sprite px thick (thinner than sp.line at hi-res: hair, cracks, creases)"""
+    sp.fill(sp.m_cap(a, b, w, w)[0], c, keep)
+
+
+def heart(sp, x, y, r, c):
+    m = sp.m_ell(x - r * 0.5, y + r * 0.3, r * 0.62, r * 0.6)[0] | sp.m_ell(x + r * 0.5, y + r * 0.3, r * 0.62, r * 0.6)[0] | \
+        sp.m_poly([(x - r * 1.05, y + r * 0.2), (x + r * 1.05, y + r * 0.2), (x, y - r * 1.1)])
+    sp.fill(m, c)
+
+
+def fm_mouth(sp, mx, my, E, mouth_):
+    """Florida Man's mouth, built for close-ups: dark opening, a THIN row of upper teeth with gaps and the gold tooth,
+    tongue at the bottom, lip line; closed = a crooked smirk with the gold tooth peeking"""
+    mc = E['mc']; mo = max(mouth_, E['mo'])
+    LIP = (110, 46, 34); GOLD = (255, 206, 60)
+    if E.get('round_mouth') and mo > 0.05:
+        r = 1.2 + 1.2 * mo
+        mm = sp.m_ell(mx, my - 0.5, r * 0.8, r)[0]
+        sp.fill(mm, (70, 16, 26)); sp.fill(mm & (DX.YC < my - 0.5 - r * 0.3), (214, 92, 104)); sp.fill(mm & ~erode(mm), LIP)
+        return
+    if mo > 0.10:
+        hw = 2.6 + 0.5 * mo + max(0.0, mc) * 0.8
+        hh = 0.8 + mo * 2.6
+        cyy = my - hh * 0.35 + mc * 0.5
+        mm = sp.m_ell(mx, cyy, hw, hh)[0]
+        if mc > 0.3: mm &= DX.YC < cyy + hh * 0.6
+        sp.fill(mm, (70, 16, 26))
+        inner = erode(mm)
+        top_ = cyy + hh * (0.6 if mc > 0.3 else 1.0)
+        tb = inner & (DX.YC > top_ - 0.95 - 0.25 * mo)                                    # thin upper teeth row
+        sp.fill(tb, (250, 246, 232), keep=True)
+        for q in range(-3, 4):                                                              # gaps between teeth
+            sp.fill(tb & (np.abs(DX.XC - (mx + q * 0.95 + 0.45)) < 0.09), (196, 186, 170), keep=True)
+        sp.fill(tb & (np.abs(DX.XC - (mx + 0.95)) < 0.45), GOLD, keep=True)                 # the gold tooth
+        if mo > 0.4:
+            tg = inner & (DX.YC < cyy - hh * 0.25)
+            sp.paint(tg, [(176, 60, 76), (206, 86, 100), (226, 112, 120), (240, 150, 150)], np.clip((DX.YC - (cyy - hh)) / hh, 0, 1) * 0.7 + 0.2, ol=False)
+        sp.fill(mm & ~erode(mm), LIP)
+        return
+    if E.get('teeth') and mc > 0.5:                                                         # closed grin: a toothy crescent
+        gm = sp.m_ell(mx, my + 0.6, 3.0, 1.5)[0] & (DX.YC < my + 0.7)
+        sp.fill(gm, (250, 246, 232), keep=True)
+        for q in range(-2, 4): sp.fill(gm & (np.abs(DX.XC - (mx + q * 1.0 - 0.5)) < 0.09), (196, 186, 170), keep=True)
+        sp.fill(gm & (np.abs(DX.XC - (mx + 1.0)) < 0.45), GOLD, keep=True)
+        sp.fill(gm & ~erode(gm), LIP)
+        return
+    pts = [(mx - 2.8, my + 0.5 * mc + 0.2), (mx - 1.0, my - 0.15), (mx + 1.0, my - 0.1 - 0.15 * mc), (mx + 2.9, my + 0.9 * mc + 0.3)]
+    for a, b in zip(pts[:-1], pts[1:]): thin(sp, a, b, LIP, 0.32)
+    if mc > 0.2:
+        sp.fill(sp.m_ell(mx + 1.2, my - 0.55, 0.5, 0.42)[0], GOLD, keep=True)              # the gold tooth peeks out of the smirk
 
 
 FLORIDA = ['XXXXXX..', 'XXXXXXX.', '.....XX.', '....XXX.', '....XXXX', '.....XXX', '.....XXX', '......XX', '......X.']
@@ -92,9 +189,9 @@ def invoice(sp, h, amount='$9,000', k=1.0):
     w, hh = 39.0, 18.0
     sp.rect(x0, y0, x0 + w, y0 + hh, (250, 250, 240))
     sp.rect(x0, y0 + hh - 7.0, x0 + w, y0 + hh, (40, 120, 200))
-    txt(sp, 'COOL-RITE', x0 + 2, y0 + hh - 1.0, (255, 255, 255))
-    txt(sp, 'TOTAL', x0 + 2, y0 + hh - 8.6, (60, 60, 70))
-    txt(sp, amount, x0 + w - 2 - txt_w(amount), y0 + 6.4, (226, 30, 40))
+    txt_box(sp, 'COOL-RITE A/C', (x0, y0 + hh - 7.0, x0 + w, y0 + hh), (255, 255, 255), alt=('COOL-RITE',))
+    txt_box(sp, 'TOTAL DUE:', (x0, y0 + 8.4, x0 + w * 0.5, y0 + hh - 7.4), (60, 60, 70), alt=('TOTAL',))
+    txt_box(sp, amount, (x0 + w * 0.32, y0 + 0.6, x0 + w, y0 + 7.0), (226, 30, 40), pad=0.6)
     sp.line((x0 + 2, y0 + 7.4), (x0 + w - 2, y0 + 7.4), (226, 30, 40))
     o = sp.m_poly([(x0, y0), (x0 + w, y0), (x0 + w, y0 + hh), (x0, y0 + hh)])
     e = o & ~erode(o); sp.fill(e, INK)
@@ -166,7 +263,8 @@ def ac_unit(sp, t=0.0, dead=False, fan=0.0):
     for q in range(3):
         aa = a + q * 2.094
         sp.line((0.0, 24.4), (math.cos(aa) * 9.0, 24.4 + math.sin(aa) * 1.8), (40, 42, 46))
-    sp.rect(-11.0, 14.0, -2.0, 19.0, (40, 120, 200)); txt(sp, 'COOL', -10.0, 18.0, (255, 255, 255))
+    sp.rect(-11.0, 13.4, 3.0, 19.6, (40, 120, 200)); sp.rect(-11.0, 13.4, 3.0, 14.0, (20, 70, 140))
+    txt_box(sp, 'COOL-RITE', (-11.0, 13.4, 3.0, 19.6), (255, 255, 255), alt=('COOL',))
     if dead: sp.rect(4.0, 16.0, 10.0, 18.0, (230, 60, 50))                           # red fault light
     sp.rect(-13.0, -0.5, 13.0, 0.5, (90, 90, 96))                                  # concrete pad
     sp.anchors.update(top=(0.0, 26.0))
@@ -248,13 +346,16 @@ def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='sta
 
     # ---------------------------------------------------------------- belly + chest
     bel = sp.union([sp.m_ell(*Q(3.6 + jig * 0.3, 37.0), 11.6, 10.4), sp.m_ell(*Q(1.5, 47.6), 7.6, 5.0)], tones(TAN), gloss=0.35)
-    sp.dot(*Q(9.5, 30.0), dark(TAN, 0.5))                                                          # navel
-    for q in range(6): sp.dot(*Q(2.0 + (q * 7) % 6, 45.0 + (q * 3) % 4), dark(TAN, 0.62))         # chest hair
+    sp.fill(sp.m_ell(*Q(9.5, 30.2), 0.55, 0.75)[0], dark(TAN, 0.5))                                 # navel
+    for q in range(7):                                                                            # chest hair: thin curls
+        x_, y_ = Q(1.4 + (q * 7) % 6 * 0.9, 44.6 + (q * 3) % 4 * 0.8)
+        thin(sp, (x_, y_), (x_ + 0.5, y_ + 0.9), dark(TAN, 0.55), 0.22)
     sp.line(Q(-1.0, 44.4), Q(4.0, 44.0), dark(TAN, 0.72))                                         # pec line
     # tattoo: the state of Florida with a heart on his town
     tx, ty = Q(-1.0, 41.0)
-    sp.stamp(FLORIDA, int(tx), int(ty), {'X': (34, 128, 132)})
-    sp.dot(int(tx) + 5, int(ty) - 6, (226, 40, 60))
+    fl = sp.m_poly([(tx + a, ty - b) for a, b in FLORIDA_PTS])
+    sp.fill(fl, (34, 128, 132)); sp.fill(fl & ~erode(erode(fl)), (20, 90, 96))
+    heart(sp, tx + 5.6, ty - 5.6, 0.75, (226, 40, 60))
     if sweat > 0:
         for i, (x, y) in enumerate(((10.0, 41.0), (-3.0, 38.0), (6.0, 33.0), (12.0, 36.0), (-5.0, 45.0))[:int(1 + 4 * sweat)]):
             yy = y - ((t * 5.0 + i * 1.7) % 6.0)
@@ -274,7 +375,7 @@ def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='sta
     face = sp.union([sp.m_ell(hx, hyy, 6.4, 7.4), sp.m_ell(hx + 2.2, hyy - 4.8, 4.8, 3.2)], tones(TAN), gloss=0.5)
     DX.stubble(sp, face & (DX.YC < hyy - 3.4) & ((DX.XC < hx + 0.5) | (DX.YC < hyy - 7.0)), (176, 150, 110), 0.22, 3)
     for q in range(4):                                                                           # sunburn peel on the dome
-        sp.dot(hx - 2.4 + q * 1.6, hyy + 5.6 - (q % 2) * 0.6, PEEL)
+        sp.fill(sp.m_ell(hx - 2.2 + q * 1.6, hyy + 5.9 - (q % 2) * 0.6, 0.7, 0.45, 0.3 * q)[0], PEEL)
     if bump:                                                                                     # a Florida-shaped goose egg on the dome (E03)
         sp.ell(hx - 1.0, hyy + 7.6, 2.6, 2.2, tones((236, 112, 96)), gloss=0.8)                     # a cartoon goose egg
         if ice: icepack(sp, (hx - 2.6, hyy + 8.6))                                              # balanced on top, melting
@@ -288,13 +389,8 @@ def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='sta
     sp.ell(hx + 6.0, hyy - 2.0, 2.0, 1.8, tones((214, 112, 84)), gloss=1.0)
     # mouth + gold tooth + toothpick
     mx, my = hx + 3.2, hyy - 5.4
-    DX.mouth(sp, mx, my, 5.6, E, mouth_, (96, 40, 30), skin=TAN, maxh=6)
+    fm_mouth(sp, mx, my, E, mouth_)
     mo = max(mouth_, E['mo'])
-    if mo > 0.1 and not E.get('round_mouth'):
-        hh = 1.0 + mo * 5 / 2; cyy = my - hh * 0.35 + E['mc'] * 0.6
-        sp.dot(mx + 0.6, cyy + hh * 0.5, (255, 206, 60), keep=True)
-    elif E['mc'] > 0.2 and E.get('teeth'):
-        sp.dot(mx + 0.5, my + 0.4, (255, 206, 60), keep=True)
     if mo < 0.5:
         sp.line((mx + 2.6, my + 0.2), (mx + 5.6, my - 0.9), (226, 196, 140))
     if stache:                                                                                   # disguise: a huge fake black handlebar moustache
@@ -306,22 +402,34 @@ def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='sta
                     (hx + 3.8, hyy - 1.1 + gd), (hx - 5.6, hyy - 0.7 + gd)])
     k_ = np.clip((hyy + 2.9 + gd - DX.YC) / 3.8, 0, 1)
     gcol = [(40, 214, 222), (120, 140, 230), (246, 76, 172), (255, 170, 62)]
+    under = sp.col.copy(); ukeep = sp.keep.copy()
     for i, c in enumerate(gcol):
         sp.fill(gl & (k_ >= i / 4) & (k_ < (i + 1) / 4 + (0.01 if i == 3 else 0)), c)
+    if sp.k >= 2:                                                     # tinted, see-through lenses: the eyes (the acting) show through
+        see = (gl & ukeep) | (gl & (np.abs(under.astype(np.int16) - np.array(TAN, np.int16)).sum(-1) > 150))
+        sp.col[see] = (sp.col[see].astype(np.float32) * 0.5 + under[see].astype(np.float32) * 0.5).astype(np.uint8)
     sp.fill(gl & (np.abs((DX.XC - hx) + (DX.YC - hyy - gd) * 1.2 - 0.5) < 0.6), GLX)
     sp.fill(gl & ~erode(gl), INK)
     sp.anchors.update(head=(hx, hyy), mouth=(mx, my), eyes=(hx + 1.0, hyy + 0.6 + gd), glasses=(hx + 1.0, hyy + 1.0 + gd))
 
     # ---------------------------------------------------------------- the braided goatee with a fishing lure
-    pts = [(mx + 0.2, my - 1.8), (mx + 0.9, my - 5.6), (mx + 1.8, my - 9.6), (mx + 2.6, my - 13.6), (mx + 3.0, my - 17.4), (mx + 3.2, my - 20.6)]
+    # it grows from a chin tuft BELOW the mouth (the open mouth never touches it), plaits angled left/right like a real braid
+    mo_ = max(mouth_, E['mo'])
+    hh_ = (1.0 + mo_ * 6 / 2) if mo_ > 0.10 else 0.6
+    jaw = my - 1.35 * hh_ + 0.6 * E['mc']                                                        # bottom of the mouth opening
+    ry = min(hyy - 7.6, jaw - 1.4)
+    tuft = sp.m_ell(mx + 0.3, ry + 0.9, 2.6, 1.7)[0] & (DX.YC < jaw - 0.5)
+    sp.paint(tuft, tones(BRAID), np.clip((DX.YC - ry) / 3.0, 0, 1) * 0.5 + 0.3, olc=BRAID_D)
+    pts = [(mx + 0.4, ry), (mx + 1.0, ry - 3.8), (mx + 1.8, ry - 7.8), (mx + 2.5, ry - 11.8), (mx + 2.9, ry - 15.6), (mx + 3.1, ry - 18.8)]
     pts = [(x + sway * (i / 5.0) ** 1.5 * 3.0, y) for i, (x, y) in enumerate(pts)]
     for i in range(len(pts) - 1):
         a, b = pts[i], pts[i + 1]
         for q in range(3):
             u = (q + 0.5) / 3
-            c = BRAID if (i * 3 + q) % 2 else dark(BRAID, 0.74)
-            sp.ell(a[0] + (b[0] - a[0]) * u + (0.35 if (i * 3 + q) % 2 else -0.35), a[1] + (b[1] - a[1]) * u, 1.6, 1.05, tones(c),
-                   olc=dark(BRAID, 0.5))
+            j = i * 3 + q
+            w_ = 1.55 - 0.5 * (i / 5.0)
+            sp.ell(a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u, w_, 0.95, tones(BRAID if j % 2 else dark(BRAID, 0.82)),
+                   ang=0.55 if j % 2 else -0.55, olc=BRAID_D)
     sp.rect(pts[-2][0] - 1.4, pts[-2][1] - 0.4, pts[-2][0] + 1.6, pts[-2][1] + 0.6, (255, 86, 160))               # pink hair tie
     lx_, ly_ = pts[-1]
     sp.ell(lx_, ly_ - 2.2, 0.9, 1.9, tones((236, 60, 50)), gloss=0.6)                                # the lure
@@ -466,11 +574,16 @@ def mort(sp, t=0.0, expr='deadpan', mouth_=0.0, look=(0.8, 0.0), blink=None, lum
     ex, ey = hx + 1.4, hy + 0.8
     DX.eye(sp, ex, ey, 3.0, 2.8, E, (230, 214, 140), look, blink, lash=INK, skin=HEADW, white=(252, 252, 246))
     DX.brow(sp, ex + 0.2, ey + 2.6, 3.4, E, +1, (214, 206, 186), th=1)
-    if glasses:                                                                                     # round reading glasses on the bill base
-        for (gx, gy, r) in ((ex + 2.6, ey - 0.6, 1.6), (ex + 5.4, ey - 1.6, 1.3)):
-            ring = sp.m_ell(gx, gy, r, r)[0]
-            sp.fill(ring & ~erode(ring), (226, 186, 60)); sp.fill(erode(ring) & (DX.XC < gx) & (DX.YC > gy), (220, 240, 250))
-        sp.line((ex + 4.2, ey - 1.0), (ex + 4.2, ey - 1.0), (226, 186, 60))
+    if glasses:                                                     # gold reading glasses sitting ON the eye: near lens around it, far lens behind the bill
+        GOLD = (232, 186, 52)
+        gx, gy, r = ex + 0.4, ey - 0.2, 2.5                                  # side view: ONE round lens over the eye, arm back to the ear
+        lens = sp.m_ell(gx, gy, r - 0.45, r * 0.92 - 0.45)[0]
+        sp.col[lens] = (sp.col[lens].astype(np.float32) * 0.7 + np.array((190, 226, 255)) * 0.3).astype(np.uint8)
+        ring = sp.m_ell(gx, gy, r, r * 0.92)[0] & ~lens
+        sp.fill(ring, GOLD, keep=True); sp.fill(ring & (DX.YC < gy - r * 0.3), dark(GOLD, 0.75), keep=True)
+        sp.fill(sp.m_ell(gx - r * 0.4, gy + r * 0.4, r * 0.22, r * 0.2)[0], (250, 252, 255), keep=True)       # glint
+        thin(sp, (gx - r + 0.1, gy + 0.3), (hx - 3.8, hy + 0.9), dark(GOLD, 0.85), 0.32)                       # temple arm to the head
+        sp.fill(sp.m_ell(gx + r - 0.1, gy + 0.2, 0.45, 0.6)[0], GOLD, keep=True)                               # nose-pad hinge on the bill
     sp.anchors.update(head=(hx, hy), eyes=(ex, ey), mouth=((B[0] + T[0]) / 2, (B[1] + T[1]) / 2), tip=T, pouch=pts[4])
     sp.outline(INK, 1)
 
@@ -532,7 +645,7 @@ def darlene(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.7, 0.0), blink=None, ha
         sp.rect(2.6, 40.0, 7.6, 45.0, dark(SHIRT, 0.86)); sp.line((2.6, 45.0), (7.6, 45.0), dark(SHIRT, 0.6))    # pocket flap
         star = [(4.6, 44.4), (5.3, 42.9), (6.9, 42.8), (5.7, 41.8), (6.2, 40.2), (4.6, 41.2), (3.0, 40.2), (3.5, 41.8), (2.3, 42.8), (3.9, 42.9)]
         sp.fill(sp.m_poly(star), (255, 206, 70)); sp.dot(4.6, 42.4, (255, 250, 200), keep=True)
-        sp.rect(-7.0, 41.0, -2.0, 42.4, (30, 30, 34)); sp.rect(-6.4, 41.4, -2.6, 42.0, (230, 230, 220))      # name plate
+        sp.rect(-7.0, 41.0, -2.0, 42.4, (30, 30, 34)); sp.rect(-6.6, 41.2, -2.4, 42.2, (230, 230, 220)); txt_box(sp, 'DARLENE', (-6.6, 41.2, -2.4, 42.2), (30, 30, 34), pad=0.05, scribble=(150, 150, 150))      # name plate
         sp.sup(-6.0, 48.0, 2.0, 2.6, tones((40, 40, 44)), n=2.4); sp.line((-6.0, 50.0), (-6.4, 53.0), (40, 40, 44))  # shoulder radio
         if not aviators:                                                                            # aviators hooked on the placket
             for cx_ in (0.0, 2.6):
@@ -635,7 +748,7 @@ def tanner(sp, t=0.0, expr='chipper', mouth_=0.0, look=(0.7, 0.0), blink=None, h
         sp.line((dx + s_ - 0.6, 1.0), (dx + s_ + 4.4, 1.0), (200, 60, 60))
     tor = sp.union([sp.m_super(0.4 + shv, 42.0, 6.6, 11.0, 2.6)], tones(POLO))
     sp.rect(-6.0, 30.0, 7.0, 32.0, (60, 46, 30))                                               # belt
-    sp.rect(2.0 + shv, 44.0, 6.4 + shv, 47.0, (240, 240, 240)); txt(sp, 'T', 3.4 + shv, 46.6, (34, 56, 112))   # name patch
+    sp.rect(2.0 + shv, 44.0, 6.4 + shv, 47.0, (240, 240, 240)); txt_box(sp, 'T', (2.0 + shv, 44.0, 6.4 + shv, 47.0), (34, 56, 112), pad=0.3)   # name patch
     if uniform == 'deli':                                                                       # green deli apron
         ap = sp.m_poly([(-4.6 + shv, 46.0), (6.6 + shv, 46.0), (7.4 + shv, 26.0), (-5.4 + shv, 26.0)])
         sp.paint(ap, tones((34, 150, 110)), np.clip((DX.YC - 26) / 20, 0, 1) * 0.5 + 0.3)
@@ -821,7 +934,7 @@ def van(sp, t=0.0, frost=1.0):
     W_ = (240, 242, 238)
     body = sp.union([sp.m_super(0.0, 14.0, 26.0, 9.0, 4.0), sp.m_super(16.0, 21.0, 10.0, 7.0, 3.0)], tones(W_))
     sp.fill(body & (np.abs(DX.YC - 12.0) < 1.6), (40, 120, 200))
-    txt(sp, 'COOL-RITE', -18.0, 20.0, (40, 120, 200))
+    txt_box(sp, 'COOL-RITE A/C', (-22.0, 15.6, 8.0, 22.4), (40, 120, 200), alt=('COOL-RITE',))
     for (x0, x1) in ((8.0, 14.0), (17.0, 24.0)):
         wm = sp.m_poly([(x0, 18.0), (x1, 18.0), (x1 - (1.6 if x1 > 20 else 0), 25.0), (x0, 25.0)])
         sp.fill(wm, (150, 200, 230)); sp.fill(wm & (FX.halftone() < -0.2 + 0.3 * frost), (236, 248, 255))
@@ -837,8 +950,8 @@ def price_tag(sp, t=0.0, price='$14.99', label='SUB', cuffed=False, side=False):
         sp.rect(-0.6, 0.0, 0.6, 22.0, (250, 250, 244)); sp.rect(-0.6, 0.0, 0.6, 1.0, (40, 40, 44))
         sp.outline(INK, 1); return
     sp.rect(-15.0, 4.0, 15.0, 22.0, (250, 250, 244))
-    sp.rect(-15.0, 16.0, 15.0, 22.0, (40, 176, 150)); txt(sp, label, -txt_w(label) // 2, 20.6, (255, 255, 255))
-    txt(sp, price, -txt_w(price) // 2, 14.0, (226, 30, 40))
+    sp.rect(-15.0, 16.0, 15.0, 22.0, (40, 176, 150)); txt_box(sp, label, (-15.0, 16.0, 15.0, 22.0), (255, 255, 255))
+    txt_box(sp, price, (-15.0, 4.6, 15.0, 15.6), (226, 30, 40), max_n=2.0)
     sp.rect(-2.0, 0.0, 2.0, 4.0, (60, 60, 64))
     if cuffed:
         for cx_ in (-15.0, 15.0):                                                               # cuffs clamp the card's edges
@@ -853,7 +966,7 @@ def cruiser(sp, t=0.0, lights=True):
     W_ = (244, 244, 240)
     body = sp.union([sp.m_super(0.0, 9.0, 26.0, 5.0, 3.0), sp.m_super(-2.0, 15.0, 14.0, 4.6, 2.4)], tones(W_))
     sp.fill(body & (np.abs(DX.YC - 5.6) < 1.1), (40, 120, 70))
-    txt(sp, 'SHERIFF', -txt_w('SHERIFF') // 2 - 2, 12.0, (40, 120, 70))
+    txt_box(sp, 'SHERIFF', (-20.0, 7.0, 14.0, 12.6), (40, 120, 70))
     sp.fill(sp.m_poly([(-12.0, 13.0), (8.0, 13.0), (5.0, 18.6), (-10.0, 18.6)]), (90, 130, 170))
     if lights:
         on = int(t * 6) % 2
@@ -867,8 +980,8 @@ def card_table(sp, t=0.0, price='$40/YR'):
     sp.line((-24.0, 0.0), (-22.0, 14.0), (120, 120, 126)); sp.line((24.0, 0.0), (22.0, 14.0), (120, 120, 126))
     sp.rect(-26.0, 14.0, 26.0, 16.0, (60, 60, 66))
     sp.rect(-25.0, 2.0, 25.0, 14.0, (236, 226, 196))                                              # the banner hangs from the table edge
-    txt(sp, 'FLORIDA MAN', -txt_w('FLORIDA MAN') // 2, 12.6, (226, 34, 52))
-    txt(sp, 'MUTUAL ' + price, -txt_w('MUTUAL ' + price) // 2, 6.6, (20, 120, 130))
+    txt_box(sp, 'FLORIDA MAN', (-25.0, 8.0, 25.0, 14.0), (226, 34, 52))
+    txt_box(sp, 'MUTUAL ' + price, (-25.0, 2.0, 25.0, 8.0), (20, 120, 130))
     sp.rect(10.0, 16.0, 17.0, 19.0, (60, 120, 70)); sp.rect(-8.0, 16.0, -5.0, 20.0, (120, 70, 40)); sp.rect(-9.0, 16.0, -4.0, 17.0, (40, 40, 44))
     sp.outline(INK, 1)
     sp.anchors.update(top=(0.0, 16.0))
@@ -878,9 +991,8 @@ def truck(sp, t=0.0, text='BYE, FLORIDA!'):
     """a white moving truck with an orange stripe and a banner taped on the side"""
     body = sp.union([sp.m_super(-6.0, 17.0, 22.0, 13.0, 4.0), sp.m_super(21.0, 12.0, 8.0, 8.0, 3.0)], tones((244, 244, 238)))
     sp.fill(body & (np.abs(DX.YC - 8.0) < 1.6), (255, 130, 40))
-    lines_ = text.split(' ', 1) if txt_w(text) > 34 else [text]
-    sp.rect(-24.0, 27.0 - 6.4 * len(lines_) - 1.0, 12.0, 27.0, (255, 236, 96))
-    for q, ln in enumerate(lines_): txt(sp, ln, -6.0 - txt_w(ln) // 2, 25.6 - q * 6.4, (226, 34, 52))
+    sp.rect(-24.0, 13.0, 12.0, 27.0, (255, 236, 96))
+    txt_box(sp, text.replace(' ', '\n', 1), (-24.0, 13.0, 12.0, 27.0), (226, 34, 52), alt=(text,))
     sp.fill(sp.m_poly([(17.0, 12.0), (27.0, 12.0), (27.0, 18.0), (19.0, 18.0)]), (90, 130, 170))
     _wheel(sp, -18.0, 4.4, 4.4, t * 12); _wheel(sp, 20.0, 4.4, 4.4, t * 12)
     sp.outline(INK, 1)
@@ -1006,3 +1118,29 @@ def pet_scanner(sp, h, on=True):
     sp.cap((h[0], h[1]), (h[0] + 3.0, h[1] + 2.0), 0.9, 0.9, tones((90, 96, 108)))
     sp.ell(h[0] + 5.0, h[1] + 3.4, 2.6, 2.2, tones((236, 200, 60)))
     sp.rect(h[0] + 0.6, h[1] + 0.6, h[0] + 2.4, h[1] + 1.6, (120, 255, 150) if on else (40, 60, 50))
+
+
+# ======================================================================================== yard ornaments (decor, props/fmdecor.py)
+def flamingo(sp, t=0.0, faded=0.3):
+    """plastic pink lawn flamingo on two wire legs (sun-faded), feet anchor = where the wires enter the ground"""
+    PK = mix((255, 110, 170), (250, 210, 220), faded)
+    for dx in (-0.8, 0.8): sp.line((dx, 0.0), (dx * 0.4, 14.0), (60, 60, 64))
+    sp.ell(0.0, 17.0, 6.4, 3.6, tones(PK), ang=-0.15)
+    sp.ell(-5.0, 18.0, 2.4, 1.6, tones(dark(PK, 0.9)), ang=0.4)                   # tail
+    sp.cap((4.0, 18.6), (5.4, 23.0), 1.2, 1.0, tones(PK)); sp.cap((5.4, 23.0), (3.2, 27.0), 1.0, 1.0, tones(PK))
+    sp.ell(4.0, 28.0, 1.8, 1.6, tones(PK))
+    sp.cap((5.2, 28.0), (7.6, 26.2), 0.7, 0.5, tones((250, 240, 230))); sp.cap((7.0, 26.6), (8.2, 25.6), 0.5, 0.4, tones((30, 30, 30)))
+    sp.dot(4.4, 28.4, (20, 20, 20))
+    sp.outline(INK, 1)
+
+
+def gnome(sp, t=0.0):
+    """garden gnome in a tiny sheriff hat and mirrored sunglasses (the trailer park's 'security')"""
+    sp.sup(0.0, 4.0, 4.0, 4.0, tones((60, 90, 170)), n=2.2)                        # body / coat
+    sp.rect(-4.0, 3.6, 4.0, 4.6, (60, 40, 30))
+    sp.ell(0.0, 6.4, 3.6, 3.0, tones((250, 250, 246)))                           # beard
+    sp.ell(0.0, 10.0, 2.6, 2.4, tones((236, 180, 150)))
+    sp.rect(-2.4, 9.8, 2.4, 11.0, (40, 44, 56))                                   # shades
+    sp.ell(0.0, 12.8, 4.6, 0.9, tones((176, 130, 70))); sp.sup(0.0, 14.2, 2.4, 1.6, tones((176, 130, 70)), n=2.4)
+    sp.fill(sp.m_ell(0.0, 13.6, 0.8, 0.8)[0], (255, 206, 60))
+    sp.outline(INK, 1)

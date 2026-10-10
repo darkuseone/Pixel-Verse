@@ -50,12 +50,17 @@ class res:
     def __exit__(s, *a): set_res(s.prev)
 
 
+RES_PX = 3.75                                       # rule 10.10.2026 («x2 resolution»): one canvas px of a hero <= ~3.75 output px
+RES_MAX = 6
+
+
 def res_for(scale, hires=None):
-    """sub-pixels per sprite px for an on-screen scale: 2 for close-ups (>= HIRES_AT output px per sprite px), 3 for extreme close-ups
-    (>= HIRES3_AT); hires=True forces at least 2, hires=False forces 1, an int forces exactly that"""
+    """sub-pixels per sprite px for an on-screen scale (output px per sprite px): k = ceil(scale / RES_PX), 1..RES_MAX, so a hero
+    pixel never gets bigger than ~3.75 output px (mid shots 2x, close-ups 4-6x: eyes, teeth, wrinkles stay readable, no «mush»).
+    hires=True forces at least 2, hires=False forces 1, an int forces exactly that"""
     if hires is False: return 1
     if hires is not True and isinstance(hires, int): return hires
-    k = 3 if scale >= HIRES3_AT else (2 if scale >= HIRES_AT else 1)
+    k = max(1, min(RES_MAX, math.ceil(scale / RES_PX - 0.05)))
     return max(k, 2) if hires else k
 LDIR = np.array([-0.52, 0.56, 0.64], np.float32)    # light from the upper left, a little from the front
 OUTLINE = (24, 18, 40)

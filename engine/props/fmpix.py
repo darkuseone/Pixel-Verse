@@ -50,6 +50,12 @@ def tones(base, k=0.30):
 
 
 class Spr(DX.Spr):
+    def dot(s, i, j, c, keep=False):
+        """detail dot: a hard sprite px at 1-2x, a small round blob at hi-res (close-ups: no square «mush» specks)"""
+        if s.k < 3: return DX.Spr.dot(s, i, j, c, keep)
+        cx, cy = int(i) + 0.5, int(j) + 0.5
+        s.fill(s.m_ell(cx, cy, 0.58, 0.58)[0], c, keep)
+
     def paint(s, mask, pal, val=None, dither=0.30, bands=(0.22, 0.44, 0.80), ol=True, olc=None, gloss=0.0):
         """gloss > 0: pixels lit above 1-gloss*0.12 turn into white sun glints (skin, lenses, beaks)"""
         if not mask.any(): return mask

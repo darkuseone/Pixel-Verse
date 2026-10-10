@@ -59,6 +59,11 @@ class Episode:
         proc.stdin.close(); proc.wait()
 
     def main(s, render, script):
+        import stage
+        render0 = render
+        def render(t):                               # animated decals / ambience read the frame time
+            stage.T_NOW[0] = t
+            return render0(t)
         n = int(round(s.dur * s.fps)); a = sys.argv
         if a[1] == 'test':
             ts = list(map(float, a[2:]))
@@ -66,6 +71,9 @@ class Episode:
             for k, tt in enumerate(ts):
                 c.paste(Image.fromarray(render(tt)).resize((270, 480), Image.LANCZOS), (k * 270, 0))
             c.save(P.build(s.bk, 'sheet.png')); print(P.build(s.bk, 'sheet.png'))
+        elif a[1] == 'frames':                       # full-size control frames (critic, close-up check at 1080x1920)
+            for tt in map(float, a[2:]):
+                f = P.build(s.bk, f'f_{tt:05.2f}.png'); Image.fromarray(render(tt)).save(f); print(f)
         elif a[1] == 'frame':
             Image.fromarray(render(float(a[2]))).save(P.build(s.bk, 'frame.png')); print(P.build(s.bk, 'frame.png'))
         elif a[1] == 'seg':

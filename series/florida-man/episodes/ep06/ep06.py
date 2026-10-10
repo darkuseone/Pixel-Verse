@@ -20,6 +20,7 @@ from episode import Episode
 from props import fmpix as FX
 from props import fmcast as C
 from props import fmkit as K
+from props import decals as D
 from props import bytfx as B
 from props.dibspix import blit
 from timeline import DUR, FPS, VOICE, SLUG, CUTS
@@ -29,23 +30,18 @@ talk = EPI.talk
 A, wpt, aout = K.A, K.wpt, K.aout
 LC = K.light_cell
 
-JAIL = K.world('jail_ext').copy()
-K.wtext(JAIL, 'SUNSHINE', 644 - K.wtext_w('SUNSHINE', 2) // 2, 286, (14, 44, 54), 2)
-K.wtext(JAIL, 'COUNTY JAIL', 644 - K.wtext_w('COUNTY JAIL', 2) // 2, 300, (14, 44, 54), 2)
+JAIL = K.wcopy(K.world('jail_ext'))                  # its sign «SUNSHINE COUNTY / JAIL & RESORT» is a decal (props/fmdecor.py)
 BOOK = K.world('booking')
 
 
 def _cell(resort):
-    W = K.world('cell').copy()
-    x0, y0, x1, y1 = 104, 30, 476, 104
-    W[y0:y1, x0:x1] = (246, 240, 220)
-    W[y0:y0 + 4, x0:x1] = (14, 44, 54); W[y1 - 4:y1, x0:x1] = (14, 44, 54)
-    t = 'SUNSHINE COUNTY'
-    K.wtext(W, t, (x0 + x1 - K.wtext_w(t, 3)) // 2, y0 + 10, (14, 44, 54), 3)
-    t = 'JAIL & RESORT' if resort else 'JAIL'
-    K.wtext(W, t, (x0 + x1 - K.wtext_w(t, 4)) // 2, y0 + 34, (226, 34, 52) if resort else (14, 44, 54), 4)
-    if resort:
-        for q in range(5): W[y1 + 4:y1 + 10, x0 + 20 + q * 70:x0 + 50 + q * 70] = (255, 206, 70)   # little gold stars
+    """the cell with a banner over the bunk: «SUNSHINE COUNTY / JAIL» -> «JAIL & RESORT» + five gold stars (hi-res decal, text fitted)"""
+    W = K.wcopy(K.world('cell'))
+    lines = ['SUNSHINE COUNTY', 'JAIL & RESORT' if resort else 'JAIL']
+    img = D.plate(372, 74, lines, bg=(246, 240, 220), colors=[(14, 44, 54), (226, 34, 52) if resort else (14, 44, 54)],
+                  border=(14, 44, 54), bw=4, weights=[1.0, 1.3], pad=3, wear=0.3)
+    D.attach(W, [(img, 104, 30)])
+    if resort: D.attach(W, [(D.knockout(D.plate(180, 16, ['★ ★ ★ ★ ★'], bg=(0, 0, 0), fg=(255, 206, 70), border=None, pad=0.5)), 200, 106)])
     return W
 
 
@@ -81,11 +77,7 @@ def cu(world, light, fn, t, cx, cy, sc, head, Z=1.4, flip=False, blur=0, pre_=No
 
 
 def siren(big, t, k=1.0):
-    on = int(t * 7) % 2
-    col = np.array((255, 40, 60) if on else (50, 90, 255), np.float32)
-    half = slice(0, OUT_W // 2) if on else slice(OUT_W // 2, OUT_W)
-    reg = big[:, half].astype(np.float32)
-    big[:, half] = np.clip(reg * (1 - 0.22 * k) + col * 0.22 * k, 0, 255).astype(np.uint8)
+    K.siren(big, t, k)
 
 
 def spotlight(big, x, y, r, a=0.35):
