@@ -20,6 +20,6 @@ def f(big, v_):
     fx.glow(big, x, y, 420, (255, 220, 110), 0.6)
 frame = E.K.shot(E.GI, E.light_gi, cx, cy, Z, acts=[rig, tl, m], fx_=f, sx=180, sy=330)
 out = pathlib.Path(__file__).with_name('cover.png')
-make(frame, ['БЕНЗИН', 'ИЗ СЕМЕЧЕК'], n=5, out=str(out), title_y=150, title_size=76)
+make(frame, ['БЕНЗИН', 'ИЗ СЕМЕЧЕК'], n=5, out=str(out), title_size=76)
 shutil.copy(out, P.series(E.SLUG) / 'covers' / 'cover_s01e05.png')
 print(out)
