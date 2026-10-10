@@ -24,7 +24,7 @@ def f(big, v_):
     K.wind_lines(big, t, 0.5)
 frame = K.shot(E.HW, K.light_hw, cx, cy, Z, acts=[car, m], fx_=f, sx=180, sy=330)
 out = pathlib.Path(__file__).with_name('cover.png')
-make(frame, ['ГДЕ', 'БЕНЗИН?!'], n=1, out=str(out), title_y=130, title_size=84)
+make(frame, ['ГДЕ', 'БЕНЗИН?!'], n=1, out=str(out), title_size=84)
 dst = P.series(E.SLUG) / 'covers'; dst.mkdir(exist_ok=True)
 shutil.copy(out, dst / 'cover_s01e01.png')
 print(out)
