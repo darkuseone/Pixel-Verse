@@ -1,0 +1,50 @@
+{
+  "f1": [
+    "fm",
+    "[shrieking, voice cracking, outraged] TWO GRAND?! For an ICE PACK?!"
+  ],
+  "t1": [
+    "tanner",
+    "[chipper, beaming] It's ORGANIC ice!"
+  ],
+  "f2": [
+    "fm",
+    "[flat, deadpan, unimpressed] It's WATER."
+  ],
+  "t2": [
+    "tanner",
+    "[cheerful, totally oblivious] Out-of-NETWORK water!"
+  ],
+  "f3": [
+    "fm",
+    "[calm, slow lazy drawl] Mort. Hold my sub."
+  ],
+  "m1": [
+    "mort",
+    "[deadpan, writing an invoice] Holding fee. Eighty BUCKS."
+  ],
+  "t3": [
+    "tanner",
+    "[sweet baby talk, cooing at a dog] Who's a GOOD boy?"
+  ],
+  "f4": [
+    "fm",
+    "[proud, pleased, slow] Me."
+  ],
+  "t4": [
+    "tanner",
+    "[sweet, cheerful] And a little MICROCHIP!"
+  ],
+  "d1": [
+    "darlene",
+    "[slow, satisfied, deadpan] Gotcha."
+  ],
+  "d2": [
+    "darlene",
+    "[deadpan, bored] Mornin', Travis."
+  ],
+  "d3": [
+    "darlene",
+    "[flat, deadpan, patting a dog] Good boy. Scan's two GRAND."
+  ]
+}

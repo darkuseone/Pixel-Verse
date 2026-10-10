@@ -421,6 +421,158 @@
    "deleted_reason": "free slots"
   },
   {
+   "slug": "florida-man",
+   "char": "fm",
+   "voice_id": "GBn8jPzCnZIbx5Kf8r1J",
+   "status": "active",
+   "name": "Florida Man",
+   "voice_name": "Florida Man — Florida Man",
+   "lines": 32,
+   "episodes": 6,
+   "samples": [
+    "series/florida-man/voice/ep06/f3.mp3",
+    "series/florida-man/voice/ep01/f3.mp3",
+    "series/florida-man/voice/ep01/f4.mp3",
+    "series/florida-man/voice/ep02/f2.mp3",
+    "series/florida-man/voice/ep02/f3.mp3",
+    "series/florida-man/voice/ep01/f6.mp3",
+    "series/florida-man/voice/ep04/f2.mp3",
+    "series/florida-man/voice/ep05/f1.mp3"
+   ],
+   "design": {
+    "description": "A sun-baked Florida Gulf Coast man in his mid-forties: warm, raspy, gravelly baritone with a slow, lazy Southern Panhandle drawl, totally zen and unbothered, a laid-back boat-ramp philosopher who chuckles under his breath. When he hears a price his voice cracks into a high-pitched, outraged shriek. Natural, characterful, comedic.",
+    "text": "Mort. Hold my sub. Nah, man, it's fine. It's Florida. Gators, hurricanes, the heat, I don't sweat it. But NINE GRAND? For the A C?! Hoo boy. Okay. Okay. Deep breath. I got a plan. It's a great plan. Hold my sub.",
+    "picked": {
+     "i": 2,
+     "dur": 25.89,
+     "f0": 142.9,
+     "f0_iqr": 64.9,
+     "rate": 13.4,
+     "loud_sd": 6.0
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A sun-baked Florida Gulf Coast man in his mid-forties: warm, raspy, gravelly baritone with a slow, lazy Southern Panhandle drawl, totally zen and unbothered, a laid-back boat-ramp philosopher who chuckles under his breath. When he hears a price his voice cracks into a high-pitched, outraged shriek. Natural, characterful, comedic.",
+    "settings": null,
+    "created_at_unix": 1791529898
+   }
+  },
+  {
+   "slug": "florida-man",
+   "char": "tanner",
+   "voice_id": "GpiDvTn0zpQeiQA9VdB7",
+   "status": "active",
+   "name": "Tanner",
+   "voice_name": "Florida Man — Tanner",
+   "lines": 20,
+   "episodes": 6,
+   "samples": [
+    "series/florida-man/voice/ep01/t3.mp3",
+    "series/florida-man/voice/ep06/t1.mp3",
+    "series/florida-man/voice/ep06/t2.mp3",
+    "series/florida-man/voice/ep06/t4.mp3",
+    "series/florida-man/voice/ep04/t1.mp3",
+    "series/florida-man/voice/ep05/t1.mp3",
+    "series/florida-man/voice/ep02/t1.mp3",
+    "series/florida-man/voice/ep01/t1.mp3"
+   ],
+   "design": {
+    "description": "A relentlessly chipper young American man in his late twenties, bright upbeat customer-service voice, fast and bubbly with a slight surfer-valley lilt, a huge smile you can hear, sincerely positive even while delivering terrible news. Natural, comedic.",
+    "text": "Hey there! I'm Tanner, I'll be your technician today! Okay, so your compressor is totally dead! No worries! It's nine thousand dollars and a three week wait. Want the extended warranty? Awesome. Have a sunshine day!",
+    "picked": {
+     "i": 2,
+     "dur": 11.0,
+     "f0": 266.7,
+     "f0_iqr": 116.2,
+     "rate": 23.1,
+     "loud_sd": 6.1
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A relentlessly chipper young American man in his late twenties, bright upbeat customer-service voice, fast and bubbly with a slight surfer-valley lilt, a huge smile you can hear, sincerely positive even while delivering terrible news. Natural, comedic.",
+    "settings": null,
+    "created_at_unix": 1791529907
+   }
+  },
+  {
+   "slug": "florida-man",
+   "char": "darlene",
+   "voice_id": "dgd3UC679ZtpWOphbJ9Y",
+   "status": "active",
+   "name": "Deputy Darlene",
+   "voice_name": "Florida Man — Deputy Darlene",
+   "lines": 14,
+   "episodes": 6,
+   "samples": [
+    "series/florida-man/voice/ep06/d2.mp3",
+    "series/florida-man/voice/ep04/d1.mp3",
+    "series/florida-man/voice/ep01/d1.mp3",
+    "series/florida-man/voice/ep02/d1.mp3",
+    "series/florida-man/voice/ep04/d3.mp3",
+    "series/florida-man/voice/ep03/d3.mp3",
+    "series/florida-man/voice/ep05/d1.mp3",
+    "series/florida-man/voice/ep01/d2.mp3"
+   ],
+   "design": {
+    "description": "A small-town Florida sheriff's deputy in her mid-fifties: a smoky, low alto with a slow rural Southern drawl, utterly bored, deadpan and unimpressed, chewing gum while she talks, motherly but done with everybody's nonsense. Natural, characterful, comedic.",
+    "text": "Mornin'. Sir. You can't live in Frozen Foods. I don't care how hot it is. Hands where I can see 'em. Five more and your next night's free. Smile. That's not a smile. Broke. Nine grand. Welcome to Florida, hon.",
+    "picked": {
+     "i": 1,
+     "dur": 18.91,
+     "f0": 181.8,
+     "f0_iqr": 36.7,
+     "rate": 17.4,
+     "loud_sd": 5.3
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A small-town Florida sheriff's deputy in her mid-fifties: a smoky, low alto with a slow rural Southern drawl, utterly bored, deadpan and unimpressed, chewing gum while she talks, motherly but done with everybody's nonsense. Natural, characterful, comedic.",
+    "settings": null,
+    "created_at_unix": 1791529905
+   }
+  },
+  {
+   "slug": "florida-man",
+   "char": "mort",
+   "voice_id": "d44i4jCJHjBEUuFbGaGy",
+   "status": "active",
+   "name": "Mort Pouch, Esq.",
+   "voice_name": "Florida Man — Mort Pouch, Esq.",
+   "lines": 11,
+   "episodes": 6,
+   "samples": [
+    "series/florida-man/voice/ep02/m1.mp3",
+    "series/florida-man/voice/ep02/m2.mp3",
+    "series/florida-man/voice/ep06/m2.mp3",
+    "series/florida-man/voice/ep04/m3.mp3",
+    "series/florida-man/voice/ep03/m1.mp3",
+    "series/florida-man/voice/ep04/m2.mp3",
+    "series/florida-man/voice/ep05/m1.mp3",
+    "series/florida-man/voice/ep04/m1.mp3"
+   ],
+   "design": {
+    "description": "A cynical old personal-injury lawyer in his seventies, a raspy, nasal, fast-talking New Jersey accent, dry deadpan delivery, world-weary and smug, a little wheezy, like a billboard attorney who moved to Florida in 1987 and never left. Natural and comedic.",
+    "text": "Mort Pouch, attorney at law. Arrested? Gator'd? Melted? Call me. My fee is a third. Is it legal? Allegedly. What sub? I don't see a sub. My client pleads Florida. Next question. And somebody turn up the air in here.",
+    "picked": {
+     "i": 1,
+     "dur": 20.11,
+     "f0": 150.9,
+     "f0_iqr": 61.9,
+     "rate": 18.1,
+     "loud_sd": 5.9
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A cynical old personal-injury lawyer in his seventies, a raspy, nasal, fast-talking New Jersey accent, dry deadpan delivery, world-weary and smug, a little wheezy, like a billboard attorney who moved to Florida in 1987 and never left. Natural and comedic.",
+    "settings": null,
+    "created_at_unix": 1791529903
+   }
+  },
+  {
    "slug": "grim-ride",
    "char": "grim",
    "voice_id": "sdQf2r6zfX32hvp25Auj",
@@ -718,7 +870,7 @@
    "status": "active",
    "name": "Мазутыч",
    "voice_name": "Мазутыч — Мазутыч",
-   "lines": 26,
+   "lines": 29,
    "episodes": 6,
    "samples": [
     "series/mazutych/voice/ep01/m1.mp3",
@@ -794,7 +946,7 @@
    "status": "active",
    "name": "Дин-Дон (моноколесо)",
    "voice_name": "Мазутыч — Дин-Дон (моноколесо)",
-   "lines": 8,
+   "lines": 9,
    "episodes": 6,
    "samples": [
     "series/mazutych/voice/ep06/w2.mp3",
@@ -831,7 +983,7 @@
    "voice_id": "sqjFPShWaZX3JdS3utu1",
    "status": "active",
    "name": "Инспектор Столбов (ДПС)",
-   "voice_name": "Мазутыч — Инспектор Столбов (ДПС)",
+   "voice_name": "mazutych — Инспектор Столбов (ДПС) (restored)",
    "lines": 8,
    "episodes": 1,
    "samples": [
@@ -857,17 +1009,10 @@
     }
    },
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "A stern Russian traffic police inspector in his forties. Loud, official, barking voice with bureaucratic cadence, self-important, slightly hoarse from shouting at drivers, then can drop to a conspiratorial whisper. Native Russian speaker.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1791279481
+    "settings": null,
+    "created_at_unix": 1791475394
    },
    "preview_url": "https://api.us.elevenlabs.io/v1/voices/F85lAHK9jOYsP9VeSqFY/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiMDc3NDE2MjUtMTgxMS00NGMxLThlZjMtMzM1NjQ2N2RiYzMxLm1wMyIsInRpbWVzdGFtcCI6MTc5MTMxNjgwMDAwMDAwMH0%3D",
    "deleted_reason": "free slots",
@@ -881,11 +1026,58 @@
   },
   {
    "slug": "mazutych",
+   "char": "boss",
+   "voice_id": "iJVGC18PiXCeNoMe4wOM",
+   "status": "active",
+   "name": "Борис Борисыч",
+   "voice_name": "mazutych — Борис Борисыч (restored)",
+   "lines": 8,
+   "episodes": 4,
+   "samples": [
+    "series/mazutych/voice/ep06/b2.mp3",
+    "series/mazutych/voice/ep02/b1.mp3",
+    "series/mazutych/voice/ep06/b1.mp3",
+    "series/mazutych/voice/ep03/b1.mp3",
+    "series/mazutych/voice/ep05/b1.mp3",
+    "series/mazutych/voice/ep06/b3.mp3",
+    "series/mazutych/voice/ep03/b2.mp3",
+    "series/mazutych/voice/ep03/b3.mp3"
+   ],
+   "design": {
+    "description": "A pompous Russian factory boss in his sixties making a triumphant announcement over a factory loudspeaker. Booming, fat, self-satisfied baritone with a solemn Soviet-style ceremonial cadence, loud and proud. Native Russian speaker.",
+    "text": "Ура́, това́рищи! Пла́н — сто со́рок оди́н проце́нт! Заво́д «Фа́кел Труда́» опя́ть впереди́. Бензи́н вы́пущен, учтён и отпра́влен! Ура́!",
+    "picked": {
+     "i": 2,
+     "dur": 15.49,
+     "f0": 271.2,
+     "f0_iqr": 28.6,
+     "rate": 13.1,
+     "loud_sd": 5.7
+    }
+   },
+   "account": {
+    "category": "cloned",
+    "description": "A pompous Russian factory boss in his sixties making a triumphant announcement over a factory loudspeaker. Booming, fat, self-satisfied baritone with a solemn Soviet-style ceremonial cadence, loud and proud. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1791475384
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/vxP9EoBM29o2m1aWHQNV/5ba4261e-8b11-4152-abfc-d089fd73aba1.mp3",
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "vxP9EoBM29o2m1aWHQNV",
+     "until": "2026-10-08",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "mazutych",
    "char": "tolik",
    "voice_id": "6FfEAtYZ4qqQztCjEr34",
    "status": "active",
    "name": "Толик (водитель бензовоза)",
-   "voice_name": "Мазутыч — Толик (водитель бензовоза)",
+   "voice_name": "mazutych — Толик (водитель бензовоза) (restored)",
    "lines": 7,
    "episodes": 3,
    "samples": [
@@ -910,17 +1102,10 @@
     }
    },
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "A cheerful, simple Russian truck driver in his forties. Hoarse, friendly, slightly husky baritone, fast and loud, easy-going and folksy, a little rough, sounds like he is shouting from a truck window with a grin. Native Russian speaker, plain provincial accent.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1791275120
+    "settings": null,
+    "created_at_unix": 1791475388
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/X8jm2orhZd79nRAehKy9/c43d33a2-4923-4ad8-9d7d-3b8c51dcee35.mp3",
    "deleted_reason": "free slots",
@@ -938,7 +1123,7 @@
    "voice_id": "3YcbIhxRmKe16pBspvSh",
    "status": "active",
    "name": "Вадик (барыга)",
-   "voice_name": "Мазутыч — Вадик (барыга)",
+   "voice_name": "mazutych — Вадик (барыга) (restored)",
    "lines": 7,
    "episodes": 1,
    "samples": [
@@ -963,75 +1148,16 @@
     }
    },
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "A sly, smooth-talking Russian street hustler in his thirties. Breathy, nasal, slightly hoarse voice, speaks mostly in a conspiratorial half-whisper, quick and slippery, with a smug grin you can hear, a light street slang manner. Native Russian speaker.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1791279478
+    "settings": null,
+    "created_at_unix": 1791475391
    },
    "preview_url": "https://api.us.elevenlabs.io/v1/voices/kBGudMWVfIgAw0ySF5rq/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiZDAyZmFmMDUtMGRkZS00OTQ5LWI2ZjEtN2U4OTc0NDVmYjFhLm1wMyIsInRpbWVzdGFtcCI6MTc5MTMxNjgwMDAwMDAwMH0%3D",
    "deleted_reason": "free slots",
    "history": [
     {
      "voice_id": "kBGudMWVfIgAw0ySF5rq",
-     "until": "2026-10-08",
-     "note": "deleted, restored as IVC clone"
-    }
-   ]
-  },
-  {
-   "slug": "mazutych",
-   "char": "boss",
-   "voice_id": "iJVGC18PiXCeNoMe4wOM",
-   "status": "active",
-   "name": "Борис Борисыч",
-   "voice_name": "Мазутыч — Борис Борисыч",
-   "lines": 6,
-   "episodes": 3,
-   "samples": [
-    "series/mazutych/voice/ep06/b2.mp3",
-    "series/mazutych/voice/ep02/b1.mp3",
-    "series/mazutych/voice/ep06/b1.mp3",
-    "series/mazutych/voice/ep03/b1.mp3",
-    "series/mazutych/voice/ep06/b3.mp3",
-    "series/mazutych/voice/ep03/b2.mp3"
-   ],
-   "design": {
-    "description": "A pompous Russian factory boss in his sixties making a triumphant announcement over a factory loudspeaker. Booming, fat, self-satisfied baritone with a solemn Soviet-style ceremonial cadence, loud and proud. Native Russian speaker.",
-    "text": "Ура́, това́рищи! Пла́н — сто со́рок оди́н проце́нт! Заво́д «Фа́кел Труда́» опя́ть впереди́. Бензи́н вы́пущен, учтён и отпра́влен! Ура́!",
-    "picked": {
-     "i": 2,
-     "dur": 15.49,
-     "f0": 271.2,
-     "f0_iqr": 28.6,
-     "rate": 13.1,
-     "loud_sd": 5.7
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A pompous Russian factory boss in his sixties making a triumphant announcement over a factory loudspeaker. Booming, fat, self-satisfied baritone with a solemn Soviet-style ceremonial cadence, loud and proud. Native Russian speaker.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1791272644
-   },
-   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/vxP9EoBM29o2m1aWHQNV/5ba4261e-8b11-4152-abfc-d089fd73aba1.mp3",
-   "deleted_reason": "free slots",
-   "history": [
-    {
-     "voice_id": "vxP9EoBM29o2m1aWHQNV",
      "until": "2026-10-08",
      "note": "deleted, restored as IVC clone"
     }
@@ -1546,5 +1672,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-08 16:03"
+ "updated": "2026-10-09 16:27"
 }
