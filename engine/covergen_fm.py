@@ -39,14 +39,16 @@ def plate(n, total=6, w=740, h=250):
 def make(frame, title, n=1, out='cover.png', title_y=None, title_size=104, plate_y=None, shift=0, grid_preview=True):
     """plate at the top of the 3:4 grid zone, title right under it, soft dark band behind both; shift moves the scene down"""
     big = frame.copy()
-    if shift > 0: big = np.concatenate([np.repeat(big[:1], shift, 0), big[:-shift]], 0)
+    if shift > 0:                                       # move the scene down; the gap on top = the frame's own top band mirrored + soft
+        top = K.dof(np.ascontiguousarray(big[:shift][::-1]), 10)
+        big = np.concatenate([top, big[:-shift]], 0)
     p = plate(n, w=600, h=190)
     py = GRID[0] + 22 if plate_y is None else plate_y
     t = K.hook_title(title, title_size, depth=16)
     ty = py + p.shape[0] + 4 if title_y is None else title_y
     y1 = ty + t.shape[0]
     shade = np.zeros((big.shape[0], 1, 1), np.float32)
-    shade[GRID[0]:y1, 0, 0] = 0.40
+    shade[:y1, 0, 0] = 0.40
     n_ = len(shade[y1:y1 + 140]); shade[y1:y1 + n_, 0, 0] = np.linspace(0.40, 0.0, 140)[:n_]
     big = (big * (1 - shade)).astype(np.uint8)
     O.overlay(big, p, (big.shape[1] - p.shape[1]) // 2, py, 1.0)

@@ -951,7 +951,7 @@ def price_tag(sp, t=0.0, price='$14.99', label='SUB', cuffed=False, side=False):
         sp.outline(INK, 1); return
     sp.rect(-15.0, 4.0, 15.0, 22.0, (250, 250, 244))
     sp.rect(-15.0, 16.0, 15.0, 22.0, (40, 176, 150)); txt_box(sp, label, (-15.0, 16.0, 15.0, 22.0), (255, 255, 255))
-    txt_box(sp, price, (-15.0, 4.6, 15.0, 15.6), (226, 30, 40), max_n=2.0)
+    txt_box(sp, price, (-11.4, 4.6, 11.4, 15.6), (226, 30, 40), max_n=2.0)                   # clear of the cuffs on the edges
     sp.rect(-2.0, 0.0, 2.0, 4.0, (60, 60, 64))
     if cuffed:
         for cx_ in (-15.0, 15.0):                                                               # cuffs clamp the card's edges

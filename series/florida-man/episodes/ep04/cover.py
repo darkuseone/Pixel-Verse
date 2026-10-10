@@ -7,7 +7,7 @@ import covergen_fm as CG
 
 big = E.r_hook(0.9, 0.9)
 here = pathlib.Path(__file__).parent
-CG.make(big, ['$8,000', 'INSURANCE?!'], n=4, out=str(here / 'cover.png'), title_y=210, title_size=88, plate_y=1690)
+CG.make(big, ['$8,000', 'INSURANCE?!'], n=4, out=str(here / 'cover.png'), shift=300, title_size=92)
 dst = here.parents[1] / 'covers' / 'cover_s01e04.png'
 shutil.copy(here / 'cover.png', dst)
 print(dst)

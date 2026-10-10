@@ -80,6 +80,9 @@ def mort_scale(v, t, **kw):
 def deli_shot(t, cx, cy, Z, back=(), acts=(), fx_=None):
     """a deli view: `back` actors stand behind the counter (occluded by it), `acts` on / in front of it"""
     def pre(big, v):
+        if Z >= 1.2:                                             # depth of field: the huge menu board on the wall goes soft
+            yb = int(min(OUT_H, max(0, v.opt(0, TOP - 6.0)[1])))      # (no sharp half-cut prices behind stickers / heads)
+            if yb > 0: big[:yb] = K.dof(big[:yb].copy(), min(14, 7 + (Z - 1.2) * 6))
         bg0 = big.copy()
         lt = LT(v)
         for b in back: b(v)(big, v, lt)
@@ -241,9 +244,9 @@ def r_darlene_cu(t, u):
 def r_board(t, u):
     """her POV: the board, CHICKEN TENDER SUB $14.99 — the lids narrow into a squint"""
     Z = lerp(2.4, 2.8, min(1.0, u / 0.45))
-    v = view_at(DELI, 860.0, 150.0, Z, 180, 320)
+    v = view_at(DELI, 912.0, 150.0, Z, 180, 320)               # the whole «$14.99» in frame (price column of the menu board)
     big = v.bg()
-    x, y = v.opt(930.0, 120.0)
+    x, y = v.opt(944.0, 116.0)
     fx.glow(big, int(x), int(y), 220, (255, 80, 80), 0.35 + 0.25 * math.sin(t * 30))
     lid = int(lerp(0, 640, sm(min(1.0, u / 0.4))))
     big[:lid] = (40, 20, 18); big[OUT_H - lid:] = (40, 20, 18)
@@ -296,7 +299,7 @@ def r_darlene_flat(t, u):
     """CU: Darlene guards her prisoner (the cuffed tag on the counter), flat: «So's my PAYCHECK.»"""
     def fx_(big, v, a):
         siren(big, t, 0.35)
-    big, a, v = cu(DELI, LT, C.darlene, t, 640.0, 300.0, 22.0, (400, 820), Z=1.35, blur=0, expr='bored', mouth_=mouth('darlene', t),
+    big, a, v = cu(DELI, LT, C.darlene, t, 640.0, 300.0, 22.0, (400, 820), Z=1.35, blur=6, expr='bored', mouth_=mouth('darlene', t),
                    look=(0.0, 0.0), hand_n=(8.0, 40.0), hand_f=(-2.0, 40.0), fx_=fx_,
                    extra=[tag_act(view_at(DELI, 640.0, 300.0, 1.35, 180, 320), t, cuffed=True)])
     return big
