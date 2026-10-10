@@ -84,14 +84,14 @@ def r_hook(t, u):
 def r_tanner_ac(t, u):
     """MS: Tanner (job #1, Cool-Rite) beside the smoking condenser, tablet up, beaming — and sweating himself (clue)"""
     Z = 1.45
-    v = view_at(YARD, 560.0, 470.0, Z, 180, 320)
+    v = view_at(YARD, 578.0, 470.0, Z, 180, 320)               # the trailer's corner stays out of the left edge
     acts = [ac_actor(v, t),
             A(C.tanner, 618.0, SAND, S_YARD * Z, t=t, expr='chipper', mouth_=mouth('tanner', t, 2.0), look=(0.0, 0.0), jobs=1, sweat=1.0,
               prop_n=lambda sp, h: C.tablet(sp, (h[0] + 0.5, h[1] - 0.5)), hand_n=(10.0, 40.0), shadow=0.35)]
     def f(big, v_):
         ac_smoke(big, v_, t)
         K.heat_haze(big, t, 1150, OUT_H, 3)
-    return K.shot(YARD, K.light_sun, 560.0, 470.0, Z, acts=acts, fx_=f, sx=180, sy=320)
+    return K.shot(YARD, K.light_sun, 578.0, 470.0, Z, acts=acts, fx_=f, sx=180, sy=320)
 
 
 def r_melt(t, u):
@@ -109,15 +109,14 @@ def r_tanner_cu(t, u):
     def pre(big, v):
         ac_actor(v, t)(big, v, K.light_sun(v)); ac_smoke(big, v, t, 0.8)
     big, a = cu(YARD, K.light_sun, C.tanner, t, 560.0, 460.0, 23.0, (540, 700), Z=1.35, blur=6, pre_=pre, expr='chipper',
-                mouth_=mouth('tanner', t, 2.0), look=(0.0, 0.0), jobs=1, sweat=1.0, thumbs=u > 0.35, hand_n=(11.0, 50.0) if u > 0.35 else None,
-                prop_f=lambda sp, h: C.tablet(sp, (h[0] - 4.0, h[1])))
+                mouth_=mouth('tanner', t, 2.0), look=(0.0, 0.0), jobs=1, sweat=1.0, thumbs=u > 0.35, hand_n=(11.0, 50.0) if u > 0.35 else None)
     return big
 
 
 def r_porch(t, u):
     """MS: zen again — Florida Man holds the sub up to Mort perched on the lawn-chair back; the billboard behind; GULP at 12.95"""
-    Z = 1.4
-    v = view_at(YARD, 770.0, 420.0, Z, 180, 320)
+    Z = 1.1                                                      # wide enough for Mort's whole billboard (802..1008) behind them
+    v = view_at(YARD, 852.0, 420.0, Z, 180, 320)
     gone = t >= 12.95
     gul = min(1.0, max(0.0, (t - 12.95) / 0.3))
     fm_ = A(C.fm, 742.0, SAND, S_YARD * Z, t=t, expr='zen', mouth_=mouth('fm', t), look=(0.8, 0.5),
@@ -126,7 +125,7 @@ def r_porch(t, u):
              look=(1.0, -0.4), lump='sub' if gone else None, gulp=gul if gone else 0.0, lift=0.5 * (1 - gul) if t > 12.5 else 0.0)
     def f(big, v_):
         K.heat_haze(big, t, 1300, OUT_H, 3)
-    return K.shot(YARD, K.light_sun, 770.0, 420.0, Z, acts=[mort, fm_], fx_=f, sx=180, sy=320)
+    return K.shot(YARD, K.light_sun, 852.0, 420.0, Z, acts=[mort, fm_], fx_=f, sx=180, sy=320)
 
 
 def r_mort_cu(t, u):
@@ -155,18 +154,33 @@ def r_doors(t, u):
 
 
 def freezer_door(big, v, x0, x1, y0, y1, ang, frost=0.6):
-    """an opened glass freezer door hinged at x1 (world), swung towards the viewer: a narrowing frosty glass panel + chrome frame"""
+    """an opened glass freezer door hinged at x1 (world), swung towards the viewer: chrome frame with hinge plates, frosted glass
+    (frost thicker at the bottom, a diagonal glare), a long vertical handle on the free edge; its bottom sits on the case's base"""
     ax0, ay0 = v.opt(x0, y0); ax1, ay1 = v.opt(x1, y1)
     w = (ax1 - ax0) * math.cos(ang)
     X0 = int(ax1 - w); X1 = int(ax1)
     Y0, Y1 = int(ay0), int(ay1)
-    if X1 - X0 < 4: return
-    reg = big[max(0, Y0 - 20):min(OUT_H, Y1 + 20), max(0, X0):min(OUT_W, X1)]
-    reg[:] = (reg * 0.45 + np.array((220, 240, 255)) * 0.55).astype(np.uint8)
-    big[max(0, Y0 - 20):min(OUT_H, Y1 + 20), max(0, X0):max(0, X0) + 14] = (200, 210, 220)
-    big[max(0, Y0 - 20):min(OUT_H, Y1 + 20), max(0, X1 - 14):X1] = (200, 210, 220)
-    big[max(0, Y0 - 20):max(0, Y0 - 6), max(0, X0):X1] = (200, 210, 220)
-    big[min(OUT_H - 1, Y1 + 6):min(OUT_H, Y1 + 20), max(0, X0):X1] = (200, 210, 220)
+    if X1 - X0 < 6: return
+    fr = max(6, int(v.Z * 3 * 3.5))                               # frame thickness
+    ya, yb = max(0, Y0 - fr), min(OUT_H, Y1 + fr)
+    xa, xb = max(0, X0), min(OUT_W, X1)
+    if xa >= xb or ya >= yb: return
+    reg = big[ya:yb, xa:xb].astype(np.float32)
+    g = np.linspace(0.45, 0.75, yb - ya)[:, None, None]             # frost builds up towards the bottom
+    reg = reg * (1 - g) + np.array((222, 240, 255), np.float32) * g
+    xx = np.arange(xa, xb)[None, :]; yy = np.arange(ya, yb)[:, None]
+    glare = (np.abs((xx - xa) - (yy - ya) * 0.35 - (xb - xa) * 0.3) < max(4, (xb - xa) * 0.08))
+    reg[glare] = reg[glare] * 0.5 + 255 * 0.5
+    big[ya:yb, xa:xb] = reg.astype(np.uint8)
+    CH, CD = (206, 214, 224), (120, 128, 140)
+    big[ya:yb, xa:min(xb, xa + fr)] = CH; big[ya:yb, max(xa, xb - fr):xb] = CH
+    big[ya:min(yb, ya + fr), xa:xb] = CH; big[max(ya, yb - fr):yb, xa:xb] = CH
+    big[ya:yb, max(xa, xb - 2):xb] = CD; big[max(ya, yb - 2):yb, xa:xb] = CD
+    for hy in (ya + (yb - ya) // 6, yb - (yb - ya) // 6):           # hinge plates on the hinge side
+        big[max(0, hy - fr):hy + fr, max(xa, xb - fr - 6):xb] = CD
+    hx = xa + fr + max(4, fr // 2)                                  # the handle on the free edge
+    big[ya + (yb - ya) // 4:yb - (yb - ya) // 4, hx:hx + max(6, fr // 2)] = (150, 158, 170)
+    big[ya + (yb - ya) // 4:yb - (yb - ya) // 4, hx:hx + 3] = (236, 240, 246)
 
 
 def cold_mist(big, v, x, y, t, n=6):
@@ -226,7 +240,9 @@ def freezer_insert(t, u, sc, head, expr, open_k=1.0, shiver=1.0, zoom=1.0):
     sp = FX.draw(C.tanner, sc, t=t, expr=expr, mouth_=mouth('tanner', t, 2.0), look=(0.0, 0.0), jobs=1, frost=1.0, shiver=shiver,
                  hand_n=(9.0, 46.0), hand_f=(-4.0, 46.0))
     px, py = sp.anchors['head']
-    blit(big, sp, head[0] - px * sc, head[1] + py * sc, sc, K.light_aisle(v2))
+    tmp = big.copy()
+    blit(tmp, sp, head[0] - px * sc, head[1] + py * sc, sc, K.light_aisle(v2))
+    big[y0:y1, x0:x1] = tmp[y0:y1, x0:x1]                      # he is INSIDE the freezer: clipped to its interior
     big[y1 - 40:y1 + 30, x0 - 30:x1 + 30] = (190, 200, 214)    # front lip hides his legs
     big[y1 + 30:] = (big[y1 + 30:] * 0.6).astype(np.uint8)
     if open_k < 1.0:                                           # the glass door still swinging open
@@ -273,9 +289,13 @@ def r_reveal(t, u):
     def pre(big, v_):
         freezer_door(big, v_, 502.0, 640.0, 230.0, 500.0, 1.15)
         freezer_door(big, v_, *DOOR_X, 230.0, 500.0, 1.25)
-        x, y = v_.opt(708.0, 470.0)                              # Tanner huddled in his freezer
-        sp = FX.draw(C.tanner, s_ * 0.9, t=t, expr='shiver', jobs=1, frost=1.0, shiver=1.0)
-        blit(big, sp, x, y, s_ * 0.9, K.light_aisle(v_))
+        x, y = v_.opt(712.0, 466.0)                              # Tanner huddled in his freezer, fits the case cell, behind its glass
+        sp = FX.draw(C.tanner, s_ * 0.7, t=t, expr='shiver', jobs=1, frost=1.0, shiver=1.0)
+        blit(big, sp, x, y, s_ * 0.7, K.light_aisle(v_))
+        gx0, gy0 = v_.opt(650.0, 226.0); gx1, gy1 = v_.opt(776.0, 470.0)
+        gx0, gy0, gx1, gy1 = max(0, int(gx0)), max(0, int(gy0)), min(OUT_W, int(gx1)), min(OUT_H, int(gy1))
+        if gx0 < gx1 and gy0 < gy1:
+            big[gy0:gy1, gx0:gx1] = (big[gy0:gy1, gx0:gx1] * 0.72 + np.array((214, 236, 255)) * 0.28).astype(np.uint8)
     def f(big, v_):
         cold_mist(big, v_, 560.0, 440.0, t)
     return K.shot(AISLE, K.light_aisle, CX, CY, Z, acts=acts, pre=pre, fx_=f, sx=180, sy=320)
@@ -305,12 +325,18 @@ def r_darlene_cu(t, u):
     return big
 
 
+def fm_recliner(sp, t=0.0, frost=0.0, **kw):
+    """Florida Man seated in his recliner, one sprite (close-ups: the chair stays under him)"""
+    C.recliner(sp, t=t, foot=1.0)
+    C.fm(sp, t=t, pose='sit', frost=frost, **kw)
+
+
 def r_browse(t, u):
     """CU: Florida Man frosted solid in the recliner, icicles on the braid, perfectly zen: «I'm BROWSING.»"""
     def pre(big, v):
         freezer_door(big, v, 502.0, 640.0, 230.0, 500.0, 1.15)
-    big, a = cu(AISLE, K.light_aisle, C.fm, t, 560.0, 420.0, 25.0, (520, 760), Z=1.4, blur=6, pre_=pre, expr='zen', mouth_=mouth('fm', t),
-                frost=1.0, look=(0.5, 0.0), pose='sit')
+    big, a = cu(AISLE, K.light_aisle, fm_recliner, t, 560.0, 420.0, 25.0, (520, 760), Z=1.4, blur=6, pre_=pre, expr='zen', mouth_=mouth('fm', t),
+                frost=1.0, look=(0.5, 0.0), hand_n=(14.0, 32.0), hand_f=(-8.0, 36.0))
     K.frost_edges(big, 0.7)
     return big
 

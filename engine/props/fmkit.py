@@ -289,12 +289,12 @@ def mug_wall():
     if _MUG is None:
         im = Image.new('RGB', (OUT_W, OUT_H), (176, 196, 204)); d = ImageDraw.Draw(im); d.fontmode = '1'
         for y in range(0, OUT_H, 8): d.line([(0, y), (OUT_W, y)], fill=(170, 190, 198))
-        labels = {0: "7'", 2: "6'6", 4: "6'", 6: "5'6", 8: "5'", 10: "4'6", 12: "4'"}
+        labels = {2: "6'6", 4: "6'", 6: "5'6", 8: "5'", 10: "4'6"}        # no 7' (under the episode plate), no 4' (under the stamp)
         for i in range(0, 14):
             y = 160 + i * 110
             d.rectangle([0, y, OUT_W, y + 8], fill=(40, 60, 70))
             if i in labels:
-                d.text((30, y - 46), labels[i], font=O.pfont(34), fill=(40, 60, 70)); d.text((OUT_W - 150, y - 46), labels[i], font=O.pfont(34), fill=(40, 60, 70))
+                d.text((30, y - 46), labels[i], font=O.pfont(34), fill=(40, 60, 70)); d.text((OUT_W - 128, y - 46), labels[i], font=O.pfont(34), fill=(40, 60, 70))
             else:
                 d.rectangle([0, y - 55, 60, y - 51], fill=(80, 100, 110)); d.rectangle([OUT_W - 60, y - 55, OUT_W, y - 51], fill=(80, 100, 110))
         _MUG = np.array(im)
