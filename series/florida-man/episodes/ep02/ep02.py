@@ -33,7 +33,8 @@ FLOOR = 680.0                      # customers' feet in front of the counter
 TAN_Y = 530.0                      # Tanner's (hidden) feet behind the counter
 SCALE = (962.0, 321.0)             # the deli scale's platform (Mort stands on it)
 TAG = (700.0, 347.0)               # the «SUB $14.99» price sign on the counter lip
-LCD = (929, 262, 996, 286)         # the scale's display (world box)
+LCD = (929, 262, 996, 286)
+BOARD_Y = 236.0                    # bottom of the menu board: depth of field blurs only above it (counter, scale, tags stay sharp)         # the scale's display (world box)
 # people scale per depth (output px per sprite px at Z=1): the counter is 1.3 m, the eye level ~1.1 m (floor perspective of the bg)
 S_FRONT, S_BACK, S_MORT, S_TAG = 20.0, 11.5, 9.1, 7.0
 
@@ -42,7 +43,7 @@ def mouth(who, t, k=1.8):
     return min(1.0, talk(who, t) * k)
 
 
-def cu(world, light, fn, t, cx, cy, sc, head, Z=1.4, flip=False, blur=0, pre_=None, fx_=None, pin='head', extra=(), **kw):
+def cu(world, light, fn, t, cx, cy, sc, head, Z=1.4, flip=False, blur=0, pre_=None, fx_=None, pin='head', extra=(), blur_y=None, **kw):
     """close-up: the sprite anchor `pin` sits at output point `head`; the background is zoomed only Z (<= ~1.45), optionally soft"""
     kw.setdefault('t', t)
     v0 = view_at(world, cx, cy, Z, 180, 320)
@@ -50,7 +51,10 @@ def cu(world, light, fn, t, cx, cy, sc, head, Z=1.4, flip=False, blur=0, pre_=No
     a = A(fn, hx, hy, sc, flip=flip, pin=pin, **kw)
     def pre(big, v):
         if pre_: pre_(big, v)
-        if blur: big[:] = K.dof(big, blur)
+        if blur and blur_y is not None:
+            yb = int(min(OUT_H, max(0, v.opt(0, blur_y)[1])))
+            if yb > 0: big[:yb] = K.dof(big[:yb].copy(), blur)
+        elif blur: big[:] = K.dof(big, blur)
     big = K.shot(world, light, cx, cy, Z, acts=list(extra) + [a], pre=pre, fx_=(lambda b, v: fx_(b, v, a)) if fx_ else None, sx=180, sy=320)
     return big, a, v0
 
@@ -77,12 +81,13 @@ def mort_scale(v, t, **kw):
     return A(C.mort, *SCALE, S_MORT * v.Z, flip=True, t=t, mouth_=mouth('mort', t), **kw)
 
 
-def deli_shot(t, cx, cy, Z, back=(), acts=(), fx_=None):
+def deli_shot(t, cx, cy, Z, back=(), acts=(), fx_=None, pre2=None):
     """a deli view: `back` actors stand behind the counter (occluded by it), `acts` on / in front of it"""
     def pre(big, v):
         if Z >= 1.2:                                             # depth of field: the huge menu board on the wall goes soft
-            yb = int(min(OUT_H, max(0, v.opt(0, TOP - 6.0)[1])))      # (no sharp half-cut prices behind stickers / heads)
+            yb = int(min(OUT_H, max(0, v.opt(0, BOARD_Y)[1])))        # (no sharp half-cut prices behind stickers / heads)
             if yb > 0: big[:yb] = K.dof(big[:yb].copy(), min(14, 7 + (Z - 1.2) * 6))
+        if pre2: pre2(big, v)
         bg0 = big.copy()
         lt = LT(v)
         for b in back: b(v)(big, v, lt)
@@ -97,7 +102,7 @@ _FG = {}
 def counter_fg(big, y0, blur=3):
     """the deli case in the foreground of a close-up behind the counter (Tanner CU): steel lip + glass + trays, soft"""
     if 'c' not in _FG:
-        crop = DELI[338:500, 300:760]
+        crop = DELI[338:530, 300:760]                              # tall enough to run off the bottom edge
         im = Image.fromarray(crop).resize((OUT_W, int(OUT_W * crop.shape[0] / crop.shape[1])), Image.NEAREST)
         _FG['c'] = K.dof(np.array(im), blur)
     a = _FG['c']
@@ -108,7 +113,7 @@ def counter_fg(big, y0, blur=3):
 def trays_fg(big, y0, blur=4):
     """inside the case looking out: meat trays across the bottom of the frame"""
     if 't' not in _FG:
-        crop = DELI[392:484, 140:572]
+        crop = DELI[392:510, 140:572]                              # tall enough to run off the bottom edge
         im = Image.fromarray(crop).resize((OUT_W, int(OUT_W * crop.shape[0] / crop.shape[1])), Image.NEAREST)
         _FG['t'] = K.dof(np.array(im), blur)
     a = _FG['t']
@@ -189,13 +194,14 @@ def r_hand(t, u):
 def r_mort_scale(t, u):
     """the deli scale insert: Mort standing on it to camera, grave: «No sub. This is an EMERGENCY.»; the LCD reads 18.2 LB  $72.80"""
     Z = 2.0
-    def f(big, v):
-        x0, y0 = v.opt(LCD[0], LCD[1]); x1, y1 = v.opt(LCD[2], LCD[3])
+    def f(big, v):                                             # customer-side display on the FRONT of the scale's base, under his feet
+        x0, y0 = v.opt(918.0, 326.0); x1, y1 = v.opt(1006.0, 346.0)
         x0, y0, x1, y1 = int(x0), int(y0), int(x1), int(y1)
         big[y0 - 8:y1 + 8, x0 - 8:x1 + 8] = (150, 156, 166)
         big[y0:y1, x0:x1] = (30, 52, 40)
         lcd_text(big, x0, y0, x1, y1)
-    return deli_shot(t, 930.0, 250.0, Z, acts=[lambda v: tag_act(v, t), lambda v: mort_scale(v, t, look=(0.0, 0.0), cam=True)], fx_=f)
+    return deli_shot(t, 930.0, 250.0, Z, acts=[lambda v: tag_act(v, t), lambda v: mort_scale(v, t, look=(0.0, 0.0), cam=True, shadow=0.4)],
+                     fx_=f)
 
 
 _LCD = {}
@@ -299,7 +305,7 @@ def r_darlene_flat(t, u):
     """CU: Darlene guards her prisoner (the cuffed tag on the counter), flat: «So's my PAYCHECK.»"""
     def fx_(big, v, a):
         siren(big, t, 0.35)
-    big, a, v = cu(DELI, LT, C.darlene, t, 640.0, 300.0, 22.0, (400, 820), Z=1.35, blur=6, expr='bored', mouth_=mouth('darlene', t),
+    big, a, v = cu(DELI, LT, C.darlene, t, 640.0, 300.0, 22.0, (400, 820), Z=1.35, blur=7, blur_y=BOARD_Y, expr='bored', mouth_=mouth('darlene', t),
                    look=(0.0, 0.0), hand_n=(8.0, 40.0), hand_f=(-2.0, 40.0), fx_=fx_,
                    extra=[tag_act(view_at(DELI, 640.0, 300.0, 1.35, 180, 320), t, cuffed=True)])
     return big
@@ -362,8 +368,8 @@ SHOW = K.Show(EPI, 2, ['$15 FOR', 'A SUB?!'], hook_t=(0.10, 2.55), hook_y=150, c
               stickers=[(K.st('JOB #2', (170, 255, 110), 52), 2.75, 4.95, 260, 520),
                         (K.st('NO SUB?!', (255, 236, 96), 70), 7.15, 8.2, 760, 520),
                         (K.st('MORT: $72.80', (120, 230, 255), 52), 8.5, 11.1, 540, 420),
-                        (K.st('COUPON: EXP. 2019', (255, 236, 96), 44), 14.85, 15.5, 330, 1290),
-                        (K.st('*DING-DONG*', (255, 255, 255), 64), 15.02, 15.55, 540, 330),
+                        (K.st('COUPON: EXP. 2019', (255, 236, 96), 44), 14.85, 15.5, 540, 1290),
+                        (K.st('*DING-DONG*', (255, 255, 255), 64), 15.02, 15.55, 540, 560),
                         (K.st('UNDER ARREST', (255, 90, 90), 70), 17.75, 18.9, 540, 380),
                         (K.st('NEW CLIENT', (120, 230, 255), 56), 22.3, 24.9, 330, 470),
                         (K.st('+$2 LEGAL FEES', (170, 255, 110), 56), 27.6, 28.75, 540, 420)],
