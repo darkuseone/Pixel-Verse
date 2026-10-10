@@ -91,6 +91,9 @@ def tanner_glass(v, t, x=650.0, **kw):
 
 def hosp_shot(t, cx, cy, Z, back=(), acts=(), fx_=None):
     def pre(big, v):
+        if Z >= 0.95:                                          # the BILLING sign doesn't fit the frame: soft (no half-cut letters)
+            yb = int(min(OUT_H, max(0, v.opt(0, 170.0)[1])))
+            if yb > 0: big[:yb] = K.dof(big[:yb].copy(), 10)
         bg0 = big.copy()
         lt = LH(v)
         for b in back: b(v)(big, v, lt)
@@ -157,7 +160,7 @@ def cone_out(act, v):
 def r_hook(t, u):
     """XCU at the billing window: a Florida-shaped bump, a tiny ice pack balanced on it, the bill unrolling to the floor"""
     def pre(big, v):
-        big[:] = K.dof(big, 6)
+        big[:] = K.dof(big, 11)
     big, a, v = cu(HOSP, LH, C.fm, t, 640.0, 300.0, 30.0, (500, 900), Z=1.35, pre_=pre, expr='shriek', mouth_=mouth('fm', t),
                    sweat=0.5, glasses_drop=min(1.0, 0.2 + u / 1.2), look=(0.6, 0.3), bump=True, ice=True)
     receipt(big, 800, 380, min(OUT_H, 380 + 2600 * min(1.0, u / 0.7)), t)
@@ -178,7 +181,7 @@ def r_fm_water(t, u):
         hx, hy = aout(a, v, 'head')
         yy = hy - 380 + 1800 * max(0.0, u - 0.1) ** 2
         if yy < OUT_H: B.puff(big, hx - 10, yy, 16, 1.0, (150, 214, 255))
-    big, a, v = cu(HOSP, LH, C.fm, t, 520.0, 300.0, 27.0, (540, 860), Z=1.35, blur=6, expr='deadpan', mouth_=mouth('fm', t), look=(0.5, 0.0),
+    big, a, v = cu(HOSP, LH, C.fm, t, 520.0, 300.0, 27.0, (540, 860), Z=1.35, blur=11, expr='deadpan', mouth_=mouth('fm', t), look=(0.5, 0.0),
                    bump=True, ice=True, fx_=fx_)
     return big
 
@@ -197,7 +200,7 @@ def r_tanner_cu(t, u):
         big[ring] = (190, 196, 204)
         holes = (d < 100) & ((xx // 24 + yy // 24) % 2 == 0) & ((xx % 24) < 8) & ((yy % 24) < 8)
         big[holes] = (60, 70, 80)
-    big, a, v = cu(HOSP, LH, C.tanner, t, 650.0, 260.0, 22.0, (540, 760), Z=1.35, blur=7, flip=True, expr='chipper', uniform='billing', jobs=3,
+    big, a, v = cu(HOSP, LH, C.tanner, t, 650.0, 260.0, 22.0, (540, 760), Z=1.35, blur=11, flip=True, expr='chipper', uniform='billing', jobs=3,
                    mouth_=mouth('tanner', t, 2.0), look=(0.0, 0.0), thumbs=u > 0.5, hand_n=(11.0, 50.0) if u > 0.5 else None, fx_=fx_)
     return big
 
@@ -216,7 +219,7 @@ def r_mort_hold(t, u):
 
 def r_mort_bill(t, u):
     """CU: Mort on the stanchion to camera, the sub in his pouch, an invoice slides into frame: «Holding fee. Eighty BUCKS.»"""
-    big, a, v = cu(HOSP, LH, C.mort, t, 560.0, 330.0, 24.0, (560, 760), Z=1.35, blur=7, expr='smug', mouth_=mouth('mort', t),
+    big, a, v = cu(HOSP, LH, C.mort, t, 560.0, 330.0, 24.0, (560, 760), Z=1.35, blur=11, expr='smug', mouth_=mouth('mort', t),
                    look=(-0.1, -0.1), lump='sub', lift=0.2)
     k = sm(min(1.0, u / 0.35))
     K.invoice_card(big, lerp(-560, 70, k), 1140, 520, ang=-7.0, amount='$80', head='MORT POUCH ESQ.',

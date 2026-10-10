@@ -142,15 +142,15 @@ def r_hook(t, u):
 
 def r_truck(t, u):
     """MS: Tanner (job #5, Sunsure yellow polo) loads the «BYE, FLORIDA!» truck and waves: «Actually, we're leaving Florida!»"""
-    Z = 1.2
+    Z = 0.9                                                      # the whole «BYE, FLORIDA!» banner in frame
     wave = (11.0 + 2.0 * math.sin(t * 12), 64.0) if u > 1.1 else (12.0, 40.0)
-    acts = [A(C.truck, 880.0, SAND, 26.0 * Z, t=0.0, shadow=0.3),
-            A(C.tanner, 690.0, SAND + 4, S_YARD * 1.15 * Z, flip=True, t=t, uniform='insurance', jobs=5, expr='chipper',
+    acts = [A(C.truck, 940.0, SAND, 26.0 * Z, t=0.0, shadow=0.3),
+            A(C.tanner, 700.0, SAND + 4, S_YARD * 1.15 * Z, flip=True, t=t, uniform='insurance', jobs=5, expr='chipper',
               mouth_=mouth('tanner', t, 2.0), look=(-0.2, 0.0), hand_n=wave, shadow=0.35,
               prop_f=lambda sp, h: sp.rect(h[0] - 4.0, h[1] - 2.0, h[0] + 3.0, h[1] + 4.0, (196, 150, 96)))]
     def f(big, v):
         K.heat_haze(big, t, 1300, OUT_H, 3)
-    return K.shot(YARD, LT, 760.0, 430.0, Z, acts=acts, fx_=f, sx=180, sy=320)
+    return K.shot(YARD, LT, 866.0, 430.0, Z, acts=acts, fx_=f, sx=180, sy=320)
 
 
 def r_dust(t, u):
@@ -170,14 +170,14 @@ def r_dust(t, u):
 
 def r_mort_hold(t, u):
     """MS: «Mort. Hold my sub.» — Mort on the lawn-chair back swallows it whole (9.80)"""
-    Z = 1.4
+    Z = 1.1                                                      # Mort's whole billboard behind them
     gone = t >= 9.8
     gul = min(1.0, max(0.0, (t - 9.8) / 0.3))
     fm_ = A(C.fm, 742.0, SAND, S_YARD * Z, t=t, expr='zen', mouth_=mouth('fm', t), look=(0.8, 0.5),
             hand_n=(15.0, 48.0), prop_n=None if gone else (lambda sp, h: C.sub(sp, (h[0] + 1.0, h[1] + 1.0), ang=0.2)), shadow=0.35)
     mort = A(C.mort, CHAIR[0], CHAIR[1], S_MORT * Z, flip=True, t=t, expr='deadpan' if not gone else 'smug', mouth_=mouth('mort', t),
              look=(1.0, -0.4), lump='sub' if gone else None, gulp=gul if gone else 0.0, lift=0.5 * (1 - gul) if t > 9.4 else 0.0)
-    return K.shot(YARD, LT, 770.0, 420.0, Z, acts=[mort, fm_], sx=180, sy=320)
+    return K.shot(YARD, LT, 852.0, 420.0, Z, acts=[mort, fm_], sx=180, sy=320)
 
 
 def r_mort_cu(t, u):
@@ -196,12 +196,12 @@ def queue_acts(v, t, wet=0.0, dar_expr='bored'):
 def r_setup(t, u):
     """WIDE: FLORIDA MAN MUTUAL — a card table, a queue of dropped neighbours (Darlene in a robe), a tiny cloud in the corner (clue)"""
     Z = 1.25
-    v = view_at(YARD, 610.0, 470.0, Z, 180, 320)
+    v = view_at(YARD, 566.0, 470.0, Z, 180, 320)               # the whole «FLORIDA MAN MUTUAL» banner in frame
     acts = [A(C.fm, TABLE + 14.0, SAND - 10.0, S_YARD * Z, t=t, expr='proud', tie=True, look=(1.0, 0.0), hand_n=(12.0, 36.0)), table_act(v, t)]
     acts += queue_acts(v, t)
     def f(big, v_):
         tiny_cloud(big, v_, 520.0, 250.0, t, 0.7)
-    return K.shot(YARD, LT, 610.0, 470.0, Z, acts=acts, fx_=f, sx=180, sy=320)
+    return K.shot(YARD, LT, 566.0, 470.0, Z, acts=acts, fx_=f, sx=180, sy=320)
 
 
 def r_stamp(t, u):
@@ -389,12 +389,12 @@ CAP = dict(hook=1800, truck=1800, dust=1800, mort_hold=1780, mort_cu=1640, setup
 
 SHOW = K.Show(EPI, 4, ['$8,000', 'INSURANCE?!'], hook_t=(0.10, 2.38), hook_y=150, cap_default=1640, cap_y=CAP, hook_size=80,
               stickers=[(K.st('JOB #5', (170, 255, 110), 52), 2.6, 5.0, 300, 420),
-                        (K.st('*WIND ONLY', (255, 120, 120), 48), 12.0, 12.9, 560, 760),
+                        (K.st('*WIND ONLY', (255, 120, 120), 48), 12.0, 12.9, 560, 1300),
                         (K.st('+$400', (170, 255, 110), 70), 14.3, 15.0, 760, 420),
                         (K.st('WIND OR FLOOD?', (255, 236, 96), 52), 17.1, 18.9, 540, 380),
                         ],
               chyrons=[(26.62, 27.6, 'FLORIDA MAN DENIES', 'OWN CLAIM', 1500)],
-              cards=[(22.3, 23.72, 8, 22.5, 540, 1180)],
+              cards=[(22.3, 23.72, 8, 22.5, 540, 1380)],
               flashes=[16.95, STAMPS[3]], mosaics=[26.28])
 
 
