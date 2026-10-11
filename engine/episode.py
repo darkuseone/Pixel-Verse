@@ -18,8 +18,10 @@ COVER_SEC = 0.1  # длительность вшитой обложки в на�
 
 
 class Episode:
-    def __init__(s, ep, voice, dur, fps=30, colors=COL, slug=P.PDZ, cap_words=3):
+    def __init__(s, ep, voice, dur, fps=30, colors=COL, slug=P.PDZ, cap_words=3, endcard=None):
+        """endcard=dict(style='fm'|'default'|..., lang='us'|'ru', sec=1.0, cy=None): «SUBSCRIBE!/ПОДПИШИСЬ!» in the last second (engine/endcard.py)"""
         s.ep, s.voice, s.dur, s.fps, s.slug = ep, voice, dur, fps, slug
+        s.endcard = endcard
         s.bk = ep if slug == P.PDZ else f'{slug}-{ep}'      # build/ subfolder
         s.env = {}
         for vid, vep, key, t0, a, b, who, txt in voice:
@@ -90,7 +92,13 @@ class Episode:
         render0 = render
         def render(t):                               # animated decals / ambience read the frame time
             stage.T_NOW[0] = t
-            return render0(t)
+            fr = render0(t)
+            ec = s.endcard
+            if ec:                                   # end card «SUBSCRIBE!» (rule 12.10.2026), drawn on top of everything
+                import endcard as EC
+                t0 = s.dur - ec.get('sec', 1.0)
+                if t >= t0: EC.draw(fr, EC.card(ec.get('style', 'default'), ec.get('lang', 'us')), t, t0, ec.get('cy') or int(OUT_H * 0.19))
+            return fr
         n = int(round(s.dur * s.fps)); a = sys.argv
         if a[1] == 'test':
             ts = list(map(float, a[2:]))
