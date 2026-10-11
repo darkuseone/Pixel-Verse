@@ -1,0 +1,178 @@
+{
+  "c_t1": [
+    "tanner",
+    "[stern judge voice, then a huge chipper smile] Florida Man. How do you PLEAD?"
+  ],
+  "c_f1": [
+    "fm",
+    "[calm, lazy zen drawl] Florida."
+  ],
+  "c_m1": [
+    "mort",
+    "[deadpan, nasal] He pleads FLORIDA, Your Honor."
+  ],
+  "o_d1": [
+    "darlene",
+    "[flat, bored, chewing gum] Six counts. One man. One CROC."
+  ],
+  "o_t1": [
+    "tanner",
+    "[confused but chipper] Aren't you the BAILIFF?"
+  ],
+  "o_d2": [
+    "darlene",
+    "[deadpan] Budget cuts."
+  ],
+  "o_m1": [
+    "mort",
+    "[dry, deadpan] My client is innocent. Allegedly."
+  ],
+  "o_t2": [
+    "tanner",
+    "[cheerful] Is the defendant represented?"
+  ],
+  "o_m2": [
+    "mort",
+    "[flat, dry] By a PELICAN. Yes."
+  ],
+  "a_d1": [
+    "darlene",
+    "[flat, wheeling in a TV cart] Exhibit A. Filmed VERTICALLY."
+  ],
+  "a_m1": [
+    "mort",
+    "[deadpan] Objection. It's Florida."
+  ],
+  "a_t1": [
+    "tanner",
+    "[chipper] Overruled! Roll it!"
+  ],
+  "a_t2": [
+    "tanner",
+    "[squinting, then delighted] Wait. That's ME."
+  ],
+  "a_m2": [
+    "mort",
+    "[dry] Conflict of interest?"
+  ],
+  "a_t3": [
+    "tanner",
+    "[beaming] Not in FLORIDA!"
+  ],
+  "b_d1": [
+    "darlene",
+    "[flat, to a price tag on the witness stand] Do you swear to tell the truth?"
+  ],
+  "b_m1": [
+    "mort",
+    "[deadpan] The tag pleads the FIFTH."
+  ],
+  "b_t1": [
+    "tanner",
+    "[chipper] It's SIXTEEN now."
+  ],
+  "e_d1": [
+    "darlene",
+    "[flat, a scanner beeps] He's chipped, Your Honor."
+  ],
+  "e_t1": [
+    "tanner",
+    "[sweet baby talk, beaming] Who's a good defendant?"
+  ],
+  "e_f1": [
+    "fm",
+    "[proud, zen] Me."
+  ],
+  "w_m1": [
+    "mort",
+    "[slow, dramatic, deadpan] The defense calls the JUDGE."
+  ],
+  "w_t1": [
+    "tanner",
+    "[nervous, chipper] Me? Okay!"
+  ],
+  "w_m2": [
+    "mort",
+    "[rapid-fire, deadpan] A/C guy. Deli guy. Billing. Vet."
+  ],
+  "w_t2": [
+    "tanner",
+    "[proud, chipper] Insurance! Landlord! Warden!"
+  ],
+  "w_t3": [
+    "tanner",
+    "[beaming] No worries!"
+  ],
+  "w_m3": [
+    "mort",
+    "[dry, satisfied] No further questions."
+  ],
+  "g_f1": [
+    "fm",
+    "[proud, zen] I denied my own claim. That's INTEGRITY."
+  ],
+  "h_d1": [
+    "darlene",
+    "[flat] Your Honor, the python is ON the jury."
+  ],
+  "h_m1": [
+    "mort",
+    "[deadpan] He has better CREDIT."
+  ],
+  "v_t1": [
+    "tanner",
+    "[reading a note, solemn, then exploding with joy] Not guilty. By reason of FLORIDA!"
+  ],
+  "v_f1": [
+    "fm",
+    "[relaxed, zen] Free to go?"
+  ],
+  "v_t2": [
+    "tanner",
+    "[super chipper] Court fees! NINE GRAND!"
+  ],
+  "v_f2": [
+    "fm",
+    "[shrieking, voice cracking] NINE GRAND?!"
+  ],
+  "v_d1": [
+    "darlene",
+    "[flat, handcuffs click] Ten stays. Free night."
+  ],
+  "p_m1": [
+    "mort",
+    "[deadpan, to the camera, nasal] Season two. My client pleads SNOWBIRDS."
+  ],
+  "o_t0": [
+    "tanner",
+    "[chipper, banging a gavel] Court is in session! Stay HYDRATED!"
+  ],
+  "b_m2": [
+    "mort",
+    "[deadpan] The sub was never found."
+  ],
+  "b_d2": [
+    "darlene",
+    "[flat, unimpressed] You ATE it."
+  ],
+  "b_m3": [
+    "mort",
+    "[dry, smug] Allegedly."
+  ],
+  "g_t1": [
+    "tanner",
+    "[chipper] As your former insurer... DENIED!"
+  ],
+  "i_d1": [
+    "darlene",
+    "[flat] Your Honor, the stenographer froze."
+  ],
+  "i_t1": [
+    "tanner",
+    "[beaming] A/C is a PRIVILEGE!"
+  ],
+  "v_t0": [
+    "tanner",
+    "[chipper, leaning forward] Has the jury reached a verdict?"
+  ]
+}

@@ -368,7 +368,30 @@ def dress_booking(W):
     D.anim(W, motes((220, 100, 760, 560), n=24, col=(255, 240, 200), speed=1.6))
 
 
-DRESS = dict(yard=dress_yard, store=dress_store, aisle=dress_aisle, cell=dress_cell, deli=dress_deli, hospital=dress_hospital,
+def dress_court(W):
+    """Sunshine County Courthouse (extended cut «FLORIDA MAN ON TRIAL»)"""
+    ws = D.WS
+    seal = D.plate(84, 84, ['SUNSHINE', 'COUNTY', 'COURT', 'EST. 1987'], bg=(214, 180, 96), colors=[(90, 50, 20)] * 3 + [(140, 90, 40)],
+                   border=(120, 80, 30), bw=3, pad=8, round_=42, weights=[1, 1, 1.2, 0.8])
+    D.attach(W, [(seal, 601, 163)])
+    D.attach(W, [
+        (D.plate(84, 108, ['NOW WITH', 'A/C*', '', '*COURTROOM B', 'ONLY'], bg=(246, 240, 220), colors=[(14, 44, 54), RED, BLK, BLK, BLK],
+                 border=None, pad=3, weights=[1, 2, 0.5, 0.8, 0.8], wear=0.3), 301, 166),
+        (D.plate(150, 30, ['HON. TANNER', '(JOB #9)'], bg=(214, 180, 96), colors=[(60, 30, 10), (120, 40, 30)], border=(90, 60, 20), bw=1.4,
+                 weights=[1.2, 0.8]), 556, 362),
+        (D.plate(170, 46, ['NO FLIP-FLOPS IN COURT', '(CROCS OK)'], bg=WH, colors=[BLK, RED], border=BLK, wear=0.3), 1076, 196),
+        (D.plate(150, 36, ['PLEASE SILENCE', 'YOUR GATORS'], bg=YEL, fg=BLK, border=BLK), 1088, 254),
+        (D.plate(120, 22, ["JURY DUTY: IT'S FREE A/C"], bg=(30, 110, 60), fg=WH, border=WH, bw=0.6), 1040, 430),
+        (D.plate(60, 52, ['BAIL', 'BONDS', '1-800-', 'POUCH-ME'], bg=(255, 250, 200), colors=[RED, RED, TEAL, TEAL], border=None, tilt=-4), 384, 318),
+        (D.plate(36, 14, ['$2/CUP'], bg=WH, fg=RED, border=None, pad=0.5, tilt=6), 228, 412),
+        (D.plate(84, 24, ['DEFENSE', '(ALLEGEDLY)'], bg=(246, 240, 220), colors=[(14, 44, 54), RED], border=(90, 60, 20)), 150, 540),
+        (D.plate(90, 24, ['PROSECUTION', '(ALSO BAILIFF)'], bg=(246, 240, 220), colors=[(14, 44, 54), RED], border=(90, 60, 20)), 1000, 540),
+        (D.plate(70, 18, ['WITNESS'], bg=(214, 180, 96), fg=(60, 30, 10), border=(90, 60, 20)), 810, 384),
+    ])
+    D.anim(W, motes((60, 60, 520, 470), n=40, col=(255, 236, 170), speed=1.2, big_=True))
+
+
+DRESS = dict(court=dress_court, yard=dress_yard, store=dress_store, aisle=dress_aisle, cell=dress_cell, deli=dress_deli, hospital=dress_hospital,
              vet=dress_vet, swamp=dress_swamp, jail_ext=dress_jail_ext, booking=dress_booking)
 
 

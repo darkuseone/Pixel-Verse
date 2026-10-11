@@ -22,6 +22,7 @@ SUBBREAD = (222, 168, 92)
 SUBWRAP = (236, 248, 240)
 SUBSTRIPE = (40, 176, 150)
 TEAL = (40, 196, 196)
+ORANGE = (255, 126, 30)                 # county jail jumpsuit
 
 XTRA = dict(
     zen=dict(eo=0.8, pu=0.55, bt=-0.15, bl=0.1, mo=0.0, mc=0.35),
@@ -289,7 +290,7 @@ def tv_cart(sp, t=0.0, on=True):
 # ======================================================================================== FLORIDA MAN
 def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='stand', hand_n=None, hand_f=None, prop_n=None, prop_f=None,
        sweat=0.0, frost=0.0, glasses_drop=0.0, walk=None, sway=0.0, shaka=False, belly_jiggle=0.0, legs=True, tie=False, cone=False,
-       wet=0.0, bump=False, ice=False, stache=False):
+       wet=0.0, bump=False, ice=False, stache=False, jumpsuit=False):
     """FLORIDA MAN — «olive on toothpicks»: a round sun-cured belly on stick legs, tiny bald peeling head, neon shield sunglasses that
     never come off (they slide down when prices hit), a braided goatee down to the belly with a fishing lure on the end, gold tooth,
     toothpick, Florida-map tattoo on the belly, frayed jorts, hot-pink fanny pack, ONE neon-orange croc (the other foot bare).
@@ -337,8 +338,9 @@ def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='sta
                     sp.ell(dx + s_ + 1.8, 1.2, 3.4, 1.3, tones(c))
                     for q in range(4): sp.dot(dx + s_ + 3.0 + q * 0.0 + (q % 2), 0.4 + q * 0.0, dark(TAN, 0.6))
     # ---------------------------------------------------------------- jorts + fanny pack
+    SH = ORANGE if jumpsuit else DENIM
     sh = sp.union([sp.m_ell(*Q(0.5, 27.5), 9.6, 5.4), sp.m_cap(Q(-3.0, 26.0), Q(-3.2, 20.0) if not sit else (8.0, 16.0), 3.4, 3.0),
-                   sp.m_cap(Q(4.0, 26.0), Q(4.6, 20.0) if not sit else (10.0, 16.5), 3.6, 3.2)], tones(DENIM))
+                   sp.m_cap(Q(4.0, 26.0), Q(4.6, 20.0) if not sit else (10.0, 16.5), 3.6, 3.2)], tones(SH))
     fr = sh & ~erode(sh) & (DX.YC < (20.8 if not sit else 17.6))                                  # frayed hem
     sp.fill(fr & DX.CHECK, (236, 236, 228))
     sp.sup(*Q(10.0, 26.0), 3.6, 2.4, tones(PACK), n=2.4, gloss=0.3)
@@ -361,6 +363,13 @@ def fm(sp, t=0.0, expr='zen', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='sta
             yy = y - ((t * 5.0 + i * 1.7) % 6.0)
             sp.ell(*Q(x, yy), 0.9, 1.3, tones((170, 230, 255)), ol=False); sp.dot(*Q(x - 0.2, yy + 0.6), WHITE)
 
+    if jumpsuit:                                                                                 # county jumpsuit worn open over the bare belly
+        for sgn in (-1, 1):
+            cx_ = 1.5 + sgn * 8.6
+            pan = sp.m_poly([Q(cx_ - 2.4 * sgn - 1.6, 51.0), Q(cx_ + 2.6 * sgn, 50.0), Q(cx_ + 4.0 * sgn, 27.0), Q(cx_ - 1.8 * sgn, 27.0)])
+            pan &= ~sp.m_ell(*Q(3.6, 37.0), 8.6 if sgn < 0 else 7.4, 9.4)[0] | (DX.YC > Q(0, 47.0)[1])
+            sp.paint(pan, tones(ORANGE), np.clip((DX.YC - Q(0, 27)[1]) / 24, 0, 1) * 0.5 + 0.3)
+        txt_box(sp, 'COUNTY', (*Q(-7.0, 28.0)[:1], Q(0, 28.0)[1], Q(-3.0, 0)[0], Q(0, 31.0)[1]), (30, 30, 36), pad=0.1, scribble=(80, 50, 30))
     if tie:                                                                                      # clip-on tie + lanyard badge (insurer mode)
         sp.cap(Q(3.6, 52.0), Q(4.4, 40.0), 1.0, 2.0, tones((236, 60, 60)))
         sp.line(Q(1.0, 52.0), Q(-2.0, 40.0), (40, 176, 150)); sp.rect(*Q(-4.0, 36.0), *Q(0.0, 40.0), (255, 206, 70))
@@ -717,7 +726,7 @@ POLO = (34, 56, 112)
 KHAKI = (196, 176, 126)
 UNIF = dict(ac=((34, 56, 112), (196, 176, 126)), deli=((240, 240, 234), (60, 60, 70)), billing=((150, 196, 230), (150, 196, 230)),
             vet=((60, 190, 176), (60, 190, 176)), insurance=((255, 206, 70), (40, 50, 80)), mgmt=((150, 110, 200), (196, 176, 126)),
-            fwc=((190, 170, 110), (70, 100, 60)), warden=((240, 240, 236), (30, 30, 36)))
+            fwc=((190, 170, 110), (70, 100, 60)), warden=((240, 240, 236), (30, 30, 36)), judge=((26, 24, 32), (26, 24, 32)))
 HAIRB = (110, 72, 40)
 TIPS = (250, 230, 150)
 JOBS = [('COOL-RITE', (40, 120, 200)), ('PUBBIX', (40, 176, 150)), ('HOSPITAL', (230, 230, 240)), ('DR PAWS', (255, 140, 60)),
@@ -725,7 +734,7 @@ JOBS = [('COOL-RITE', (40, 120, 200)), ('PUBBIX', (40, 176, 150)), ('HOSPITAL', 
 
 
 def tanner(sp, t=0.0, expr='chipper', mouth_=0.0, look=(0.7, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-           thumbs=False, jobs=1, uniform='ac', walk=None, frost=0.0, shiver=0.0, sweat=0.0):
+           thumbs=False, jobs=1, uniform='ac', walk=None, frost=0.0, shiver=0.0, sweat=0.0, robe_open=0.0, gavel=False):
     """TANNER — «lit match»: tall and thin, spiky frosted tips, a megawatt grin, Bluetooth earpiece, a lanyard with one badge per job.
     uniform: 'ac' navy COOL-RITE polo (E01) | 'deli' white shirt + green apron + paper hat (E02) | 'billing' / 'vet' scrubs (E03) |
     'insurance' yellow SUNSURE polo (E04) | 'mgmt' purple polo (E05) | 'fwc' ranger khaki (E05) | 'warden' black concierge vest (E06)"""
@@ -762,6 +771,18 @@ def tanner(sp, t=0.0, expr='chipper', mouth_=0.0, look=(0.7, 0.0), blink=None, h
         sp.fill(sp.m_poly(star), (255, 206, 70))
     if uniform == 'insurance':
         sp.cap((1.0 + shv, 51.0), (1.4 + shv, 40.0), 0.9, 1.3, tones((40, 50, 80)))              # tie
+    if uniform == 'judge':                                                                      # black judge's robe down to the shins
+        ROBE = (26, 24, 32)
+        op = robe_open
+        rb = sp.m_poly([(-6.0 + shv, 53.0), (7.0 + shv, 53.0), (9.6 + shv, 12.0), (-8.6 + shv, 12.0)])
+        if op > 0:                                                                              # opened: the polo + all the badges show
+            gap = sp.m_poly([(-1.0 + shv - 2.0 * op, 52.0), (3.0 + shv + 2.0 * op, 52.0), (4.6 + shv + 4.0 * op, 12.0), (-2.6 + shv - 4.0 * op, 12.0)])
+            rb &= ~gap
+            sp.paint(gap & (DX.YC > 30.0), tones((34, 56, 112)))
+        sp.paint(rb, tones(ROBE), np.clip((DX.YC - 12) / 41, 0, 1) * 0.5 + 0.25)
+        for q in range(3):                                                                      # robe folds
+            sp.fill(rb & (np.abs(DX.XC - (-4.0 + shv + q * 4.4) - (DX.YC - 40) * 0.05) < 0.25) & (DX.YC < 44), (52, 50, 62))
+        sp.fill(sp.m_poly([(-1.4 + shv, 53.6), (4.4 + shv, 53.6), (1.5 + shv, 49.0)]), (250, 250, 246))   # white collar
     # lanyard + badges
     sp.line((-1.0 + shv, 52.0), (1.6 + shv, 41.0), (40, 176, 150)); sp.line((4.0 + shv, 52.0), (1.6 + shv, 41.0), (40, 176, 150))
     for q in range(max(1, jobs)):
@@ -816,7 +837,7 @@ def tanner(sp, t=0.0, expr='chipper', mouth_=0.0, look=(0.7, 0.0), blink=None, h
     shN = (6.0 + shv, 52.0)
     hn = hand_n if hand_n is not None else ((10.0, 58.0) if thumbs else (8.4, 33.0))
     kN, eN = ik(shN, hn, 9.4, 9.0, -1.0)
-    sp.cap(shN, kN, 2.0, 1.8, tones(POLO)); sp.cap(kN, eN, 1.7, 1.5, tones(TSKIN))
+    sp.cap(shN, kN, 2.0, 1.8, tones(POLO if uniform != 'judge' else (40, 38, 48))); sp.cap(kN, eN, 1.7, 1.5, tones(TSKIN))
     if thumbs:                                                                       # a clear THUMBS-UP: horizontal fist, thumb up on its back edge
         fx_, fy = eN[0] + 1.2, eN[1] + 0.4
         sp.sup(fx_, fy, 2.8, 2.1, tones(TSKIN), n=2.4)
@@ -825,6 +846,9 @@ def tanner(sp, t=0.0, expr='chipper', mouth_=0.0, look=(0.7, 0.0), blink=None, h
         sp.dot(fx_ - 1.8, fy + 5.0, (250, 220, 210))
     else:
         sp.ell(*eN, 1.9, 1.8, tones(TSKIN))
+    if gavel:                                                                        # the judge's gavel in the near hand
+        sp.cap((eN[0] - 0.4, eN[1] - 0.4), (eN[0] + 4.6, eN[1] + 2.6), 0.5, 0.5, tones((150, 96, 52)))
+        sp.cap((eN[0] + 3.2, eN[1] + 4.6), (eN[0] + 6.0, eN[1] + 0.4), 1.5, 1.5, tones((120, 72, 36)), gloss=0.4)
     if prop_n: prop_n(sp, eN)
     sp.anchors['hand'] = eN
     new = sp.m & ~before
