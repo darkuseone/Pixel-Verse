@@ -10,6 +10,7 @@ import math
 import numpy as np
 from PIL import Image, ImageDraw
 from stage import OUT_W, OUT_H
+import stage as _ST
 
 _B4 = np.array([[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]], np.float32) / 16.0 - 0.47
 _GRIDS = {}
@@ -50,12 +51,17 @@ class res:
     def __exit__(s, *a): set_res(s.prev)
 
 
+RES_PX = 3.75                                       # rule 10.10.2026 («x2 resolution»): one canvas px of a hero <= ~3.75 output px
+RES_MAX = 6
+
+
 def res_for(scale, hires=None):
-    """sub-pixels per sprite px for an on-screen scale: 2 for close-ups (>= HIRES_AT output px per sprite px), 3 for extreme close-ups
-    (>= HIRES3_AT); hires=True forces at least 2, hires=False forces 1, an int forces exactly that"""
+    """sub-pixels per sprite px for an on-screen scale (output px per sprite px): k = ceil(scale / RES_PX), 1..RES_MAX, so a hero
+    pixel never gets bigger than ~3.75 output px (mid shots 2x, close-ups 4-6x: eyes, teeth, wrinkles stay readable, no «mush»).
+    hires=True forces at least 2, hires=False forces 1, an int forces exactly that"""
     if hires is False: return 1
     if hires is not True and isinstance(hires, int): return hires
-    k = 3 if scale >= HIRES3_AT else (2 if scale >= HIRES_AT else 1)
+    k = max(1, min(RES_MAX, math.ceil(scale / RES_PX - 0.05)))
     return max(k, 2) if hires else k
 LDIR = np.array([-0.52, 0.56, 0.64], np.float32)    # light from the upper left, a little from the front
 OUTLINE = (24, 18, 40)
@@ -508,6 +514,13 @@ def blit(big, sp, ox, oy, s, lt=None, flip=False, alpha=1.0, ghost=None, shadow=
     X0, Y0 = max(0, int(math.floor(x0))), max(0, int(math.floor(y0)))
     X1, Y1 = min(BW, int(math.ceil(x0 + ww * s))), min(BH, int(math.ceil(y0 + hh * s)))
     if X0 >= X1 or Y0 >= Y1: return
+    if _ST.LOG[0] is not None and (BH, BW) == (OUT_H, OUT_W):                # machine critic: where this sprite and its face are
+        S_ = s * k
+        hd = sp.anchors.get('head')
+        face = None
+        if hd is not None and isinstance(hd, tuple) and len(hd) == 2:
+            face = (ox + (-hd[0] if flip else hd[0]) * S_, oy - hd[1] * S_, 7.0 * S_)
+        _ST.log('sprite', bbox=(x0, y0, x0 + ww * s, y0 + hh * s), face=face, scale=S_)
     ci = np.floor((np.arange(X0, X1) + 0.5 - x0) / s).astype(int); ri = np.floor((np.arange(Y0, Y1) + 0.5 - y0) / s).astype(int)
     vx = (ci >= 0) & (ci < ww); vy = (ri >= 0) & (ri < hh)
     ci = np.clip(ci, 0, ww - 1); ri = np.clip(ri, 0, hh - 1)

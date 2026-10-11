@@ -1,0 +1,58 @@
+{
+  "f1": [
+    "fm",
+    "[shrieking, voice cracking, outraged] EIGHT GRAND?! For a TRAILER?!"
+  ],
+  "t1": [
+    "tanner",
+    "[chipper, cheerful, waving goodbye] Actually, we're leaving Florida! No worries!"
+  ],
+  "f2": [
+    "fm",
+    "[calm, slow lazy drawl, determined] Fine. I'll insure MYSELF."
+  ],
+  "f3": [
+    "fm",
+    "[calm, slow drawl] Mort. Hold my sub."
+  ],
+  "m1": [
+    "mort",
+    "[deadpan, mouth full, to the camera] Sub's not COVERED."
+  ],
+  "m2": [
+    "mort",
+    "[smug, to the camera] Is it legal? It's CHEAPER."
+  ],
+  "f4": [
+    "fm",
+    "[imitating a chipper customer-service voice, too cheerful] Was it WIND, or FLOOD?"
+  ],
+  "f5": [
+    "fm",
+    "[small, defeated, soaking wet] Flood."
+  ],
+  "f6": [
+    "fm",
+    "[chipper, brisk, stamping] DENIED!"
+  ],
+  "d1": [
+    "darlene",
+    "[deadpan, dripping wet, bored] Flood."
+  ],
+  "d2": [
+    "darlene",
+    "[flat, threatening, deadpan] Noted."
+  ],
+  "m3": [
+    "mort",
+    "[deadpan, to the camera] Congrats. You're the bad guy NOW."
+  ],
+  "d3": [
+    "darlene",
+    "[shrieking, outraged, voice cracking] EIGHT GRAND?! For a TRAILER?!"
+  ],
+  "f7": [
+    "fm",
+    "[perfect chipper customer-service voice, beaming] No worries!"
+  ]
+}

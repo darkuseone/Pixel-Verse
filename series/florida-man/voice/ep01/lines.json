@@ -1,0 +1,50 @@
+{
+  "f1": [
+    "fm",
+    "[shrieking, voice cracking, outraged] NINE GRAND?! For the A/C?!"
+  ],
+  "t1": [
+    "tanner",
+    "[chipper customer-service voice, beaming] Compressor's DEAD! Three-week WAIT!"
+  ],
+  "f2": [
+    "fm",
+    "[weak, wilting, melting in the heat] I'll be dead in three WEEKS."
+  ],
+  "t2": [
+    "tanner",
+    "[cheerful, upbeat, totally oblivious] No worries! Want the extended WARRANTY?"
+  ],
+  "f3": [
+    "fm",
+    "[calm again, slow lazy drawl, exhales] Mort. Hold my sub."
+  ],
+  "m1": [
+    "mort",
+    "[deadpan, mouth full, to the camera] What sub?"
+  ],
+  "f4": [
+    "fm",
+    "[blissful moan, relieved] Ohhh. Sixty-EIGHT."
+  ],
+  "t3": [
+    "tanner",
+    "[shivering, teeth chattering, still chipper] Mine broke TOO! Three WEEKS!"
+  ],
+  "d1": [
+    "darlene",
+    "[deadpan, bored, chewing gum] Sir. You can't LIVE in Frozen Foods."
+  ],
+  "f5": [
+    "fm",
+    "[zen, unbothered, slow] I'm not living, ma'am. I'm BROWSING."
+  ],
+  "f6": [
+    "fm",
+    "[relieved sigh, content] Ahh. Jail's got A/C."
+  ],
+  "d2": [
+    "darlene",
+    "[flat, deadpan, chewing gum] Broke. Nine GRAND."
+  ]
+}

@@ -11,6 +11,8 @@ API = 'https://api.elevenlabs.io/v1'
 
 
 def _post(url, body, out):
+    if not os.path.isdir(os.path.dirname(os.path.abspath(out))):           # check BEFORE the paid call (09.10.2026: a wrong cwd burned credits)
+        sys.exit(f'no such folder for {out} (paths are relative to the current directory)')
     req = urllib.request.Request(url, json.dumps(body).encode(), {
         'xi-api-key': os.environ['ELEVENLABS_API_KEY'], 'Content-Type': 'application/json'})
     try:

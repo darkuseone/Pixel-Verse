@@ -1,0 +1,101 @@
+{
+  "cartoon": "Florida Man",
+  "slug": "florida-man",
+  "lang": "en",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "fm": {
+      "name": "Florida Man",
+      "color_caption": [
+        255,
+        132,
+        110
+      ],
+      "style": "[slow, lazy drawl, zen] / [shrieking, voice cracking] only at prices",
+      "design": {
+        "description": "A sun-baked Florida Gulf Coast man in his mid-forties: warm, raspy, gravelly baritone with a slow, lazy Southern Panhandle drawl, totally zen and unbothered, a laid-back boat-ramp philosopher who chuckles under his breath. When he hears a price his voice cracks into a high-pitched, outraged shriek. Natural, characterful, comedic.",
+        "text": "Mort. Hold my sub. Nah, man, it's fine. It's Florida. Gators, hurricanes, the heat, I don't sweat it. But NINE GRAND? For the A C?! Hoo boy. Okay. Okay. Deep breath. I got a plan. It's a great plan. Hold my sub.",
+        "picked": {
+          "i": 2,
+          "dur": 25.89,
+          "f0": 142.9,
+          "f0_iqr": 64.9,
+          "rate": 13.4,
+          "loud_sd": 6.0
+        }
+      },
+      "voice_id": "GBn8jPzCnZIbx5Kf8r1J",
+      "voice": "Florida Man — Florida Man"
+    },
+    "mort": {
+      "name": "Mort Pouch, Esq.",
+      "color_caption": [
+        90,
+        230,
+        225
+      ],
+      "style": "[deadpan, to camera] — cynical New Jersey billboard lawyer, dry one-liners",
+      "design": {
+        "description": "A cynical old personal-injury lawyer in his seventies, a raspy, nasal, fast-talking New Jersey accent, dry deadpan delivery, world-weary and smug, a little wheezy, like a billboard attorney who moved to Florida in 1987 and never left. Natural and comedic.",
+        "text": "Mort Pouch, attorney at law. Arrested? Gator'd? Melted? Call me. My fee is a third. Is it legal? Allegedly. What sub? I don't see a sub. My client pleads Florida. Next question. And somebody turn up the air in here.",
+        "picked": {
+          "i": 1,
+          "dur": 20.11,
+          "f0": 150.9,
+          "f0_iqr": 61.9,
+          "rate": 18.1,
+          "loud_sd": 5.9
+        }
+      },
+      "voice_id": "d44i4jCJHjBEUuFbGaGy",
+      "voice": "Florida Man — Mort Pouch, Esq."
+    },
+    "darlene": {
+      "name": "Deputy Darlene",
+      "color_caption": [
+        255,
+        214,
+        80
+      ],
+      "style": "[deadpan, chewing gum] — bored small-town sheriff's deputy, flat and final",
+      "design": {
+        "description": "A small-town Florida sheriff's deputy in her mid-fifties: a smoky, low alto with a slow rural Southern drawl, utterly bored, deadpan and unimpressed, chewing gum while she talks, motherly but done with everybody's nonsense. Natural, characterful, comedic.",
+        "text": "Mornin'. Sir. You can't live in Frozen Foods. I don't care how hot it is. Hands where I can see 'em. Five more and your next night's free. Smile. That's not a smile. Broke. Nine grand. Welcome to Florida, hon.",
+        "picked": {
+          "i": 1,
+          "dur": 18.91,
+          "f0": 181.8,
+          "f0_iqr": 36.7,
+          "rate": 17.4,
+          "loud_sd": 5.3
+        }
+      },
+      "voice_id": "dgd3UC679ZtpWOphbJ9Y",
+      "voice": "Florida Man — Deputy Darlene"
+    },
+    "tanner": {
+      "name": "Tanner",
+      "color_caption": [
+        170,
+        255,
+        110
+      ],
+      "style": "[chipper customer-service voice] — delivers terrible news with a big smile, 'No worries!'",
+      "design": {
+        "description": "A relentlessly chipper young American man in his late twenties, bright upbeat customer-service voice, fast and bubbly with a slight surfer-valley lilt, a huge smile you can hear, sincerely positive even while delivering terrible news. Natural, comedic.",
+        "text": "Hey there! I'm Tanner, I'll be your technician today! Okay, so your compressor is totally dead! No worries! It's nine thousand dollars and a three week wait. Want the extended warranty? Awesome. Have a sunshine day!",
+        "picked": {
+          "i": 2,
+          "dur": 11.0,
+          "f0": 266.7,
+          "f0_iqr": 116.2,
+          "rate": 23.1,
+          "loud_sd": 6.1
+        }
+      },
+      "voice_id": "GpiDvTn0zpQeiQA9VdB7",
+      "voice": "Florida Man — Tanner"
+    }
+  },
+  "note": "09.10.2026: voices designed for S01 pilot (Voice Design, eleven_ttv_v3), see docs/voices.md."
+}
