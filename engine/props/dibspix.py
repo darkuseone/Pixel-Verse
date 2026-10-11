@@ -10,6 +10,7 @@ import math
 import numpy as np
 from PIL import Image, ImageDraw
 from stage import OUT_W, OUT_H
+import stage as _ST
 
 _B4 = np.array([[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]], np.float32) / 16.0 - 0.47
 _GRIDS = {}
@@ -513,6 +514,13 @@ def blit(big, sp, ox, oy, s, lt=None, flip=False, alpha=1.0, ghost=None, shadow=
     X0, Y0 = max(0, int(math.floor(x0))), max(0, int(math.floor(y0)))
     X1, Y1 = min(BW, int(math.ceil(x0 + ww * s))), min(BH, int(math.ceil(y0 + hh * s)))
     if X0 >= X1 or Y0 >= Y1: return
+    if _ST.LOG[0] is not None and (BH, BW) == (OUT_H, OUT_W):                # machine critic: where this sprite and its face are
+        S_ = s * k
+        hd = sp.anchors.get('head')
+        face = None
+        if hd is not None and isinstance(hd, tuple) and len(hd) == 2:
+            face = (ox + (-hd[0] if flip else hd[0]) * S_, oy - hd[1] * S_, 7.0 * S_)
+        _ST.log('sprite', bbox=(x0, y0, x0 + ww * s, y0 + hh * s), face=face, scale=S_)
     ci = np.floor((np.arange(X0, X1) + 0.5 - x0) / s).astype(int); ri = np.floor((np.arange(Y0, Y1) + 0.5 - y0) / s).astype(int)
     vx = (ci >= 0) & (ci < ww); vy = (ri >= 0) & (ri < hh)
     ci = np.clip(ci, 0, ww - 1); ri = np.clip(ri, 0, hh - 1)

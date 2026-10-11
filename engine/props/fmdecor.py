@@ -20,6 +20,7 @@ def _spr(fn, s, **kw):
 def place_sprite(world, fn, wx, wy, s, **kw):
     """a code-drawn ornament standing on the ground: feet anchor at world (wx, wy); s = world px per sprite px"""
     img, ax, ay = _spr(fn, s * D.WS, **kw)
+    D.PROPS.add(id(img))
     D.attach(world, [(img, wx - ax / D.WS, wy - ay / D.WS)])
 
 
@@ -127,7 +128,7 @@ def dress_yard(W, slogan=None):
         (D.plate(70, 44, ['DO NOT FEED', 'THE GATORS', '(THEY HAVE', 'A LAWYER)'], bg=(236, 244, 236), colors=[(30, 110, 60)] * 2 + [RED] * 2,
                  border=(30, 110, 60), wear=0.5, seed=5), 868, 426),
         (D.plate(40, 36, ['LOST:', '1 CROC', '(LEFT)', 'REWARD $2'], bg=(255, 250, 200), colors=[RED, BLK, BLK, (30, 110, 60)],
-                 border=None, pad=1.2, tilt=5), 668, 432),
+                 border=None, pad=1.2, tilt=5), 636, 432),
     ])
     place_sprite(W, C.flamingo, 1000, 548, 3.0)
     place_sprite(W, C.flamingo, 1052, 556, 2.8, flip=True, faded=0.6)

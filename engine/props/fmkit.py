@@ -354,12 +354,16 @@ class Show:
     def apply(s, big, t, shot_):
         for (t0, t1, l1, l2, y) in s.chyrons: chyron(big, t, t0, t1, l1, l2, y)
         for (t0, t1, n, pt, cx, cy) in s.cards:
-            if t0 <= t < t1: punch_card(big, t, t0, n, cx, cy, punch_t=pt)
+            if t0 <= t < t1:
+                punch_card(big, t, t0, n, cx, cy, punch_t=pt)
+                ST.log('card', bbox=(cx - 380, cy - 230, cx + 380, cy + 230))
         for img, t0, t1, cx, cy in s.stickers: O.draw_sticker(big, img, t, t0, t1, cx, cy)
         O.overlay(big, s.badge, 36, 96, 1.0)
+        ST.log('plate', bbox=O._bbox(s.badge, 36, 96))
         if s.hook is not None and s.hook_t[0] <= t < s.hook_t[1]:
             k = min(1.0, (t - s.hook_t[0]) / 0.1) * (1 - sm((t - (s.hook_t[1] - 0.2)) / 0.2))
             O.overlay(big, s.hook, 0, s.hook_y, k)
+            ST.log('title', bbox=O._bbox(s.hook, 0, s.hook_y))
         if s.extra: s.extra(big, t, shot_)
         s.epi.captions.draw(big, t, s.cap_y.get(shot_, s.cap_default))
         for fa in s.flashes:

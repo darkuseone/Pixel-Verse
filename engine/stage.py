@@ -26,7 +26,13 @@ S.ell = ell
 
 
 DECALS = {}                                        # id(world) -> [world, [(img, wx, wy, ws)], [anim fns]] (props/decals.py)
-T_NOW = [0.0]                                      # time of the frame being rendered (set by episode.Episode), for animated decals
+T_NOW = [0.0]
+LOG = [None]                                       # autocheck (engine/autocheck.py): a list while a frame is being logged
+
+
+def log(kind, **kw):
+    """record what lands on the output frame (faces, captions, stickers, decals) for the machine critic; no-op normally"""
+    if LOG[0] is not None: LOG[0].append(dict(kind=kind, **kw))                                      # time of the frame being rendered (set by episode.Episode), for animated decals
 
 
 class View:

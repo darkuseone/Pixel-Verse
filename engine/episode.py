@@ -58,6 +58,33 @@ class Episode:
             proc.stdin.write(fr.tobytes())
         proc.stdin.close(); proc.wait()
 
+    def _cuts(s):
+        m = sys.modules.get('__main__')
+        c = getattr(m, 'CUTS', None)
+        return list(c) if c else None
+
+    def _shot_id(s, x):
+        if x.isdigit(): return int(x)
+        names = list(getattr(sys.modules.get('__main__'), 'NAMES', []))
+        return names.index(x)
+
+    def _shot_frames(s, i, n):
+        c = s._cuts()
+        f0 = int(round(c[i] * s.fps)); f1 = n if i == len(c) - 2 else int(round(c[i + 1] * s.fps))
+        return f0, min(f1, n)
+
+    def _render_even(s, render, script, a, n):
+        k = int(a[2]) if len(a) > 2 else 4
+        cuts = [round(n * i / k) for i in range(k + 1)]
+        procs = [subprocess.Popen([sys.executable, script, 'seg', str(cuts[i]), str(cuts[i + 1])]) for i in range(k)]
+        for p_ in procs: p_.wait()
+        lst = P.build(s.bk, 'segs.txt')
+        with open(lst, 'w') as f:
+            for i in range(k): f.write(f"file '{P.build(s.bk, f'seg_{cuts[i]:04d}.mp4')}'\n")
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', lst, '-c', 'copy',
+                        P.build(s.bk, 'noaudio.mp4')], check=True)
+        print('ok', P.build(s.bk, 'noaudio.mp4'))
+
     def main(s, render, script):
         import stage
         render0 = render
@@ -79,14 +106,31 @@ class Episode:
         elif a[1] == 'seg':
             a0, a1 = int(a[2]), min(int(a[3]), n)
             s.encode(render, a0, a1, P.build(s.bk, f'seg_{a0:04d}.mp4')); print('done', a0, a1)
-        elif a[1] == 'all':
-            k = int(a[2]) if len(a) > 2 else 4
-            cuts = [round(n * i / k) for i in range(k + 1)]
-            procs = [subprocess.Popen([sys.executable, script, 'seg', str(cuts[i]), str(cuts[i + 1])]) for i in range(k)]
+        elif a[1] == 'segs':                         # worker: render the listed shots, one segment per shot
+            for i in map(int, a[2].split(',')):
+                f0, f1 = s._shot_frames(i, n)
+                s.encode(render, f0, f1, P.build(s.bk, f'shot_{i:02d}.mp4')); print('shot', i, f0, f1, flush=True)
+        elif a[1] in ('all', 'shots'):
+            # per-shot segments (rule 11.10.2026): after the critic only the fixed shots are re-rendered —
+            #   python epNN.py shots 3 7 twist     (indexes or NAMES), then concat of all shot segments
+            cuts = s._cuts()
+            if cuts is None or a[1] == 'all' and os.environ.get('PV_SEGMODE') == 'even':
+                return s._render_even(render, script, a, n)
+            ids = list(range(len(cuts) - 1)) if a[1] == 'all' else [s._shot_id(x) for x in a[2:]]
+            k = int(os.environ.get('PV_PROCS', '4'))
+            lens = sorted(ids, key=lambda i: -(cuts[i + 1] - cuts[i]))
+            jobs = [[] for _ in range(min(k, len(ids)))]
+            load = [0.0] * len(jobs)
+            for i in lens:                                          # greedy balance by shot length
+                j = load.index(min(load)); jobs[j].append(i); load[j] += cuts[i + 1] - cuts[i]
+            procs = [subprocess.Popen([sys.executable, script, 'segs', ','.join(map(str, jb))]) for jb in jobs if jb]
             for p_ in procs: p_.wait()
-            lst = P.build(s.bk, 'segs.txt')
+            if any(p_.returncode for p_ in procs): sys.exit('a shot worker failed')
+            missing = [i for i in range(len(cuts) - 1) if not os.path.exists(P.build(s.bk, f'shot_{i:02d}.mp4'))]
+            if missing: sys.exit(f'shot segments missing: {missing} (run: all)')
+            lst = P.build(s.bk, 'shots.txt')
             with open(lst, 'w') as f:
-                for i in range(k): f.write(f"file '{P.build(s.bk, f'seg_{cuts[i]:04d}.mp4')}'\n")
+                for i in range(len(cuts) - 1): f.write(f"file '{P.build(s.bk, f'shot_{i:02d}.mp4')}'\n")
             subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', lst, '-c', 'copy',
                             P.build(s.bk, 'noaudio.mp4')], check=True)
-            print('ok', P.build(s.bk, 'noaudio.mp4'))
+            print('ok', P.build(s.bk, 'noaudio.mp4'), f'({len(ids)} shot(s) rendered)')

@@ -133,6 +133,20 @@ class Captions:
                 pop = 1.0 + 0.12 * (1 - min(1.0, (t - a) / 0.1))
                 im = img if pop <= 1.001 else _scale(img, pop)
                 overlay(big, im, (OUT_W - im.shape[1]) // 2, cy - im.shape[0] // 2, k)
+                _log('caption', bbox=_bbox(im, (OUT_W - im.shape[1]) // 2, cy - im.shape[0] // 2))
+
+
+def _log(kind, **kw):
+    import stage
+    stage.log(kind, **kw)
+
+
+def _bbox(img, x0, y0):
+    """output bbox of the opaque part of an RGBA overlay (glow excluded: alpha >= 200)"""
+    a = img[..., 3] >= 200 if img.shape[2] == 4 else np.ones(img.shape[:2], bool)
+    r = np.where(a.any(1))[0]; c = np.where(a.any(0))[0]
+    if not len(r): return (x0, y0, x0, y0)
+    return (x0 + c[0], y0 + r[0], x0 + c[-1] + 1, y0 + r[-1] + 1)
 
 
 def _scale(img, f):
@@ -179,6 +193,7 @@ def draw_sticker(big, img, t, t0, t1, cx, cy):
     im = _scale(img, max(0.2, s))
     fade = 1 - max(0.0, (t - (t1 - 0.15)) / 0.15)
     overlay(big, im, int(cx - im.shape[1] / 2), int(cy - im.shape[0] / 2 + bounce), fade)
+    _log('sticker', bbox=_bbox(im, int(cx - im.shape[1] / 2), int(cy - im.shape[0] / 2 + bounce)))
 
 
 # ---------------------------------------------------------------- transitions

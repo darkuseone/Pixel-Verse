@@ -229,9 +229,9 @@ def r_mort_bill(t, u):
 
 def r_vet_in(t, u):
     """wide: Dr. Paws — the MICROCHIP SPECIAL poster on the wall (the clue); he walks in, the door bell jingles"""
-    Z = 1.0
-    x = lerp(440.0, 540.0, min(1.0, u / 1.1))
-    return K.shot(VET, LH, 620.0, 330.0, Z, acts=[A(C.fm, x, 560.0, S_TV * Z, t=t, expr='zen', walk=t * 9, look=(1.0, 0.2), bump=True, shadow=0.3)],
+    Z = 0.9                                                      # the whole MICROCHIP SPECIAL poster (the clue) in frame
+    x = lerp(545.0, 640.0, min(1.0, u / 1.1))
+    return K.shot(VET, LH, 720.0, 330.0, Z, acts=[A(C.fm, x, 560.0, S_TV * Z, t=t, expr='zen', walk=t * 9, look=(1.0, 0.2), bump=True, shadow=0.3)],
                   sx=180, sy=320)
 
 
@@ -456,7 +456,7 @@ SHOW = K.Show(EPI, 3, ['$2,000', 'ICE PACK?!'], hook_t=(0.10, 2.6), hook_y=150, 
               stickers=[(K.st('JOB #3', (170, 255, 110), 52), 2.8, 4.15, 260, 420),
                         (K.st('ICE: $2,000', (120, 230, 255), 52), 3.1, 4.15, 760, 540),
                         (K.st('$80', (120, 230, 255), 70), 10.5, 11.45, 780, 520),
-                        (K.st('JOB #4', (170, 255, 110), 52), 13.75, 15.45, 820, 420),
+                        (K.st('JOB #4', (170, 255, 110), 52), 13.75, 15.45, 560, 820),
                         (K.st('CHIPPED', (255, 90, 90), 70), 17.95, 18.28, 760, 300),
                         (K.st('BEEP!', (255, 90, 90), 64), 19.85, 20.45, 760, 420),
                         (K.st('BEEP!', (255, 90, 90), 64), 20.85, 21.45, 300, 420),

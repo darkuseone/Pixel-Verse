@@ -17,6 +17,7 @@ import stage as ST
 from props.dibspix import FONT3
 
 WS = 4
+PROPS = set()                                      # ids of decals that are objects (flamingos, gnomes), not inscriptions
 FONT = dict(FONT3)
 FONT.update(N=['1001', '1101', '1011', '1001', '1001'], M=['10001', '11011', '10101', '10001', '10001'],
             W=['10001', '10001', '10101', '11011', '10001'], K=['1001', '1010', '1100', '1010', '1001'])
@@ -215,6 +216,9 @@ def blit(big, v, img, wx, wy, ws=WS, k=1.0):
     al = sub[..., 3:4].astype(np.float32) / 255.0 * k
     reg = big[y0:y1, x0:x1]
     reg[:] = (reg * (1 - al) + sub[..., :3] * al).astype(np.uint8)
+    if ST.LOG[0] is not None and big.shape[:2] == (ST.OUT_H, ST.OUT_W):        # machine critic: is it cut by the frame edge?
+        full = (ox, oy, ox + w * s, oy + h * s)
+        ST.log('decal', bbox=(x0, y0, x1, y1), full=full, patch=reg.copy(), mask=sub[..., 3] > 0, prop=id(img) in PROPS)
 
 
 def draw(big, v):
