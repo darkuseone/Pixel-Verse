@@ -10,7 +10,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 SLUG = 'florida-man'
 FPS = 30
-MASTER = 0.72
+MASTER = 0.86
 VEP = 'movie_t'
 S = 'library/sfx/'
 
