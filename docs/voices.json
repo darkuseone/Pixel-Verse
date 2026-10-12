@@ -123,7 +123,7 @@
    "slug": "agent-dibs",
    "char": "brad",
    "voice_id": "1U7R8ztWDP1r2BuAL8Dz",
-   "status": "active",
+   "status": "library_or_premade",
    "name": "Brad",
    "voice_name": "Agent Dibs — Brad",
    "lines": 9,
@@ -427,17 +427,17 @@
    "status": "active",
    "name": "Florida Man",
    "voice_name": "Florida Man — Florida Man",
-   "lines": 32,
-   "episodes": 6,
+   "lines": 37,
+   "episodes": 7,
    "samples": [
     "series/florida-man/voice/ep06/f3.mp3",
     "series/florida-man/voice/ep01/f3.mp3",
     "series/florida-man/voice/ep01/f4.mp3",
     "series/florida-man/voice/ep02/f2.mp3",
     "series/florida-man/voice/ep02/f3.mp3",
+    "series/florida-man/voice/movie/g_f1.mp3",
     "series/florida-man/voice/ep01/f6.mp3",
-    "series/florida-man/voice/ep04/f2.mp3",
-    "series/florida-man/voice/ep05/f1.mp3"
+    "series/florida-man/voice/ep04/f2.mp3"
    ],
    "design": {
     "description": "A sun-baked Florida Gulf Coast man in his mid-forties: warm, raspy, gravelly baritone with a slow, lazy Southern Panhandle drawl, totally zen and unbothered, a laid-back boat-ramp philosopher who chuckles under his breath. When he hears a price his voice cracks into a high-pitched, outraged shriek. Natural, characterful, comedic.",
@@ -465,17 +465,17 @@
    "status": "active",
    "name": "Tanner",
    "voice_name": "Florida Man — Tanner",
-   "lines": 20,
-   "episodes": 6,
+   "lines": 37,
+   "episodes": 7,
    "samples": [
     "series/florida-man/voice/ep01/t3.mp3",
     "series/florida-man/voice/ep06/t1.mp3",
+    "series/florida-man/voice/movie/o_t0.mp3",
     "series/florida-man/voice/ep06/t2.mp3",
+    "series/florida-man/voice/movie/v_t2.mp3",
     "series/florida-man/voice/ep06/t4.mp3",
-    "series/florida-man/voice/ep04/t1.mp3",
-    "series/florida-man/voice/ep05/t1.mp3",
-    "series/florida-man/voice/ep02/t1.mp3",
-    "series/florida-man/voice/ep01/t1.mp3"
+    "series/florida-man/voice/movie/v_t1.mp3",
+    "series/florida-man/voice/ep04/t1.mp3"
    ],
    "design": {
     "description": "A relentlessly chipper young American man in his late twenties, bright upbeat customer-service voice, fast and bubbly with a slight surfer-valley lilt, a huge smile you can hear, sincerely positive even while delivering terrible news. Natural, comedic.",
@@ -498,60 +498,22 @@
   },
   {
    "slug": "florida-man",
-   "char": "darlene",
-   "voice_id": "dgd3UC679ZtpWOphbJ9Y",
-   "status": "active",
-   "name": "Deputy Darlene",
-   "voice_name": "Florida Man — Deputy Darlene",
-   "lines": 14,
-   "episodes": 6,
-   "samples": [
-    "series/florida-man/voice/ep06/d2.mp3",
-    "series/florida-man/voice/ep04/d1.mp3",
-    "series/florida-man/voice/ep01/d1.mp3",
-    "series/florida-man/voice/ep02/d1.mp3",
-    "series/florida-man/voice/ep04/d3.mp3",
-    "series/florida-man/voice/ep03/d3.mp3",
-    "series/florida-man/voice/ep05/d1.mp3",
-    "series/florida-man/voice/ep01/d2.mp3"
-   ],
-   "design": {
-    "description": "A small-town Florida sheriff's deputy in her mid-fifties: a smoky, low alto with a slow rural Southern drawl, utterly bored, deadpan and unimpressed, chewing gum while she talks, motherly but done with everybody's nonsense. Natural, characterful, comedic.",
-    "text": "Mornin'. Sir. You can't live in Frozen Foods. I don't care how hot it is. Hands where I can see 'em. Five more and your next night's free. Smile. That's not a smile. Broke. Nine grand. Welcome to Florida, hon.",
-    "picked": {
-     "i": 1,
-     "dur": 18.91,
-     "f0": 181.8,
-     "f0_iqr": 36.7,
-     "rate": 17.4,
-     "loud_sd": 5.3
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A small-town Florida sheriff's deputy in her mid-fifties: a smoky, low alto with a slow rural Southern drawl, utterly bored, deadpan and unimpressed, chewing gum while she talks, motherly but done with everybody's nonsense. Natural, characterful, comedic.",
-    "settings": null,
-    "created_at_unix": 1791529905
-   }
-  },
-  {
-   "slug": "florida-man",
    "char": "mort",
    "voice_id": "d44i4jCJHjBEUuFbGaGy",
    "status": "active",
    "name": "Mort Pouch, Esq.",
    "voice_name": "Florida Man — Mort Pouch, Esq.",
-   "lines": 11,
-   "episodes": 6,
+   "lines": 24,
+   "episodes": 7,
    "samples": [
+    "series/florida-man/voice/movie/p_m1.mp3",
     "series/florida-man/voice/ep02/m1.mp3",
+    "series/florida-man/voice/movie/o_m1.mp3",
     "series/florida-man/voice/ep02/m2.mp3",
     "series/florida-man/voice/ep06/m2.mp3",
     "series/florida-man/voice/ep04/m3.mp3",
-    "series/florida-man/voice/ep03/m1.mp3",
-    "series/florida-man/voice/ep04/m2.mp3",
-    "series/florida-man/voice/ep05/m1.mp3",
-    "series/florida-man/voice/ep04/m1.mp3"
+    "series/florida-man/voice/movie/w_m2.mp3",
+    "series/florida-man/voice/movie/w_m1.mp3"
    ],
    "design": {
     "description": "A cynical old personal-injury lawyer in his seventies, a raspy, nasal, fast-talking New Jersey accent, dry deadpan delivery, world-weary and smug, a little wheezy, like a billboard attorney who moved to Florida in 1987 and never left. Natural and comedic.",
@@ -570,6 +532,44 @@
     "description": "A cynical old personal-injury lawyer in his seventies, a raspy, nasal, fast-talking New Jersey accent, dry deadpan delivery, world-weary and smug, a little wheezy, like a billboard attorney who moved to Florida in 1987 and never left. Natural and comedic.",
     "settings": null,
     "created_at_unix": 1791529903
+   }
+  },
+  {
+   "slug": "florida-man",
+   "char": "darlene",
+   "voice_id": "dgd3UC679ZtpWOphbJ9Y",
+   "status": "active",
+   "name": "Deputy Darlene",
+   "voice_name": "Florida Man — Deputy Darlene",
+   "lines": 23,
+   "episodes": 7,
+   "samples": [
+    "series/florida-man/voice/ep06/d2.mp3",
+    "series/florida-man/voice/ep04/d1.mp3",
+    "series/florida-man/voice/ep01/d1.mp3",
+    "series/florida-man/voice/ep02/d1.mp3",
+    "series/florida-man/voice/movie/o_d1.mp3",
+    "series/florida-man/voice/movie/a_d1.mp3",
+    "series/florida-man/voice/ep04/d3.mp3",
+    "series/florida-man/voice/ep03/d3.mp3"
+   ],
+   "design": {
+    "description": "A small-town Florida sheriff's deputy in her mid-fifties: a smoky, low alto with a slow rural Southern drawl, utterly bored, deadpan and unimpressed, chewing gum while she talks, motherly but done with everybody's nonsense. Natural, characterful, comedic.",
+    "text": "Mornin'. Sir. You can't live in Frozen Foods. I don't care how hot it is. Hands where I can see 'em. Five more and your next night's free. Smile. That's not a smile. Broke. Nine grand. Welcome to Florida, hon.",
+    "picked": {
+     "i": 1,
+     "dur": 18.91,
+     "f0": 181.8,
+     "f0_iqr": 36.7,
+     "rate": 17.4,
+     "loud_sd": 5.3
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A small-town Florida sheriff's deputy in her mid-fifties: a smoky, low alto with a slow rural Southern drawl, utterly bored, deadpan and unimpressed, chewing gum while she talks, motherly but done with everybody's nonsense. Natural, characterful, comedic.",
+    "settings": null,
+    "created_at_unix": 1791529905
    }
   },
   {
@@ -664,7 +664,7 @@
    "slug": "grim-ride",
    "char": "harold",
    "voice_id": "UScN6kcNEVzdo1v1Nl6W",
-   "status": "active",
+   "status": "deleted",
    "name": "Harold",
    "voice_name": "Grim Ride — Harold",
    "lines": 9,
@@ -700,15 +700,79 @@
    "account": {
     "category": "generated",
     "description": "A crusty, gravelly ninety-seven-year-old American man with a thick old New England accent, slow and completely unbothered, dry wit, a short wheezy chuckle, sharp and mischievous, not frail at all. Natural, characterful, comedic.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1791318873
-   }
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/UScN6kcNEVzdo1v1Nl6W/7c141256-9d5e-462f-9571-b0f66d69d71b.mp3",
+   "deleted_on": "2026-10-12",
+   "deleted_reason": "auto: room for valera-i-kot/semenych"
+  },
+  {
+   "slug": "grim-ride",
+   "char": "kayden",
+   "voice_id": "wISugChlyIgdUxhS0vFR",
+   "status": "deleted",
+   "name": "Kayden",
+   "voice_name": "Grim Ride — Kayden",
+   "lines": 9,
+   "episodes": 4,
+   "samples": [
+    "series/grim-ride/voice/ep06/k1.mp3",
+    "series/grim-ride/voice/ep03/k2.mp3",
+    "series/grim-ride/voice/ep04/k2.mp3",
+    "series/grim-ride/voice/ep04/k4.mp3",
+    "series/grim-ride/voice/ep01/k1.mp3",
+    "series/grim-ride/voice/ep03/k1.mp3",
+    "series/grim-ride/voice/ep04/k5.mp3",
+    "series/grim-ride/voice/ep04/k1.mp3"
+   ],
+   "design": {
+    "description": "A young American guy in his early twenties with a bored, flat, mumbly monotone, slightly nasal, totally unimpressed slacker energy, talks a little muffled and lazy. Natural and comedic.",
+    "text": "Relax, pal. It's a class three. Mine does forty. Nice skin, where'd you get it? Bro, you're cooked. Relax. Relax, pal. We ride at nine. Don't be weird about it, okay? Whatever. Relax, pal.",
+    "picked": {
+     "i": 1,
+     "dur": 17.01,
+     "f0": 100.0,
+     "f0_iqr": 8.3,
+     "rate": 19.0,
+     "loud_sd": 5.2
+    }
+   },
+   "history": [
+    {
+     "voice_id": "bIHbv24MWmeRgasZH58o",
+     "until": "2026-10-06"
+    }
+   ],
+   "account": {
+    "category": "generated",
+    "description": "A young American guy in his early twenties with a bored, flat, mumbly monotone, slightly nasal, totally unimpressed slacker energy, talks a little muffled and lazy. Natural and comedic.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1791318877
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/wISugChlyIgdUxhS0vFR/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiMTJlNmUzZTEtOGVjNy00YjZkLTg0ZDAtNTQ0NjZlMzhjMThkLm1wMyIsInRpbWVzdGFtcCI6MTc5MTc5MjAwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-12",
+   "deleted_reason": "auto: room for valera-i-kot/kolyan"
   },
   {
    "slug": "grim-ride",
    "char": "todd",
    "voice_id": "9rXbTqAmpdfkBx20G31c",
-   "status": "active",
+   "status": "library_or_premade",
    "name": "Todd",
    "voice_name": "Grim Ride — Todd",
    "lines": 9,
@@ -750,53 +814,9 @@
   },
   {
    "slug": "grim-ride",
-   "char": "kayden",
-   "voice_id": "wISugChlyIgdUxhS0vFR",
-   "status": "active",
-   "name": "Kayden",
-   "voice_name": "Grim Ride — Kayden",
-   "lines": 9,
-   "episodes": 4,
-   "samples": [
-    "series/grim-ride/voice/ep06/k1.mp3",
-    "series/grim-ride/voice/ep03/k2.mp3",
-    "series/grim-ride/voice/ep04/k2.mp3",
-    "series/grim-ride/voice/ep04/k4.mp3",
-    "series/grim-ride/voice/ep01/k1.mp3",
-    "series/grim-ride/voice/ep03/k1.mp3",
-    "series/grim-ride/voice/ep04/k5.mp3",
-    "series/grim-ride/voice/ep04/k1.mp3"
-   ],
-   "design": {
-    "description": "A young American guy in his early twenties with a bored, flat, mumbly monotone, slightly nasal, totally unimpressed slacker energy, talks a little muffled and lazy. Natural and comedic.",
-    "text": "Relax, pal. It's a class three. Mine does forty. Nice skin, where'd you get it? Bro, you're cooked. Relax. Relax, pal. We ride at nine. Don't be weird about it, okay? Whatever. Relax, pal.",
-    "picked": {
-     "i": 1,
-     "dur": 17.01,
-     "f0": 100.0,
-     "f0_iqr": 8.3,
-     "rate": 19.0,
-     "loud_sd": 5.2
-    }
-   },
-   "history": [
-    {
-     "voice_id": "bIHbv24MWmeRgasZH58o",
-     "until": "2026-10-06"
-    }
-   ],
-   "account": {
-    "category": "generated",
-    "description": "A young American guy in his early twenties with a bored, flat, mumbly monotone, slightly nasal, totally unimpressed slacker energy, talks a little muffled and lazy. Natural and comedic.",
-    "settings": null,
-    "created_at_unix": 1791318877
-   }
-  },
-  {
-   "slug": "grim-ride",
    "char": "dashley",
    "voice_id": "hvKhJmx8w6dx2qaLhHC6",
-   "status": "active",
+   "status": "library_or_premade",
    "name": "Dashley (DoomDash support bot)",
    "voice_name": "Grim Ride — Dashley (DoomDash support bot)",
    "lines": 8,
@@ -834,7 +854,7 @@
    "slug": "grim-ride",
    "char": "mom",
    "voice_id": "UNaE6Ed6rSceF3pSO5yL",
-   "status": "active",
+   "status": "library_or_premade",
    "name": "Trick-or-treat Mom",
    "voice_name": "Grim Ride — Trick-or-treat Mom",
    "lines": 3,
@@ -1403,8 +1423,8 @@
    "status": "active",
    "name": "Валера",
    "voice_name": "Валера и кот — Валера",
-   "lines": 33,
-   "episodes": 6,
+   "lines": 49,
+   "episodes": 7,
    "samples": [
     "series/valera-i-kot/voice/ep06/v1.mp3",
     "series/valera-i-kot/voice/ep01/v2.mp3",
@@ -1441,8 +1461,8 @@
    "status": "active",
    "name": "Кот Дембель",
    "voice_name": "Валера и кот — Кот Дембель",
-   "lines": 14,
-   "episodes": 6,
+   "lines": 23,
+   "episodes": 7,
    "samples": [
     "series/valera-i-kot/voice/ep02/c1.mp3",
     "series/valera-i-kot/voice/ep03/c1.mp3",
@@ -1474,64 +1494,13 @@
   },
   {
    "slug": "valera-i-kot",
-   "char": "nina",
-   "voice_id": "pVPuMCjFhiIm88pqmX0y",
-   "status": "active",
-   "name": "Нина Петровна (ЖЭК)",
-   "voice_name": "Валера и кот — Нина Петровна (ЖЭК)",
-   "lines": 5,
-   "episodes": 1,
-   "samples": [
-    "series/valera-i-kot/voice/ep04/n5.mp3",
-    "series/valera-i-kot/voice/ep04/n1.mp3",
-    "series/valera-i-kot/voice/ep04/n2.mp3",
-    "series/valera-i-kot/voice/ep04/n4.mp3",
-    "series/valera-i-kot/voice/ep04/n3.mp3"
-   ],
-   "design": {
-    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
-    "text": "ЖЭК, слу́шаю. В труба́х, мужчи́на. До пятна́дцатого. Зна́чит, до сле́дующего. Э́то вода́. Служе́бная. Заявле́ния принима́ем по вто́рникам, с двух до двух пятна́дцати.",
-    "picked": {
-     "i": 1,
-     "dur": 13.56,
-     "f0": 177.8,
-     "f0_iqr": 41.3,
-     "rate": 16.2,
-     "loud_sd": 5.0
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1790647561
-   },
-   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/9dk6dPXhLLtqmUWeVU6p/1c3dc72a-57d2-4a0e-a964-2879386a5c09.mp3",
-   "deleted_reason": "free slots",
-   "history": [
-    {
-     "voice_id": "9dk6dPXhLLtqmUWeVU6p",
-     "until": "2026-10-12",
-     "note": "deleted, restored as IVC clone"
-    }
-   ]
-  },
-  {
-   "slug": "valera-i-kot",
    "char": "zina",
-   "voice_id": "YLwEzYleYhWwRlkHH8jA",
-   "status": "deleted",
+   "voice_id": "zYrh5fGxYuTn3sXH3sMw",
+   "status": "active",
    "name": "Баба Зина",
-   "voice_name": "Валера и кот — Баба Зина",
-   "lines": 6,
-   "episodes": 2,
+   "voice_name": "valera-i-kot — Баба Зина (restored)",
+   "lines": 19,
+   "episodes": 3,
    "samples": [
     "series/valera-i-kot/voice/ep03/z4.mp3",
     "series/valera-i-kot/voice/ep05/z1.mp3",
@@ -1553,31 +1522,30 @@
     }
    },
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "A sharp, nosy Russian grandmother in her late seventies. Thin, slightly shrill and crackly elderly female voice, quick sarcastic gossiping delivery, sounds like she knows everyone's business. Native Russian speaker.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1790647557
+    "settings": null,
+    "created_at_unix": 1791792672
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/YLwEzYleYhWwRlkHH8jA/dfcd7f13-0eb9-4a35-8bcd-d0f4290771b9.mp3",
-   "deleted_on": "2026-10-06",
-   "deleted_reason": "free slots"
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "YLwEzYleYhWwRlkHH8jA",
+     "until": "2026-10-12",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
   },
   {
    "slug": "valera-i-kot",
    "char": "tamara",
-   "voice_id": "3ce56pY2fyj9q7ajgqw6",
-   "status": "deleted",
+   "voice_id": "EJfoq1w8EoRCsRnCWoOc",
+   "status": "active",
    "name": "Кассирша Тамара",
-   "voice_name": "Валера и кот — Кассирша Тамара",
-   "lines": 6,
-   "episodes": 1,
+   "voice_name": "valera-i-kot — Кассирша Тамара (restored)",
+   "lines": 12,
+   "episodes": 2,
    "samples": [
     "series/valera-i-kot/voice/ep02/t4.mp3",
     "series/valera-i-kot/voice/ep02/t2.mp3",
@@ -1599,31 +1567,59 @@
     }
    },
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "A tired Russian supermarket cashier woman in her early fifties. Flat, slightly nasal and husky voice, bored deadpan delivery, chewing gum, completely unimpressed by customers. Native Russian speaker.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1790647555
+    "settings": null,
+    "created_at_unix": 1791792683
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/3ce56pY2fyj9q7ajgqw6/aced8126-d428-48b3-99f2-4b85b5235770.mp3",
-   "deleted_on": "2026-10-06",
-   "deleted_reason": "free slots"
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "3ce56pY2fyj9q7ajgqw6",
+     "until": "2026-10-12",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "semenych",
+   "voice_id": "B5J7DQRqcdz5aZwL642J",
+   "status": "active",
+   "name": "Семёныч",
+   "voice_name": "Валера и кот — Семёныч",
+   "lines": 8,
+   "episodes": 1,
+   "samples": [],
+   "design": {
+    "description": "An eccentric intelligent Russian man around sixty, a former literature teacher and charming drinker. Theatrical, pompous, declamatory delivery, soft warm baritone, slightly nasal, a little tipsy and ironic, very articulate. Native Russian speaker.",
+    "text": "Вале́рий, позво́льте замеча́ние. Ру́сская литерату́ра у́чит нас: е́сли на ла́вочке сидя́т ба́бушки, то́ подъе́зд — э́то уже́ не подъе́зд, а грани́ца. Мы пройдём. Как Суво́ров — че́рез А́льпы.",
+    "picked": {
+     "i": 1,
+     "dur": 16.85,
+     "f0": 158.4,
+     "f0_iqr": 170.3,
+     "rate": 17.2,
+     "loud_sd": 5.4
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "An eccentric intelligent Russian man around sixty, a former literature teacher and charming drinker. Theatrical, pompous, declamatory delivery, soft warm baritone, slightly nasal, a little tipsy and ironic, very articulate. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1791792734
+   }
   },
   {
    "slug": "valera-i-kot",
    "char": "lyuba",
-   "voice_id": "e0TVxkt3XGwbs1DJmz5O",
-   "status": "deleted",
+   "voice_id": "bB7ZYDhHF7rhyK82vKpu",
+   "status": "active",
    "name": "Баба Люба",
-   "voice_name": "Валера и кот — Баба Люба",
-   "lines": 3,
-   "episodes": 2,
+   "voice_name": "valera-i-kot — Баба Люба (restored)",
+   "lines": 7,
+   "episodes": 3,
    "samples": [
     "series/valera-i-kot/voice/ep03/l2.mp3",
     "series/valera-i-kot/voice/ep05/l1.mp3",
@@ -1642,21 +1638,93 @@
     }
    },
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "A slow, heavy Russian grandmother around eighty. Low, raspy and breathy elderly female voice, very slow deadpan delivery with long pauses, dry and unimpressed. Native Russian speaker.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1790647559
+    "settings": null,
+    "created_at_unix": 1791792678
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/e0TVxkt3XGwbs1DJmz5O/fa6d10ce-6577-4508-bd20-d4a0796137d0.mp3",
-   "deleted_on": "2026-10-06",
-   "deleted_reason": "free slots"
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "e0TVxkt3XGwbs1DJmz5O",
+     "until": "2026-10-12",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "nina",
+   "voice_id": "pVPuMCjFhiIm88pqmX0y",
+   "status": "active",
+   "name": "Нина Петровна (ЖЭК)",
+   "voice_name": "valera-i-kot — Нина Петровна (ЖЭК) (restored)",
+   "lines": 6,
+   "episodes": 2,
+   "samples": [
+    "series/valera-i-kot/voice/ep04/n5.mp3",
+    "series/valera-i-kot/voice/ep04/n1.mp3",
+    "series/valera-i-kot/voice/ep04/n2.mp3",
+    "series/valera-i-kot/voice/ep04/n4.mp3",
+    "series/valera-i-kot/voice/ep04/n3.mp3"
+   ],
+   "design": {
+    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
+    "text": "ЖЭК, слу́шаю. В труба́х, мужчи́на. До пятна́дцатого. Зна́чит, до сле́дующего. Э́то вода́. Служе́бная. Заявле́ния принима́ем по вто́рникам, с двух до двух пятна́дцати.",
+    "picked": {
+     "i": 1,
+     "dur": 13.56,
+     "f0": 177.8,
+     "f0_iqr": 41.3,
+     "rate": 16.2,
+     "loud_sd": 5.0
+    }
+   },
+   "account": {
+    "category": "cloned",
+    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1791781536
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/9dk6dPXhLLtqmUWeVU6p/1c3dc72a-57d2-4a0e-a964-2879386a5c09.mp3",
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "9dk6dPXhLLtqmUWeVU6p",
+     "until": "2026-10-12",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "kolyan",
+   "voice_id": "obfzPRwPXc0avd4LPuzH",
+   "status": "active",
+   "name": "Колян",
+   "voice_name": "Валера и кот — Колян",
+   "lines": 6,
+   "episodes": 1,
+   "samples": [],
+   "design": {
+    "description": "A huge, slow, taciturn Russian working-class man in his forties. Very deep, low, rumbling bass voice, lazy and sleepy, slightly hoarse, minimal intonation, speaks rarely and very briefly but warmly. Native Russian speaker.",
+    "text": "Ну. Ну! Ну-у. Мужики́, я в гараже́, под Жигуля́ми. Ключ на трина́дцать пода́й. Ну. Не, ну а чё. Нормально всё. Ну, с Но́вым го́дом, мужики́.",
+    "picked": {
+     "i": 2,
+     "dur": 25.0,
+     "f0": 110.3,
+     "f0_iqr": 267.6,
+     "rate": 11.3,
+     "loud_sd": 5.3
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A huge, slow, taciturn Russian working-class man in his forties. Very deep, low, rumbling bass voice, lazy and sleepy, slightly hoarse, minimal intonation, speaks rarely and very briefly but warmly. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1791792729
+   }
   },
   {
    "slug": "valera-i-kot",
@@ -1678,5 +1746,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-12 05:05"
+ "updated": "2026-10-12 08:12"
 }

@@ -1,37 +1,290 @@
 {
-  "h_n1": ["nina", "[screaming, shocked by ice-cold water] А-а-а! ЛЕДЯНА́Я!"],
-  "h_v1": ["valera", "[satisfied, pleased, proud] После́днее фо́то. Альбо́м — гото́в."],
-  "h_c1": ["cat", "[deadpan, to camera] Ни́на Петро́вна. ЖЭК. В на́шей ВА́ННОЙ."],
-  "h_c2": ["cat", "[deadpan] Листа́ем с нача́ла."],
-  "p_v1": ["valera", "[teeth chattering, freezing, wrapped in a blanket] С Но́вым го́дом, Де́мбель. Вода́ опя́ть ЛЕДЯНА́Я."],
-  "p_r1": ["robot", "[formal radio announcer] Отключе́ние горя́чей воды́ с пе́рвого января́. Во всех зда́ниях. Включа́я ЖЭК."],
-  "p_v2": ["valera", "[nostalgic, proud] Два́дцать лет наза́д — а́рмия. Тепе́рь — э́та ЗИМА́."],
-  "p_v3": ["valera", "[determined, military] Офо́рмим. По УСТА́ВУ."],
-  "p_c1": ["cat", "[deadpan, to camera] Он оформля́ет альбо́м. Я — ПРА́ВДУ."],
-  "a_v1": ["valera", "[offended, proud] Э́то был боево́й КЛИЧ!"],
-  "a_c1": ["cat", "[deadpan] В тона́льности ЧА́ЙНИКА."],
-  "b_v1": ["valera", "[proud, triumphant] ТРОФЕ́Й!"],
-  "b_c1": ["cat", "[deadpan, to camera] Са́мый дорого́й трофе́й А́РМИИ."],
-  "c_v1": ["valera", "[whispering, secretive] Разве́дка. Соверше́нно СЕКРЕ́ТНО."],
-  "c_v2": ["valera", "[shocked, shouting] Отку́да у меня́ Э́ТИ фо́то?!"],
-  "c_c1": ["cat", "[deadpan] Подари́ли. С Но́вым ГО́ДОМ."],
-  "d_v1": ["valera", "[proud, solemn] Перегово́ры с ЖЭ́Ком. Три часа́. Не СДА́ЛСЯ."],
-  "t_n1": ["nina", "[tired, polite, a bit embarrassed] Мужчи́на. С Но́вым го́дом. У вас ГОРЯ́ЧАЯ есть?"],
-  "t_c1": ["cat", "[amused, whispering to camera] О-о. Сейча́с БУ́ДЕТ."],
-  "t_v1": ["valera", "[imitating an answering machine, flat robotic monotone] Ваш визи́т о́чень ва́жен для нас. Вы — пе́рвая. ЖДИ́ТЕ."],
-  "t_n2": ["nina", "[indignant, outraged] Мужчи́на, я из ЖЭ́КА!"],
-  "t_v2": ["valera", "[smug, calm] А я — из ВА́ННОЙ."],
-  "t_c2": ["cat", "[whispering to camera] Вода́ ЛЕДЯНА́Я."],
-  "t_n3": ["nina", "[shocked, pointing] Э́то что, Я?!"],
-  "t_v3": ["valera", "[dry, deadpan, smug] Вода́. СЛУЖЕ́БНАЯ."],
-  "e_v1": ["valera", "[stern, like an interrogator] Опера́ция «Кипято́к». СМОТРИ́ТЕ."],
-  "e_n1": ["nina", "[furious, shouting] Так э́то ВЫ откры́ли ве́нтиль?! Вся служе́бная — во ДВОР!"],
-  "e_n2": ["nina", "[haughty, determined] Я иду́ во двор. Там ГОРЯ́ЧАЯ!"],
-  "f_v1": ["valera", "[solemn, heavy] Но́вый год. Фина́л. Тяжеле́е ВСЕГО́."],
-  "f_n1": ["nina", "[touched, softly, a little jealous] Мужчи́на, а кот у вас пе́рвым ПОМЫ́ЛСЯ?"],
-  "f_n2": ["nina", "[pleading, desperate] Пусти́те. Хоть ЛЕДЯНА́Я."],
-  "z_v1": ["valera", "[generous, grand gesture, sly] Проходи́те. Ва́нна свобо́дна. Горя́чая — специа́льно для ЖЭ́КА."],
-  "z_c1": ["cat", "[deadpan, to camera] ЛЕДЯНА́Я."],
-  "k_v1": ["valera", "[proud military salute, loud] Служу́ горя́чей ВОДЕ́!"],
-  "s_c1": ["cat", "[deadpan, to camera] Сезо́н ДВА."]
+  "v01": [
+    "valera",
+    "[whispering, tense, watching through binoculars] Сидя́т. С обе́да. Не морга́ют."
+  ],
+  "z01": [
+    "zina",
+    "[shouting up from below, sharp, mocking] Вале́ра! Бино́кль протри́!"
+  ],
+  "c01": [
+    "cat",
+    "[deadpan documentary narrator, calm] Тридца́ть пе́рвое декабря́. До Но́вого го́да — четы́ре часа́. До ла́вочки — два этажа́."
+  ],
+  "v02": [
+    "valera",
+    "[proud, presenting the festive table] Оливье́ — таз. Шу́ба — есть. Мандари́ны — по уста́ву."
+  ],
+  "v03": [
+    "valera",
+    "[sad, looking through an empty bottle] Горю́чее [pause] зако́нчилось тридца́того."
+  ],
+  "c02": [
+    "cat",
+    "[deadpan] Тридца́того. В во́семь утра́."
+  ],
+  "v04": [
+    "valera",
+    "[determined, picking up the phone] Вызыва́ю подкрепле́ние."
+  ],
+  "k01": [
+    "kolyan",
+    "[low, flat, bored] Ну."
+  ],
+  "v05": [
+    "valera",
+    "[excited, shouting into the phone] Коля́н! Но́вый год! У меня́!"
+  ],
+  "k02": [
+    "kolyan",
+    "[happy, low] Ну!"
+  ],
+  "s01": [
+    "semenych",
+    "[theatrical, intelligent, slightly tipsy] Вале́рий, я в пальто́ с обе́да. Но у вас — ла́вочка."
+  ],
+  "s02": [
+    "semenych",
+    "[grave, dramatic] Че́рез ва́ших ба́бушек в про́шлом году́ не прошёл да́же Дед Моро́з."
+  ],
+  "v06": [
+    "valera",
+    "[proud, shouting] Два́дцать лет в а́рмии! Пройдём!"
+  ],
+  "c03": [
+    "cat",
+    "[deadpan, to camera] Два́дцать лет. На скла́де. Склад никто́ не штурмова́л."
+  ],
+  "v07": [
+    "valera",
+    "[commander, briefing, serious] Опера́ция «Оливье́». Э́то — подъе́зд. Э́то — ла́вочка."
+  ],
+  "v08": [
+    "valera",
+    "[commander] Бойцы́ беру́т горю́чее у Тама́ры. Ползко́м — в подъе́зд."
+  ],
+  "c04": [
+    "cat",
+    "[deadpan] Мандари́ны не морга́ют. Ба́бки — то́же."
+  ],
+  "s03": [
+    "semenych",
+    "[eloquent, gallant] Тама́ра, свет оче́й. Нам бы чего́-нибудь для души́."
+  ],
+  "t01": [
+    "tamara",
+    "[bored, flat, chewing gum] По́сле девяти́ для души́ — то́лько кефи́р."
+  ],
+  "k03": [
+    "kolyan",
+    "[pleading, low, drawn out] Ну-у-у."
+  ],
+  "t02": [
+    "tamara",
+    "[whispering, looking around] Компо́т. Вишнёвый. Из-под прила́вка."
+  ],
+  "s04": [
+    "semenych",
+    "[suspicious, sniffing] Компо́т [pause] в се́мьдесят гра́дусов?"
+  ],
+  "t03": [
+    "tamara",
+    "[dry, deadpan] Ви́шня зла́я."
+  ],
+  "t04": [
+    "tamara",
+    "[flat, bored] Пятьсо́т. И паке́т — девяно́сто."
+  ],
+  "t05": [
+    "tamara",
+    "[into the phone, bored] Да, Зин. Дво́е. Оди́н в ке́пке, второ́й — с кни́жкой."
+  ],
+  "v09": [
+    "valera",
+    "[whispering into a walkie-talkie] Вы — сугро́бы. Сугро́бы не разгова́ривают."
+  ],
+  "l01": [
+    "lyuba",
+    "[slow, heavy, squinting] Зин. Сугро́б ползёт."
+  ],
+  "z02": [
+    "zina",
+    "[sharp, indignant] Второ́й за зи́му. Обнагле́ли."
+  ],
+  "z03": [
+    "zina",
+    "[shouting] Сугро́б! У тебя́ кроссо́вки «Абиба́с»!"
+  ],
+  "c05": [
+    "cat",
+    "[deadpan documentary narrator] Попы́тка но́мер оди́н. Сугро́б сда́ли кроссо́вки."
+  ],
+  "s05": [
+    "semenych",
+    "[jolly, booming, theatrical] Здра́вствуйте, ба́бушки! Дед Моро́з — к де́тям!"
+  ],
+  "z04": [
+    "zina",
+    "[suspicious, dry] В четы́рнадцатой дете́й нет. Там пра́порщик и кот."
+  ],
+  "l02": [
+    "lyuba",
+    "[slow, squinting] Снегу́рочка [pause] а чего́ небри́тая?"
+  ],
+  "k04": [
+    "kolyan",
+    "[forced high squeaky falsetto] Ну."
+  ],
+  "z05": [
+    "zina",
+    "[commanding] Стишо́к!"
+  ],
+  "s06": [
+    "semenych",
+    "[pompous poetry recital] Моро́з и во́дка — день чуде́сный!"
+  ],
+  "z06": [
+    "zina",
+    "[triumphant, strict] Стихи́ с гра́дусом проноси́ть нельзя́."
+  ],
+  "c06": [
+    "cat",
+    "[deadpan documentary narrator] Попы́тка но́мер два. Кла́ссика не прошла́ досмо́тр."
+  ],
+  "v10": [
+    "valera",
+    "[solemn, careful] Ба́бушки. Перегово́ры. Без ору́жия."
+  ],
+  "z07": [
+    "zina",
+    "[reading from a notebook, dry] Опера́ция «Оливье́». Коля́н — Снегу́рочка. Горю́чее — у Тама́ры."
+  ],
+  "v11": [
+    "valera",
+    "[shocked, shouting] Отку́да?!"
+  ],
+  "c07": [
+    "cat",
+    "[deadpan, to camera, calm] Да. Двойно́й аге́нт. За смета́ну."
+  ],
+  "v12": [
+    "valera",
+    "[betrayed, shouting] Де́мбель! Преда́тель!"
+  ],
+  "c08": [
+    "cat",
+    "[deadpan] Не преда́тель. Контра́ктник."
+  ],
+  "z08": [
+    "zina",
+    "[businesslike] Пропу́стим. Всех. Но — с усло́виями."
+  ],
+  "l03": [
+    "lyuba",
+    "[dreamy, slow] Оливье́ — нам."
+  ],
+  "z09": [
+    "zina",
+    "[businesslike] И «Огонёк» смо́трим у тебя́. У нас телеви́зор слома́лся."
+  ],
+  "v13": [
+    "valera",
+    "[defeated, sigh] Проходи́те."
+  ],
+  "t06": [
+    "tamara",
+    "[tired, entering, holding a jar] Сме́на ко́нчилась. Компо́т — мой."
+  ],
+  "z10": [
+    "zina",
+    "[raising a glass, cheerful toast] Ну, за пропускно́й режи́м!"
+  ],
+  "l04": [
+    "lyuba",
+    "[mouth full, chewing] Майоне́зу ма́ло."
+  ],
+  "z11": [
+    "zina",
+    "[commanding, pointing] А вы — на пост. Ла́вочка пуста́я — непоря́док."
+  ],
+  "v14": [
+    "valera",
+    "[offended] Я два́дцать лет в а́рмии!"
+  ],
+  "z12": [
+    "zina",
+    "[dry] Вот и заступа́й."
+  ],
+  "s07": [
+    "semenych",
+    "[philosophical, freezing] Вале́рий, мы штурмова́ли подъе́зд. А взя́ли — ла́вочку."
+  ],
+  "v15": [
+    "valera",
+    "[sigh, freezing] Два́дцать лет в а́рмии. И опя́ть — на посту́."
+  ],
+  "k05": [
+    "kolyan",
+    "[warm, slow, surprisingly thoughtful] Мужики́. А ба́бкам-то про́сто хо́лодно бы́ло. Одни́м."
+  ],
+  "s08": [
+    "semenych",
+    "[shocked] Коля́н [pause] ты разгова́риваешь?!"
+  ],
+  "k06": [
+    "kolyan",
+    "[low, matter-of-fact] Ну."
+  ],
+  "n01": [
+    "nina",
+    "[polite, tired] Мужчи́ны, у вас в подъе́зде горя́чая есть?"
+  ],
+  "v16": [
+    "valera",
+    "[stern guard, raising his palm] Стоя́ть. Про́пуск!"
+  ],
+  "c09": [
+    "cat",
+    "[deadpan, to camera] С Но́вым го́дом. Сме́на карау́ла."
+  ],
+  "z13": [
+    "zina",
+    "[shouting from a window, sharp] Сме́ну сдади́те в сентябре́."
+  ],
+  "s10": [
+    "semenych",
+    "[solemn, theatrical, whispering] Никола́й, мы идём туда́, где не ступа́ла нога́ тре́звого челове́ка."
+  ],
+  "k07": [
+    "kolyan",
+    "[low, resigned] Ну."
+  ],
+  "c10": [
+    "cat",
+    "[deadpan, to camera, content] Контра́кт продлён. До весны́."
+  ],
+  "l05": [
+    "lyuba",
+    "[cheerful, slow, dancing] Вале́рочка! А холоде́ц где?"
+  ],
+  "v17": [
+    "valera",
+    "[quietly, hurt, from the doorway] Я э́тот стол три дня накрыва́л."
+  ],
+  "z14": [
+    "zina",
+    "[dry, proud] А мы на ла́вочке — три го́да сиди́м."
+  ],
+  "s09": [
+    "semenych",
+    "[philosophical, freezing, slowly] Кто на ла́вочке сиди́т — тот и власть."
+  ],
+  "z15": [
+    "zina",
+    "[shouting from a window above, approving] Молодцы́! Хорошо́ стои́шь, Вале́ра!"
+  ],
+  "k08": [
+    "kolyan",
+    "[forced high falsetto, embarrassed] Ну-у."
+  ]
 }

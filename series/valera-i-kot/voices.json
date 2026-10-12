@@ -69,8 +69,11 @@
           "loud_sd": 6.9
         }
       },
-      "voice_id": "YLwEzYleYhWwRlkHH8jA",
-      "voice": "Валера и кот — Баба Зина"
+      "voice_id": "zYrh5fGxYuTn3sXH3sMw",
+      "voice": "Валера и кот — Баба Зина",
+      "previous_voice_ids": [
+        "YLwEzYleYhWwRlkHH8jA"
+      ]
     },
     "lyuba": {
       "name": "Баба Люба",
@@ -92,8 +95,11 @@
           "loud_sd": 4.7
         }
       },
-      "voice_id": "e0TVxkt3XGwbs1DJmz5O",
-      "voice": "Валера и кот — Баба Люба"
+      "voice_id": "bB7ZYDhHF7rhyK82vKpu",
+      "voice": "Валера и кот — Баба Люба",
+      "previous_voice_ids": [
+        "e0TVxkt3XGwbs1DJmz5O"
+      ]
     },
     "tamara": {
       "name": "Кассирша Тамара",
@@ -115,8 +121,11 @@
           "loud_sd": 5.7
         }
       },
-      "voice_id": "3ce56pY2fyj9q7ajgqw6",
-      "voice": "Валера и кот — Кассирша Тамара"
+      "voice_id": "EJfoq1w8EoRCsRnCWoOc",
+      "voice": "Валера и кот — Кассирша Тамара",
+      "previous_voice_ids": [
+        "3ce56pY2fyj9q7ajgqw6"
+      ]
     },
     "nina": {
       "name": "Нина Петровна (ЖЭК)",
@@ -154,6 +163,52 @@
       "voice": "Marusya G – Persuasive Outbound Caller",
       "voice_id": "uQiZyJqZ7ePaB8bwME8n",
       "style": "[robotic, cheerful, monotone] + телефонный фильтр при сведении"
+    },
+    "kolyan": {
+      "name": "Колян",
+      "color_caption": [
+        150,
+        220,
+        120
+      ],
+      "style": "[low] — односложно, «Ну.»",
+      "design": {
+        "description": "A huge, slow, taciturn Russian working-class man in his forties. Very deep, low, rumbling bass voice, lazy and sleepy, slightly hoarse, minimal intonation, speaks rarely and very briefly but warmly. Native Russian speaker.",
+        "text": "Ну. Ну! Ну-у. Мужики́, я в гараже́, под Жигуля́ми. Ключ на трина́дцать пода́й. Ну. Не, ну а чё. Нормально всё. Ну, с Но́вым го́дом, мужики́.",
+        "picked": {
+          "i": 2,
+          "dur": 25.0,
+          "f0": 110.3,
+          "f0_iqr": 267.6,
+          "rate": 11.3,
+          "loud_sd": 5.3
+        }
+      },
+      "voice_id": "obfzPRwPXc0avd4LPuzH",
+      "voice": "Валера и кот — Колян"
+    },
+    "semenych": {
+      "name": "Семёныч",
+      "color_caption": [
+        230,
+        190,
+        120
+      ],
+      "style": "[theatrical] — высокий штиль",
+      "design": {
+        "description": "An eccentric intelligent Russian man around sixty, a former literature teacher and charming drinker. Theatrical, pompous, declamatory delivery, soft warm baritone, slightly nasal, a little tipsy and ironic, very articulate. Native Russian speaker.",
+        "text": "Вале́рий, позво́льте замеча́ние. Ру́сская литерату́ра у́чит нас: е́сли на ла́вочке сидя́т ба́бушки, то́ подъе́зд — э́то уже́ не подъе́зд, а грани́ца. Мы пройдём. Как Суво́ров — че́рез А́льпы.",
+        "picked": {
+          "i": 1,
+          "dur": 16.85,
+          "f0": 158.4,
+          "f0_iqr": 170.3,
+          "rate": 17.2,
+          "loud_sd": 5.4
+        }
+      },
+      "voice_id": "B5J7DQRqcdz5aZwL642J",
+      "voice": "Валера и кот — Семёныч"
     }
   },
   "music": {},

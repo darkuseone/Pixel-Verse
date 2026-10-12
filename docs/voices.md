@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-12 05:05.
+Обновлено: 2026-10-12 08:12.
 
 ## agent-dibs
 
@@ -13,7 +13,7 @@
 | Dibs | `dibs` | `5C0bHt6GhA0my3bZoLJf` | active | 33 / 6 | Agent Dibs — Dibs |
 | Terry | `terry` | `EUq8L3QnRf1VZ3o46Rqy` | active | 12 / 4 | Agent Dibs — Terry |
 | Deb | `deb` | `rDUAka3HaW9ATyqCs7fi` | active | 11 / 5 | Agent Dibs — Deb |
-| Brad | `brad` | `1U7R8ztWDP1r2BuAL8Dz` | active | 9 / 3 | Agent Dibs — Brad |
+| Brad | `brad` | `1U7R8ztWDP1r2BuAL8Dz` | library_or_premade | 9 / 3 | Agent Dibs — Brad |
 | Gary | `gary` | `2RpVmTUANdkCGLgvjh2O` | deleted 2026-10-06 | 6 / 3 | Agent Dibs — Gary |
 | 311 Operator | `operator` | `eT8Vk9u6kd8OzYpIosfG` | deleted 2026-10-06 | 5 / 1 | Agent Dibs — 311 Operator |
 | Marty | `marty` | `cI8n4KiVHQvXcAVhs2wo` | deleted 2026-10-06 | 4 / 3 | Agent Dibs — Marty |
@@ -25,10 +25,10 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Florida Man | `fm` | `GBn8jPzCnZIbx5Kf8r1J` | active | 32 / 6 | Florida Man — Florida Man |
-| Tanner | `tanner` | `GpiDvTn0zpQeiQA9VdB7` | active | 20 / 6 | Florida Man — Tanner |
-| Deputy Darlene | `darlene` | `dgd3UC679ZtpWOphbJ9Y` | active | 14 / 6 | Florida Man — Deputy Darlene |
-| Mort Pouch, Esq. | `mort` | `d44i4jCJHjBEUuFbGaGy` | active | 11 / 6 | Florida Man — Mort Pouch, Esq. |
+| Florida Man | `fm` | `GBn8jPzCnZIbx5Kf8r1J` | active | 37 / 7 | Florida Man — Florida Man |
+| Tanner | `tanner` | `GpiDvTn0zpQeiQA9VdB7` | active | 37 / 7 | Florida Man — Tanner |
+| Mort Pouch, Esq. | `mort` | `d44i4jCJHjBEUuFbGaGy` | active | 24 / 7 | Florida Man — Mort Pouch, Esq. |
+| Deputy Darlene | `darlene` | `dgd3UC679ZtpWOphbJ9Y` | active | 23 / 7 | Florida Man — Deputy Darlene |
 
 ## grim-ride
 
@@ -36,11 +36,11 @@
 |---|---|---|---|---|---|
 | Grim | `grim` | `sdQf2r6zfX32hvp25Auj` | active | 30 / 6 | Grim Ride — Grim |
 | Edgar | `edgar` | `QxBrp3fXvoJ3Zvl8DXHD` | active | 17 / 6 | Grim Ride — Edgar |
-| Harold | `harold` | `UScN6kcNEVzdo1v1Nl6W` | active | 9 / 5 | Grim Ride — Harold |
-| Todd | `todd` | `9rXbTqAmpdfkBx20G31c` | active | 9 / 4 | Grim Ride — Todd |
-| Kayden | `kayden` | `wISugChlyIgdUxhS0vFR` | active | 9 / 4 | Grim Ride — Kayden |
-| Dashley (DoomDash support bot) | `dashley` | `hvKhJmx8w6dx2qaLhHC6` | active | 8 / 2 | Grim Ride — Dashley (DoomDash support bot) |
-| Trick-or-treat Mom | `mom` | `UNaE6Ed6rSceF3pSO5yL` | active | 3 / 2 | Grim Ride — Trick-or-treat Mom |
+| Harold | `harold` | `UScN6kcNEVzdo1v1Nl6W` | deleted 2026-10-12 | 9 / 5 | Grim Ride — Harold |
+| Kayden | `kayden` | `wISugChlyIgdUxhS0vFR` | deleted 2026-10-12 | 9 / 4 | Grim Ride — Kayden |
+| Todd | `todd` | `9rXbTqAmpdfkBx20G31c` | library_or_premade | 9 / 4 | Grim Ride — Todd |
+| Dashley (DoomDash support bot) | `dashley` | `hvKhJmx8w6dx2qaLhHC6` | library_or_premade | 8 / 2 | Grim Ride — Dashley (DoomDash support bot) |
+| Trick-or-treat Mom | `mom` | `UNaE6Ed6rSceF3pSO5yL` | library_or_premade | 3 / 2 | Grim Ride — Trick-or-treat Mom |
 
 ## mazutych
 
@@ -76,12 +76,14 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Валера | `valera` | `rBeJLZF1kJdbvH3OTV0M` | active | 33 / 6 | Валера и кот — Валера |
-| Кот Дембель | `cat` | `0SYrGzuYVNDS2OD4YroI` | active | 14 / 6 | Валера и кот — Кот Дембель |
-| Нина Петровна (ЖЭК) | `nina` | `pVPuMCjFhiIm88pqmX0y` | active | 5 / 1 | Валера и кот — Нина Петровна (ЖЭК) |
-| Баба Зина | `zina` | `YLwEzYleYhWwRlkHH8jA` | deleted 2026-10-06 | 6 / 2 | Валера и кот — Баба Зина |
-| Кассирша Тамара | `tamara` | `3ce56pY2fyj9q7ajgqw6` | deleted 2026-10-06 | 6 / 1 | Валера и кот — Кассирша Тамара |
-| Баба Люба | `lyuba` | `e0TVxkt3XGwbs1DJmz5O` | deleted 2026-10-06 | 3 / 2 | Валера и кот — Баба Люба |
+| Валера | `valera` | `rBeJLZF1kJdbvH3OTV0M` | active | 49 / 7 | Валера и кот — Валера |
+| Кот Дембель | `cat` | `0SYrGzuYVNDS2OD4YroI` | active | 23 / 7 | Валера и кот — Кот Дембель |
+| Баба Зина | `zina` | `zYrh5fGxYuTn3sXH3sMw` | active | 19 / 3 | valera-i-kot — Баба Зина (restored) |
+| Кассирша Тамара | `tamara` | `EJfoq1w8EoRCsRnCWoOc` | active | 12 / 2 | valera-i-kot — Кассирша Тамара (restored) |
+| Семёныч | `semenych` | `B5J7DQRqcdz5aZwL642J` | active | 8 / 1 | Валера и кот — Семёныч |
+| Баба Люба | `lyuba` | `bB7ZYDhHF7rhyK82vKpu` | active | 7 / 3 | valera-i-kot — Баба Люба (restored) |
+| Нина Петровна (ЖЭК) | `nina` | `pVPuMCjFhiIm88pqmX0y` | active | 6 / 2 | valera-i-kot — Нина Петровна (ЖЭК) (restored) |
+| Колян | `kolyan` | `obfzPRwPXc0avd4LPuzH` | active | 6 / 1 | Валера и кот — Колян |
 | Автоответчик ЖЭКа | `robot` | `uQiZyJqZ7ePaB8bwME8n` | library_or_premade | 2 / 1 | Marusya G – Persuasive Outbound Caller |
 
 ## Защищённые (личные голоса владельца)
