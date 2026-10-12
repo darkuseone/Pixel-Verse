@@ -28,6 +28,7 @@ class Episode:
             if (vep, key) not in s.env: s.env[(vep, key)] = S.load_env(P.voice_wav(vep, key, slug))
         items = []
         for vid, vep, key, t0, a, b, who, txt in voice:
+            txt = txt.replace('\u0301', '')                 # stress marks are for the TTS only, never in subtitles (owner, 12.10.2026)
             ch = O.chunk_words(O.word_times(s.env[(vep, key)], t0, a, b, txt.split()), cap_words)
             for i, c in enumerate(ch):
                 s0 = c[0][1]; e0 = ch[i + 1][0][1] if i + 1 < len(ch) else max(c[-1][2] + 0.35, t0 + (b - a))
