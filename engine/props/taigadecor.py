@@ -193,3 +193,18 @@ def dress_glade(W):
 
 
 DRESS.update(glade=dress_glade)
+
+
+def dress_birch(W):
+    """E04: the forest «polyclinic»: a sign on a post, the electronic queue plate on the thick birch, the waiting bench"""
+    D.attach(W, [
+        (_post(7, 140), 330, 470),
+        (birch(120, 40, ['ЛЕСНАЯ', 'ПОЛИКЛИНИКА'], colors=[NAVY, RED], weights=[0.9, 1.0], seed=31), 274, 430),
+        (R.plate(96, 36, ['ЭЛЕКТРОННАЯ', 'ОЧЕРЕДЬ'], bg=(30, 110, 200), colors=[WH, (255, 236, 90)], border=WH, weights=[0.9, 1.0]), 1066, 412),
+        (R.plate(70, 22, ['ОЖИДАНИЕ'], bg=WH, fg=BLK, border=BLK), 878, 488),
+    ])
+    D.anim(W, sparkles((0, 560, 1280, 720), n=60, seed=31))
+    D.anim(W, flakes((0, 0, 1280, 720), n=60, seed=32, speed=12.0))
+
+
+DRESS.update(birch=dress_birch)

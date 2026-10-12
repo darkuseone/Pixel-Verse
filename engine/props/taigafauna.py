@@ -110,7 +110,7 @@ def critter(sp, kind='fox', t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), b
     if vest:
         vm = sp.m_ell(bx, by + bob, brx * 1.02, bry * 0.9)[0] & (DX.YC < by + bry * 0.75 + bob)
         sp.paint(vm, tones((40, 44, 52)), np.clip((DX.YC - by + bry) / (2 * bry), 0, 1) * 0.5 + 0.3)
-        sp.txt_box([vest], (bx - brx * 0.8, by + 1.6 + bob, bx + brx * 0.55, by + 6.0 + bob), (250, 220, 60), pad=0.2)
+        sp.txt_box([vest], (bx - brx * 1.0, by + 2.6 + bob, bx + brx * 0.25, by + 6.6 + bob), (250, 220, 60), pad=0.2)
     if badge:
         sp.sup(bx + brx * 0.4, by + bry * 0.35 + bob, 6.0, 2.6, tones((240, 240, 236)), n=4.0)
         sp.txt_box([badge], (bx + brx * 0.4 - 5.6, by + bry * 0.35 - 2.2 + bob, bx + brx * 0.4 + 5.6, by + bry * 0.35 + 2.2 + bob), (180, 30, 34), pad=0.1)
@@ -249,4 +249,29 @@ def birdhouse_cam(sp, t=0.0, turn=0.0, light=True):
     sp.sup(2.6 * turn, 1.4, 3.0, 2.0, tones((50, 50, 56)), n=3.0)
     sp.ell(2.6 * turn + 2.4 * (1 if turn >= 0 else -1), 1.4, 1.2, 1.2, tones((40, 70, 120)), gloss=1.0, snow=False)
     if light and int(t * 3) % 2 == 0: sp.fill(sp.m_ell(2.6 * turn - 1.6, 3.0, 0.6, 0.6)[0], (255, 40, 40))
+    sp.outline(INK, 1)
+
+
+def cuckoo(sp, t=0.0, call=0.0, look=(0.6, 0.0)):
+    """the cuckoo of the «electronic queue»: a small grey bird with a barred belly, yellow-ringed eye; call 0..1 opens the beak"""
+    G = (120, 124, 132)
+    sp.ell(-5.0, 4.0, 4.0, 1.6, tones(dark(G, 0.8)), ang=0.4)                      # tail
+    body = sp.ell(0.0, 5.0, 4.6, 3.8, tones(G))
+    bel = sp.m_ell(0.8, 4.2, 3.4, 2.8)[0]
+    sp.fill(bel, (232, 228, 216))
+    for q in range(4): sp.fill(bel & (np.abs(DX.YC - (2.6 + q * 1.0)) < 0.22), (90, 90, 96))
+    sp.ell(2.6, 9.0, 3.0, 2.8, tones(G))
+    DX.eye(sp, 3.6, 9.6, 2.2, 2.2, X('stunned' if call > 0.3 else 'normal'), (40, 30, 20), look, False, lash=INK, skin=G, white=(250, 220, 80))
+    o = 1.2 * call
+    sp.fill(sp.m_poly([(5.0, 9.4), (8.4, 9.0 + o * 0.4), (5.0, 8.6)]), (230, 180, 60))
+    sp.fill(sp.m_poly([(5.0, 8.4), (8.0, 7.6 - o), (5.0, 8.0)]), (200, 150, 40))
+    for dx in (-1.0, 1.2): sp.cap((dx, 1.6), (dx + 0.4, 0.0), 0.35, 0.3, tones((230, 170, 60)))
+    sp.outline(INK, 1)
+    sp.anchors.update(head=(2.6, 9.0), beak=(8.0, 8.6))
+
+
+def hollow(sp, t=0.0):
+    """a dark tree hollow (дупло) with a bark rim"""
+    sp.ell(0.0, 0.0, 6.0, 7.6, tones((120, 90, 70)), snow=False)
+    sp.ell(0.0, -0.4, 4.2, 5.8, tones((24, 18, 16)), snow=False)
     sp.outline(INK, 1)
