@@ -1416,7 +1416,7 @@ def render(t):
         hk = img('hook', lambda: O.winter_title(['ГОСТИ', 'НЕ ПРОЙДУТ?!'], 84, width=1900))
         if 0.08 <= t < 2.6:
             k = min(1.0, (t - 0.08) / 0.1) * (1 - sm((t - 2.45) / 0.15))
-            O.overlay(big, hk, 10, 620, k)
+            O.overlay(big, hk, 10, 470, k)
     for im, t0, t1, cx, cy in stickers(): O.draw_sticker(big, im, t, t0, t1, cx, cy)
     if s['name'] not in NOCAP: EPI.captions.draw(big, t, 950)
     if s['name'] not in NOHUD: hud(big, s)
