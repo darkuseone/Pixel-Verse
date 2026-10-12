@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-09 16:27.
+Обновлено: 2026-10-12 05:05.
 
 ## agent-dibs
 
@@ -78,9 +78,9 @@
 |---|---|---|---|---|---|
 | Валера | `valera` | `rBeJLZF1kJdbvH3OTV0M` | active | 33 / 6 | Валера и кот — Валера |
 | Кот Дембель | `cat` | `0SYrGzuYVNDS2OD4YroI` | active | 14 / 6 | Валера и кот — Кот Дембель |
+| Нина Петровна (ЖЭК) | `nina` | `pVPuMCjFhiIm88pqmX0y` | active | 5 / 1 | Валера и кот — Нина Петровна (ЖЭК) |
 | Баба Зина | `zina` | `YLwEzYleYhWwRlkHH8jA` | deleted 2026-10-06 | 6 / 2 | Валера и кот — Баба Зина |
 | Кассирша Тамара | `tamara` | `3ce56pY2fyj9q7ajgqw6` | deleted 2026-10-06 | 6 / 1 | Валера и кот — Кассирша Тамара |
-| Нина Петровна (ЖЭК) | `nina` | `9dk6dPXhLLtqmUWeVU6p` | deleted 2026-10-06 | 5 / 1 | Валера и кот — Нина Петровна (ЖЭК) |
 | Баба Люба | `lyuba` | `e0TVxkt3XGwbs1DJmz5O` | deleted 2026-10-06 | 3 / 2 | Валера и кот — Баба Люба |
 | Автоответчик ЖЭКа | `robot` | `uQiZyJqZ7ePaB8bwME8n` | library_or_premade | 2 / 1 | Marusya G – Persuasive Outbound Caller |
 

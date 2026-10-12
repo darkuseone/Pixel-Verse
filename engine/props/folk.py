@@ -738,11 +738,18 @@ NC = dict(skin=(238, 198, 176), skin_hi=(250, 218, 200), skin_sh=(206, 160, 140)
           cardi_hi=(122, 94, 138), cardi_sh=(72, 52, 84))
 
 
-def nina(CH, cam, t=0.0, mouth=0.0, expr='bored', bath=True, hand_n=None, prop_n=None, look=0.0):
+def nina(CH, cam, t=0.0, mouth=0.0, expr='bored', bath=True, hand_n=None, prop_n=None, look=0.0, foam=True, cap_=False,
+         cold=0.0, outfit='cardi'):
     """Nina Petrovna from the ZhEK: tall beehive, pencil-thin arched brows, big glasses on a chain, red lips, a mole.
     Anchor = waterline (bath) / desk line. Only the upper body is drawn; in the bath foam covers the chest.
-    expr: bored | smug | blissful | stern"""
-    P = NC
+    expr: bored | smug | blissful | stern | shock | angry;  cap_: shower cap over the beehive; cold 0..1: icy blue skin + frost;
+    outfit (not in the bath): cardi | robe (pink bathrobe) | coat (grey coat over the robe)"""
+    P = dict(NC)
+    if outfit == 'robe': P.update(cardi=(236, 150, 180), cardi_hi=(250, 184, 206), cardi_sh=(196, 112, 146))
+    elif outfit == 'coat': P.update(cardi=(110, 112, 120), cardi_hi=(140, 142, 150), cardi_sh=(80, 82, 90))
+    if cold > 0:
+        for k in ('skin', 'skin_hi', 'skin_sh'):
+            P[k] = tuple(int(c * (1 - 0.45 * cold) + b * 0.45 * cold) for c, b in zip(P[k], (176, 206, 255)))
     L = Layer(cam)
     br = 0.1 * math.sin(t * 1.5)
     def F(x, h): return H(x, h + br)
@@ -763,7 +770,10 @@ def nina(CH, cam, t=0.0, mouth=0.0, expr='bored', bath=True, hand_n=None, prop_n
     ell(Hd, F(0.95, 9.5), 2.35, 2.75, P['skin'], 0, P['skin_hi'], P['skin_sh'])                          # face
     ell(Hd, F(-1.15, 9.3), 0.45, 0.7, P['skin'], 0, None, P['skin_sh'])                                   # ear
     ell(Hd, F(-1.15, 8.45), 0.28, 0.36, (236, 196, 70))                                                   # earring
-    lid = {'bored': 0.62, 'smug': 0.5, 'blissful': 1.0, 'stern': 0.35}.get(expr, 0.62)
+    if cap_:                                                                                          # shower cap over the beehive
+        ell(Hd, F(0.3, 13.9), 3.3, 3.1, (255, 176, 206), 0, (255, 214, 228), (226, 132, 170))
+        for k in range(9): dot(Hd, F(-2.9 + k * 0.72, 11.6 + 0.35 * math.sin(k * 1.7)), (255, 214, 228), 0.42)
+    lid = {'bored': 0.62, 'smug': 0.5, 'blissful': 1.0, 'stern': 0.35, 'shock': 0.0, 'angry': 0.3}.get(expr, 0.62)
     for k2, (x, r) in enumerate(((1.05, 0.62), (2.45, 0.68))):
         e_ = F(x + 0.08 * look, 10.0)
         ell(Hd, e_, r * 1.18, r * 1.05, P['frame']); ell(Hd, e_, r * 0.98, r * 0.86, P['glass'])          # big glasses
@@ -776,7 +786,7 @@ def nina(CH, cam, t=0.0, mouth=0.0, expr='bored', bath=True, hand_n=None, prop_n
             cap(Hd, (e_[0] - r * 0.62, lt), (e_[0] + r * 0.62, lt), 0.07, 0.07, P['eye'])
         else:
             cap(Hd, (e_[0] - r * 0.55, e_[1] + 0.12), (e_[0] + r * 0.55, e_[1] + 0.02), 0.09, 0.09, P['eye'])
-        bx = e_[0]; lift = 0.35 if expr in ('smug', 'stern') else 0.0                                       # thin arched brows
+        bx = e_[0]; lift = {'smug': 0.35, 'stern': 0.35, 'shock': 0.8, 'angry': -0.25}.get(expr, 0.0)       # thin arched brows
         s_ = -1 if k2 == 0 else 1
         cap(Hd, (bx - 0.75, e_[1] - r * 1.45), (bx, e_[1] - r * 1.9 - lift * (1 if s_ > 0 else 0.4)), 0.07, 0.07, (90, 44, 30))
         cap(Hd, (bx, e_[1] - r * 1.9 - lift * (1 if s_ > 0 else 0.4)), (bx + 0.75, e_[1] - r * 1.5), 0.07, 0.07, (90, 44, 30))
@@ -800,7 +810,11 @@ def nina(CH, cam, t=0.0, mouth=0.0, expr='bored', bath=True, hand_n=None, prop_n
     ell(A, en, 0.72, 0.68, P['skin'], 0, P['skin_hi'], P['skin_sh'])
     if prop_n: prop_n(A, en)
     _merge(L, A)
-    if bath:
+    if cold > 0.3:                                                                                   # frost on the glasses + icicles on the chin
+        for k2, x in enumerate((1.05, 2.45)):
+            for j in range(3): dot(L, F(x - 0.4 + 0.4 * j, 10.5 - 0.25 * j), (236, 248, 255), 0.16)
+        for j in range(3): cap(L, F(1.6 + 0.6 * j, 7.0), F(1.6 + 0.6 * j, 6.2 - 0.2 * j), 0.12, 0.04, (220, 240, 255))
+    if bath and foam:
         Fo = Layer(cam)
         for (x, h, rx, ry) in ((-3.2, 0.9, 2.2, 1.4), (-0.9, 0.7, 2.4, 1.5), (1.6, 0.8, 2.3, 1.4), (3.8, 0.5, 2.0, 1.3),
                                (-2.0, 2.1, 1.6, 1.1), (2.4, 2.2, 1.5, 1.0), (0.3, 2.0, 1.6, 1.1)):

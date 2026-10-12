@@ -1474,6 +1474,57 @@
   },
   {
    "slug": "valera-i-kot",
+   "char": "nina",
+   "voice_id": "pVPuMCjFhiIm88pqmX0y",
+   "status": "active",
+   "name": "Нина Петровна (ЖЭК)",
+   "voice_name": "Валера и кот — Нина Петровна (ЖЭК)",
+   "lines": 5,
+   "episodes": 1,
+   "samples": [
+    "series/valera-i-kot/voice/ep04/n5.mp3",
+    "series/valera-i-kot/voice/ep04/n1.mp3",
+    "series/valera-i-kot/voice/ep04/n2.mp3",
+    "series/valera-i-kot/voice/ep04/n4.mp3",
+    "series/valera-i-kot/voice/ep04/n3.mp3"
+   ],
+   "design": {
+    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
+    "text": "ЖЭК, слу́шаю. В труба́х, мужчи́на. До пятна́дцатого. Зна́чит, до сле́дующего. Э́то вода́. Служе́бная. Заявле́ния принима́ем по вто́рникам, с двух до двух пятна́дцати.",
+    "picked": {
+     "i": 1,
+     "dur": 13.56,
+     "f0": 177.8,
+     "f0_iqr": 41.3,
+     "rate": 16.2,
+     "loud_sd": 5.0
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790647561
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/9dk6dPXhLLtqmUWeVU6p/1c3dc72a-57d2-4a0e-a964-2879386a5c09.mp3",
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "9dk6dPXhLLtqmUWeVU6p",
+     "until": "2026-10-12",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "valera-i-kot",
    "char": "zina",
    "voice_id": "YLwEzYleYhWwRlkHH8jA",
    "status": "deleted",
@@ -1566,51 +1617,6 @@
   },
   {
    "slug": "valera-i-kot",
-   "char": "nina",
-   "voice_id": "9dk6dPXhLLtqmUWeVU6p",
-   "status": "deleted",
-   "name": "Нина Петровна (ЖЭК)",
-   "voice_name": "Валера и кот — Нина Петровна (ЖЭК)",
-   "lines": 5,
-   "episodes": 1,
-   "samples": [
-    "series/valera-i-kot/voice/ep04/n5.mp3",
-    "series/valera-i-kot/voice/ep04/n1.mp3",
-    "series/valera-i-kot/voice/ep04/n2.mp3",
-    "series/valera-i-kot/voice/ep04/n4.mp3",
-    "series/valera-i-kot/voice/ep04/n3.mp3"
-   ],
-   "design": {
-    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
-    "text": "ЖЭК, слу́шаю. В труба́х, мужчи́на. До пятна́дцатого. Зна́чит, до сле́дующего. Э́то вода́. Служе́бная. Заявле́ния принима́ем по вто́рникам, с двух до двух пятна́дцати.",
-    "picked": {
-     "i": 1,
-     "dur": 13.56,
-     "f0": 177.8,
-     "f0_iqr": 41.3,
-     "rate": 16.2,
-     "loud_sd": 5.0
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1790647561
-   },
-   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/9dk6dPXhLLtqmUWeVU6p/1c3dc72a-57d2-4a0e-a964-2879386a5c09.mp3",
-   "deleted_on": "2026-10-06",
-   "deleted_reason": "free slots"
-  },
-  {
-   "slug": "valera-i-kot",
    "char": "lyuba",
    "voice_id": "e0TVxkt3XGwbs1DJmz5O",
    "status": "deleted",
@@ -1672,5 +1678,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-09 16:27"
+ "updated": "2026-10-12 05:05"
 }

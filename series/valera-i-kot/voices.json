@@ -138,8 +138,11 @@
           "loud_sd": 5.0
         }
       },
-      "voice_id": "9dk6dPXhLLtqmUWeVU6p",
-      "voice": "Валера и кот — Нина Петровна (ЖЭК)"
+      "voice_id": "pVPuMCjFhiIm88pqmX0y",
+      "voice": "Валера и кот — Нина Петровна (ЖЭК)",
+      "previous_voice_ids": [
+        "9dk6dPXhLLtqmUWeVU6p"
+      ]
     },
     "robot": {
       "name": "Автоответчик ЖЭКа",
