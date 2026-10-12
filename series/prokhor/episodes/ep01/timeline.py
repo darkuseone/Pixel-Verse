@@ -1,68 +1,70 @@
-"""S01E01 «9 000 ЗА ТЕПЛО?!» — timing for video (ep01.py) and audio (mix.py). Voice clips are the tightened takes (voice/ep01_t)."""
-DUR = 34.2
+"""S01E01 v2 «9 000 ЗА ТЕПЛО?!» — timing for video (ep01.py) and audio (mix.py). Voice: tightened takes voice/ep01b_t (new rough voice).
+Sound design: ONLY this series' own sounds (series/prokhor/sfx, owner rule 12.10.2026) + the balalaika theme."""
+DUR = 32.0
 FPS = 30
 SLUG = 'prokhor'
-MASTER = 0.92
+MASTER = 0.90
 
 VOICE = [
-    ('p1', 'ep01_t', 'p1', 0.00, 0.00, 1.91, 'prokhor', 'Девять тыщ за ТЕПЛО?!'),
-    ('p2', 'ep01_t', 'p2', 2.05, 0.00, 2.98, 'prokhor', 'Вот. Пять секунд тепла — БЕСПЛАТНО.'),
-    ('p3', 'ep01_t', 'p3', 5.12, 0.00, 2.90, 'prokhor', 'Городские! Лайфхак номер ОДИН!'),
-    ('p4', 'ep01_t', 'p4', 8.12, 0.00, 3.74, 'prokhor', 'Медведь. Тридцать восемь градусов. Без СЧЁТЧИКА!'),
-    ('p5', 'ep01_t', 'p5', 12.02, 0.00, 2.64, 'prokhor', 'Спит до апреля. Тариф — НОЛЬ.'),
-    ('p6', 'ep01_t', 'p6', 15.40, 0.00, 1.99, 'prokhor', 'Городские — УЧИТЕСЬ!'),
-    ('b1', 'ep01_t', 'b1', 17.60, 0.00, 3.00, 'bear', 'Отопление. Девять ТЫСЯЧ.'),
-    ('p7', 'ep01_t', 'p7', 20.72, 0.00, 1.04, 'prokhor', 'Ты ж СПИШЬ!'),
-    ('b2', 'ep01_t', 'b2', 21.88, 0.00, 1.72, 'bear', 'Я на УДАЛЁНКЕ.'),
-    ('p8', 'ep01_t', 'p8', 23.72, 0.00, 1.67, 'prokhor', 'А если не ЗАПЛАЧУ?'),
-    ('b3', 'ep01_t', 'b3', 25.50, 0.00, 2.04, 'bear', 'ОТКЛЮЧУ.'),
-    ('p9', 'ep01_t', 'p9', 28.72, 0.00, 3.74, 'prokhor', 'Го-городские... НЕ учитесь.'),
-    ('b4', 'ep01_t', 'b4', 32.56, 0.00, 1.46, 'bear', 'Плюс ПЕНИ.'),
+    ('p1', 'ep01b_t', 'p1', 0.00, 0.00, 2.23, 'prokhor', 'Девять тыщ за ОТОПЛЕНИЕ?!'),
+    ('p2', 'ep01b_t', 'p2', 2.32, 0.00, 3.84, 'prokhor', 'А я в тайгу переехал. Тут тепло — БЕСПЛАТНО!'),
+    ('p3', 'ep01b_t', 'p3', 6.35, 0.00, 3.72, 'prokhor', 'Лайфхак: зимой медведь — это БАТАРЕЯ.'),
+    ('p3b', 'ep01b_t', 'p3b', 10.30, 0.00, 1.26, 'prokhor', 'Тихо. СПИТ.'),
+    ('p4', 'ep01b_t', 'p4', 13.10, 0.00, 2.91, 'prokhor', 'Тридцать восемь градусов. Без СЧЁТЧИКА.'),
+    ('p5', 'ep01b_t', 'p5', 16.08, 0.00, 1.84, 'prokhor', 'Городские, УЧИТЕСЬ.'),
+    ('b1', 'ep01b_t', 'b1', 18.15, 0.00, 3.00, 'bear', 'Отопление. Девять ТЫСЯЧ.'),
+    ('p6', 'ep01b_t', 'p6', 21.30, 0.00, 0.95, 'prokhor', 'НЕТУ...'),
+    ('b2', 'ep01b_t', 'b2', 22.35, 0.00, 1.49, 'bear', 'ОТКЛЮЧАЮ.'),
+    ('p7', 'ep01b_t', 'p7', 25.95, 0.00, 4.15, 'prokhor', 'Го-городские... НЕ учитесь.'),
+    ('b3', 'ep01b_t', 'b3', 30.30, 0.00, 1.36, 'bear', 'Плюс ПЕНИ.'),
 ]
 
-#        hook stove warm  blog  trek   entr   snug   meter  bliss  EYE    bearcu reveal remote plead  yawn   fly    ice    ice2   button
-CUTS = [0.0, 2.00, 3.45, 5.08, 8.08, 10.10, 12.00, 14.66, 15.40, 17.50, 19.20, 20.66, 21.84, 23.66, 25.44, 27.40, 28.68, 30.60, 32.50, DUR]
-NAMES = ['hook', 'stove', 'warm', 'blog', 'trek', 'entrance', 'snuggle', 'meter', 'bliss', 'eye', 'bearcu', 'reveal', 'remote', 'plead',
-         'yawn', 'fly', 'ice', 'ice2', 'button']
-TWIST = CUTS[9]
+#       selfie walk   crawl  den    EYE    term   plead  shove  fly    ice
+CUTS = [0.0, 6.20, 10.20, 12.95, 17.95, 19.30, 21.30, 22.30, 23.90, 25.90, DUR]
+NAMES = ['selfie', 'walk', 'crawl', 'den', 'eye', 'terminal', 'plead', 'shove', 'fly', 'ice']
+TWIST = CUTS[4]
 
-S = 'library/sfx/'
+X = 'series/prokhor/sfx/'
 SFX = [
-    (S + 'paper_crumple_slap.mp3', 0.00, 0.45),
-    (S + 'wind_gust.mp3', 0.05, 0.35),
-    (S + 'paper_crumple_slap.mp3', 2.30, 0.40),
-    (S + 'whoosh.mp3', 2.75, 0.45, 0.0, 1.0),
-    (S + 'fuse_crackle.mp3', 2.80, 0.40, 0.0, 1.4),
-    (S + 'ui_tap_chirp.mp3', 5.10, 0.45),
-    (S + 'pushpin_pop.mp3', 6.20, 0.45),
-    (S + 'snow_steps.mp3', 8.10, 0.55),
-    (S + 'snore.mp3', 10.20, 0.40),
-    (S + 'snow_crawl.mp3', 12.00, 0.40),
-    (S + 'snore.mp3', 12.40, 0.55),
-    (S + 'pushpin_pop.mp3', 13.00, 0.40),
-    (S + 'clock_fast_ticks.mp3', 14.66, 0.60, 0.0, 0.8),
-    (S + 'counter_blip.mp3', 15.20, 0.40),
-    (S + 'snore.mp3', 15.60, 0.30),
-    (S + 'gum_pop.mp3', 17.47, 0.75),
-    (S + 'record_scratch.mp3', 17.50, 0.50),
-    (S + 'scanner_beep.mp3', 19.80, 0.60),
-    (S + 'flashlight_click.mp3', 20.66, 0.70),
-    (S + 'cash_register.mp3', 23.40, 0.30),
-    (S + 'whoosh.mp3', 27.20, 0.60, 0.0, 1.2),
-    (S + 'wind_gust.mp3', 27.40, 0.35),
-    (S + 'chair_slam_snow.mp3', 28.05, 0.70),
-    (S + 'ice_clink.mp3', 28.30, 0.75),
-    (S + 'teeth_chatter.mp3', 28.75, 0.45),
-    (S + 'teeth_chatter.mp3', 30.40, 0.45),
-    (S + 'stamp.mp3', 32.95, 0.55),
-    (S + 'pushpin_pop.mp3', 33.20, 0.55),
+    (X + 'bill_rustle.mp3', 0.00, 0.80),
+    (X + 'breath_frost.mp3', 0.55, 0.55),
+    (X + 'crow_caw.mp3', 1.40, 0.28),
+    (X + 'bill_rustle.mp3', 1.10, 0.45),
+    (X + 'breath_frost.mp3', 4.40, 0.40),
+    (X + 'phone_rec_start.mp3', 6.22, 0.55),
+    (X + 'tripod_snow.mp3', 6.30, 0.55),
+    (X + 'snow_steps_valenki.mp3', 6.40, 0.75),
+    (X + 'snow_steps_valenki.mp3', 8.70, 0.70),
+    (X + 'crow_caw.mp3', 9.40, 0.22),
+    (X + 'bear_snore.mp3', 10.25, 0.35),
+    (X + 'snow_crawl_in.mp3', 11.50, 0.85),
+    (X + 'bear_snore.mp3', 12.95, 0.75),
+    (X + 'snow_crawl_in.mp3', 13.00, 0.45, 0.0, 0.8),
+    (X + 'cozy_creak.mp3', 13.70, 0.70),
+    (X + 'hat_off_sigh.mp3', 15.95, 0.35, 0.6, 1.48),
+    (X + 'bear_snore.mp3', 16.10, 0.45, 0.0, 1.8),
+    (X + 'snot_bubble_pop.mp3', 17.85, 1.00),
+    (X + 'twist_hit.mp3', 17.95, 0.75),
+    (X + 'bear_wake_growl.mp3', 18.00, 0.45),
+    (X + 'pos_terminal.mp3', 19.55, 0.80),
+    (X + 'bear_wake_growl.mp3', 22.25, 0.55),
+    (X + 'paw_shove_whoosh.mp3', 23.25, 1.00),
+    (X + 'snowdrift_landing.mp3', 24.62, 1.00),
+    (X + 'freeze_crackle.mp3', 24.85, 0.95),
+    (X + 'ice_crack_small.mp3', 25.75, 0.60),
+    (X + 'teeth_chatter_cold.mp3', 26.00, 0.55),
+    (X + 'teeth_chatter_cold.mp3', 28.10, 0.45),
+    (X + 'paper_slap_ice.mp3', 29.88, 1.00),
+    (X + 'ice_crack_small.mp3', 31.00, 0.45),
 ]
 
 BEDS = [
-    ('library/sfx/amb_winter_yard.mp3', 8.0, 0.0, DUR, 0.22, False),
-    ('series/prokhor/music/prokhor_theme_15s.mp3', 15.0, 5.08, 17.50, 0.22, True),
-    ('series/prokhor/music/prokhor_theme_15s.mp3', 15.0, 20.66, DUR, 0.20, True),
+    ('series/prokhor/sfx/taiga_wind_loop.mp3', 8.0, 0.0, 12.95, 0.40, True),
+    ('series/prokhor/sfx/den_ambience_loop.mp3', 8.0, 12.95, 23.90, 0.55, True),
+    ('series/prokhor/sfx/taiga_wind_loop.mp3', 8.0, 23.90, DUR, 0.45, True),
+    ('series/prokhor/music/prokhor_theme_15s.mp3', 15.0, 2.25, 17.90, 0.20, True),
+    ('series/prokhor/music/prokhor_theme_15s.mp3', 15.0, 23.90, DUR, 0.18, True),
 ]
 
 VFX = {'bear': 'aecho=0.6:0.4:35:0.12'}
-VGAIN = {'prokhor': 1.5, 'bear': 1.7}
+VGAIN = {'prokhor': 1.55, 'bear': 1.75}

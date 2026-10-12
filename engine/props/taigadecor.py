@@ -26,6 +26,14 @@ def place_sprite(world, fn, wx, wy, s, **kw):
     D.attach(world, [(img, wx - ax / D.WS, wy - ay / D.WS)])
 
 
+def _post(w, h, col=(110, 76, 46)):
+    """a plain wooden post (world px) for signposts"""
+    img = np.zeros((int(h * D.WS), int(w * D.WS), 4), np.uint8)
+    img[..., :3] = col; img[..., 3] = 255
+    img[:, :D.WS, :3] = (70, 46, 28); img[:, -D.WS:, :3] = (70, 46, 28)
+    return img
+
+
 def birch(w, h, lines, colors=None, weights=None, seed=0, tilt=0.0):
     """a birch-bark plate: white with black bark dashes along the edges, hand-lettered"""
     img = R.plate(w, h, lines, bg=BIRCH, fg=BLK, border=(70, 64, 58), colors=colors, weights=weights, hand=True, seed=seed, pad=2.2)
@@ -138,3 +146,35 @@ DRESS = dict(izba=dress_izba, taiga=dress_taiga, den=dress_den)
 
 def dress(name, W):
     if name in DRESS: DRESS[name](W)
+
+
+# ---------------------------------------------------------------- v2 worlds (12.10.2026)
+def dress_porch(W):
+    D.attach(W, [
+        (R.plate(30, 54, ['-42°'], bg=(236, 240, 246), fg=(30, 60, 160), border=(90, 90, 100), pad=1.4), 300, 140),     # thermometer
+        (birch(96, 40, ['ГАЗ ПРОВЕДУТ', 'В 1987 Г.'], colors=[NAVY, RED], seed=2, tilt=-3), 18, 345),
+        (R.plate(80, 18, ['ТАЙГА-ЛАЙФХАК'], bg=(30, 110, 200), fg=WH, border=WH, round_=2.0, pad=1.0, tilt=4), 150, 120),
+    ])
+    D.anim(W, flakes((0, 0, 1280, 720), n=70, seed=11, speed=16.0))
+    D.anim(W, sparkles((450, 480, 1280, 720), n=40, seed=12))
+
+
+def dress_taiga2(W):
+    D.attach(W, [
+        (R.plate(56, 28, ['НЕ', 'БУДИТЬ!'], bg=PLY, fg=RED, border=(110, 80, 50), weights=[0.8, 1.0], tilt=-5, hand=True, seed=5), 912, 452),
+        (birch(60, 26, ['ЛОВИТ', 'ТУТ ^'], colors=[NAVY, RED], seed=8), 1092, 420),
+        (_post(7, 150), 368, 466),
+        (R.plate(84, 20, ['ГОРОД 400 КМ >'], bg=(240, 236, 220), fg=BLK, border=(60, 50, 40), tilt=2), 330, 470),
+        (R.plate(76, 20, ['ПВЗ 40 КМ >'], bg=(250, 210, 60), fg=BLK, border=(60, 50, 40), tilt=-3), 336, 494),
+        (birch(84, 22, ['ТАЙГА-ЛАЙФХАК'], colors=[(30, 110, 200)], seed=9), 96, 300),
+    ])
+    place_sprite(W, C.meter, 700, 590, 2.4, rub=0, spin=0.0)
+    D.anim(W, sparkles((0, 520, 1280, 720), n=70, seed=7))
+    D.anim(W, flakes((0, 0, 1280, 720), n=70, seed=8, speed=14.0))
+
+
+def dress_den2(W):
+    D.anim(W, beam_dust((640, 60, 800, 470), n=36))
+
+
+DRESS.update(porch=dress_porch, taiga2=dress_taiga2, den2=dress_den2)

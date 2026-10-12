@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-12 16:14.
+Обновлено: 2026-10-12 17:16.
 
 ## agent-dibs
 
@@ -67,8 +67,8 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Прохор | `prokhor` | `z42gWT4h52CwjWCO9GF0` | active | 0 / 0 | Прохор — Прохор |
-| Михал Потапыч | `bear` | `xflYwcTw1xfUQvQHsSsi` | active | 0 / 0 | Прохор — Михал Потапыч |
+| Прохор | `prokhor` | `FmmR663nLw91vgt0SRzR` | active | 9 / 1 | Прохор — Прохор |
+| Михал Потапыч | `bear` | `xflYwcTw1xfUQvQHsSsi` | active | 4 / 1 | Прохор — Михал Потапыч |
 
 ## sunny-palms-hoa
 

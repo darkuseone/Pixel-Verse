@@ -41,7 +41,7 @@ def snowline(y, x0, x1):
 im = Image.fromarray(big); d = ImageDraw.Draw(im)
 f_t = ImageFont.truetype(P.FONT_PX, 48)
 f_s = ImageFont.truetype(str(P.ROOT / 'engine/fonts/JetBrainsMono-Regular.ttf'), 22)
-d.text((80, 48), 'МОРОЗНЫЙ ЛУБОК', font=f_t, fill=(236, 244, 255))
+d.text((80, 48), 'МОРОЗНЫЙ ЛУБОК v2', font=f_t, fill=(236, 244, 255))
 d.text((84, 124), 'ПРОХОР · МИХАЛ ПОТАПЫЧ — модельный лист · свет: низкое солнце слева + отражённый снег снизу', font=f_s, fill=(150, 170, 200))
 big[:] = np.array(im)
 
@@ -66,7 +66,8 @@ big[:] = np.array(im)
 
 # ---------------------------------------------------------------- row 2: moods, full figures
 snowline(1120, 80, W - 80)
-put(TX.draw, C.prokhor, 200, 1120, 5.2, t=0.3, expr='smug', hand_n=(18, 44), prop_n=lambda sp, h: C.phone(sp, h))
+put(TX.draw, C.tripod, 90, 1120, 5.2, t=0.0)
+put(TX.draw, C.prokhor, 230, 1120, 5.2, t=0.3, expr='grin', hand_n=(22, 46))
 put(TX.draw, C.prokhor, 470, 1120, 5.2, t=0.3, expr='shout', mouth_=0.8, hand_n=(17, 40), prop_n=lambda sp, h: C.bill(sp, h))
 put(TX.draw, C.prokhor, 740, 1120, 5.2, t=0.3, expr='chatter', chatter=1.0, post=lambda sp: C.ice_over(sp, 1.0))
 put(TX.draw, C.potapych, 1150, 1120, 4.6, t=0.3, expr='asleep', bubble=0.9)
@@ -75,7 +76,7 @@ put(TX.draw, C.potapych, 2060, 1120, 4.6, t=0.3, expr='boss', prop_n=C.terminal)
 
 # ---------------------------------------------------------------- row 3: faces in close-up (hi-res rig)
 for i, (kw) in enumerate([dict(expr='shout', mouth_=0.9), dict(expr='smug'), dict(expr='plead', mouth_=0.3)]):
-    put_head(C.prokhor, 260 + i * 380, 1470, 15.0, t=0.3, **kw)
+    put_head(C.prokhor, 230 + i * 380, 1420, 12.0, t=0.3, **kw)
 put_head(C.potapych, 1500, 1500, 9.0, t=0.3, expr='boss')
 put_head(C.potapych, 2000, 1500, 9.0, t=0.3, expr='yawn', mouth_=1.0)
 big[1700:] = (np.array(big[1700:], np.float32) * 0.0 + np.array(BG)).astype(np.uint8)

@@ -90,137 +90,117 @@ def phone(sp, h, rec=True):
     if rec: sp.fill(sp.m_ell(x + 0.8, y + 5.6, 0.45, 0.45)[0], (255, 40, 40))
 
 
-# ================================================================================ Прохор
+# ================================================================================ Прохор (v2, 12.10.2026: bigger head, clean big shapes)
 def prokhor(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-            hat_off=False, sweat=0.0, frost=0.4, breath=None, lean=0.0, walk=None, chatter=0.0, legs=True, beard_items=True):
-    """ПРОХОР — «сугроб с бородой»: pyramid silhouette (small head in an ushanka with ONE ear-flap up like a wing, a wide quilted
-    телогрейка patched with blue electrical tape, a rust-ginger beard down to the rope belt with a wooden spoon, a fishing float and a
-    pine cone living in it), frostbitten potato nose, frosted brows, valenki in red galoshes, red mittens. Axe in the belt at the back."""
+            hat_off=False, sweat=0.0, frost=0.0, walk=None, chatter=0.0, legs=True, lean=0.0, steam=0.0):
+    """ПРОХОР v2 — city man gone taiga lumberjack, a caricature you read at a glance: a BIG head (≈40 % of the height) with huge eyes,
+    a frostbitten potato nose, a wide talking mouth under a ginger moustache and a clean, chunky ginger beard down to the chest; a
+    big puffy ushanka (one flap down, one sticking up like a wing); a stocky quilted телогрейка with blue electrical tape, rope belt,
+    axe at the back, valenki in red galoshes, red mittens. walk = phase (legs, bob, arm swing)."""
     E = X(expr)
     if blink is None: blink = (t % 3.7) < 0.12
     br = 0.35 * math.sin(t * 2.2)
-    jit = (math.sin(t * 60.0) * 0.35) if chatter else 0.0
-    def Q(x, y): return (x + lean * (y / 50.0) * 4.0 + (jit if y > 30 else 0), y)
+    bob = abs(math.sin(walk)) * 1.2 if walk is not None else 0.0
+    jit = (math.sin(t * 70.0) * 0.45) if chatter else 0.0
+    def Q(x, y): return (x + lean * (y / 50.0) * 5.0 + (jit if y > 30 else 0), y + (bob if y > 9 else bob * 0.3))
+    swing = math.sin(walk) * 5.0 if walk is not None else 0.0
 
     # ---------------------------------------------------------------- far arm (behind)
-    shF = Q(-9.0, 38.0 + br * 0.3)
-    hf = hand_f if hand_f is not None else Q(-15.0, 24.0)
-    kF, eF = ik(shF, hf, 9.0, 8.4, -1.0)
-    sp.cap(shF, kF, 3.4, 3.0, tones(dark(JACKET, 0.8))); sp.cap(kF, eF, 3.0, 2.6, tones(dark(JACKET, 0.8)))
-    sp.ell(eF[0], eF[1] - 0.6, 2.6, 2.4, tones(dark(MITT, 0.8)))
+    shF = Q(-11.0, 32.0 + br * 0.3)
+    hf = hand_f if hand_f is not None else Q(-16.0 - swing * 0.6, 18.0)
+    kF, eF = ik(shF, hf, 9.0, 8.5, -1.0)
+    sp.cap(shF, kF, 3.6, 3.2, tones(dark(JACKET, 0.78))); sp.cap(kF, eF, 3.2, 2.9, tones(dark(JACKET, 0.78)))
+    sp.ell(eF[0], eF[1] - 0.6, 3.1, 2.9, tones(dark(MITT, 0.78)))
     if prop_f: prop_f(sp, eF)
     sp.anchors['hand_f'] = eF
-
-    # ---------------------------------------------------------------- the axe in the belt at the back (silhouette element)
-    sp.cap(Q(-12.0, 18.0), Q(-17.5, 33.0), 0.9, 0.8, tones(WOOD))
-    blade = sp.m_poly([Q(-19.6, 30.6), Q(-15.6, 33.4), Q(-15.0, 35.6), Q(-20.6, 34.4)])
-    sp.paint(blade, tones(STEEL), np.clip((DX.YC - 30) / 6, 0, 1) * 0.7 + 0.2, gloss=0.6)
-
+    # axe in the belt at the back
+    sp.cap(Q(-12.0, 13.0), Q(-18.0, 29.0), 1.0, 0.9, tones(WOOD))
+    blade = sp.m_poly([Q(-20.4, 26.0), Q(-16.0, 29.2), Q(-15.4, 31.8), Q(-21.6, 30.4)])
+    sp.paint(blade, tones(STEEL), np.clip((DX.YC - 26) / 6, 0, 1) * 0.7 + 0.2, gloss=0.6)
     # ---------------------------------------------------------------- legs: valenki in galoshes
     if legs:
-        sw = math.sin(walk) * 2.4 if walk is not None else 0.0
-        for k_, dx in enumerate((-5.0, 5.0)):
+        sw = math.sin(walk) * 2.6 if walk is not None else 0.0
+        for k_, dx in enumerate((-5.4, 5.4)):
             s_ = sw if k_ else -sw
             c = FELT if k_ else dark(FELT, 0.82)
-            sp.cap((dx * 0.9, 12.0), (dx + s_ * 0.6, 3.0), 3.4, 3.6, tones(c))
-            sp.ell(dx + s_ * 0.6 + 1.6, 2.2, 4.8, 2.6, tones(c))
-            gal = sp.m_ell(dx + s_ * 0.6 + 1.7, 1.6, 5.0, 2.2)[0]
-            sp.paint(gal, tones(GALOSH), DX.lit(np.zeros_like(DX.XC), np.clip((DX.YC - 1.6) / 2.2, -1, 1)), gloss=0.7)
-    # ---------------------------------------------------------------- телогрейка (quilted, flared hem)
-    hem = sp.m_poly([Q(-15.6, 10.6), Q(16.4, 10.6), Q(14.0, 18.0), Q(-13.0, 18.0)])
-    hem_n = (np.clip((DX.XC - 0.5) / 16.0, -0.9, 0.9) * 0.85, np.full_like(DX.XC, -0.05))
-    body = sp.union([sp.m_super(*Q(0.5, 26.0), 14.0, 15.5, 3.4), sp.m_ell(*Q(0.5, 39.5), 12.0, 5.0), (hem,) + hem_n], tones(JACKET))
-    qx = DX.XC - lean * (DX.YC / 50.0) * 4.0
-    sp.fill(body & (np.abs(((DX.YC - 13.0) % 3.4) - 1.7) > 1.48), dark(JACKET, 0.62))       # quilting rows
-    sp.fill(body & (np.abs(((qx + 12.0) % 4.0) - 2.0) > 1.68) & (np.abs(((DX.YC - 14.7) % 3.4) - 1.7) < 0.32), dark(JACKET, 0.7))   # stitches
-    for (a, b) in ((Q(-10.0, 34.0), Q(-4.0, 30.0)), (Q(-9.6, 30.2), Q(-4.4, 34.2)), (Q(9.0, 14.0), Q(14.0, 16.4))):   # изолента patches
-        sp.fill(sp.m_cap(a, b, 0.9, 0.9)[0] & body, TAPE)
-        thin(sp, a, b, mix(TAPE, WHITE, 0.45), 0.18)
-    sp.anchors['chest'] = Q(2.0, 30.0)
-
-    # ---------------------------------------------------------------- head (drawn before the beard: the beard covers chin + cheeks)
-    hx, hy = Q(4.0, 53.5)
-    sp.cap(Q(2.0, 41.0), Q(3.0, 47.0), 3.4, 3.4, tones(SKIN))
-    face = sp.union([sp.m_ell(hx, hy, 6.2, 6.8), sp.m_ell(hx + 1.6, hy - 3.2, 5.4, 3.8)], tones(SKIN))
+            lift = max(0.0, s_) * 0.5
+            sp.cap((dx * 0.9, 11.0), (dx + s_ * 0.7, 3.4 + lift), 4.0, 4.2, tones(c))
+            sp.ell(dx + s_ * 0.7 + 1.8, 2.4 + lift, 5.4, 2.8, tones(c))
+            gal = sp.m_ell(dx + s_ * 0.7 + 1.9, 1.7 + lift, 5.6, 2.3)[0]
+            sp.paint(gal, tones(GALOSH), DX.lit(np.zeros_like(DX.XC), np.clip((DX.YC - 1.7 - lift) / 2.3, -1, 1)), gloss=0.7)
+    # ---------------------------------------------------------------- телогрейка
+    hem = sp.m_poly([Q(-16.4, 9.4), Q(17.6, 9.4), Q(15.0, 15.0), Q(-14.0, 15.0)])
+    hem_n = (np.clip((DX.XC - 0.5) / 17.0, -0.9, 0.9) * 0.85, np.full_like(DX.XC, -0.05))
+    body = sp.union([sp.m_super(*Q(0.8, 22.5), 15.0, 13.5, 3.0), sp.m_ell(*Q(0.8, 33.0), 13.6, 4.8), (hem,) + hem_n], tones(JACKET))
+    sp.fill(body & (np.abs(((DX.YC - bob - 11.0) % 3.6) - 1.8) > 1.62), dark(JACKET, 0.66))                 # quilting rows (subtle)
+    for (a, b) in ((Q(-11.0, 27.0), Q(-5.0, 23.0)), (Q(-10.6, 23.2), Q(-5.4, 27.2)), (Q(10.0, 11.4), Q(15.0, 13.4))):
+        sp.fill(sp.m_cap(a, b, 1.0, 1.0)[0] & body, TAPE)
+    sp.cap(Q(-14.6, 15.4), Q(16.0, 15.4), 0.9, 0.9, tones(ROPE))                                             # rope belt
+    # ---------------------------------------------------------------- head
+    hx, hy = Q(3.0, 47.5)
+    face = sp.union([sp.m_ell(hx, hy, 10.0, 10.4), sp.m_ell(hx + 2.4, hy - 4.0, 8.4, 6.6)], tones(SKIN))
     lx, ly = look
-    DX.eye(sp, hx + 2.8, hy + 1.3, 3.6, 3.4, E, (70, 120, 160), (lx, ly), blink, lash=INK, skin=SKIN)
-    DX.eye(sp, hx - 1.8, hy + 1.3, 3.0, 3.1, E, (70, 120, 160), (lx, ly), blink, lash=INK, skin=SKIN)
-    Eb = dict(E, bl=E['bl'] * 0.5)
-    BROW = mix(BEARD, BEARD_G, 0.35)
-    DX.brow(sp, hx + 2.9, hy + 4.0, 4.0, Eb, +1, BROW, th=2, bushy=True)
-    DX.brow(sp, hx - 1.8, hy + 4.0, 3.2, Eb, -1, BROW, th=2, bushy=True)
-    if sp.k >= 2:                                                                       # crow's feet + under-eye bags
-        for q in range(3): thin(sp, (hx + 4.6, hy + 1.6 - q * 0.8), (hx + 5.6, hy + 2.0 - q * 1.1), dark(SKIN, 0.7), 0.16)
-        thin(sp, (hx + 1.6, hy - 0.4), (hx + 3.8, hy - 0.5), dark(SKIN, 0.82), 0.16)
-    DX.blush(sp, hx + 0.6, hy - 1.6, 2.0, 1.3, (230, 90, 90))
-    nose = sp.ell(hx + 6.4, hy - 1.2, 2.8, 2.4, tones(NOSE), gloss=1.0)                 # potato nose
-    sp.fill(sp.m_ell(hx + 5.6, hy - 2.4, 0.5, 0.4)[0], dark(NOSE, 0.5))
-    # beard: chin + cheeks + a long fan down to the belt; mouth is drawn on top of it
-    bd = sp.union([sp.m_ell(*Q(4.6, 34.0), 10.6, 13.6), sp.m_ell(hx + 0.5, hy - 5.4, 7.2, 5.2), sp.m_ell(*Q(5.0, 23.0), 7.4, 5.0)],
-                  tones(BEARD), exclude=~(DX.YC > 19.6))
-    grey = bd & (np.abs((DX.XC - (hx - 2.0)) + (DX.YC - 30.0) * 0.18) < 1.2) & (DX.YC < 40.0)
-    sp.fill(grey, BEARD_G)
-    sp.fur(bd, dark(BEARD, 0.66), step=2.0, ln=1.8, ang=-1.75, seed=3)
-    sp.fur(bd & (DX.YC > hy - 9), mix(BEARD, (255, 210, 150), 0.4), step=3.0, ln=1.2, ang=-1.6, seed=5)
-    if beard_items:
-        sp.cap(Q(10.0, 30.0), Q(14.6, 37.0), 0.6, 0.6, tones(WOOD))                           # wooden spoon handle
-        sp.ell(*Q(15.2, 38.0), 1.4, 1.1, tones(WOOD))
-        fl = Q(1.0, 24.0)                                                                       # fishing float on a line
-        thin(sp, (fl[0], fl[1] + 4.0), fl, (220, 220, 220), 0.15)
-        sp.ell(fl[0], fl[1] - 0.6, 0.9, 1.4, tones((236, 40, 40)), gloss=0.8)
-        sp.fill(sp.m_ell(fl[0], fl[1] - 1.4, 0.9, 0.7)[0], WHITE)
-        cone = sp.ell(*Q(8.6, 25.6), 1.6, 2.2, tones((150, 96, 52)))                             # pine cone
-        for q in range(3): thin(sp, Q(7.2, 24.4 + q * 1.2), Q(10.0, 24.4 + q * 1.2), dark((150, 96, 52), 0.6), 0.16)
-    # moustache + mouth
-    mx, my = hx + 3.6, hy - 5.0
+    DX.eye(sp, hx + 4.2, hy + 2.4, 5.6, 5.8, E, (70, 120, 160), (lx, ly), blink, lash=INK, skin=SKIN, bold=1)
+    DX.eye(sp, hx - 2.8, hy + 2.4, 4.8, 5.4, E, (70, 120, 160), (lx, ly), blink, lash=INK, skin=SKIN, bold=1)
+    Eb = dict(E, bl=E['bl'] * 0.7)
+    BROW = (150, 70, 34)
+    DX.brow(sp, hx + 4.4, hy + 7.6, 6.2, Eb, +1, BROW, th=3, bushy=True)
+    DX.brow(sp, hx - 2.9, hy + 7.5, 5.0, Eb, -1, BROW, th=3, bushy=True)
+    if sp.k >= 2:
+        for q in range(3): thin(sp, (hx + 7.4, hy + 2.6 - q * 1.0), (hx + 8.8, hy + 3.2 - q * 1.5), dark(SKIN, 0.72), 0.2)    # crow's feet
+    DX.blush(sp, hx - 0.4, hy - 2.6, 2.6, 1.6, (232, 100, 96))
+    mx, my = hx + 4.0, hy - 5.8
     mo = max(mouth_, E['mo'])
-    if mo > 0.10 or (E.get('teeth') and E['mc'] > 0.5):
-        DX.mouth(sp, mx, my, 4.4, E, mouth_, (120, 40, 34), inside=(80, 20, 28), maxh=5)
-    else:                                                                               # closed: a thin line under the moustache
-        c_ = E['mc']
-        stroke(sp, [(mx - 2.2, my + 0.2 + 0.9 * c_), (mx, my - 0.1 - 0.2 * c_), (mx + 2.2, my + 0.2 + 0.9 * c_)], (110, 36, 30), 0.26)
+    # beard: jaw + cheeks + a chunky spade down to the chest, with a clean hole around the mouth
+    hole = sp.m_ell(mx, my + 0.4 - mo * 1.6, 5.2 + mo * 0.6, 2.6 + mo * 3.2)[0]
+    bd = sp.union([sp.m_ell(hx + 1.6, hy - 9.0, 11.0, 7.6), sp.m_ell(hx + 2.2, hy - 15.0, 9.0, 9.2), sp.m_ell(hx - 7.6, hy - 3.0, 3.2, 5.6)],
+                  tones(BEARD), exclude=hole)
+    for i, (a, b) in enumerate((((-5.0, -10.0), (-3.6, -20.0)), ((0.0, -12.0), (0.4, -24.0)), ((5.0, -12.0), (4.0, -22.0)),
+                                ((8.6, -9.0), (7.0, -17.0)), ((-2.4, -15.0), (-1.4, -22.0)))):
+        stroke(sp, [(hx + a[0], hy + a[1]), (hx + (a[0] + b[0]) / 2 + 0.8, hy + (a[1] + b[1]) / 2), (hx + b[0], hy + b[1])], dark(BEARD, 0.62), 0.32)
+    for (a, b) in (((-3.0, -8.0), (-2.0, -13.0)), ((3.0, -10.4), (3.6, -15.0))):
+        thin(sp, (hx + a[0], hy + a[1]), (hx + b[0], hy + b[1]), mix(BEARD, (255, 220, 160), 0.45), 0.3)
+    if frost: sp.frost(bd & (DX.YC > hy - 16), 0.02 * frost, 6)
+    DX.mouth(sp, mx, my, 6.6, E, mouth_, (120, 40, 34), inside=(80, 20, 28), skin=SKIN, maxh=9, big_teeth=False)
     if chatter and sp.k >= 2:
-        sp.fill(sp.m_ell(mx, my - 0.6, 2.2, 0.8)[0], WHITE, keep=True)
-        for q in range(-2, 3): thin(sp, (mx + q * 0.9, my - 1.3), (mx + q * 0.9, my + 0.1), (180, 180, 190), 0.1, keep=True)
-    ms = sp.union([sp.m_ell(mx - 1.6, my + 1.6, 3.4, 1.4, 0.25), sp.m_ell(mx + 2.4, my + 1.5, 3.0, 1.3, -0.3)], tones(mix(BEARD, BEARD_G, 0.2)))
-    sp.fur(ms, dark(BEARD, 0.62), step=1.4, ln=1.0, ang=-2.4, seed=8)
-    if frost: sp.frost(sp.m_ell(hx + 2.0, hy + 4.0, 6.0, 1.4)[0] & sp.m, 0.25 * frost, 9)  # frost on the brows
-    sp.anchors.update(head=(hx, hy), mouth=(mx, my), nose=(hx + 6.4, hy - 1.2), eyes=(hx + 0.6, hy + 1.3))
-
-    # ---------------------------------------------------------------- ushanka: ONE flap up like a wing, one down
+        sp.fill(sp.m_ell(mx, my - 0.5, 3.2, 1.1)[0], WHITE, keep=True)
+        for q in range(-3, 4): thin(sp, (mx + q * 0.95, my - 1.5), (mx + q * 0.95, my + 0.5), (170, 170, 184), 0.12, keep=True)
+    ms = sp.union([sp.m_ell(mx - 2.6, my + 2.6, 4.2, 1.9, 0.3), sp.m_ell(mx + 2.8, my + 2.6, 3.8, 1.8, -0.3)], tones(mix(BEARD, (240, 150, 80), 0.25)))
+    thin(sp, (mx - 5.0, my + 2.2), (mx - 1.0, my + 3.0), dark(BEARD, 0.62), 0.25); thin(sp, (mx + 1.0, my + 3.0), (mx + 5.2, my + 2.2), dark(BEARD, 0.62), 0.25)
+    nose = sp.ell(hx + 8.6, hy - 1.0, 4.2, 3.6, tones(NOSE), gloss=1.0)
+    sp.fill(sp.m_ell(hx + 7.4, hy - 2.8, 0.7, 0.5)[0], dark(NOSE, 0.5))
+    if frost: sp.frost(sp.m_ell(hx + 1.0, hy + 6.8, 8.0, 1.6)[0] & sp.m, 0.10 * frost, 9)
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my), nose=(hx + 8.6, hy - 1.0), eyes=(hx + 0.8, hy + 2.4))
+    # ---------------------------------------------------------------- ushanka
     if not hat_off:
-        wing = sp.ell(hx + 8.6, hy + 9.8, 3.8, 2.5, tones(HAT), ang=0.5)                     # far flap sticking up-out like a wing
-        sp.fur(wing, dark(HAT, 0.62), step=1.4, ln=0.9, ang=-0.8, seed=13)
-        thin(sp, (hx + 11.8, hy + 11.6), (hx + 13.6, hy + 10.0), (220, 210, 190), 0.16)
-        crown = sp.sup(hx - 0.2, hy + 9.4, 7.6, 4.0, tones(HAT_L), n=2.4)
-        band = sp.union([sp.m_ell(hx + 0.4, hy + 6.7, 8.2, 2.3), sp.m_ell(hx + 6.8, hy + 7.4, 2.4, 2.5)], tones(HAT))
-        flap = sp.cap((hx - 5.8, hy + 5.6), (hx - 6.4, hy - 3.6), 2.6, 2.4, tones(HAT))           # near flap hanging down
-        thin(sp, (hx - 6.4, hy - 5.8), (hx - 5.6, hy - 9.4), (220, 210, 190), 0.18)             # untied string
-        sp.fur(band | flap, dark(HAT, 0.62), step=1.6, ln=1.0, ang=-1.9, seed=11)
-        sp.fill(sp.m_super(hx - 1.6, hy + 10.4, 1.6, 0.9, 3.0)[0], TAPE)                          # изолента on the crown
-        if frost: sp.frost(band, 0.12 * frost, 12)
+        wing = sp.ell(hx + 12.2, hy + 12.4, 5.0, 2.8, tones(HAT), ang=0.55)                            # far flap up like a wing
+        sp.ell(hx + 0.2, hy + 12.6, 11.6, 6.0, tones(HAT_L))                                         # crown
+        band = sp.union([sp.m_ell(hx + 0.6, hy + 8.6, 12.4, 3.4), sp.m_ell(hx + 9.6, hy + 9.2, 3.4, 3.4)], tones(HAT))
+        flap = sp.cap((hx - 10.4, hy + 7.4), (hx - 11.0, hy - 3.4), 3.4, 3.0, tones(HAT))              # near flap down
+        for (a, b) in (((-8.0, 9.6), (-6.4, 7.8)), ((-3.0, 10.2), (-1.4, 8.2)), ((2.6, 10.2), (4.2, 8.2)), ((7.6, 10.0), (9.0, 8.2)),
+                       ((-11.4, 3.0), (-10.0, 1.4)), ((-11.0, -0.6), (-9.8, -2.0))):
+            thin(sp, (hx + a[0], hy + a[1]), (hx + b[0], hy + b[1]), dark(HAT, 0.6), 0.35)
+        thin(sp, (hx - 11.2, hy - 5.6), (hx - 10.4, hy - 9.6), (230, 220, 200), 0.22)                  # untied string
+        sp.sup(hx - 2.0, hy + 14.0, 2.0, 1.1, tones(TAPE), n=3.0)                                    # изолента on the crown
+        if frost: sp.frost(band, 0.05 * frost, 12)
     else:
-        bald = sp.ell(hx, hy + 6.0, 6.6, 3.6, tones(SKIN), gloss=0.8)
-        for q in range(3): thin(sp, (hx - 5.4 + q * 0.4, hy + 3.4 + q * 1.0), (hx - 7.2, hy + 2.6 + q * 1.1), BEARD, 0.3)
+        sp.ell(hx, hy + 8.2, 9.8, 4.4, tones(SKIN), gloss=0.9)                                      # bald dome
+        for q in range(4): thin(sp, (hx - 9.4 + q * 0.5, hy + 4.0 + q * 1.4), (hx - 11.6, hy + 3.0 + q * 1.6), BEARD, 0.4)
     if sweat > 0:
-        for i, (x, y) in enumerate(((hx - 3.0, hy + 4.0), (hx + 5.2, hy + 3.0), (hx - 5.0, hy + 0.5))[:int(1 + 2 * sweat)]):
+        for i, (x, y) in enumerate(((hx - 4.0, hy + 5.0), (hx + 7.0, hy + 4.0), (hx - 7.4, hy + 0.5))[:int(1 + 2 * sweat)]):
             yy = y - ((t * 4.0 + i * 1.3) % 4.0)
-            sp.ell(x, yy, 0.6, 0.9, tones((170, 220, 255)), ol=False, snow=False); sp.dot(x - 0.2, yy + 0.3, WHITE)
+            sp.ell(x, yy, 0.8, 1.2, tones((170, 220, 255)), ol=False, snow=False); sp.dot(x - 0.2, yy + 0.4, WHITE)
     sp.outline(INK, 1)
-
-    # ---------------------------------------------------------------- near arm + red mitten
+    # ---------------------------------------------------------------- near arm + mitten
     before = sp.m.copy()
-    shN = Q(11.0, 38.0 + br * 0.3)
-    hn = hand_n if hand_n is not None else Q(17.0, 24.0)
-    kN, eN = ik(shN, hn, 9.0, 8.4, -1.0)
-    sp.cap(shN, kN, 3.5, 3.1, tones(JACKET)); sp.cap(kN, eN, 3.1, 2.7, tones(JACKET))
-    for q in (0.35, 0.7):
-        a = (shN[0] + (eN[0] - shN[0]) * q, shN[1] + (eN[1] - shN[1]) * q)
-        thin(sp, (a[0] - 2.6, a[1] + 1.0), (a[0] + 2.6, a[1] - 1.0), dark(JACKET, 0.62), 0.2)
+    shN = Q(13.0, 32.0 + br * 0.3)
+    hn = hand_n if hand_n is not None else Q(19.0 + swing * 0.6, 18.0)
+    kN, eN = ik(shN, hn, 9.0, 8.5, -1.0)
+    sp.cap(shN, kN, 3.7, 3.3, tones(JACKET)); sp.cap(kN, eN, 3.3, 3.0, tones(JACKET))
     if prop_n and getattr(prop_n, 'behind', False): prop_n(sp, eN)
-    mit = sp.ell(eN[0] + 0.4, eN[1] - 0.4, 2.7, 2.5, tones(MITT))
-    sp.ell(eN[0] + 2.0, eN[1] + 1.4, 1.0, 1.3, tones(MITT))                                       # thumb
-    sp.fill(mit & (np.abs(DX.YC - (eN[1] - 0.2)) < 0.35) & DX.CHECK, WHITE)                      # knitted pattern
+    mit = sp.ell(eN[0] + 0.4, eN[1] - 0.4, 3.3, 3.0, tones(MITT))
+    sp.ell(eN[0] + 2.4, eN[1] + 1.6, 1.3, 1.6, tones(MITT))
+    sp.fill(mit & (np.abs(DX.YC - (eN[1] - 0.2)) < 0.45) & DX.CHECK, WHITE)
     if prop_n and not getattr(prop_n, 'behind', False): prop_n(sp, eN)
     sp.anchors['hand'] = eN
     new = sp.m & ~before
@@ -248,9 +228,9 @@ def potapych(sp, t=0.0, expr='asleep', mouth_=0.0, look=(0.6, -0.1), blink=None,
     sp.cap(shF, Q(-24.0, 26.0), 6.6, 5.6, tones(dark(FUR, 0.8)))
     # body (pear) + belly
     body = sp.union([sp.m_ell(0.0, 28.0 + breathe * 0.3, 30.0, 27.0 + breathe * 0.4), sp.m_ell(*Q(2.0, 48.0), 22.0, 14.0)], tones(FUR))
-    sp.fur(body, dark(FUR, 0.66), step=2.6, ln=2.2, ang=-1.9, seed=21)
+    sp.fur(body, dark(FUR, 0.70), step=4.2, ln=2.6, ang=-1.9, seed=21)
     bel = sp.ell(7.0, 26.0 + breathe * 0.3, 17.0, 18.0 + breathe * 0.4, tones(FUR_L), flat=0.05)
-    sp.fur(bel, dark(FUR_L, 0.78), step=3.0, ln=1.6, ang=-1.7, seed=22)
+    sp.fur(bel, dark(FUR_L, 0.82), step=4.6, ln=2.0, ang=-1.7, seed=22)
     # near leg with a padded foot
     sp.cap((8.0, 9.0), (24.0, 5.0), 8.0, 7.0, tones(FUR))
     foot = sp.ell(29.0, 7.0, 5.6, 7.6, tones(FUR))
@@ -262,9 +242,9 @@ def potapych(sp, t=0.0, expr='asleep', mouth_=0.0, look=(0.6, -0.1), blink=None,
     for ex, ey in ((hx - 12.0, hy + 11.0), (hx + 8.0, hy + 13.0)):
         sp.ell(ex, ey, 5.2, 4.8, tones(FUR)); sp.ell(ex + 0.6, ey - 0.4, 2.8, 2.4, tones((96, 60, 42)), snow=False)
     head = sp.union([sp.m_ell(hx, hy, 16.0, 14.0), sp.m_ell(hx - 2.0, hy - 6.0, 15.0, 9.0)], tones(FUR))
-    sp.fur(head, dark(FUR, 0.66), step=2.4, ln=1.8, ang=-1.9, seed=23)
+    sp.fur(head, dark(FUR, 0.70), step=3.6, ln=2.0, ang=-1.9, seed=23)
     mz = sp.union([sp.m_ell(hx + 8.0, hy - 5.0, 10.0, 7.0)], tones(FUR_L))
-    sp.fur(mz, dark(FUR_L, 0.8), step=2.2, ln=1.0, ang=-1.6, seed=24)
+    sp.fur(mz, dark(FUR_L, 0.84), step=3.4, ln=1.2, ang=-1.6, seed=24)
     # eyes: small, heavy-lidded bureaucrat
     lx, ly = look
     if eyes == 'one':
@@ -366,21 +346,55 @@ def meter(sp, t=0.0, rub=0, spin=0.0, snow_cap=True):
 
 
 def ice_over(sp, k=1.0, t=0.0):
-    """encase a finished sprite in an ice block (applied as Act(post=...)): tint icy, frosty specks, a translucent block with glints"""
+    """encase a finished sprite in an ice block (Act(post=...)), growing from the feet up: k 0..1 = how high the ice has climbed.
+    Icy tint + frost on the covered part, a translucent block with a bright rim and diagonal glints"""
     m = sp.m.copy()
     ys, xs = np.nonzero(m)
-    if not len(xs): return
-    sp.col[m] = (sp.col[m].astype(np.float32) * (1 - 0.45 * k) + np.array((170, 214, 250)) * 0.45 * k).astype(np.uint8)
+    if not len(xs) or k <= 0: return
     y0, y1, x0, x1 = ys.min() - 3 * sp.k, ys.max() + 3 * sp.k, xs.min() - 4 * sp.k, xs.max() + 4 * sp.k
-    blk = np.zeros_like(m); blk[max(0, y0):y1, max(0, x0):x1] = True
+    top = int(y1 - (y1 - y0) * min(1.0, k))
+    rr, cc = np.mgrid[0:sp.H, 0:sp.W]
+    cov = m & (rr >= top)
+    sp.col[cov] = (sp.col[cov].astype(np.float32) * 0.55 + np.array((170, 214, 250)) * 0.45).astype(np.uint8)
+    blk = (rr >= max(0, top)) & (rr < y1) & (cc >= max(0, x0)) & (cc < x1)
+    if k < 1.0:                                                       # a jagged crystal front while it climbs
+        jag = ((cc // max(1, 3 * sp.k)) % 2 == 0) & (rr < top + 2 * sp.k)
+        blk &= ~jag
     rim = blk & ~erode(erode(blk))
     out = blk & ~m
-    sp.col[out] = (210, 236, 255)
-    sp.col[rim] = (240, 250, 255)
-    rr, cc = np.mgrid[0:sp.H, 0:sp.W]
+    sp.col[out] = (206, 234, 255)
+    sp.col[rim] = (244, 252, 255)
     diag = blk & ((((cc * 0.8 - rr) / sp.k) % 14.0) < 1.0)
-    sp.col[diag] = (250, 254, 255)
+    sp.col[diag] = (252, 255, 255)
     sp.m |= blk
+
+
+def tripod(sp, t=0.0, rec=True, screen=None):
+    """a cheap camera tripod with his smartphone on top (the blogger's camera): three thin legs, a clamp, the phone with a red REC dot"""
+    for (fx_, a) in ((-8.0, 0.0), (8.0, 0.0), (1.5, 0.0)):
+        thin(sp, (fx_, a), (0.0, 30.0), (60, 64, 72), 0.55)
+        thin(sp, (fx_ * 0.98, a + 0.4), (0.0, 30.0), (150, 156, 168), 0.22)
+    sp.cap((0.0, 29.0), (0.0, 33.0), 0.8, 0.8, tones((60, 64, 72)))
+    ph = sp.m_super(0.0, 36.6, 2.8, 4.6, 4.0)[0]
+    sp.paint(ph, tones((34, 34, 40)), None, olc=INK)
+    sp.fill(sp.m_super(0.0, 36.6, 2.1, 3.8, 4.0)[0], screen or (60, 110, 160))
+    if rec and int(t * 2) % 2 == 0: sp.fill(sp.m_ell(-1.0, 39.6, 0.7, 0.7)[0], (255, 40, 40))
+    sp.fill(sp.m_ell(1.2, 39.6, 0.6, 0.6)[0], (20, 20, 24))                     # the lens
+    sp.outline(INK, 1)
+    sp.anchors['phone'] = (0.0, 36.6)
+
+
+def bear_paw(sp, t=0.0, bill_=True, reach=1.0):
+    """the bear's huge furry forearm coming in from the right (pointing left), claws, the bill pinned under it"""
+    a, b = (34.0, 20.0), (34.0 - 26.0 * reach, 20.0)
+    arm = sp.cap(a, b, 9.0, 7.4, tones(FUR))
+    sp.fur(arm, dark(FUR, 0.7), step=4.0, ln=2.4, ang=3.0, seed=41)
+    pw = sp.ell(b[0] - 2.0, b[1], 7.2, 6.4, tones(FUR))
+    for q in range(4):
+        c0 = (b[0] - 8.4, b[1] + 4.2 - q * 2.8)
+        sp.fill(sp.m_cap(c0, (c0[0] - 2.6, c0[1] - 0.8), 0.9, 0.35)[0], (236, 230, 214))
+    if bill_: bill(sp, (b[0] - 14.0, b[1] - 6.0), big=True)
+    sp.outline(INK, 1)
 
 
 def den_sign(sp, text=('НЕ', 'БУДИТЬ!')):

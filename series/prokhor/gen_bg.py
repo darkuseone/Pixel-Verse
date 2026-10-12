@@ -26,7 +26,34 @@ BG = {
            'where a big sleeping animal would lie.',
 }
 
+# v2 (owner 12.10.2026: «более качественный задний фон, арт-дизайн», less noisy): clean cartoon pixel art, bold shapes, big readable masses
+STYLE2 = ('Clean stylized 16-bit cartoon pixel art game background, bold readable shapes, big simple masses, limited soft palette, smooth '
+          'pixel gradients, uncluttered, cozy and charming, like a modern indie pixel adventure game, Siberian taiga in deep winter, '
+          'low orange winter sun, long blue shadows, wide 16:9 scene. No characters, no people, no animals, no text, no letters, no numbers; '
+          'any signs and boards are blank. ')
+BG2 = {
+    'taiga2': 'Side view of a wide snowy taiga clearing. On the far left a small cozy log cabin with a snowy roof, a lit window and a wooden '
+              'porch. In the center-right a huge rounded snow-covered mound with a LARGE dark cave entrance at ground level (the entrance is '
+              'about a third of the image height and wide), thick roots around the entrance, a thin steam plume rising from a vent on top. '
+              'A tall pine on the far right. Flat open snowy ground across the whole lower third with a trail of footprints from the cabin to '
+              'the cave. Dense spruce forest behind, pink-violet evening sky, a big low orange sun.',
+    'den2': 'Interior of a big cozy bear den under the snow, front view: a large rounded earthen cave, hanging tree roots, a thick round '
+            'nest of hay and old patterned wool blankets in the center on the floor, a soft beam of light from a vent hole in the ceiling, '
+            'warm amber light, uncluttered, a big empty space in the center for a huge sleeping animal, the cave entrance glowing blue on '
+            'the far left edge.',
+    'porch': 'Close view of the front of an old log cabin in deep winter: a log wall on the left half with a small frosted window glowing '
+             'warm, snow on the porch steps, a neat stack of firewood, icicles hanging from the roof edge, an old enamel basin on a nail; '
+             'the right half opens to a snowy taiga clearing with spruce trees and a big low orange sun, pink-violet sky.',
+}
+
+
 if __name__ == '__main__':
+    if sys.argv[1:2] == ['v2']:
+        total = 0.0
+        for n in sys.argv[2:] or list(BG2):
+            p = OUT / f'{n}.png'
+            if not p.exists(): total += xai.generate(STYLE2 + BG2[n], [str(p)], aspect='16:9')
+        print('total $%.3f' % total); sys.exit()
     names = sys.argv[1:] or list(BG)
     total = 0.0
     for n in names:

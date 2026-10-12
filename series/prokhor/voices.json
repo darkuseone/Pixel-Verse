@@ -11,20 +11,20 @@
         128,
         96
       ],
-      "style": "[booming] [boastful] [shouting] — громкий хвастливый таёжник, на морозе стучит зубами",
+      "style": "[rough] [confident] [booming] — грубый уверенный деревенский бас таёжника-лесоруба",
       "design": {
-        "description": "A loud, hoarse Siberian backwoodsman in his mid fifties, a self-taught video blogger living alone in the taiga. Booming, rough bass-baritone with a frosty rasp, energetic, boastful and cheerful, talks fast like a showman, shouts with outrage at prices, then whispers with childish delight. Strong rural northern Russian accent with clear okanye. Native Russian speaker, very expressive and funny.",
-        "text": "[shouting] Девять ты́щ за тепло́?! [boastful] Городски́е! Лайфха́к но́мер оди́н! Медве́дь. Три́дцать во́семь гра́дусов. Без счётчика! [whispering, delighted] Спит до апре́ля. Тари́ф — ноль. [teeth chattering] Го-городски́е... не у́читесь.",
+        "description": "A huge bearded Siberian lumberjack, around fifty five, living alone in the taiga. Extremely low, deep, chesty and gravelly bass voice, the lowest male register, rough and husky like he chops wood all day, slow heavy confident delivery with village swagger, thick rural Russian accent with strong okanye, a smoker's rasp, warm and funny. Not shouting, just a big booming low voice. Native Russian speaker.",
+        "text": "[confident, low] Городски́е. Де́вять ты́щ за отопле́ние пла́тите? [chuckles] А я в тайгу́ перее́хал. Тут тепло́ — беспла́тно. Лайфха́к: медве́дь зимо́й — э́то батаре́я. [whispering] Ти́хо. Спит. Три́дцать во́семь гра́дусов.",
         "picked": {
           "i": 2,
-          "dur": 16.93,
-          "f0": 326.5,
-          "f0_iqr": 97.5,
-          "rate": 20.8,
-          "loud_sd": 6.5
+          "dur": 22.75,
+          "f0": 139.1,
+          "f0_iqr": 140.5,
+          "rate": 16.1,
+          "loud_sd": 5.9
         }
       },
-      "voice_id": "z42gWT4h52CwjWCO9GF0",
+      "voice_id": "FmmR663nLw91vgt0SRzR",
       "voice": "Прохор — Прохор"
     },
     "bear": {

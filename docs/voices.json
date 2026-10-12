@@ -1270,31 +1270,43 @@
   {
    "slug": "prokhor",
    "char": "prokhor",
-   "voice_id": "z42gWT4h52CwjWCO9GF0",
+   "voice_id": "FmmR663nLw91vgt0SRzR",
    "status": "active",
    "name": "Прохор",
    "voice_name": "Прохор — Прохор",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 9,
+   "episodes": 1,
+   "samples": [
+    "series/prokhor/voice/ep01/p4.mp3",
+    "series/prokhor/voice/ep01/p9.mp3",
+    "series/prokhor/voice/ep01/p2.mp3",
+    "series/prokhor/voice/ep01/p5.mp3",
+    "series/prokhor/voice/ep01/p3.mp3",
+    "series/prokhor/voice/ep01/p6.mp3",
+    "series/prokhor/voice/ep01/p1.mp3",
+    "series/prokhor/voice/ep01/p8.mp3"
+   ],
    "design": {
-    "description": "A loud, hoarse Siberian backwoodsman in his mid fifties, a self-taught video blogger living alone in the taiga. Booming, rough bass-baritone with a frosty rasp, energetic, boastful and cheerful, talks fast like a showman, shouts with outrage at prices, then whispers with childish delight. Strong rural northern Russian accent with clear okanye. Native Russian speaker, very expressive and funny.",
-    "text": "[shouting] Девять ты́щ за тепло́?! [boastful] Городски́е! Лайфха́к но́мер оди́н! Медве́дь. Три́дцать во́семь гра́дусов. Без счётчика! [whispering, delighted] Спит до апре́ля. Тари́ф — ноль. [teeth chattering] Го-городски́е... не у́читесь.",
+    "description": "A huge bearded Siberian lumberjack, around fifty five, living alone in the taiga. Extremely low, deep, chesty and gravelly bass voice, the lowest male register, rough and husky like he chops wood all day, slow heavy confident delivery with village swagger, thick rural Russian accent with strong okanye, a smoker's rasp, warm and funny. Not shouting, just a big booming low voice. Native Russian speaker.",
+    "text": "[confident, low] Городски́е. Де́вять ты́щ за отопле́ние пла́тите? [chuckles] А я в тайгу́ перее́хал. Тут тепло́ — беспла́тно. Лайфха́к: медве́дь зимо́й — э́то батаре́я. [whispering] Ти́хо. Спит. Три́дцать во́семь гра́дусов.",
     "picked": {
      "i": 2,
-     "dur": 16.93,
-     "f0": 326.5,
-     "f0_iqr": 97.5,
-     "rate": 20.8,
-     "loud_sd": 6.5
+     "dur": 22.75,
+     "f0": 139.1,
+     "f0_iqr": 140.5,
+     "rate": 16.1,
+     "loud_sd": 5.9
     }
    },
    "account": {
     "category": "generated",
-    "description": "A loud, hoarse Siberian backwoodsman in his mid fifties, a self-taught video blogger living alone in the taiga. Booming, rough bass-baritone with a frosty rasp, energetic, boastful and cheerful, talks fast like a showman, shouts with outrage at prices, then whispers with childish delight. Strong rural northern Russian accent with clear okanye. Native Russian speaker, very expressive and funny.",
+    "description": "A huge bearded Siberian lumberjack, around fifty five, living alone in the taiga. Extremely low, deep, chesty and gravelly bass voice, the lowest male register, rough and husky like he chops wood all day, slow heavy confident delivery with village swagger, thick rural Russian accent with strong okanye, a smoker's rasp, warm and funny. Not shouting, just a big booming low voice. Native Russian speaker.",
     "settings": null,
-    "created_at_unix": 1791821632
-   }
+    "created_at_unix": 1791825379
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/z42gWT4h52CwjWCO9GF0/e0556206-931d-4942-b7fb-e58c5132b4f8.mp3",
+   "deleted_on": "2026-10-12",
+   "deleted_reason": "manual"
   },
   {
    "slug": "prokhor",
@@ -1303,9 +1315,14 @@
    "status": "active",
    "name": "Михал Потапыч",
    "voice_name": "Прохор — Михал Потапыч",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 4,
+   "episodes": 1,
+   "samples": [
+    "series/prokhor/voice/ep01/b1.mp3",
+    "series/prokhor/voice/ep01/b3.mp3",
+    "series/prokhor/voice/ep01/b2.mp3",
+    "series/prokhor/voice/ep01/b4.mp3"
+   ],
    "design": {
     "description": "A huge old bear who runs the housing management office of the forest, woken up in the middle of winter hibernation. Extremely deep, slow, sleepy and heavy bass voice, monotone bureaucratic deadpan, unimpressed, yawns between words, a low growl in the throat, speaks very calmly and briefly like a tired official reading a bill. Older Russian man in his sixties. Native Russian speaker.",
     "text": "[sleepy, deadpan] Отопле́ние. Де́вять ты́сяч. [bored] Я на удалёнке. [yawns] Отключу́. [flat] Плюс пе́ни. Сле́дующий. Квита́нцию возьми́те.",
@@ -1852,5 +1869,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-12 16:14"
+ "updated": "2026-10-12 17:16"
 }
