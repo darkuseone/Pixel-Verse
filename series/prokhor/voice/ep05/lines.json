@@ -1,0 +1,10 @@
+{
+  "p1": ["prokhor", "[shouting, outraged, rough] Штраф за костёр?!"],
+  "r1": ["ranger", "[stern, loud, official, merciless] И за дым. И за за́пах. Подпи́сывайте!"],
+  "p2": ["prokhor", "[rough, confident, sly, to the camera] Лайфха́к: маскиро́вка «ёлочка». Ни дрон, ни е́герь — не уви́дят!"],
+  "p3": ["prokhor", "[whispering, proud, smug] Ёлка. Гирля́нда. Невиди́мка."],
+  "r2": ["ranger", "[panicking, screaming, running] Ёлочка! Спрячь меня́!"],
+  "r3": ["ranger", "[whispering, terrified, trembling] Он ушёл?"],
+  "p4": ["prokhor", "[sly, slow, official, savoring it] Укры́тие. По тари́фу. [pause] Плюс пе́ни."],
+  "b1": ["bear", "[deadpan, very low, chewing, approving] Учи́тся."]
+}

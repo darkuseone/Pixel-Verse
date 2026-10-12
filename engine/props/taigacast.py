@@ -92,7 +92,7 @@ def phone(sp, h, rec=True):
 
 # ================================================================================ Прохор (v2, 12.10.2026: bigger head, clean big shapes)
 def prokhor(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-            hat_off=False, sweat=0.0, frost=0.0, walk=None, chatter=0.0, legs=True, lean=0.0, steam=0.0, camo=False, swollen=0.0):
+            hat_off=False, sweat=0.0, frost=0.0, walk=None, chatter=0.0, legs=True, lean=0.0, steam=0.0, camo=False, swollen=0.0, tree=False, garland=None):
     """ПРОХОР v2 — city man gone taiga lumberjack, a caricature you read at a glance: a BIG head (≈40 % of the height) with huge eyes,
     a frostbitten potato nose, a wide talking mouth under a ginger moustache and a clean, chunky ginger beard down to the chest; a
     big puffy ushanka (one flap down, one sticking up like a wing); a stocky quilted телогрейка with blue electrical tape, rope belt,
@@ -203,7 +203,37 @@ def prokhor(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, h
         for i, (x, y) in enumerate(((hx - 4.0, hy + 5.0), (hx + 7.0, hy + 4.0), (hx - 7.4, hy + 0.5))[:int(1 + 2 * sweat)]):
             yy = y - ((t * 4.0 + i * 1.3) % 4.0)
             sp.ell(x, yy, 0.8, 1.2, tones((170, 220, 255)), ol=False, snow=False); sp.dot(x - 0.2, yy + 0.4, WHITE)
+    if tree:                                                                                             # E05: the «ёлочка» suit
+        FIR = (46, 112, 68)
+        win = sp.m_ell(hx + 3.4, hy - 1.6, 10.0, 9.4)[0]
+        tiers = ((2.0, 27.0, 34.0), (22.0, 23.0, 56.0), (40.0, 19.0, 80.0))
+        tm = sp.union([(sp.m_poly([(1.0 - w, y0), (1.0 + w, y0), (1.0, y1)]), np.clip((DX.XC - 1.0) / w, -0.9, 0.9) * 0.8,
+                        np.full_like(DX.XC, 0.15)) for (y0, w, y1) in tiers], tones(FIR), exclude=win)
+        for (y0, w, y1) in tiers:
+            sp.fill(tm & (np.abs(DX.YC - y0 - 1.0) < 1.0), dark(FIR, 0.62))
+            for q in range(9):
+                x0 = 1.0 - w * 0.8 + q * w * 0.2
+                thin(sp, (x0, y0 + 2.0), (x0 + 1.6, y0 + 4.6), mix(FIR, (180, 230, 160), 0.35), 0.24, mask=tm)
+        for q in range(5):                                                                               # snow on the tiers
+            for (y0, w, y1) in tiers:
+                sp.fill(sp.m_ell(1.0 - w * 0.6 + q * w * 0.3, y0 + 0.8 + 0.3 * (q % 2), 1.6, 0.6)[0] & tm, (236, 244, 255))
+        star = sp.m_poly([(1.0 + 3.0 * math.cos(-1.5708 + i * 0.6283) * (1 if i % 2 == 0 else 0.45),
+                           81.6 - 3.0 * math.sin(-1.5708 + i * 0.6283) * (1 if i % 2 == 0 else 0.45)) for i in range(10)])
+        sp.paint(star, tones((250, 210, 60)), None, olc=INK, gloss=1.0)
+        if garland is not None:
+            cols = ((255, 60, 60), (255, 220, 60), (70, 200, 255), (110, 240, 110))
+            for k_, (y0, w, y1) in enumerate(tiers):
+                for q in range(7):
+                    s_ = q / 6.0
+                    gx = 1.0 - w * 0.7 + s_ * w * 1.4
+                    gy = y0 + 4.0 - 2.0 * math.sin(math.pi * s_)
+                    if (gx - hx - 3.4) ** 2 / 121.0 + (gy - hy + 1.6) ** 2 / 110.0 < 1.0: continue
+                    on = int(garland * 4 + q + k_) % 2 == 0
+                    c = cols[(q + k_) % 4] if on else dark(cols[(q + k_) % 4], 0.45)
+                    sp.ell(gx, gy, 1.2, 1.2, tones(c), ol=False, snow=False, gloss=1.0 if on else 0.0)
+        sp.anchors['star'] = (1.0, 81.6)
     sp.outline(INK, 1)
+    if tree and hand_n is None: return
     # ---------------------------------------------------------------- near arm + mitten
     before = sp.m.copy()
     shN = Q(13.0, 32.0 + br * 0.3)
@@ -223,7 +253,7 @@ def prokhor(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, h
 
 # ================================================================================ Михал Потапыч
 def potapych(sp, t=0.0, expr='asleep', mouth_=0.0, look=(0.6, -0.1), blink=None, eyes=None, glasses=True, cap=True, bubble=None,
-             hand_n=None, prop_n=None, slump=0.0, snore=True):
+             hand_n=None, prop_n=None, slump=0.0, snore=True, trunks=False):
     """МИХАЛ ПОТАПЫЧ — a huge pear of brown fur sitting in his den: tiny heavy-lidded eyes behind round reading glasses on a string,
     striped nightcap with a pompon, a glossy black nose, a lighter muzzle and belly, claws. Asleep he slumps and blows a snot bubble.
     eyes: None (from expr) | 'one' (only the near eye opens: the twist) ; bubble: 0..1 size of the nose bubble (None = from t while asleep)"""
@@ -249,6 +279,10 @@ def potapych(sp, t=0.0, expr='asleep', mouth_=0.0, look=(0.6, -0.1), blink=None,
     foot = sp.ell(29.0, 7.0, 5.6, 7.6, tones(FUR))
     sp.ell(31.0, 7.0, 3.4, 5.2, tones((90, 64, 56)), snow=False)
     for q in range(4): sp.ell(32.4, 2.4 + q * 2.8, 1.0, 0.9, tones((70, 50, 46)), snow=False)
+    if trunks:                                                                                       # E06: striped swim trunks over the fur
+        tm = sp.union([sp.m_ell(2.0, 9.0, 28.0, 9.0), sp.m_cap((8.0, 9.0), (18.0, 6.0), 8.4, 7.4)], tones((220, 50, 60)), snow=False)
+        sp.fill(tm & (((DX.XC + DX.YC * 0.3) // 3.0) % 2 == 0), (250, 246, 240))
+        sp.fill(tm & (np.abs(DX.YC - 17.4) < 0.7), (40, 40, 60))
     # ---------------------------------------------------------------- head
     hx, hy = Q(8.0, 64.0)
     hx += 0.0; hy += -sl * 2.0

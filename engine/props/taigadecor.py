@@ -200,7 +200,7 @@ def dress_birch(W):
     D.attach(W, [
         (_post(7, 140), 330, 470),
         (birch(120, 40, ['ЛЕСНАЯ', 'ПОЛИКЛИНИКА'], colors=[NAVY, RED], weights=[0.9, 1.0], seed=31), 274, 430),
-        (R.plate(96, 36, ['ЭЛЕКТРОННАЯ', 'ОЧЕРЕДЬ'], bg=(30, 110, 200), colors=[WH, (255, 236, 90)], border=WH, weights=[0.9, 1.0]), 1066, 412),
+        (R.plate(96, 36, ['ЭЛЕКТРОННАЯ', 'ОЧЕРЕДЬ'], bg=(30, 110, 200), colors=[WH, (255, 236, 90)], border=WH, weights=[0.9, 1.0]), 1044, 318),
         (R.plate(70, 22, ['ОЖИДАНИЕ'], bg=WH, fg=BLK, border=BLK), 878, 488),
     ])
     D.anim(W, sparkles((0, 560, 1280, 720), n=60, seed=31))
