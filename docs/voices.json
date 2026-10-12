@@ -961,44 +961,6 @@
   },
   {
    "slug": "mazutych",
-   "char": "wheel",
-   "voice_id": "Kp5sQTqr3PnriPusCHEb",
-   "status": "active",
-   "name": "Дин-Дон (моноколесо)",
-   "voice_name": "Мазутыч — Дин-Дон (моноколесо)",
-   "lines": 9,
-   "episodes": 6,
-   "samples": [
-    "series/mazutych/voice/ep06/w2.mp3",
-    "series/mazutych/voice/ep01/w2.mp3",
-    "series/mazutych/voice/ep04/w1.mp3",
-    "series/mazutych/voice/ep06/w1.mp3",
-    "series/mazutych/voice/ep05/w1.mp3",
-    "series/mazutych/voice/ep01/w1.mp3",
-    "series/mazutych/voice/ep02/w1.mp3",
-    "series/mazutych/voice/ep03/w1.mp3"
-   ],
-   "design": {
-    "description": "A cheerful synthetic female voice assistant of a cheap gadget, bright, slightly metallic and robotic, evenly spaced syllables, overly polite, speaks broken machine-translated Russian with a light East Asian accent. Clear and comedic.",
-    "text": "Здра́вствуй, дру́га! Я твой помо́щник Ди́н-до́н. Заря́д три проце́нт. Ты е́хать ти́ше, дру́га. Ско́рость о́чень мно́го. Всё. Я спать. Ди́н-до́н!",
-    "picked": {
-     "i": 1,
-     "dur": 10.45,
-     "f0": 275.9,
-     "f0_iqr": 80.6,
-     "rate": 19.1,
-     "loud_sd": 5.0
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A cheerful synthetic female voice assistant of a cheap gadget, bright, slightly metallic and robotic, evenly spaced syllables, overly polite, speaks broken machine-translated Russian with a light East Asian accent. Clear and comedic.",
-    "settings": null,
-    "created_at_unix": 1791272643
-   }
-  },
-  {
-   "slug": "mazutych",
    "char": "cop",
    "voice_id": "sqjFPShWaZX3JdS3utu1",
    "status": "active",
@@ -1184,6 +1146,54 @@
    ]
   },
   {
+   "slug": "mazutych",
+   "char": "wheel",
+   "voice_id": "Kp5sQTqr3PnriPusCHEb",
+   "status": "deleted",
+   "name": "Дин-Дон (моноколесо)",
+   "voice_name": "Мазутыч — Дин-Дон (моноколесо)",
+   "lines": 9,
+   "episodes": 6,
+   "samples": [
+    "series/mazutych/voice/ep06/w2.mp3",
+    "series/mazutych/voice/ep01/w2.mp3",
+    "series/mazutych/voice/ep04/w1.mp3",
+    "series/mazutych/voice/ep06/w1.mp3",
+    "series/mazutych/voice/ep05/w1.mp3",
+    "series/mazutych/voice/ep01/w1.mp3",
+    "series/mazutych/voice/ep02/w1.mp3",
+    "series/mazutych/voice/ep03/w1.mp3"
+   ],
+   "design": {
+    "description": "A cheerful synthetic female voice assistant of a cheap gadget, bright, slightly metallic and robotic, evenly spaced syllables, overly polite, speaks broken machine-translated Russian with a light East Asian accent. Clear and comedic.",
+    "text": "Здра́вствуй, дру́га! Я твой помо́щник Ди́н-до́н. Заря́д три проце́нт. Ты е́хать ти́ше, дру́га. Ско́рость о́чень мно́го. Всё. Я спать. Ди́н-до́н!",
+    "picked": {
+     "i": 1,
+     "dur": 10.45,
+     "f0": 275.9,
+     "f0_iqr": 80.6,
+     "rate": 19.1,
+     "loud_sd": 5.0
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A cheerful synthetic female voice assistant of a cheap gadget, bright, slightly metallic and robotic, evenly spaced syllables, overly polite, speaks broken machine-translated Russian with a light East Asian accent. Clear and comedic.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1791272643
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/Kp5sQTqr3PnriPusCHEb/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiN2U4MDFkMGMtMTU3MS00OTQwLWIwOWUtZDhkNWY1MjM3ZmEyLm1wMyIsInRpbWVzdGFtcCI6MTc5MTgyMDgwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-12",
+   "deleted_reason": "auto: room for prokhor/bear"
+  },
+  {
    "slug": "pochti-dikiy-zapad",
    "char": "molniya",
    "voice_id": "WzVKtqQpTUUQ2JNx8YxI",
@@ -1256,6 +1266,64 @@
     "series/pochti-dikiy-zapad/voice/movie/p3.mp3",
     "series/pochti-dikiy-zapad/voice/movie/p1.mp3"
    ]
+  },
+  {
+   "slug": "prokhor",
+   "char": "prokhor",
+   "voice_id": "z42gWT4h52CwjWCO9GF0",
+   "status": "active",
+   "name": "Прохор",
+   "voice_name": "Прохор — Прохор",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [],
+   "design": {
+    "description": "A loud, hoarse Siberian backwoodsman in his mid fifties, a self-taught video blogger living alone in the taiga. Booming, rough bass-baritone with a frosty rasp, energetic, boastful and cheerful, talks fast like a showman, shouts with outrage at prices, then whispers with childish delight. Strong rural northern Russian accent with clear okanye. Native Russian speaker, very expressive and funny.",
+    "text": "[shouting] Девять ты́щ за тепло́?! [boastful] Городски́е! Лайфха́к но́мер оди́н! Медве́дь. Три́дцать во́семь гра́дусов. Без счётчика! [whispering, delighted] Спит до апре́ля. Тари́ф — ноль. [teeth chattering] Го-городски́е... не у́читесь.",
+    "picked": {
+     "i": 2,
+     "dur": 16.93,
+     "f0": 326.5,
+     "f0_iqr": 97.5,
+     "rate": 20.8,
+     "loud_sd": 6.5
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A loud, hoarse Siberian backwoodsman in his mid fifties, a self-taught video blogger living alone in the taiga. Booming, rough bass-baritone with a frosty rasp, energetic, boastful and cheerful, talks fast like a showman, shouts with outrage at prices, then whispers with childish delight. Strong rural northern Russian accent with clear okanye. Native Russian speaker, very expressive and funny.",
+    "settings": null,
+    "created_at_unix": 1791821632
+   }
+  },
+  {
+   "slug": "prokhor",
+   "char": "bear",
+   "voice_id": "xflYwcTw1xfUQvQHsSsi",
+   "status": "active",
+   "name": "Михал Потапыч",
+   "voice_name": "Прохор — Михал Потапыч",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [],
+   "design": {
+    "description": "A huge old bear who runs the housing management office of the forest, woken up in the middle of winter hibernation. Extremely deep, slow, sleepy and heavy bass voice, monotone bureaucratic deadpan, unimpressed, yawns between words, a low growl in the throat, speaks very calmly and briefly like a tired official reading a bill. Older Russian man in his sixties. Native Russian speaker.",
+    "text": "[sleepy, deadpan] Отопле́ние. Де́вять ты́сяч. [bored] Я на удалёнке. [yawns] Отключу́. [flat] Плюс пе́ни. Сле́дующий. Квита́нцию возьми́те.",
+    "picked": {
+     "i": 1,
+     "dur": 16.35,
+     "f0": 320.0,
+     "f0_iqr": 74.9,
+     "rate": 14.1,
+     "loud_sd": 5.4
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A huge old bear who runs the housing management office of the forest, woken up in the middle of winter hibernation. Extremely deep, slow, sleepy and heavy bass voice, monotone bureaucratic deadpan, unimpressed, yawns between words, a low growl in the throat, speaks very calmly and briefly like a tired official reading a bill. Older Russian man in his sixties. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1791821642
+   }
   },
   {
    "slug": "sunny-palms-hoa",
@@ -1423,17 +1491,17 @@
    "status": "active",
    "name": "Валера",
    "voice_name": "Валера и кот — Валера",
-   "lines": 49,
+   "lines": 50,
    "episodes": 7,
    "samples": [
+    "series/valera-i-kot/voice/movie/v02.mp3",
+    "series/valera-i-kot/voice/movie/v15.mp3",
+    "series/valera-i-kot/voice/movie/v07.mp3",
     "series/valera-i-kot/voice/ep06/v1.mp3",
     "series/valera-i-kot/voice/ep01/v2.mp3",
-    "series/valera-i-kot/voice/ep01/v4.mp3",
-    "series/valera-i-kot/voice/ep02/v2.mp3",
-    "series/valera-i-kot/voice/ep05/v1.mp3",
-    "series/valera-i-kot/voice/ep05/v2.mp3",
-    "series/valera-i-kot/voice/ep03/v2.mp3",
-    "series/valera-i-kot/voice/ep06/v4.mp3"
+    "series/valera-i-kot/voice/movie/v10.mp3",
+    "series/valera-i-kot/voice/movie/v09.mp3",
+    "series/valera-i-kot/voice/movie/v03.mp3"
    ],
    "design": {
     "description": "Deep, low-pitched, hoarse bass-baritone voice of a heavyset Russian man in his mid-fifties, a retired army warrant officer. Gravelly smoker's rasp, chesty and booming, bossy and blunt like giving orders, self-important, but not screaming. Native Russian speaker, plain provincial Russian accent.",
@@ -1461,17 +1529,17 @@
    "status": "active",
    "name": "Кот Дембель",
    "voice_name": "Валера и кот — Кот Дембель",
-   "lines": 23,
+   "lines": 24,
    "episodes": 7,
    "samples": [
+    "series/valera-i-kot/voice/movie/c01.mp3",
+    "series/valera-i-kot/voice/movie/c03.mp3",
     "series/valera-i-kot/voice/ep02/c1.mp3",
     "series/valera-i-kot/voice/ep03/c1.mp3",
+    "series/valera-i-kot/voice/movie/c06.mp3",
+    "series/valera-i-kot/voice/movie/c05.mp3",
     "series/valera-i-kot/voice/ep05/c1.mp3",
-    "series/valera-i-kot/voice/ep04/c1.mp3",
-    "series/valera-i-kot/voice/ep05/c3.mp3",
-    "series/valera-i-kot/voice/ep01/c4.mp3",
-    "series/valera-i-kot/voice/ep06/c2.mp3",
-    "series/valera-i-kot/voice/ep01/c2.mp3"
+    "series/valera-i-kot/voice/movie/c04.mp3"
    ],
    "design": {
     "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
@@ -1499,15 +1567,17 @@
    "status": "active",
    "name": "Баба Зина",
    "voice_name": "valera-i-kot — Баба Зина (restored)",
-   "lines": 19,
+   "lines": 21,
    "episodes": 3,
    "samples": [
-    "series/valera-i-kot/voice/ep03/z4.mp3",
-    "series/valera-i-kot/voice/ep05/z1.mp3",
-    "series/valera-i-kot/voice/ep03/z1.mp3",
-    "series/valera-i-kot/voice/ep03/z2.mp3",
-    "series/valera-i-kot/voice/ep03/z3.mp3",
-    "series/valera-i-kot/voice/ep05/z2.mp3"
+    "series/valera-i-kot/voice/movie/z07.mp3",
+    "series/valera-i-kot/voice/movie/z04.mp3",
+    "series/valera-i-kot/voice/movie/z11.mp3",
+    "series/valera-i-kot/voice/movie/z09.mp3",
+    "series/valera-i-kot/voice/movie/z15.mp3",
+    "series/valera-i-kot/voice/movie/z03.mp3",
+    "series/valera-i-kot/voice/movie/z08.mp3",
+    "series/valera-i-kot/voice/ep03/z4.mp3"
    ],
    "design": {
     "description": "A sharp, nosy Russian grandmother in her late seventies. Thin, slightly shrill and crackly elderly female voice, quick sarcastic gossiping delivery, sounds like she knows everyone's business. Native Russian speaker.",
@@ -1547,12 +1617,14 @@
    "lines": 12,
    "episodes": 2,
    "samples": [
+    "series/valera-i-kot/voice/movie/t05.mp3",
+    "series/valera-i-kot/voice/movie/t02.mp3",
     "series/valera-i-kot/voice/ep02/t4.mp3",
     "series/valera-i-kot/voice/ep02/t2.mp3",
-    "series/valera-i-kot/voice/ep02/t1.mp3",
-    "series/valera-i-kot/voice/ep02/t3.mp3",
-    "series/valera-i-kot/voice/ep02/t6.mp3",
-    "series/valera-i-kot/voice/ep02/t5.mp3"
+    "series/valera-i-kot/voice/movie/t06.mp3",
+    "series/valera-i-kot/voice/movie/t01.mp3",
+    "series/valera-i-kot/voice/movie/t04.mp3",
+    "series/valera-i-kot/voice/ep02/t1.mp3"
    ],
    "design": {
     "description": "A tired Russian supermarket cashier woman in her early fifties. Flat, slightly nasal and husky voice, bored deadpan delivery, chewing gum, completely unimpressed by customers. Native Russian speaker.",
@@ -1589,9 +1661,18 @@
    "status": "active",
    "name": "Семёныч",
    "voice_name": "Валера и кот — Семёныч",
-   "lines": 8,
+   "lines": 10,
    "episodes": 1,
-   "samples": [],
+   "samples": [
+    "series/valera-i-kot/voice/movie/s10.mp3",
+    "series/valera-i-kot/voice/movie/s02.mp3",
+    "series/valera-i-kot/voice/movie/s07.mp3",
+    "series/valera-i-kot/voice/movie/s01.mp3",
+    "series/valera-i-kot/voice/movie/s03.mp3",
+    "series/valera-i-kot/voice/movie/s04.mp3",
+    "series/valera-i-kot/voice/movie/s05.mp3",
+    "series/valera-i-kot/voice/movie/s06.mp3"
+   ],
    "design": {
     "description": "An eccentric intelligent Russian man around sixty, a former literature teacher and charming drinker. Theatrical, pompous, declamatory delivery, soft warm baritone, slightly nasal, a little tipsy and ironic, very articulate. Native Russian speaker.",
     "text": "Вале́рий, позво́льте замеча́ние. Ру́сская литерату́ра у́чит нас: е́сли на ла́вочке сидя́т ба́бушки, то́ подъе́зд — э́то уже́ не подъе́зд, а грани́ца. Мы пройдём. Как Суво́ров — че́рез А́льпы.",
@@ -1618,11 +1699,16 @@
    "status": "active",
    "name": "Баба Люба",
    "voice_name": "valera-i-kot — Баба Люба (restored)",
-   "lines": 7,
+   "lines": 8,
    "episodes": 3,
    "samples": [
+    "series/valera-i-kot/voice/movie/l02.mp3",
+    "series/valera-i-kot/voice/movie/l01.mp3",
     "series/valera-i-kot/voice/ep03/l2.mp3",
+    "series/valera-i-kot/voice/movie/l05.mp3",
+    "series/valera-i-kot/voice/movie/l03.mp3",
     "series/valera-i-kot/voice/ep05/l1.mp3",
+    "series/valera-i-kot/voice/movie/l04.mp3",
     "series/valera-i-kot/voice/ep03/l1.mp3"
    ],
    "design": {
@@ -1663,6 +1749,7 @@
    "lines": 6,
    "episodes": 2,
    "samples": [
+    "series/valera-i-kot/voice/movie/n01.mp3",
     "series/valera-i-kot/voice/ep04/n5.mp3",
     "series/valera-i-kot/voice/ep04/n1.mp3",
     "series/valera-i-kot/voice/ep04/n2.mp3",
@@ -1701,12 +1788,21 @@
    "slug": "valera-i-kot",
    "char": "kolyan",
    "voice_id": "obfzPRwPXc0avd4LPuzH",
-   "status": "active",
+   "status": "deleted",
    "name": "Колян",
    "voice_name": "Валера и кот — Колян",
-   "lines": 6,
+   "lines": 8,
    "episodes": 1,
-   "samples": [],
+   "samples": [
+    "series/valera-i-kot/voice/movie/k05.mp3",
+    "series/valera-i-kot/voice/movie/k07.mp3",
+    "series/valera-i-kot/voice/movie/k02.mp3",
+    "series/valera-i-kot/voice/movie/k03.mp3",
+    "series/valera-i-kot/voice/movie/k08.mp3",
+    "series/valera-i-kot/voice/movie/k01.mp3",
+    "series/valera-i-kot/voice/movie/k04.mp3",
+    "series/valera-i-kot/voice/movie/k06.mp3"
+   ],
    "design": {
     "description": "A huge, slow, taciturn Russian working-class man in his forties. Very deep, low, rumbling bass voice, lazy and sleepy, slightly hoarse, minimal intonation, speaks rarely and very briefly but warmly. Native Russian speaker.",
     "text": "Ну. Ну! Ну-у. Мужики́, я в гараже́, под Жигуля́ми. Ключ на трина́дцать пода́й. Ну. Не, ну а чё. Нормально всё. Ну, с Но́вым го́дом, мужики́.",
@@ -1722,9 +1818,19 @@
    "account": {
     "category": "generated",
     "description": "A huge, slow, taciturn Russian working-class man in his forties. Very deep, low, rumbling bass voice, lazy and sleepy, slightly hoarse, minimal intonation, speaks rarely and very briefly but warmly. Native Russian speaker.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1791792729
-   }
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/obfzPRwPXc0avd4LPuzH/0c8f745d-9cae-4cdc-8bee-32e1cc107d15.mp3",
+   "deleted_on": "2026-10-12",
+   "deleted_reason": "auto: room for prokhor/prokhor"
   },
   {
    "slug": "valera-i-kot",
@@ -1746,5 +1852,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-12 08:12"
+ "updated": "2026-10-12 16:14"
 }

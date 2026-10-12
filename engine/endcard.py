@@ -5,7 +5,7 @@ where it covers no face and no caption.
   python3 engine/endcard.py apply series/<slug>/episodes/epNN [--lang us|ru] [--sec 1.0]   # finished final.mp4, no re-render
   python3 engine/endcard.py preview <style> <lang> out.png
 In new episodes the card goes straight into the render: Episode(..., endcard=dict(style=..., lang=...)) (engine/episode.py).
-Styles: 'fm' (Florida Man: postcard letters + (ALLEGEDLY) stamp + pixel bell), 'default' (any series: Press Start 2P, outline, glow).
+Styles: 'fm' (Florida Man: postcard letters + (ALLEGEDLY) stamp + pixel bell), 'taiga' («Прохор»: campfire letters, snow caps, icicles), 'default' (any series: Press Start 2P, outline, glow).
 """
 import sys, math, subprocess, pathlib, importlib, os
 import numpy as np
@@ -71,6 +71,10 @@ def card(style='default', lang='us', width=None):
         row[(row.shape[0] - bell.shape[0]) // 2:(row.shape[0] - bell.shape[0]) // 2 + bell.shape[0], :bell.shape[1]] = bell
         row[(row.shape[0] - stamp.shape[0]) // 2:(row.shape[0] - stamp.shape[0]) // 2 + stamp.shape[0], bell.shape[1] + 30:] = stamp
         img = _stack([title, row], width, gap=4)
+    elif style == 'taiga':                                       # «Прохор»: campfire letters with snow caps + icicles, a pixel bell
+        from props import taigakit as K
+        title = fit(K.title_trim(K.hook_title([txt], 96 if width <= 1080 else 120, width=width + 300)), width - 60)
+        img = _stack([title, _bell(11)], width, gap=6)
     else:
         img = fit(O.sticker(txt, fg=(255, 214, 60), size=104 if width <= 1080 else 120, icon=_bell(11)), width - 30)
     _CACHE[key] = img

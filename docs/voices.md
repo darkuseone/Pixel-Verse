@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-12 08:12.
+Обновлено: 2026-10-12 16:14.
 
 ## agent-dibs
 
@@ -48,11 +48,11 @@
 |---|---|---|---|---|---|
 | Мазутыч | `maz` | `xSY5jZDD2Tge1l2uwiQn` | active | 29 / 6 | Мазутыч — Мазутыч |
 | Зоя (АЗС) | `zoya` | `aNpGfBJ5tarP9jXqryIk` | active | 13 / 4 | Мазутыч — Зоя (АЗС) |
-| Дин-Дон (моноколесо) | `wheel` | `Kp5sQTqr3PnriPusCHEb` | active | 9 / 6 | Мазутыч — Дин-Дон (моноколесо) |
 | Инспектор Столбов (ДПС) | `cop` | `sqjFPShWaZX3JdS3utu1` | active | 8 / 1 | mazutych — Инспектор Столбов (ДПС) (restored) |
 | Борис Борисыч | `boss` | `iJVGC18PiXCeNoMe4wOM` | active | 8 / 4 | mazutych — Борис Борисыч (restored) |
 | Толик (водитель бензовоза) | `tolik` | `6FfEAtYZ4qqQztCjEr34` | active | 7 / 3 | mazutych — Толик (водитель бензовоза) (restored) |
 | Вадик (барыга) | `vadik` | `3YcbIhxRmKe16pBspvSh` | active | 7 / 1 | mazutych — Вадик (барыга) (restored) |
+| Дин-Дон (моноколесо) | `wheel` | `Kp5sQTqr3PnriPusCHEb` | deleted 2026-10-12 | 9 / 6 | Мазутыч — Дин-Дон (моноколесо) |
 
 ## pochti-dikiy-zapad
 
@@ -62,6 +62,13 @@
 | Ковбой Билли | `billy` | `KTPVrSVAEUSJRClDzBw7` | library_or_premade | 35 / 7 | Bob - Rugged and Warm Cowboy |
 | Кривой Сэм | `sam` | `N2lVS1w4EtoT3dr4eOWO` | library_or_premade | 20 / 7 | Callum - Husky Trickster |
 | Бармен | `bartender` | `LTkx8oHrUXaND7aaxdTA` | library_or_premade | 2 / 1 | Alexander - Deep Mature Narrator |
+
+## prokhor
+
+| Герой | char | voice_id | Статус | Реплик / серий | Голос |
+|---|---|---|---|---|---|
+| Прохор | `prokhor` | `z42gWT4h52CwjWCO9GF0` | active | 0 / 0 | Прохор — Прохор |
+| Михал Потапыч | `bear` | `xflYwcTw1xfUQvQHsSsi` | active | 0 / 0 | Прохор — Михал Потапыч |
 
 ## sunny-palms-hoa
 
@@ -76,14 +83,14 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Валера | `valera` | `rBeJLZF1kJdbvH3OTV0M` | active | 49 / 7 | Валера и кот — Валера |
-| Кот Дембель | `cat` | `0SYrGzuYVNDS2OD4YroI` | active | 23 / 7 | Валера и кот — Кот Дембель |
-| Баба Зина | `zina` | `zYrh5fGxYuTn3sXH3sMw` | active | 19 / 3 | valera-i-kot — Баба Зина (restored) |
+| Валера | `valera` | `rBeJLZF1kJdbvH3OTV0M` | active | 50 / 7 | Валера и кот — Валера |
+| Кот Дембель | `cat` | `0SYrGzuYVNDS2OD4YroI` | active | 24 / 7 | Валера и кот — Кот Дембель |
+| Баба Зина | `zina` | `zYrh5fGxYuTn3sXH3sMw` | active | 21 / 3 | valera-i-kot — Баба Зина (restored) |
 | Кассирша Тамара | `tamara` | `EJfoq1w8EoRCsRnCWoOc` | active | 12 / 2 | valera-i-kot — Кассирша Тамара (restored) |
-| Семёныч | `semenych` | `B5J7DQRqcdz5aZwL642J` | active | 8 / 1 | Валера и кот — Семёныч |
-| Баба Люба | `lyuba` | `bB7ZYDhHF7rhyK82vKpu` | active | 7 / 3 | valera-i-kot — Баба Люба (restored) |
+| Семёныч | `semenych` | `B5J7DQRqcdz5aZwL642J` | active | 10 / 1 | Валера и кот — Семёныч |
+| Баба Люба | `lyuba` | `bB7ZYDhHF7rhyK82vKpu` | active | 8 / 3 | valera-i-kot — Баба Люба (restored) |
 | Нина Петровна (ЖЭК) | `nina` | `pVPuMCjFhiIm88pqmX0y` | active | 6 / 2 | valera-i-kot — Нина Петровна (ЖЭК) (restored) |
-| Колян | `kolyan` | `obfzPRwPXc0avd4LPuzH` | active | 6 / 1 | Валера и кот — Колян |
+| Колян | `kolyan` | `obfzPRwPXc0avd4LPuzH` | deleted 2026-10-12 | 8 / 1 | Валера и кот — Колян |
 | Автоответчик ЖЭКа | `robot` | `uQiZyJqZ7ePaB8bwME8n` | library_or_premade | 2 / 1 | Marusya G – Persuasive Outbound Caller |
 
 ## Защищённые (личные голоса владельца)

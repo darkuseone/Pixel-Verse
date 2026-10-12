@@ -1,0 +1,54 @@
+{
+  "cartoon": "Прохор",
+  "slug": "prokhor",
+  "lang": "ru",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "prokhor": {
+      "name": "Прохор",
+      "color_caption": [
+        255,
+        128,
+        96
+      ],
+      "style": "[booming] [boastful] [shouting] — громкий хвастливый таёжник, на морозе стучит зубами",
+      "design": {
+        "description": "A loud, hoarse Siberian backwoodsman in his mid fifties, a self-taught video blogger living alone in the taiga. Booming, rough bass-baritone with a frosty rasp, energetic, boastful and cheerful, talks fast like a showman, shouts with outrage at prices, then whispers with childish delight. Strong rural northern Russian accent with clear okanye. Native Russian speaker, very expressive and funny.",
+        "text": "[shouting] Девять ты́щ за тепло́?! [boastful] Городски́е! Лайфха́к но́мер оди́н! Медве́дь. Три́дцать во́семь гра́дусов. Без счётчика! [whispering, delighted] Спит до апре́ля. Тари́ф — ноль. [teeth chattering] Го-городски́е... не у́читесь.",
+        "picked": {
+          "i": 2,
+          "dur": 16.93,
+          "f0": 326.5,
+          "f0_iqr": 97.5,
+          "rate": 20.8,
+          "loud_sd": 6.5
+        }
+      },
+      "voice_id": "z42gWT4h52CwjWCO9GF0",
+      "voice": "Прохор — Прохор"
+    },
+    "bear": {
+      "name": "Михал Потапыч",
+      "color_caption": [
+        150,
+        220,
+        255
+      ],
+      "style": "[sleepy] [deadpan] [bored] — сонный бас начальника ЖЭКа, разбуженного зимой",
+      "design": {
+        "description": "A huge old bear who runs the housing management office of the forest, woken up in the middle of winter hibernation. Extremely deep, slow, sleepy and heavy bass voice, monotone bureaucratic deadpan, unimpressed, yawns between words, a low growl in the throat, speaks very calmly and briefly like a tired official reading a bill. Older Russian man in his sixties. Native Russian speaker.",
+        "text": "[sleepy, deadpan] Отопле́ние. Де́вять ты́сяч. [bored] Я на удалёнке. [yawns] Отключу́. [flat] Плюс пе́ни. Сле́дующий. Квита́нцию возьми́те.",
+        "picked": {
+          "i": 1,
+          "dur": 16.35,
+          "f0": 320.0,
+          "f0_iqr": 74.9,
+          "rate": 14.1,
+          "loud_sd": 5.4
+        }
+      },
+      "voice_id": "xflYwcTw1xfUQvQHsSsi",
+      "voice": "Прохор — Михал Потапыч"
+    }
+  }
+}
