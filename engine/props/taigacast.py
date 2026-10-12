@@ -92,7 +92,7 @@ def phone(sp, h, rec=True):
 
 # ================================================================================ Прохор (v2, 12.10.2026: bigger head, clean big shapes)
 def prokhor(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-            hat_off=False, sweat=0.0, frost=0.0, walk=None, chatter=0.0, legs=True, lean=0.0, steam=0.0):
+            hat_off=False, sweat=0.0, frost=0.0, walk=None, chatter=0.0, legs=True, lean=0.0, steam=0.0, camo=False, swollen=0.0):
     """ПРОХОР v2 — city man gone taiga lumberjack, a caricature you read at a glance: a BIG head (≈40 % of the height) with huge eyes,
     a frostbitten potato nose, a wide talking mouth under a ginger moustache and a clean, chunky ginger beard down to the chest; a
     big puffy ushanka (one flap down, one sticking up like a wing); a stocky quilted телогрейка with blue electrical tape, rope belt,
@@ -136,6 +136,13 @@ def prokhor(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, h
     for (a, b) in ((Q(-11.0, 27.0), Q(-5.0, 23.0)), (Q(-10.6, 23.2), Q(-5.4, 27.2)), (Q(10.0, 11.4), Q(15.0, 13.4))):
         sp.fill(sp.m_cap(a, b, 1.0, 1.0)[0] & body, TAPE)
     sp.cap(Q(-14.6, 15.4), Q(16.0, 15.4), 0.9, 0.9, tones(ROPE))                                             # rope belt
+    if camo:                                                                                                 # «маскхалат» of fir branches
+        FIR = (50, 110, 70)
+        cape = sp.union([sp.m_ell(*Q(0.8, 24.0), 18.5, 15.5), sp.m_ell(*Q(-6.0, 14.0), 12.0, 7.0), sp.m_ell(*Q(8.0, 14.0), 12.0, 7.0)], tones(FIR))
+        for q in range(26):
+            a = q * 2.4; x0 = 0.8 + math.cos(a) * (6 + (q % 5) * 2.4); y0 = 24.0 + math.sin(a) * (5 + (q % 4) * 2.4)
+            thin(sp, Q(x0, y0), Q(x0 + 2.2, y0 - 1.6), dark(FIR, 0.62), 0.28, mask=cape)
+            thin(sp, Q(x0, y0), Q(x0 - 2.0, y0 - 1.8), mix(FIR, (180, 230, 160), 0.35), 0.22, mask=cape)
     # ---------------------------------------------------------------- head
     hx, hy = Q(3.0, 47.5)
     face = sp.union([sp.m_ell(hx, hy, 10.0, 10.4), sp.m_ell(hx + 2.4, hy - 4.0, 8.4, 6.6)], tones(SKIN))
@@ -167,6 +174,8 @@ def prokhor(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, h
         for q in range(-3, 4): thin(sp, (mx + q * 0.95, my - 1.5), (mx + q * 0.95, my + 0.5), (170, 170, 184), 0.12, keep=True)
     ms = sp.union([sp.m_ell(mx - 2.6, my + 2.6, 4.2, 1.9, 0.3), sp.m_ell(mx + 2.8, my + 2.6, 3.8, 1.8, -0.3)], tones(mix(BEARD, (240, 150, 80), 0.25)))
     thin(sp, (mx - 5.0, my + 2.2), (mx - 1.0, my + 3.0), dark(BEARD, 0.62), 0.25); thin(sp, (mx + 1.0, my + 3.0), (mx + 5.2, my + 2.2), dark(BEARD, 0.62), 0.25)
+    if swollen > 0:                                                                                     # toothache: a balloon cheek + bandage
+        sp.ell(hx - 3.6, hy - 4.6, 6.0 * swollen + 2.0, 5.4 * swollen + 2.0, tones(mix(SKIN, (240, 120, 110), 0.35)), gloss=0.6)
     nose = sp.ell(hx + 8.6, hy - 1.0, 4.2, 3.6, tones(NOSE), gloss=1.0)
     sp.fill(sp.m_ell(hx + 7.4, hy - 2.8, 0.7, 0.5)[0], dark(NOSE, 0.5))
     if frost: sp.frost(sp.m_ell(hx + 1.0, hy + 6.8, 8.0, 1.6)[0] & sp.m, 0.10 * frost, 9)
@@ -182,6 +191,10 @@ def prokhor(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, h
             thin(sp, (hx + a[0], hy + a[1]), (hx + b[0], hy + b[1]), dark(HAT, 0.6), 0.35)
         thin(sp, (hx - 11.2, hy - 5.6), (hx - 10.4, hy - 9.6), (230, 220, 200), 0.22)                  # untied string
         sp.sup(hx - 2.0, hy + 14.0, 2.0, 1.1, tones(TAPE), n=3.0)                                    # изолента on the crown
+        if camo:
+            for q in range(5):
+                a = -1.0 + q * 0.5
+                thin(sp, (hx - 1.0, hy + 16.0), (hx - 1.0 + math.cos(a + 1.57) * 7.0, hy + 16.0 + math.sin(a + 1.57) * 6.0), (50, 110, 70), 0.6)
         if frost: sp.frost(band, 0.05 * frost, 12)
     else:
         sp.ell(hx, hy + 8.2, 9.8, 4.4, tones(SKIN), gloss=0.9)                                      # bald dome

@@ -20,7 +20,7 @@ def plate(n, total=6, w=860, h=150):
     a[:8], a[-8:], a[:, :8], a[:, -8:] = (40, 36, 34, 255), (40, 36, 34, 255), (40, 36, 34, 255), (40, 36, 34, 255)
     for _ in range(90):
         y = int(rng.integers(10, h - 14)); x = int(rng.integers(10, w - 40)); ln = int(rng.integers(10, 46))
-        if y < 26 or y > h - 30: a[y:y + 4, x:x + ln, :3] = (52, 46, 42)
+        if y < 20 or y > h - 20: a[y:y + 4, x:x + ln, :3] = (52, 46, 42)
     img = Image.fromarray(a); d = ImageDraw.Draw(img); d.fontmode = '1'
     f1, f2 = O.pfont(46), O.pfont(28)
     t1 = 'ТАЁЖНЫЕ ЛАЙФХАКИ'; b1 = f1.getbbox(t1)

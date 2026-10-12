@@ -44,6 +44,16 @@ BG2 = {
     'porch': 'Close view of the front of an old log cabin in deep winter: a log wall on the left half with a small frosted window glowing '
              'warm, snow on the porch steps, a neat stack of firewood, icicles hanging from the roof edge, an old enamel basin on a nail; '
              'the right half opens to a snowy taiga clearing with spruce trees and a big low orange sun, pink-violet sky.',
+    'glade': 'A snowy forest glade, side view: in the middle a big patch of raspberry bushes still holding bright red berries poking out '
+             'of the snow, a few orange mushrooms in the snow, on the left a tall white birch tree with a small empty wooden birdhouse '
+             'nailed to its trunk at mid height, on the right a wide flat tree stump with snow on top, dense spruce forest behind, '
+             'flat open snowy ground in the lower third, pink-violet evening sky, low orange sun.',
+    'lake': 'A wide frozen forest lake in deep winter, side view: a flat snowy ice surface across the lower half, a gently sloping snowy '
+            'shore in the foreground, spruce forest around the far shore, a big low orange sun over the lake, pink-violet sky, empty '
+            'open space in the middle of the ice.',
+    'birch': 'A quiet winter birch grove path in the taiga, side view: a snowy path across the lower third, several white birches and '
+             'spruces, one thick old birch on the right with a low horizontal branch at head height, a small wooden bench half in snow, '
+             'pink-violet evening sky with a low orange sun between the trees.',
 }
 
 

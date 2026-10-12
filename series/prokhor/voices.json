@@ -49,6 +49,98 @@
       },
       "voice_id": "xflYwcTw1xfUQvQHsSsi",
       "voice": "Прохор — Михал Потапыч"
+    },
+    "fox": {
+      "name": "Лиса (курьер «Лиса-Экспресс»)",
+      "color_caption": [
+        255,
+        170,
+        60
+      ],
+      "style": "[sly] [sweet] [fast] — сладкая хитрая курьерша",
+      "design": {
+        "description": "A sly, sweet-talking young woman courier in her twenties, a fast chatty delivery girl with a honeyed, slightly nasal, mischievous voice, fake-polite customer service tone, quick and bouncy, a little cunning laugh. Native Russian speaker, playful and expressive.",
+        "text": "[sweet, fast] Лиса́-Экспре́сс! Распиши́тесь: тут, тут и тут. [sly] Э́то всё — вам. Вы же пункт вы́дачи! [laughs softly] Хоро́шего дня́!",
+        "picked": {
+          "i": 1,
+          "dur": 8.2,
+          "f0": 266.7,
+          "f0_iqr": 105.1,
+          "rate": 26.7,
+          "loud_sd": 5.9
+        }
+      },
+      "voice_id": "049gV87VLzOb4th1QiGx",
+      "voice": "Прохор — Лиса (курьер «Лиса-Экспресс»)"
+    },
+    "squirrel": {
+      "name": "Белка-охранник",
+      "color_caption": [
+        255,
+        200,
+        90
+      ],
+      "style": "[fast] [strict] [nasal] — дотошная охранница магазина",
+      "design": {
+        "description": "A small, fussy, strict supermarket security guard woman in her forties, quick high-pitched nasal voice, bossy and suspicious, speaks fast in short official phrases, chewing sunflower seeds, light southern Russian accent. Native Russian speaker, funny and expressive.",
+        "text": "[strict] Мужчи́на, паке́тик откро́йте. [suspicious] Мали́на — по ве́су. Ши́шка — по а́кции. [bored] Тайга́ — по ка́рте. Сле́дующий!",
+        "picked": {
+          "i": 0,
+          "dur": 7.08,
+          "f0": 290.9,
+          "f0_iqr": 73.8,
+          "rate": 28.1,
+          "loud_sd": 5.2
+        }
+      },
+      "voice_id": "emZnToZuXhR4oQGQ3LhD",
+      "voice": "Прохор — Белка-охранник"
+    },
+    "moose": {
+      "name": "Лось-санитар",
+      "color_caption": [
+        200,
+        170,
+        120
+      ],
+      "style": "[slow] [dumb] [deep] — медленный бюрократ-санитар",
+      "design": {
+        "description": "A huge slow-witted hospital orderly man in his forties, very slow, deep, nasal and dopey voice, bored bureaucratic monotone, long pauses, sighs, absolutely unbothered. Native Russian speaker, funny deadpan.",
+        "text": "[slow, bored] Направле́ние есть? [sigh] Без направле́ния не тяну́. Тало́н — у куку́шки. [deadpan] Сле́дующий.",
+        "picked": {
+          "i": 1,
+          "dur": 8.83,
+          "f0": 129.0,
+          "f0_iqr": 261.7,
+          "rate": 16.8,
+          "loud_sd": 4.8
+        }
+      },
+      "voice_id": "aFuXgHiYbXdvfWT8BKEc",
+      "voice": "Прохор — Лось-санитар"
+    },
+    "ranger": {
+      "name": "Егерь Людмила Петровна",
+      "color_caption": [
+        150,
+        230,
+        120
+      ],
+      "style": "[stern] [loud] [official] — строгая егерша со штрафами",
+      "design": {
+        "description": "A stern loud forest ranger woman in her fifties, commanding husky contralto, official and merciless like a strict inspector, then panicking and squealing when a bear chases her. Light rural Russian accent. Native Russian speaker, expressive and funny.",
+        "text": "[stern] Штраф. За костёр. И за дым. И за за́пах. [panicking, screaming] Ёлочка! Спрячь меня́! [whispering] Он ушёл?",
+        "picked": {
+          "i": 2,
+          "dur": 9.33,
+          "f0": 283.2,
+          "f0_iqr": 133.3,
+          "rate": 24.5,
+          "loud_sd": 5.4
+        }
+      },
+      "voice_id": "d6PvT1IIGreyRcDnsiMh",
+      "voice": "Прохор — Егерь Людмила Петровна"
     }
   }
 }

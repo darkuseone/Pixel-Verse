@@ -178,3 +178,18 @@ def dress_den2(W):
 
 
 DRESS.update(porch=dress_porch, taiga2=dress_taiga2, den2=dress_den2)
+
+
+def dress_glade(W):
+    """E03: the «free» raspberry glade is a shop: a price tag on the far bush and the shop sign by the stump (seen only after the twist)"""
+    D.attach(W, [
+        (R.plate(56, 26, ['МАЛИНА', '900 ₽/КГ'], bg=(255, 236, 90), colors=[BLK, RED], border=RED, weights=[0.8, 1.0], tilt=-6), 862, 452),
+        (_post(7, 120), 935, 365),
+        (R.plate(120, 34, ['ПЯТНЮШКА-ТАЙГА', '24/7 · ПО КАРТЕ'], bg=(40, 150, 70), colors=[WH, (255, 236, 90)], border=WH, weights=[1, 0.7]), 880, 330),
+        (R.plate(46, 22, ['ГРИБЫ', 'ПО АКЦИИ'], bg=WH, colors=[BLK, RED], border=BLK, tilt=4), 1210, 470),
+    ])
+    D.anim(W, sparkles((0, 560, 1280, 720), n=60, seed=21))
+    D.anim(W, flakes((0, 0, 1280, 720), n=60, seed=22, speed=12.0))
+
+
+DRESS.update(glade=dress_glade)

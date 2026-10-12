@@ -285,3 +285,53 @@ def cu(fn, t, world_, cx, cy, Z, sz, head=(540, 960), light=None, blur=0, extra_
         if extra_fx: extra_fx(big, v, a)
     big = shot(world_, light, cx, cy, Z, acts=list(acts_before) + [a] + list(acts_after), pre=pre, fx_=f)
     return big, a
+
+
+# ---------------------------------------------------------------- blogger / phone helpers (E02+)
+def handheld(t, amp=1.0):
+    """selfie camera wobble (output px)"""
+    return (math.sin(t * 2.3) * 10 + math.sin(t * 5.1) * 4) * amp, (math.sin(t * 1.7 + 1) * 8 + math.sin(t * 6.3) * 3) * amp
+
+
+def shift(big, dx, dy):
+    if not dx and not dy: return big
+    return np.roll(np.roll(big, int(dy), 0), int(dx), 1)
+
+
+def _star(d, cx, cy, r, fill, outline):
+    pts = []
+    for i in range(10):
+        a = -math.pi / 2 + i * math.pi / 5
+        rr = r if i % 2 == 0 else r * 0.45
+        pts.append((cx + math.cos(a) * rr, cy + math.sin(a) * rr))
+    d.polygon(pts, fill=fill, outline=outline)
+    if fill is None:
+        for k in range(len(pts)): d.line([pts[k], pts[(k + 1) % len(pts)]], fill=outline, width=5)
+
+
+def phone_card(big, t, t0, t1, lines, icon='ДЯ', icon_col=(150, 40, 150), y=640, stars=None, colors=None):
+    """a phone notification card popping in (t0..t1): app icon + fitted text lines (+ optional star rating, filled = stars)"""
+    if not (t0 <= t < t1): return
+    k = min(1.0, (t - t0) / 0.15) * (1 - sm((t - (t1 - 0.15)) / 0.15))
+    W_, H_ = 940, 150 + 40 * (len(lines) - 1) + (110 if stars is not None else 0)
+    im = Image.new('RGBA', (W_, H_), (0, 0, 0, 0)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    d.rounded_rectangle([0, 0, W_ - 1, H_ - 1], 36, fill=(250, 250, 252, 245), outline=(30, 30, 40, 255), width=6)
+    d.rounded_rectangle([28, 28, 128, 128], 24, fill=icon_col + (255,))
+    f = O.pfont(34); bb = f.getbbox(icon)
+    d.text((78 - (bb[2] - bb[0]) / 2 - bb[0], 78 - (bb[3] - bb[1]) / 2 - bb[1]), icon, font=f, fill=(255, 255, 255))
+    y_ = 34
+    for i, ln in enumerate(lines):
+        sz = 30 if i == 0 else 24
+        f = O.pfont(sz)
+        while f.getlength(ln) > W_ - 190 and sz > 12: sz -= 2; f = O.pfont(sz)
+        d.text((156, y_), ln, font=f, fill=(colors[i] if colors else ((30, 30, 40) if i == 0 else (90, 90, 100))))
+        y_ += sz + 18
+    if stars is not None:
+        for i in range(5):
+            _star(d, 230 + i * 120, H_ - 66, 44, (255, 196, 40) if i < stars else None, (60, 60, 70))
+    a = np.array(im)
+    if k < 1:
+        s = 0.6 + 0.4 * k
+        a = np.array(Image.fromarray(a).resize((max(1, int(W_ * s)), max(1, int(H_ * s))), Image.NEAREST))
+    O.overlay(big, a, (OUT_W - a.shape[1]) // 2, int(y - a.shape[0] / 2), 1.0)
+    if ST.LOG[0] is not None: ST.log('card', bbox=((OUT_W - a.shape[1]) // 2, int(y - a.shape[0] / 2), (OUT_W + a.shape[1]) // 2, int(y + a.shape[0] / 2)))

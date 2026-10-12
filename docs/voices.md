@@ -4,15 +4,15 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-12 17:16.
+Обновлено: 2026-10-12 21:31.
 
 ## agent-dibs
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
 | Dibs | `dibs` | `5C0bHt6GhA0my3bZoLJf` | active | 33 / 6 | Agent Dibs — Dibs |
-| Terry | `terry` | `EUq8L3QnRf1VZ3o46Rqy` | active | 12 / 4 | Agent Dibs — Terry |
-| Deb | `deb` | `rDUAka3HaW9ATyqCs7fi` | active | 11 / 5 | Agent Dibs — Deb |
+| Terry | `terry` | `EUq8L3QnRf1VZ3o46Rqy` | deleted 2026-10-12 | 12 / 4 | Agent Dibs — Terry |
+| Deb | `deb` | `rDUAka3HaW9ATyqCs7fi` | deleted 2026-10-12 | 11 / 5 | Agent Dibs — Deb |
 | Brad | `brad` | `1U7R8ztWDP1r2BuAL8Dz` | library_or_premade | 9 / 3 | Agent Dibs — Brad |
 | Gary | `gary` | `2RpVmTUANdkCGLgvjh2O` | deleted 2026-10-06 | 6 / 3 | Agent Dibs — Gary |
 | 311 Operator | `operator` | `eT8Vk9u6kd8OzYpIosfG` | deleted 2026-10-06 | 5 / 1 | Agent Dibs — 311 Operator |
@@ -47,11 +47,11 @@
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
 | Мазутыч | `maz` | `xSY5jZDD2Tge1l2uwiQn` | active | 29 / 6 | Мазутыч — Мазутыч |
-| Зоя (АЗС) | `zoya` | `aNpGfBJ5tarP9jXqryIk` | active | 13 / 4 | Мазутыч — Зоя (АЗС) |
 | Инспектор Столбов (ДПС) | `cop` | `sqjFPShWaZX3JdS3utu1` | active | 8 / 1 | mazutych — Инспектор Столбов (ДПС) (restored) |
 | Борис Борисыч | `boss` | `iJVGC18PiXCeNoMe4wOM` | active | 8 / 4 | mazutych — Борис Борисыч (restored) |
 | Толик (водитель бензовоза) | `tolik` | `6FfEAtYZ4qqQztCjEr34` | active | 7 / 3 | mazutych — Толик (водитель бензовоза) (restored) |
 | Вадик (барыга) | `vadik` | `3YcbIhxRmKe16pBspvSh` | active | 7 / 1 | mazutych — Вадик (барыга) (restored) |
+| Зоя (АЗС) | `zoya` | `aNpGfBJ5tarP9jXqryIk` | deleted 2026-10-12 | 13 / 4 | Мазутыч — Зоя (АЗС) |
 | Дин-Дон (моноколесо) | `wheel` | `Kp5sQTqr3PnriPusCHEb` | deleted 2026-10-12 | 9 / 6 | Мазутыч — Дин-Дон (моноколесо) |
 
 ## pochti-dikiy-zapad
@@ -67,8 +67,12 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Прохор | `prokhor` | `FmmR663nLw91vgt0SRzR` | active | 9 / 1 | Прохор — Прохор |
-| Михал Потапыч | `bear` | `xflYwcTw1xfUQvQHsSsi` | active | 4 / 1 | Прохор — Михал Потапыч |
+| Прохор | `prokhor` | `FmmR663nLw91vgt0SRzR` | active | 17 / 2 | Прохор — Прохор |
+| Михал Потапыч | `bear` | `xflYwcTw1xfUQvQHsSsi` | active | 7 / 2 | Прохор — Михал Потапыч |
+| Лиса (курьер «Лиса-Экспресс») | `fox` | `049gV87VLzOb4th1QiGx` | active | 0 / 0 | Прохор — Лиса (курьер «Лиса-Экспресс») |
+| Белка-охранник | `squirrel` | `emZnToZuXhR4oQGQ3LhD` | active | 0 / 0 | Прохор — Белка-охранник |
+| Лось-санитар | `moose` | `aFuXgHiYbXdvfWT8BKEc` | active | 0 / 0 | Прохор — Лось-санитар |
+| Егерь Людмила Петровна | `ranger` | `d6PvT1IIGreyRcDnsiMh` | active | 0 / 0 | Прохор — Егерь Людмила Петровна |
 
 ## sunny-palms-hoa
 
@@ -87,9 +91,9 @@
 | Кот Дембель | `cat` | `0SYrGzuYVNDS2OD4YroI` | active | 24 / 7 | Валера и кот — Кот Дембель |
 | Баба Зина | `zina` | `zYrh5fGxYuTn3sXH3sMw` | active | 21 / 3 | valera-i-kot — Баба Зина (restored) |
 | Кассирша Тамара | `tamara` | `EJfoq1w8EoRCsRnCWoOc` | active | 12 / 2 | valera-i-kot — Кассирша Тамара (restored) |
-| Семёныч | `semenych` | `B5J7DQRqcdz5aZwL642J` | active | 10 / 1 | Валера и кот — Семёныч |
 | Баба Люба | `lyuba` | `bB7ZYDhHF7rhyK82vKpu` | active | 8 / 3 | valera-i-kot — Баба Люба (restored) |
 | Нина Петровна (ЖЭК) | `nina` | `pVPuMCjFhiIm88pqmX0y` | active | 6 / 2 | valera-i-kot — Нина Петровна (ЖЭК) (restored) |
+| Семёныч | `semenych` | `B5J7DQRqcdz5aZwL642J` | deleted 2026-10-12 | 10 / 1 | Валера и кот — Семёныч |
 | Колян | `kolyan` | `obfzPRwPXc0avd4LPuzH` | deleted 2026-10-12 | 8 / 1 | Валера и кот — Колян |
 | Автоответчик ЖЭКа | `robot` | `uQiZyJqZ7ePaB8bwME8n` | library_or_premade | 2 / 1 | Marusya G – Persuasive Outbound Caller |
 
