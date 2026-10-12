@@ -200,7 +200,7 @@ def r_fly(t, u):
     ice = sm((t - 24.85) / 0.8)
     a = A(C.prokhor, x, y, WT * 3 * Z, t=t, expr='shock' if ice < 0.5 else 'frozen', mouth_=0.8 if k < 1 else 0.2,
           rot=0 if k >= 1 else -360 * k, pivot=(0.0, 30.0), post=(lambda sp: C.ice_over(sp, ice)) if ice > 0 else None)
-    tp = A(C.tripod, 512.0, 700.0, WT * 1.25 * 3 * Z, t=t)
+    tp = A(C.tripod, 552.0, 700.0, WT * 1.25 * 3 * Z, t=t)
     def f(big, v):
         ox, oy = v.opt(610.0, GROUND)
         K.snow_burst(big, ox, oy - 30, t, 24.65, n=60)
@@ -228,12 +228,12 @@ def r_ice(t, u):
 R = [r_selfie, r_walk, r_crawl, r_den, r_eye, r_terminal, r_plead, r_shove, r_fly, r_ice]
 assert len(R) == len(CUTS) - 1 == len(NAMES)
 
-SHOW = K.Show(EPI, 1, ['9 000 ЗА', 'ТЕПЛО?!'], hook_t=(0.10, 2.25), hook_y=300,
+SHOW = K.Show(EPI, 1, ['9 000 ЗА', 'ТЕПЛО?!'], hook_t=(0.10, 2.25), hook_y=420,
               stickers=[(K.st('ЛАЙФХАК №1', fg=(255, 214, 80)), 8.6, 10.2, 540, 560),
                         (K.st('ТАРИФ: 0 ₽', fg=(150, 255, 160)), 14.4, 15.9, 560, 520),
                         (K.st('9 000 ₽', fg=(255, 90, 80), size=84), 19.7, 21.25, 540, 330)],
               flashes=[TWIST, 23.45], mosaics=[],
-              cap_y={0: 1560, 1: 1000, 2: 1560, 3: 1620, 4: 1450, 9: 1580})
+              cap_y={0: 1560, 1: 1000, 2: 1560, 3: 1620, 4: 1450, 5: 1660, 9: 1580})
 
 
 def render(t):

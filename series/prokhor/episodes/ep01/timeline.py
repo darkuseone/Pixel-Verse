@@ -3,7 +3,7 @@ Sound design: ONLY this series' own sounds (series/prokhor/sfx, owner rule 12.10
 DUR = 32.0
 FPS = 30
 SLUG = 'prokhor'
-MASTER = 0.90
+MASTER = 0.74
 
 VOICE = [
     ('p1', 'ep01b_t', 'p1', 0.00, 0.00, 2.23, 'prokhor', 'Девять тыщ за ОТОПЛЕНИЕ?!'),

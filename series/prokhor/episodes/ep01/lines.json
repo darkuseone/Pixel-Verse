@@ -1,15 +1,13 @@
 {
-  "p1": ["prokhor", "[shouting, outraged, furious] Де́вять ты́щ за тепло́?!"],
-  "p2": ["prokhor", "[smug, satisfied, warming his hands] Вот. Пять секу́нд тепла́ — беспла́тно."],
-  "p3": ["prokhor", "[boastful showman, loud, to the camera] Городски́е! Лайфха́к но́мер оди́н!"],
-  "p4": ["prokhor", "[proud, confident, counting on fingers] Медве́дь. Три́дцать во́семь гра́дусов. Без счётчика!"],
-  "p5": ["prokhor", "[whispering, blissful, cozy] Спит до апре́ля. Тари́ф — ноль."],
-  "p6": ["prokhor", "[smug, triumphant, to the camera] Городски́е — учи́тесь!"],
+  "p1": ["prokhor", "[outraged, shouting, rough] Де́вять ты́щ за отопле́ние?!"],
+  "p2": ["prokhor", "[rough, proud, confident] А я в тайгу́ перее́хал. Тут тепло́ — беспла́тно!"],
+  "p3": ["prokhor", "[confident, showing off, loud] Лайфха́к: зимо́й медве́дь — э́то батаре́я."],
+  "p3b": ["prokhor", "[whispering] Ти́хо. Спит."],
+  "p4": ["prokhor", "[whispering, blissful, cozy] Три́дцать во́семь гра́дусов. Без счётчика."],
+  "p5": ["prokhor", "[whispering, smug] Городски́е, учи́тесь."],
   "b1": ["bear", "[sleepy, deadpan, very low] Отопле́ние. Де́вять ты́сяч."],
-  "p7": ["prokhor", "[shocked, shouting] Ты ж спишь!"],
-  "b2": ["bear", "[bored, deadpan] Я на удалёнке."],
-  "p8": ["prokhor", "[pleading, nervous] А е́сли не заплачу́?"],
-  "b3": ["bear", "[yawns] Отключу́."],
-  "p9": ["prokhor", "[teeth chattering, frozen, weak voice] Го-городски́е... не учи́тесь."],
-  "b4": ["bear", "[flat, deadpan, unimpressed] Плюс пе́ни."]
+  "p6": ["prokhor", "[whispering, nervous] Не́ту..."],
+  "b2": ["bear", "[growling, deadpan, low] Отключа́ю."],
+  "p7": ["prokhor", "[teeth chattering, frozen, weak] Го-городски́е... не учи́тесь."],
+  "b3": ["bear", "[flat, deadpan, unimpressed] Плюс пе́ни."]
 }
