@@ -8,6 +8,7 @@ import math
 import numpy as np
 from props import dibspix as DX
 from props.dibspix import dark, mix, erode, ik, EXPR
+from props import koshpix as KX
 from props.koshpix import tones, thin, INK, WHITE, GOLD, GOLD_L, GHOST, CINNABAR
 
 # ---------------------------------------------------------------- palette
@@ -165,8 +166,8 @@ def koshchei(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, 
     mx, my = hx + 5.4, hy - 8.1
     DX.mouth(sp, mx, my, 5.4, E, mouth_, INK, skin=K_SKIN, maxh=7, big_teeth=True, teeth=(230, 222, 186))
     # the moustache: two thin grey strands hanging to the chest
-    for side, (a, b, c) in enumerate((((mx - 0.6, my + 1.2), (mx - 3.2, my - 2.0), (mx - 4.2, my - 14.0)),
-                                      ((mx + 1.4, my + 1.2), (mx + 4.0, my - 2.4), (mx + 6.2, my - 15.0)))):
+    for side, (a, b, c) in enumerate((((mx - 3.0, my + 1.8), (mx - 4.6, my - 2.0), (mx - 5.2, my - 14.0)),
+                                      ((mx + 3.2, my + 1.8), (mx + 5.2, my - 2.4), (mx + 6.4, my - 15.0)))):
         thin(sp, a, b, K_MOUS, 0.42); thin(sp, b, c, K_MOUS, 0.34)
         sp.blob(c[0], c[1], 0.4, mix(K_MOUS, WHITE, 0.4))
     # the foil crown, askew
@@ -223,24 +224,24 @@ def yaga(sp, t=0.0, expr='gossip', mouth_=0.0, look=(0.7, 0.0), blink=None, hand
     sp.fill(sh & ~erode(sh) & (DX.YC < 31.0), GOLD)                                      # gold fringe edge
     for q in range(9): thin(sp, Q(-5.0 + q * 1.2, 21.0 - abs(q - 4) * 1.2), Q(-5.2 + q * 1.2, 19.4 - abs(q - 4) * 1.2), GOLD, 0.18)
     # head in the shawl
-    hx, hy = Q(4.2, 36.0)
-    hood = sp.union([sp.m_ell(hx - 1.0, hy + 1.0, 7.4, 7.6)], tones(Y_SHAWL))
-    sp.rose(hx - 4.4, hy + 4.0, 1.6, CINNABAR, hood); sp.rose(hx - 1.0, hy + 6.6, 1.2, CINNABAR, hood)
-    for q in range(2): sp.ell(hx + 1.6 + q * 2.6, hy + 6.2, 1.1, 1.0, tones((220, 90, 150)), snow=False)   # бигуди
-    face = sp.union([sp.m_ell(hx + 1.6, hy - 0.4, 4.8, 5.4)], tones(Y_SKIN))
+    hx, hy = Q(4.6, 38.0)
+    hood = sp.union([sp.m_ell(hx - 1.4, hy + 1.4, 10.4, 10.6)], tones(Y_SHAWL))
+    sp.rose(hx - 6.2, hy + 5.6, 2.2, CINNABAR, hood); sp.rose(hx - 1.4, hy + 9.2, 1.7, CINNABAR, hood)
+    for q in range(2): sp.ell(hx + 2.2 + q * 2.6, hy + 8.7, 1.5, 1.4, tones((220, 90, 150)), snow=False)   # бигуди
+    face = sp.union([sp.m_ell(hx + 2.2, hy - 0.6, 6.7, 7.6)], tones(Y_SKIN))
     sp.gold(hood)
-    for q in range(3): thin(sp, (hx - 1.0, hy - 1.0 - q * 1.1), (hx + 1.0, hy - 1.6 - q * 1.1), dark(Y_SKIN, 0.75), 0.18, mask=face)
+    for q in range(3): thin(sp, (hx - 1.4, hy - 1.4 - q * 1.1), (hx + 1.4, hy - 2.2 - q * 1.1), dark(Y_SKIN, 0.75), 0.18, mask=face)
     lx, ly = look
-    DX.eye(sp, hx + 1.2, hy + 1.2, 2.6, 2.2, E, (70, 50, 40), (lx, ly), blink, lash=INK, skin=Y_SKIN, lidc=dark(Y_SKIN, 0.85), bag=dark(Y_SKIN, 0.75))
-    DX.eye(sp, hx + 4.6, hy + 1.4, 2.4, 2.0, E, (70, 50, 40), (lx, ly), blink, lash=INK, skin=Y_SKIN, lidc=dark(Y_SKIN, 0.85))
-    DX.brow(sp, hx + 4.6, hy + 3.4, 2.6, E, +1, (150, 146, 140), th=1, bushy=True)
-    DX.brow(sp, hx + 1.0, hy + 3.2, 2.6, E, -1, (150, 146, 140), th=1, bushy=True)
-    nose = sp.m_poly([(hx + 3.4, hy + 0.6), (hx + 10.4, hy - 3.4), (hx + 10.0, hy - 5.0), (hx + 4.4, hy - 2.6)])
+    DX.eye(sp, hx + 1.7, hy + 1.7, 3.8, 3.2, E, (70, 50, 40), (lx, ly), blink, lash=INK, skin=Y_SKIN, lidc=dark(Y_SKIN, 0.85), bag=dark(Y_SKIN, 0.75))
+    DX.eye(sp, hx + 6.4, hy + 2.0, 3.4, 2.9, E, (70, 50, 40), (lx, ly), blink, lash=INK, skin=Y_SKIN, lidc=dark(Y_SKIN, 0.85))
+    DX.brow(sp, hx + 6.4, hy + 4.8, 3.6, E, +1, (150, 146, 140), th=1.3, bushy=True)
+    DX.brow(sp, hx + 1.4, hy + 4.5, 3.6, E, -1, (150, 146, 140), th=1.3, bushy=True)
+    nose = sp.m_poly([(hx + 4.8, hy + 0.8), (hx + 14.6, hy - 4.8), (hx + 14.0, hy - 7.0), (hx + 6.2, hy - 3.6)])
     sp.paint(nose, tones(Y_NOSE), DX.lit(np.full_like(DX.XC, 0.4), np.full_like(DX.XC, 0.3)), olc=INK)
-    sp.blob(hx + 7.0, hy - 1.0, 0.7, (150, 90, 70))                                     # the wart
-    mx, my = hx + 3.4, hy - 4.0
-    DX.mouth(sp, mx, my, 3.2, E, mouth_, INK, skin=Y_SKIN, maxh=4)
-    thin(sp, (mx + 0.6, my - 0.2), (mx + 0.7, my - 1.8), (240, 232, 190), 0.4)          # the one long tooth
+    sp.blob(hx + 9.8, hy - 1.4, 1.0, (150, 90, 70))                                     # the wart
+    mx, my = hx + 4.8, hy - 5.6
+    DX.mouth(sp, mx, my, 4.5, E, mouth_, INK, skin=Y_SKIN, maxh=6)
+    thin(sp, (mx + 0.8, my - 0.3), (mx + 1.0, my - 2.5), (240, 232, 190), 0.55)          # the one long tooth
     sp.anchors['head'] = (hx, hy)
     # near arm
     shN = Q(6.0, 28.0)
@@ -281,3 +282,335 @@ def domovoy(sp, t=0.0, expr='zhut', mouth_=0.0, look=(0.9, -0.1), blink=None, gl
     seal = sp.ell(1.6, 5.8, 1.3, 1.3, tones((150, 154, 164)), gloss=0.6, snow=False)
     if glow > 0: sp.blob(-4.4, 16.0 + br, 0.6 + 0.4 * glow, mix((255, 60, 40), (255, 220, 200), 0.3 * glow))
     sp.anchors['head'] = (1.6, 12.6)
+
+
+# ================================================================================ Галина Аркадьевна («система» в каждом окошке)
+G_SKIN = (232, 186, 160)
+G_HAIR = (150, 64, 44)              # хна, химзавивка
+G_CARD = (110, 70, 120)             # кофта
+G_BLOUSE = (236, 226, 210)
+
+
+def galina(sp, t=0.0, expr='deadpan', mouth_=0.0, look=(-0.6, -0.2), blink=None, hand_n=None, prop_n=None, biscuit=False, chew=False,
+           hand_f=None, prop_f=None, scared=0.0):
+    """ГАЛИНА АРКАДЬЕВНА — the clerk in every window: a round «кубышка» (≈42 px) with a big rusty-henna perm, glasses on a chain,
+    a violet cardigan with an amber brooch, a ring biscuit in her teeth; facing +x like everyone (flip=True to face left).
+    scared = 0..1 (E05): shoulders up, the perm bristles, she shrinks"""
+    E = X(expr)
+    if blink is None: blink = (t % 4.8) < 0.12
+    br = 0.25 * math.sin(t * 1.7)
+    sh = 1.6 * scared
+    ch = (math.sin(t * 9.0) * 0.5 + 0.5) if chew else 0.0
+    sp.cap((-3.0, 8.0), (-3.2, 2.0), 2.6, 2.4, tones((60, 50, 54))); sp.ell(-2.0, 1.2, 3.4, 1.6, tones((40, 34, 36)))
+    sp.cap((3.0, 8.0), (3.4, 2.0), 2.6, 2.4, tones((70, 60, 64))); sp.ell(4.6, 1.2, 3.4, 1.6, tones((40, 34, 36)))
+    sp.union([sp.m_super(0.4, 12.0, 8.8, 5.0, 2.4)], tones((60, 60, 72)))                             # skirt
+    body = sp.union([sp.m_ell(0.4, 22.0, 10.4, 9.6)], tones(G_CARD))
+    sp.fill(body & (np.abs(DX.XC - 4.6) < 0.5), dark(G_CARD, 0.7))
+    sp.ell(5.2, 26.0, 2.4, 3.0, tones(G_BLOUSE), snow=False)
+    sp.ell(5.6, 25.0, 1.1, 1.1, tones((230, 150, 40)), gloss=0.9, snow=False)                        # amber brooch
+    hf = hand_f if hand_f is not None else (-6.0, 15.0)
+    kF, eF = ik((-7.0, 27.0 + sh), hf, 6.0, 6.0, -1.0)
+    sp.cap((-7.0, 27.0 + sh), kF, 2.4, 2.2, tones(dark(G_CARD, 0.8))); sp.cap(kF, eF, 2.2, 2.0, tones(dark(G_CARD, 0.8)))
+    sp.ell(eF[0], eF[1], 1.7, 1.7, tones(dark(G_SKIN, 0.85)))
+    if prop_f: prop_f(sp, eF)
+    hx, hy = 3.0, 38.0 - sh * 0.6
+    hair = sp.union([sp.m_ell(hx - 1.4, hy + 3.2 + sh * 0.3, 9.4 + sh, 8.4 + sh), sp.m_ell(hx - 6.0, hy - 1.0, 4.4, 5.0)], tones(G_HAIR))
+    rng = np.random.default_rng(5)
+    for q in range(26):                                                                                 # perm curls
+        a_ = rng.random() * 6.28; r_ = rng.random() * 7.6
+        sp.curl(hx - 1.4 + math.cos(a_) * r_, hy + 3.2 + math.sin(a_) * r_ * 0.85, 1.0, dark(G_HAIR, 0.66), turns=0.9, w=0.22, mask=hair, seed=q)
+    face = sp.union([sp.m_ell(hx + 1.4, hy - 0.6, 6.6, 7.0)], tones(G_SKIN))
+    DX.blush(sp, hx + 4.0, hy - 2.6, 1.8, 1.0, (230, 130, 130))
+    lx, ly = look
+    DX.eye(sp, hx + 0.4, hy + 0.8, 3.6, 3.0, E, (90, 70, 50), (lx, ly), blink, lash=INK, skin=G_SKIN, lidc=dark(G_SKIN, 0.86))
+    DX.eye(sp, hx + 5.0, hy + 1.0, 3.4, 2.8, E, (90, 70, 50), (lx, ly), blink, lash=INK, skin=G_SKIN, lidc=dark(G_SKIN, 0.86))
+    for (cx, w_) in ((hx + 0.4, 2.4), (hx + 5.0, 2.2)):                                                 # glasses
+        m = sp.m_ell(cx, hy + 0.8, w_ + 0.3, 2.1)[0]
+        sp.fill(m & ~erode(m), (120, 90, 50))
+    thin(sp, (hx + 2.7, hy + 1.2), (hx + 2.9, hy + 1.2), (120, 90, 50), 0.3)
+    for q in range(10): sp.blob(hx - 2.2 - q * 0.25, hy + 0.4 - q * 1.6, 0.25, GOLD)                    # the chain
+    DX.brow(sp, hx + 5.2, hy + 3.8, 3.2, E, +1, dark(G_HAIR, 0.6), th=0.9)
+    DX.brow(sp, hx + 0.2, hy + 3.6, 3.2, E, -1, dark(G_HAIR, 0.6), th=0.9)
+    sp.ell(hx + 4.4, hy - 1.6, 1.4, 1.6, tones(dark(G_SKIN, 0.92)), snow=False)
+    mx, my = hx + 3.4, hy - 4.6
+    DX.mouth(sp, mx, my, 3.6, E, max(mouth_, ch * 0.25), (170, 50, 70), skin=G_SKIN, maxh=5)
+    if biscuit:
+        b = sp.m_ell(mx + 2.8, my + 0.4, 2.4, 2.0)[0]
+        sp.paint(b & ~sp.m_ell(mx + 2.8, my + 0.4, 0.9, 0.8)[0], tones((214, 160, 90)), None, olc=dark((214, 160, 90), 0.5))
+    sp.anchors['head'] = (hx, hy)
+    hn = hand_n if hand_n is not None else (9.0, 16.0)
+    kN, eN = ik((7.0, 27.0 + sh), hn, 6.0, 6.0, -1.0)
+    sp.cap((7.0, 27.0 + sh), kN, 2.4, 2.2, tones(G_CARD)); sp.cap(kN, eN, 2.2, 2.0, tones(G_CARD))
+    sp.ell(eN[0], eN[1], 1.7, 1.7, tones(G_SKIN))
+    if prop_n: prop_n(sp, eN)
+    sp.anchors['hand_n'] = eN
+
+
+def stamp(sp, h, up=0.0):
+    """rubber stamp (ПЕЧАТЬ) in a hand; up lifts it"""
+    x, y = h
+    sp.cap((x, y + up), (x, y + 4.0 + up), 1.0, 0.8, tones((120, 70, 40)))
+    sp.ell(x, y + 4.6 + up, 1.6, 1.4, tones((120, 70, 40)), gloss=0.6, snow=False)
+    sp.sup(x, y - 0.6 + up, 2.4, 0.9, tones((60, 60, 70)), snow=False)
+
+
+def cutters(sp, h, open_=0.4):
+    """big bolt cutters (E05)"""
+    x, y = h
+    for s_ in (-1, 1):
+        a = 0.35 + s_ * open_ * 0.35
+        thin(sp, (x, y), (x - math.cos(a) * 9.0, y - s_ * math.sin(a) * 3.0 - 5.0), (196, 40, 40), 0.7)
+        thin(sp, (x, y), (x + math.cos(a * 0.6) * 4.0, y + s_ * 1.2 * (0.5 + open_)), (170, 176, 186), 0.6)
+
+
+# ================================================================================ Змей Горыныч (сосед сверху, три головы)
+GR = (88, 150, 70)
+GR_B = (196, 210, 120)
+
+
+def gorynych(sp, t=0.0, exprs=('normal', 'normal', 'normal'), mouths=(0.0, 0.0, 0.0), looks=None, hats=False, phones=False, drills=None,
+             duvet=0.0, laptop=False, wave=0.0):
+    """ЗМЕЙ ГОРЫНЫЧ — a pear-bodied green dragon in a striped tank top, three necks: head 1 (front, polite operator with a headset),
+    head 2 (big, gruff bass), head 3 (small, squeaky). hats = three hard hats (E03), phones = a phone at each head (E02),
+    drills = list of 3 drill angles or None (E03), duvet = each head under its own blanket (0..1, E03 night), wave = paw wave (E02)"""
+    looks = looks or [(0.7, 0.0)] * 3
+    br = 0.3 * math.sin(t * 2.0)
+    sp.ell(-10.0, 6.0, 6.0, 3.0, tones(dark(GR, 0.8)))                                                   # tail
+    sp.cap((-10.0, 6.0), (-18.0, 3.0 + math.sin(t * 2) * 1.0), 2.4, 1.0, tones(dark(GR, 0.8)))
+    for dx in (-5.0, 5.0):
+        sp.cap((dx, 8.0), (dx + 1.0, 2.0), 3.2, 3.0, tones(GR)); sp.ell(dx + 2.4, 1.4, 4.2, 1.6, tones(dark(GR, 0.7)))
+    body = sp.union([sp.m_ell(0.0, 20.0 + br * 0.2, 13.0, 14.0)], tones(GR))
+    belly = sp.ell(3.0, 19.0, 8.4, 10.6, tones(GR_B), snow=False)
+    sp.fill(belly & ((DX.YC % 2.6) < 0.5), dark(GR_B, 0.85))
+    tank = sp.m_poly([(-9.0, 12.0), (11.0, 12.0), (10.0, 28.0), (5.0, 30.0), (-4.0, 30.0), (-9.0, 27.0)])
+    sp.paint(tank & body, tones((236, 236, 230)), None, olc=dark((236, 236, 230), 0.6))
+    sp.fill(tank & body & ((DX.YC % 2.4) < 0.7), (60, 90, 170))                                           # striped тельняшка
+    # three necks + heads
+    heads = [((-8.0, 31.0), (-14.0, 45.0), 1.0), ((1.0, 33.0), (2.0, 51.0), 1.25), ((9.0, 31.0), (16.0, 44.0), 0.8)]
+    for i, (base, hp, k) in enumerate(heads):
+        sway = math.sin(t * 2.0 + i * 1.7) * 0.8
+        hx, hy = hp[0] + sway, hp[1]
+        sp.cap(base, (hx - 1.0, hy - 3.0 * k), 3.0 * k, 2.4 * k, tones(GR))
+        E = X(exprs[i])
+        head = sp.union([sp.m_ell(hx, hy, 5.4 * k, 4.6 * k), sp.m_ell(hx + 4.0 * k, hy - 1.4 * k, 4.0 * k, 3.0 * k)], tones(GR))
+        sp.gold(head)
+        for q in range(3): sp.ell(hx - 3.0 * k + q * 2.0 * k, hy + 4.4 * k, 0.9 * k, 1.2 * k, tones((230, 120, 50)), snow=False)   # crest
+        sp.blob(hx + 7.0 * k, hy - 0.6 * k, 0.45 * k, dark(GR, 0.4))                                    # nostril
+        lx, ly = looks[i]
+        DX.eye(sp, hx + 1.4 * k, hy + 1.2 * k, 3.2 * k, 2.8 * k, E, (230, 180, 40), (lx, ly), (t + i) % 3.7 < 0.12, lash=INK, skin=GR,
+               lidc=dark(GR, 0.85), slit=True)
+        DX.brow(sp, hx + 1.4 * k, hy + 3.4 * k, 3.0 * k, E, +1, dark(GR, 0.55), th=0.9)
+        DX.mouth(sp, hx + 4.4 * k, hy - 2.6 * k, 4.4 * k, E, mouths[i], dark(GR, 0.45), skin=GR, maxh=4 * k, big_teeth=True)
+        sp.anchors[f'head{i + 1}'] = (hx, hy)
+        if hats:
+            hat = sp.union([sp.m_ell(hx - 0.4, hy + 3.6 * k, 5.6 * k, 3.4 * k)], tones((250, 200, 40)))
+            sp.fill(hat & (DX.YC < hy + 2.0 * k), (250, 200, 40)); sp.cap((hx - 6.4 * k, hy + 2.2 * k), (hx + 5.6 * k, hy + 2.2 * k), 0.6 * k, 0.6 * k, tones((230, 170, 30)))
+        if phones:
+            ph = sp.m_super(hx - 3.4 * k, hy - 1.0 * k, 1.2 * k, 2.6 * k, 3.0)[0]
+            sp.paint(ph, tones((40, 40, 46)), None, olc=INK)
+            sp.fill(sp.m_ell(hx - 3.4 * k, hy + 0.2 * k, 0.6 * k, 0.6 * k)[0], (90, 200, 120))
+        if drills is not None:
+            a = drills[i]; dxh, dyh = hx + 6.0 * k, hy - 3.0 * k
+            sp.sup(dxh, dyh, 2.6 * k, 1.6 * k, tones((40, 110, 200)), snow=False)
+            thin(sp, (dxh + 2.4 * k, dyh), (dxh + 2.4 * k + math.cos(a) * 5.0 * k, dyh + math.sin(a) * 5.0 * k), (190, 196, 206), 0.4 * k)
+        if duvet > 0:
+            dv = sp.m_ell(hx + 0.6, hy - 1.0 * k + 8.0 * (1 - duvet), 6.6 * k, 5.6 * k)[0] & (DX.YC < hy + 6.0 * k)
+            sp.paint(dv, tones([(220, 120, 140), (110, 160, 220), (240, 200, 90)][i]), None, olc=INK)
+    if laptop:
+        sp.sup(12.0, 18.0, 6.0, 1.0, tones((60, 60, 70)), snow=False)
+        sc = sp.m_poly([(8.0, 19.0), (16.0, 19.0), (17.0, 26.0), (9.0, 26.0)])
+        sp.paint(sc, tones((40, 40, 48)), None, olc=INK)
+        sp.fill(sp.m_poly([(9.0, 20.0), (15.6, 20.0), (16.4, 25.2), (9.8, 25.2)]), (120, 200, 255))
+        sp.txt_box(['КОЛЛ-', 'ЦЕНТР'], (9.4, 20.2, 16.0, 25.0), (20, 40, 80), pad=0.2)
+    if wave:
+        sp.cap((10.0, 26.0), (17.0, 32.0 + math.sin(t * 14) * 2.0 * wave), 2.2, 1.8, tones(GR))
+        sp.ell(17.4, 33.0 + math.sin(t * 14) * 2.0 * wave, 2.0, 2.2, tones(GR))
+    sp.anchors['head'] = heads[1][1]
+
+
+# ================================================================================ ряженые студенты (E06, 18+)
+def student(sp, t=0.0, costume='zombie', expr='grin', mouth_=0.0, look=(0.7, 0.0), blink=None, hand_n=None, prop_n=None, bag=True):
+    """a university student in a trick-or-treat costume: zombie (green face paint, torn shirt), vampire (cape, fangs, slick hair)
+    or skeleton (black onesie with bones). ≈50 px, lanky, sneakers, a paper bag for candy."""
+    E = X(expr)
+    if blink is None: blink = (t % 3.5) < 0.12
+    skin = (150, 196, 130) if costume == 'zombie' else (236, 226, 220) if costume == 'vampire' else (232, 190, 160)
+    shirt = {'zombie': (120, 110, 90), 'vampire': (30, 26, 34), 'skeleton': (26, 26, 30)}[costume]
+    if costume == 'vampire':
+        cape = sp.m_poly([(-9.0, 40.0), (8.0, 40.0), (13.0, 6.0), (-14.0, 6.0)])
+        sp.paint(cape, tones((150, 20, 30)), None, olc=INK)
+    for dx in (-2.6, 2.6):
+        sp.cap((dx, 24.0), (dx + 0.4, 3.0), 2.2, 2.0, tones((50, 70, 120) if costume != 'skeleton' else shirt))
+        sp.ell(dx + 1.6, 1.4, 3.4, 1.6, tones((240, 240, 240)))
+        if costume == 'skeleton':
+            for q in range(3): sp.cap((dx, 21.0 - q * 6.0), (dx + 0.3, 18.0 - q * 6.0), 0.6, 0.6, tones(BONE), snow=False)
+    body = sp.union([sp.m_super(0.0, 32.0, 6.4, 9.0, 2.4)], tones(shirt))
+    if costume == 'zombie':
+        for q in range(4): sp.fill(body & sp.m_poly([(-6.4 + q * 3.4, 23.0), (-4.6 + q * 3.4, 23.0), (-5.4 + q * 3.4, 26.0)]), (0, 0, 0))
+        sp.fill(body & sp.m_ell(2.0, 34.0, 1.6, 1.2)[0], (150, 30, 30))
+    if costume == 'skeleton':
+        for q in range(4): thin(sp, (-4.0, 36.0 - q * 2.4), (4.0, 36.0 - q * 2.4), BONE, 0.4)
+        thin(sp, (0.0, 38.0), (0.0, 26.0), BONE, 0.5)
+    if costume == 'vampire':
+        sp.fill(body & sp.m_poly([(-1.6, 41.0), (1.6, 41.0), (0.0, 30.0)]), (240, 240, 240))
+        sp.fill(sp.m_poly([(-4.0, 42.0), (4.0, 42.0), (7.0, 46.0), (-7.0, 46.0)]), (150, 20, 30))
+    hx, hy = 1.4, 48.0
+    head = sp.union([sp.m_ell(hx, hy, 6.0, 6.8)], tones(skin))
+    if costume == 'skeleton':
+        sp.fill(head & ~sp.m_ell(hx + 1.6, hy - 1.0, 4.4, 5.2)[0], (26, 26, 30))
+    hair = {'zombie': (60, 40, 30), 'vampire': (20, 20, 26), 'skeleton': (26, 26, 30)}[costume]
+    sp.union([sp.m_ell(hx - 1.0, hy + 4.8, 6.0, 2.8)], tones(hair))
+    if costume == 'zombie':
+        thin(sp, (hx - 2.0, hy - 2.0), (hx + 1.0, hy - 4.0), (150, 30, 30), 0.3); thin(sp, (hx + 3.0, hy + 3.0), (hx + 4.4, hy + 1.6), (60, 90, 50), 0.3)
+    lx, ly = look
+    DX.eye(sp, hx + 0.4, hy + 0.8, 3.2, 2.8, E, (70, 60, 50) if costume != 'vampire' else (190, 30, 30), (lx, ly), blink, lash=INK, skin=skin,
+           bag=(90, 120, 80) if costume == 'zombie' else None)
+    DX.eye(sp, hx + 4.4, hy + 1.0, 3.0, 2.6, E, (70, 60, 50) if costume != 'vampire' else (190, 30, 30), (lx, ly), blink, lash=INK, skin=skin)
+    DX.brow(sp, hx + 4.4, hy + 3.2, 2.8, E, +1, hair, th=0.9)
+    DX.brow(sp, hx + 0.4, hy + 3.0, 2.8, E, -1, hair, th=0.9)
+    sp.ell(hx + 3.6, hy - 1.4, 1.2, 1.4, tones(dark(skin, 0.9)), snow=False)
+    mx, my = hx + 3.0, hy - 3.8
+    DX.mouth(sp, mx, my, 3.6, E, mouth_, INK, skin=skin, maxh=5)
+    if costume == 'vampire':
+        for dx in (-0.8, 0.8): thin(sp, (mx + dx, my + 0.2), (mx + dx, my - 1.2), WHITE, 0.3)
+    sp.anchors['head'] = (hx, hy)
+    hn = hand_n if hand_n is not None else (8.0, 26.0)
+    kN, eN = ik((4.0, 39.0), hn, 7.0, 7.0, -1.0)
+    sp.cap((4.0, 39.0), kN, 1.8, 1.6, tones(shirt)); sp.cap(kN, eN, 1.6, 1.4, tones(shirt))
+    sp.ell(eN[0], eN[1], 1.5, 1.5, tones(skin))
+    if bag:
+        b = sp.m_super(eN[0] + 1.0, eN[1] - 4.0, 2.6, 3.4, 3.0)[0]
+        sp.paint(b, tones((200, 160, 110)), None, olc=dark((200, 160, 110), 0.5))
+        sp.ell(eN[0] + 1.0, eN[1] - 4.0, 1.0, 0.9, tones((240, 140, 40)), snow=False)
+    if prop_n: prop_n(sp, eN)
+    sp.anchors['hand_n'] = eN
+
+
+# ================================================================================ избушка на курьих ножках (Яга's «ракушка»)
+def izba(sp, t=0.0, sit=0.0, cluck=0.0, lit=1.0, steam=True, sign=True, egg=0.0, step=None):
+    """the hut on chicken legs: a small log cabin (≈34 px box) on two scaly yellow chicken legs. sit = 0 standing .. 1 brooding on the
+    pipe (legs folded, body lowered, feathers fluff out); cluck = body bob; egg = a hot egg rolling out from under it (0..1)."""
+    bob = math.sin(t * 18.0) * 1.2 * cluck
+    leg_h = 22.0 * (1 - sit)
+    base = 4.0 + leg_h + bob
+    if sit < 0.9:
+        for dx, ph in ((-7.0, 0.0), (7.0, 1.7)):
+            st_ = math.sin(step + ph) * 3.0 if step is not None else 0.0
+            knee = (dx + 4.0 + st_ * 0.5, 4.0 + leg_h * 0.55)
+            sp.cap((dx, base), knee, 2.0, 1.6, tones((240, 190, 60)))
+            sp.cap(knee, (dx + st_, 3.0), 1.6, 1.3, tones((240, 190, 60)))
+            for a in (-0.5, 0.0, 0.5):
+                thin(sp, (dx + st_, 2.6), (dx + st_ + math.sin(a) * 5.0 + 2.0, 0.6), (220, 160, 40), 0.5)
+            for q in range(4): thin(sp, (knee[0] - 1.4, knee[1] - q * 2.4), (knee[0] + 1.4, knee[1] - q * 2.4 - 0.4), (190, 130, 30), 0.18)
+    feathers = sp.m_ell(0.0, base + 1.0, 18.0, 4.0 + 3.0 * sit)[0]
+    sp.paint(feathers, tones((236, 220, 200)), None, olc=dark((236, 220, 200), 0.5))
+    for q in range(12): sp.blob(-16.0 + q * 2.9, base - 0.6 - 1.6 * sit, 1.2 + 0.6 * sit, (250, 240, 228))
+    logs = sp.union([sp.m_super(0.0, base + 14.0, 15.0, 12.0, 4.0)], tones((140, 90, 50)))
+    for q in range(6): sp.fill(logs & (np.abs(DX.YC - (base + 4.0 + q * 4.0)) < 0.45), dark((140, 90, 50), 0.6))
+    for q in range(6):
+        y_ = base + 4.0 + q * 4.0
+        sp.ell(-15.4, y_ + 2.0, 1.6, 1.8, tones((180, 130, 80)), snow=False); sp.ell(15.4, y_ + 2.0, 1.6, 1.8, tones((180, 130, 80)), snow=False)
+    roof = sp.m_poly([(-19.0, base + 25.0), (19.0, base + 25.0), (0.0, base + 40.0)])
+    sp.paint(roof, tones((80, 60, 50)), DX.lit(np.clip((DX.XC) / 19.0, -0.9, 0.9), np.full_like(DX.XC, 0.3)), olc=INK)
+    for q in range(5): thin(sp, (-16.0 + q * 2.0, base + 25.5 + q * 2.8), (16.0 - q * 2.0, base + 25.5 + q * 2.8), dark((80, 60, 50), 0.6), 0.3)
+    sp.cap((10.0, base + 30.0), (10.0, base + 38.0), 1.6, 1.6, tones((150, 70, 60)))
+    win = sp.m_super(1.0, base + 15.0, 5.0, 4.6, 4.0)[0]
+    sp.fill(win, mix((40, 30, 30), (255, 210, 120), lit))
+    sp.fill(win & ~erode(win), (230, 200, 120))
+    sp.fill(win & (np.abs(DX.XC - 1.0) < 0.35), (110, 80, 50)); sp.fill(win & (np.abs(DX.YC - (base + 15.0)) < 0.35), (110, 80, 50))
+    for dx in (-6.4, 8.4):                                                                              # carved shutters
+        sh = sp.m_super(1.0 + dx, base + 15.0, 1.6, 4.8, 3.0)[0]
+        sp.paint(sh, tones(KX.CINNABAR), None, olc=INK)
+        sp.curl(1.0 + dx, base + 15.6, 1.0, GOLD, turns=1.0, w=0.2, mask=sh)
+    if sign:
+        sp.sup(-8.0, base + 8.0, 5.4, 2.2, tones((240, 236, 220)), snow=False)
+        sp.txt_box(['ЧАСТНАЯ', 'ТЕРРИТОРИЯ'], (-13.2, base + 6.0, -2.8, base + 10.0), KX.CINNABAR, pad=0.15)
+    sp.anchors['chimney'] = (10.0, base + 39.0)
+    sp.anchors['window'] = (1.0, base + 15.0)
+    if egg > 0:
+        ex = -4.0 + 14.0 * egg
+        sp.ell(ex, 3.2, 2.6, 3.2, tones((250, 236, 210)), gloss=0.8, snow=False)
+        sp.anchors['egg'] = (ex, 3.2)
+    sp.anchors['head'] = (1.0, base + 15.0)
+
+
+# ================================================================================ гроб на табуретках, думка
+def coffin(sp, t=0.0, lid=0.0, jump=0.0, stools=True):
+    """a hexagonal wooden coffin on two kitchen stools (side view, ≈44 px long), a «думка» pillow with embroidery «СПИ, МОЯ РАДОСТЬ»
+    at the head (+x side). lid 0 closed .. 1 propped open behind; jump = the lid hopping (drill vibration)"""
+    y0 = 14.0 if stools else 0.0
+    if stools:
+        for dx in (-14.0, 14.0):
+            sp.sup(dx, y0 - 0.8, 6.0, 0.9, tones((150, 110, 70)), snow=False)
+            for e in (-4.6, 4.6): sp.cap((dx + e, y0 - 1.6), (dx + e * 1.1, 0.4), 0.7, 0.7, tones((120, 86, 56)))
+    box = sp.m_poly([(-22.0, y0 + 1.0), (20.0, y0 + 1.0), (24.0, y0 + 5.0), (20.0, y0 + 9.0), (-22.0, y0 + 9.0), (-24.0, y0 + 5.0)])
+    sp.paint(box, tones((120, 70, 40)), DX.lit(np.zeros_like(DX.XC), np.clip((DX.YC - y0 - 5.0) / 5.0, -0.9, 0.9)), olc=INK)
+    sp.fill(box & (np.abs(DX.YC - (y0 + 8.4)) < 0.4), GOLD)
+    sp.ell(17.0, y0 + 9.6, 4.4, 1.8, tones((240, 236, 226)), snow=False)                                 # думка
+    sp.curl(17.0, y0 + 9.8, 0.9, KX.CINNABAR, turns=1.0, w=0.2)
+    if lid > 0:
+        a = 1.3 * lid
+        top = y0 + 9.0 + 1.0 * abs(math.sin(t * 40)) * jump
+        p0 = (-22.0, top)
+        p1 = (-22.0 + 46.0 * math.cos(a), top + 46.0 * math.sin(a))
+        sp.cap(p0, p1, 1.6, 1.6, tones((140, 84, 50)))
+    else:
+        top = y0 + 9.0 + 1.6 * abs(math.sin(t * 40)) * jump
+        lidm = sp.m_poly([(-22.0, top), (20.0, top), (22.0, top + 2.4), (-22.0, top + 2.4)])
+        sp.paint(lidm, tones((140, 84, 50)), None, olc=INK)
+    sp.anchors['pillow'] = (16.0, y0 + 11.0)
+
+
+# ================================================================================ small props
+def phone_btn(sp, h, glow=0.0, env=False):
+    """кнопочный телефон at the ear / in the hand; env = blinking SMS envelope on the screen"""
+    x, y = h
+    body = sp.m_super(x, y + 3.2, 1.6, 3.6, 3.0)[0]
+    sp.paint(body, tones((70, 74, 86)), None, olc=INK)
+    sp.fill(sp.m_super(x, y + 4.8, 1.2, 1.2, 3.0)[0], mix((40, 70, 60), (150, 255, 170), 0.4 + 0.6 * glow))
+    if env: sp.fill(sp.m_super(x, y + 4.8, 0.8, 0.5, 3.0)[0], (255, 255, 255))
+    for q in range(3): sp.blob(x - 0.6 + q * 0.6, y + 1.4, 0.25, (200, 204, 214))
+    sp.anchors['phone'] = (x, y + 3.2)
+
+
+def duck(sp, h):
+    """хрустальная утка (her egg-and-needle inside)"""
+    x, y = h
+    b = sp.ell(x, y + 2.6, 4.0, 2.6, [(150, 190, 210), (210, 236, 250), (250, 254, 255)], gloss=1.2, snow=False)
+    sp.ell(x + 3.4, y + 5.4, 1.8, 1.8, [(150, 190, 210), (210, 236, 250), (250, 254, 255)], gloss=1.2, snow=False)
+    sp.blob(x + 5.4, y + 5.2, 0.8, (230, 220, 160))
+    sp.fill(b & (((DX.XC - DX.YC) % 1.6) < 0.3), (255, 255, 255))
+
+
+def cake(sp, h, n=60, lit=1.0, t=0.0):
+    """юбилейный торт «1000» with a forest of candles (n candles)"""
+    x, y = h
+    sp.sup(x, y + 2.4, 9.0, 2.6, tones((240, 220, 200)), snow=False)
+    sp.fill(sp.m_super(x, y + 4.4, 9.0, 0.7, 3.0)[0], (230, 120, 160))
+    sp.txt_box(['1000'], (x - 6.0, y + 0.6, x + 6.0, y + 4.0), KX.CINNABAR, pad=0.1)
+    rng = np.random.default_rng(1)
+    for q in range(n):
+        cx = x - 8.0 + rng.random() * 16.0; ch = 2.0 + rng.random() * 3.0
+        thin(sp, (cx, y + 5.0), (cx, y + 5.0 + ch), [(250, 240, 120), (150, 200, 255), (255, 160, 200)][q % 3], 0.18)
+        if lit: sp.blob(cx, y + 5.6 + ch, 0.35 + 0.15 * math.sin(t * 20 + q), (255, 200 + int(40 * rng.random()), 80))
+    sp.anchors['cake'] = (x, y + 6.0)
+
+
+def zucchini(sp, h, lit=1.0):
+    """кабачок-фонарь (pumpkins are 1499 ₽): a carved zucchini with a candle face"""
+    x, y = h
+    z = sp.ell(x, y + 2.0, 5.6, 2.4, tones((70, 130, 60)), snow=False)
+    sp.fill(z & (np.abs(DX.YC - (y + 2.6)) < 0.25), dark((70, 130, 60), 0.7))
+    for (ex, ey) in ((x - 1.6, y + 2.6), (x + 1.6, y + 2.6)): sp.fill(sp.m_poly([(ex - 0.6, ey - 0.4), (ex + 0.6, ey - 0.4), (ex, ey + 0.6)]), mix((40, 20, 10), (255, 210, 90), lit))
+    sp.fill(sp.m_ell(x, y + 1.0, 1.8, 0.5)[0], mix((40, 20, 10), (255, 210, 90), lit))
+
+
+def coins(sp, h):
+    x, y = h
+    for q in range(4): sp.ell(x - 1.4 + q * 1.0, y + 0.6 + (q % 2) * 0.6, 0.9, 0.6, tones((200, 170, 90)), gloss=0.8, snow=False)
+
+
+def candy(sp, h, col=(220, 40, 60)):
+    x, y = h
+    sp.ell(x, y, 1.4, 0.9, tones(col), snow=False)
+    for s_ in (-1, 1): sp.fill(sp.m_poly([(x + s_ * 1.2, y), (x + s_ * 2.4, y + 0.9), (x + s_ * 2.4, y - 0.9)]), col)

@@ -1,0 +1,54 @@
+{
+ "r1": [
+  "gorynych",
+  "[polite, smooth] Слу́жба безопа́сности ба́нка «Сберёг». Ва́ша смерть — в опа́сности!"
+ ],
+ "k1": [
+  "koshchei",
+  "[scared whisper] Отку́да вы зна́ете, где она́?!"
+ ],
+ "r2": [
+  "gorynych",
+  "[stern, official] Майо́р Горы́нычев. Не кла́дите тру́бку!"
+ ],
+ "r3": [
+  "gorynych",
+  "[fast, official] Центроба́нк. Подтвержда́ем."
+ ],
+ "k2": [
+  "koshchei",
+  "[haughty] Я — Коще́й Бессме́ртный! Меня́ не обма́нешь!"
+ ],
+ "r4": [
+  "gorynych",
+  "[polite] Тогда́ продикту́йте код из эс-эм-э́с."
+ ],
+ "k3": [
+  "koshchei",
+  "[obediently, slowly] Семь. Три."
+ ],
+ "r5": [
+  "gorynych",
+  "[polite, sweet] Иглу́ положи́те на балко́н."
+ ],
+ "r6": [
+  "gorynych",
+  "[cheerful, neighborly] О, сосе́д! Здоро́во!"
+ ],
+ "k4": [
+  "koshchei",
+  "[shrieking] Горы́ныч?!"
+ ],
+ "r7": [
+  "gorynych",
+  "[calm, smooth] Э́то не мы. Э́то — алгори́тм."
+ ],
+ "y1": [
+  "yaga",
+  "[shouting, indignant] Горы́ныч! Мне то́же звони́ли — вну́ком!"
+ ],
+ "r8": [
+  "gorynych",
+  "[sheepish] Бабу́ль, э́то то́же я."
+ ]
+}

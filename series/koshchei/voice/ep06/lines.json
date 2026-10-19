@@ -1,0 +1,54 @@
+{
+ "s1": [
+  "student",
+  "[cheerful, shouting] Сла́дость и́ли га́дость?!"
+ ],
+ "s2": [
+  "student",
+  "[delighted] Дед, костю́м — топ! Где брал?"
+ ],
+ "k1": [
+  "koshchei",
+  "[offended] Э́то — лицо́."
+ ],
+ "k2": [
+  "koshchei",
+  "[solemn, theatrical] Отдаю́ са́мое дорого́е — смерть свою́!"
+ ],
+ "s3": [
+  "student",
+  "[awkward] Дед, нам бы — шокола́дку."
+ ],
+ "y1": [
+  "yaga",
+  "[shouting from below] Хэ́ллоуин — не наш пра́здник!"
+ ],
+ "s4": [
+  "student",
+  "[impressed] Бабу́ль, кла́ссный костю́м Ба́бы Яги́!"
+ ],
+ "y2": [
+  "yaga",
+  "[offended] Я — в хала́те."
+ ],
+ "k3": [
+  "koshchei",
+  "[ecstatic] Дожда́лся!"
+ ],
+ "k4": [
+  "koshchei",
+  "[solemn, generous] Держи́те. Сла́дость."
+ ],
+ "s5": [
+  "student",
+  "[deadpan] Дед. Э́то — га́дость."
+ ],
+ "k5": [
+  "koshchei",
+  "[proud, teary] Э́то — пе́нсия."
+ ],
+ "k6": [
+  "koshchei",
+  "[shouting, outraged] Трина́дцать рубле́й?!"
+ ]
+}
