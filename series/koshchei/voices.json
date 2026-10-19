@@ -1,0 +1,146 @@
+{
+  "cartoon": "Кощей из панельки",
+  "slug": "koshchei",
+  "lang": "ru",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "koshchei": {
+      "name": "Кощей",
+      "color_caption": [
+        120,
+        255,
+        140
+      ],
+      "style": "[haughty] [creaky] [theatrical] — скрипучий царственный старик-злодей, мгновенно скатывается в жалобного пенсионера",
+      "design": {
+        "description": "A thousand-year-old evil fairy-tale king, now a grumpy pensioner living in a Soviet apartment block. High, thin, creaky and raspy old man's voice, haughty and theatrical like a pompous villain from an old Russian fairy-tale film, with dramatic villain howls and hisses, then instantly collapsing into a whiny complaining old pensioner. Very expressive, comedic, sharp diction. Elderly Russian man in his eighties. Native Russian speaker.",
+        "text": "[haughty, theatrical] Я — Коще́й Бессме́ртный! Трепещи́те, сме́ртные! [whining] Девятьсо́т девяно́сто де́вять лет — и пе́нсия не поло́жена?! [furious, shouting] В моё вре́мя за тако́е — в темни́цу!",
+        "picked": {
+          "i": 0,
+          "dur": 16.43,
+          "f0": 290.9,
+          "f0_iqr": 107.4,
+          "rate": 17.0,
+          "loud_sd": 5.6
+        }
+      },
+      "voice_id": "jdVj8kVEH8bb83ryznli",
+      "voice": "Кощей из панельки — Кощей"
+    },
+    "yaga": {
+      "name": "Баба Яга",
+      "color_caption": [
+        255,
+        96,
+        80
+      ],
+      "style": "[sly] [raspy] [fast] — ехидная хриплая бабка-старшая по подъезду",
+      "design": {
+        "description": "A very old cunning village grandmother who is the self-appointed head of the apartment building, sitting on the bench by the entrance and knowing everyone's business. Raspy, croaky, crackly old woman's voice, fast gossipy patter, sly and sarcastic, cackles, sharp and bossy, with a light rural Russian accent. Woman in her eighties. Native Russian speaker, very expressive and funny.",
+        "text": "[sly, raspy] Хэ́ллоуин — не наш пра́здник! Наш — суббо́тник. [cackles] Я всё про всех зна́ю, ми́лок. [bossy] А ну, вытира́й но́ги! [smug] Я — в хала́те.",
+        "picked": {
+          "i": 0,
+          "dur": 12.59,
+          "f0": 231.9,
+          "f0_iqr": 198.3,
+          "rate": 18.1,
+          "loud_sd": 5.8
+        }
+      },
+      "voice_id": "LakpqgKj0ywvEMqSS2OQ",
+      "voice": "Кощей из панельки — Баба Яга"
+    },
+    "kuzmich": {
+      "name": "Домовой Кузьмич",
+      "color_caption": [
+        255,
+        214,
+        90
+      ],
+      "style": "[deadpan] [very low] [dry] — тихий сухой бас, одно слово",
+      "design": {
+        "description": "A tiny ancient house spirit, an old grumpy grandpa who lives inside the electrical panel of the stairwell. Very low, dry, quiet and gravelly bass voice, extremely deadpan and unimpressed, speaks slowly in single words with long weary pauses, a soft sigh before each word, like a tired old janitor commenting on everything. Old Russian man. Native Russian speaker.",
+        "text": "[deadpan, very low] Жуть. [sigh] Жуть. [dry] Опя́ть Коще́й. [pause] Свет — по гра́фику. [weary] Я тут, вообще́-то, живу́. Жуть.",
+        "picked": {
+          "i": 1,
+          "dur": 16.85,
+          "f0": 363.6,
+          "f0_iqr": 56.9,
+          "rate": 14.2,
+          "loud_sd": 5.3
+        }
+      },
+      "voice_id": "LkhQGB8Q82s4UQOnplHh",
+      "voice": "Кощей из панельки — Домовой Кузьмич"
+    },
+    "galina": {
+      "name": "Галина Аркадьевна",
+      "color_caption": [
+        200,
+        190,
+        255
+      ],
+      "style": "[monotone] [bored] [chewing] — скучающая чиновница в любом окошке",
+      "design": {
+        "description": "A bored middle-aged Russian government clerk behind a service window, a woman in her late fifties. Flat, monotone, nasal and utterly unbothered voice, speaks slowly and evenly while chewing a dry biscuit, zero emotion, bureaucratic sing-song, slightly tired and dismissive, never raises her voice. Native Russian speaker, deadpan and funny.",
+        "text": "[monotone, chewing] С ты́сячи лет. Год оста́лся. Потерпи́те. [bored] Тру́довой нет. Ца́рства — неофициа́льно. [flat] Шум по́сле двадцати́ трёх. Штраф. Сле́дующий.",
+        "picked": {
+          "i": 1,
+          "dur": 14.92,
+          "f0": 202.5,
+          "f0_iqr": 90.0,
+          "rate": 17.9,
+          "loud_sd": 5.4
+        }
+      },
+      "voice_id": "9TtJLIijaIcVmOE5P20m",
+      "voice": "Кощей из панельки — Галина Аркадьевна"
+    },
+    "gorynych": {
+      "name": "Змей Горыныч",
+      "color_caption": [
+        150,
+        230,
+        120
+      ],
+      "style": "[polite] [smooth] [scammy] — вежливый оператор колл-центра; три головы = три высоты",
+      "design": {
+        "description": "A smooth, overly polite call-centre operator man in his thirties, warm salesy voice, fake-caring customer-service tone, speaks quickly and confidently, a little slimy and sly, can switch to a stern official tone. Native Russian speaker, natural and expressive.",
+        "text": "[polite, smooth] Здра́вствуйте! Слу́жба безопа́сности ба́нка «Сберёг». Ва́ша смерть — в опа́сности! [stern] Не кла́дите тру́бку. [sly] Продикту́йте, пожа́луйста, код из СМС.",
+        "picked": {
+          "i": 0,
+          "dur": 8.99,
+          "f0": 225.4,
+          "f0_iqr": 120.7,
+          "rate": 25.1,
+          "loud_sd": 5.5
+        }
+      },
+      "voice_id": "7b7c6njy94EqNbu1iSbC",
+      "voice": "Кощей из панельки — Змей Горыныч"
+    },
+    "student": {
+      "name": "Ряженый студент",
+      "color_caption": [
+        255,
+        160,
+        220
+      ],
+      "style": "[cheerful] [young] — бодрый студент в костюме зомби",
+      "design": {
+        "description": "A cheerful energetic young Russian man around twenty, a university student in a zombie costume going trick-or-treating, friendly, laid-back modern slang intonation, laughs easily, playful and a bit cheeky. Native Russian speaker.",
+        "text": "[cheerful] Сла́дость и́ли га́дость?! [laughs] Дед, костю́м — топ! Где брал? [awkward] Дед, нам бы — шокола́дку. [deadpan] Это — га́дость.",
+        "picked": {
+          "i": 0,
+          "dur": 8.59,
+          "f0": 179.8,
+          "f0_iqr": 112.1,
+          "rate": 25.8,
+          "loud_sd": 6.2
+        }
+      },
+      "voice_id": "IvN1tklEWIznHsYj1xdb",
+      "voice": "Кощей из панельки — Ряженый студент"
+    }
+  }
+}

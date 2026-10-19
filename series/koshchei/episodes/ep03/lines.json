@@ -1,0 +1,46 @@
+{
+ "k1": [
+  "koshchei",
+  "[screaming, furious] В семь утра́?! Я то́лько лёг!"
+ ],
+ "k2": [
+  "koshchei",
+  "[panting, outraged] Я — не́чисть! Я днём — сплю!"
+ ],
+ "r1": [
+  "gorynych",
+  "[gruff, unbothered] Тишина́ — с двадцати́ трёх. А сейча́с — день."
+ ],
+ "k3": [
+  "koshchei",
+  "[haughty] Я — Коще́й Бессме́ртный!"
+ ],
+ "r2": [
+  "gorynych",
+  "[smug] А я — трёхголо́вый. И что?"
+ ],
+ "k4": [
+  "koshchei",
+  "[villainous howl, then sinister] У-у-у-у! Споко́йной но́чи, сосе́душка."
+ ],
+ "g1": [
+  "galina",
+  "[monotone] Шум по́сле двадцати́ трёх. Штраф."
+ ],
+ "k5": [
+  "koshchei",
+  "[stunned] Вы ж — в Соцфо́нде!"
+ ],
+ "g2": [
+  "galina",
+  "[flat] По совмести́тельству."
+ ],
+ "k6": [
+  "koshchei",
+  "[whining] А он — сверли́т!"
+ ],
+ "g3": [
+  "galina",
+  "[flat] Он — днём. По зако́ну."
+ ]
+}

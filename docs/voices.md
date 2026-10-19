@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-12 21:31.
+Обновлено: 2026-10-19 04:17.
 
 ## agent-dibs
 
@@ -42,17 +42,28 @@
 | Dashley (DoomDash support bot) | `dashley` | `hvKhJmx8w6dx2qaLhHC6` | library_or_premade | 8 / 2 | Grim Ride — Dashley (DoomDash support bot) |
 | Trick-or-treat Mom | `mom` | `UNaE6Ed6rSceF3pSO5yL` | library_or_premade | 3 / 2 | Grim Ride — Trick-or-treat Mom |
 
+## koshchei
+
+| Герой | char | voice_id | Статус | Реплик / серий | Голос |
+|---|---|---|---|---|---|
+| Кощей | `koshchei` | `jdVj8kVEH8bb83ryznli` | active | 0 / 0 | Кощей из панельки — Кощей |
+| Баба Яга | `yaga` | `LakpqgKj0ywvEMqSS2OQ` | active | 0 / 0 | Кощей из панельки — Баба Яга |
+| Домовой Кузьмич | `kuzmich` | `LkhQGB8Q82s4UQOnplHh` | active | 0 / 0 | Кощей из панельки — Домовой Кузьмич |
+| Галина Аркадьевна | `galina` | `9TtJLIijaIcVmOE5P20m` | active | 0 / 0 | Кощей из панельки — Галина Аркадьевна |
+| Змей Горыныч | `gorynych` | `7b7c6njy94EqNbu1iSbC` | active | 0 / 0 | Кощей из панельки — Змей Горыныч |
+| Ряженый студент | `student` | `IvN1tklEWIznHsYj1xdb` | active | 0 / 0 | Кощей из панельки — Ряженый студент |
+
 ## mazutych
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
 | Мазутыч | `maz` | `xSY5jZDD2Tge1l2uwiQn` | active | 29 / 6 | Мазутыч — Мазутыч |
-| Инспектор Столбов (ДПС) | `cop` | `sqjFPShWaZX3JdS3utu1` | active | 8 / 1 | mazutych — Инспектор Столбов (ДПС) (restored) |
-| Борис Борисыч | `boss` | `iJVGC18PiXCeNoMe4wOM` | active | 8 / 4 | mazutych — Борис Борисыч (restored) |
-| Толик (водитель бензовоза) | `tolik` | `6FfEAtYZ4qqQztCjEr34` | active | 7 / 3 | mazutych — Толик (водитель бензовоза) (restored) |
-| Вадик (барыга) | `vadik` | `3YcbIhxRmKe16pBspvSh` | active | 7 / 1 | mazutych — Вадик (барыга) (restored) |
 | Зоя (АЗС) | `zoya` | `aNpGfBJ5tarP9jXqryIk` | deleted 2026-10-12 | 13 / 4 | Мазутыч — Зоя (АЗС) |
 | Дин-Дон (моноколесо) | `wheel` | `Kp5sQTqr3PnriPusCHEb` | deleted 2026-10-12 | 9 / 6 | Мазутыч — Дин-Дон (моноколесо) |
+| Инспектор Столбов (ДПС) | `cop` | `sqjFPShWaZX3JdS3utu1` | library_or_premade | 8 / 1 | Мазутыч — Инспектор Столбов (ДПС) |
+| Борис Борисыч | `boss` | `iJVGC18PiXCeNoMe4wOM` | library_or_premade | 8 / 4 | Мазутыч — Борис Борисыч |
+| Толик (водитель бензовоза) | `tolik` | `6FfEAtYZ4qqQztCjEr34` | library_or_premade | 7 / 3 | Мазутыч — Толик (водитель бензовоза) |
+| Вадик (барыга) | `vadik` | `3YcbIhxRmKe16pBspvSh` | library_or_premade | 7 / 1 | Мазутыч — Вадик (барыга) |
 
 ## pochti-dikiy-zapad
 
@@ -67,12 +78,12 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Прохор | `prokhor` | `FmmR663nLw91vgt0SRzR` | active | 17 / 2 | Прохор — Прохор |
-| Михал Потапыч | `bear` | `xflYwcTw1xfUQvQHsSsi` | active | 7 / 2 | Прохор — Михал Потапыч |
-| Лиса (курьер «Лиса-Экспресс») | `fox` | `049gV87VLzOb4th1QiGx` | active | 0 / 0 | Прохор — Лиса (курьер «Лиса-Экспресс») |
-| Белка-охранник | `squirrel` | `emZnToZuXhR4oQGQ3LhD` | active | 0 / 0 | Прохор — Белка-охранник |
-| Лось-санитар | `moose` | `aFuXgHiYbXdvfWT8BKEc` | active | 0 / 0 | Прохор — Лось-санитар |
-| Егерь Людмила Петровна | `ranger` | `d6PvT1IIGreyRcDnsiMh` | active | 0 / 0 | Прохор — Егерь Людмила Петровна |
+| Прохор | `prokhor` | `FmmR663nLw91vgt0SRzR` | active | 43 / 7 | Прохор — Прохор |
+| Михал Потапыч | `bear` | `xflYwcTw1xfUQvQHsSsi` | active | 14 / 7 | Прохор — Михал Потапыч |
+| Егерь Людмила Петровна | `ranger` | `d6PvT1IIGreyRcDnsiMh` | active | 3 / 1 | Прохор — Егерь Людмила Петровна |
+| Лось-санитар | `moose` | `aFuXgHiYbXdvfWT8BKEc` | active | 2 / 1 | Прохор — Лось-санитар |
+| Белка-охранник | `squirrel` | `emZnToZuXhR4oQGQ3LhD` | deleted 2026-10-19 | 2 / 1 | Прохор — Белка-охранник |
+| Лиса (курьер «Лиса-Экспресс») | `fox` | `049gV87VLzOb4th1QiGx` | deleted 2026-10-19 | 2 / 1 | Прохор — Лиса (курьер «Лиса-Экспресс») |
 
 ## sunny-palms-hoa
 
