@@ -162,11 +162,11 @@ def r_bench(t, u):
     st = []
     for i, (cos, x) in enumerate(COSTUMES):
         m = mouth('student', t) if i == 1 else 0.0
-        st.append(A(C.student, lerp(520.0, 760.0, walk) + i * 90, 600.0, 4.2 * 1.05 * 3 * Z, flip=True, t=t + i, costume=cos,
+        st.append(A(C.student, lerp(495.0, 545.0, walk) + i * 72, 600.0, 4.2 * 1.05 * 3 * Z, flip=True, t=t + i, costume=cos,
                     expr='cheer' if m > 0.05 else 'grin', mouth_=m, look=(0.8, 0.0)))
-    yg = A(C.yaga, 330.0, 600.0, 4.2 * 1.1 * 3 * Z, t=t, expr='glare' if not speaking('yaga', t) else 'angry', mouth_=mouth('yaga', t),
+    yg = A(C.yaga, 425.0, 600.0, 4.2 * 1.1 * 3 * Z, t=t, expr='glare' if not speaking('yaga', t) else 'angry', mouth_=mouth('yaga', t),
            look=(0.8, 0.0))
-    return K.shot(YARD, K.light_yard, 470.0, 400.0, Z, acts=[yg] + st[::-1], sy=330)
+    return K.shot(YARD, K.light_yard, 512.0, 400.0, Z, acts=[yg] + st[::-1], sy=330)
 
 
 # ================================================================== 10: Кузьмич unwraps a candy: «Жуть.»
