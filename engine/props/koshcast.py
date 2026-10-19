@@ -313,6 +313,7 @@ def galina(sp, t=0.0, expr='deadpan', mouth_=0.0, look=(-0.6, -0.2), blink=None,
     sp.cap((-7.0, 27.0 + sh), kF, 2.4, 2.2, tones(dark(G_CARD, 0.8))); sp.cap(kF, eF, 2.2, 2.0, tones(dark(G_CARD, 0.8)))
     sp.ell(eF[0], eF[1], 1.7, 1.7, tones(dark(G_SKIN, 0.85)))
     if prop_f: prop_f(sp, eF)
+    sp.anchors['hand_f'] = eF
     hx, hy = 3.0, 38.0 - sh * 0.6
     hair = sp.union([sp.m_ell(hx - 1.4, hy + 3.2 + sh * 0.3, 9.4 + sh, 8.4 + sh), sp.m_ell(hx - 6.0, hy - 1.0, 4.4, 5.0)], tones(G_HAIR))
     rng = np.random.default_rng(5)
@@ -355,12 +356,12 @@ def stamp(sp, h, up=0.0):
 
 
 def cutters(sp, h, open_=0.4):
-    """big bolt cutters (E05)"""
+    """big bolt cutters (E05): red handles hang DOWN from the hand, steel jaws point UP above it"""
     x, y = h
     for s_ in (-1, 1):
-        a = 0.35 + s_ * open_ * 0.35
-        thin(sp, (x, y), (x - math.cos(a) * 9.0, y - s_ * math.sin(a) * 3.0 - 5.0), (196, 40, 40), 0.7)
-        thin(sp, (x, y), (x + math.cos(a * 0.6) * 4.0, y + s_ * 1.2 * (0.5 + open_)), (170, 176, 186), 0.6)
+        thin(sp, (x, y), (x + s_ * (1.0 + 1.6 * open_), y - 9.0), (196, 40, 40), 0.7)
+        thin(sp, (x, y), (x + s_ * (0.4 + 1.2 * open_), y + 4.0), (170, 176, 186), 0.6)
+    sp.blob(x, y, 0.8, (120, 124, 134))
 
 
 # ================================================================================ Змей Горыныч (сосед сверху, три головы)

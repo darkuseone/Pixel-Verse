@@ -102,7 +102,7 @@ def r_door(t, u):
     k = A(C.koshchei, lerp(160.0, 520.0, run), FL_S, WS * 3 * Z, t=t, expr='angry', mouth_=0.0, look=(0.8, 0.0),
           walk=t * 12 if run < 1 else None, hand_n=(12.0, 30.0))
     g = gor(t, Z, exprs=('deadpan', 'smug' if speaking('gorynych2', t) else 'deadpan', 'deadpan'))
-    return K.shot(STAIRS, K.light_stairs, 620.0, 360.0, Z, acts=[g, k], sy=330)
+    return K.shot(STAIRS, K.light_stairs, 620.0, 410.0, Z, acts=[g, k], sy=330)
 
 
 # ================================================================== 2: HAUGHTY — «Я — Кощей Бессмертный!»

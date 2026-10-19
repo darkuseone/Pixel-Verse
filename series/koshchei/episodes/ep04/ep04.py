@@ -79,7 +79,7 @@ def r_hook(t, u, loop=False):
         hx, hy = aout(k, v, 'head')
         K.steam(big, hx + 200, hy + 60, t, 0.7, 0.8)
         frosty(big, 0.8)
-    return K.shot(FLAT, K.light_flat, 520.0, 450.0, Z, acts=[k], fx_=f, sy=330)
+    return K.shot(FLAT, K.light_flat, 520.0, 405.0, Z, acts=[k], fx_=f, sy=330)
 
 
 # ================================================================== 1: Галина in the УК — heater, plaid, tea, phone
@@ -244,7 +244,7 @@ assert len(R_) == len(CUTS) - 1 == len(NAMES)
 SHOW = K.Show(EPI, 4, ['БАТАРЕИ', 'ЛЕДЯНЫЕ?!'], hook_t=(0.10, 2.70), hook_y=230,
               stickers=[(K.st('СЕЗОН ОТКРЫТ', fg=(255, 220, 110)), 5.0, 7.3, 540, 520),
                         (K.st('ДЗЫНЬ!', fg=(200, 236, 255), size=84), 7.5, 8.4, 540, 1180),
-                        (K.st('НАСЕДКА', fg=(255, 90, 80), size=84), 18.0, 19.6, 540, 520)],
+                        (K.st('НАСЕДКА', fg=(255, 90, 80), size=84), 18.0, 19.6, 540, 1380)],
               flashes=[TWIST], mosaics=[],
               cap_y={0: 1640, 1: 1560, 2: 1640, 3: 1640, 4: 1640, 5: 1640, 6: 1640, 7: 1640, 8: 1520, 9: 1640})
 
