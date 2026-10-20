@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-12 21:31.
+Обновлено: 2026-10-20 01:02.
 
 ## agent-dibs
 
@@ -27,15 +27,15 @@
 |---|---|---|---|---|---|
 | Florida Man | `fm` | `GBn8jPzCnZIbx5Kf8r1J` | active | 37 / 7 | Florida Man — Florida Man |
 | Tanner | `tanner` | `GpiDvTn0zpQeiQA9VdB7` | active | 37 / 7 | Florida Man — Tanner |
-| Mort Pouch, Esq. | `mort` | `d44i4jCJHjBEUuFbGaGy` | active | 24 / 7 | Florida Man — Mort Pouch, Esq. |
-| Deputy Darlene | `darlene` | `dgd3UC679ZtpWOphbJ9Y` | active | 23 / 7 | Florida Man — Deputy Darlene |
+| Mort Pouch, Esq. | `mort` | `d44i4jCJHjBEUuFbGaGy` | deleted 2026-10-20 | 24 / 7 | Florida Man — Mort Pouch, Esq. |
+| Deputy Darlene | `darlene` | `dgd3UC679ZtpWOphbJ9Y` | deleted 2026-10-20 | 23 / 7 | Florida Man — Deputy Darlene |
 
 ## grim-ride
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
 | Grim | `grim` | `sdQf2r6zfX32hvp25Auj` | active | 30 / 6 | Grim Ride — Grim |
-| Edgar | `edgar` | `QxBrp3fXvoJ3Zvl8DXHD` | active | 17 / 6 | Grim Ride — Edgar |
+| Edgar | `edgar` | `QxBrp3fXvoJ3Zvl8DXHD` | deleted 2026-10-20 | 17 / 6 | Grim Ride — Edgar |
 | Harold | `harold` | `UScN6kcNEVzdo1v1Nl6W` | deleted 2026-10-12 | 9 / 5 | Grim Ride — Harold |
 | Kayden | `kayden` | `wISugChlyIgdUxhS0vFR` | deleted 2026-10-12 | 9 / 4 | Grim Ride — Kayden |
 | Todd | `todd` | `9rXbTqAmpdfkBx20G31c` | library_or_premade | 9 / 4 | Grim Ride — Todd |
@@ -47,12 +47,12 @@
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
 | Мазутыч | `maz` | `xSY5jZDD2Tge1l2uwiQn` | active | 29 / 6 | Мазутыч — Мазутыч |
-| Инспектор Столбов (ДПС) | `cop` | `sqjFPShWaZX3JdS3utu1` | active | 8 / 1 | mazutych — Инспектор Столбов (ДПС) (restored) |
-| Борис Борисыч | `boss` | `iJVGC18PiXCeNoMe4wOM` | active | 8 / 4 | mazutych — Борис Борисыч (restored) |
-| Толик (водитель бензовоза) | `tolik` | `6FfEAtYZ4qqQztCjEr34` | active | 7 / 3 | mazutych — Толик (водитель бензовоза) (restored) |
-| Вадик (барыга) | `vadik` | `3YcbIhxRmKe16pBspvSh` | active | 7 / 1 | mazutych — Вадик (барыга) (restored) |
-| Зоя (АЗС) | `zoya` | `aNpGfBJ5tarP9jXqryIk` | deleted 2026-10-12 | 13 / 4 | Мазутыч — Зоя (АЗС) |
-| Дин-Дон (моноколесо) | `wheel` | `Kp5sQTqr3PnriPusCHEb` | deleted 2026-10-12 | 9 / 6 | Мазутыч — Дин-Дон (моноколесо) |
+| Зоя (АЗС) | `zoya` | `tmuyzPXDJGIQYqD2DsN3` | active | 13 / 4 | Мазутыч — Зоя (АЗС) |
+| Дин-Дон (моноколесо) | `wheel` | `qCq2QOkDqmbtFpDmNPRP` | active | 9 / 6 | Мазутыч — Дин-Дон (моноколесо) |
+| Борис Борисыч | `boss` | `tucKspJ994E6SUPePYF5` | active | 8 / 4 | Мазутыч — Борис Борисыч |
+| Толик (водитель бензовоза) | `tolik` | `cL7vvvUcXjn22DU68RzU` | active | 7 / 3 | Мазутыч — Толик (водитель бензовоза) |
+| Инспектор Столбов (ДПС) | `cop` | `sqjFPShWaZX3JdS3utu1` | library_or_premade | 8 / 1 | Мазутыч — Инспектор Столбов (ДПС) |
+| Вадик (барыга) | `vadik` | `3YcbIhxRmKe16pBspvSh` | library_or_premade | 7 / 1 | Мазутыч — Вадик (барыга) |
 
 ## pochti-dikiy-zapad
 
@@ -67,12 +67,12 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Прохор | `prokhor` | `FmmR663nLw91vgt0SRzR` | active | 17 / 2 | Прохор — Прохор |
-| Михал Потапыч | `bear` | `xflYwcTw1xfUQvQHsSsi` | active | 7 / 2 | Прохор — Михал Потапыч |
-| Лиса (курьер «Лиса-Экспресс») | `fox` | `049gV87VLzOb4th1QiGx` | active | 0 / 0 | Прохор — Лиса (курьер «Лиса-Экспресс») |
-| Белка-охранник | `squirrel` | `emZnToZuXhR4oQGQ3LhD` | active | 0 / 0 | Прохор — Белка-охранник |
-| Лось-санитар | `moose` | `aFuXgHiYbXdvfWT8BKEc` | active | 0 / 0 | Прохор — Лось-санитар |
-| Егерь Людмила Петровна | `ranger` | `d6PvT1IIGreyRcDnsiMh` | active | 0 / 0 | Прохор — Егерь Людмила Петровна |
+| Прохор | `prokhor` | `FmmR663nLw91vgt0SRzR` | active | 43 / 7 | Прохор — Прохор |
+| Михал Потапыч | `bear` | `xflYwcTw1xfUQvQHsSsi` | active | 14 / 7 | Прохор — Михал Потапыч |
+| Егерь Людмила Петровна | `ranger` | `d6PvT1IIGreyRcDnsiMh` | active | 3 / 1 | Прохор — Егерь Людмила Петровна |
+| Лось-санитар | `moose` | `aFuXgHiYbXdvfWT8BKEc` | active | 2 / 1 | Прохор — Лось-санитар |
+| Лиса (курьер «Лиса-Экспресс») | `fox` | `049gV87VLzOb4th1QiGx` | library_or_premade | 2 / 1 | Прохор — Лиса (курьер «Лиса-Экспресс») |
+| Белка-охранник | `squirrel` | `emZnToZuXhR4oQGQ3LhD` | library_or_premade | 2 / 1 | Прохор — Белка-охранник |
 
 ## sunny-palms-hoa
 
@@ -88,11 +88,11 @@
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
 | Валера | `valera` | `rBeJLZF1kJdbvH3OTV0M` | active | 50 / 7 | Валера и кот — Валера |
-| Кот Дембель | `cat` | `0SYrGzuYVNDS2OD4YroI` | active | 24 / 7 | Валера и кот — Кот Дембель |
 | Баба Зина | `zina` | `zYrh5fGxYuTn3sXH3sMw` | active | 21 / 3 | valera-i-kot — Баба Зина (restored) |
 | Кассирша Тамара | `tamara` | `EJfoq1w8EoRCsRnCWoOc` | active | 12 / 2 | valera-i-kot — Кассирша Тамара (restored) |
 | Баба Люба | `lyuba` | `bB7ZYDhHF7rhyK82vKpu` | active | 8 / 3 | valera-i-kot — Баба Люба (restored) |
 | Нина Петровна (ЖЭК) | `nina` | `pVPuMCjFhiIm88pqmX0y` | active | 6 / 2 | valera-i-kot — Нина Петровна (ЖЭК) (restored) |
+| Кот Дембель | `cat` | `0SYrGzuYVNDS2OD4YroI` | deleted 2026-10-20 | 24 / 7 | Валера и кот — Кот Дембель |
 | Семёныч | `semenych` | `B5J7DQRqcdz5aZwL642J` | deleted 2026-10-12 | 10 / 1 | Валера и кот — Семёныч |
 | Колян | `kolyan` | `obfzPRwPXc0avd4LPuzH` | deleted 2026-10-12 | 8 / 1 | Валера и кот — Колян |
 | Автоответчик ЖЭКа | `robot` | `uQiZyJqZ7ePaB8bwME8n` | library_or_premade | 2 / 1 | Marusya G – Persuasive Outbound Caller |
