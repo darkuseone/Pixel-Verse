@@ -38,6 +38,15 @@ BG = {
     'assembly_hall': 'A Soviet-era factory assembly hall interior: a wooden stage with red velvet curtains and a podium, a long blank '
                      'banner above the stage, rows of wooden seats in the foreground seen from behind, wall-mounted lamps, a bust pedestal '
                      'without any statue, a framed blank honor board, warm stage lights and dust in the air, empty stage floor.',
+    'tank_farm': 'Night at an oil refinery tank farm, side view: one gigantic cylindrical white steel storage tank fills the middle and right '
+                 'of the frame with a spiral staircase around it, rusty streaks, a big blank rectangular panel painted on its side; thick pipes '
+                 'run along the ground in the foreground to a large red hand-wheel valve on a pipe near the lower left; a concrete pad with oil '
+                 'stains in the lower third, a chain-link fence, floodlights on poles casting cold white light, the very tall flare stack far '
+                 'right burning orange, deep blue night sky with stars and steam clouds.',
+    'boss_office': 'Interior of a pompous Soviet-era factory director office, front view: a huge polished wooden desk in the centre with an '
+                   'old rotary phone, an abacus and a desk lamp, an empty leather armchair behind it, behind the desk a wall with wood panels, '
+                   'a big blank framed chart on an easel, a glass cabinet with trophies and a model of an oil derrick, heavy red curtains on a '
+                   'window showing the refinery flare at dusk, a rubber plant in a pot, a red carpet in the lower third.',
 }
 
 if __name__ == '__main__':

@@ -520,12 +520,13 @@
    "slug": "florida-man",
    "char": "mort",
    "voice_id": "d44i4jCJHjBEUuFbGaGy",
-   "status": "active",
+   "status": "deleted",
    "name": "Mort Pouch, Esq.",
    "voice_name": "Florida Man — Mort Pouch, Esq.",
    "lines": 24,
    "episodes": 7,
    "samples": [
+    "library/voice_archive/florida-man/mort_preview.mp3",
     "series/florida-man/voice/movie/p_m1.mp3",
     "series/florida-man/voice/ep02/m1.mp3",
     "series/florida-man/voice/movie/o_m1.mp3",
@@ -550,20 +551,31 @@
    "account": {
     "category": "generated",
     "description": "A cynical old personal-injury lawyer in his seventies, a raspy, nasal, fast-talking New Jersey accent, dry deadpan delivery, world-weary and smug, a little wheezy, like a billboard attorney who moved to Florida in 1987 and never left. Natural and comedic.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1791529903
-   }
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/d44i4jCJHjBEUuFbGaGy/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiMDVkY2E3NWMtYjZmYi00OTE5LWE0NGYtZWNhNDc5ZjA0MTFmLm1wMyIsInRpbWVzdGFtcCI6MTc5MjQ1ODAwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-20",
+   "deleted_reason": "free slots"
   },
   {
    "slug": "florida-man",
    "char": "darlene",
    "voice_id": "dgd3UC679ZtpWOphbJ9Y",
-   "status": "active",
+   "status": "deleted",
    "name": "Deputy Darlene",
    "voice_name": "Florida Man — Deputy Darlene",
    "lines": 23,
    "episodes": 7,
    "samples": [
+    "library/voice_archive/florida-man/darlene_preview.mp3",
     "series/florida-man/voice/ep06/d2.mp3",
     "series/florida-man/voice/ep04/d1.mp3",
     "series/florida-man/voice/ep01/d1.mp3",
@@ -588,9 +600,19 @@
    "account": {
     "category": "generated",
     "description": "A small-town Florida sheriff's deputy in her mid-fifties: a smoky, low alto with a slow rural Southern drawl, utterly bored, deadpan and unimpressed, chewing gum while she talks, motherly but done with everybody's nonsense. Natural, characterful, comedic.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1791529905
-   }
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/dgd3UC679ZtpWOphbJ9Y/1fac92f3-534c-4fbc-871d-ca7669442937.mp3",
+   "deleted_on": "2026-10-20",
+   "deleted_reason": "free slots"
   },
   {
    "slug": "grim-ride",
@@ -640,12 +662,13 @@
    "slug": "grim-ride",
    "char": "edgar",
    "voice_id": "QxBrp3fXvoJ3Zvl8DXHD",
-   "status": "active",
+   "status": "deleted",
    "name": "Edgar",
    "voice_name": "Grim Ride — Edgar",
    "lines": 17,
    "episodes": 6,
    "samples": [
+    "library/voice_archive/grim-ride/edgar_preview.mp3",
     "series/grim-ride/voice/ep01/e3.mp3",
     "series/grim-ride/voice/ep04/e1.mp3",
     "series/grim-ride/voice/ep01/e1.mp3",
@@ -676,9 +699,19 @@
    "account": {
     "category": "generated",
     "description": "An old raven with a dry, raspy, low male voice, utterly bored and sardonic, flat monotone deadpan, slightly gravelly and nasal, speaks slowly in very short sentences like a tired late-night radio host who has seen everything. General American accent.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1791318871
-   }
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/QxBrp3fXvoJ3Zvl8DXHD/1ba31783-aeca-4e2d-814e-b67c2c7b833c.mp3",
+   "deleted_on": "2026-10-20",
+   "deleted_reason": "free slots"
   },
   {
    "slug": "grim-ride",
@@ -943,11 +976,222 @@
   },
   {
    "slug": "mazutych",
+   "char": "zoya",
+   "voice_id": "tmuyzPXDJGIQYqD2DsN3",
+   "status": "active",
+   "name": "Зоя (АЗС)",
+   "voice_name": "Мазутыч — Зоя (АЗС)",
+   "lines": 13,
+   "episodes": 4,
+   "samples": [
+    "series/mazutych/voice/ep05/z1.mp3",
+    "series/mazutych/voice/ep02/z4.mp3",
+    "series/mazutych/voice/ep01/z3.mp3",
+    "series/mazutych/voice/ep01/z1.mp3",
+    "series/mazutych/voice/ep06/z3.mp3",
+    "series/mazutych/voice/ep02/z1.mp3",
+    "series/mazutych/voice/ep01/z2.mp3",
+    "series/mazutych/voice/ep06/z1.mp3"
+   ],
+   "design": {
+    "description": "A loud, bored Russian gas station cashier woman around fifty. Husky, smoky, slightly hoarse contralto, lazy and unimpressed, chewing gum, speaks with the tired authority of the person behind the window, a light southern Russian accent with a soft fricative g. Native Russian speaker.",
+    "text": "Бензи́на нет! Ждём бензово́з! Мужчи́на, не стучи́те в око́шко. Ми́мо. Хот-до́г бу́дете? Тало́ны принима́ем по чётным. Сле́дующий!",
+    "picked": {
+     "i": 2,
+     "dur": 18.99,
+     "f0": 246.2,
+     "f0_iqr": 78.2,
+     "rate": 11.4,
+     "loud_sd": 5.2
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A loud, bored Russian gas station cashier woman around fifty. Husky, smoky, slightly hoarse contralto, lazy and unimpressed, chewing gum, speaks with the tired authority of the person behind the window, a light southern Russian accent with a soft fricative g. Native Russian speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1791272637
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/aNpGfBJ5tarP9jXqryIk/5596ca03-4381-4a9b-b359-239bd326bf6d.mp3",
+   "deleted_reason": "auto: room for prokhor/ranger",
+   "history": [
+    {
+     "voice_id": "aNpGfBJ5tarP9jXqryIk",
+     "until": "2026-10-20",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "mazutych",
+   "char": "wheel",
+   "voice_id": "qCq2QOkDqmbtFpDmNPRP",
+   "status": "active",
+   "name": "Дин-Дон (моноколесо)",
+   "voice_name": "Мазутыч — Дин-Дон (моноколесо)",
+   "lines": 9,
+   "episodes": 6,
+   "samples": [
+    "series/mazutych/voice/ep06/w2.mp3",
+    "series/mazutych/voice/ep01/w2.mp3",
+    "series/mazutych/voice/ep04/w1.mp3",
+    "series/mazutych/voice/ep06/w1.mp3",
+    "series/mazutych/voice/ep05/w1.mp3",
+    "series/mazutych/voice/ep01/w1.mp3",
+    "series/mazutych/voice/ep02/w1.mp3",
+    "series/mazutych/voice/ep03/w1.mp3"
+   ],
+   "design": {
+    "description": "A cheerful synthetic female voice assistant of a cheap gadget, bright, slightly metallic and robotic, evenly spaced syllables, overly polite, speaks broken machine-translated Russian with a light East Asian accent. Clear and comedic.",
+    "text": "Здра́вствуй, дру́га! Я твой помо́щник Ди́н-до́н. Заря́д три проце́нт. Ты е́хать ти́ше, дру́га. Ско́рость о́чень мно́го. Всё. Я спать. Ди́н-до́н!",
+    "picked": {
+     "i": 1,
+     "dur": 10.45,
+     "f0": 275.9,
+     "f0_iqr": 80.6,
+     "rate": 19.1,
+     "loud_sd": 5.0
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A cheerful synthetic female voice assistant of a cheap gadget, bright, slightly metallic and robotic, evenly spaced syllables, overly polite, speaks broken machine-translated Russian with a light East Asian accent. Clear and comedic.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1791272643
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/Kp5sQTqr3PnriPusCHEb/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiN2U4MDFkMGMtMTU3MS00OTQwLWIwOWUtZDhkNWY1MjM3ZmEyLm1wMyIsInRpbWVzdGFtcCI6MTc5MTgyMDgwMDAwMDAwMH0%3D",
+   "deleted_reason": "auto: room for prokhor/bear",
+   "history": [
+    {
+     "voice_id": "Kp5sQTqr3PnriPusCHEb",
+     "until": "2026-10-20",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "mazutych",
+   "char": "boss",
+   "voice_id": "tucKspJ994E6SUPePYF5",
+   "status": "active",
+   "name": "Борис Борисыч",
+   "voice_name": "Мазутыч — Борис Борисыч",
+   "lines": 8,
+   "episodes": 4,
+   "samples": [
+    "series/mazutych/voice/ep06/b2.mp3",
+    "series/mazutych/voice/ep02/b1.mp3",
+    "series/mazutych/voice/ep06/b1.mp3",
+    "series/mazutych/voice/ep03/b1.mp3",
+    "series/mazutych/voice/ep05/b1.mp3",
+    "series/mazutych/voice/ep06/b3.mp3",
+    "series/mazutych/voice/ep03/b2.mp3",
+    "series/mazutych/voice/ep03/b3.mp3"
+   ],
+   "design": {
+    "description": "A pompous Russian factory boss in his sixties making a triumphant announcement over a factory loudspeaker. Booming, fat, self-satisfied baritone with a solemn Soviet-style ceremonial cadence, loud and proud. Native Russian speaker.",
+    "text": "Ура́, това́рищи! Пла́н — сто со́рок оди́н проце́нт! Заво́д «Фа́кел Труда́» опя́ть впереди́. Бензи́н вы́пущен, учтён и отпра́влен! Ура́!",
+    "picked": {
+     "i": 2,
+     "dur": 15.49,
+     "f0": 271.2,
+     "f0_iqr": 28.6,
+     "rate": 13.1,
+     "loud_sd": 5.7
+    }
+   },
+   "account": {
+    "category": "cloned",
+    "description": "A pompous Russian factory boss in his sixties making a triumphant announcement over a factory loudspeaker. Booming, fat, self-satisfied baritone with a solemn Soviet-style ceremonial cadence, loud and proud. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1791475384
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/vxP9EoBM29o2m1aWHQNV/5ba4261e-8b11-4152-abfc-d089fd73aba1.mp3",
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "vxP9EoBM29o2m1aWHQNV",
+     "until": "2026-10-08",
+     "note": "deleted, restored as IVC clone"
+    },
+    {
+     "voice_id": "iJVGC18PiXCeNoMe4wOM",
+     "until": "2026-10-20",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "mazutych",
+   "char": "tolik",
+   "voice_id": "cL7vvvUcXjn22DU68RzU",
+   "status": "active",
+   "name": "Толик (водитель бензовоза)",
+   "voice_name": "Мазутыч — Толик (водитель бензовоза)",
+   "lines": 7,
+   "episodes": 3,
+   "samples": [
+    "series/mazutych/voice/ep04/d1.mp3",
+    "series/mazutych/voice/ep01/d2.mp3",
+    "series/mazutych/voice/ep05/d3.mp3",
+    "series/mazutych/voice/ep01/d1.mp3",
+    "series/mazutych/voice/ep01/d3.mp3",
+    "series/mazutych/voice/ep05/d1.mp3",
+    "series/mazutych/voice/ep05/d2.mp3"
+   ],
+   "design": {
+    "description": "A cheerful, simple Russian truck driver in his forties. Hoarse, friendly, slightly husky baritone, fast and loud, easy-going and folksy, a little rough, sounds like he is shouting from a truck window with a grin. Native Russian speaker, plain provincial accent.",
+    "text": "Мужики́, кто кра́йний? Пусто́й я, с весны́ не запра́влялся. А я его́ вожу́, бензи́н-то! Куда́ — сам не зна́ю, но вожу́ испра́вно, два́дцать лет за рулём, ни одно́й ава́рии!",
+    "picked": {
+     "i": 0,
+     "dur": 13.09,
+     "f0": 258.1,
+     "f0_iqr": 88.6,
+     "rate": 18.2,
+     "loud_sd": 5.9
+    }
+   },
+   "account": {
+    "category": "cloned",
+    "description": "A cheerful, simple Russian truck driver in his forties. Hoarse, friendly, slightly husky baritone, fast and loud, easy-going and folksy, a little rough, sounds like he is shouting from a truck window with a grin. Native Russian speaker, plain provincial accent.",
+    "settings": null,
+    "created_at_unix": 1791475388
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/X8jm2orhZd79nRAehKy9/c43d33a2-4923-4ad8-9d7d-3b8c51dcee35.mp3",
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "X8jm2orhZd79nRAehKy9",
+     "until": "2026-10-08",
+     "note": "deleted, restored as IVC clone"
+    },
+    {
+     "voice_id": "6FfEAtYZ4qqQztCjEr34",
+     "until": "2026-10-20",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "mazutych",
    "char": "cop",
    "voice_id": "sqjFPShWaZX3JdS3utu1",
-   "status": "active",
+   "status": "library_or_premade",
    "name": "Инспектор Столбов (ДПС)",
-   "voice_name": "mazutych — Инспектор Столбов (ДПС) (restored)",
+   "voice_name": "Мазутыч — Инспектор Столбов (ДПС)",
    "lines": 8,
    "episodes": 1,
    "samples": [
@@ -990,104 +1234,11 @@
   },
   {
    "slug": "mazutych",
-   "char": "boss",
-   "voice_id": "iJVGC18PiXCeNoMe4wOM",
-   "status": "active",
-   "name": "Борис Борисыч",
-   "voice_name": "mazutych — Борис Борисыч (restored)",
-   "lines": 8,
-   "episodes": 4,
-   "samples": [
-    "series/mazutych/voice/ep06/b2.mp3",
-    "series/mazutych/voice/ep02/b1.mp3",
-    "series/mazutych/voice/ep06/b1.mp3",
-    "series/mazutych/voice/ep03/b1.mp3",
-    "series/mazutych/voice/ep05/b1.mp3",
-    "series/mazutych/voice/ep06/b3.mp3",
-    "series/mazutych/voice/ep03/b2.mp3",
-    "series/mazutych/voice/ep03/b3.mp3"
-   ],
-   "design": {
-    "description": "A pompous Russian factory boss in his sixties making a triumphant announcement over a factory loudspeaker. Booming, fat, self-satisfied baritone with a solemn Soviet-style ceremonial cadence, loud and proud. Native Russian speaker.",
-    "text": "Ура́, това́рищи! Пла́н — сто со́рок оди́н проце́нт! Заво́д «Фа́кел Труда́» опя́ть впереди́. Бензи́н вы́пущен, учтён и отпра́влен! Ура́!",
-    "picked": {
-     "i": 2,
-     "dur": 15.49,
-     "f0": 271.2,
-     "f0_iqr": 28.6,
-     "rate": 13.1,
-     "loud_sd": 5.7
-    }
-   },
-   "account": {
-    "category": "cloned",
-    "description": "A pompous Russian factory boss in his sixties making a triumphant announcement over a factory loudspeaker. Booming, fat, self-satisfied baritone with a solemn Soviet-style ceremonial cadence, loud and proud. Native Russian speaker.",
-    "settings": null,
-    "created_at_unix": 1791475384
-   },
-   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/vxP9EoBM29o2m1aWHQNV/5ba4261e-8b11-4152-abfc-d089fd73aba1.mp3",
-   "deleted_reason": "free slots",
-   "history": [
-    {
-     "voice_id": "vxP9EoBM29o2m1aWHQNV",
-     "until": "2026-10-08",
-     "note": "deleted, restored as IVC clone"
-    }
-   ]
-  },
-  {
-   "slug": "mazutych",
-   "char": "tolik",
-   "voice_id": "6FfEAtYZ4qqQztCjEr34",
-   "status": "active",
-   "name": "Толик (водитель бензовоза)",
-   "voice_name": "mazutych — Толик (водитель бензовоза) (restored)",
-   "lines": 7,
-   "episodes": 3,
-   "samples": [
-    "series/mazutych/voice/ep04/d1.mp3",
-    "series/mazutych/voice/ep01/d2.mp3",
-    "series/mazutych/voice/ep05/d3.mp3",
-    "series/mazutych/voice/ep01/d1.mp3",
-    "series/mazutych/voice/ep01/d3.mp3",
-    "series/mazutych/voice/ep05/d1.mp3",
-    "series/mazutych/voice/ep05/d2.mp3"
-   ],
-   "design": {
-    "description": "A cheerful, simple Russian truck driver in his forties. Hoarse, friendly, slightly husky baritone, fast and loud, easy-going and folksy, a little rough, sounds like he is shouting from a truck window with a grin. Native Russian speaker, plain provincial accent.",
-    "text": "Мужики́, кто кра́йний? Пусто́й я, с весны́ не запра́влялся. А я его́ вожу́, бензи́н-то! Куда́ — сам не зна́ю, но вожу́ испра́вно, два́дцать лет за рулём, ни одно́й ава́рии!",
-    "picked": {
-     "i": 0,
-     "dur": 13.09,
-     "f0": 258.1,
-     "f0_iqr": 88.6,
-     "rate": 18.2,
-     "loud_sd": 5.9
-    }
-   },
-   "account": {
-    "category": "cloned",
-    "description": "A cheerful, simple Russian truck driver in his forties. Hoarse, friendly, slightly husky baritone, fast and loud, easy-going and folksy, a little rough, sounds like he is shouting from a truck window with a grin. Native Russian speaker, plain provincial accent.",
-    "settings": null,
-    "created_at_unix": 1791475388
-   },
-   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/X8jm2orhZd79nRAehKy9/c43d33a2-4923-4ad8-9d7d-3b8c51dcee35.mp3",
-   "deleted_reason": "free slots",
-   "history": [
-    {
-     "voice_id": "X8jm2orhZd79nRAehKy9",
-     "until": "2026-10-08",
-     "note": "deleted, restored as IVC clone"
-    }
-   ]
-  },
-  {
-   "slug": "mazutych",
    "char": "vadik",
    "voice_id": "3YcbIhxRmKe16pBspvSh",
-   "status": "active",
+   "status": "library_or_premade",
    "name": "Вадик (барыга)",
-   "voice_name": "mazutych — Вадик (барыга) (restored)",
+   "voice_name": "Мазутыч — Вадик (барыга)",
    "lines": 7,
    "episodes": 1,
    "samples": [
@@ -1126,102 +1277,6 @@
      "note": "deleted, restored as IVC clone"
     }
    ]
-  },
-  {
-   "slug": "mazutych",
-   "char": "zoya",
-   "voice_id": "aNpGfBJ5tarP9jXqryIk",
-   "status": "deleted",
-   "name": "Зоя (АЗС)",
-   "voice_name": "Мазутыч — Зоя (АЗС)",
-   "lines": 13,
-   "episodes": 4,
-   "samples": [
-    "series/mazutych/voice/ep05/z1.mp3",
-    "series/mazutych/voice/ep02/z4.mp3",
-    "series/mazutych/voice/ep01/z3.mp3",
-    "series/mazutych/voice/ep01/z1.mp3",
-    "series/mazutych/voice/ep06/z3.mp3",
-    "series/mazutych/voice/ep02/z1.mp3",
-    "series/mazutych/voice/ep01/z2.mp3",
-    "series/mazutych/voice/ep06/z1.mp3"
-   ],
-   "design": {
-    "description": "A loud, bored Russian gas station cashier woman around fifty. Husky, smoky, slightly hoarse contralto, lazy and unimpressed, chewing gum, speaks with the tired authority of the person behind the window, a light southern Russian accent with a soft fricative g. Native Russian speaker.",
-    "text": "Бензи́на нет! Ждём бензово́з! Мужчи́на, не стучи́те в око́шко. Ми́мо. Хот-до́г бу́дете? Тало́ны принима́ем по чётным. Сле́дующий!",
-    "picked": {
-     "i": 2,
-     "dur": 18.99,
-     "f0": 246.2,
-     "f0_iqr": 78.2,
-     "rate": 11.4,
-     "loud_sd": 5.2
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A loud, bored Russian gas station cashier woman around fifty. Husky, smoky, slightly hoarse contralto, lazy and unimpressed, chewing gum, speaks with the tired authority of the person behind the window, a light southern Russian accent with a soft fricative g. Native Russian speaker.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1791272637
-   },
-   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/aNpGfBJ5tarP9jXqryIk/5596ca03-4381-4a9b-b359-239bd326bf6d.mp3",
-   "deleted_on": "2026-10-12",
-   "deleted_reason": "auto: room for prokhor/ranger"
-  },
-  {
-   "slug": "mazutych",
-   "char": "wheel",
-   "voice_id": "Kp5sQTqr3PnriPusCHEb",
-   "status": "deleted",
-   "name": "Дин-Дон (моноколесо)",
-   "voice_name": "Мазутыч — Дин-Дон (моноколесо)",
-   "lines": 9,
-   "episodes": 6,
-   "samples": [
-    "series/mazutych/voice/ep06/w2.mp3",
-    "series/mazutych/voice/ep01/w2.mp3",
-    "series/mazutych/voice/ep04/w1.mp3",
-    "series/mazutych/voice/ep06/w1.mp3",
-    "series/mazutych/voice/ep05/w1.mp3",
-    "series/mazutych/voice/ep01/w1.mp3",
-    "series/mazutych/voice/ep02/w1.mp3",
-    "series/mazutych/voice/ep03/w1.mp3"
-   ],
-   "design": {
-    "description": "A cheerful synthetic female voice assistant of a cheap gadget, bright, slightly metallic and robotic, evenly spaced syllables, overly polite, speaks broken machine-translated Russian with a light East Asian accent. Clear and comedic.",
-    "text": "Здра́вствуй, дру́га! Я твой помо́щник Ди́н-до́н. Заря́д три проце́нт. Ты е́хать ти́ше, дру́га. Ско́рость о́чень мно́го. Всё. Я спать. Ди́н-до́н!",
-    "picked": {
-     "i": 1,
-     "dur": 10.45,
-     "f0": 275.9,
-     "f0_iqr": 80.6,
-     "rate": 19.1,
-     "loud_sd": 5.0
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A cheerful synthetic female voice assistant of a cheap gadget, bright, slightly metallic and robotic, evenly spaced syllables, overly polite, speaks broken machine-translated Russian with a light East Asian accent. Clear and comedic.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1791272643
-   },
-   "preview_url": "https://api.us.elevenlabs.io/v1/voices/Kp5sQTqr3PnriPusCHEb/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiN2U4MDFkMGMtMTU3MS00OTQwLWIwOWUtZDhkNWY1MjM3ZmEyLm1wMyIsInRpbWVzdGFtcCI6MTc5MTgyMDgwMDAwMDAwMH0%3D",
-   "deleted_on": "2026-10-12",
-   "deleted_reason": "auto: room for prokhor/bear"
   },
   {
    "slug": "pochti-dikiy-zapad",
@@ -1304,17 +1359,17 @@
    "status": "active",
    "name": "Прохор",
    "voice_name": "Прохор — Прохор",
-   "lines": 17,
-   "episodes": 2,
+   "lines": 43,
+   "episodes": 7,
    "samples": [
+    "series/prokhor/voice/ep03/p4.mp3",
+    "series/prokhor/voice/ep06/p3.mp3",
+    "series/prokhor/voice/ep05/p2.mp3",
+    "series/prokhor/voice/ep02/p2.mp3",
+    "series/prokhor/voice/ep03/p2.mp3",
+    "series/prokhor/voice/ep05/p4.mp3",
     "series/prokhor/voice/ep01/p4.mp3",
-    "series/prokhor/voice/ep01b/p2.mp3",
-    "series/prokhor/voice/ep01b/p7.mp3",
-    "series/prokhor/voice/ep01/p9.mp3",
-    "series/prokhor/voice/ep01b/p3.mp3",
-    "series/prokhor/voice/ep01/p2.mp3",
-    "series/prokhor/voice/ep01/p5.mp3",
-    "series/prokhor/voice/ep01/p3.mp3"
+    "series/prokhor/voice/ep01b/p2.mp3"
    ],
    "design": {
     "description": "A huge bearded Siberian lumberjack, around fifty five, living alone in the taiga. Extremely low, deep, chesty and gravelly bass voice, the lowest male register, rough and husky like he chops wood all day, slow heavy confident delivery with village swagger, thick rural Russian accent with strong okanye, a smoker's rasp, warm and funny. Not shouting, just a big booming low voice. Native Russian speaker.",
@@ -1345,16 +1400,17 @@
    "status": "active",
    "name": "Михал Потапыч",
    "voice_name": "Прохор — Михал Потапыч",
-   "lines": 7,
-   "episodes": 2,
+   "lines": 14,
+   "episodes": 7,
    "samples": [
+    "series/prokhor/voice/ep03/b1.mp3",
+    "series/prokhor/voice/ep06/b1.mp3",
     "series/prokhor/voice/ep01/b1.mp3",
     "series/prokhor/voice/ep01b/b1.mp3",
+    "series/prokhor/voice/ep02/b1.mp3",
+    "series/prokhor/voice/ep06/b2.mp3",
     "series/prokhor/voice/ep01/b3.mp3",
-    "series/prokhor/voice/ep01/b2.mp3",
-    "series/prokhor/voice/ep01b/b2.mp3",
-    "series/prokhor/voice/ep01/b4.mp3",
-    "series/prokhor/voice/ep01b/b3.mp3"
+    "series/prokhor/voice/ep04/b1.mp3"
    ],
    "design": {
     "description": "A huge old bear who runs the housing management office of the forest, woken up in the middle of winter hibernation. Extremely deep, slow, sleepy and heavy bass voice, monotone bureaucratic deadpan, unimpressed, yawns between words, a low growl in the throat, speaks very calmly and briefly like a tired official reading a bill. Older Russian man in his sixties. Native Russian speaker.",
@@ -1377,14 +1433,82 @@
   },
   {
    "slug": "prokhor",
+   "char": "ranger",
+   "voice_id": "d6PvT1IIGreyRcDnsiMh",
+   "status": "active",
+   "name": "Егерь Людмила Петровна",
+   "voice_name": "Прохор — Егерь Людмила Петровна",
+   "lines": 3,
+   "episodes": 1,
+   "samples": [
+    "series/prokhor/voice/ep05/r1.mp3",
+    "series/prokhor/voice/ep05/r2.mp3",
+    "series/prokhor/voice/ep05/r3.mp3"
+   ],
+   "design": {
+    "description": "A stern loud forest ranger woman in her fifties, commanding husky contralto, official and merciless like a strict inspector, then panicking and squealing when a bear chases her. Light rural Russian accent. Native Russian speaker, expressive and funny.",
+    "text": "[stern] Штраф. За костёр. И за дым. И за за́пах. [panicking, screaming] Ёлочка! Спрячь меня́! [whispering] Он ушёл?",
+    "picked": {
+     "i": 2,
+     "dur": 9.33,
+     "f0": 283.2,
+     "f0_iqr": 133.3,
+     "rate": 24.5,
+     "loud_sd": 5.4
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A stern loud forest ranger woman in her fifties, commanding husky contralto, official and merciless like a strict inspector, then panicking and squealing when a bear chases her. Light rural Russian accent. Native Russian speaker, expressive and funny.",
+    "settings": null,
+    "created_at_unix": 1791840715
+   }
+  },
+  {
+   "slug": "prokhor",
+   "char": "moose",
+   "voice_id": "aFuXgHiYbXdvfWT8BKEc",
+   "status": "active",
+   "name": "Лось-санитар",
+   "voice_name": "Прохор — Лось-санитар",
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/prokhor/voice/ep04/m2.mp3",
+    "series/prokhor/voice/ep04/m1.mp3"
+   ],
+   "design": {
+    "description": "A huge slow-witted hospital orderly man in his forties, very slow, deep, nasal and dopey voice, bored bureaucratic monotone, long pauses, sighs, absolutely unbothered. Native Russian speaker, funny deadpan.",
+    "text": "[slow, bored] Направле́ние есть? [sigh] Без направле́ния не тяну́. Тало́н — у куку́шки. [deadpan] Сле́дующий.",
+    "picked": {
+     "i": 1,
+     "dur": 8.83,
+     "f0": 129.0,
+     "f0_iqr": 261.7,
+     "rate": 16.8,
+     "loud_sd": 4.8
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A huge slow-witted hospital orderly man in his forties, very slow, deep, nasal and dopey voice, bored bureaucratic monotone, long pauses, sighs, absolutely unbothered. Native Russian speaker, funny deadpan.",
+    "settings": null,
+    "created_at_unix": 1791840707
+   }
+  },
+  {
+   "slug": "prokhor",
    "char": "fox",
    "voice_id": "049gV87VLzOb4th1QiGx",
-   "status": "active",
+   "status": "library_or_premade",
    "name": "Лиса (курьер «Лиса-Экспресс»)",
    "voice_name": "Прохор — Лиса (курьер «Лиса-Экспресс»)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/prokhor/voice/ep02/f1.mp3",
+    "series/prokhor/voice/ep02/f2.mp3"
+   ],
    "design": {
     "description": "A sly, sweet-talking young woman courier in her twenties, a fast chatty delivery girl with a honeyed, slightly nasal, mischievous voice, fake-polite customer service tone, quick and bouncy, a little cunning laugh. Native Russian speaker, playful and expressive.",
     "text": "[sweet, fast] Лиса́-Экспре́сс! Распиши́тесь: тут, тут и тут. [sly] Э́то всё — вам. Вы же пункт вы́дачи! [laughs softly] Хоро́шего дня́!",
@@ -1408,12 +1532,15 @@
    "slug": "prokhor",
    "char": "squirrel",
    "voice_id": "emZnToZuXhR4oQGQ3LhD",
-   "status": "active",
+   "status": "library_or_premade",
    "name": "Белка-охранник",
    "voice_name": "Прохор — Белка-охранник",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/prokhor/voice/ep03/s1.mp3",
+    "series/prokhor/voice/ep03/s2.mp3"
+   ],
    "design": {
     "description": "A small, fussy, strict supermarket security guard woman in her forties, quick high-pitched nasal voice, bossy and suspicious, speaks fast in short official phrases, chewing sunflower seeds, light southern Russian accent. Native Russian speaker, funny and expressive.",
     "text": "[strict] Мужчи́на, паке́тик откро́йте. [suspicious] Мали́на — по ве́су. Ши́шка — по а́кции. [bored] Тайга́ — по ка́рте. Сле́дующий!",
@@ -1431,64 +1558,6 @@
     "description": "A small, fussy, strict supermarket security guard woman in her forties, quick high-pitched nasal voice, bossy and suspicious, speaks fast in short official phrases, chewing sunflower seeds, light southern Russian accent. Native Russian speaker, funny and expressive.",
     "settings": null,
     "created_at_unix": 1791840700
-   }
-  },
-  {
-   "slug": "prokhor",
-   "char": "moose",
-   "voice_id": "aFuXgHiYbXdvfWT8BKEc",
-   "status": "active",
-   "name": "Лось-санитар",
-   "voice_name": "Прохор — Лось-санитар",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
-   "design": {
-    "description": "A huge slow-witted hospital orderly man in his forties, very slow, deep, nasal and dopey voice, bored bureaucratic monotone, long pauses, sighs, absolutely unbothered. Native Russian speaker, funny deadpan.",
-    "text": "[slow, bored] Направле́ние есть? [sigh] Без направле́ния не тяну́. Тало́н — у куку́шки. [deadpan] Сле́дующий.",
-    "picked": {
-     "i": 1,
-     "dur": 8.83,
-     "f0": 129.0,
-     "f0_iqr": 261.7,
-     "rate": 16.8,
-     "loud_sd": 4.8
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A huge slow-witted hospital orderly man in his forties, very slow, deep, nasal and dopey voice, bored bureaucratic monotone, long pauses, sighs, absolutely unbothered. Native Russian speaker, funny deadpan.",
-    "settings": null,
-    "created_at_unix": 1791840707
-   }
-  },
-  {
-   "slug": "prokhor",
-   "char": "ranger",
-   "voice_id": "d6PvT1IIGreyRcDnsiMh",
-   "status": "active",
-   "name": "Егерь Людмила Петровна",
-   "voice_name": "Прохор — Егерь Людмила Петровна",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
-   "design": {
-    "description": "A stern loud forest ranger woman in her fifties, commanding husky contralto, official and merciless like a strict inspector, then panicking and squealing when a bear chases her. Light rural Russian accent. Native Russian speaker, expressive and funny.",
-    "text": "[stern] Штраф. За костёр. И за дым. И за за́пах. [panicking, screaming] Ёлочка! Спрячь меня́! [whispering] Он ушёл?",
-    "picked": {
-     "i": 2,
-     "dur": 9.33,
-     "f0": 283.2,
-     "f0_iqr": 133.3,
-     "rate": 24.5,
-     "loud_sd": 5.4
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A stern loud forest ranger woman in her fifties, commanding husky contralto, official and merciless like a strict inspector, then panicking and squealing when a bear chases her. Light rural Russian accent. Native Russian speaker, expressive and funny.",
-    "settings": null,
-    "created_at_unix": 1791840715
    }
   },
   {
@@ -1690,44 +1759,6 @@
   },
   {
    "slug": "valera-i-kot",
-   "char": "cat",
-   "voice_id": "0SYrGzuYVNDS2OD4YroI",
-   "status": "active",
-   "name": "Кот Дембель",
-   "voice_name": "Валера и кот — Кот Дембель",
-   "lines": 24,
-   "episodes": 7,
-   "samples": [
-    "series/valera-i-kot/voice/movie/c01.mp3",
-    "series/valera-i-kot/voice/movie/c03.mp3",
-    "series/valera-i-kot/voice/ep02/c1.mp3",
-    "series/valera-i-kot/voice/ep03/c1.mp3",
-    "series/valera-i-kot/voice/movie/c06.mp3",
-    "series/valera-i-kot/voice/movie/c05.mp3",
-    "series/valera-i-kot/voice/ep05/c1.mp3",
-    "series/valera-i-kot/voice/movie/c04.mp3"
-   ],
-   "design": {
-    "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
-    "text": "На скла́де. К весне́ помо́ется. Копчёный. Ещё четы́рнадцать дней. Я своё отслужи́л, тепе́рь я лежу́ на батаре́е. Тради́ция. Двадцать лет в армии... спалился за двадцать секунд.",
-    "picked": {
-     "i": 1,
-     "dur": 21.08,
-     "f0": 132.2,
-     "f0_iqr": 39.3,
-     "rate": 12.1,
-     "loud_sd": 5.3
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
-    "settings": null,
-    "created_at_unix": 1790647553
-   }
-  },
-  {
-   "slug": "valera-i-kot",
    "char": "zina",
    "voice_id": "zYrh5fGxYuTn3sXH3sMw",
    "status": "active",
@@ -1914,6 +1945,55 @@
   },
   {
    "slug": "valera-i-kot",
+   "char": "cat",
+   "voice_id": "0SYrGzuYVNDS2OD4YroI",
+   "status": "deleted",
+   "name": "Кот Дембель",
+   "voice_name": "Валера и кот — Кот Дембель",
+   "lines": 24,
+   "episodes": 7,
+   "samples": [
+    "library/voice_archive/valera-i-kot/cat_preview.mp3",
+    "series/valera-i-kot/voice/movie/c01.mp3",
+    "series/valera-i-kot/voice/movie/c03.mp3",
+    "series/valera-i-kot/voice/ep02/c1.mp3",
+    "series/valera-i-kot/voice/ep03/c1.mp3",
+    "series/valera-i-kot/voice/movie/c06.mp3",
+    "series/valera-i-kot/voice/movie/c05.mp3",
+    "series/valera-i-kot/voice/ep05/c1.mp3",
+    "series/valera-i-kot/voice/movie/c04.mp3"
+   ],
+   "design": {
+    "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
+    "text": "На скла́де. К весне́ помо́ется. Копчёный. Ещё четы́рнадцать дней. Я своё отслужи́л, тепе́рь я лежу́ на батаре́е. Тради́ция. Двадцать лет в армии... спалился за двадцать секунд.",
+    "picked": {
+     "i": 1,
+     "dur": 21.08,
+     "f0": 132.2,
+     "f0_iqr": 39.3,
+     "rate": 12.1,
+     "loud_sd": 5.3
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790647553
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/0SYrGzuYVNDS2OD4YroI/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiMjNhNjdlYWQtMGNmNC00N2RmLThiZWMtMTNkNjdjMjhlZTczLm1wMyIsInRpbWVzdGFtcCI6MTc5MjQ1ODAwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-20",
+   "deleted_reason": "free slots"
+  },
+  {
+   "slug": "valera-i-kot",
    "char": "semenych",
    "voice_id": "B5J7DQRqcdz5aZwL642J",
    "status": "deleted",
@@ -2024,9 +2104,15 @@
   }
  ],
  "unlisted_account_voices": {
+  "IvN1tklEWIznHsYj1xdb": "Кощей из панельки — Ряженый студент",
+  "7b7c6njy94EqNbu1iSbC": "Кощей из панельки — Змей Горыныч",
+  "9TtJLIijaIcVmOE5P20m": "Кощей из панельки — Галина Аркадьевна",
+  "LkhQGB8Q82s4UQOnplHh": "Кощей из панельки — Домовой Кузьмич",
+  "LakpqgKj0ywvEMqSS2OQ": "Кощей из панельки — Баба Яга",
+  "jdVj8kVEH8bb83ryznli": "Кощей из панельки — Кощей",
   "14NozJq5eoBmDc1FXFDq": "NIKITA2",
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-12 21:31"
+ "updated": "2026-10-20 01:02"
 }

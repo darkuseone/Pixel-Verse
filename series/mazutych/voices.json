@@ -47,8 +47,11 @@
           "loud_sd": 5.2
         }
       },
-      "voice_id": "aNpGfBJ5tarP9jXqryIk",
-      "voice": "Мазутыч — Зоя (АЗС)"
+      "voice_id": "tmuyzPXDJGIQYqD2DsN3",
+      "voice": "Мазутыч — Зоя (АЗС)",
+      "previous_voice_ids": [
+        "aNpGfBJ5tarP9jXqryIk"
+      ]
     },
     "wheel": {
       "name": "Дин-Дон (моноколесо)",
@@ -70,8 +73,11 @@
           "loud_sd": 5.0
         }
       },
-      "voice_id": "Kp5sQTqr3PnriPusCHEb",
-      "voice": "Мазутыч — Дин-Дон (моноколесо)"
+      "voice_id": "qCq2QOkDqmbtFpDmNPRP",
+      "voice": "Мазутыч — Дин-Дон (моноколесо)",
+      "previous_voice_ids": [
+        "Kp5sQTqr3PnriPusCHEb"
+      ]
     },
     "boss": {
       "name": "Борис Борисыч",
@@ -93,10 +99,11 @@
           "loud_sd": 5.7
         }
       },
-      "voice_id": "iJVGC18PiXCeNoMe4wOM",
+      "voice_id": "tucKspJ994E6SUPePYF5",
       "voice": "Мазутыч — Борис Борисыч",
       "previous_voice_ids": [
-        "vxP9EoBM29o2m1aWHQNV"
+        "vxP9EoBM29o2m1aWHQNV",
+        "iJVGC18PiXCeNoMe4wOM"
       ]
     },
     "tolik": {
@@ -119,10 +126,11 @@
           "loud_sd": 5.9
         }
       },
-      "voice_id": "6FfEAtYZ4qqQztCjEr34",
+      "voice_id": "cL7vvvUcXjn22DU68RzU",
       "voice": "Мазутыч — Толик (водитель бензовоза)",
       "previous_voice_ids": [
-        "X8jm2orhZd79nRAehKy9"
+        "X8jm2orhZd79nRAehKy9",
+        "6FfEAtYZ4qqQztCjEr34"
       ]
     },
     "vadik": {
