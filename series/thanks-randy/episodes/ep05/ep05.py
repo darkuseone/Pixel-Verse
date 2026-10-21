@@ -257,7 +257,7 @@ assert len(R) == len(CUTS) - 1 == len(NAMES)
 
 SHOW = K.Show(EPI, 5, ['$30 FOR', 'FOOTBALL?!'], hook_t=(0.10, 1.95), hook_y=300, hook_size=84,
               day=(2.10, 5.10, 'THURSDAY 6:00 PM', 'TURKEY DAY', 1650),
-              stickers=[(K.st("KIDS' TABLE (HE'S 24)", fg=(255, 214, 80), size=50), 7.40, 9.25, 600, 1240),
+              stickers=[(K.st("KIDS' TABLE (HE'S 24)", fg=(255, 214, 80), size=40), 7.40, 9.25, 540, 1240),
                         (K.st('STEP 4 OF 47', fg=(255, 120, 120), size=56), 11.80, 12.60, 540, 1380),
                         (K.st('SUPPORT+ $29.99', fg=(200, 150, 255), size=62), 18.20, 22.10, 540, 1260)],
               flashes=[TWIST], mosaics=[],

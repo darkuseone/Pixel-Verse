@@ -3,7 +3,7 @@ Sound design: ONLY this series' own sounds (series/thanks-randy/sfx) + the sitco
 DUR = 32.25
 FPS = 30
 SLUG = 'thanks-randy'
-MASTER = 0.80
+MASTER = 0.92
 
 VOICE = [
     ('r1', 'ep05_t', 'r1', 0.00, 0.00, 1.93, 'randy', 'THIRTY bucks?! For FOOTBALL?!'),

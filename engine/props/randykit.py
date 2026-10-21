@@ -515,8 +515,12 @@ def tv_ui(mode, t, w=980, h=560, step=0):
     im = Image.new('RGB', (w, h), (14, 10, 30)); d = ImageDraw.Draw(im); d.fontmode = '1'
     for y in range(0, h, 8): d.line([(0, y), (w, y)], fill=(20, 14, 40))
     d.rectangle([0, 0, w, 64], fill=(120, 20, 200))
-    d.text((24, 18), 'STREAMFLIX ULTRA+ MAX', font=O.pfont(30), fill=(255, 255, 255))
-    d.text((w - 360, 22), 'MAPLE FALLS vs EVERYBODY', font=O.pfont(18), fill=(230, 210, 255))
+    ft, fsub = O.pfont(30), O.pfont(18)
+    d.text((24, 18), 'STREAMFLIX ULTRA+ MAX', font=ft, fill=(255, 255, 255))
+    for sub in ('MAPLE FALLS vs EVERYBODY', 'MF vs EVERYBODY', 'LIVE'):                    # right-aligned, never over the title
+        if w - 24 - fsub.getlength(sub) > 24 + ft.getlength('STREAMFLIX ULTRA+ MAX') + 24:
+            d.text((w - 24 - fsub.getlength(sub), 26), sub, font=fsub, fill=(230, 210, 255))
+            break
     fb, f, fs = O.pfont(52), O.pfont(34), O.pfont(18)
     if mode == 'paywall':
         for i, ln in enumerate(['SUBSCRIBE', 'TO WATCH']):
