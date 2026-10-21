@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-20 01:02.
+Обновлено: 2026-10-21 01:14.
 
 ## agent-dibs
 
@@ -34,7 +34,7 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Grim | `grim` | `sdQf2r6zfX32hvp25Auj` | active | 30 / 6 | Grim Ride — Grim |
+| Grim | `grim` | `sdQf2r6zfX32hvp25Auj` | deleted 2026-10-21 | 30 / 6 | Grim Ride — Grim |
 | Edgar | `edgar` | `QxBrp3fXvoJ3Zvl8DXHD` | deleted 2026-10-20 | 17 / 6 | Grim Ride — Edgar |
 | Harold | `harold` | `UScN6kcNEVzdo1v1Nl6W` | deleted 2026-10-12 | 9 / 5 | Grim Ride — Harold |
 | Kayden | `kayden` | `wISugChlyIgdUxhS0vFR` | deleted 2026-10-12 | 9 / 4 | Grim Ride — Kayden |
@@ -46,11 +46,11 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Мазутыч | `maz` | `xSY5jZDD2Tge1l2uwiQn` | active | 29 / 6 | Мазутыч — Мазутыч |
-| Зоя (АЗС) | `zoya` | `tmuyzPXDJGIQYqD2DsN3` | active | 13 / 4 | Мазутыч — Зоя (АЗС) |
-| Дин-Дон (моноколесо) | `wheel` | `qCq2QOkDqmbtFpDmNPRP` | active | 9 / 6 | Мазутыч — Дин-Дон (моноколесо) |
-| Борис Борисыч | `boss` | `tucKspJ994E6SUPePYF5` | active | 8 / 4 | Мазутыч — Борис Борисыч |
-| Толик (водитель бензовоза) | `tolik` | `cL7vvvUcXjn22DU68RzU` | active | 7 / 3 | Мазутыч — Толик (водитель бензовоза) |
+| Мазутыч | `maz` | `xSY5jZDD2Tge1l2uwiQn` | active | 58 / 7 | Мазутыч — Мазутыч |
+| Дин-Дон (моноколесо) | `wheel` | `qCq2QOkDqmbtFpDmNPRP` | active | 19 / 7 | mazutych — Дин-Дон (моноколесо) (restored) |
+| Зоя (АЗС) | `zoya` | `tmuyzPXDJGIQYqD2DsN3` | active | 17 / 5 | mazutych — Зоя (АЗС) (restored) |
+| Борис Борисыч | `boss` | `tucKspJ994E6SUPePYF5` | active | 17 / 5 | mazutych — Борис Борисыч (restored) |
+| Толик (водитель бензовоза) | `tolik` | `cL7vvvUcXjn22DU68RzU` | active | 11 / 4 | mazutych — Толик (водитель бензовоза) (restored) |
 | Инспектор Столбов (ДПС) | `cop` | `sqjFPShWaZX3JdS3utu1` | library_or_premade | 8 / 1 | Мазутыч — Инспектор Столбов (ДПС) |
 | Вадик (барыга) | `vadik` | `3YcbIhxRmKe16pBspvSh` | library_or_premade | 7 / 1 | Мазутыч — Вадик (барыга) |
 
@@ -68,9 +68,9 @@
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
 | Прохор | `prokhor` | `FmmR663nLw91vgt0SRzR` | active | 43 / 7 | Прохор — Прохор |
-| Михал Потапыч | `bear` | `xflYwcTw1xfUQvQHsSsi` | active | 14 / 7 | Прохор — Михал Потапыч |
-| Егерь Людмила Петровна | `ranger` | `d6PvT1IIGreyRcDnsiMh` | active | 3 / 1 | Прохор — Егерь Людмила Петровна |
-| Лось-санитар | `moose` | `aFuXgHiYbXdvfWT8BKEc` | active | 2 / 1 | Прохор — Лось-санитар |
+| Михал Потапыч | `bear` | `xflYwcTw1xfUQvQHsSsi` | deleted 2026-10-21 | 14 / 7 | Прохор — Михал Потапыч |
+| Егерь Людмила Петровна | `ranger` | `d6PvT1IIGreyRcDnsiMh` | deleted 2026-10-21 | 3 / 1 | Прохор — Егерь Людмила Петровна |
+| Лось-санитар | `moose` | `aFuXgHiYbXdvfWT8BKEc` | deleted 2026-10-21 | 2 / 1 | Прохор — Лось-санитар |
 | Лиса (курьер «Лиса-Экспресс») | `fox` | `049gV87VLzOb4th1QiGx` | library_or_premade | 2 / 1 | Прохор — Лиса (курьер «Лиса-Экспресс») |
 | Белка-охранник | `squirrel` | `emZnToZuXhR4oQGQ3LhD` | library_or_premade | 2 / 1 | Прохор — Белка-охранник |
 
@@ -80,8 +80,18 @@
 |---|---|---|---|---|---|
 | Brenda | `brenda` | `SK1BhvqG7RGgUrYJyInI` | active | 48 / 7 | Sunny Palms HOA — Brenda |
 | Dale | `dale` | `Ii27fPpQjUvsObpI9Ex2` | active | 46 / 7 | Sunny Palms HOA — Dale |
-| Earl the Gator | `earl` | `LnoWNLqEhWQWVHwQFlpP` | active | 27 / 7 | Sunny Palms HOA — Earl the Gator |
+| Earl the Gator | `earl` | `LnoWNLqEhWQWVHwQFlpP` | deleted 2026-10-21 | 27 / 7 | Sunny Palms HOA — Earl the Gator |
 | Payment Tablet | `tablet` | `pmf8vtu31xjkFqYKEPwq` | deleted 2026-10-06 | 5 / 1 | Sunny Palms HOA — Payment Tablet |
+
+## thanks-randy
+
+| Герой | char | voice_id | Статус | Реплик / серий | Голос |
+|---|---|---|---|---|---|
+| Randy | `randy` | `TchZIvpJmfER4pUh0mLj` | active | 0 / 0 | Thanks, Randy — Randy |
+| Tom (frozen turkey) | `tom` | `HIEYuk97dd40Gpi6GtRn` | active | 0 / 0 | Thanks, Randy — Tom (frozen turkey) |
+| Nana Joyce | `joyce` | `dJjx0RiCfuNSJOqSszkH` | active | 0 / 0 | Thanks, Randy — Nana Joyce |
+| Brayden | `brayden` | `MIUbQ8ecRUmaOKYrVlLG` | active | 0 / 0 | Thanks, Randy — Brayden |
+| SCAN-DEE (every machine) | `scandee` | `3ANi4ZKHBsZCpmOHdUAL` | active | 0 / 0 | Thanks, Randy — SCAN-DEE (every machine) |
 
 ## valera-i-kot
 

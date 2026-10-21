@@ -1,0 +1,123 @@
+{
+  "cartoon": "Thanks, Randy",
+  "slug": "thanks-randy",
+  "lang": "us",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "randy": {
+      "name": "Randy",
+      "color_caption": [
+        255,
+        150,
+        50
+      ],
+      "style": "[booming] [confident] -> [high squeak] panic — loud Ohio sitcom dad",
+      "design": {
+        "description": "A loud, overconfident suburban dad from Ohio in his late forties, the classic sitcom father who thinks he is a genius at everything. Big booming chesty baritone, fast energetic delivery, flat Midwestern vowels, lots of swagger and bluster, and when he panics his voice cracks up into a funny high squeak. Warm, goofy, very expressive and comedic. Native American English speaker.",
+        "text": "[outraged, shouting] Eighty-nine bucks?! For a BIRD?! [proud, booming] This year, I'm hosting Thanksgiving. Twenty years, never burned a turkey! [panicking, voice cracking] There's nothing there! Why is it beeping?!",
+        "picked": {
+          "i": 0,
+          "dur": 9.48,
+          "f0": 271.2,
+          "f0_iqr": 121.2,
+          "rate": 36.5,
+          "loud_sd": 6.4
+        }
+      },
+      "voice_id": "TchZIvpJmfER4pUh0mLj",
+      "voice": "Thanks, Randy — Randy"
+    },
+    "tom": {
+      "name": "Tom (frozen turkey)",
+      "color_caption": [
+        150,
+        220,
+        255
+      ],
+      "style": "[deadpan] [gravelly] — tired noir narrator, zero emotion",
+      "design": {
+        "description": "A world-weary older man in his sixties with a low, gravelly, rough voice, bone-dry and completely deadpan, like a tired film-noir detective narrator who has seen everything. Slow, unhurried, flat delivery with long dry pauses, a slight New Jersey accent, never excited, quietly sarcastic and funny. Native American English speaker.",
+        "text": "[deadpan, gravelly] I'm worth it. [flat] Twenty-two pounds, pal. I'm a glacier. [dry] Still frozen. [weary sigh] Great. Now it's a support group. Miss me?",
+        "picked": {
+          "i": 2,
+          "dur": 16.2,
+          "f0": 80.4,
+          "f0_iqr": 166.3,
+          "rate": 18.2,
+          "loud_sd": 5.2
+        }
+      },
+      "voice_id": "HIEYuk97dd40Gpi6GtRn",
+      "voice": "Thanks, Randy — Tom (frozen turkey)"
+    },
+    "joyce": {
+      "name": "Nana Joyce",
+      "color_caption": [
+        206,
+        160,
+        255
+      ],
+      "style": "[sweet] [passive-aggressive] — tiny Midwestern grandma",
+      "design": {
+        "description": "A tiny sweet elderly grandmother in her eighties from the American Midwest. Thin, high, sugary old-lady voice with a slight tremble, very polite and warm on the surface but passive-aggressive underneath, and the last word of every sentence turns sharp and steely. Gossipy and nosy, comedic timing. Native American English speaker.",
+        "text": "[sweet] I'm resting, sweetie. [passive-aggressive] No, it's fine. I'll just die here. [nosy, sweetly] So. When are you getting married? [sweet] Carry me to the car.",
+        "picked": {
+          "i": 1,
+          "dur": 11.81,
+          "f0": 210.5,
+          "f0_iqr": 62.1,
+          "rate": 22.9,
+          "loud_sd": 5.5
+        }
+      },
+      "voice_id": "dJjx0RiCfuNSJOqSszkH",
+      "voice": "Thanks, Randy — Nana Joyce"
+    },
+    "brayden": {
+      "name": "Brayden",
+      "color_caption": [
+        170,
+        255,
+        90
+      ],
+      "style": "[lazy] [vocal fry] — California tech-bro cousin",
+      "design": {
+        "description": "A lazy twenty-four-year-old California tech bro and wannabe entrepreneur. Relaxed laid-back young adult male voice with heavy vocal fry, upspeak at the ends of sentences, unbothered and monotone, always half amused, speaks slowly like he is filming content. Native American English speaker.",
+        "text": "[flat, vocal fry] You never cooked one. [excited, lazy] Bro. Nana's on sale. [smug] Uber, but for thawing. It's a startup. [deadpan] Okay. This is a startup.",
+        "picked": {
+          "i": 0,
+          "dur": 9.64,
+          "f0": 84.2,
+          "f0_iqr": 65.9,
+          "rate": 31.0,
+          "loud_sd": 4.7
+        }
+      },
+      "voice_id": "MIUbQ8ecRUmaOKYrVlLG",
+      "voice": "Thanks, Randy — Brayden"
+    },
+    "scandee": {
+      "name": "SCAN-DEE (every machine)",
+      "color_caption": [
+        235,
+        240,
+        255
+      ],
+      "style": "[robotic] [chipper] — self-checkout voice",
+      "design": {
+        "description": "A polite synthetic female voice of a supermarket self-checkout machine. Perfectly even, chipper, customer-service robotic tone, slightly too cheerful, clipped and precise articulation, no emotion at all, like an automated announcement. Adult woman, American English.",
+        "text": "[robotic, chipper] Unexpected item in bagging area. Please wait for assistance. Unexpected item. Grandma detected. Four ninety-nine per pound. Total: eighty-nine ninety-nine.",
+        "picked": {
+          "i": 1,
+          "dur": 11.23,
+          "f0": 192.8,
+          "f0_iqr": 73.9,
+          "rate": 21.0,
+          "loud_sd": 4.6
+        }
+      },
+      "voice_id": "3ANi4ZKHBsZCpmOHdUAL",
+      "voice": "Thanks, Randy — SCAN-DEE (every machine)"
+    }
+  }
+}
