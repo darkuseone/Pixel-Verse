@@ -377,7 +377,7 @@ def r_s2(t, u):
         K.cold_vapor(big, 560, 1120, t, 1.0, 1.4)
         K.thaw_meter(big, t, 30.55, DUR, 'CHRISTMAS?', x=900, y=1050)
     big = K.shot(OUT, light_out, 640.0, 470.0, Z, acts=[tom], pre=pre, fx_=f)
-    K.day_card(big, t, 30.45, DUR, 'SEASON 2:', 'RANDY HOSTS CHRISTMAS', y=300)
+    K.day_card(big, t, 30.45, DUR, 'SEASON 2:', 'RANDY HOSTS CHRISTMAS', y=560)
     return big
 
 
