@@ -1,0 +1,16 @@
+{
+  "r1": ["randy", "[outraged, shouting at the TV] THIRTY bucks?! For FOOTBALL?!"],
+  "j1": ["joyce", "[sweet, delighted] Randy, it's PERFECT!"],
+  "r2": ["randy", "[glowing, proud, booming] Twenty years! Never burned a turkey!"],
+  "b1": ["brayden", "[flat, vocal fry, unimpressed] It still has the PRICE TAG."],
+  "s1": ["scandee", "[robotic, chipper, fast] Download the APP. Verify your EMAIL. Reset your PASSWORD."],
+  "s2": ["scandee", "[robotic, chipper] Security question. Name of your first PET?"],
+  "r3": ["randy", "[unsure, guessing] TOM?"],
+  "t1": ["tom", "[deadpan, gravelly] We never MET."],
+  "s3": ["scandee", "[robotic, chipper] To speak to an agent, subscribe to SUPPORT PLUS. Twenty-nine NINETY-NINE."],
+  "r4": ["randy", "[breaking down, high squeak, whining] I just want to watch the GAME!"],
+  "j2": ["joyce", "[sweet, calm, smug] No, it's FINE. I have CABLE."],
+  "b2": ["brayden", "[deadpan, flat] Spoiler. We LOST."],
+  "fj": ["joyce", "[deadpan, flat, unimpressed] Thanks, Randy."],
+  "fb": ["brayden", "[deadpan, flat, vocal fry] Thanks, Randy."]
+}

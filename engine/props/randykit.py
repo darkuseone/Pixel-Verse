@@ -506,3 +506,66 @@ def split(left, right, gap=10, col=(255, 186, 60)):
     out[:, :W2] = left[:, lx:lx + W2]
     out[:, W2 + gap:W2 + gap + W2] = right[:, lx:lx + W2]
     return out
+
+
+# ---------------------------------------------------------------- E05: the StreamFlix TV screen (paywall recursion)
+def tv_ui(mode, t, w=980, h=560, step=0):
+    """StreamFlix Ultra+ Max on the big TV: 'paywall' (SUBSCRIBE TO WATCH $29.99/MO + fine print), 'windows' (step 1..4 stacked popups:
+    QR / APP / EMAIL / PASSWORD), 'question' (SECURITY QUESTION), 'locked' (WRONG · LOCKED → SUPPORT+ $29.99), 'final' (the game is over)"""
+    im = Image.new('RGB', (w, h), (14, 10, 30)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    for y in range(0, h, 8): d.line([(0, y), (w, y)], fill=(20, 14, 40))
+    d.rectangle([0, 0, w, 64], fill=(120, 20, 200))
+    d.text((24, 18), 'STREAMFLIX ULTRA+ MAX', font=O.pfont(30), fill=(255, 255, 255))
+    d.text((w - 360, 22), 'MAPLE FALLS vs EVERYBODY', font=O.pfont(18), fill=(230, 210, 255))
+    fb, f, fs = O.pfont(52), O.pfont(34), O.pfont(18)
+    if mode == 'paywall':
+        for i, ln in enumerate(['SUBSCRIBE', 'TO WATCH']):
+            d.text(((w - fb.getlength(ln)) / 2, 110 + i * 70), ln, font=fb, fill=(255, 255, 255))
+        d.text(((w - O.pfont(64).getlength('$29.99/MO')) / 2, 270), '$29.99/MO', font=O.pfont(64), fill=(255, 214, 60))
+        d.text(((w - fs.getlength('*requires app, account, email & patience')) / 2, h - 50), '*requires app, account, email & patience',
+               font=fs, fill=(170, 160, 200))
+    elif mode == 'windows':
+        items = [('SCAN THE QR CODE', (60, 160, 255)), ('DOWNLOAD THE APP', (60, 200, 120)), ('VERIFY YOUR EMAIL', (255, 160, 40)),
+                 ('RESET YOUR PASSWORD', (230, 60, 60))]
+        for i, (txt, c) in enumerate(items[:max(1, step)]):
+            x0, y0 = 60 + i * 60, 100 + i * 80
+            d.rectangle([x0, y0, x0 + 620, y0 + 230], fill=(250, 250, 252), outline=c, width=8)
+            d.rectangle([x0, y0, x0 + 620, y0 + 44], fill=c)
+            d.text((x0 + 16, y0 + 10), 'STEP %d OF 47' % (i + 1), font=O.pfont(20), fill=(255, 255, 255))
+            d.text((x0 + 30, y0 + 90), txt, font=O.pfont(30), fill=(30, 30, 40))
+            if i == 0:
+                for q in range(6):
+                    for r_ in range(6):
+                        if (q * 7 + r_ * 3) % 5 < 2: d.rectangle([x0 + 470 + q * 18, y0 + 70 + r_ * 18, x0 + 486 + q * 18, y0 + 86 + r_ * 18], fill=(0, 0, 0))
+    elif mode == 'question':
+        d.rectangle([60, 110, w - 60, h - 60], fill=(250, 250, 252), outline=(230, 60, 60), width=8)
+        d.text((100, 140), 'SECURITY QUESTION', font=f, fill=(230, 60, 60))
+        d.text((100, 220), 'NAME OF YOUR', font=f, fill=(30, 30, 40))
+        d.text((100, 270), 'FIRST PET?', font=f, fill=(30, 30, 40))
+        d.rectangle([100, 350, w - 100, 420], outline=(30, 30, 40), width=4)
+        if int(t * 3) % 2: d.rectangle([116, 362, 128, 408], fill=(30, 30, 40))
+    elif mode == 'locked':
+        blink = int(t * 4) % 2 == 0
+        d.rectangle([0, 64, w, h], fill=(200, 30, 40) if blink else (150, 20, 30))
+        d.text(((w - f.getlength('WRONG. ACCOUNT LOCKED.')) / 2, 100), 'WRONG. ACCOUNT LOCKED.', font=f, fill=(255, 255, 255))
+        d.rectangle([80, 170, w - 80, h - 50], fill=(250, 250, 252))
+        d.text((110, 196), 'TO SPEAK TO AN AGENT', font=O.pfont(28), fill=(30, 30, 40))
+        d.text((110, 246), 'SUBSCRIBE TO', font=O.pfont(28), fill=(30, 30, 40))
+        d.text((110, 300), 'SUPPORT+', font=O.pfont(72), fill=(120, 20, 200))
+        d.text((110, 400), '$29.99/MO', font=O.pfont(48), fill=(200, 30, 40))
+    elif mode == 'final':
+        d.text(((w - fb.getlength('FINAL')) / 2, 200), 'FINAL', font=fb, fill=(255, 255, 255))
+        d.text(((w - f.getlength('THANKS FOR WATCHING')) / 2, 300), 'THANKS FOR WATCHING', font=f, fill=(255, 214, 60))
+    return np.array(im)
+
+
+def paste_world(big, v, img, rect, log=False):
+    """paste an RGB image into a world-space rectangle (x0, y0, x1, y1) of the current view (a TV screen, a phone, a poster)"""
+    ox0, oy0 = v.opt(rect[0], rect[1]); ox1, oy1 = v.opt(rect[2], rect[3])
+    X0, X1, Y0, Y1 = int(round(ox0)), int(round(ox1)), int(round(oy0)), int(round(oy1))
+    if X1 <= X0 or Y1 <= Y0: return
+    sub = np.array(Image.fromarray(img[..., :3] if img.shape[2] > 3 else img).resize((X1 - X0, Y1 - Y0), Image.NEAREST))
+    cx0, cy0 = max(0, X0), max(0, Y0); cx1, cy1 = min(OUT_W, X1), min(OUT_H, Y1)
+    if cx0 >= cx1 or cy0 >= cy1: return
+    big[cy0:cy1, cx0:cx1] = sub[cy0 - Y0:cy1 - Y0, cx0 - X0:cx1 - X0]
+    if log and ST.LOG[0] is not None: ST.log('card', bbox=(cx0, cy0, cx1, cy1))

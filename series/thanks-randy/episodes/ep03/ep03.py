@@ -194,8 +194,8 @@ def r_honey(t, u):
 
 # ================================================================== 7: TWIST — the call centre: every expert blasts her own frozen turkey
 def r_twist(t, u):
-    Z = 1.05
-    cx, cy = 640.0, 430.0
+    Z = 0.97
+    cx, cy = 640.0, 385.0
     v = V(CC, cx, cy, Z)
     sw = 3.0
     s = sw * Z * 3

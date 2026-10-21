@@ -122,7 +122,7 @@ def phone(sp, h, live=True):
 # ================================================================================ RANDY
 def randy(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
           mitt=True, walk=None, lean=0.0, sweat=0.0, stache=None, cap_on=False, shoe_off=False, soot=0.0, legs=True, tremble=0.0,
-          belly=0.0, gravy=0.0, brows=True):
+          belly=0.0, gravy=0.0, brows=True, goggles=False):
     """RANDY — square brick head with a 90s flat-top, a push-broom moustache across the whole face, bead eyes with whites, caterpillar
     brows, a potato nose; a pear body in a forest-green polo under an apron «KISS THE COOK (DON'T)»; cargo shorts in November, skinny
     hairy legs, knee socks, chunky white dad sneakers; a turkey oven mitt on the near hand, a Bluetooth earpiece, a pencil behind the ear.
@@ -197,8 +197,14 @@ def randy(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, han
     lx, ly = look
     DX.eye(sp, hx + 5.2, hy + 2.6, 4.4, 4.2, E, (110, 84, 52), (lx, ly), blink, lash=INK, skin=SKIN, bold=1)
     DX.eye(sp, hx - 0.8, hy + 2.6, 3.8, 4.0, E, (110, 84, 52), (lx, ly), blink, lash=INK, skin=SKIN, bold=1)
-    DX.brow(sp, hx + 5.4, hy + 6.4, 5.4, E, +1, HAIR, th=3, bushy=True)
-    DX.brow(sp, hx - 0.8, hy + 6.3, 4.4, E, -1, HAIR, th=3, bushy=True)
+    if brows:
+        DX.brow(sp, hx + 5.4, hy + 6.4, 5.4, E, +1, HAIR, th=3, bushy=True)
+        DX.brow(sp, hx - 0.8, hy + 6.3, 4.4, E, -1, HAIR, th=3, bushy=True)
+    if goggles:                                                                       # welding goggles: two green lenses on a strap
+        thin(sp, (hx - 7.6, hy + 3.0), (hx + 9.0, hy + 3.4), (40, 40, 44), 0.7)
+        for (ex, r) in ((hx + 5.2, 2.9), (hx - 0.8, 2.6)):
+            sp.ell(ex, hy + 2.8, r + 0.5, r + 0.3, tones((60, 60, 66)), ol=False)
+            sp.ell(ex, hy + 2.8, r - 0.2, r - 0.4, tones((70, 170, 110)), ol=False, gloss=1.0)
     if sp.k >= 2:
         for q in range(2): thin(sp, (hx + 1.4, hy + 9.2 + q * 1.1), (hx + 6.4, hy + 9.4 + q * 1.1), dark(SKIN, 0.78), 0.14)   # forehead lines
     DX.blush(sp, hx + 1.6, hy - 2.6, 2.8, 1.8, (232, 110, 100))
@@ -316,7 +322,7 @@ def tom(sp, t=0.0, expr='dead', mouth_=0.0, look=(-0.2, 0.0), blink=None, frost=
 
 # ================================================================================ NANA JOYCE
 def joyce(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.5, 0.0), blink=None, sit=False, knit=None, purse='side', hand_n=None,
-          hand_f=None, prop_n=None, squint=0.0, glare=True, robe=False):
+          hand_f=None, prop_n=None, squint=0.0, glare=True, robe=False, perm=None, card=None):
     """NANA JOYCE — tiny (to Randy's waist): a huge lavender perm helmet wider than her shoulders, magnifying glasses that make her
     eyes three times bigger (lashes, irises, crow's feet), rouge circles, pink lips, a mustard cardigan with a turkey brooch, pearls,
     a plum skirt, beige stockings, black orthopedic shoes, a giant quilted purse. sit=True: anchor = the seat under her, legs dangle;
@@ -325,6 +331,7 @@ def joyce(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.5, 0.0), blink=None, sit
     if blink is None: blink = ((t + 1.1) % 4.3) < 0.13
     br = 0.25 * math.sin(t * 2.4)
     dy = -13.5 if sit else 0.0
+    PERM_, CARD_ = perm or PERM, card or CARD
     def Q(x, y): return (x, y + dy)
     # ---------------------------------------------------------------- legs
     if sit:
@@ -350,14 +357,14 @@ def joyce(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.5, 0.0), blink=None, sit
         sp.ell(px, py + 8.0, 1.2, 0.9, tones(GOLD), gloss=1.0)
         stroke(sp, [(px - 3.4, py + 8.0), (px - 2.0, py + 11.4), (px + 2.0, py + 11.4), (px + 3.4, py + 8.0)], dark(PURSE, 0.6), 0.5)
     # ---------------------------------------------------------------- far arm
-    AC = (236, 150, 180) if robe else CARD
+    AC = (236, 150, 180) if robe else CARD_
     shF = Q(-3.6, 28.6 + br)
     hf = hand_f if hand_f is not None else (Q(5.4, 18.4) if knit is not None else Q(-5.0, 19.0))
     kF, eF = ik(shF, hf, 4.8, 4.6, -1.0)
     sp.cap(shF, kF, 1.8, 1.5, tones(dark(AC, 0.84))); sp.cap(kF, eF, 1.5, 1.3, tones(dark(AC, 0.84)))
     sp.ell(eF[0], eF[1], 1.3, 1.2, tones(dark(SKIN_J, 0.9)))
     # ---------------------------------------------------------------- cardigan torso
-    tor = sp.union([sp.m_ell(*Q(0.6, 24.6), 7.0, 6.6), sp.m_ell(*Q(0.4, 20.8), 6.6, 3.4)], tones((236, 150, 180) if robe else CARD))
+    tor = sp.union([sp.m_ell(*Q(0.6, 24.6), 7.0, 6.6), sp.m_ell(*Q(0.4, 20.8), 6.6, 3.4)], tones((236, 150, 180) if robe else CARD_))
     if robe:                                                                                   # fluffy pink bathrobe down to the ankles
         sp.union([sp.m_super(*Q(0.6, 13.0), 7.4, 9.0, 2.6)], tones((236, 150, 180)))
         for q in range(6): thin(sp, Q(-5.0 + q * 2.0, 22.0), Q(-5.4 + q * 2.0, 6.0), (220, 130, 166), 0.18)
@@ -400,10 +407,10 @@ def joyce(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.5, 0.0), blink=None, sit
         curls.append((hx - 0.2 + math.cos(a) * 8.4, hy + 4.6 + math.sin(a) * 5.8, 2.6, 2.4))
     for q in range(4):
         curls.append((hx - 7.6 + (q % 2) * 0.6, hy + 2.0 - q * 2.0, 2.2, 2.0))                     # back curls down to the collar
-    perm = sp.union([sp.m_ell(cx, cy, rx, ry) for (cx, cy, rx, ry) in curls], tones(PERM), exclude=face & (DX.YC < hy + 4.6) & (DX.XC > hx - 4.2))
+    perm = sp.union([sp.m_ell(cx, cy, rx, ry) for (cx, cy, rx, ry) in curls], tones(PERM_), exclude=face & (DX.YC < hy + 4.6) & (DX.XC > hx - 4.2))
     for (cx, cy, rx, ry) in curls[1:]:
-        thin(sp, (cx - rx * 0.4, cy + ry * 0.3), (cx + rx * 0.2, cy + ry * 0.5), mix(PERM, (255, 255, 255), 0.55), 0.24, mask=perm)
-        thin(sp, (cx - rx * 0.5, cy - ry * 0.2), (cx + rx * 0.4, cy - ry * 0.4), dark(PERM, 0.72), 0.18, mask=perm)
+        thin(sp, (cx - rx * 0.4, cy + ry * 0.3), (cx + rx * 0.2, cy + ry * 0.5), mix(PERM_, (255, 255, 255), 0.55), 0.24, mask=perm)
+        thin(sp, (cx - rx * 0.5, cy - ry * 0.2), (cx + rx * 0.4, cy - ry * 0.4), dark(PERM_, 0.72), 0.18, mask=perm)
     if robe:                                                                                   # pink foam curlers in the perm
         for q in range(5):
             a = math.pi * (0.15 + 0.7 * q / 4)
@@ -788,3 +795,272 @@ def carol(sp, t=0.0, expr='hype', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_
 OPERATORS = [dict(hair=(90, 60, 40), sweater=(60, 110, 70), cheese=False, seed=1), dict(hair=(200, 200, 206), sweater=(214, 150, 50), cheese=True, seed=2),
              dict(hair=(150, 50, 40), sweater=(70, 90, 160), cheese=False, seed=3), dict(hair=(40, 34, 30), sweater=(170, 60, 120), cheese=True, seed=4),
              dict(hair=(236, 206, 120), sweater=(120, 80, 50), cheese=False, seed=5)]
+
+
+# ================================================================================ E04 — the fryer and the fire department
+FIRE_R = (206, 34, 36)
+TURNOUT = (196, 160, 70)            # tan turnout coat with reflective bands
+REFL = (230, 240, 120)
+
+
+def fryer(sp, t=0.0, flames=1.0, boil=1.0):
+    """«FRY-HARD 3000»: a tall aluminium turkey-fryer pot on a three-leg propane burner, a hose to a white propane tank"""
+    for x in (-7.0, 0.0, 7.0):
+        sp.cap((x * 0.9, 9.0), (x, 0.0), 0.8, 0.8, tones((60, 60, 66)))
+    sp.sup(0.0, 9.6, 8.6, 1.2, tones((50, 50, 56)), n=5.0)
+    if flames > 0:
+        for q in range(7):
+            ph = (t * 6.0 + q * 0.37) % 1.0
+            h_ = (2.0 + 2.4 * (1 - ph)) * flames
+            sp.ell(-5.4 + q * 1.8, 10.6 + h_ * 0.4, 0.8, h_ * 0.5, tones((70, 150, 255) if ph < 0.5 else (255, 180, 60)), ol=False)
+    pot = sp.sup(0.0, 19.0, 8.0, 8.4, tones((196, 202, 212)), n=3.6, gloss=0.8)
+    sp.fill(pot & (np.abs(DX.YC - 20.0) < 2.4) & (np.abs(DX.XC) < 6.0), (230, 220, 200))
+    sp.txt_box(['FRY-HARD', '3000'], (-6.0, 17.4, 6.0, 22.6), (196, 40, 36), pad=0.2)
+    sp.ell(0.0, 27.2, 8.4, 1.2, tones((120, 124, 132)))
+    if boil > 0:
+        for q in range(6):
+            ph = (t * 4.0 + q * 0.21) % 1.0
+            sp.ell(-6.0 + q * 2.4, 27.6 + ph * 2.0 * boil, 0.7 + 0.5 * ph, 0.7 + 0.5 * ph, tones((240, 200, 90)), ol=False)
+    thin(sp, (7.6, 2.0), (18.0, 1.0), (40, 40, 44), 0.4)                                            # hose
+    tank = sp.sup(21.0, 6.2, 3.6, 6.0, tones((236, 236, 232)), n=2.6, gloss=0.7)
+    sp.cap((21.0, 12.0), (21.0, 13.4), 1.2, 1.2, tones((150, 150, 156)))
+    sp.anchors.update(pot_top=(0.0, 27.6))
+    sp.outline(INK, 1)
+
+
+def hook_pole(sp, h, length=16.0):
+    """a long steel lifting hook held at h, pointing forward-down (the turkey hangs on its end)"""
+    x, y = h
+    e = (x + length * 0.8, y - length * 0.25)
+    thin(sp, (x, y), e, (170, 176, 186), 0.5)
+    stroke(sp, [e, (e[0] + 0.6, e[1] - 1.6), (e[0] - 0.6, e[1] - 2.4)], (170, 176, 186), 0.4)
+    sp.anchors['hook_end'] = (e[0], e[1] - 2.4)
+
+
+def dunn(sp, t=0.0, expr='dead', mouth_=0.0, look=(-0.6, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None, soot=0.4):
+    """CAPTAIN DUNN — «a fridge with a helmet»: a tall square man in a tan turnout coat with yellow reflective bands, black boots,
+    a red helmet with a CAPTAIN shield and a long back brim, a soot-smeared square jaw, a grey walrus moustache, a toothpick"""
+    E = X(expr)
+    if blink is None: blink = ((t + 1.4) % 4.4) < 0.12
+    br = 0.25 * math.sin(t * 1.5)
+    for k_, dx in enumerate((-4.6, 4.6)):
+        c = (40, 40, 44) if k_ else (30, 30, 34)
+        sp.cap((dx, 30.0), (dx, 4.0), 4.0, 3.6, tones(TURNOUT if k_ else dark(TURNOUT, 0.85)))
+        sp.fill(sp.m_super(dx, 14.0, 4.0, 0.9, 4.0)[0], REFL)
+        sp.sup(dx + 1.2, 3.0, 5.0, 3.4, tones(c), n=3.0)
+    shF = (-11.0, 60.0 + br)
+    hf = hand_f if hand_f is not None else (-13.0, 38.0)
+    kF, eF = ik(shF, hf, 10.0, 9.4, -1.0)
+    sp.cap(shF, kF, 3.6, 3.2, tones(dark(TURNOUT, 0.82))); sp.cap(kF, eF, 3.2, 2.8, tones(dark(TURNOUT, 0.82)))
+    sp.ell(eF[0], eF[1], 2.6, 2.4, tones((60, 50, 40)))
+    if prop_f: prop_f(sp, eF)
+    coat = sp.sup(0.8, 46.0, 13.0, 17.0, tones(TURNOUT), n=4.0)
+    for y in (34.0, 40.0): sp.fill(coat & (np.abs(DX.YC - y) < 1.0), REFL)
+    for q in range(4): sp.dot(3.6, 56.0 - q * 4.6, (40, 40, 44))
+    sp.txt_box(['DUNN'], (-8.0, 49.0, 2.0, 53.6), (40, 30, 20), pad=0.2)
+    hx, hy = 2.6, 70.0
+    head = sp.union([sp.m_super(hx, hy, 7.6, 8.2, 3.2), sp.m_super(hx + 1.0, hy - 4.6, 7.2, 4.4, 3.0)], tones((214, 160, 124)))
+    lx, ly = look
+    DX.eye(sp, hx + 3.8, hy + 1.6, 3.8, 3.4, E, (80, 100, 120), (lx, ly), blink, lash=INK, skin=(214, 160, 124), bag=(170, 120, 90))
+    DX.eye(sp, hx - 1.8, hy + 1.6, 3.4, 3.2, E, (80, 100, 120), (lx, ly), blink, lash=INK, skin=(214, 160, 124), bag=(170, 120, 90))
+    DX.brow(sp, hx + 3.8, hy + 4.4, 4.4, E, +1, (150, 150, 156), th=2, bushy=True)
+    DX.brow(sp, hx - 1.8, hy + 4.2, 3.8, E, -1, (150, 150, 156), th=2, bushy=True)
+    sp.ell(hx + 7.0, hy - 0.8, 2.0, 2.2, tones((200, 130, 100)))
+    mx, my = hx + 3.6, hy - 5.6
+    DX.mouth(sp, mx, my, 5.0, E, mouth_, (140, 70, 60), inside=(90, 24, 34), skin=(214, 160, 124), maxh=5)
+    sp.union([sp.m_ell(mx - 0.4, my + 2.0, 5.2, 1.7), sp.m_ell(mx - 4.4, my + 0.6, 1.6, 2.4), sp.m_ell(mx + 4.0, my + 0.6, 1.6, 2.4)],
+             tones((176, 176, 180)))                                                                   # grey walrus moustache
+    if mouth_ < 0.2: thin(sp, (mx + 2.4, my - 0.6), (mx + 6.4, my - 1.6), (230, 200, 140), 0.25)       # toothpick
+    sp.fill(sp.m_ell(hx - 2.0, hy - 3.0, 4.0, 2.2)[0] & head, (110, 90, 80))                            # soot smear
+    sp.ell(hx - 0.4, hy + 7.0, 9.6, 3.6, tones(FIRE_R), gloss=0.6)                                    # helmet dome
+    sp.ell(hx - 7.0, hy + 4.4, 5.6, 1.4, tones(dark(FIRE_R, 0.85)), ang=-0.2)                          # long back brim
+    sp.sup(hx + 4.6, hy + 7.4, 2.2, 2.6, tones((236, 200, 80)), n=2.2)                                # shield
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my))
+    if soot: sp.soot(soot * 0.35)
+    sp.outline(INK, 1)
+    before = sp.m.copy()
+    shN = (12.6, 60.0 + br)
+    hn = hand_n if hand_n is not None else (15.0, 38.0)
+    kN, eN = ik(shN, hn, 10.0, 9.4, -1.0)
+    sp.cap(shN, kN, 3.7, 3.3, tones(TURNOUT)); sp.cap(kN, eN, 3.3, 2.9, tones(TURNOUT))
+    sp.ell(eN[0], eN[1], 2.7, 2.5, tones((60, 50, 40)))
+    if prop_n: prop_n(sp, eN)
+    sp.anchors['hand'] = eN
+    new = sp.m & ~before
+    o = dilate(new) & ~sp.m
+    sp.col[o] = INK; sp.m |= o
+
+
+def fire_truck(sp, t=0.0, lights=True):
+    """the front of a Maple Falls FD engine (side view, facing right): cab with windows, chrome bumper, a light bar, «MAPLE FALLS FD» on
+    the door, the ladder on top running back off the canvas; the burning part of the ladder is drawn as fire FX over it"""
+    body = sp.sup(-40.0, 26.0, 70.0, 18.0, tones(FIRE_R), n=6.0)
+    cab = sp.sup(18.0, 34.0, 14.0, 22.0, tones(FIRE_R), n=5.0)
+    sp.fill(sp.m_super(22.0, 44.0, 8.0, 7.0, 5.0)[0], (140, 190, 230))                             # windscreen
+    sp.fill(sp.m_super(10.0, 44.0, 5.0, 6.0, 5.0)[0], (120, 170, 210))                             # side window
+    sp.fill(sp.m_super(-40.0, 20.0, 70.0, 1.2, 6.0)[0] | sp.m_super(18.0, 20.0, 14.0, 1.2, 6.0)[0], (240, 240, 236))   # white stripe
+    sp.txt_box(['MAPLE FALLS', 'FD'], (2.0, 24.0, 28.0, 34.0), (255, 236, 160), pad=0.4)
+    sp.sup(33.0, 10.0, 2.0, 5.0, tones((210, 214, 222)), n=4.0, gloss=0.8)                           # bumper
+    for x in (20.0, -20.0, -70.0):                                                                  # wheels
+        sp.ell(x, 7.0, 7.0, 7.0, tones((30, 30, 34)))
+        sp.ell(x, 7.0, 3.2, 3.2, tones((190, 194, 204)), gloss=0.6)
+    blink = int(t * 6) % 2 == 0
+    for q in range(4):                                                                              # light bar
+        c = (255, 40, 40) if (q % 2 == 0) == blink else (255, 230, 120)
+        sp.sup(12.0 + q * 4.0, 57.6, 1.8, 1.2, tones(c if lights else dark(c, 0.5)), n=3.0, gloss=0.8 if lights else 0.0)
+    for x0 in range(-108, 30, 6):                                                                   # ladder on top
+        thin(sp, (x0, 47.0), (x0, 52.0), (200, 204, 212), 0.4)
+    thin(sp, (-110.0, 47.0), (30.0, 47.0), (200, 204, 212), 0.5)
+    thin(sp, (-110.0, 52.0), (30.0, 52.0), (200, 204, 212), 0.5)
+    sp.anchors.update(ladder=(-60.0, 50.0), door=(14.0, 26.0))
+    sp.outline(INK, 1)
+
+
+def extinguisher(sp, h):
+    x, y = h
+    sp.sup(x + 0.4, y - 3.0, 2.0, 4.6, tones((210, 30, 36)), n=2.6, gloss=0.7)
+    sp.cap((x + 0.4, y + 1.8), (x + 2.8, y + 3.2), 0.6, 0.5, tones((40, 40, 44)))
+    stroke(sp, [(x + 1.6, y + 1.2), (x + 3.6, y + 0.4), (x + 4.4, y - 1.6)], (30, 30, 34), 0.35)
+
+
+def inflatable_turkey(sp, t=0.0, sway=1.0):
+    """a giant inflatable lawn turkey (decor), wobbling"""
+    w = math.sin(t * 1.4) * 1.4 * sway
+    for i, c in enumerate(FEATH):
+        a = 1.9 - i * 0.42 + w * 0.05
+        sp.ell(-2.0 + math.cos(a) * 10.0, 22.0 + math.sin(a) * 10.0, 4.0, 7.0, tones(c), ang=a - 1.57)
+    sp.ell(0.0 + w * 0.3, 16.0, 9.0, 10.0, tones(MITT_B))
+    sp.ell(6.0 + w * 0.6, 26.0, 3.6, 3.6, tones(MITT_B))
+    sp.ell(9.6 + w * 0.6, 25.6, 1.6, 1.0, tones((240, 190, 60)))
+    sp.ell(8.4 + w * 0.6, 23.6, 0.9, 1.6, tones(WATTLE))
+    sp.dot(6.6 + w * 0.6, 27.0, (20, 16, 20))
+    sp.ell(0.0, 1.0, 5.0, 1.0, tones((60, 60, 66)))
+    sp.outline(INK, 1)
+
+
+# ================================================================================ E05 — Thanksgiving dinner and the paywall
+ROAST = (206, 132, 56)
+
+
+def roast(sp, t=0.0, tag=True, steam=True):
+    """a golden store-bought roast turkey on a white platter, a big yellow «SHOP'N'WEEP $139» price sticker still on it"""
+    sp.ell(0.0, 1.4, 16.0, 2.0, tones((240, 240, 236)), gloss=0.6)
+    body = sp.union([sp.m_super(-1.0, 8.6, 12.4, 7.0, 2.4), sp.m_ell(4.0, 9.6, 8.6, 6.6)], tones(ROAST), gloss=0.9)
+    sp.cap((7.0, 7.0), (13.0, 12.6), 3.0, 2.4, tones(dark(ROAST, 0.9)))
+    sp.ell(13.8, 13.4, 1.6, 1.4, tones(WHITE))
+    for q in range(5): thin(sp, (-9.0 + q * 3.6, 12.6), (-7.6 + q * 3.6, 5.0), dark(ROAST, 0.72), 0.2, mask=body)
+    if tag:
+        lab = sp.m_super(-3.0, 9.6, 5.4, 3.0, 4.0)[0] & body
+        sp.fill(lab, LABEL)
+        sp.fill(lab & ~erode(lab), dark(LABEL, 0.6))
+        sp.txt_box(['$139'], (-8.0, 7.0, 2.0, 12.2), (190, 30, 40), pad=0.3)
+    sp.anchors.update(head=(0.0, 9.0), top=(0.0, 16.0))
+    sp.outline(INK, 1)
+
+
+def remote(sp, h):
+    x, y = h
+    sp.sup(x + 1.0, y + 1.6, 1.2, 3.6, tones((40, 40, 46)), n=4.0)
+    sp.dot(x + 1.0, y + 4.0, (255, 60, 60))
+
+
+def tiny_tv(sp, h, t=0.0, final=False):
+    """Nana's 1998 portable TV: a beige box with a rabbit-ears antenna, a snowy little screen"""
+    x, y = h
+    box = sp.sup(x + 3.0, y + 3.4, 4.4, 3.6, tones((216, 204, 176)), n=4.0)
+    scr = sp.m_super(x + 2.4, y + 3.6, 2.8, 2.4, 4.0)[0]
+    rng = np.random.default_rng(int(t * 20))
+    sn = rng.random(scr.shape) < 0.5
+    sp.fill(scr, (70, 80, 90)); sp.fill(scr & sn, (200, 210, 220))
+    thin(sp, (x + 3.0, y + 7.0), (x + 0.6, y + 11.4), (180, 180, 186), 0.22)
+    thin(sp, (x + 3.4, y + 7.0), (x + 6.6, y + 11.0), (180, 180, 186), 0.22)
+    sp.anchors['tiny_screen'] = (x + 2.4, y + 3.6)
+
+
+# ================================================================================ E06 — Black Friday at Best Bye
+BB_BLUE = (30, 70, 170)
+BB_YEL = (252, 214, 40)
+BOX = (196, 160, 110)
+GRANNIES = [dict(perm=(236, 236, 240), card=(70, 130, 170)), dict(perm=(200, 120, 90), card=(120, 160, 90)),
+            dict(perm=(150, 150, 160), card=(200, 90, 120)), dict(perm=(240, 200, 120), card=(110, 90, 160))]
+
+
+def kyle(sp, t=0.0, expr='dead', mouth_=0.0, look=(-0.7, 0.0), blink=None, hand_n=None, hand_f=None):
+    """KYLE (Best Bye) — «a question mark»: a slouching teenager in a blue store polo with a yellow name tag and a lanyard, long greasy
+    bangs over one eye, a few pimples, heavy sleepy lids, a scanner gun in hand"""
+    E = X(expr)
+    if blink is None: blink = ((t + 2.0) % 3.1) < 0.14
+    for k_, dx in enumerate((-2.4, 2.4)):
+        sp.cap((dx, 30.0), (dx, 3.0), 2.4, 2.0, tones((60, 60, 70) if k_ else (48, 48, 56)))
+        sp.ell(dx + 1.4, 1.6, 3.6, 1.8, tones((40, 40, 46)))
+    sp.cap((-5.0, 50.0), (-7.0, 30.0), 1.8, 1.5, tones(dark(BB_BLUE, 0.85)))
+    body = sp.union([sp.m_super(1.6, 41.0, 6.6, 11.4, 2.6)], tones(BB_BLUE))
+    sp.fill(sp.m_super(3.6, 46.0, 2.6, 1.4, 4.0)[0], BB_YEL)
+    sp.txt_box(['KYLE'], (1.2, 44.8, 6.2, 47.4), (30, 30, 40), pad=0.1)
+    thin(sp, (1.0, 52.0), (3.6, 47.0), (230, 200, 60), 0.3)
+    hx, hy = 4.0, 59.0                                                                           # slouch: head forward
+    head = sp.union([sp.m_ell(hx, hy, 5.6, 6.6), sp.m_ell(hx + 0.8, hy - 3.4, 4.6, 3.6)], tones(SKIN_B))
+    lx, ly = look
+    DX.eye(sp, hx + 2.8, hy + 1.0, 3.4, 3.2, E, (80, 100, 80), (lx, ly), blink, lash=INK, skin=SKIN_B, bag=dark(SKIN_B, 0.75))
+    sp.union([sp.m_ell(hx - 0.6, hy + 4.4, 6.0, 3.4)], tones((110, 80, 50)))
+    bang = sp.m_poly([(hx - 2.0, hy + 6.0), (hx + 3.0, hy + 5.4), (hx + 0.0, hy - 1.2), (hx - 2.4, hy + 0.6)])
+    sp.paint(bang, tones((110, 80, 50)), None)
+    for (x, y) in ((hx + 3.6, hy - 2.0), (hx + 1.4, hy - 3.6), (hx - 2.0, hy - 1.4)): sp.dot(x, y, (220, 110, 110))
+    sp.ell(hx + 5.6, hy - 0.4, 1.2, 1.5, tones(dark(SKIN_B, 0.95)))
+    mx, my = hx + 2.4, hy - 4.0
+    DX.mouth(sp, mx, my, 3.2, E, mouth_, (160, 90, 80), inside=(90, 24, 34), skin=SKIN_B, maxh=4)
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my))
+    sp.outline(INK, 1)
+    before = sp.m.copy()
+    hn = hand_n if hand_n is not None else (8.0, 34.0)
+    kN, eN = ik((6.0, 50.0), hn, 7.6, 7.2, -1.0)
+    sp.cap((6.0, 50.0), kN, 1.9, 1.6, tones(BB_BLUE)); sp.cap(kN, eN, 1.6, 1.4, tones(SKIN_B))
+    sp.sup(eN[0] + 2.0, eN[1] + 0.6, 2.6, 1.4, tones((50, 50, 56)), n=3.0)                       # scanner gun
+    sp.dot(eN[0] + 4.4, eN[1] + 0.6, (255, 60, 60))
+    sp.anchors['hand'] = eN
+    new = sp.m & ~before
+    o = dilate(new) & ~sp.m
+    sp.col[o] = INK; sp.m |= o
+
+
+def tv_box(sp, t=0.0, flap=0.0, price='$199'):
+    """a big flat cardboard TV box standing upright (a TV pictured on it, «65"», a yellow «$199» doorbuster tag); flap 0..1 opens the top
+    flap (Nana inside)"""
+    box = sp.sup(0.0, 18.0, 15.0, 18.0, tones(BOX), n=6.0)
+    sp.fill(sp.m_super(0.0, 19.0, 11.6, 10.4, 6.0)[0], (30, 30, 40))
+    sp.fill(sp.m_super(0.0, 19.0, 10.6, 9.4, 6.0)[0], (60, 140, 220))
+    sp.fill(sp.m_ell(-3.0, 22.0, 4.0, 3.0)[0] & box, (110, 200, 120))
+    sp.txt_box(['65"'], (-13.0, 31.0, -3.0, 35.4), (30, 30, 40), pad=0.2)
+    tag = sp.m_super(8.4, 4.6, 5.0, 2.8, 4.0)[0]
+    sp.fill(tag, BB_YEL); sp.fill(tag & ~erode(tag), (120, 90, 10))
+    sp.txt_box([price], (3.8, 2.4, 13.0, 6.8), (196, 30, 40), pad=0.2)
+    if flap > 0:
+        a = flap * 2.4
+        thin(sp, (-15.0, 36.0), (-15.0 + 15.0 * math.cos(a), 36.0 + 15.0 * math.sin(a)), dark(BOX, 0.8), 1.0)
+        thin(sp, (15.0, 36.0), (15.0 - 15.0 * math.cos(a), 36.0 + 15.0 * math.sin(a)), dark(BOX, 0.8), 1.0)
+    sp.anchors.update(top=(0.0, 36.0))
+    sp.outline(INK, 1)
+
+
+def folding_chair(sp, t=0.0, name='JOYCE', sub='SINCE TUE', tent=False):
+    """a folding camping chair with a hand-written cardboard name sign taped on; tent=True: a zipped dome tent behind it"""
+    if tent:
+        sp.paint(sp.m_poly([(-16.0, 0.0), (16.0, 0.0), (0.0, 22.0)]), tones((90, 140, 90)), np.clip((DX.XC + 16) / 32, 0, 1) * 0.6 + 0.2)
+        thin(sp, (0.0, 1.0), (0.0, 18.0), (60, 60, 60), 0.3)
+    for (a, b) in (((-6.0, 0.0), (5.0, 12.0)), ((6.0, 0.0), (-5.0, 12.0))):
+        thin(sp, a, b, (60, 60, 70), 0.5)
+    sp.sup(0.0, 12.0, 7.0, 1.4, tones((40, 80, 160)), n=3.0)
+    sp.sup(-1.0, 18.0, 6.0, 5.0, tones((40, 80, 160)), n=3.0)
+    card = sp.m_super(0.0, 18.0, 6.4, 3.4, 4.0)[0]
+    sp.fill(card, (236, 214, 170))
+    sp.txt_box([name, sub], (-5.8, 15.0, 5.8, 21.0), (40, 40, 50), pad=0.2)
+    sp.outline(INK, 1)
+
+
+def walker(sp, h):
+    """a granny walker with tennis balls (held at h)"""
+    x, y = h
+    for dx in (0.0, 6.0):
+        thin(sp, (x + dx, y), (x + dx + 1.0, y - 14.0), (200, 204, 212), 0.4)
+        sp.ell(x + dx + 1.0, y - 14.6, 1.0, 1.0, tones((210, 230, 60)), ol=False)
+    thin(sp, (x, y), (x + 6.0, y), (200, 204, 212), 0.4)

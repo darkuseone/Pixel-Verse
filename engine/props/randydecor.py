@@ -197,8 +197,109 @@ def dress_callcenter(W):
     D.anim(W, lamp_blink(400, 58, 90, 30, (250, 255, 230), 0.17))
 
 
+# ---------------------------------------------------------------- Randy's front yard, Thanksgiving morning (yard.png / yard_b.png)
+def _turkey_balloon(W, x, y, s):
+    from props import randypix as RX, randycast as C
+    img, (ax, ay) = D.sprite(C.inflatable_turkey, s * D.WS, RX.draw, t=0.0)
+    D.PROPS.add(id(img))
+    D.attach(W, [(img, x - ax / D.WS, y - ay / D.WS)])
+
+
+def dress_yard(W):
+    D.attach(W, [
+        (D.plate(78, 92, ['MAPLE FALLS', 'FIRE DEPT', 'ANNUAL', 'TURKEY FRY', 'THU 10 AM', 'AT THE', 'STATION'], bg=WH,
+                 colors=[RED, RED, BLK, RED, NAVY, BLK, BLK], border=RED, weights=[0.7, 0.7, 0.6, 0.8, 0.7, 0.6, 0.6], pad=1.0, tilt=-2), 459, 300),
+        (D.plate(70, 22, ['IN CASE', 'OF RANDY'], bg=RED, colors=[WH, YEL], border=WH, pad=0.8), 150, 322),
+        (D.plate(150, 30, ['OUR FRYER EXPLODED AND', 'ALL WE GOT WAS THIS SIGN'], bg=CREAM, colors=[BLK, RED], border=(90, 70, 40), pad=0.8), 1112, 432),
+        (D.plate(96, 30, ['FAMILY PARKING:', 'LAWN IS FINE'], bg=(40, 110, 60), colors=[WH, YEL], border=WH, pad=0.8, tilt=3), 880, 478),
+        (D.plate(26, 14, ['RANDY'], bg=WH, fg=BLK, border=None, pad=0.6), 543, 420),
+    ])
+    _turkey_balloon(W, 1000.0, 600.0, 3.0)
+    D.anim(W, leaves((0, 120, 1280, 640), n=14, seed=31))
+
+
+def dress_yard_b(W):
+    D.attach(W, [
+        (D.plate(70, 22, ['IN CASE', 'OF RANDY'], bg=RED, colors=[WH, YEL], border=WH, pad=0.8), 120, 360),
+        (D.plate(110, 30, ['OUR FRYER EXPLODED AND', 'ALL WE GOT WAS THIS SIGN'], bg=CREAM, colors=[BLK, RED], border=(90, 70, 40), pad=0.8), 1120, 470),
+        (D.plate(34, 16, ['RANDY'], bg=WH, fg=BLK, border=None, pad=0.6), 734, 470),
+    ])
+    _turkey_balloon(W, 1000.0, 660.0, 3.4)
+    D.anim(W, leaves((0, 120, 1280, 700), n=14, seed=32))
+
+
+# ---------------------------------------------------------------- living room + dinner table (living.png / living_b.png)
+def dress_living(W):
+    D.attach(W, [
+        (D.plate(240, 104, ['GATHER', '(NOT TOO CLOSE)'], bg=(170, 120, 74), colors=[(250, 240, 220), (250, 220, 170)], border=(110, 70, 40),
+                 weights=[1.6, 0.7], pad=2.0), 90, 38),
+        (D.plate(96, 56, ['2:00 EAT', '2:05 NAP', '2:10 ARGUE'], bg=CREAM, colors=[NAVY, NAVY, RED], border=(150, 120, 80), pad=1.2, tilt=2), 540, 150),
+        (D.plate(64, 22, ["DAD'S.", "DON'T."], bg=WH, colors=[BLK, RED], border=RED, pad=0.8, tilt=-4), 960, 296),
+        (D.plate(96, 24, ["KIDS' TABLE"], bg=YEL, fg=RED, border=RED, pad=0.8, tilt=3), 1110, 452),
+    ])
+    D.anim(W, dust((700, 120, 1240, 420), n=18, seed=41, col=(255, 236, 180)))
+
+
+def dress_living_b(W):
+    D.attach(W, [
+        (D.plate(160, 74, ['GATHER', '(NOT TOO CLOSE)'], bg=(170, 120, 74), colors=[(250, 240, 220), (250, 220, 170)], border=(110, 70, 40),
+                 weights=[1.6, 0.7], pad=1.6), 477, 124),
+        (D.plate(70, 22, ["DAD'S.", "DON'T."], bg=WH, colors=[BLK, RED], border=RED, pad=0.8, tilt=-4), 1030, 360),
+        (D.plate(100, 24, ["KIDS' TABLE"], bg=YEL, fg=RED, border=RED, pad=0.8, tilt=3), 1090, 492),
+    ])
+    D.anim(W, dust((600, 120, 1240, 420), n=16, seed=42, col=(255, 236, 180)))
+
+
+# ---------------------------------------------------------------- Best Bye, Black Friday dawn (bbout.png) + inside (bbin.png)
+def dress_bbout(W):
+    D.attach(W, [
+        (D.plate(452, 92, ['BEST BYE'], bg=(30, 70, 170), fg=(252, 214, 40), border=(252, 214, 40), bw=2.0, pad=2.4), 386, 158),
+        (D.plate(78, 120, ['BLACK', 'FRIDAY', 'DOOR-', 'BUSTERS', '(DOORS NOT', 'INCLUDED)'], bg=(30, 20, 30), colors=[YEL, YEL, WH, WH, CREAM, CREAM],
+                 border=YEL, pad=1.0), 174, 304),
+        (D.plate(78, 120, ['WAS $199', 'NOW', '$199', '(BUT IN', 'RED)'], bg=(30, 70, 170), colors=[WH, WH, (255, 90, 80), CREAM, CREAM],
+                 border=YEL, pad=1.0), 944, 304),
+        (D.plate(56, 36, ['OPEN 5 AM', 'SANITY', 'CLOSED'], bg=WH, colors=[NAVY, RED, RED], border=NAVY, pad=0.8), 434, 330),
+        (D.plate(56, 36, ['LIMIT 1 PER', 'CUSTOMER', '0 PER RANDY'], bg=YEL, colors=[BLK, BLK, RED], border=BLK, pad=0.8), 712, 330),
+        (D.plate(70, 22, ['NO CAMPING'], bg=RED, fg=WH, border=WH, pad=0.8), 16, 270),
+        (D.plate(46, 16, ['65" $199'], bg=YEL, fg=RED, border=BLK, pad=0.6), 575, 372),
+    ])
+    D.anim(W, mist((0, 380, 1280, 560), n=10, seed=51, col=(220, 230, 255)))
+
+
+def dress_bbin(W):
+    BLU = (30, 70, 170)
+    D.attach(W, [
+        (D.plate(160, 92, ['BLACK', 'FRIDAY', 'DOOR-', 'BUSTERS'], bg=YEL, colors=[BLK, BLK, RED, RED], border=BLK, bw=1.2, pad=1.4), 66, 32),
+        (D.plate(136, 86, ['NO', 'TRAMPLING', '(BEFORE', '5:00)'], bg=BLU, colors=[WH, WH, YEL, YEL], border=YEL, bw=1.2, pad=1.4), 333, 50),
+        (D.plate(144, 66, ['SELF', 'CHECKOUT >'], bg=YEL, colors=[BLK, BLK], border=BLK, bw=1.2, pad=1.4), 815, 54),
+        (D.plate(162, 84, ['WE LOVE', 'CUSTOMERS', '(FROM A', 'DISTANCE)'], bg=BLU, colors=[WH, WH, YEL, YEL], border=YEL, bw=1.2, pad=1.4), 1060, 30),
+        (D.plate(118, 40, ['DISPLAY ONLY', '(EMPTY BOXES)'], bg=WH, colors=[RED, BLK], border=RED, pad=1.0), 572, 438),
+        (D.plate(62, 24, ['65" $199', '1 LEFT'], bg=YEL, colors=[RED, BLK], border=BLK, pad=0.8), 452, 300),
+        (D.plate(64, 22, ['SELF CHECKOUT', '(SELF BLAME)'], bg=NAVY, colors=[WH, YEL], border=WH, pad=0.8), 1104, 470),
+        (D.plate(196, 18, ['OPEN BOX DEALS (BOX ONLY)'], bg=RED, fg=WH, border=WH, pad=0.8), 70, 404),
+        (D.sticker('LOST SHOES >', bg=WH, fg=RED, w=58, h=12, tilt=-4), 150, 600),
+    ])
+    D.anim(W, dust((0, 120, 1280, 600), n=30, seed=61))
+
+
+def dress_bbin_b(W):
+    BLU = (30, 70, 170)
+    D.attach(W, [
+        (D.plate(180, 100, ['BLACK', 'FRIDAY', '5:00 AM'], bg=YEL, colors=[BLK, BLK, RED], border=BLK, bw=1.2, pad=1.4), 102, 32),
+        (D.plate(72, 40, ['65"', '$199'], bg=YEL, colors=[BLK, RED], border=BLK, pad=0.8), 462, 146),
+        (D.plate(178, 100, ['SELF', 'CHECKOUT', '(YOU WORK', 'HERE NOW)'], bg=BLU, colors=[WH, WH, YEL, YEL], border=YEL, bw=1.2, pad=1.4), 777, 42),
+        (D.plate(66, 46, ['EXIT', '(NO)'], bg=BLU, colors=[WH, YEL], border=YEL, pad=0.8), 1077, 100),
+        (D.plate(120, 40, ['DISPLAY ONLY', '(EMPTY BOXES)'], bg=WH, colors=[RED, BLK], border=RED, pad=1.0), 570, 430),
+        (D.plate(70, 22, ['LANE 1', "ASK KYLE (HE WON'T)"], bg=NAVY, colors=[WH, YEL], border=WH, pad=0.8), 880, 470),
+        (D.sticker('SALE', bg=RED, fg=WH, w=24, h=10, shape='round', tilt=-8), 30, 230),
+    ])
+    D.anim(W, dust((0, 120, 1280, 600), n=26, seed=62))
+
+
 DRESS = dict(store=dress_store, store_b=dress_store_b, airport=dress_airport, airport_b=dress_airport_b, kitchen=dress_kitchen,
-             kitchen_b=dress_kitchen_b, callcenter=dress_callcenter)
+             kitchen_b=dress_kitchen_b, callcenter=dress_callcenter, yard=dress_yard, yard_b=dress_yard_b,
+             living=dress_living, living_b=dress_living_b, bbout=dress_bbout,
+             bbin=dress_bbin, bbin_b=dress_bbin_b)
 
 
 def dress(name, W):

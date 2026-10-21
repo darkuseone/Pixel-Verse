@@ -41,6 +41,28 @@ BG = {
                   'potted plants; on the back wall a big blank digital counter board and blank framed posters; fluorescent ceiling '
                   'lights, one flickering; a big window with a dark night sky and snow. Carpeted floor across the lower third, empty, '
                   'no people.',
+    'yard': 'An American suburban house front yard in Ohio on a cold November morning, eye-level side view. Left: a two-car garage '
+            'attached to a beige house with its big garage door wide open (dark empty inside with shelves and a lawnmower), a concrete '
+            'driveway in front of it; middle: a front lawn covered with fallen yellow and orange maple leaves, a curbside mailbox on a '
+            'post, a bare maple tree; right: the front porch with steps, a front window, pumpkins on the steps, corn stalks tied to the '
+            'porch post. A neighbor house far right, grey overcast sky. Flat open driveway and lawn across the lower third, empty, '
+            'no people, no cars.',
+    'living': 'Interior of a cozy American suburban living room and dining area on Thanksgiving evening, eye-level side view. Left: a '
+              'big flat TV on a low wooden TV stand (black blank screen), a game console, a potted plant; middle: a long dining table '
+              'with a white tablecloth, plates, glasses, candles, autumn leaves centerpiece, mashed potatoes, green bean casserole, '
+              'cranberry sauce, rolls, an EMPTY big platter in the center; right: a brown leather recliner, a small separate low '
+              'folding kids table with a paper tablecloth and a tiny chair; on the walls: a blank wooden decor sign, framed family photos, '
+              'a window with dark evening blue sky and warm lamp light. Warm cozy yellow lamp light, hardwood floor across the lower '
+              'third, empty, no people.',
+    'bbout': 'Outside a big American electronics superstore at 4:59 AM on Black Friday, eye-level side view: a wide store front with '
+             'big glass sliding doors in the middle (lights on inside, a pyramid of big TV boxes visible through the glass), a blank '
+             'store sign above, blank banners in the windows, a long line of empty folding camping chairs and small camping tents along '
+             'the sidewalk, a shopping cart corral, frost on the glass, a dark blue dawn sky with the first pink light, parking lot lamps '
+             'glowing, cold breath mist. Flat sidewalk across the lower third, empty, no people.',
+    'bbin': 'Interior of a big American electronics superstore on Black Friday morning, eye-level view: a huge pyramid of flat-screen TV '
+            'boxes in the center, walls of glowing TV screens showing colorful blank screens, aisles with laptops and speakers, '
+            'hanging blank yellow and blue sale banners, a row of two self-checkout kiosks with a bagging shelf on the right side, '
+            'bright white store lights, a shiny grey floor with scattered fallen shoes and a lost shopping cart, empty, no people.',
 }
 
 if __name__ == '__main__':
