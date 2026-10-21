@@ -41,6 +41,7 @@
 ## 7. Уже использовано (не повторять в других US мультах)
 - «Agent Dibs» S01 (сценарий на согласовании, гэги в резерве): полный список внизу, блок «Использовано в Agent Dibs».
 - «Grim Ride» S01 (готов 06.10.2026): блок «Использовано в Grim Ride» внизу.
+- «Thanks, Randy» S01 (сценарий 21.10.2026): блок «Заложено в Thanks, Randy» внизу.
 - «Florida Man: Allegedly» S01 (готов 09.10.2026): кондиционер $9 000 и жизнь в морозильном ряду; саб $14.99 и арест ценника (фото в профиль = линия); счёт за лёд $2 000, «organic / out-of-network water», ветклиника и микрочип (SPECIES: FLORIDA); страховщик уходит из штата, своя страховая, «wind or flood?», отказ самому себе, тучка только над героем; аренда $3 400 за «tiny home», питон $50/фут (FWC bounty), «rent's up», питон с лучшим кредитом; тюрьма дешевле аренды, карта постоянного гостя 10/10, resort fee, «Pillow's a SUBSCRIPTION»; сквозные: «Hold my sub.», Таннер JOB #1–#8 и «No worries!», BREAKING … (ALLEGEDLY), «Mornin', [звук]» вместо имени, Pubbix, Sunsure Mutual, Cool-Rite, Dr. Paws, Sawgrass Acres MGMT, Sunshine County Jail & Resort, игуаны, билборд Морта со слоганом серии. В резерве на S2: snowbirds (северяне-пенсионеры), early-bird special, HOA-gate, Publix-подобные «BOGO»-войны, love bugs.
 - «Sunny Palms HOA» S01: Saxophone gets louder (`sax_sting_swell`), Aura ±9999, Florida Man, «I watched a video», HOA/Karen, emotional support animal (сертификат $19.99), соседское приложение, штраф урагану, tip fatigue, выборы в HOA, «Bless your heart» + «TRANSLATION: YOU IDIOT», TOTAL FINES, Beautification Fund / Bahamas, Earl «grandfathered in».
 
@@ -256,3 +257,33 @@ time.com / abc7ny.com (age limits), knowyourmeme.com / napoleoncat.com (сент
 - **Ветклиника Dr. Paws:** «PLEASE KEEP YOUR HUMAN ON A LEASH», «BITE RISK: LOW / MEDIUM / FLORIDA», «NOT FOR HUMANS» на миске, «OCCUPIED» на когтеточке, «NO ALLIGATORS (WE CHECKED)».
 - **Эверглейдс:** «CASH ONLY (NO GATORS)», «AIRBOAT TOURS $40 (SURVIVAL EXTRA)», «NO SWIM GATORS!», «PRIVATE DOCK — TRESPASSERS WILL BE EATEN», «PYTHON CHALLENGE CHECK-IN 2 MI →».
 - **Тюрьма:** «SUNSHINE COUNTY JAIL & RESORT», «NO TRESPASSING (THIS MEANS YOU, FLORIDA MAN)», неон «CHECK-IN →», «NOW HIRING GUARDS (MUST LIKE FLORIDA MAN)», доска: «WANTED FLORIDA MAN (AGAIN)», «LOST GATOR ANSWERS TO "KEVIN"», «EMPLOYEE OF THE MONTH: FLORIDA MAN», «FREQUENT GUESTS → EXPRESS LANE»; камера: «INMATE RULES 1. NO 2. ALSO NO 3. A/C IS A PRIVILEGE», «★★★★★ GREAT A/C», «FLORIDA MAN WAS HERE».
+
+## 21.10.2026 — разведка для «Thanks, Randy» (Thanksgiving + Black Friday, Огайо)
+Поиск 21.10.2026 (WebSearch, выдача US). Формат: мем / тема → смысл → как вкладываем → дата → статус.
+
+| Мем / тема | Смысл | Как вкладываем | Дата | Статус |
+|---|---|---|---|---|
+| **Стоимость жизни** | Insurify 2026: 79 % тревожит стоимость жизни, 57 % — бензин неподъёмен, 42 % — автостраховка (было 31 %); Reuters/Ipsos (май 2026): 74 % «идёт не туда» | Крики о цене в хуках: «$89 TURKEY?!», «$30 FOR FOOTBALL?!», «$199 TV?!» | 2026 | основа сезона |
+| **Касса самообслуживания** | «Unexpected item in bagging area» — вечная боль; часть сетей возвращает живых кассиров (Which?, Retail Systems; CNN 2022: 67 % сталкивались со сбоем) | Робот SCAN-DEE во всех машинах сезона; E01 бабушка на полке упаковки | evergreen | E01, сквозной |
+| **TSA: подливка = жидкость** | Подливка и клюквенный соус — жидкость, лимит 3,4 унции (Fox News, Scripps; источники спорят про желейный соус) | E02: Рэнди выпивает галлон подливки → «YOU are a liquid now» | evergreen | E02 |
+| **Пожары в День благодарения** | NFPA: день №1 по кухонным пожарам (~1 000 за день); фритюрница для индейки — частая причина, особенно замороженная птица (NOFD 2025, Newport Beach, Miami-Dade: «просто купите готовую») | E04 огненный шар, пожарные сами всё сожгли; E05 Рэнди «готовит» купленную индейку с ценником | evergreen | E04, E05 |
+| **Праздничные перелёты** | AAA 2025: 81,8 млн путешественников, рекорд; данные 2026 выйдут за неделю до праздника | Плашки дней недели, аэропорт в E02 | 2025 | фон |
+| **Цена ужина** | AFBF 2025: ужин на 10 человек $55,18, индейка 16 lb $21,50 ($1,34/lb, −16 %); 2026 по США ещё нет (есть только канадский прогноз +10 %) | Цена $89.99 за 22 lb — нарочно гротеск «премиум-индейки» в Shop'n'Weep, не статистика | 2025 | учтено |
+| **Тренд «Subtle Foreshadowing»** (TikTok, окт. 2026, Gelato) | Мелкая деталь в начале, которая выстреливает в конце | Наши улики перед поворотом (клубок пряжи, флаер пожарных, стул «JOYCE · SINCE TUE») — ровно этот формат | окт. 2026 | специя |
+| **Тренд «Suspect»** (TikTok, окт. 2026) | Близких описывают как «подозреваемых» гипер-конкретно | В резерве: ориентировка на Джойс в S2 | окт. 2026 | банк |
+| **Сленг 2026** | «aura farming», «locking in», «side quest», «canon event», «404 coded»; «6-7» — самый искомый, «skibidi» и «demure» устарели (NewsNation, Storyboard18, Colorado State) | Брэйден: «Bro», «It's a STARTUP», возможно «locking in» перед Black Friday; устаревшее не берём | 2026 | специя |
+| **Сезонные вечные реалии** | «When are you getting married?», детский стол во взрослом возрасте, фритюрница папы, футбол в День благодарения на очередном стриминге, разморозка «забыл за 5 дней», Tupperware бабушки, Black Friday с палатками | Сквозные гэги Джойс, E03 горячая линия, E05 подписка | evergreen | основа сезона |
+
+Источники: insurify (через kpcnews.com / homenewshere.com), ipsos.com, gelato.com/blog/tiktok-trends-right-now, socialbee.com, newsnationnow.com, storyboard18.com, social.colostate.edu, foxnews.com, 10news.com / wptv.com (TSA), jezebel.com, abc7chicago.com, nola.gov, newportbeachindy.com, cbsnews.com/miami, whdh.com (CNN), which.co.uk, retail-systems.com, abc7.com / abc7news.com (AAA 2025), wral.com / feedstuffs.com (AFBF), retail-insider.com (Канада 2026).
+
+**Не трогаем:** молитву перед едой (религия), историю праздника и коренные народы, политику за столом, реальные команды и лигу, травмы в давке Black Friday (реальные трагедии), реальные пожары с жертвами.
+
+### Банк «Thanksgiving / Огайо» (пополняется)
+- **Места:** супермаркет перед праздником, досмотр TSA, кухня в 3 ночи, горячая линия индеек, двор с фритюрницей, гостиная с детским столом, очередь Black Friday с палатками.
+- **Реалии:** разморозка 1 день на 4–5 lb (22 lb ≈ 5 дней), «индейки-ладошки», надувные индейки на газонах, кукурузные снопы, «GATHER»-декор, Tupperware «верни», футбол после ужина, сон после еды, остатки на неделю, Огайо-мем «only in Ohio».
+
+### Пародийные бренды (банк §4)
+«Shop'n'Weep» (супермаркет), «Butterbutt» + «Butterbutt Turkey Talk-Line 1-800-GOBBLE», «Fry-Hard 3000», «StreamFlix Ultra+ Max», «Best Bye», «Tumbleweed Intl», «Maple Falls FD».
+
+### Заложено в «Thanks, Randy», сезон 1 (не повторять в других US мультах)
+«$89 TURKEY?!», «I'm worth it.», «You never COOKED one.», «Unexpected GRANDMA», «Nana's on SALE», «I'll just die HERE»; «Gravy's a LIQUID?!», «family LIQUID», «YOU are a liquid now», «Still FLYING»; «I'm a GLACIER», «experts are ALSO thawing», «Can I come to YOURS?», «We brought DIP», «support GROUP»; «RANDY, NO!», «You burned the GARAGE», «We're TRENDING», «Ours went off at the STATION», «To the job, ma'am», «Got any OIL?»; «$30 FOR FOOTBALL?!», «PRICE TAG», «We never MET», «SUPPORT PLUS», «I have CABLE», «Thanks, Randy.»; «$199 TV?!», «You never GOT UP», «Since TUESDAY», «Plus GRANDMA»; сквозные: «Still frozen.», «Twenty years. Never burned a turkey!», «When are you getting MARRIED?», «No, it's FINE.», «It's a STARTUP.», SCAN-DEE, THAW-O-METER, КЛОНК. Крючок «SEASON 2: RANDY HOSTS CHRISTMAS».
