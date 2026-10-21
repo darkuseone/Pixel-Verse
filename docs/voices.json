@@ -9,7 +9,7 @@
    "slug": "agent-dibs",
    "char": "dibs",
    "voice_id": "5C0bHt6GhA0my3bZoLJf",
-   "status": "active",
+   "status": "deleted",
    "name": "Dibs",
    "voice_name": "Agent Dibs — Dibs",
    "lines": 33,
@@ -39,9 +39,19 @@
    "account": {
     "category": "generated",
     "description": "A loud, gravelly American man in his mid-fifties with a thick old-school Chicago accent (flat vowels, 'da' for 'the'), blue-collar, hearty, confident, always sure he has it handled, sounds like he is talking over a cold wind. Expressive, comedic, mid-low baritone, native American English speaker.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1790850333
-   }
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/5C0bHt6GhA0my3bZoLJf/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiMDJlMTg2YTctZTdlMC00NzVlLTkwMTgtMDYwNzdiNzY5MDRmLm1wMyIsInRpbWVzdGFtcCI6MTc5MjU2MjQwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-21",
+   "deleted_reason": "auto: room for thanks-randy/patty"
   },
   {
    "slug": "agent-dibs",
@@ -442,47 +452,9 @@
   },
   {
    "slug": "florida-man",
-   "char": "fm",
-   "voice_id": "GBn8jPzCnZIbx5Kf8r1J",
-   "status": "active",
-   "name": "Florida Man",
-   "voice_name": "Florida Man — Florida Man",
-   "lines": 37,
-   "episodes": 7,
-   "samples": [
-    "series/florida-man/voice/ep06/f3.mp3",
-    "series/florida-man/voice/ep01/f3.mp3",
-    "series/florida-man/voice/ep01/f4.mp3",
-    "series/florida-man/voice/ep02/f2.mp3",
-    "series/florida-man/voice/ep02/f3.mp3",
-    "series/florida-man/voice/movie/g_f1.mp3",
-    "series/florida-man/voice/ep01/f6.mp3",
-    "series/florida-man/voice/ep04/f2.mp3"
-   ],
-   "design": {
-    "description": "A sun-baked Florida Gulf Coast man in his mid-forties: warm, raspy, gravelly baritone with a slow, lazy Southern Panhandle drawl, totally zen and unbothered, a laid-back boat-ramp philosopher who chuckles under his breath. When he hears a price his voice cracks into a high-pitched, outraged shriek. Natural, characterful, comedic.",
-    "text": "Mort. Hold my sub. Nah, man, it's fine. It's Florida. Gators, hurricanes, the heat, I don't sweat it. But NINE GRAND? For the A C?! Hoo boy. Okay. Okay. Deep breath. I got a plan. It's a great plan. Hold my sub.",
-    "picked": {
-     "i": 2,
-     "dur": 25.89,
-     "f0": 142.9,
-     "f0_iqr": 64.9,
-     "rate": 13.4,
-     "loud_sd": 6.0
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A sun-baked Florida Gulf Coast man in his mid-forties: warm, raspy, gravelly baritone with a slow, lazy Southern Panhandle drawl, totally zen and unbothered, a laid-back boat-ramp philosopher who chuckles under his breath. When he hears a price his voice cracks into a high-pitched, outraged shriek. Natural, characterful, comedic.",
-    "settings": null,
-    "created_at_unix": 1791529898
-   }
-  },
-  {
-   "slug": "florida-man",
    "char": "tanner",
    "voice_id": "GpiDvTn0zpQeiQA9VdB7",
-   "status": "active",
+   "status": "deleted",
    "name": "Tanner",
    "voice_name": "Florida Man — Tanner",
    "lines": 37,
@@ -512,9 +484,67 @@
    "account": {
     "category": "generated",
     "description": "A relentlessly chipper young American man in his late twenties, bright upbeat customer-service voice, fast and bubbly with a slight surfer-valley lilt, a huge smile you can hear, sincerely positive even while delivering terrible news. Natural, comedic.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1791529907
-   }
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/GpiDvTn0zpQeiQA9VdB7/8952219a-9c60-4261-86d8-db0b9972ad71.mp3",
+   "deleted_on": "2026-10-21",
+   "deleted_reason": "auto: room for thanks-randy/dunn"
+  },
+  {
+   "slug": "florida-man",
+   "char": "fm",
+   "voice_id": "GBn8jPzCnZIbx5Kf8r1J",
+   "status": "deleted",
+   "name": "Florida Man",
+   "voice_name": "Florida Man — Florida Man",
+   "lines": 37,
+   "episodes": 7,
+   "samples": [
+    "series/florida-man/voice/ep06/f3.mp3",
+    "series/florida-man/voice/ep01/f3.mp3",
+    "series/florida-man/voice/ep01/f4.mp3",
+    "series/florida-man/voice/ep02/f2.mp3",
+    "series/florida-man/voice/ep02/f3.mp3",
+    "series/florida-man/voice/movie/g_f1.mp3",
+    "series/florida-man/voice/ep01/f6.mp3",
+    "series/florida-man/voice/ep04/f2.mp3"
+   ],
+   "design": {
+    "description": "A sun-baked Florida Gulf Coast man in his mid-forties: warm, raspy, gravelly baritone with a slow, lazy Southern Panhandle drawl, totally zen and unbothered, a laid-back boat-ramp philosopher who chuckles under his breath. When he hears a price his voice cracks into a high-pitched, outraged shriek. Natural, characterful, comedic.",
+    "text": "Mort. Hold my sub. Nah, man, it's fine. It's Florida. Gators, hurricanes, the heat, I don't sweat it. But NINE GRAND? For the A C?! Hoo boy. Okay. Okay. Deep breath. I got a plan. It's a great plan. Hold my sub.",
+    "picked": {
+     "i": 2,
+     "dur": 25.89,
+     "f0": 142.9,
+     "f0_iqr": 64.9,
+     "rate": 13.4,
+     "loud_sd": 6.0
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A sun-baked Florida Gulf Coast man in his mid-forties: warm, raspy, gravelly baritone with a slow, lazy Southern Panhandle drawl, totally zen and unbothered, a laid-back boat-ramp philosopher who chuckles under his breath. When he hears a price his voice cracks into a high-pitched, outraged shriek. Natural, characterful, comedic.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1791529898
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/GBn8jPzCnZIbx5Kf8r1J/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiYjRlYmY3MjktZjJkMC00Y2ZlLWIwNDItZDZiNWEwZWY3ZDU3Lm1wMyIsInRpbWVzdGFtcCI6MTc5MjU2MjQwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-21",
+   "deleted_reason": "auto: room for thanks-randy/carol"
   },
   {
    "slug": "florida-man",
@@ -1350,7 +1380,7 @@
    "slug": "prokhor",
    "char": "prokhor",
    "voice_id": "FmmR663nLw91vgt0SRzR",
-   "status": "active",
+   "status": "deleted",
    "name": "Прохор",
    "voice_name": "Прохор — Прохор",
    "lines": 43,
@@ -1380,12 +1410,19 @@
    "account": {
     "category": "generated",
     "description": "A huge bearded Siberian lumberjack, around fifty five, living alone in the taiga. Extremely low, deep, chesty and gravelly bass voice, the lowest male register, rough and husky like he chops wood all day, slow heavy confident delivery with village swagger, thick rural Russian accent with strong okanye, a smoker's rasp, warm and funny. Not shouting, just a big booming low voice. Native Russian speaker.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1791825379
    },
-   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/z42gWT4h52CwjWCO9GF0/e0556206-931d-4942-b7fb-e58c5132b4f8.mp3",
-   "deleted_on": "2026-10-12",
-   "deleted_reason": "manual"
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/FmmR663nLw91vgt0SRzR/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiZWYwNGRmMTctNDcxMC00YzdlLTg4YjAtNDJmNzc3NTJkMjg2Lm1wMyIsInRpbWVzdGFtcCI6MTc5MjU2MjQwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-21",
+   "deleted_reason": "auto: room for thanks-randy/kyle"
   },
   {
    "slug": "prokhor",
@@ -1760,9 +1797,15 @@
    "status": "active",
    "name": "Randy",
    "voice_name": "Thanks, Randy — Randy",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 5,
+   "episodes": 1,
+   "samples": [
+    "series/thanks-randy/voice/ep01/r2.mp3",
+    "series/thanks-randy/voice/ep01/r3.mp3",
+    "series/thanks-randy/voice/ep01/r1.mp3",
+    "series/thanks-randy/voice/ep01/r5.mp3",
+    "series/thanks-randy/voice/ep01/r4.mp3"
+   ],
    "design": {
     "description": "A loud, overconfident suburban dad from Ohio in his late forties, the classic sitcom father who thinks he is a genius at everything. Big booming chesty baritone, fast energetic delivery, flat Midwestern vowels, lots of swagger and bluster, and when he panics his voice cracks up into a funny high squeak. Warm, goofy, very expressive and comedic. Native American English speaker.",
     "text": "[outraged, shouting] Eighty-nine bucks?! For a BIRD?! [proud, booming] This year, I'm hosting Thanksgiving. Twenty years, never burned a turkey! [panicking, voice cracking] There's nothing there! Why is it beeping?!",
@@ -1784,31 +1827,36 @@
   },
   {
    "slug": "thanks-randy",
-   "char": "tom",
-   "voice_id": "HIEYuk97dd40Gpi6GtRn",
+   "char": "scandee",
+   "voice_id": "3ANi4ZKHBsZCpmOHdUAL",
    "status": "active",
-   "name": "Tom (frozen turkey)",
-   "voice_name": "Thanks, Randy — Tom (frozen turkey)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "name": "SCAN-DEE (every machine)",
+   "voice_name": "Thanks, Randy — SCAN-DEE (every machine)",
+   "lines": 4,
+   "episodes": 1,
+   "samples": [
+    "series/thanks-randy/voice/ep01/s3.mp3",
+    "series/thanks-randy/voice/ep01/s4.mp3",
+    "series/thanks-randy/voice/ep01/s1.mp3",
+    "series/thanks-randy/voice/ep01/s2.mp3"
+   ],
    "design": {
-    "description": "A world-weary older man in his sixties with a low, gravelly, rough voice, bone-dry and completely deadpan, like a tired film-noir detective narrator who has seen everything. Slow, unhurried, flat delivery with long dry pauses, a slight New Jersey accent, never excited, quietly sarcastic and funny. Native American English speaker.",
-    "text": "[deadpan, gravelly] I'm worth it. [flat] Twenty-two pounds, pal. I'm a glacier. [dry] Still frozen. [weary sigh] Great. Now it's a support group. Miss me?",
+    "description": "A polite synthetic female voice of a supermarket self-checkout machine. Perfectly even, chipper, customer-service robotic tone, slightly too cheerful, clipped and precise articulation, no emotion at all, like an automated announcement. Adult woman, American English.",
+    "text": "[robotic, chipper] Unexpected item in bagging area. Please wait for assistance. Unexpected item. Grandma detected. Four ninety-nine per pound. Total: eighty-nine ninety-nine.",
     "picked": {
-     "i": 2,
-     "dur": 16.2,
-     "f0": 80.4,
-     "f0_iqr": 166.3,
-     "rate": 18.2,
-     "loud_sd": 5.2
+     "i": 1,
+     "dur": 11.23,
+     "f0": 192.8,
+     "f0_iqr": 73.9,
+     "rate": 21.0,
+     "loud_sd": 4.6
     }
    },
    "account": {
     "category": "generated",
-    "description": "A world-weary older man in his sixties with a low, gravelly, rough voice, bone-dry and completely deadpan, like a tired film-noir detective narrator who has seen everything. Slow, unhurried, flat delivery with long dry pauses, a slight New Jersey accent, never excited, quietly sarcastic and funny. Native American English speaker.",
+    "description": "A polite synthetic female voice of a supermarket self-checkout machine. Perfectly even, chipper, customer-service robotic tone, slightly too cheerful, clipped and precise articulation, no emotion at all, like an automated announcement. Adult woman, American English.",
     "settings": null,
-    "created_at_unix": 1792545213
+    "created_at_unix": 1792545236
    }
   },
   {
@@ -1818,9 +1866,13 @@
    "status": "active",
    "name": "Nana Joyce",
    "voice_name": "Thanks, Randy — Nana Joyce",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 3,
+   "episodes": 1,
+   "samples": [
+    "series/thanks-randy/voice/ep01/j2.mp3",
+    "series/thanks-randy/voice/ep01/j3.mp3",
+    "series/thanks-randy/voice/ep01/j1.mp3"
+   ],
    "design": {
     "description": "A tiny sweet elderly grandmother in her eighties from the American Midwest. Thin, high, sugary old-lady voice with a slight tremble, very polite and warm on the surface but passive-aggressive underneath, and the last word of every sentence turns sharp and steely. Gossipy and nosy, comedic timing. Native American English speaker.",
     "text": "[sweet] I'm resting, sweetie. [passive-aggressive] No, it's fine. I'll just die here. [nosy, sweetly] So. When are you getting married? [sweet] Carry me to the car.",
@@ -1847,9 +1899,12 @@
    "status": "active",
    "name": "Brayden",
    "voice_name": "Thanks, Randy — Brayden",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/thanks-randy/voice/ep01/b2.mp3",
+    "series/thanks-randy/voice/ep01/b1.mp3"
+   ],
    "design": {
     "description": "A lazy twenty-four-year-old California tech bro and wannabe entrepreneur. Relaxed laid-back young adult male voice with heavy vocal fry, upspeak at the ends of sentences, unbothered and monotone, always half amused, speaks slowly like he is filming content. Native American English speaker.",
     "text": "[flat, vocal fry] You never cooked one. [excited, lazy] Bro. Nana's on sale. [smug] Uber, but for thawing. It's a startup. [deadpan] Okay. This is a startup.",
@@ -1871,31 +1926,149 @@
   },
   {
    "slug": "thanks-randy",
-   "char": "scandee",
-   "voice_id": "3ANi4ZKHBsZCpmOHdUAL",
+   "char": "tom",
+   "voice_id": "HIEYuk97dd40Gpi6GtRn",
    "status": "active",
-   "name": "SCAN-DEE (every machine)",
-   "voice_name": "Thanks, Randy — SCAN-DEE (every machine)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "name": "Tom (frozen turkey)",
+   "voice_name": "Thanks, Randy — Tom (frozen turkey)",
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/thanks-randy/voice/ep01/t1.mp3"
+   ],
    "design": {
-    "description": "A polite synthetic female voice of a supermarket self-checkout machine. Perfectly even, chipper, customer-service robotic tone, slightly too cheerful, clipped and precise articulation, no emotion at all, like an automated announcement. Adult woman, American English.",
-    "text": "[robotic, chipper] Unexpected item in bagging area. Please wait for assistance. Unexpected item. Grandma detected. Four ninety-nine per pound. Total: eighty-nine ninety-nine.",
+    "description": "A world-weary older man in his sixties with a low, gravelly, rough voice, bone-dry and completely deadpan, like a tired film-noir detective narrator who has seen everything. Slow, unhurried, flat delivery with long dry pauses, a slight New Jersey accent, never excited, quietly sarcastic and funny. Native American English speaker.",
+    "text": "[deadpan, gravelly] I'm worth it. [flat] Twenty-two pounds, pal. I'm a glacier. [dry] Still frozen. [weary sigh] Great. Now it's a support group. Miss me?",
     "picked": {
-     "i": 1,
-     "dur": 11.23,
-     "f0": 192.8,
-     "f0_iqr": 73.9,
-     "rate": 21.0,
-     "loud_sd": 4.6
+     "i": 2,
+     "dur": 16.2,
+     "f0": 80.4,
+     "f0_iqr": 166.3,
+     "rate": 18.2,
+     "loud_sd": 5.2
     }
    },
    "account": {
     "category": "generated",
-    "description": "A polite synthetic female voice of a supermarket self-checkout machine. Perfectly even, chipper, customer-service robotic tone, slightly too cheerful, clipped and precise articulation, no emotion at all, like an automated announcement. Adult woman, American English.",
+    "description": "A world-weary older man in his sixties with a low, gravelly, rough voice, bone-dry and completely deadpan, like a tired film-noir detective narrator who has seen everything. Slow, unhurried, flat delivery with long dry pauses, a slight New Jersey accent, never excited, quietly sarcastic and funny. Native American English speaker.",
     "settings": null,
-    "created_at_unix": 1792545236
+    "created_at_unix": 1792545213
+   }
+  },
+  {
+   "slug": "thanks-randy",
+   "char": "patty",
+   "voice_id": "j4ogMUtanUuqkUCotVOx",
+   "status": "active",
+   "name": "Officer Patty (TSA)",
+   "voice_name": "Thanks, Randy — Officer Patty (TSA)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [],
+   "design": {
+    "description": "A bored airport security officer, a woman in her fifties from Philadelphia, chewing gum loudly while she talks. Flat, nasal, deeply unimpressed deadpan delivery with a thick Philly accent, slow and tired, every sentence sounds like the hundredth time today. Dry and funny. Native American English speaker.",
+    "text": "[bored, chewing gum] Over three point four ounces. Liquid. [flat] Then it's a family liquid. [unimpressed] Sir. You are a liquid now. Not flying today either. Next.",
+    "picked": {
+     "i": 1,
+     "dur": 11.31,
+     "f0": 177.8,
+     "f0_iqr": 28.5,
+     "rate": 21.4,
+     "loud_sd": 5.6
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A bored airport security officer, a woman in her fifties from Philadelphia, chewing gum loudly while she talks. Flat, nasal, deeply unimpressed deadpan delivery with a thick Philly accent, slow and tired, every sentence sounds like the hundredth time today. Dry and funny. Native American English speaker.",
+    "settings": null,
+    "created_at_unix": 1792564514
+   }
+  },
+  {
+   "slug": "thanks-randy",
+   "char": "carol",
+   "voice_id": "xfJvbnf19p6r0uEM0iJQ",
+   "status": "active",
+   "name": "Carol (Turkey Talk-Line)",
+   "voice_name": "Thanks, Randy — Carol (Turkey Talk-Line)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [],
+   "design": {
+    "description": "A warm, chirpy middle-aged hotline operator from Wisconsin, around fifty, with a strong friendly Upper Midwest accent, very polite and sing-song customer service voice that suddenly cracks into a panicked desperate whisper. Expressive, comedic, motherly. Native American English speaker.",
+    "text": "[warm, chirpy] Butterbutt Talk-Line, this is Carol! [quietly horrified] Oh. Honey. [panicked whisper] Mine's frozen too. Can I come to yours? [cheerful] We brought dip!",
+    "picked": {
+     "i": 2,
+     "dur": 11.0,
+     "f0": 301.9,
+     "f0_iqr": 120.3,
+     "rate": 33.9,
+     "loud_sd": 6.9
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A warm, chirpy middle-aged hotline operator from Wisconsin, around fifty, with a strong friendly Upper Midwest accent, very polite and sing-song customer service voice that suddenly cracks into a panicked desperate whisper. Expressive, comedic, motherly. Native American English speaker.",
+    "settings": null,
+    "created_at_unix": 1792564523
+   }
+  },
+  {
+   "slug": "thanks-randy",
+   "char": "dunn",
+   "voice_id": "OXWVo11izezT9DaOSbK4",
+   "status": "active",
+   "name": "Captain Dunn (fire dept.)",
+   "voice_name": "Thanks, Randy — Captain Dunn (fire dept.)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [],
+   "design": {
+    "description": "A gruff veteran fire captain in his late fifties from Boston, thick Boston accent, low raspy smoky voice like he has breathed smoke for thirty years, short tough sentences, deadpan, secretly sentimental and funny. Native American English speaker.",
+    "text": "[gruff] Ours went off at the station. [solemn] Twenty years. Never burned a turkey. [deadpan] To the job, ma'am. [grinning] That bird still frozen? Got any oil?",
+    "picked": {
+     "i": 1,
+     "dur": 10.61,
+     "f0": 93.6,
+     "f0_iqr": 36.1,
+     "rate": 24.6,
+     "loud_sd": 5.9
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A gruff veteran fire captain in his late fifties from Boston, thick Boston accent, low raspy smoky voice like he has breathed smoke for thirty years, short tough sentences, deadpan, secretly sentimental and funny. Native American English speaker.",
+    "settings": null,
+    "created_at_unix": 1792564531
+   }
+  },
+  {
+   "slug": "thanks-randy",
+   "char": "kyle",
+   "voice_id": "o66JG48gZPKDedxBW6sr",
+   "status": "active",
+   "name": "Kyle (Best Bye cashier)",
+   "voice_name": "Thanks, Randy — Kyle (Best Bye cashier)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [],
+   "design": {
+    "description": "A bored young adult store cashier, about nineteen, completely monotone, sleepy and unbothered, mumbling slightly, zero enthusiasm, speaks like he has worked the night shift for twelve hours. Native American English speaker.",
+    "text": "[monotone, bored] That one's on hold. [flat] Next. Do you want a receipt? [sighs] Black Friday. Doors open at five. That one's on hold.",
+    "picked": {
+     "i": 1,
+     "dur": 10.84,
+     "f0": 102.6,
+     "f0_iqr": 9.9,
+     "rate": 21.0,
+     "loud_sd": 5.3
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A bored young adult store cashier, about nineteen, completely monotone, sleepy and unbothered, mumbling slightly, zero enthusiasm, speaks like he has worked the night shift for twelve hours. Native American English speaker.",
+    "settings": null,
+    "created_at_unix": 1792564538
    }
   },
   {
@@ -2292,5 +2465,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-21 01:14"
+ "updated": "2026-10-21 06:35"
 }

@@ -125,7 +125,80 @@ def dress_store_b(W):
     D.anim(W, lamp_blink(788, 219, 7, 9, (255, 60, 60), 0.45))
 
 
-DRESS = dict(store=dress_store, store_b=dress_store_b)
+# ---------------------------------------------------------------- Tumbleweed Intl airport (airport.png / airport_b.png)
+def dress_airport(W):
+    D.attach(W, [
+        (D.plate(132, 50, ['SECURITY', 'CHECKPOINT'], bg=(40, 70, 150), colors=[WH, YEL], border=(200, 210, 230), round_=2.0), 205, 34),
+        (D.plate(152, 50, ['WELCOME TO ARIZONA', "IT'S A DRY HEAT (LIE)"], bg=(200, 96, 40), colors=[WH, CREAM], border=(250, 220, 160),
+                 weights=[1.0, 0.8], round_=2.0), 714, 34),
+        (D.plate(90, 58, ['NOW', 'BOARDING:', 'NOBODY'], bg=(20, 30, 50), colors=[(120, 220, 255), (120, 220, 255), YEL], border=None, pad=1.0), 386, 150),
+        (D.plate(150, 46, ['LIQUIDS 3.4 OZ', 'YES, GRAVY TOO'], bg=WH, colors=[RED, BLK], border=RED, bw=1.4, pad=1.4), 520, 300),
+        (D.plate(118, 22, ['REMOVE SHOES, BELTS, DIGNITY'], bg=YEL, fg=BLK, border=BLK, pad=0.8), 640, 488),
+        (D.plate(62, 30, ['ARMS UP', 'DIGNITY DOWN'], bg=(220, 240, 250), colors=[NAVY, RED], border=NAVY, pad=1.0), 1030, 330),
+        (D.plate(70, 20, ['BIN RETURN >'], bg=NAVY, fg=WH, border=WH, pad=0.8), 110, 500),
+        (D.plate(170, 22, ['TUMBLEWEED INTL AIRPORT'], bg=(250, 240, 214), fg=(160, 70, 30), border=(160, 70, 30), round_=1.0), 505, 236),
+        (D.sticker('WAIT HERE (FOREVER)', bg=YEL, fg=BLK, w=74, h=12, tilt=0), 470, 640),
+    ])
+    D.anim(W, dust((0, 80, 1280, 420), n=30, seed=12, col=(255, 236, 190)))
+    D.anim(W, lamp_blink(1050, 128, 10, 6, (255, 60, 60), 0.5))
+
+
+def dress_airport_b(W):
+    D.attach(W, [
+        (D.plate(144, 46, ['GATE B', 'DELAYED: YES'], bg=(40, 70, 150), colors=[WH, YEL], border=(200, 210, 230), round_=2.0), 133, 84),
+        (D.plate(144, 46, ['CONFISCATED', 'TODAY: 312 GRAVIES'], bg=(196, 40, 36), colors=[WH, YEL], border=(250, 220, 160),
+                 weights=[1.0, 0.8], round_=2.0), 1003, 84),
+        (D.plate(84, 60, ['LANE 2', 'GRAVY', 'CHECK'], bg=(20, 30, 50), colors=[(120, 220, 255), YEL, YEL], border=None, pad=1.0), 852, 312),
+        (D.plate(120, 40, ['LIQUIDS 3.4 OZ', 'YES, GRAVY TOO'], bg=WH, colors=[RED, BLK], border=RED, bw=1.4, pad=1.2), 610, 340),
+        (D.plate(86, 18, ['BIN RETURN >'], bg=NAVY, fg=WH, border=WH, pad=0.8), 300, 470),
+    ])
+    D.anim(W, dust((0, 80, 1280, 420), n=26, seed=13, col=(255, 236, 190)))
+
+
+# ---------------------------------------------------------------- Randy's kitchen at night (kitchen.png / kitchen_b.png)
+def dress_kitchen(W):
+    D.attach(W, [
+        (D.plate(72, 76, ['THANKS-', 'GIVING:', 'TOMORROW', '!!!', 'TOM: ROCK'], bg=WH, colors=[NAVY, NAVY, RED, RED, (40, 110, 200)],
+                 border=(70, 120, 200), weights=[0.8, 0.8, 0.9, 0.9, 0.7], pad=1.0, tilt=-2), 244, 170),
+        (D.plate(74, 70, ['NOV', '25', 'WED'], bg=WH, colors=[RED, BLK, BLK], border=(150, 150, 160), weights=[0.6, 1.4, 0.6], pad=1.2), 138, 163),
+        (D.plate(130, 30, ['LIVE * LAUGH * LOAF'], bg=(196, 150, 96), fg=(250, 240, 220), border=(110, 70, 40), round_=1.0), 262, 66),
+        (D.plate(114, 26, ["NANA'S TUPPERWARE", 'RETURN OR ELSE'], bg=(250, 246, 226), colors=[(120, 60, 140), RED], border=(120, 60, 140), pad=0.8), 92, 66),
+        (D.plate(70, 22, ['SMOKE ALARM:', 'NOT TODAY'], bg=YEL, colors=[BLK, RED], border=BLK, pad=0.8, tilt=3), 1120, 40),
+        (D.plate(76, 42, ['HOW TO THAW:', '1. PLAN', '2. TOO LATE'], bg=CREAM, colors=[NAVY, BLK, RED], border=(150, 120, 80), pad=1.0, tilt=4), 362, 238),
+        (D.plate(140, 18, ['GO AWAY (JK) HAPPY TURKEY'], bg=(150, 90, 50), fg=(250, 230, 190), border=(90, 54, 30), pad=0.8), 1092, 598),
+    ])
+    D.anim(W, dust((640, 120, 1000, 420), n=18, seed=21, col=(255, 236, 180)))
+
+
+def dress_kitchen_b(W):
+    D.attach(W, [
+        (D.plate(132, 74, ['THANKSGIVING:', 'TOMORROW!!!', 'TOM: ROCK'], bg=WH, colors=[NAVY, RED, (40, 110, 200)], border=None,
+                 weights=[0.8, 0.9, 0.8], pad=1.2), 112, 430),
+        (D.plate(70, 68, ['NOV', '25', 'WED'], bg=WH, colors=[RED, BLK, BLK], border=(150, 150, 160), weights=[0.6, 1.4, 0.6], pad=1.2), 176, 188),
+        (D.plate(140, 28, ['LIVE * LAUGH * LOAF'], bg=(196, 150, 96), fg=(250, 240, 220), border=(110, 70, 40), round_=1.0), 312, 140),
+        (D.plate(78, 44, ['HOW TO THAW:', '1. PLAN', '2. TOO LATE'], bg=CREAM, colors=[NAVY, BLK, RED], border=(150, 120, 80), pad=1.0, tilt=-3), 760, 240),
+        (D.plate(150, 18, ['GO AWAY (JK) HAPPY TURKEY'], bg=(150, 90, 50), fg=(250, 230, 190), border=(90, 54, 30), pad=0.8), 1036, 560),
+    ])
+    D.anim(W, dust((560, 100, 900, 380), n=16, seed=22, col=(255, 236, 180)))
+
+
+# ---------------------------------------------------------------- Butterbutt Turkey Talk-Line call centre (callcenter.png)
+def dress_callcenter(W):
+    D.attach(W, [
+        (D.plate(296, 120, ['DAYS WITHOUT A', 'FROZEN TURKEY:', '0'], bg=(20, 16, 18), colors=[(255, 90, 60), (255, 90, 60), (255, 220, 60)],
+                 border=(60, 60, 66), weights=[0.8, 0.8, 1.6], pad=1.6), 515, 138),
+        (D.plate(78, 98, ['STAY', 'CALM', '(WE', "CAN'T)"], bg=(240, 236, 220), colors=[NAVY, NAVY, RED, RED], border=(120, 80, 50), pad=1.2), 371, 155),
+        (D.plate(98, 110, ['EMPLOYEE', 'OF THE', 'MONTH:', 'OVEN'], bg=(250, 230, 160), colors=[BLK, BLK, BLK, RED], border=(150, 110, 50),
+                 weights=[0.8, 0.8, 0.8, 1.3], pad=1.2), 857, 145),
+        (D.plate(62, 74, ['1-800', 'GOBBLE'], bg=(40, 70, 150), colors=[WH, YEL], border=(200, 210, 230), pad=1.0), 1000, 168),
+        (D.plate(80, 110, ['BUTTER', 'BUTT', 'TALK-', 'LINE', 'SINCE 81'], bg=(226, 112, 36), colors=[WH, WH, YEL, YEL, CREAM],
+                 border=(250, 220, 120), pad=1.0), 1168, 152),
+    ])
+    D.anim(W, lamp_blink(400, 58, 90, 30, (250, 255, 230), 0.17))
+
+
+DRESS = dict(store=dress_store, store_b=dress_store_b, airport=dress_airport, airport_b=dress_airport_b, kitchen=dress_kitchen,
+             kitchen_b=dress_kitchen_b, callcenter=dress_callcenter)
 
 
 def dress(name, W):

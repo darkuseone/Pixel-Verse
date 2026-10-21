@@ -4,13 +4,13 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-21 01:14.
+Обновлено: 2026-10-21 06:35.
 
 ## agent-dibs
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Dibs | `dibs` | `5C0bHt6GhA0my3bZoLJf` | active | 33 / 6 | Agent Dibs — Dibs |
+| Dibs | `dibs` | `5C0bHt6GhA0my3bZoLJf` | deleted 2026-10-21 | 33 / 6 | Agent Dibs — Dibs |
 | Terry | `terry` | `EUq8L3QnRf1VZ3o46Rqy` | deleted 2026-10-12 | 12 / 4 | Agent Dibs — Terry |
 | Deb | `deb` | `rDUAka3HaW9ATyqCs7fi` | deleted 2026-10-12 | 11 / 5 | Agent Dibs — Deb |
 | Brad | `brad` | `1U7R8ztWDP1r2BuAL8Dz` | library_or_premade | 9 / 3 | Agent Dibs — Brad |
@@ -25,8 +25,8 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Florida Man | `fm` | `GBn8jPzCnZIbx5Kf8r1J` | active | 37 / 7 | Florida Man — Florida Man |
-| Tanner | `tanner` | `GpiDvTn0zpQeiQA9VdB7` | active | 37 / 7 | Florida Man — Tanner |
+| Tanner | `tanner` | `GpiDvTn0zpQeiQA9VdB7` | deleted 2026-10-21 | 37 / 7 | Florida Man — Tanner |
+| Florida Man | `fm` | `GBn8jPzCnZIbx5Kf8r1J` | deleted 2026-10-21 | 37 / 7 | Florida Man — Florida Man |
 | Mort Pouch, Esq. | `mort` | `d44i4jCJHjBEUuFbGaGy` | deleted 2026-10-20 | 24 / 7 | Florida Man — Mort Pouch, Esq. |
 | Deputy Darlene | `darlene` | `dgd3UC679ZtpWOphbJ9Y` | deleted 2026-10-20 | 23 / 7 | Florida Man — Deputy Darlene |
 
@@ -67,7 +67,7 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Прохор | `prokhor` | `FmmR663nLw91vgt0SRzR` | active | 43 / 7 | Прохор — Прохор |
+| Прохор | `prokhor` | `FmmR663nLw91vgt0SRzR` | deleted 2026-10-21 | 43 / 7 | Прохор — Прохор |
 | Михал Потапыч | `bear` | `xflYwcTw1xfUQvQHsSsi` | deleted 2026-10-21 | 14 / 7 | Прохор — Михал Потапыч |
 | Егерь Людмила Петровна | `ranger` | `d6PvT1IIGreyRcDnsiMh` | deleted 2026-10-21 | 3 / 1 | Прохор — Егерь Людмила Петровна |
 | Лось-санитар | `moose` | `aFuXgHiYbXdvfWT8BKEc` | deleted 2026-10-21 | 2 / 1 | Прохор — Лось-санитар |
@@ -87,11 +87,15 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Randy | `randy` | `TchZIvpJmfER4pUh0mLj` | active | 0 / 0 | Thanks, Randy — Randy |
-| Tom (frozen turkey) | `tom` | `HIEYuk97dd40Gpi6GtRn` | active | 0 / 0 | Thanks, Randy — Tom (frozen turkey) |
-| Nana Joyce | `joyce` | `dJjx0RiCfuNSJOqSszkH` | active | 0 / 0 | Thanks, Randy — Nana Joyce |
-| Brayden | `brayden` | `MIUbQ8ecRUmaOKYrVlLG` | active | 0 / 0 | Thanks, Randy — Brayden |
-| SCAN-DEE (every machine) | `scandee` | `3ANi4ZKHBsZCpmOHdUAL` | active | 0 / 0 | Thanks, Randy — SCAN-DEE (every machine) |
+| Randy | `randy` | `TchZIvpJmfER4pUh0mLj` | active | 5 / 1 | Thanks, Randy — Randy |
+| SCAN-DEE (every machine) | `scandee` | `3ANi4ZKHBsZCpmOHdUAL` | active | 4 / 1 | Thanks, Randy — SCAN-DEE (every machine) |
+| Nana Joyce | `joyce` | `dJjx0RiCfuNSJOqSszkH` | active | 3 / 1 | Thanks, Randy — Nana Joyce |
+| Brayden | `brayden` | `MIUbQ8ecRUmaOKYrVlLG` | active | 2 / 1 | Thanks, Randy — Brayden |
+| Tom (frozen turkey) | `tom` | `HIEYuk97dd40Gpi6GtRn` | active | 1 / 1 | Thanks, Randy — Tom (frozen turkey) |
+| Officer Patty (TSA) | `patty` | `j4ogMUtanUuqkUCotVOx` | active | 0 / 0 | Thanks, Randy — Officer Patty (TSA) |
+| Carol (Turkey Talk-Line) | `carol` | `xfJvbnf19p6r0uEM0iJQ` | active | 0 / 0 | Thanks, Randy — Carol (Turkey Talk-Line) |
+| Captain Dunn (fire dept.) | `dunn` | `OXWVo11izezT9DaOSbK4` | active | 0 / 0 | Thanks, Randy — Captain Dunn (fire dept.) |
+| Kyle (Best Bye cashier) | `kyle` | `o66JG48gZPKDedxBW6sr` | active | 0 / 0 | Thanks, Randy — Kyle (Best Bye cashier) |
 
 ## valera-i-kot
 

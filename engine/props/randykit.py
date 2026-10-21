@@ -19,7 +19,8 @@ from props import randydecor as DEC
 
 SLUG = 'thanks-randy'
 COL = dict(randy=(255, 150, 50), tom=(150, 220, 255), joyce=(206, 160, 255), brayden=(170, 255, 90), scandee=(235, 240, 255),
-           patty=(255, 120, 120), carol=(255, 200, 120), dunn=(255, 90, 60), kyle=(200, 200, 200))
+           patty=(255, 120, 120), carol=(255, 200, 120), carol2=(255, 200, 120), dunn=(255, 90, 60), kyle=(200, 200, 200),
+           family=(255, 255, 255))
 INK = RX.INK
 CRUST = (92, 46, 26)                                   # title outline: roast crust brown
 FILL = ((255, 186, 60), (255, 120, 60), (240, 70, 110))  # orange (top) -> coral -> cranberry-pink (bottom)
@@ -70,6 +71,12 @@ def light_store_b(v, alarm=0.0):
     keys = [(640, 40, 900, (255, 236, 190), 0.30), (260, 420, 560, (150, 210, 255), 0.32)]
     if alarm > 0: keys.append((800, 300, 700, (255, 60, 60), 0.35 * alarm))
     return Light(amb=(1.02, 1.0, 0.98), keys=_keys(v, keys), rim=(-1, -0.3, (170, 220, 255), 0.30), grad=(1.04, 0.95))
+
+
+def light_airport(v, alarm=0.0):
+    keys = [(640, 120, 1000, (255, 228, 180), 0.32), (1050, 300, 500, (190, 230, 255), 0.20)]
+    if alarm > 0: keys.append((1050, 300, 700, (255, 60, 60), 0.40 * alarm))
+    return Light(amb=(1.0, 1.0, 1.02), keys=_keys(v, keys), rim=(1, -0.3, (255, 220, 170), 0.30), grad=(1.04, 0.96))
 
 
 # ---------------------------------------------------------------- worlds
@@ -396,3 +403,106 @@ def cover_make(frame, title, n=1, out='cover.png', title_size=104, plate_y=None,
         g[SAFE_BOTTOM - GRID[0]:] = (g[SAFE_BOTTOM - GRID[0]:] * 0.45).astype(np.uint8)
         Image.fromarray(g).resize((270, 360), Image.LANCZOS).save(str(out).replace('.png', '_grid.png'))
     return big
+
+
+# ---------------------------------------------------------------- E02: airport X-ray monitor + body scanner screens
+def _bezel(a, label=None):
+    h, w = a.shape[:2]
+    out = np.zeros((h + 60, w + 60, 4), np.uint8)
+    out[..., :3] = (44, 48, 58); out[..., 3] = 255
+    out[:8] = INK + (255,); out[-8:] = INK + (255,); out[:, :8] = INK + (255,); out[:, -8:] = INK + (255,)
+    out[30:30 + h, 30:30 + w, :3] = a
+    return out
+
+
+def xray_ui(fn, t, w=860, h=600, s=13.0, label='SOLID FOOD', sub='UNLIMITED', ok=True, rot=0.0, spr=None, at=None):
+    """baggage X-ray monitor: the sprite fn rendered in false colours (organics orange, dense blue-black), grid, a verdict label"""
+    from props.dibspix import blit
+    a = np.zeros((h, w, 3), np.uint8); a[:] = (230, 236, 240)
+    for x in range(0, w, 40): a[:, x] = (210, 218, 226)
+    for y in range(0, h, 40): a[y] = (210, 218, 226)
+    sp = RX.draw(fn, s, rot=rot, t=t, **(spr or {}))
+    lum = sp.col.astype(np.float32).mean(2)
+    fc = np.zeros_like(sp.col)
+    dense = lum < 120
+    fc[...] = (236, 150, 60)
+    fc[dense] = (40, 60, 150)
+    fc[(lum > 200)] = (250, 200, 120)
+    c_ = sp.col.astype(int)
+    gr = (c_[..., 0] > 95) & (c_[..., 0] < 160) & (c_[..., 1] > 50) & (c_[..., 1] < 100) & (c_[..., 2] < 55)   # gravy = liquid green
+    fc[gr] = (90, 190, 110)
+    sp.col = fc
+    blit(a, sp, *(at or (w // 2, h - 120)), s, None, False)
+    im = Image.fromarray(a); d = ImageDraw.Draw(im); d.fontmode = '1'
+    d.rectangle([0, 0, w, 56], fill=(30, 40, 60))
+    d.text((20, 14), 'X-RAY LANE 2', font=O.pfont(26), fill=(200, 220, 255))
+    blink = int(t * 3) % 2 == 0
+    col = (40, 160, 90) if ok else ((200, 30, 40) if blink else (150, 20, 30))
+    d.rectangle([0, h - 92, w, h], fill=col)
+    f = O.pfont(40); f2 = O.pfont(24)
+    d.text(((w - f.getlength(label)) / 2, h - 84), label, font=f, fill=(255, 255, 255))
+    d.text(((w - f2.getlength(sub)) / 2, h - 36), sub, font=f2, fill=(255, 255, 220))
+    return _bezel(np.array(im))
+
+
+def scanner_ui(t, level=0.7, w=700, h=860, slosh=1.0, label='UNEXPECTED LIQUID', sub='128 OZ'):
+    """millimetre-wave body scanner screen: a generic yellow outline of a stocky man (arms up), filled with brown gravy to `level`"""
+    im = Image.new('RGB', (w, h), (18, 26, 44)); d = ImageDraw.Draw(im)
+    for y in range(0, h, 6): d.line([(0, y), (w, y)], fill=(22, 32, 54))
+    m = Image.new('L', (w, h), 0); dm = ImageDraw.Draw(m)
+    cx = w // 2
+    dm.rectangle([cx - 70, 70, cx + 70, 220], fill=255)                       # brick head
+    dm.ellipse([cx - 190, 230, cx + 190, 620], fill=255)                      # pear body
+    dm.rectangle([cx - 90, 600, cx - 40, 800], fill=255); dm.rectangle([cx + 40, 600, cx + 90, 800], fill=255)   # legs
+    dm.polygon([(cx - 150, 300), (cx - 260, 120), (cx - 220, 100), (cx - 110, 260)], fill=255)                  # arms up
+    dm.polygon([(cx + 150, 300), (cx + 260, 120), (cx + 220, 100), (cx + 110, 260)], fill=255)
+    M = np.array(m) > 127
+    a = np.array(im)
+    yy, xx = np.mgrid[0:h, 0:w]
+    surf = h - level * (h - 120) + np.sin(xx / 40.0 + t * 7.0) * 14 * slosh
+    a[M & (yy > surf)] = (150, 90, 40)
+    a[M & (yy > surf) & ((xx + yy + int(t * 30)) % 23 < 2)] = (190, 120, 60)
+    edge = M & ~(np.roll(M, 4, 0) & np.roll(M, -4, 0) & np.roll(M, 4, 1) & np.roll(M, -4, 1))
+    a[edge] = (255, 220, 60)
+    im = Image.fromarray(a); d = ImageDraw.Draw(im); d.fontmode = '1'
+    blink = int(t * 4) % 2 == 0
+    d.rectangle([0, 0, w, 64], fill=(200, 30, 40) if blink else (150, 20, 30))
+    f = O.pfont(30)
+    d.text(((w - f.getlength(label)) / 2, 18), label, font=f, fill=(255, 255, 255))
+    f2 = O.pfont(44)
+    bw = int(f2.getlength(sub)) + 40
+    d.rectangle([w - bw - 20, h - 90, w - 20, h - 20], fill=(252, 246, 226))
+    d.text((w - bw, h - 76), sub, font=f2, fill=(160, 40, 30))
+    return _bezel(np.array(im))
+
+
+# ---------------------------------------------------------------- E03: phone call screen + split screen
+def phone_ui(t, name='BUTTERBUTT', sub='TURKEY TALK-LINE', number='1-800-GOBBLE', status='ON HOLD', timer=None, w=520, h=900):
+    """a big smartphone in-call screen (output res): caller name, number, a hold timer, call buttons"""
+    im = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    d.rounded_rectangle([0, 0, w - 1, h - 1], 60, fill=INK + (255,))
+    d.rounded_rectangle([18, 18, w - 19, h - 19], 46, fill=(24, 34, 60, 255))
+    d.ellipse([w // 2 - 70, 110, w // 2 + 70, 250], fill=(236, 120, 40, 255))
+    for i, c in enumerate(FEATH := ((226, 96, 40), (246, 176, 48), (176, 70, 36), (236, 200, 90))):     # turkey icon
+        d.ellipse([w // 2 - 50 + i * 22, 132, w // 2 - 30 + i * 22, 186], fill=c)
+    d.ellipse([w // 2 - 30, 160, w // 2 + 30, 220], fill=(150, 92, 46))
+    f1, f2, f3 = O.pfont(40), O.pfont(24), O.pfont(30)
+    for txt, f, y, c in ((name, f1, 290, (255, 255, 255)), (sub, f2, 350, (200, 220, 255)), (number, f3, 410, (255, 214, 80))):
+        d.text(((w - f.getlength(txt)) / 2, y), txt, font=f, fill=c)
+    blink = int(t * 2) % 2 == 0
+    d.text(((w - f3.getlength(status)) / 2, 500), status, font=f3, fill=(255, 120, 120) if blink else (255, 200, 200))
+    if timer:
+        d.text(((w - O.pfont(56).getlength(timer)) / 2, 560), timer, font=O.pfont(56), fill=(255, 255, 255))
+    for i, (x, c) in enumerate(((w // 2 - 140, (80, 90, 110)), (w // 2, (80, 90, 110)), (w // 2 + 140, (230, 50, 50)))):
+        d.ellipse([x - 50, h - 190, x + 50, h - 90], fill=c)
+    return np.array(im)
+
+
+def split(left, right, gap=10, col=(255, 186, 60)):
+    """vertical split screen of two full frames (each squeezed to half width by cropping its centre)"""
+    W2 = (OUT_W - gap) // 2
+    out = np.zeros_like(left); out[:] = col
+    lx = (OUT_W - W2) // 2
+    out[:, :W2] = left[:, lx:lx + W2]
+    out[:, W2 + gap:W2 + gap + W2] = right[:, lx:lx + W2]
+    return out
