@@ -645,8 +645,8 @@
   {
    "slug": "grim-ride",
    "char": "grim",
-   "voice_id": "sdQf2r6zfX32hvp25Auj",
-   "status": "deleted",
+   "voice_id": "9kccWXrItNrNr72CRNY3",
+   "status": "active",
    "name": "Grim",
    "voice_name": "Grim Ride — Grim",
    "lines": 30,
@@ -677,6 +677,11 @@
     {
      "voice_id": "JBFqnCBsd6RMkjVDRZzb",
      "until": "2026-10-06"
+    },
+    {
+     "voice_id": "sdQf2r6zfX32hvp25Auj",
+     "until": "2026-10-21",
+     "note": "deleted, restored as IVC clone"
     }
    ],
    "account": {
@@ -693,14 +698,13 @@
     "created_at_unix": 1791318868
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/sdQf2r6zfX32hvp25Auj/d1d3dc52-413c-4cb3-aa29-cdcf11bbe07f.mp3",
-   "deleted_on": "2026-10-21",
    "deleted_reason": "auto: room for thanks-randy/scandee"
   },
   {
    "slug": "grim-ride",
    "char": "edgar",
-   "voice_id": "QxBrp3fXvoJ3Zvl8DXHD",
-   "status": "deleted",
+   "voice_id": "qSoNm6CDt8qHyugcvk47",
+   "status": "active",
    "name": "Edgar",
    "voice_name": "Grim Ride — Edgar",
    "lines": 17,
@@ -731,6 +735,11 @@
     {
      "voice_id": "N2lVS1w4EtoT3dr4eOWO",
      "until": "2026-10-06"
+    },
+    {
+     "voice_id": "QxBrp3fXvoJ3Zvl8DXHD",
+     "until": "2026-10-21",
+     "note": "deleted, restored as IVC clone"
     }
    ],
    "account": {
@@ -747,14 +756,13 @@
     "created_at_unix": 1791318871
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/QxBrp3fXvoJ3Zvl8DXHD/1ba31783-aeca-4e2d-814e-b67c2c7b833c.mp3",
-   "deleted_on": "2026-10-20",
    "deleted_reason": "free slots"
   },
   {
    "slug": "grim-ride",
    "char": "harold",
-   "voice_id": "UScN6kcNEVzdo1v1Nl6W",
-   "status": "deleted",
+   "voice_id": "eFOwKI3LNrA1UWjisXHn",
+   "status": "active",
    "name": "Harold",
    "voice_name": "Grim Ride — Harold",
    "lines": 9,
@@ -785,6 +793,11 @@
     {
      "voice_id": "pqHfZKP75CvOlQylNhV4",
      "until": "2026-10-06"
+    },
+    {
+     "voice_id": "UScN6kcNEVzdo1v1Nl6W",
+     "until": "2026-10-21",
+     "note": "deleted, restored as IVC clone"
     }
    ],
    "account": {
@@ -801,8 +814,52 @@
     "created_at_unix": 1791318873
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/UScN6kcNEVzdo1v1Nl6W/7c141256-9d5e-462f-9571-b0f66d69d71b.mp3",
-   "deleted_on": "2026-10-12",
    "deleted_reason": "auto: room for valera-i-kot/semenych"
+  },
+  {
+   "slug": "grim-ride",
+   "char": "dashley",
+   "voice_id": "LNZyyXPD0jcfm1UPIKsc",
+   "status": "active",
+   "name": "Dashley (DoomDash support bot)",
+   "voice_name": "Grim Ride — Dashley (DoomDash support bot)",
+   "lines": 8,
+   "episodes": 2,
+   "samples": [
+    "series/grim-ride/voice/ep02/d3.mp3",
+    "series/grim-ride/voice/ep02/d1.mp3",
+    "series/grim-ride/voice/ep02/d6.mp3",
+    "series/grim-ride/voice/ep06/d0.mp3",
+    "series/grim-ride/voice/ep06/d1.mp3",
+    "series/grim-ride/voice/ep02/d5.mp3",
+    "series/grim-ride/voice/ep02/d2.mp3",
+    "series/grim-ride/voice/ep02/d4.mp3"
+   ],
+   "design": {
+    "description": "A relentlessly cheerful corporate customer-support AI assistant: a young adult American woman's voice, perky, sing-song, bright and a little too polite, slightly synthetic and robotic in rhythm, smiling through every sentence, clean studio sound. Comedic.",
+    "text": "Hi there! I'm Dashley, your DoomDash support assistant! Are you a human? Sorry, I didn't catch that. For your safety, your bike is now Class One! Transferring you to a specialist. Your estimated wait time is eternity. Have a spooktacular day!",
+    "picked": {
+     "i": 0,
+     "dur": 15.73,
+     "f0": 313.7,
+     "f0_iqr": 114.0,
+     "rate": 21.6,
+     "loud_sd": 6.6
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A relentlessly cheerful corporate customer-support AI assistant: a young adult American woman's voice, perky, sing-song, bright and a little too polite, slightly synthetic and robotic in rhythm, smiling through every sentence, clean studio sound. Comedic.",
+    "settings": null,
+    "created_at_unix": 1791319087
+   },
+   "history": [
+    {
+     "voice_id": "hvKhJmx8w6dx2qaLhHC6",
+     "until": "2026-10-21",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
   },
   {
    "slug": "grim-ride",
@@ -900,44 +957,6 @@
     "description": "An over-enthusiastic American suburban dad in his early forties, upbeat slightly nasal tenor, says bro and buddy a lot, fast excited delivery, friendly and totally oblivious, light Southern California bro accent. Comedic and natural.",
     "settings": null,
     "created_at_unix": 1791318875
-   }
-  },
-  {
-   "slug": "grim-ride",
-   "char": "dashley",
-   "voice_id": "hvKhJmx8w6dx2qaLhHC6",
-   "status": "library_or_premade",
-   "name": "Dashley (DoomDash support bot)",
-   "voice_name": "Grim Ride — Dashley (DoomDash support bot)",
-   "lines": 8,
-   "episodes": 2,
-   "samples": [
-    "series/grim-ride/voice/ep02/d3.mp3",
-    "series/grim-ride/voice/ep02/d1.mp3",
-    "series/grim-ride/voice/ep02/d6.mp3",
-    "series/grim-ride/voice/ep06/d0.mp3",
-    "series/grim-ride/voice/ep06/d1.mp3",
-    "series/grim-ride/voice/ep02/d5.mp3",
-    "series/grim-ride/voice/ep02/d2.mp3",
-    "series/grim-ride/voice/ep02/d4.mp3"
-   ],
-   "design": {
-    "description": "A relentlessly cheerful corporate customer-support AI assistant: a young adult American woman's voice, perky, sing-song, bright and a little too polite, slightly synthetic and robotic in rhythm, smiling through every sentence, clean studio sound. Comedic.",
-    "text": "Hi there! I'm Dashley, your DoomDash support assistant! Are you a human? Sorry, I didn't catch that. For your safety, your bike is now Class One! Transferring you to a specialist. Your estimated wait time is eternity. Have a spooktacular day!",
-    "picked": {
-     "i": 0,
-     "dur": 15.73,
-     "f0": 313.7,
-     "f0_iqr": 114.0,
-     "rate": 21.6,
-     "loud_sd": 6.6
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A relentlessly cheerful corporate customer-support AI assistant: a young adult American woman's voice, perky, sing-song, bright and a little too polite, slightly synthetic and robotic in rhythm, smiling through every sentence, clean studio sound. Comedic.",
-    "settings": null,
-    "created_at_unix": 1791319087
    }
   },
   {
@@ -1797,14 +1816,17 @@
    "status": "active",
    "name": "Randy",
    "voice_name": "Thanks, Randy — Randy",
-   "lines": 5,
-   "episodes": 1,
+   "lines": 27,
+   "episodes": 6,
    "samples": [
     "series/thanks-randy/voice/ep01/r2.mp3",
-    "series/thanks-randy/voice/ep01/r3.mp3",
-    "series/thanks-randy/voice/ep01/r1.mp3",
-    "series/thanks-randy/voice/ep01/r5.mp3",
-    "series/thanks-randy/voice/ep01/r4.mp3"
+    "series/thanks-randy/voice/ep04/r1.mp3",
+    "series/thanks-randy/voice/ep02/r3.mp3",
+    "series/thanks-randy/voice/ep06/r2.mp3",
+    "series/thanks-randy/voice/ep02/r4.mp3",
+    "series/thanks-randy/voice/ep02/r5.mp3",
+    "series/thanks-randy/voice/ep04/r2.mp3",
+    "series/thanks-randy/voice/ep04/r3.mp3"
    ],
    "design": {
     "description": "A loud, overconfident suburban dad from Ohio in his late forties, the classic sitcom father who thinks he is a genius at everything. Big booming chesty baritone, fast energetic delivery, flat Midwestern vowels, lots of swagger and bluster, and when he panics his voice cracks up into a funny high squeak. Warm, goofy, very expressive and comedic. Native American English speaker.",
@@ -1832,13 +1854,17 @@
    "status": "active",
    "name": "SCAN-DEE (every machine)",
    "voice_name": "Thanks, Randy — SCAN-DEE (every machine)",
-   "lines": 4,
-   "episodes": 1,
+   "lines": 12,
+   "episodes": 5,
    "samples": [
+    "series/thanks-randy/voice/ep05/s3.mp3",
+    "series/thanks-randy/voice/ep03/s1.mp3",
+    "series/thanks-randy/voice/ep05/s1.mp3",
+    "series/thanks-randy/voice/ep02/s1.mp3",
     "series/thanks-randy/voice/ep01/s3.mp3",
-    "series/thanks-randy/voice/ep01/s4.mp3",
-    "series/thanks-randy/voice/ep01/s1.mp3",
-    "series/thanks-randy/voice/ep01/s2.mp3"
+    "series/thanks-randy/voice/ep06/s2.mp3",
+    "series/thanks-randy/voice/ep05/s2.mp3",
+    "series/thanks-randy/voice/ep01/s4.mp3"
    ],
    "design": {
     "description": "A polite synthetic female voice of a supermarket self-checkout machine. Perfectly even, chipper, customer-service robotic tone, slightly too cheerful, clipped and precise articulation, no emotion at all, like an automated announcement. Adult woman, American English.",
@@ -1866,12 +1892,17 @@
    "status": "active",
    "name": "Nana Joyce",
    "voice_name": "Thanks, Randy — Nana Joyce",
-   "lines": 3,
-   "episodes": 1,
+   "lines": 12,
+   "episodes": 5,
    "samples": [
     "series/thanks-randy/voice/ep01/j2.mp3",
+    "series/thanks-randy/voice/ep03/j1.mp3",
+    "series/thanks-randy/voice/ep06/j2.mp3",
+    "series/thanks-randy/voice/ep05/j2.mp3",
+    "series/thanks-randy/voice/ep06/j1.mp3",
     "series/thanks-randy/voice/ep01/j3.mp3",
-    "series/thanks-randy/voice/ep01/j1.mp3"
+    "series/thanks-randy/voice/ep04/j2.mp3",
+    "series/thanks-randy/voice/ep05/j1.mp3"
    ],
    "design": {
     "description": "A tiny sweet elderly grandmother in her eighties from the American Midwest. Thin, high, sugary old-lady voice with a slight tremble, very polite and warm on the surface but passive-aggressive underneath, and the last word of every sentence turns sharp and steely. Gossipy and nosy, comedic timing. Native American English speaker.",
@@ -1899,11 +1930,17 @@
    "status": "active",
    "name": "Brayden",
    "voice_name": "Thanks, Randy — Brayden",
-   "lines": 2,
-   "episodes": 1,
+   "lines": 10,
+   "episodes": 5,
    "samples": [
+    "series/thanks-randy/voice/ep06/b1.mp3",
+    "series/thanks-randy/voice/ep03/b1.mp3",
     "series/thanks-randy/voice/ep01/b2.mp3",
-    "series/thanks-randy/voice/ep01/b1.mp3"
+    "series/thanks-randy/voice/ep04/b1.mp3",
+    "series/thanks-randy/voice/ep05/b1.mp3",
+    "series/thanks-randy/voice/ep05/b2.mp3",
+    "series/thanks-randy/voice/ep01/b1.mp3",
+    "series/thanks-randy/voice/ep04/fb.mp3"
    ],
    "design": {
     "description": "A lazy twenty-four-year-old California tech bro and wannabe entrepreneur. Relaxed laid-back young adult male voice with heavy vocal fry, upspeak at the ends of sentences, unbothered and monotone, always half amused, speaks slowly like he is filming content. Native American English speaker.",
@@ -1931,10 +1968,17 @@
    "status": "active",
    "name": "Tom (frozen turkey)",
    "voice_name": "Thanks, Randy — Tom (frozen turkey)",
-   "lines": 1,
-   "episodes": 1,
+   "lines": 9,
+   "episodes": 6,
    "samples": [
-    "series/thanks-randy/voice/ep01/t1.mp3"
+    "series/thanks-randy/voice/ep02/t1.mp3",
+    "series/thanks-randy/voice/ep03/t2.mp3",
+    "series/thanks-randy/voice/ep03/t1.mp3",
+    "series/thanks-randy/voice/ep02/t2.mp3",
+    "series/thanks-randy/voice/ep04/t1.mp3",
+    "series/thanks-randy/voice/ep06/t2.mp3",
+    "series/thanks-randy/voice/ep01/t1.mp3",
+    "series/thanks-randy/voice/ep05/t1.mp3"
    ],
    "design": {
     "description": "A world-weary older man in his sixties with a low, gravelly, rough voice, bone-dry and completely deadpan, like a tired film-noir detective narrator who has seen everything. Slow, unhurried, flat delivery with long dry pauses, a slight New Jersey accent, never excited, quietly sarcastic and funny. Native American English speaker.",
@@ -1957,14 +2001,54 @@
   },
   {
    "slug": "thanks-randy",
+   "char": "dunn",
+   "voice_id": "OXWVo11izezT9DaOSbK4",
+   "status": "active",
+   "name": "Captain Dunn (fire dept.)",
+   "voice_name": "Thanks, Randy — Captain Dunn (fire dept.)",
+   "lines": 5,
+   "episodes": 1,
+   "samples": [
+    "series/thanks-randy/voice/ep04/d2.mp3",
+    "series/thanks-randy/voice/ep04/d5.mp3",
+    "series/thanks-randy/voice/ep04/d4.mp3",
+    "series/thanks-randy/voice/ep04/d1.mp3",
+    "series/thanks-randy/voice/ep04/d3.mp3"
+   ],
+   "design": {
+    "description": "A gruff veteran fire captain in his late fifties from Boston, thick Boston accent, low raspy smoky voice like he has breathed smoke for thirty years, short tough sentences, deadpan, secretly sentimental and funny. Native American English speaker.",
+    "text": "[gruff] Ours went off at the station. [solemn] Twenty years. Never burned a turkey. [deadpan] To the job, ma'am. [grinning] That bird still frozen? Got any oil?",
+    "picked": {
+     "i": 1,
+     "dur": 10.61,
+     "f0": 93.6,
+     "f0_iqr": 36.1,
+     "rate": 24.6,
+     "loud_sd": 5.9
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A gruff veteran fire captain in his late fifties from Boston, thick Boston accent, low raspy smoky voice like he has breathed smoke for thirty years, short tough sentences, deadpan, secretly sentimental and funny. Native American English speaker.",
+    "settings": null,
+    "created_at_unix": 1792564531
+   }
+  },
+  {
+   "slug": "thanks-randy",
    "char": "patty",
    "voice_id": "j4ogMUtanUuqkUCotVOx",
    "status": "active",
    "name": "Officer Patty (TSA)",
    "voice_name": "Thanks, Randy — Officer Patty (TSA)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 4,
+   "episodes": 1,
+   "samples": [
+    "series/thanks-randy/voice/ep02/p1.mp3",
+    "series/thanks-randy/voice/ep02/p3.mp3",
+    "series/thanks-randy/voice/ep02/p4.mp3",
+    "series/thanks-randy/voice/ep02/p2.mp3"
+   ],
    "design": {
     "description": "A bored airport security officer, a woman in her fifties from Philadelphia, chewing gum loudly while she talks. Flat, nasal, deeply unimpressed deadpan delivery with a thick Philly accent, slow and tired, every sentence sounds like the hundredth time today. Dry and funny. Native American English speaker.",
     "text": "[bored, chewing gum] Over three point four ounces. Liquid. [flat] Then it's a family liquid. [unimpressed] Sir. You are a liquid now. Not flying today either. Next.",
@@ -1991,9 +2075,14 @@
    "status": "active",
    "name": "Carol (Turkey Talk-Line)",
    "voice_name": "Thanks, Randy — Carol (Turkey Talk-Line)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 4,
+   "episodes": 1,
+   "samples": [
+    "series/thanks-randy/voice/ep03/c3.mp3",
+    "series/thanks-randy/voice/ep03/c1.mp3",
+    "series/thanks-randy/voice/ep03/c2.mp3",
+    "series/thanks-randy/voice/ep03/c4.mp3"
+   ],
    "design": {
     "description": "A warm, chirpy middle-aged hotline operator from Wisconsin, around fifty, with a strong friendly Upper Midwest accent, very polite and sing-song customer service voice that suddenly cracks into a panicked desperate whisper. Expressive, comedic, motherly. Native American English speaker.",
     "text": "[warm, chirpy] Butterbutt Talk-Line, this is Carol! [quietly horrified] Oh. Honey. [panicked whisper] Mine's frozen too. Can I come to yours? [cheerful] We brought dip!",
@@ -2015,43 +2104,16 @@
   },
   {
    "slug": "thanks-randy",
-   "char": "dunn",
-   "voice_id": "OXWVo11izezT9DaOSbK4",
-   "status": "active",
-   "name": "Captain Dunn (fire dept.)",
-   "voice_name": "Thanks, Randy — Captain Dunn (fire dept.)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
-   "design": {
-    "description": "A gruff veteran fire captain in his late fifties from Boston, thick Boston accent, low raspy smoky voice like he has breathed smoke for thirty years, short tough sentences, deadpan, secretly sentimental and funny. Native American English speaker.",
-    "text": "[gruff] Ours went off at the station. [solemn] Twenty years. Never burned a turkey. [deadpan] To the job, ma'am. [grinning] That bird still frozen? Got any oil?",
-    "picked": {
-     "i": 1,
-     "dur": 10.61,
-     "f0": 93.6,
-     "f0_iqr": 36.1,
-     "rate": 24.6,
-     "loud_sd": 5.9
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A gruff veteran fire captain in his late fifties from Boston, thick Boston accent, low raspy smoky voice like he has breathed smoke for thirty years, short tough sentences, deadpan, secretly sentimental and funny. Native American English speaker.",
-    "settings": null,
-    "created_at_unix": 1792564531
-   }
-  },
-  {
-   "slug": "thanks-randy",
    "char": "kyle",
    "voice_id": "o66JG48gZPKDedxBW6sr",
    "status": "active",
    "name": "Kyle (Best Bye cashier)",
    "voice_name": "Thanks, Randy — Kyle (Best Bye cashier)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/thanks-randy/voice/ep06/k1.mp3"
+   ],
    "design": {
     "description": "A bored young adult store cashier, about nineteen, completely monotone, sleepy and unbothered, mumbling slightly, zero enthusiasm, speaks like he has worked the night shift for twelve hours. Native American English speaker.",
     "text": "[monotone, bored] That one's on hold. [flat] Next. Do you want a receipt? [sighs] Black Friday. Doors open at five. That one's on hold.",
@@ -2465,5 +2527,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-21 06:35"
+ "updated": "2026-10-21 22:29"
 }

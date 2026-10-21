@@ -211,6 +211,10 @@ time.com / abc7ny.com (age limits), knowyourmeme.com / napoleoncat.com (сент
   «too old to trick-or-treat»; «the plug», донглы $40 CASH, «A bird's gotta EAT», «No REFUNDS»; Best Yard, «Ugh. TACKY.», «Needs FOG»,
   «Method ACTING», «It's ANIMATRONIC!», «Kinda CHIC»; 1:59 AM, «Fall Back» (2:00 → 1:00), «Pickup rescheduled. Next HALLOWEEN», «Five. STARS.»,
   крючок «Spring Forward».
+- Фильм «ONE MORE HOUR» (21.10.2026): временная петля лишнего часа («Daylight saving. The hour happens twice.» — «It happened THREE times!» —
+  «Government.»), счётчик петель, «Death doesn't get STUCK. Death gets GOOD.», «Loop fifty / seventy-three», пицца DoomDash «Didn't order.»,
+  полёт на фоне луны (E.T.), «You don't waste an hour. You RECYCLE it.», «Three. Two. Whatever.», «Battery died.» — «It did NOT.», напольные часы
+  Гарольда, весенний перевод «Where'd the HOUR go?» — «Spent it, kid.»
 
 ### Новые пародийные бренды (банк §4)
 «DoomDash» (DoorDash), «AfterlifePay» (BNPL), «Home Despot» (уже в банке), «Spirit Halloweenie», «Nextdoom» (Nextdoor), «Pale Horse 2» (байк Смерти).

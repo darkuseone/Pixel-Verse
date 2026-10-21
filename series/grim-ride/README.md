@@ -53,3 +53,8 @@ deadline). Бренды-пародии: DoomDash, AfterlifePay, Home Despot, Spi
 | E04 | «The Plug» | DEATH BUYS A DONGLE? | барыга донглов — ворон Эдгар (злодей — свой, 55 %); «No REFUNDS.» | 33,4 с |
 | E05 | «Best Yard» | DEATH PLAYS DECORATION? | «It's ANIMATRONIC!» — Гарольд выигрывает Best Yard и продаёт Смерть Тодду (успех хуже провала, 58 %); «Kinda CHIC.» | 30,4 с |
 | E06 | «Fall Back» | DEATH'S LAST MINUTE? | 2:00 → 1:00, перевод часов (часы дают время, 54 %); 5 звёзд, «Nevermore.»; крючок SPRING FORWARD; петля на пилот | 32,4 с |
+
+## Расширенная версия
+`movie/` — мини-фильм «ONE MORE HOUR» (5:04, 16:9): временная петля лишнего часа перевода часов, каждая петля — попытка из сезона,
+поворот на 58 % — петлю делает сам Гарольд своими напольными часами. Сценарий `movie/script.md`, сборка `python3 movie.py all` →
+`python3 mix.py`, обложка `python3 cover.py`, выкладка `movie/publish_movie.txt`.
