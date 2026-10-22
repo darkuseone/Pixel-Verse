@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-21 06:35.
+Обновлено: 2026-10-21 22:29.
 
 ## agent-dibs
 
@@ -34,12 +34,12 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Grim | `grim` | `sdQf2r6zfX32hvp25Auj` | deleted 2026-10-21 | 30 / 6 | Grim Ride — Grim |
-| Edgar | `edgar` | `QxBrp3fXvoJ3Zvl8DXHD` | deleted 2026-10-20 | 17 / 6 | Grim Ride — Edgar |
-| Harold | `harold` | `UScN6kcNEVzdo1v1Nl6W` | deleted 2026-10-12 | 9 / 5 | Grim Ride — Harold |
+| Grim | `grim` | `9kccWXrItNrNr72CRNY3` | active | 30 / 6 | Grim Ride — Grim |
+| Edgar | `edgar` | `qSoNm6CDt8qHyugcvk47` | active | 17 / 6 | Grim Ride — Edgar |
+| Harold | `harold` | `eFOwKI3LNrA1UWjisXHn` | active | 9 / 5 | Grim Ride — Harold |
+| Dashley (DoomDash support bot) | `dashley` | `LNZyyXPD0jcfm1UPIKsc` | active | 8 / 2 | Grim Ride — Dashley (DoomDash support bot) |
 | Kayden | `kayden` | `wISugChlyIgdUxhS0vFR` | deleted 2026-10-12 | 9 / 4 | Grim Ride — Kayden |
 | Todd | `todd` | `9rXbTqAmpdfkBx20G31c` | library_or_premade | 9 / 4 | Grim Ride — Todd |
-| Dashley (DoomDash support bot) | `dashley` | `hvKhJmx8w6dx2qaLhHC6` | library_or_premade | 8 / 2 | Grim Ride — Dashley (DoomDash support bot) |
 | Trick-or-treat Mom | `mom` | `UNaE6Ed6rSceF3pSO5yL` | library_or_premade | 3 / 2 | Grim Ride — Trick-or-treat Mom |
 
 ## mazutych
@@ -87,15 +87,15 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Randy | `randy` | `TchZIvpJmfER4pUh0mLj` | active | 5 / 1 | Thanks, Randy — Randy |
-| SCAN-DEE (every machine) | `scandee` | `3ANi4ZKHBsZCpmOHdUAL` | active | 4 / 1 | Thanks, Randy — SCAN-DEE (every machine) |
-| Nana Joyce | `joyce` | `dJjx0RiCfuNSJOqSszkH` | active | 3 / 1 | Thanks, Randy — Nana Joyce |
-| Brayden | `brayden` | `MIUbQ8ecRUmaOKYrVlLG` | active | 2 / 1 | Thanks, Randy — Brayden |
-| Tom (frozen turkey) | `tom` | `HIEYuk97dd40Gpi6GtRn` | active | 1 / 1 | Thanks, Randy — Tom (frozen turkey) |
-| Officer Patty (TSA) | `patty` | `j4ogMUtanUuqkUCotVOx` | active | 0 / 0 | Thanks, Randy — Officer Patty (TSA) |
-| Carol (Turkey Talk-Line) | `carol` | `xfJvbnf19p6r0uEM0iJQ` | active | 0 / 0 | Thanks, Randy — Carol (Turkey Talk-Line) |
-| Captain Dunn (fire dept.) | `dunn` | `OXWVo11izezT9DaOSbK4` | active | 0 / 0 | Thanks, Randy — Captain Dunn (fire dept.) |
-| Kyle (Best Bye cashier) | `kyle` | `o66JG48gZPKDedxBW6sr` | active | 0 / 0 | Thanks, Randy — Kyle (Best Bye cashier) |
+| Randy | `randy` | `TchZIvpJmfER4pUh0mLj` | active | 27 / 6 | Thanks, Randy — Randy |
+| SCAN-DEE (every machine) | `scandee` | `3ANi4ZKHBsZCpmOHdUAL` | active | 12 / 5 | Thanks, Randy — SCAN-DEE (every machine) |
+| Nana Joyce | `joyce` | `dJjx0RiCfuNSJOqSszkH` | active | 12 / 5 | Thanks, Randy — Nana Joyce |
+| Brayden | `brayden` | `MIUbQ8ecRUmaOKYrVlLG` | active | 10 / 5 | Thanks, Randy — Brayden |
+| Tom (frozen turkey) | `tom` | `HIEYuk97dd40Gpi6GtRn` | active | 9 / 6 | Thanks, Randy — Tom (frozen turkey) |
+| Captain Dunn (fire dept.) | `dunn` | `OXWVo11izezT9DaOSbK4` | active | 5 / 1 | Thanks, Randy — Captain Dunn (fire dept.) |
+| Officer Patty (TSA) | `patty` | `j4ogMUtanUuqkUCotVOx` | active | 4 / 1 | Thanks, Randy — Officer Patty (TSA) |
+| Carol (Turkey Talk-Line) | `carol` | `xfJvbnf19p6r0uEM0iJQ` | active | 4 / 1 | Thanks, Randy — Carol (Turkey Talk-Line) |
+| Kyle (Best Bye cashier) | `kyle` | `o66JG48gZPKDedxBW6sr` | active | 1 / 1 | Thanks, Randy — Kyle (Best Bye cashier) |
 
 ## valera-i-kot
 

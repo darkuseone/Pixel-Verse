@@ -25,8 +25,11 @@
           "loud_sd": 5.9
         }
       },
-      "voice_id": "sdQf2r6zfX32hvp25Auj",
-      "voice": "Grim Ride — Grim"
+      "voice_id": "9kccWXrItNrNr72CRNY3",
+      "voice": "Grim Ride — Grim",
+      "previous_voice_ids": [
+        "sdQf2r6zfX32hvp25Auj"
+      ]
     },
     "edgar": {
       "name": "Edgar",
@@ -49,8 +52,11 @@
           "loud_sd": 4.8
         }
       },
-      "voice_id": "QxBrp3fXvoJ3Zvl8DXHD",
-      "voice": "Grim Ride — Edgar"
+      "voice_id": "qSoNm6CDt8qHyugcvk47",
+      "voice": "Grim Ride — Edgar",
+      "previous_voice_ids": [
+        "QxBrp3fXvoJ3Zvl8DXHD"
+      ]
     },
     "harold": {
       "name": "Harold",
@@ -73,8 +79,11 @@
           "loud_sd": 6.1
         }
       },
-      "voice_id": "UScN6kcNEVzdo1v1Nl6W",
-      "voice": "Grim Ride — Harold"
+      "voice_id": "eFOwKI3LNrA1UWjisXHn",
+      "voice": "Grim Ride — Harold",
+      "previous_voice_ids": [
+        "UScN6kcNEVzdo1v1Nl6W"
+      ]
     },
     "todd": {
       "name": "Todd",
@@ -144,8 +153,11 @@
           "loud_sd": 6.6
         }
       },
-      "voice_id": "hvKhJmx8w6dx2qaLhHC6",
-      "voice": "Grim Ride — Dashley (DoomDash support bot)"
+      "voice_id": "LNZyyXPD0jcfm1UPIKsc",
+      "voice": "Grim Ride — Dashley (DoomDash support bot)",
+      "previous_voice_ids": [
+        "hvKhJmx8w6dx2qaLhHC6"
+      ]
     },
     "mom": {
       "name": "Trick-or-treat Mom",

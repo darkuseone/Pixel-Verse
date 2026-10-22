@@ -244,7 +244,7 @@ GRIM_STYLE = dict(hs=1.25)
 
 def grim(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, ride=True, spin=0.0, crank=None, wind=0.0, batt=13, dead=False,
          raven=False, raven_mouth=0.0, raven_expr='deadpan', pose='bar', glow=1.0, scythe=True, jaw_drop=0.0, hood_back=0.0, shake=0.0,
-         lean=0.0, carry=0.0):
+         lean=0.0, carry=0.0, mug=False):
     """GRIM, 3/4 to the right. ride: on the e-bike (pose 'bar' = both hands on the bar, 'phone' = near hand holds a phone up,
     'shout' = near arm raised with an open claw); ride=False: standing, cloak to the ground, scythe upright in the far hand
     (pose 'stand' / 'point' / 'claw' / 'phone' / 'loom' = arms raised over a victim). wind 0..1: cloak and tatters stream back."""
@@ -365,6 +365,7 @@ def grim(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, ride=
     else:
         bony_hand(sp, *eN, d=1.0, grip=(ride and pose == 'bar') or pose == 'stand', point=pose == 'point')
         if carry: sack(sp, eN[0] + 1.0, eN[1] - 1.0, carry)
+        if mug: cocoa_mug(sp, eN[0] + 2.0, eN[1] - 1.5, t, k=1.3)
     sp.anchors['hand'] = eN
     sp.anchors['pocket'] = (neck[0] - 3.0, neck[1] - 20.0)
     new = sp.m & ~before
@@ -506,7 +507,7 @@ def rocking_chair(sp, rock=0.0):
 
 
 def harold(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.6, 0.0), blink=None, pose='stand', spin=0.0, flag=1.0, rock=0.0, wave=0.0,
-           toss=0.0, wind=0.0, offer=0.0, cup=False):
+           toss=0.0, wind=0.0, offer=0.0, cup=False, mug=False):
     """HAROLD, 97: a tiny shrivelled «bobblehead» under a giant black helmet with flames, coke-bottle glasses magnifying the eyes,
     khaki pants belted at the chest, red suspenders, white orthopedic sneakers. pose 'stand' / 'rock' (rocking chair) / 'ride' (e-trike)"""
     E = X(expr)
@@ -556,8 +557,8 @@ def harold(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.6, 0.0), blink=None, pos
         hN = (shN[0] + 6.0 + 2.0 * math.sin(t * 14.0) * wave, shN[1] + 9.0)
     elif toss > 0:
         hN = (shN[0] + 9.0, shN[1] + 2.0 + 8.0 * toss)
-    elif offer > 0 or cup:
-        hN = (shN[0] + 10.0 * max(offer, 0.6) + 2.0, shN[1] - 2.0 + (6.0 if cup else 0.0))
+    elif offer > 0 or cup or mug:
+        hN = (shN[0] + 10.0 * max(offer, 0.6) + 2.0, shN[1] - 2.0 + (6.0 if cup else 2.0 if mug else 0.0))
     elif pose == 'rock':
         hN = (shN[0] + 5.0, shN[1] - 9.0)
     else:
@@ -570,6 +571,9 @@ def harold(sp, t=0.0, expr='bored', mouth_=0.0, look=(0.6, 0.0), blink=None, pos
         sp.rect(cx_ - 3.0, cy_, cx_ + 3.0, cy_ + 2.0, (30, 26, 36)); sp.rect(cx_ - 0.6, cy_ + 2.0, cx_ + 0.6, cy_ + 4.5, (220, 170, 50))
         cupm = sp.m_ell(cx_, cy_ + 7.5, 3.4, 3.6)[0] & (DX.YC > cy_ + 5.5)
         sp.paint(cupm, tones((240, 190, 60), glow=(255, 240, 160)), vgrad(cy_ + 11, cy_ + 4, 0.2))
+        sp.ell(*eN, 2.2, 1.9, tones(HSKIN))
+    if mug:
+        cocoa_mug(sp, eN[0] + 1.5, eN[1] - 1.0, t)
         sp.ell(*eN, 2.2, 1.9, tones(HSKIN))
     sp.anchors['hand'] = eN
     # head: small wrinkly face, giant ears, big nose, white tufty brows, coke-bottle glasses
@@ -930,6 +934,18 @@ def mom(sp, t=0.0, expr='squint', mouth_=0.0, look=(-0.8, 0.0), blink=None, poin
     sp.ell(*eN, 1.8, 1.6, tones(MSKIN))
     if point > 0.3: sp.line((eN[0] + 1.0, eN[1]), (eN[0] + 4.0, eN[1] + 0.6), MSKIN, 1)
     sp.outline(INK, 1)
+
+
+def cocoa_mug(sp, x, y, t=0.0, k=1.0):
+    """a hot-cocoa mug held at (x, y) (its bottom), a curl of steam (the movie's porch ending)"""
+    sp.rect(x - 2.4 * k, y, x + 2.4 * k, y + 4.6 * k, (236, 112, 40))
+    sp.rect(x - 2.4 * k, y + 3.6 * k, x + 2.4 * k, y + 4.6 * k, (250, 236, 220))
+    sp.rect(x - 1.8 * k, y + 4.2 * k, x + 1.8 * k, y + 4.6 * k, (110, 60, 30))
+    ring = sp.m_ell(x + 3.0 * k, y + 2.4 * k, 1.4 * k, 1.5 * k)[0] & ~sp.m_ell(x + 3.0 * k, y + 2.4 * k, 0.6 * k, 0.7 * k)[0]
+    sp.fill(ring, (236, 112, 40))
+    for i in range(3):
+        yy = y + (5.6 + i * 1.6) * k
+        sp.dot(x + math.sin(t * 3.0 + i * 1.3) * 1.0 * k, yy, (230, 226, 240), keep=True)
 
 
 def sack(sp, x, y, fill=0.2):
