@@ -288,7 +288,7 @@ def cold_ride(t, s, u):
     rot = 22.0 * sm(min(1.0, u / 0.4)) + 3 * math.sin(t * 6)
     def f(big, v, acts):
         K.speed_streaks(big, t, 0.9); K.leaves(big, t, 30, seed=1, speed=1.8)
-        K.lightning(big, t, 0.05, seed=5)
+        K.lightning(big, t, 0.9, seed=5)
     return wide(STREET, LS, cx, 470, 1.6, [(GC.grim, 960, 1010, 5.6, dict(**gk(t, 'angry', pose='shout', wind=1.0, spin=t * 34, batt=13,
                                                                                    raven=True), rot=rot, pivot=(-24.0, 0.5)))],
                 t, fx_=f)
