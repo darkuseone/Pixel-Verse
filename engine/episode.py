@@ -98,7 +98,7 @@ class Episode:
             if ec:                                   # end card «SUBSCRIBE!» (rule 12.10.2026), drawn on top of everything
                 import endcard as EC
                 t0 = s.dur - ec.get('sec', 1.0)
-                if t >= t0: EC.draw(fr, EC.card(ec.get('style', 'default'), ec.get('lang', 'us')), t, t0, ec.get('cy') or int(OUT_H * 0.19))
+                if t >= t0: EC.draw(fr, EC.card(ec.get('style', 'default'), ec.get('lang', 'us'), promise=ec.get('promise')), t, t0, ec.get('cy') or int(OUT_H * 0.19))
             return fr
         n = int(round(s.dur * s.fps)); a = sys.argv
         if a[1] == 'test':

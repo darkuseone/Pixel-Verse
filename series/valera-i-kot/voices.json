@@ -46,8 +46,11 @@
           "loud_sd": 5.3
         }
       },
-      "voice_id": "0SYrGzuYVNDS2OD4YroI",
-      "voice": "Валера и кот — Кот Дембель"
+      "voice_id": "YVkh6e91HD5qbnYVass7",
+      "voice": "Валера и кот — Кот Дембель",
+      "previous_voice_ids": [
+        "0SYrGzuYVNDS2OD4YroI"
+      ]
     },
     "zina": {
       "name": "Баба Зина",

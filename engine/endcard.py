@@ -53,9 +53,11 @@ def _trim(a):
     return a[r[0]:r[-1] + 1, c[0]:c[-1] + 1] if len(r) else a
 
 
-def card(style='default', lang='us', width=None):
+def card(style='default', lang='us', width=None, promise=None):
+    """promise: optional second line under the call (owner rule 22.10.2026: the card promises the next episode,
+    e.g. «ЗАВТРА: СОСЕД С ПЕРФОРАТОРОМ»)"""
     width = width or ST.OUT_W
-    key = (style, lang, width)
+    key = (style, lang, width, promise)
     if key in _CACHE: return _CACHE[key]
     txt = TEXT[lang]
     def fit(a, maxw):
@@ -84,8 +86,14 @@ def card(style='default', lang='us', width=None):
         row[(row.shape[0] - bell.shape[0]) // 2:(row.shape[0] - bell.shape[0]) // 2 + bell.shape[0], :bell.shape[1]] = bell
         row[(row.shape[0] - tag.shape[0]) // 2:(row.shape[0] - tag.shape[0]) // 2 + tag.shape[0], bell.shape[1] + 24:] = tag
         img = _stack([title, row], width, gap=6)
+    elif style == 'winter':                                      # «Валера и кот»: frosty winter_title letters (the series hook style) + bell
+        title = fit(_trim(O.winter_title([txt], 92 if width <= 1080 else 110, width=width + 300)), width - 60)
+        img = _stack([title, _bell(11)], width, gap=6)
     else:
         img = fit(O.sticker(txt, fg=(255, 214, 60), size=104 if width <= 1080 else 120, icon=_bell(11)), width - 30)
+    if promise:
+        line = fit(O.sticker(promise, fg=(255, 255, 255), size=40 if width <= 1080 else 46), width - 60)
+        img = _stack([img, line], width, gap=8)
     _CACHE[key] = img
     return img
 

@@ -94,12 +94,12 @@ def title(F, lines, top, size=64, max_w=520, gap=12):
     return y
 
 
-def make(raw_png, src_jpg, out_pngs, n, title_lines, series='ВАЛЕРА И КОТ', extra=None):
+def make(raw_png, src_jpg, out_pngs, n, title_lines, series='ВАЛЕРА И КОТ', extra=None, plank=None):
     Image.open(raw_png).convert('RGB').save(src_jpg, quality=93)
     F = pixelize(Image.open(src_jpg))
     for i, yy in enumerate(range(0, 110, 22)):
         F[yy:yy + 22] = (F[yy:yy + 22].astype(np.float32) * (0.62 + 0.07 * i)).astype(np.uint8)
-    yb = enamel_plank(F, f'{series}\nСЕРИЯ {n}/6', 136, 24)                 # below the 3:4 grid crop line
+    yb = enamel_plank(F, plank or f'{series}\nСЕРИЯ {n}/6', 136, 24)                 # below the 3:4 grid crop line
     title(F, title_lines, yb + 22, 64, max_w=524, gap=10)
     if extra: extra(F)
     img = Image.fromarray(F).resize((1080, 1920), Image.NEAREST)

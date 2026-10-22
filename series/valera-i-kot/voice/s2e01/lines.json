@@ -1,0 +1,15 @@
+{
+  "v1": ["valera", "[furious shout, teeth chattering from cold] Плюс четы́рнадцать?! До́ма?!"],
+  "c1": ["cat", "[deadpan, flat, dry, betrayed] Батаре́я. Преда́тель."],
+  "v2": ["valera", "[determined, military command voice, teeth chattering] Стра́вливаю во́здух. По уста́ву!"],
+  "c2": ["cat", "[deadpan, dry] Во́здух есть. Тепла́ нет."],
+  "n1": ["nina", "[sweet, bored, on the phone] Отопле́ние включено́ по гра́фику."],
+  "v3": ["valera", "[indignant shout] По како́му гра́фику?!"],
+  "n2": ["nina", "[bored, flat] По отопи́тельному."],
+  "v4": ["valera", "[furious, proud, shouting] Два́дцать лет в а́рмии! Я замёрзну — вы отве́тите!"],
+  "n3": ["nina", "[patient, condescending, slow] Мужчи́на. У вас окно́ откры́то."],
+  "v5": ["valera", "[proud, dignified, slow] Э́то не окно́. Э́то вентиля́ция. По уста́ву."],
+  "c3": ["cat", "[deadpan, dry] Два́дцать лет. Сквозня́к."],
+  "c4": ["cat", "[deadpan, to camera, writing in a notebook] Записа́л. Фо́рточку закрыва́ете? Пиши́те."],
+  "v6": ["valera", "[cheerful, proud, taking a deep breath] Для здоро́вья!"]
+}

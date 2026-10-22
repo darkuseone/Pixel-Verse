@@ -648,18 +648,18 @@
    "voice_id": "9kccWXrItNrNr72CRNY3",
    "status": "active",
    "name": "Grim",
-   "voice_name": "Grim Ride — Grim",
-   "lines": 30,
-   "episodes": 6,
+   "voice_name": "grim-ride — Grim (restored)",
+   "lines": 44,
+   "episodes": 7,
    "samples": [
+    "series/grim-ride/voice/movie/g04.mp3",
+    "series/grim-ride/voice/movie/g05.mp3",
     "series/grim-ride/voice/ep04/g4.mp3",
+    "series/grim-ride/voice/movie/g06.mp3",
     "series/grim-ride/voice/ep03/g1.mp3",
     "series/grim-ride/voice/ep02/g3.mp3",
     "series/grim-ride/voice/ep01/g1.mp3",
-    "series/grim-ride/voice/ep01/g4.mp3",
-    "series/grim-ride/voice/ep03/g2.mp3",
-    "series/grim-ride/voice/ep01/g6.mp3",
-    "series/grim-ride/voice/ep02/g1.mp3"
+    "series/grim-ride/voice/ep01/g4.mp3"
    ],
    "design": {
     "description": "The Grim Reaper as a pompous Shakespearean stage actor: a deep, booming, theatrical male voice, rich old-fashioned British stage accent, resonant bass-baritone, grand, self-important and dramatic, but it cracks into a whiny, panicky higher register when things go wrong. Comedic, expressive, crisp diction.",
@@ -685,17 +685,10 @@
     }
    ],
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "The Grim Reaper as a pompous Shakespearean stage actor: a deep, booming, theatrical male voice, rich old-fashioned British stage accent, resonant bass-baritone, grand, self-important and dramatic, but it cracks into a whiny, panicky higher register when things go wrong. Comedic, expressive, crisp diction.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1791318868
+    "settings": null,
+    "created_at_unix": 1792621725
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/sdQf2r6zfX32hvp25Auj/d1d3dc52-413c-4cb3-aa29-cdcf11bbe07f.mp3",
    "deleted_reason": "auto: room for thanks-randy/scandee"
@@ -706,18 +699,18 @@
    "voice_id": "qSoNm6CDt8qHyugcvk47",
    "status": "active",
    "name": "Edgar",
-   "voice_name": "Grim Ride — Edgar",
-   "lines": 17,
-   "episodes": 6,
+   "voice_name": "grim-ride — Edgar (restored)",
+   "lines": 27,
+   "episodes": 7,
    "samples": [
+    "series/grim-ride/voice/movie/e01.mp3",
+    "series/grim-ride/voice/movie/e08.mp3",
     "series/grim-ride/voice/ep01/e3.mp3",
     "series/grim-ride/voice/ep04/e1.mp3",
+    "series/grim-ride/voice/movie/e07.mp3",
     "series/grim-ride/voice/ep01/e1.mp3",
-    "series/grim-ride/voice/ep04/e2.mp3",
-    "series/grim-ride/voice/ep04/e4.mp3",
-    "series/grim-ride/voice/ep05/e1.mp3",
-    "series/grim-ride/voice/ep04/e5.mp3",
-    "series/grim-ride/voice/ep05/e3.mp3"
+    "series/grim-ride/voice/movie/e05.mp3",
+    "series/grim-ride/voice/movie/e06.mp3"
    ],
    "design": {
     "description": "An old raven with a dry, raspy, low male voice, utterly bored and sardonic, flat monotone deadpan, slightly gravelly and nasal, speaks slowly in very short sentences like a tired late-night radio host who has seen everything. General American accent.",
@@ -743,17 +736,10 @@
     }
    ],
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "An old raven with a dry, raspy, low male voice, utterly bored and sardonic, flat monotone deadpan, slightly gravelly and nasal, speaks slowly in very short sentences like a tired late-night radio host who has seen everything. General American accent.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1791318871
+    "settings": null,
+    "created_at_unix": 1792621731
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/QxBrp3fXvoJ3Zvl8DXHD/1ba31783-aeca-4e2d-814e-b67c2c7b833c.mp3",
    "deleted_reason": "free slots"
@@ -764,18 +750,18 @@
    "voice_id": "eFOwKI3LNrA1UWjisXHn",
    "status": "active",
    "name": "Harold",
-   "voice_name": "Grim Ride — Harold",
-   "lines": 9,
-   "episodes": 5,
+   "voice_name": "grim-ride — Harold (restored)",
+   "lines": 19,
+   "episodes": 6,
    "samples": [
+    "series/grim-ride/voice/movie/h06.mp3",
+    "series/grim-ride/voice/movie/h07.mp3",
+    "series/grim-ride/voice/movie/h04.mp3",
+    "series/grim-ride/voice/movie/h05.mp3",
     "series/grim-ride/voice/ep01/h2.mp3",
     "series/grim-ride/voice/ep06/h2.mp3",
     "series/grim-ride/voice/ep06/h3.mp3",
-    "series/grim-ride/voice/ep06/h1.mp3",
-    "series/grim-ride/voice/ep05/h1.mp3",
-    "series/grim-ride/voice/ep01/h1.mp3",
-    "series/grim-ride/voice/ep03/h1.mp3",
-    "series/grim-ride/voice/ep01/h3.mp3"
+    "series/grim-ride/voice/ep06/h1.mp3"
    ],
    "design": {
     "description": "A crusty, gravelly ninety-seven-year-old American man with a thick old New England accent, slow and completely unbothered, dry wit, a short wheezy chuckle, sharp and mischievous, not frail at all. Natural, characterful, comedic.",
@@ -801,17 +787,10 @@
     }
    ],
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "A crusty, gravelly ninety-seven-year-old American man with a thick old New England accent, slow and completely unbothered, dry wit, a short wheezy chuckle, sharp and mischievous, not frail at all. Natural, characterful, comedic.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1791318873
+    "settings": null,
+    "created_at_unix": 1792621738
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/UScN6kcNEVzdo1v1Nl6W/7c141256-9d5e-462f-9571-b0f66d69d71b.mp3",
    "deleted_reason": "auto: room for valera-i-kot/semenych"
@@ -822,18 +801,18 @@
    "voice_id": "LNZyyXPD0jcfm1UPIKsc",
    "status": "active",
    "name": "Dashley (DoomDash support bot)",
-   "voice_name": "Grim Ride — Dashley (DoomDash support bot)",
-   "lines": 8,
-   "episodes": 2,
+   "voice_name": "grim-ride — Dashley (DoomDash support bot) (restored)",
+   "lines": 9,
+   "episodes": 3,
    "samples": [
+    "series/grim-ride/voice/movie/d01.mp3",
     "series/grim-ride/voice/ep02/d3.mp3",
     "series/grim-ride/voice/ep02/d1.mp3",
     "series/grim-ride/voice/ep02/d6.mp3",
     "series/grim-ride/voice/ep06/d0.mp3",
     "series/grim-ride/voice/ep06/d1.mp3",
     "series/grim-ride/voice/ep02/d5.mp3",
-    "series/grim-ride/voice/ep02/d2.mp3",
-    "series/grim-ride/voice/ep02/d4.mp3"
+    "series/grim-ride/voice/ep02/d2.mp3"
    ],
    "design": {
     "description": "A relentlessly cheerful corporate customer-support AI assistant: a young adult American woman's voice, perky, sing-song, bright and a little too polite, slightly synthetic and robotic in rhythm, smiling through every sentence, clean studio sound. Comedic.",
@@ -848,10 +827,10 @@
     }
    },
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "A relentlessly cheerful corporate customer-support AI assistant: a young adult American woman's voice, perky, sing-song, bright and a little too polite, slightly synthetic and robotic in rhythm, smiling through every sentence, clean studio sound. Comedic.",
     "settings": null,
-    "created_at_unix": 1791319087
+    "created_at_unix": 1792621744
    },
    "history": [
     {
@@ -1682,12 +1661,13 @@
    "slug": "sunny-palms-hoa",
    "char": "dale",
    "voice_id": "Ii27fPpQjUvsObpI9Ex2",
-   "status": "active",
+   "status": "deleted",
    "name": "Dale",
    "voice_name": "Sunny Palms HOA — Dale",
    "lines": 46,
    "episodes": 7,
    "samples": [
+    "library/voice_archive/sunny-palms-hoa/dale_preview.mp3",
     "series/sunny-palms-hoa/voice/movie/i1.mp3",
     "series/sunny-palms-hoa/voice/movie/a4.mp3",
     "series/sunny-palms-hoa/voice/ep06/d3.mp3",
@@ -1712,9 +1692,19 @@
    "account": {
     "category": "generated",
     "description": "A loud, cocky, raspy American man in his late forties, a sunburnt Florida guy with a slightly nasal bro accent. Overconfident, easily outraged, prone to shouting, hoarse from cheap beer and cigarettes, sounds like he says 'trust me' right before every disaster. Expressive, comedic, mid-pitched baritone, native American English speaker.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1790665827
-   }
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/Ii27fPpQjUvsObpI9Ex2/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiYTQ5MDVmZWYtNzVjYi00ZDM2LTk3ODctNDVlMmE2ZDQ2YTA0Lm1wMyIsInRpbWVzdGFtcCI6MTc5MjcxMDAwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-22",
+   "deleted_reason": "free slots"
   },
   {
    "slug": "sunny-palms-hoa",
@@ -2003,7 +1993,7 @@
    "slug": "thanks-randy",
    "char": "dunn",
    "voice_id": "OXWVo11izezT9DaOSbK4",
-   "status": "active",
+   "status": "library_or_premade",
    "name": "Captain Dunn (fire dept.)",
    "voice_name": "Thanks, Randy — Captain Dunn (fire dept.)",
    "lines": 5,
@@ -2038,7 +2028,7 @@
    "slug": "thanks-randy",
    "char": "patty",
    "voice_id": "j4ogMUtanUuqkUCotVOx",
-   "status": "active",
+   "status": "library_or_premade",
    "name": "Officer Patty (TSA)",
    "voice_name": "Thanks, Randy — Officer Patty (TSA)",
    "lines": 4,
@@ -2072,7 +2062,7 @@
    "slug": "thanks-randy",
    "char": "carol",
    "voice_id": "xfJvbnf19p6r0uEM0iJQ",
-   "status": "active",
+   "status": "library_or_premade",
    "name": "Carol (Turkey Talk-Line)",
    "voice_name": "Thanks, Randy — Carol (Turkey Talk-Line)",
    "lines": 4,
@@ -2106,7 +2096,7 @@
    "slug": "thanks-randy",
    "char": "kyle",
    "voice_id": "o66JG48gZPKDedxBW6sr",
-   "status": "active",
+   "status": "library_or_premade",
    "name": "Kyle (Best Bye cashier)",
    "voice_name": "Thanks, Randy — Kyle (Best Bye cashier)",
    "lines": 1,
@@ -2170,6 +2160,60 @@
     "settings": null,
     "created_at_unix": 1790647550
    }
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "cat",
+   "voice_id": "YVkh6e91HD5qbnYVass7",
+   "status": "active",
+   "name": "Кот Дембель",
+   "voice_name": "Валера и кот — Кот Дембель",
+   "lines": 24,
+   "episodes": 7,
+   "samples": [
+    "series/valera-i-kot/voice/movie/c01.mp3",
+    "series/valera-i-kot/voice/movie/c03.mp3",
+    "series/valera-i-kot/voice/ep02/c1.mp3",
+    "series/valera-i-kot/voice/ep03/c1.mp3",
+    "series/valera-i-kot/voice/movie/c06.mp3",
+    "series/valera-i-kot/voice/movie/c05.mp3",
+    "series/valera-i-kot/voice/ep05/c1.mp3",
+    "series/valera-i-kot/voice/movie/c04.mp3"
+   ],
+   "design": {
+    "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
+    "text": "На скла́де. К весне́ помо́ется. Копчёный. Ещё четы́рнадцать дней. Я своё отслужи́л, тепе́рь я лежу́ на батаре́е. Тради́ция. Двадцать лет в армии... спалился за двадцать секунд.",
+    "picked": {
+     "i": 1,
+     "dur": 21.08,
+     "f0": 132.2,
+     "f0_iqr": 39.3,
+     "rate": 12.1,
+     "loud_sd": 5.3
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1790647553
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/0SYrGzuYVNDS2OD4YroI/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiMjNhNjdlYWQtMGNmNC00N2RmLThiZWMtMTNkNjdjMjhlZTczLm1wMyIsInRpbWVzdGFtcCI6MTc5MjQ1ODAwMDAwMDAwMH0%3D",
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "0SYrGzuYVNDS2OD4YroI",
+     "until": "2026-10-22",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
   },
   {
    "slug": "valera-i-kot",
@@ -2359,54 +2403,6 @@
   },
   {
    "slug": "valera-i-kot",
-   "char": "cat",
-   "voice_id": "0SYrGzuYVNDS2OD4YroI",
-   "status": "deleted",
-   "name": "Кот Дембель",
-   "voice_name": "Валера и кот — Кот Дембель",
-   "lines": 24,
-   "episodes": 7,
-   "samples": [
-    "series/valera-i-kot/voice/movie/c01.mp3",
-    "series/valera-i-kot/voice/movie/c03.mp3",
-    "series/valera-i-kot/voice/ep02/c1.mp3",
-    "series/valera-i-kot/voice/ep03/c1.mp3",
-    "series/valera-i-kot/voice/movie/c06.mp3",
-    "series/valera-i-kot/voice/movie/c05.mp3",
-    "series/valera-i-kot/voice/ep05/c1.mp3",
-    "series/valera-i-kot/voice/movie/c04.mp3"
-   ],
-   "design": {
-    "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
-    "text": "На скла́де. К весне́ помо́ется. Копчёный. Ещё четы́рнадцать дней. Я своё отслужи́л, тепе́рь я лежу́ на батаре́е. Тради́ция. Двадцать лет в армии... спалился за двадцать секунд.",
-    "picked": {
-     "i": 1,
-     "dur": 21.08,
-     "f0": 132.2,
-     "f0_iqr": 39.3,
-     "rate": 12.1,
-     "loud_sd": 5.3
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1790647553
-   },
-   "preview_url": "https://api.us.elevenlabs.io/v1/voices/0SYrGzuYVNDS2OD4YroI/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiMjNhNjdlYWQtMGNmNC00N2RmLThiZWMtMTNkNjdjMjhlZTczLm1wMyIsInRpbWVzdGFtcCI6MTc5MjQ1ODAwMDAwMDAwMH0%3D",
-   "deleted_on": "2026-10-20",
-   "deleted_reason": "free slots"
-  },
-  {
-   "slug": "valera-i-kot",
    "char": "semenych",
    "voice_id": "B5J7DQRqcdz5aZwL642J",
    "status": "deleted",
@@ -2527,5 +2523,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-21 22:29"
+ "updated": "2026-10-22 23:33"
 }
