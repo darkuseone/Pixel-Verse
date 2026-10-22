@@ -4,9 +4,10 @@ description: Правка готовой серии по замечаниям в
 ---
 # /fix <slug> <N> <что не так>
 
+0. Читать только код этой серии (`timeline.py`, нужные функции `epNN.py` через grep) и `STATUS.md`; большие документы не открывать.
 1. Найти план(ы): `timeline.py` CUTS + `NAMES` в `epNN.py`; при скриншоте — сверить по времени/кадру (`python3 epNN.py frames t`).
 2. Причина — в общем коде (риг, декали, обложка) или в коде серии? Общее чинить в движке (тогда проверить и другие серии сериала через `engine/autocheck.py`).
 3. Исправить → `python3 engine/autocheck.py <ep> --times <t…>` + кроп глазами.
 4. `python3 epNN.py shots <i|name …>` → `python3 mix.py …` → плашка подписки уже в рендере (для старых финалов — `engine/endcard.py apply`).
 5. Новое правило владельца → `docs/decisions.md` + CLAUDE.md; огрех → «Чего не делать» в `docs/episode-formula.md`.
-6. Коммит + пуш, `SendUserFile` final.mp4 + cover.png, 1–2 строки что исправлено.
+6. `/ship`, `SendUserFile` final.mp4 + cover.png, 1–2 строки что исправлено.
