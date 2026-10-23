@@ -1,0 +1,58 @@
+{
+  "s1": [
+    "semenych",
+    "[theatrical, loud, pompous, through a closed door] Пове́рка счётчиков! Ина́че штраф, су́дарь!"
+  ],
+  "v1": [
+    "valera",
+    "[suspicious, tense whisper] Пове́рка?! Без прика́за?!"
+  ],
+  "c1": [
+    "cat",
+    "[deadpan, flat, dry] Паро́ль спроси́."
+  ],
+  "v2": [
+    "valera",
+    "[commanding shout, like an army sentry] Стой! Кто идёт?! Паро́ль!"
+  ],
+  "v3": [
+    "valera",
+    "[triumphant, shouting] Непра́вильно! Два́дцать лет в а́рмии!"
+  ],
+  "v4": [
+    "valera",
+    "[triumphant, proud, loud] Моше́нники! Разби́ты по уста́ву!"
+  ],
+  "n1": [
+    "nina",
+    "[polite, bored, official] Пла́новая пове́рка. УК «Ую́т»."
+  ],
+  "n2": [
+    "nina",
+    "[bored, flat, final] Пять ты́сяч."
+  ],
+  "v5": [
+    "valera",
+    "[choking, quiet, stunned] А те… ско́лько бра́ли?"
+  ],
+  "c2": [
+    "cat",
+    "[deadpan, flat] Две."
+  ],
+  "v6": [
+    "valera",
+    "[desperate shout down the stairwell] Мужики́! Верни́тесь! У вас деше́вле!"
+  ],
+  "c3": [
+    "cat",
+    "[deadpan, dry, to camera, writing in a notebook] Записа́л. Кто честне́е — моше́нники и́ли УК? Пиши́те."
+  ],
+  "k01": [
+    "kolyan",
+    "[low, flat, bored] Ну."
+  ],
+  "k02": [
+    "kolyan",
+    "[happy, low] Ну!"
+  ]
+}
