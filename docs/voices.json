@@ -1916,12 +1916,13 @@
    "slug": "thanks-randy",
    "char": "brayden",
    "voice_id": "MIUbQ8ecRUmaOKYrVlLG",
-   "status": "active",
+   "status": "deleted",
    "name": "Brayden",
    "voice_name": "Thanks, Randy — Brayden",
    "lines": 10,
    "episodes": 5,
    "samples": [
+    "library/voice_archive/thanks-randy/brayden_preview.mp3",
     "series/thanks-randy/voice/ep06/b1.mp3",
     "series/thanks-randy/voice/ep03/b1.mp3",
     "series/thanks-randy/voice/ep01/b2.mp3",
@@ -1946,9 +1947,19 @@
    "account": {
     "category": "generated",
     "description": "A lazy twenty-four-year-old California tech bro and wannabe entrepreneur. Relaxed laid-back young adult male voice with heavy vocal fry, upspeak at the ends of sentences, unbothered and monotone, always half amused, speaks slowly like he is filming content. Native American English speaker.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1792545229
-   }
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/MIUbQ8ecRUmaOKYrVlLG/c26953e5-79b0-4f6d-b790-b5ea4acdad82.mp3",
+   "deleted_on": "2026-10-23",
+   "deleted_reason": "free slots"
   },
   {
    "slug": "thanks-randy",
@@ -2139,17 +2150,17 @@
    "status": "active",
    "name": "Валера",
    "voice_name": "Валера и кот — Валера",
-   "lines": 56,
-   "episodes": 8,
+   "lines": 67,
+   "episodes": 10,
    "samples": [
     "series/valera-i-kot/voice/movie/v02.mp3",
     "series/valera-i-kot/voice/s2e01/v5.mp3",
     "series/valera-i-kot/voice/movie/v15.mp3",
     "series/valera-i-kot/voice/movie/v07.mp3",
+    "series/valera-i-kot/voice/s2e03/v3.mp3",
     "series/valera-i-kot/voice/s2e01/v4.mp3",
     "series/valera-i-kot/voice/ep06/v1.mp3",
-    "series/valera-i-kot/voice/ep01/v2.mp3",
-    "series/valera-i-kot/voice/movie/v10.mp3"
+    "series/valera-i-kot/voice/ep01/v2.mp3"
    ],
    "design": {
     "description": "Deep, low-pitched, hoarse bass-baritone voice of a heavyset Russian man in his mid-fifties, a retired army warrant officer. Gravelly smoker's rasp, chesty and booming, bossy and blunt like giving orders, self-important, but not screaming. Native Russian speaker, plain provincial Russian accent.",
@@ -2177,17 +2188,17 @@
    "status": "active",
    "name": "Кот Дембель",
    "voice_name": "valera-i-kot — Кот Дембель (restored)",
-   "lines": 28,
-   "episodes": 8,
+   "lines": 33,
+   "episodes": 10,
    "samples": [
     "series/valera-i-kot/voice/movie/c01.mp3",
+    "series/valera-i-kot/voice/s2e03/c3.mp3",
     "series/valera-i-kot/voice/movie/c03.mp3",
     "series/valera-i-kot/voice/ep02/c1.mp3",
+    "series/valera-i-kot/voice/s2e02/c2.mp3",
     "series/valera-i-kot/voice/ep03/c1.mp3",
     "series/valera-i-kot/voice/movie/c06.mp3",
-    "series/valera-i-kot/voice/movie/c05.mp3",
-    "series/valera-i-kot/voice/ep05/c1.mp3",
-    "series/valera-i-kot/voice/s2e01/c4.mp3"
+    "series/valera-i-kot/voice/movie/c05.mp3"
    ],
    "design": {
     "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
@@ -2224,8 +2235,8 @@
    "status": "active",
    "name": "Баба Зина",
    "voice_name": "valera-i-kot — Баба Зина (restored)",
-   "lines": 21,
-   "episodes": 3,
+   "lines": 23,
+   "episodes": 5,
    "samples": [
     "series/valera-i-kot/voice/movie/z07.mp3",
     "series/valera-i-kot/voice/movie/z04.mp3",
@@ -2271,17 +2282,17 @@
    "status": "active",
    "name": "Кассирша Тамара",
    "voice_name": "valera-i-kot — Кассирша Тамара (restored)",
-   "lines": 12,
-   "episodes": 2,
+   "lines": 13,
+   "episodes": 3,
    "samples": [
     "series/valera-i-kot/voice/movie/t05.mp3",
     "series/valera-i-kot/voice/movie/t02.mp3",
     "series/valera-i-kot/voice/ep02/t4.mp3",
     "series/valera-i-kot/voice/ep02/t2.mp3",
     "series/valera-i-kot/voice/movie/t06.mp3",
+    "series/valera-i-kot/voice/s2e03/t1.mp3",
     "series/valera-i-kot/voice/movie/t01.mp3",
-    "series/valera-i-kot/voice/movie/t04.mp3",
-    "series/valera-i-kot/voice/ep02/t1.mp3"
+    "series/valera-i-kot/voice/movie/t04.mp3"
    ],
    "design": {
     "description": "A tired Russian supermarket cashier woman in her early fifties. Flat, slightly nasal and husky voice, bored deadpan delivery, chewing gum, completely unimpressed by customers. Native Russian speaker.",
@@ -2318,17 +2329,17 @@
    "status": "active",
    "name": "Нина Петровна (ЖЭК)",
    "voice_name": "valera-i-kot — Нина Петровна (ЖЭК) (restored)",
-   "lines": 9,
-   "episodes": 3,
+   "lines": 10,
+   "episodes": 4,
    "samples": [
     "series/valera-i-kot/voice/s2e01/n3.mp3",
     "series/valera-i-kot/voice/movie/n01.mp3",
     "series/valera-i-kot/voice/ep04/n5.mp3",
     "series/valera-i-kot/voice/ep04/n1.mp3",
     "series/valera-i-kot/voice/ep04/n2.mp3",
+    "series/valera-i-kot/voice/s2e03/n1.mp3",
     "series/valera-i-kot/voice/ep04/n4.mp3",
-    "series/valera-i-kot/voice/s2e01/n1.mp3",
-    "series/valera-i-kot/voice/s2e01/n2.mp3"
+    "series/valera-i-kot/voice/s2e01/n1.mp3"
    ],
    "design": {
     "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
@@ -2360,85 +2371,9 @@
   },
   {
    "slug": "valera-i-kot",
-   "char": "lyuba",
-   "voice_id": "bB7ZYDhHF7rhyK82vKpu",
-   "status": "active",
-   "name": "Баба Люба",
-   "voice_name": "valera-i-kot — Баба Люба (restored)",
-   "lines": 8,
-   "episodes": 3,
-   "samples": [
-    "series/valera-i-kot/voice/movie/l02.mp3",
-    "series/valera-i-kot/voice/movie/l01.mp3",
-    "series/valera-i-kot/voice/ep03/l2.mp3",
-    "series/valera-i-kot/voice/movie/l05.mp3",
-    "series/valera-i-kot/voice/movie/l03.mp3",
-    "series/valera-i-kot/voice/ep05/l1.mp3",
-    "series/valera-i-kot/voice/movie/l04.mp3",
-    "series/valera-i-kot/voice/ep03/l1.mp3"
-   ],
-   "design": {
-    "description": "A slow, heavy Russian grandmother around eighty. Low, raspy and breathy elderly female voice, very slow deadpan delivery with long pauses, dry and unimpressed. Native Russian speaker.",
-    "text": "С пу́зом. Хлеб в буты́лках не продаю́т. Всё включено́. Ой, да ла́дно тебе́, Зи́на, сиди́ уже́, не тарато́рь. Моро́з сего́дня, а мы сиди́м.",
-    "picked": {
-     "i": 1,
-     "dur": 22.6,
-     "f0": 166.7,
-     "f0_iqr": 125.6,
-     "rate": 9.2,
-     "loud_sd": 4.7
-    }
-   },
-   "account": {
-    "category": "cloned",
-    "description": "A slow, heavy Russian grandmother around eighty. Low, raspy and breathy elderly female voice, very slow deadpan delivery with long pauses, dry and unimpressed. Native Russian speaker.",
-    "settings": null,
-    "created_at_unix": 1791792678
-   },
-   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/e0TVxkt3XGwbs1DJmz5O/fa6d10ce-6577-4508-bd20-d4a0796137d0.mp3",
-   "deleted_reason": "free slots",
-   "history": [
-    {
-     "voice_id": "e0TVxkt3XGwbs1DJmz5O",
-     "until": "2026-10-12",
-     "note": "deleted, restored as IVC clone"
-    }
-   ]
-  },
-  {
-   "slug": "valera-i-kot",
-   "char": "gena",
-   "voice_id": "ZszdQcL5WjzUTdPEv3YN",
-   "status": "active",
-   "name": "Гена (сосед сверху)",
-   "voice_name": "Валера и кот — Гена (сосед сверху)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
-   "design": {
-    "description": "A loud, cheerful, raspy Russian handyman in his late forties, a neighbour who has been renovating his flat for years. Hoarse jolly bass voice, slightly deaf from power tools so he always half-shouts, warm and good-natured, simple working-class manner, laughs easily. Native Russian speaker, plain provincial Russian accent.",
-    "text": "ЧЕГО́?! Не слы́шу! А, Вале́рий Никола́ич! Заходи́, заходи́! У меня́ ремо́нт, седьмо́й год уже́, ха-ха! Подержи́ полку́, а? Ты же а́рмия, ты ро́вно де́ржишь! ЧЕГО́?!",
-    "picked": {
-     "i": 1,
-     "dur": 15.15,
-     "f0": 262.3,
-     "f0_iqr": 48.8,
-     "rate": 14.9,
-     "loud_sd": 5.4
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A loud, cheerful, raspy Russian handyman in his late forties, a neighbour who has been renovating his flat for years. Hoarse jolly bass voice, slightly deaf from power tools so he always half-shouts, warm and good-natured, simple working-class manner, laughs easily. Native Russian speaker, plain provincial Russian accent.",
-    "settings": null,
-    "created_at_unix": 1792724851
-   }
-  },
-  {
-   "slug": "valera-i-kot",
    "char": "semenych",
-   "voice_id": "B5J7DQRqcdz5aZwL642J",
-   "status": "deleted",
+   "voice_id": "wB7e2HF2LrmqM3QcPn0B",
+   "status": "active",
    "name": "Семёныч",
    "voice_name": "Валера и кот — Семёныч",
    "lines": 10,
@@ -2479,8 +2414,94 @@
     "created_at_unix": 1791792734
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/B5J7DQRqcdz5aZwL642J/dd87b634-78d3-45a8-8a29-efbb6c8ea229.mp3",
-   "deleted_on": "2026-10-12",
-   "deleted_reason": "auto: room for prokhor/fox"
+   "deleted_reason": "auto: room for prokhor/fox",
+   "history": [
+    {
+     "voice_id": "B5J7DQRqcdz5aZwL642J",
+     "until": "2026-10-23",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "lyuba",
+   "voice_id": "bB7ZYDhHF7rhyK82vKpu",
+   "status": "active",
+   "name": "Баба Люба",
+   "voice_name": "valera-i-kot — Баба Люба (restored)",
+   "lines": 9,
+   "episodes": 4,
+   "samples": [
+    "series/valera-i-kot/voice/movie/l02.mp3",
+    "series/valera-i-kot/voice/movie/l01.mp3",
+    "series/valera-i-kot/voice/ep03/l2.mp3",
+    "series/valera-i-kot/voice/movie/l05.mp3",
+    "series/valera-i-kot/voice/movie/l03.mp3",
+    "series/valera-i-kot/voice/ep05/l1.mp3",
+    "series/valera-i-kot/voice/movie/l04.mp3",
+    "series/valera-i-kot/voice/s2e03/l1.mp3"
+   ],
+   "design": {
+    "description": "A slow, heavy Russian grandmother around eighty. Low, raspy and breathy elderly female voice, very slow deadpan delivery with long pauses, dry and unimpressed. Native Russian speaker.",
+    "text": "С пу́зом. Хлеб в буты́лках не продаю́т. Всё включено́. Ой, да ла́дно тебе́, Зи́на, сиди́ уже́, не тарато́рь. Моро́з сего́дня, а мы сиди́м.",
+    "picked": {
+     "i": 1,
+     "dur": 22.6,
+     "f0": 166.7,
+     "f0_iqr": 125.6,
+     "rate": 9.2,
+     "loud_sd": 4.7
+    }
+   },
+   "account": {
+    "category": "cloned",
+    "description": "A slow, heavy Russian grandmother around eighty. Low, raspy and breathy elderly female voice, very slow deadpan delivery with long pauses, dry and unimpressed. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1791792678
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/e0TVxkt3XGwbs1DJmz5O/fa6d10ce-6577-4508-bd20-d4a0796137d0.mp3",
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "e0TVxkt3XGwbs1DJmz5O",
+     "until": "2026-10-12",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "gena",
+   "voice_id": "ZszdQcL5WjzUTdPEv3YN",
+   "status": "active",
+   "name": "Гена (сосед сверху)",
+   "voice_name": "Валера и кот — Гена (сосед сверху)",
+   "lines": 3,
+   "episodes": 1,
+   "samples": [
+    "series/valera-i-kot/voice/s2e02/g2.mp3",
+    "series/valera-i-kot/voice/s2e02/g3.mp3",
+    "series/valera-i-kot/voice/s2e02/g1.mp3"
+   ],
+   "design": {
+    "description": "A loud, cheerful, raspy Russian handyman in his late forties, a neighbour who has been renovating his flat for years. Hoarse jolly bass voice, slightly deaf from power tools so he always half-shouts, warm and good-natured, simple working-class manner, laughs easily. Native Russian speaker, plain provincial Russian accent.",
+    "text": "ЧЕГО́?! Не слы́шу! А, Вале́рий Никола́ич! Заходи́, заходи́! У меня́ ремо́нт, седьмо́й год уже́, ха-ха! Подержи́ полку́, а? Ты же а́рмия, ты ро́вно де́ржишь! ЧЕГО́?!",
+    "picked": {
+     "i": 1,
+     "dur": 15.15,
+     "f0": 262.3,
+     "f0_iqr": 48.8,
+     "rate": 14.9,
+     "loud_sd": 5.4
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A loud, cheerful, raspy Russian handyman in his late forties, a neighbour who has been renovating his flat for years. Hoarse jolly bass voice, slightly deaf from power tools so he always half-shouts, warm and good-natured, simple working-class manner, laughs easily. Native Russian speaker, plain provincial Russian accent.",
+    "settings": null,
+    "created_at_unix": 1792724851
+   }
   },
   {
    "slug": "valera-i-kot",
@@ -2556,5 +2577,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-23 03:07"
+ "updated": "2026-10-23 03:24"
 }
