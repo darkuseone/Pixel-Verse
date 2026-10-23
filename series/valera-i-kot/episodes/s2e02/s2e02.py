@@ -24,6 +24,7 @@ import timeline as TL
 EPI = Episode(TL.EP, TL.VOICE, TL.DUR, TL.FPS, colors=K.COL, slug=TL.SLUG,
               endcard=dict(style='winter', lang='ru', promise='ЗАВТРА: 40 БАНОК'))
 talk = EPI.talk
+CUTS, NAMES = TL.CUTS + [TL.DUR], TL.NAMES                  # per-shot render: python3 s2e02.py shots <i|name>
 INK, RED, BLUE, PAPER = (34, 30, 30), (176, 30, 34), (40, 60, 150), (240, 234, 214)
 
 
