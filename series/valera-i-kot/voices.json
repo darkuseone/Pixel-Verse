@@ -210,8 +210,11 @@
           "loud_sd": 5.4
         }
       },
-      "voice_id": "B5J7DQRqcdz5aZwL642J",
-      "voice": "Валера и кот — Семёныч"
+      "voice_id": "wB7e2HF2LrmqM3QcPn0B",
+      "voice": "Валера и кот — Семёныч",
+      "previous_voice_ids": [
+        "B5J7DQRqcdz5aZwL642J"
+      ]
     },
     "gena": {
       "name": "Гена (сосед сверху)",
