@@ -9,7 +9,8 @@ import overlays as O
 from props import panelka as PK
 
 COL = dict(valera=(120, 200, 255), cat=(255, 170, 70), zina=(255, 150, 190), lyuba=(200, 170, 255),
-           tamara=(150, 230, 140), nina=(255, 130, 110), robot=(200, 200, 200))
+           tamara=(150, 230, 140), nina=(255, 130, 110), robot=(200, 200, 200), gena=(255, 200, 60),
+           kolyan=(150, 220, 120), semenych=(230, 190, 120))
 
 
 def begin(Z):
