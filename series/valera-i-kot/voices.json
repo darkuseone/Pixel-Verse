@@ -212,6 +212,29 @@
       },
       "voice_id": "B5J7DQRqcdz5aZwL642J",
       "voice": "Валера и кот — Семёныч"
+    },
+    "gena": {
+      "name": "Гена (сосед сверху)",
+      "color_caption": [
+        255,
+        200,
+        60
+      ],
+      "style": "[shouting] [cheerful] — громкий, глуховатый, добрый",
+      "design": {
+        "description": "A loud, cheerful, raspy Russian handyman in his late forties, a neighbour who has been renovating his flat for years. Hoarse jolly bass voice, slightly deaf from power tools so he always half-shouts, warm and good-natured, simple working-class manner, laughs easily. Native Russian speaker, plain provincial Russian accent.",
+        "text": "ЧЕГО́?! Не слы́шу! А, Вале́рий Никола́ич! Заходи́, заходи́! У меня́ ремо́нт, седьмо́й год уже́, ха-ха! Подержи́ полку́, а? Ты же а́рмия, ты ро́вно де́ржишь! ЧЕГО́?!",
+        "picked": {
+          "i": 1,
+          "dur": 15.15,
+          "f0": 262.3,
+          "f0_iqr": 48.8,
+          "rate": 14.9,
+          "loud_sd": 5.4
+        }
+      },
+      "voice_id": "ZszdQcL5WjzUTdPEv3YN",
+      "voice": "Валера и кот — Гена (сосед сверху)"
     }
   },
   "music": {},

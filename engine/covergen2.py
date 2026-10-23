@@ -121,3 +121,28 @@ def lcd(F, txt, cx, cy, size=40, col=(120, 255, 140)):
     m = np.array(img) > 127
     reg = F[y0:y0 + h, x0:x0 + w]
     reg[m] = col
+
+
+def code_cover(big, plank, title_lines, outs, size=64):
+    """S02+ standard (owner 23.10.2026): the cover frame is a code-rendered 1080x1920 scene (no xAI edit). The plank and the title are
+    drawn on the 540x960 cover grid and pasted 2x over the full-res frame; a dark band behind them. Writes outs + cover_grid.png."""
+    small = np.array(Image.fromarray(big).resize((W, H), Image.NEAREST))
+    F = small.copy()
+    yb = enamel_plank(F, plank, 136, 24)
+    ye = title(F, title_lines, yb + 22, size, max_w=524, gap=10)
+    m = np.any(F != small, axis=2)
+    m2 = np.repeat(np.repeat(m, 2, 0), 2, 1)
+    F2 = np.repeat(np.repeat(F, 2, 0), 2, 1)
+    out = big.astype(np.float32)
+    y1 = int(ye * 2) + 20
+    shade = np.zeros((out.shape[0], 1, 1), np.float32)
+    shade[:y1] = 0.42
+    n = min(160, out.shape[0] - y1); shade[y1:y1 + n, 0, 0] = np.linspace(0.42, 0.0, 160)[:n]
+    out = (out * (1 - shade)).astype(np.uint8)
+    out[m2] = F2[m2]
+    img = Image.fromarray(out)
+    for o in outs: img.save(o)
+    w, h = img.size; h34 = int(w * 4 / 3); y0 = (h - h34) // 2                          # TikTok / Reels profile tile preview
+    import pathlib
+    img.crop((0, y0, w, y0 + h34)).resize((w // 4, h34 // 4), Image.LANCZOS).save(pathlib.Path(str(outs[0])).with_name('cover_grid.png'))
+    return out

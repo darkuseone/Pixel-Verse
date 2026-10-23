@@ -1667,7 +1667,6 @@
    "lines": 46,
    "episodes": 7,
    "samples": [
-    "library/voice_archive/sunny-palms-hoa/dale_preview.mp3",
     "series/sunny-palms-hoa/voice/movie/i1.mp3",
     "series/sunny-palms-hoa/voice/movie/a4.mp3",
     "series/sunny-palms-hoa/voice/ep06/d3.mp3",
@@ -1955,7 +1954,7 @@
    "slug": "thanks-randy",
    "char": "tom",
    "voice_id": "HIEYuk97dd40Gpi6GtRn",
-   "status": "active",
+   "status": "deleted",
    "name": "Tom (frozen turkey)",
    "voice_name": "Thanks, Randy — Tom (frozen turkey)",
    "lines": 9,
@@ -1985,9 +1984,19 @@
    "account": {
     "category": "generated",
     "description": "A world-weary older man in his sixties with a low, gravelly, rough voice, bone-dry and completely deadpan, like a tired film-noir detective narrator who has seen everything. Slow, unhurried, flat delivery with long dry pauses, a slight New Jersey accent, never excited, quietly sarcastic and funny. Native American English speaker.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1792545213
-   }
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/HIEYuk97dd40Gpi6GtRn/5d921b53-1279-48f0-96a2-6ae2f6629409.mp3",
+   "deleted_on": "2026-10-23",
+   "deleted_reason": "auto: room for valera-i-kot/gena"
   },
   {
    "slug": "thanks-randy",
@@ -2130,17 +2139,17 @@
    "status": "active",
    "name": "Валера",
    "voice_name": "Валера и кот — Валера",
-   "lines": 50,
-   "episodes": 7,
+   "lines": 56,
+   "episodes": 8,
    "samples": [
     "series/valera-i-kot/voice/movie/v02.mp3",
+    "series/valera-i-kot/voice/s2e01/v5.mp3",
     "series/valera-i-kot/voice/movie/v15.mp3",
     "series/valera-i-kot/voice/movie/v07.mp3",
+    "series/valera-i-kot/voice/s2e01/v4.mp3",
     "series/valera-i-kot/voice/ep06/v1.mp3",
     "series/valera-i-kot/voice/ep01/v2.mp3",
-    "series/valera-i-kot/voice/movie/v10.mp3",
-    "series/valera-i-kot/voice/movie/v09.mp3",
-    "series/valera-i-kot/voice/movie/v03.mp3"
+    "series/valera-i-kot/voice/movie/v10.mp3"
    ],
    "design": {
     "description": "Deep, low-pitched, hoarse bass-baritone voice of a heavyset Russian man in his mid-fifties, a retired army warrant officer. Gravelly smoker's rasp, chesty and booming, bossy and blunt like giving orders, self-important, but not screaming. Native Russian speaker, plain provincial Russian accent.",
@@ -2167,9 +2176,9 @@
    "voice_id": "YVkh6e91HD5qbnYVass7",
    "status": "active",
    "name": "Кот Дембель",
-   "voice_name": "Валера и кот — Кот Дембель",
-   "lines": 24,
-   "episodes": 7,
+   "voice_name": "valera-i-kot — Кот Дембель (restored)",
+   "lines": 28,
+   "episodes": 8,
    "samples": [
     "series/valera-i-kot/voice/movie/c01.mp3",
     "series/valera-i-kot/voice/movie/c03.mp3",
@@ -2178,7 +2187,7 @@
     "series/valera-i-kot/voice/movie/c06.mp3",
     "series/valera-i-kot/voice/movie/c05.mp3",
     "series/valera-i-kot/voice/ep05/c1.mp3",
-    "series/valera-i-kot/voice/movie/c04.mp3"
+    "series/valera-i-kot/voice/s2e01/c4.mp3"
    ],
    "design": {
     "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
@@ -2193,17 +2202,10 @@
     }
    },
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1790647553
+    "settings": null,
+    "created_at_unix": 1792712013
    },
    "preview_url": "https://api.us.elevenlabs.io/v1/voices/0SYrGzuYVNDS2OD4YroI/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiMjNhNjdlYWQtMGNmNC00N2RmLThiZWMtMTNkNjdjMjhlZTczLm1wMyIsInRpbWVzdGFtcCI6MTc5MjQ1ODAwMDAwMDAwMH0%3D",
    "deleted_reason": "free slots",
@@ -2311,6 +2313,53 @@
   },
   {
    "slug": "valera-i-kot",
+   "char": "nina",
+   "voice_id": "pVPuMCjFhiIm88pqmX0y",
+   "status": "active",
+   "name": "Нина Петровна (ЖЭК)",
+   "voice_name": "valera-i-kot — Нина Петровна (ЖЭК) (restored)",
+   "lines": 9,
+   "episodes": 3,
+   "samples": [
+    "series/valera-i-kot/voice/s2e01/n3.mp3",
+    "series/valera-i-kot/voice/movie/n01.mp3",
+    "series/valera-i-kot/voice/ep04/n5.mp3",
+    "series/valera-i-kot/voice/ep04/n1.mp3",
+    "series/valera-i-kot/voice/ep04/n2.mp3",
+    "series/valera-i-kot/voice/ep04/n4.mp3",
+    "series/valera-i-kot/voice/s2e01/n1.mp3",
+    "series/valera-i-kot/voice/s2e01/n2.mp3"
+   ],
+   "design": {
+    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
+    "text": "ЖЭК, слу́шаю. В труба́х, мужчи́на. До пятна́дцатого. Зна́чит, до сле́дующего. Э́то вода́. Служе́бная. Заявле́ния принима́ем по вто́рникам, с двух до двух пятна́дцати.",
+    "picked": {
+     "i": 1,
+     "dur": 13.56,
+     "f0": 177.8,
+     "f0_iqr": 41.3,
+     "rate": 16.2,
+     "loud_sd": 5.0
+    }
+   },
+   "account": {
+    "category": "cloned",
+    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1791781536
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/9dk6dPXhLLtqmUWeVU6p/1c3dc72a-57d2-4a0e-a964-2879386a5c09.mp3",
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "9dk6dPXhLLtqmUWeVU6p",
+     "until": "2026-10-12",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "valera-i-kot",
    "char": "lyuba",
    "voice_id": "bB7ZYDhHF7rhyK82vKpu",
    "status": "active",
@@ -2358,48 +2407,32 @@
   },
   {
    "slug": "valera-i-kot",
-   "char": "nina",
-   "voice_id": "pVPuMCjFhiIm88pqmX0y",
+   "char": "gena",
+   "voice_id": "ZszdQcL5WjzUTdPEv3YN",
    "status": "active",
-   "name": "Нина Петровна (ЖЭК)",
-   "voice_name": "valera-i-kot — Нина Петровна (ЖЭК) (restored)",
-   "lines": 6,
-   "episodes": 2,
-   "samples": [
-    "series/valera-i-kot/voice/movie/n01.mp3",
-    "series/valera-i-kot/voice/ep04/n5.mp3",
-    "series/valera-i-kot/voice/ep04/n1.mp3",
-    "series/valera-i-kot/voice/ep04/n2.mp3",
-    "series/valera-i-kot/voice/ep04/n4.mp3",
-    "series/valera-i-kot/voice/ep04/n3.mp3"
-   ],
+   "name": "Гена (сосед сверху)",
+   "voice_name": "Валера и кот — Гена (сосед сверху)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [],
    "design": {
-    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
-    "text": "ЖЭК, слу́шаю. В труба́х, мужчи́на. До пятна́дцатого. Зна́чит, до сле́дующего. Э́то вода́. Служе́бная. Заявле́ния принима́ем по вто́рникам, с двух до двух пятна́дцати.",
+    "description": "A loud, cheerful, raspy Russian handyman in his late forties, a neighbour who has been renovating his flat for years. Hoarse jolly bass voice, slightly deaf from power tools so he always half-shouts, warm and good-natured, simple working-class manner, laughs easily. Native Russian speaker, plain provincial Russian accent.",
+    "text": "ЧЕГО́?! Не слы́шу! А, Вале́рий Никола́ич! Заходи́, заходи́! У меня́ ремо́нт, седьмо́й год уже́, ха-ха! Подержи́ полку́, а? Ты же а́рмия, ты ро́вно де́ржишь! ЧЕГО́?!",
     "picked": {
      "i": 1,
-     "dur": 13.56,
-     "f0": 177.8,
-     "f0_iqr": 41.3,
-     "rate": 16.2,
-     "loud_sd": 5.0
+     "dur": 15.15,
+     "f0": 262.3,
+     "f0_iqr": 48.8,
+     "rate": 14.9,
+     "loud_sd": 5.4
     }
    },
    "account": {
-    "category": "cloned",
-    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
+    "category": "generated",
+    "description": "A loud, cheerful, raspy Russian handyman in his late forties, a neighbour who has been renovating his flat for years. Hoarse jolly bass voice, slightly deaf from power tools so he always half-shouts, warm and good-natured, simple working-class manner, laughs easily. Native Russian speaker, plain provincial Russian accent.",
     "settings": null,
-    "created_at_unix": 1791781536
-   },
-   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/9dk6dPXhLLtqmUWeVU6p/1c3dc72a-57d2-4a0e-a964-2879386a5c09.mp3",
-   "deleted_reason": "free slots",
-   "history": [
-    {
-     "voice_id": "9dk6dPXhLLtqmUWeVU6p",
-     "until": "2026-10-12",
-     "note": "deleted, restored as IVC clone"
-    }
-   ]
+    "created_at_unix": 1792724851
+   }
   },
   {
    "slug": "valera-i-kot",
@@ -2523,5 +2556,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-22 23:33"
+ "updated": "2026-10-23 03:07"
 }

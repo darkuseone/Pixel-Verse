@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-22 23:33.
+Обновлено: 2026-10-23 03:07.
 
 ## agent-dibs
 
@@ -91,7 +91,7 @@
 | SCAN-DEE (every machine) | `scandee` | `3ANi4ZKHBsZCpmOHdUAL` | active | 12 / 5 | Thanks, Randy — SCAN-DEE (every machine) |
 | Nana Joyce | `joyce` | `dJjx0RiCfuNSJOqSszkH` | active | 12 / 5 | Thanks, Randy — Nana Joyce |
 | Brayden | `brayden` | `MIUbQ8ecRUmaOKYrVlLG` | active | 10 / 5 | Thanks, Randy — Brayden |
-| Tom (frozen turkey) | `tom` | `HIEYuk97dd40Gpi6GtRn` | active | 9 / 6 | Thanks, Randy — Tom (frozen turkey) |
+| Tom (frozen turkey) | `tom` | `HIEYuk97dd40Gpi6GtRn` | deleted 2026-10-23 | 9 / 6 | Thanks, Randy — Tom (frozen turkey) |
 | Captain Dunn (fire dept.) | `dunn` | `OXWVo11izezT9DaOSbK4` | library_or_premade | 5 / 1 | Thanks, Randy — Captain Dunn (fire dept.) |
 | Officer Patty (TSA) | `patty` | `j4ogMUtanUuqkUCotVOx` | library_or_premade | 4 / 1 | Thanks, Randy — Officer Patty (TSA) |
 | Carol (Turkey Talk-Line) | `carol` | `xfJvbnf19p6r0uEM0iJQ` | library_or_premade | 4 / 1 | Thanks, Randy — Carol (Turkey Talk-Line) |
@@ -101,12 +101,13 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Валера | `valera` | `rBeJLZF1kJdbvH3OTV0M` | active | 50 / 7 | Валера и кот — Валера |
-| Кот Дембель | `cat` | `YVkh6e91HD5qbnYVass7` | active | 24 / 7 | Валера и кот — Кот Дембель |
+| Валера | `valera` | `rBeJLZF1kJdbvH3OTV0M` | active | 56 / 8 | Валера и кот — Валера |
+| Кот Дембель | `cat` | `YVkh6e91HD5qbnYVass7` | active | 28 / 8 | valera-i-kot — Кот Дембель (restored) |
 | Баба Зина | `zina` | `zYrh5fGxYuTn3sXH3sMw` | active | 21 / 3 | valera-i-kot — Баба Зина (restored) |
 | Кассирша Тамара | `tamara` | `EJfoq1w8EoRCsRnCWoOc` | active | 12 / 2 | valera-i-kot — Кассирша Тамара (restored) |
+| Нина Петровна (ЖЭК) | `nina` | `pVPuMCjFhiIm88pqmX0y` | active | 9 / 3 | valera-i-kot — Нина Петровна (ЖЭК) (restored) |
 | Баба Люба | `lyuba` | `bB7ZYDhHF7rhyK82vKpu` | active | 8 / 3 | valera-i-kot — Баба Люба (restored) |
-| Нина Петровна (ЖЭК) | `nina` | `pVPuMCjFhiIm88pqmX0y` | active | 6 / 2 | valera-i-kot — Нина Петровна (ЖЭК) (restored) |
+| Гена (сосед сверху) | `gena` | `ZszdQcL5WjzUTdPEv3YN` | active | 0 / 0 | Валера и кот — Гена (сосед сверху) |
 | Семёныч | `semenych` | `B5J7DQRqcdz5aZwL642J` | deleted 2026-10-12 | 10 / 1 | Валера и кот — Семёныч |
 | Колян | `kolyan` | `obfzPRwPXc0avd4LPuzH` | deleted 2026-10-12 | 8 / 1 | Валера и кот — Колян |
 | Автоответчик ЖЭКа | `robot` | `uQiZyJqZ7ePaB8bwME8n` | library_or_premade | 2 / 1 | Marusya G – Persuasive Outbound Caller |
