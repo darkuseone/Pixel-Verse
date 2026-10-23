@@ -22,6 +22,17 @@ SP = dict(skin=(236, 190, 160), skin_hi=(250, 214, 188), skin_sh=(200, 150, 124)
           dm=(204, 36, 40), dm_hi=(236, 70, 70), dm_sh=(150, 20, 26), fur=(246, 248, 252), fur_sh=(200, 210, 226))
 
 
+VEST, VEST_SH, REFL = (250, 122, 30), (204, 90, 20), (226, 232, 236)
+
+
+def _vest(T, x0, x1, top, bot):
+    """orange hi-vis vest «ПОВЕРКА» over the torso (unit coords): reflective bands, open V at the neck"""
+    poly(T, [H(x0, top), H(x1, top), H(x1 + 0.5, bot), H(x0 - 0.3, bot)], VEST)
+    poly(T, [H(x0 + 0.4, bot), H(x1 + 0.3, bot), H(x1 + 0.5, bot + 0.8), H(x0 - 0.1, bot + 0.8)], VEST_SH)
+    for hh in (bot + 2.2, bot + 4.0):
+        cap(T, H(x0, hh), H(x1 + 0.4, hh), 0.32, 0.32, REFL)
+
+
 STAND = dict(VPOSE['stand'], n=(5.0, 9.6), f=(-3.6, 9.8), bn=1, bf=-1)
 
 
@@ -114,7 +125,7 @@ def _rig(CH, cam, pose, t, P, dims, top, legc, footc, head, hand_n=None, hand_f=
 
 # ======================================================================================= КОЛЯН
 def kolyan(CH, cam, pose=None, t=0.0, mouth=0.0, expr='normal', costume=None, look=0.0, hand_n=None, hand_f=None, prop_n=None,
-           prop_f=None, lean=0.0, cold=0.0):
+           prop_f=None, lean=0.0, cold=0.0, vest=False):
     """expr: normal | happy | sad | shock | sly | blissful | squint; costume: None (tracksuit) | snegurochka"""
     P = dict(KP)
     if cold > 0:
@@ -164,6 +175,7 @@ def kolyan(CH, cam, pose=None, t=0.0, mouth=0.0, expr='normal', costume=None, lo
         else:                                                                                   # chest logo + zip
             cap(T, H(1.6, 19.6), H(1.6, 10.6), 0.1, 0.1, P['stripe'])
             for k in range(3): cap(T, H(2.9 + k * 0.35, 18.0), H(3.1 + k * 0.35, 17.0 + 0.2 * k), 0.12, 0.12, P['stripe'])
+        if vest: _vest(T, -3.6, 4.8, 19.6, 10.4)
 
     dims = (4.4, 19.4, 10.2, 4.5, 1.75, 2.05, 6.0, 5.2)
     return _rig(CH, cam, pose, t, P, dims, top, legc, footc, head, hand_n, hand_f, prop_n, prop_f, skirt=skirt, lean=lean,
@@ -172,7 +184,7 @@ def kolyan(CH, cam, pose=None, t=0.0, mouth=0.0, expr='normal', costume=None, lo
 
 # ======================================================================================= СЕМЁНЫЧ
 def semenych(CH, cam, pose=None, t=0.0, mouth=0.0, expr='normal', costume=None, look=0.0, hand_n=None, hand_f=None, prop_n=None,
-             prop_f=None, lean=0.0, cold=0.0):
+             prop_f=None, lean=0.0, cold=0.0, vest=False):
     """expr: normal | smug | sad | shock | blissful | squint | shout; costume: None | ded_moroz"""
     P = dict(SP)
     if cold > 0:
@@ -237,6 +249,7 @@ def semenych(CH, cam, pose=None, t=0.0, mouth=0.0, expr='normal', costume=None, 
             poly(T, [H(0.6, 16.8), H(2.4, 16.6), H(1.7, 11.0)], P['shirt'])                       # shirt V
             for (x, h) in ((-0.8, 12.8), (2.6, 12.0)): dot(T, H(x, h), P['tweed_sh'], 0.18)        # tweed flecks
             dot(T, H(1.9, 9.8), P['tweed_sh'], 0.15)
+        if vest: _vest(T, -2.6, 3.4, 16.8, 8.8)
 
     def arm_patch(A, e):
         pass
