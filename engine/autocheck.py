@@ -7,7 +7,7 @@ render log (stage.LOG) and checks what a vision critic used to find by eye — a
   HEAD_CUT     a face cut by the frame edge
   SEAM         (--seams, experimental) a straight colour step across the frame; off by default: too many false hits
   TIMING       length 30–38 s, twist at 50–60 % and <= 18 s, shots longer than 3.2 s
-  AUDIO        mean -20…-22 dB, peak <= 0 dB (from final.mp4 if present)
+  AUDIO        integrated -14 ±1 LUFS (test rule 25.10.2026) or legacy mean -20…-22 dB, peak <= 0 dB (from final.mp4 if present)
   COVER        cover.png + cover_grid.png exist
 
   python3 engine/autocheck.py series/<slug>/episodes/epNN [--times t1 t2 ...]
@@ -129,10 +129,15 @@ def audio(path):
     if not path.exists(): return [dict(code='AUDIO', sev='NIT', msg='no final.mp4 yet')]
     r = subprocess.run(['ffmpeg', '-v', 'info', '-i', str(path), '-af', 'volumedetect', '-f', 'null', '-'], capture_output=True, text=True)
     mean = re.search(r'mean_volume: (-?[\d.]+)', r.stderr); mx = re.search(r'max_volume: (-?[\d.]+)', r.stderr)
+    e = subprocess.run(['ffmpeg', '-nostats', '-i', str(path), '-af', 'ebur128', '-f', 'null', '-'], capture_output=True, text=True)
+    lu = re.findall(r'I:\s+(-?[\d.]+) LUFS', e.stderr)
+    lufs = float(lu[-1]) if lu else None
     F = []
-    if mean and not (-23.0 <= float(mean.group(1)) <= -19.0): F.append(dict(code='AUDIO', sev='FIX', msg=f'mean {mean.group(1)} dB (-20…-22)'))
+    ok_new = lufs is not None and -15.0 <= lufs <= -13.0                      # LUFS = -14 timelines (new episodes)
+    ok_old = mean is not None and -23.0 <= float(mean.group(1)) <= -19.0       # legacy MASTER mixes
+    if not (ok_new or ok_old): F.append(dict(code='AUDIO', sev='FIX', msg=f'{lufs} LUFS (target -14) / mean {mean.group(1) if mean else "?"} dB'))
     if mx and float(mx.group(1)) > 0.0: F.append(dict(code='AUDIO', sev='FIX', msg=f'peak {mx.group(1)} dB (> 0)'))
-    info = f"mean {mean.group(1) if mean else '?'} dB, peak {mx.group(1) if mx else '?'} dB"
+    info = f"{lufs} LUFS, mean {mean.group(1) if mean else '?'} dB, peak {mx.group(1) if mx else '?'} dB"
     return F, info
 
 

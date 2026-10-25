@@ -14,7 +14,7 @@ description: Фоновый рендер серии или фильма, мик�
    - пока идёт — писать сценарий, выкладку, документы;
    - скорость в 16:9 ≈ 1 кадр/с на процесс (4:30 → ~55 мин);
    - после правок — `python3 <ep>.py shots <i|name …>` вместо полного рендера.
-3. **Микс:** `python3 mix.py [<noaudio.mp4> <out.mp4>]` → громкость `ffmpeg -i out.mp4 -af volumedetect -vn -f null - 2>&1 | grep -E "mean_vol|max_vol"`. Цель mean −20…−22 dB, max ≤ 0; вставки тише — поднять их gain в SFX.
+3. **Микс:** `python3 mix.py [<noaudio.mp4> <out.mp4>]` → громкость `ffmpeg -i out.mp4 -af volumedetect -vn -f null - 2>&1 | grep -E "mean_vol|max_vol"`. Новые серии (в `timeline.py` есть `LUFS = -14.0`) — проверять `-af ebur128`: I ≈ −14 LUFS, пик ≤ −1 dB; старые — mean −20…−22 dB, max ≤ 0; вставки тише — поднять их gain в SFX.
 4. **Кадры финала:** 9 кадров через `ffmpeg -ss t -frames:v 1 -vf scale=480:-1` → один лист → посмотреть.
 5. **Сжатие:**
    - шортс > 29 МиБ (лимит чата) — `PV_CRF=23` и перерендер;

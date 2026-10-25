@@ -1,7 +1,11 @@
 """Generic episode audio mix (any series) from a timeline module -> build/<ep>/mix.wav (+ mux with video).
 Timeline module provides DUR, VOICE, SFX, BEDS and optionally VFX (speaker -> extra ffmpeg filter, e.g. phone band)
 and VGAIN (speaker -> gain). Beds are looped with acrossfade, faded and ducked under speech.
+Optional T.LUFS (e.g. -14, owner's test rule 25.10.2026): two-pass loudnorm of the final mix to LUFS / -1 dBTP instead of the
+plain MASTER gain (older timelines without LUFS keep their exact old sound).
 Usage from an episode folder:  python3 mix.py [noaudio.mp4 final.mp4]   (mix.py there calls run(...))"""
+import json
+import os
 import subprocess
 import paths as P
 
@@ -52,9 +56,24 @@ def run(slug, ep, T, video=None, out_mp4=None):
     out = P.build(ep if slug == P.PDZ else f'{slug}-{ep}', 'mix.wav')
     subprocess.run(['ffmpeg', '-v', 'error', '-y', *inputs, '-filter_complex', ';'.join(chains), '-map', '[out]', '-ar', '44100', out],
                    check=True)
+    lufs = getattr(T, 'LUFS', None)
+    if lufs is not None: loudnorm(out, lufs)
     print(out)
     if video:
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', video, '-i', out, '-map', '0:v', '-map', '1:a', '-c:v', 'copy',
                         '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', out_mp4], check=True)
         print(out_mp4)
     return out
+
+
+def loudnorm(wav, target=-14.0, tp=-1.0, lra=11.0):
+    """two-pass EBU R128 normalisation in place: measure, then apply in linear mode (keeps the mix dynamics when possible)"""
+    r = subprocess.run(['ffmpeg', '-hide_banner', '-nostats', '-i', str(wav), '-af', f'loudnorm=I={target}:TP={tp}:LRA={lra}:print_format=json',
+                        '-f', 'null', '-'], capture_output=True, text=True, check=True)
+    m = json.loads(r.stderr[r.stderr.rindex('{'):r.stderr.rindex('}') + 1])
+    tmp = str(wav) + '.ln.wav'
+    af = (f"loudnorm=I={target}:TP={tp}:LRA={lra}:measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}:"
+          f"measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true,aresample=44100")
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', str(wav), '-af', af, '-ar', '44100', tmp], check=True)
+    os.replace(tmp, wav)
+    print(f"loudnorm: {float(m['input_i']):.1f} LUFS -> {target} LUFS, TP <= {tp} dBTP")
