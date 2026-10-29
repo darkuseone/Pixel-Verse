@@ -1,0 +1,100 @@
+{
+  "cartoon": "Land of the Fee",
+  "slug": "land-of-the-fee",
+  "lang": "us",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "duke": {
+      "name": "Duke (bald eagle)",
+      "color_caption": [
+        255,
+        206,
+        60
+      ],
+      "style": "[booming] [heroic bravado] -> [deflated] — 80s action-trailer eagle, patriotic swagger",
+      "design": {
+        "description": "A loud, macho, overconfident American man in his mid forties with a gravelly, raspy action-movie-trailer baritone. Over-the-top 80s action hero bravado and patriotic swagger, a little dim, roars when outraged, speaks every sentence like a heroic one-liner; when he loses, his voice deflates and goes small. Very expressive, comedic, punchy fast delivery. General American accent, native English speaker.",
+        "text": "[furious, roaring] REPRESENTATIVE! [proud, booming] I'm a bald eagle. I'm on the dollar! [determined, gritty] Fine. I'm talking to a human. [outraged] For what?!",
+        "picked": {
+          "i": 1,
+          "dur": 7.31,
+          "f0": 246.2,
+          "f0_iqr": 95.8,
+          "rate": 32.0,
+          "loud_sd": 4.4
+        }
+      },
+      "voice_id": "VwuOUTEifmEo5liYSsaS",
+      "voice": "Land of the Fee — Duke (bald eagle)"
+    },
+    "sal": {
+      "name": "Sal (pigeon)",
+      "color_caption": [
+        206,
+        170,
+        255
+      ],
+      "style": "[deadpan] [nasal Brooklyn] — tired street pigeon, zero energy",
+      "design": {
+        "description": "A tired, unimpressed older man in his sixties from Brooklyn, New York. Thin nasal slightly raspy voice, very slow, low-energy dry deadpan delivery, sarcastic and street-smart, sounds like he has seen everything and cares about nothing. Thick Brooklyn accent. Short sentences, flat intonation, tiny pauses before the punchline. Native English speaker.",
+        "text": "[deadpan, bored] Not on yours. [dry] Pigeons don't pay rent. We collect it. [flat, unimpressed] Majestic.",
+        "picked": {
+          "i": 1,
+          "dur": 7.31,
+          "f0": 113.5,
+          "f0_iqr": 26.5,
+          "rate": 22.5,
+          "loud_sd": 5.7
+        }
+      },
+      "voice_id": "0LhkTs3X3fXASzpzsM4I",
+      "voice": "Land of the Fee — Sal (pigeon)"
+    },
+    "feebee": {
+      "name": "Fee-Bee (AI support bot)",
+      "color_caption": [
+        130,
+        255,
+        200
+      ],
+      "style": "[chipper] [bubbly] — relentless customer-service AI smile",
+      "design": {
+        "description": "A relentlessly cheerful young female AI customer-service assistant. Bright, bubbly, sing-song upbeat voice with rising intonation, over-polished and a little synthetic like a perfect corporate voice assistant, a fake customer-service smile in every word, fast and crisp, never stops being happy even when delivering bad news. American accent.",
+        "text": "[bubbly, chipper] Hi! I'm Fee-Bee, your AI helper! [cheerful] Sounds like you said, upgrade! Done! [sing-song] Sounds like you said, hummus!",
+        "picked": {
+          "i": 0,
+          "dur": 8.83,
+          "f0": 313.7,
+          "f0_iqr": 129.7,
+          "rate": 31.1,
+          "loud_sd": 7.1
+        }
+      },
+      "voice_id": "RwxygB5ruF7aNKTLfElp",
+      "voice": "Land of the Fee — Fee-Bee (AI support bot)"
+    },
+    "doris": {
+      "name": "Doris (the last human rep)",
+      "color_caption": [
+        255,
+        186,
+        150
+      ],
+      "style": "[sweet] [Minnesota] — warm grandma who bills by the minute",
+      "design": {
+        "description": "A sweet, warm, folksy grandmotherly woman in her late sixties from Minnesota. Friendly cozy voice, calls everyone hon, strong upbeat Minnesota accent with long round vowels, gentle and slow, smiling, completely unbothered while calmly delivering terrible news about money. Native English speaker.",
+        "text": "[warm, sweet] Hi, hon! I'm a real human! [sweet, matter-of-fact] That's nineteen ninety-nine a minute. [gently] Eye contact's extra, hon.",
+        "picked": {
+          "i": 0,
+          "dur": 9.4,
+          "f0": 256.0,
+          "f0_iqr": 111.1,
+          "rate": 23.5,
+          "loud_sd": 6.4
+        }
+      },
+      "voice_id": "N6PX5q8cQTh4FZMyFW3G",
+      "voice": "Land of the Fee — Doris (the last human rep)"
+    }
+  }
+}

@@ -1,0 +1,506 @@
+"""«Land of the Fee» cast + props, drawn in the «Intaglio Pop» manner (props/feepix.py).
+Coordinates: sprite px, feet anchor at (0, 0), x right = facing side, y UP.
+  duke(sp, ...)   — Duke, bald eagle, ~45: «a barrel with a hook» (a chest wider than a doorway in an 80s red-white-navy track jacket,
+                    tiny yellow talons, a white fist of a head with a giant hooked yellow beak, permanently furrowed brows, ONE combed-over
+                    feather across the top, aviators on the forehead, a gold chain with a coin medallion); wings are the arms
+  sal(sp, ...)    — Sal, Brooklyn street pigeon: «a pear on matchsticks» (fat grey body, tiny head on an oil-slick green-violet neck,
+                    orange eyes, pink feet), a french fry in the beak, the head bobs on its own rhythm
+  doris(sp, ...)  — Doris, the last human support rep: a mini Minnesota grandma (auburn bouffant, half-moon glasses, a headset, a peach
+                    cardigan, a lanyard «REAL HUMAN» and a taxi meter on her belly that counts dollars)
+Props: kiosk (XFEENITY self-service stand with the Fee-Bee face), phone, wallet, hummus cup, speaker, fries box, door (EMPLOYEES ONLY)."""
+import math
+import numpy as np
+from props import dibspix as DX
+from props.dibspix import dark, mix, erode, dilate, ik, EXPR
+from props.feepix import tones, thin, stroke, INK, WHITE, PAPER
+
+# ---------------------------------------------------------------- palette
+EAGLE_B = (98, 62, 38)               # dark brown body feathers
+EAGLE_W = (246, 244, 236)            # white head / tail
+EAGLE_G = (176, 172, 168)            # grey feather shading on the white head
+BEAK = (250, 196, 46)                # big yellow beak + talons
+BEAK_D = (206, 140, 30)
+IRIS_E = (236, 204, 70)              # pale yellow eagle eye
+JACK = (40, 54, 116)                 # navy track jacket
+JRED = (204, 42, 50)
+JWHT = (246, 244, 236)
+GOLD = (238, 198, 72)
+LENS = (40, 70, 80)
+
+PIG = (150, 156, 172)                # pigeon grey-blue
+PIG_D = (96, 100, 118)
+PIG_NG = (74, 170, 120)              # iridescent neck green
+PIG_NV = (150, 92, 170)              # iridescent neck violet
+PIG_EYE = (240, 130, 40)
+PIG_FOOT = (226, 120, 130)
+FRY = (246, 200, 80)
+
+SKIN_D = (244, 204, 180)             # Doris
+HAIR_D = (178, 84, 54)               # auburn bouffant
+CARD_D = (246, 170, 140)             # peach cardigan
+BLOUSE = (250, 240, 220)
+SLACK = (64, 70, 110)
+LANY = (214, 40, 60)
+METER = (40, 40, 46)
+LED = (255, 70, 60)
+
+MINT = (110, 240, 196)               # Fee-Bee glow
+MINT_D = (40, 150, 120)
+KIO = (240, 240, 246)
+KIO_D = (120, 116, 150)
+PURP = (126, 72, 190)
+
+XTRA = dict(
+    proud=dict(eo=0.85, pu=0.55, bt=0.45, bl=0.2, mo=0.0, mc=0.6),
+    roar=dict(eo=1.25, pu=0.40, bt=0.75, bl=0.0, mo=1.0, mc=0.0),
+    plead=dict(eo=1.15, pu=0.55, bt=-0.6, bl=0.6, mo=0.3, mc=-0.5),
+    losing=dict(eo=1.35, pu=0.3, bt=-0.5, bl=0.8, mo=0.85, mc=-0.3),
+    dead=dict(eo=0.72, pu=0.55, bt=0.0, bl=0.0, mo=0.0, mc=0.0, lid=0.58),
+    sweet=dict(eo=0.0, pu=0.6, bt=-0.3, bl=0.4, mo=0.0, mc=0.9, shut=True),
+    warm=dict(eo=0.95, pu=0.62, bt=-0.25, bl=0.35, mo=0.0, mc=0.85),
+    joy=dict(eo=1.25, pu=0.65, bt=-0.4, bl=0.7, mo=0.7, mc=0.9),
+    puff=dict(eo=0.6, pu=0.5, bt=0.6, bl=-0.2, mo=0.0, mc=-0.3, lid=0.3),
+)
+
+
+def X(expr):
+    return dict(XTRA.get(expr) or EXPR.get(expr, EXPR['normal']))
+
+
+def _rot(pts, o, deg):
+    a = math.radians(deg); ca, sa = math.cos(a), math.sin(a)
+    return [(o[0] + (x - o[0]) * ca - (y - o[1]) * sa, o[1] + (x - o[0]) * sa + (y - o[1]) * ca) for x, y in pts]
+
+
+# ================================================================================ Fee-Bee face (on any screen, sprite res)
+def feebee_face(sp, cx, cy, r, t=0.0, talk=0.0, expr='smile', glow=True, eq=True):
+    """Fee-Bee: a mint glowing disc with two bean eyes and a wide smile (opens with talk), an equalizer under it when she speaks"""
+    m = sp.m_ell(cx, cy, r, r)[0]
+    sp.fill(m, MINT, keep=True)
+    sp.fill(m & (DX.YC > cy + r * 0.45), mix(MINT, (255, 255, 255), 0.45), keep=True)
+    sp.fill(m & ~erode(m), MINT_D, keep=True)
+    blink = ((t + 0.7) % 3.1) < 0.12
+    for ex in (cx - r * 0.36, cx + r * 0.36):
+        if blink: thin(sp, (ex - r * 0.12, cy + r * 0.22), (ex + r * 0.12, cy + r * 0.22), (20, 60, 50), max(0.25, r * 0.05), keep=True)
+        else:
+            sp.blob(ex, cy + r * 0.22, max(0.5, r * 0.13), (20, 60, 50), keep=True)
+            sp.blob(ex - r * 0.04, cy + r * 0.28, max(0.3, r * 0.05), (255, 255, 255), keep=True)
+    op = min(1.0, talk * 1.4)
+    if op < 0.08:                                                                   # idle: a wide customer-service smile
+        for q in range(9):
+            u = (q - 4) / 4.0
+            sp.blob(cx + u * r * 0.48, cy - r * 0.30 + r * 0.16 * u * u, max(0.35, r * 0.06), (20, 60, 50), keep=True)
+    else:
+        mw, mh = r * 0.5, r * (0.12 + 0.32 * op)
+        mm = sp.m_ell(cx, cy - r * 0.26, mw, mh)[0] & (DX.YC < cy - r * 0.16)
+        sp.fill(mm, (20, 60, 50), keep=True)
+        if op > 0.25: sp.fill(mm & (DX.YC < cy - r * 0.26 - mh * 0.4), (255, 120, 150), keep=True)
+    for ex in (cx - r * 0.62, cx + r * 0.62):
+        sp.fill(sp.m_ell(ex, cy - r * 0.08, r * 0.14, r * 0.08)[0] & m, (255, 160, 190), keep=True)
+    if eq and talk > 0.02:
+        for i in range(7):
+            h = r * 0.12 + r * 0.55 * talk * abs(math.sin(t * 17 + i * 1.7))
+            x = cx - r * 0.75 + i * r * 0.25
+            sp.fill(sp.m_super(x, cy - r - 0.6 - h / 2, r * 0.07, h / 2, 4.0)[0], MINT, keep=True)
+
+
+# ================================================================================ hand props
+def phone(sp, h, t=0.0, talk=0.0, screen='feebee'):
+    """a smartphone held upright: dark case, the screen shows Fee-Bee (or plain glow)"""
+    x, y = h
+    m = sp.m_super(x + 0.6, y + 3.6, 2.4, 4.4, 4.0)[0]
+    sp.paint(m, tones((36, 36, 44)), None, olc=INK)
+    sc = sp.m_super(x + 0.6, y + 3.6, 1.9, 3.8, 4.0)[0]
+    sp.fill(sc, (24, 40, 60), keep=True)
+    if screen == 'feebee': feebee_face(sp, x + 0.6, y + 4.0, 1.6, t, talk, eq=False)
+    sp.anchors['phone'] = (x + 0.6, y + 3.6)
+
+
+def wallet(sp, h, open_=0.0):
+    x, y = h
+    if open_ > 0:
+        sp.sup(x - 1.6, y + 0.6, 2.4, 1.8, tones((110, 70, 44)), n=3.0)
+        sp.sup(x + 2.0, y + 0.8, 2.4, 1.8, tones((126, 82, 52)), n=3.0)
+        sp.fill(sp.m_super(x + 0.2, y + 0.7, 0.4, 1.4, 3.0)[0], (60, 40, 26))
+    else:
+        sp.sup(x + 0.6, y + 0.4, 2.6, 1.7, tones((110, 70, 44)), n=3.0)
+
+
+def fry(sp, a, b):
+    thin(sp, a, b, FRY, 0.5)
+    thin(sp, (a[0], a[1] + 0.25), (b[0], b[1] + 0.25), mix(FRY, (255, 255, 220), 0.5), 0.18)
+
+
+def hummus(sp, t=0.0, lid=True):
+    """a small plastic cup of hummus with a peeled foil lid (dropped by the kiosk)"""
+    cup = sp.poly([(-3.4, 5.6), (3.4, 5.6), (2.6, 0.0), (-2.6, 0.0)], tones((246, 240, 214)), grad=(5.6, 0.0))
+    sp.fill(cup & (DX.YC > 2.0) & (DX.YC < 3.6), (220, 160, 60))
+    sp.txt_box(['HUMMUS'], (-2.8, 2.0, 2.8, 3.6), (120, 60, 20), pad=0.1)
+    sp.ell(0.0, 5.8, 3.4, 0.9, tones((214, 190, 130)))
+    if lid: sp.poly([(0.0, 6.0), (3.6, 6.6), (4.6, 9.0), (1.0, 7.6)], tones((210, 214, 224)), grad=(9.0, 6.0))
+
+
+def speaker(sp, h=(0.0, 0.0), t=0.0, on=False):
+    """a cheap Bluetooth speaker (Sal's «SCREAM» button)"""
+    x, y = h
+    sp.sup(x, y + 2.0, 3.8, 2.2, tones((44, 44, 54)), n=3.0)
+    for q in range(-2, 3): sp.dot(x + q * 1.2, y + 2.0, (90, 90, 104))
+    sp.dot(x + 3.0, y + 3.4, (90, 230, 120) if on and int(t * 6) % 2 == 0 else (60, 70, 70))
+
+
+def fries_box(sp, t=0.0):
+    """a red fries carton «FREE FRIES (FOR PIGEONS)» on the window ledge"""
+    sp.poly([(-3.0, 5.6), (3.0, 5.6), (2.2, 0.0), (-2.2, 0.0)], tones((214, 40, 46)), grad=(5.6, 0.0))
+    for q in range(5):
+        fry(sp, (-2.2 + q * 1.1, 5.0), (-2.6 + q * 1.3, 7.8 + (q % 2) * 0.8))
+    sp.txt_box(['FREE'], (-2.2, 1.2, 2.2, 4.2), (255, 230, 120), pad=0.1)
+
+
+# ================================================================================ DUKE — the bald eagle
+def _wing_hand(sp, e, d, open_=0.6, col=EAGLE_B):
+    """feather «fingers» (primaries) fanning from the wrist e along direction d (radians)"""
+    for i in range(4):
+        a = d + (i - 1.5) * (0.22 + 0.25 * open_)
+        L = 5.6 - abs(i - 1.5) * 0.6
+        ex, ey = e[0] + math.cos(a) * L, e[1] + math.sin(a) * L
+        sp.cap(e, (ex, ey), 1.5, 0.75, tones(col if i < 3 else dark(col, 0.85)))
+    sp.ell(e[0], e[1], 2.2, 2.0, tones(col))
+
+
+def duke(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
+         walk=None, lean=0.0, puff=0.0, flop=0.0, shades='head', tremble=0.0, fly=None, legs=True, jacket=True, sweat=0.0):
+    """DUKE — barrel chest in a navy 80s track jacket (red chest stripe, white piping, popped collar, zip half open over brown chest
+    feathers), a gold chain with a coin medallion, short feathered «trousers» and tiny yellow talons, a white tail peeking under the
+    jacket; a white fist of a head with heavy furrowed brows (always glaring), pale yellow eyes, a giant hooked yellow beak (the mouth),
+    one long combed-over feather (flop 0..1: it lifts and flaps when he roars), aviators on the forehead (shades='head'|'eyes'|None).
+    puff 0..1 swells the chest (pride); fly = phase -> wings spread and beat, legs tucked"""
+    E = X(expr)
+    E['bt'] = max(E['bt'], 0.42)                                   # an eagle can only look disappointed
+    if blink is None: blink = ((t + 0.9) % 4.1) < 0.12
+    br = 0.35 * math.sin(t * 2.0)
+    bob = abs(math.sin(walk)) * 1.0 if walk is not None else 0.0
+    jit = math.sin(t * 60.0) * 0.4 * tremble
+    def Q(x, y): return (x + lean * (y / 70.0) * 6.0 + (jit if y > 52 else 0), y + (bob if y > 12 else bob * 0.3))
+    swing = math.sin(walk) * 4.0 if walk is not None else 0.0
+    pk = 1.0 + 0.10 * puff
+    flying = fly is not None
+    beat = math.sin(fly * 2 * math.pi) if flying else 0.0
+    # ---------------------------------------------------------------- far wing (behind)
+    shF = Q(-12.0, 44.0 + br * 0.3)
+    if flying:
+        a = math.radians(150 - 40 * beat)
+        kF = (shF[0] + math.cos(a) * 10, shF[1] + math.sin(a) * 10); eF = (kF[0] + math.cos(a + 0.2) * 9, kF[1] + math.sin(a + 0.2) * 9)
+    else:
+        hf = hand_f if hand_f is not None else Q(-17.0 - swing * 0.6, 26.0)
+        kF, eF = ik(shF, hf, 9.0, 8.0, -1.0)
+    sl = tones(dark(JACK, 0.8)) if jacket else tones(dark(EAGLE_B, 0.85))
+    sp.cap(shF, kF, 4.0, 3.2, sl)
+    sp.cap(kF, eF, 3.2, 2.4, sl)
+    _wing_hand(sp, eF, math.atan2(eF[1] - kF[1], eF[0] - kF[0]), 0.9 if flying else 0.5, dark(EAGLE_B, 0.85))
+    if prop_f: prop_f(sp, eF)
+    sp.anchors['hand_f'] = eF
+    # ---------------------------------------------------------------- tail + legs
+    sp.union([sp.m_ell(*Q(-13.0, 15.0), 5.0, 2.2, 0.5), sp.m_ell(*Q(-15.0, 13.4), 4.0, 1.8, 0.7)], tones(EAGLE_W))
+    if legs and not flying:
+        sw = math.sin(walk) * 2.4 if walk is not None else 0.0
+        for k_, dx in enumerate((-5.0, 5.0)):
+            s_ = sw if k_ else -sw
+            near = k_ == 1
+            c = EAGLE_B if near else dark(EAGLE_B, 0.85)
+            fx_, fy_ = dx + s_ * 0.7, 1.6 + max(0.0, s_) * 0.4
+            sp.cap(Q(dx * 0.8, 15.0), (fx_, fy_ + 3.6), 3.0, 2.4, tones(c))                       # feathered «trousers»
+            for q in range(3): thin(sp, (dx * 0.8 - 1.8 + q * 1.4, 10.0), (dx * 0.8 - 1.2 + q * 1.4, 7.0), dark(c, 0.7), 0.2)
+            sp.cap((fx_, fy_ + 2.6), (fx_, fy_ + 0.6), 1.2, 1.2, tones(BEAK))
+            for q, (tx, ty) in enumerate(((2.8, -0.6), (1.6, -0.9), (-1.6, -0.6))):                  # three talons + claws
+                sp.cap((fx_, fy_ + 0.4), (fx_ + tx, fy_ + ty), 0.8, 0.6, tones(BEAK if near else dark(BEAK, 0.9)), ol=False)
+                sp.dot(fx_ + tx + (0.6 if tx > 0 else -0.6), fy_ + ty - 0.2, (40, 34, 30))
+    elif flying:
+        for dx in (-3.0, 2.0):
+            sp.ell(*Q(dx - 4.0, 12.0), 2.6, 1.6, tones(EAGLE_B))
+            sp.ell(*Q(dx - 6.6, 11.4), 1.2, 0.8, tones(BEAK), ol=False)
+    # ---------------------------------------------------------------- barrel body: jacket over chest feathers
+    bx, by = Q(1.4, 32.0)
+    if jacket:
+        body = sp.union([sp.m_ell(bx, by, 16.4 * pk, 18.6), sp.m_ell(*Q(1.0, 46.0), 13.0 * pk, 7.4)], tones(JACK))
+        vee = sp.m_poly([Q(1.8, 52.0), Q(11.6, 52.0), Q(8.6, 34.0)]) & body                            # open zip: chest feathers
+        sp.paint(vee, tones(EAGLE_B), DX.lit(np.clip((DX.XC - 6.0) / 8.0, -0.9, 0.9), np.full_like(DX.XC, 0.3)))
+        for q in range(4): thin(sp, Q(4.0 + q * 1.6, 47.0 - q * 2.2), Q(6.0 + q * 1.6, 46.0 - q * 2.2), dark(EAGLE_B, 0.7), 0.25, mask=vee)
+        thin(sp, Q(8.6, 34.0), Q(9.4, 15.0), (220, 220, 226), 0.35, mask=body)                          # zipper
+        band = body & (DX.YC < Q(0, 40.0)[1] + (DX.XC - bx) * 0.25) & (DX.YC > Q(0, 35.0)[1] + (DX.XC - bx) * 0.25)
+        sp.paint(band & ~vee, tones(JRED), DX.lit(np.clip((DX.XC - bx) / 16.0, -0.9, 0.9), np.full_like(DX.XC, 0.25)))
+        for off in (34.2, 40.8):
+            thin(sp, Q(bx - 16.0, off - 4.0), Q(bx + 16.0, off + 4.0), JWHT, 0.35, mask=body & ~vee)
+        sp.fill(body & (DX.YC < Q(0, 15.6)[1]), dark(JACK, 0.7))                                          # ribbed hem
+        for q in range(-14, 16, 2): thin(sp, Q(bx + q, 13.2), Q(bx + q, 15.4), dark(JACK, 0.55), 0.15, mask=body)
+        col_ = sp.union([sp.m_ell(*Q(-1.0, 52.0), 5.0, 3.0, 0.4), sp.m_ell(*Q(13.0, 51.6), 3.6, 2.6, -0.5)], tones(JRED))   # popped collar
+        # gold chain + coin medallion
+        for q in range(9):
+            a = math.pi * (1.08 + 0.84 * q / 8)
+            sp.blob(*Q(6.6 + math.cos(a) * 5.6, 50.4 + math.sin(a) * 7.6), 0.5, GOLD)
+        mx_, my_ = Q(6.6, 41.2)
+        sp.ell(mx_, my_, 2.6, 2.6, tones(GOLD), gloss=1.0)
+        sp.ell(mx_, my_, 1.7, 1.7, tones(dark(GOLD, 0.82)), ol=False)
+        sp.dot(mx_ - 0.4, my_ + 0.2, (250, 240, 200)); sp.dot(mx_ + 0.6, my_ - 0.4, (180, 130, 40))
+        sp.anchors['medal'] = (mx_, my_)
+    else:
+        body = sp.union([sp.m_ell(bx, by, 16.0 * pk, 18.4), sp.m_ell(*Q(1.0, 46.0), 13.0 * pk, 7.4)], tones(EAGLE_B))
+        for q in range(14):
+            x_ = bx - 12 + (q % 7) * 4 + (q // 7) * 2; y_ = by + 8 - (q // 7) * 10
+            thin(sp, (x_, y_), (x_ + 1.6, y_ - 1.6), dark(EAGLE_B, 0.7), 0.3, mask=body)
+    # ---------------------------------------------------------------- neck ruff + head
+    hx, hy = Q(4.6, 62.0)
+    hx += jit
+    ruff = sp.union([sp.m_ell(hx - 0.4, hy - 8.6, 8.6, 3.6)] + [sp.m_ell(hx - 7.0 + q * 2.4, hy - 10.6 - (q % 2) * 0.8, 1.6, 2.0) for q in range(7)],
+                    tones(EAGLE_W))
+    head = sp.union([sp.m_ell(hx, hy, 9.6, 8.8), sp.m_ell(hx - 3.6, hy + 1.4, 6.6, 7.2), sp.m_ell(hx + 3.4, hy - 3.8, 6.4, 4.6)], tones(EAGLE_W))
+    for q in range(5):                                                                                  # feather flicks on the head
+        thin(sp, (hx - 8.0 + q * 1.4, hy + 4.0 - q * 1.8), (hx - 6.4 + q * 1.4, hy + 3.0 - q * 1.8), EAGLE_G, 0.22, mask=head)
+    for q in range(3):
+        sp.cap((hx - 9.0, hy - 2.0 - q * 2.2), (hx - 11.4, hy - 3.6 - q * 2.2), 0.9, 0.4, tones(EAGLE_W))   # ragged nape
+    sp.fill(head & (DX.YC > hy + 5.5) & (DX.XC > hx - 2.0), mix(EAGLE_W, PAPER, 0.6))
+    # eyes: near big, far small, both pale yellow under the brow ridge
+    lx, ly = look
+    DX.eye(sp, hx + 5.4, hy + 1.6, 4.6, 4.0, E, IRIS_E, (lx, ly), blink, lash=INK, skin=EAGLE_W, bold=1, lidc=EAGLE_W)
+    DX.eye(sp, hx - 0.6, hy + 1.8, 3.2, 3.4, E, IRIS_E, (lx, ly), blink, lash=INK, skin=EAGLE_W, bold=1, lidc=EAGLE_W)
+    DX.brow(sp, hx + 5.6, hy + 5.0, 6.6, E, -1, (92, 88, 96), th=3, bushy=False, arch=0.4)               # heavy glaring brow ridge (inner
+    DX.brow(sp, hx - 0.6, hy + 5.0, 4.2, E, +1, (92, 88, 96), th=2.4, arch=0.4)                          # ends point at the beak root)
+    if shades == 'eyes':
+        for (ex, r) in ((hx + 5.4, 2.8), (hx - 0.6, 2.2)):
+            sp.ell(ex, hy + 1.6, r + 0.5, r, tones(GOLD), ol=False)
+            sp.ell(ex, hy + 1.6, r, r - 0.4, tones(LENS), ol=False, gloss=1.0)
+        thin(sp, (hx + 1.8, hy + 2.2), (hx + 2.8, hy + 2.2), GOLD, 0.3)
+    # beak: upper hook + lower mandible that drops open (the mouth)
+    op = max(mouth_, E['mo'])
+    root = (hx + 7.4, hy - 3.6)
+    up = [(hx + 6.6, hy + 0.2), (hx + 11.0, hy + 0.8), (hx + 15.4, hy - 0.4), (hx + 18.2, hy - 3.0), (hx + 18.6, hy - 5.8), (hx + 17.2, hy - 6.8),
+          (hx + 16.6, hy - 5.0), (hx + 13.0, hy - 3.8), (hx + 7.4, hy - 4.2)]
+    lo = [(hx + 7.4, hy - 4.0), (hx + 13.0, hy - 3.8), (hx + 16.0, hy - 4.6), (hx + 14.4, hy - 6.0), (hx + 10.0, hy - 6.6), (hx + 7.0, hy - 5.8)]
+    BK = 1.3
+    up = [(root[0] + (x - root[0]) * BK, root[1] + (y - root[1]) * BK) for x, y in up]
+    lo = [(root[0] + (x - root[0]) * BK, root[1] + (y - root[1]) * BK) for x, y in lo]
+    ang = -34.0 * op
+    lo2 = _rot(lo, root, ang)
+    if op > 0.05:
+        gape = sp.m_poly([root, (root[0] + 9.0, hy - 4.0), lo2[2], lo2[3], lo2[4]])
+        sp.fill(gape, (150, 34, 48))
+        sp.fill(gape & (DX.YC < root[1] - 2.0 - 3.0 * op), (236, 110, 130))                               # tongue
+        sp.fill(gape & ~erode(gape), (110, 24, 36))
+    sp.poly(lo2, tones(BEAK_D), grad=(hy - 3.8, hy - 6.6 - 4 * op))
+    upm = sp.poly(up, tones(BEAK), grad=(hy + 0.8, hy - 6.8))
+    sp.fill(upm & (DX.YC > hy - 0.6) & (DX.XC < hx + 11.0), mix(BEAK, (255, 240, 170), 0.5))            # cere highlight
+    sp.blob(hx + 11.0, hy - 0.8, 0.45, (90, 60, 20))                                                    # nostril
+    if op <= 0.05: thin(sp, (hx + 8.0, hy - 4.0), (hx + 16.0, hy - 3.9), (150, 90, 20), 0.22)        # gape line
+    if sp.k >= 2: thin(sp, (hx + 18.0, hy - 1.0), (hx + 20.6, hy - 4.6), (255, 236, 160), 0.2)          # hook shine
+    sp.anchors.update(head=(hx, hy), mouth=(hx + 15.0, hy - 4.6), beak=(hx + 21.0, hy - 6.0), eyes=(hx + 2.4, hy + 1.6), belly=(bx, by),
+                      back=Q(-9.0, 47.0))
+    # the combed-over feather + aviators on the forehead
+    fl = flop * (0.6 + 0.4 * math.sin(t * 22.0))
+    base = (hx - 7.0, hy + 6.0); mid_ = (hx + 0.0, hy + 10.6 + 4.0 * fl); tip = (hx + 8.4 - 2.0 * fl, hy + 8.4 + 9.0 * fl)
+    stroke(sp, [base, mid_, tip], (120, 116, 112), 1.05)
+    stroke(sp, [base, mid_, tip], EAGLE_W, 0.7)
+    if shades == 'head':
+        for (ex, r) in ((hx + 4.4, 2.4), (hx - 1.0, 2.0)):
+            sp.ell(ex, hy + 8.4, r + 0.5, r - 0.2, tones(GOLD), ol=False)
+            sp.ell(ex, hy + 8.4, r, r - 0.7, tones(LENS), ol=False, gloss=1.0)
+        thin(sp, (hx + 1.0, hy + 8.6), (hx + 2.0, hy + 8.6), GOLD, 0.3)
+    if sweat > 0:
+        for i, (x, y) in enumerate(((hx - 4.0, hy + 6.0), (hx + 8.6, hy + 5.0))[:int(1 + sweat)]):
+            yy = y - ((t * 4.0 + i * 1.3) % 4.0)
+            sp.ell(x, yy, 0.7, 1.1, tones((170, 220, 255)), ol=False); sp.dot(x - 0.2, yy + 0.4, WHITE)
+    sp.outline(INK, 1)
+    # ---------------------------------------------------------------- near wing (arm) + prop
+    before = sp.m.copy()
+    shN = Q(12.4, 44.0 + br * 0.3)
+    if flying:
+        a = math.radians(30 + 40 * beat)
+        kN = (shN[0] + math.cos(a) * 10, shN[1] + math.sin(a) * 10); eN = (kN[0] + math.cos(a - 0.2) * 9, kN[1] + math.sin(a - 0.2) * 9)
+    else:
+        hn = hand_n if hand_n is not None else Q(17.6 + swing * 0.6, 26.0)
+        kN, eN = ik(shN, hn, 9.0, 8.0, -1.0)
+    sl = tones(JACK) if jacket else tones(EAGLE_B)
+    a1 = sp.cap(shN, kN, 4.2, 3.4, sl)
+    a2 = sp.cap(kN, eN, 3.4, 2.6, sl)
+    if jacket:
+        for (p0, p1, mm) in ((shN, kN, a1), (kN, eN, a2)):                                               # sleeve stripes
+            nx_, ny_ = p1[1] - p0[1], -(p1[0] - p0[0]); L = math.hypot(nx_, ny_) or 1.0
+            o = (nx_ / L * 1.6, ny_ / L * 1.6)
+            thin(sp, (p0[0] + o[0], p0[1] + o[1]), (p1[0] + o[0], p1[1] + o[1]), JRED, 0.6, mask=mm)
+            thin(sp, (p0[0] + o[0] * 0.4, p0[1] + o[1] * 0.4), (p1[0] + o[0] * 0.4, p1[1] + o[1] * 0.4), JWHT, 0.3, mask=mm)
+        sp.ell(eN[0], eN[1], 2.6, 2.4, tones(JRED))                                                        # red cuff
+    if prop_n and getattr(prop_n, 'behind', False): prop_n(sp, eN)
+    _wing_hand(sp, eN, math.atan2(eN[1] - kN[1], eN[0] - kN[0]), 0.9 if flying else 0.5)
+    if prop_n and not getattr(prop_n, 'behind', False): prop_n(sp, eN)
+    sp.anchors['hand'] = eN
+    new = sp.m & ~before
+    o = dilate(new) & ~sp.m
+    sp.col[o] = INK; sp.m |= o
+
+
+# ================================================================================ SAL — the pigeon
+def sal(sp, t=0.0, expr='dead', mouth_=0.0, look=(0.5, 0.0), blink=None, bob=True, fry_=False, walk=None, ruffle=0.0, prop=None,
+        speaker_=False, speaker_on=False):
+    """SAL — a fat grey pear of a city pigeon on two pink matchsticks: dark wing bars, a charcoal tail, a tiny head on an oil-slick
+    green/violet neck, orange eyes with heavy deadpan lids, a dark beak with a white cere, a french fry in the beak; the head bobs"""
+    E = X(expr)
+    if blink is None: blink = ((t + 0.4) % 3.7) < 0.12
+    ph = (t * 1.6) % 1.0
+    hb = (math.sin(ph * 2 * math.pi) * 1.1 if bob else 0.0) + (math.sin(walk * 2) * 1.6 if walk is not None else 0.0)
+    # feet
+    for dx in (-1.6, 1.8):
+        sp.cap((dx, 4.6), (dx + 0.4, 0.8), 0.55, 0.5, tones(PIG_FOOT), ol=False)
+        for tx in (1.4, -1.0, 0.4):
+            thin(sp, (dx + 0.4, 0.6), (dx + 0.4 + tx, 0.2), dark(PIG_FOOT, 0.8), 0.32)
+    # tail
+    sp.poly([(-6.0, 9.0), (-12.6, 5.6), (-12.0, 3.8), (-5.0, 6.0)], tones((70, 72, 86)), grad=(9.0, 3.8))
+    # body
+    body = sp.union([sp.m_ell(0.0, 9.6, 7.8 + ruffle, 6.6 + ruffle * 0.6), sp.m_ell(2.6, 13.4, 4.6, 4.0)], tones(PIG))
+    sp.fill(body & (DX.YC < 6.0), mix(PIG, (220, 224, 236), 0.35))
+    wing = sp.union([sp.m_ell(-2.0, 10.6, 6.0, 4.2, -0.15)], tones(PIG_D))
+    for q, xx in enumerate((-2.6, 0.2)):
+        thin(sp, (xx - 1.6, 12.4 - q * 0.4), (xx + 0.8, 8.4 - q * 0.4), (40, 40, 50), 0.6, mask=wing)
+    # neck (iridescent)
+    hx, hy = 4.6 + hb, 18.6
+    neck = sp.union([sp.m_ell(3.2 + hb * 0.5, 14.8, 3.6, 3.2)], tones(PIG_NG))
+    sp.fill(neck & (DX.XC < 3.0 + hb * 0.5), PIG_NV)
+    sp.fill(neck & (DX.YC > 16.0), mix(PIG_NG, (200, 255, 220), 0.4))
+    head = sp.ell(hx, hy, 3.4, 3.0, tones(mix(PIG, (110, 120, 150), 0.3)))
+    lx, ly = look
+    DX.eye(sp, hx + 1.2, hy + 0.6, 2.4, 2.4, E, PIG_EYE, (lx, ly), blink, lash=INK, skin=mix(PIG, (110, 120, 150), 0.3), bold=1)
+    # beak + cere; mouth = the beak opening
+    op = max(mouth_, E['mo'])
+    sp.poly([(hx + 2.6, hy + 0.2), (hx + 5.2, hy - 0.4), (hx + 2.6, hy - 0.8)], tones((60, 50, 54)))
+    if op > 0.1:
+        sp.poly([(hx + 2.6, hy - 0.9), (hx + 4.8, hy - 1.4 - op * 1.4), (hx + 2.6, hy - 1.6 - op * 0.8)], tones((60, 50, 54)))
+    sp.ell(hx + 2.8, hy + 0.4, 0.7, 0.5, tones((240, 240, 244)), ol=False)                                  # cere
+    if fry_:
+        fy = hy - 0.6 - op * 0.6
+        fry(sp, (hx + 3.2, fy), (hx + 6.0, fy - 2.6))
+    sp.anchors.update(head=(hx, hy), mouth=(hx + 4.0, hy - 0.4), eyes=(hx + 1.2, hy + 0.6))
+    if prop: prop(sp)
+    sp.outline(INK, 1)
+    if speaker_:
+        speaker(sp, (-9.0, 0.0), t, speaker_on)
+
+
+# ================================================================================ DORIS — the last human
+def doris(sp, t=0.0, expr='warm', mouth_=0.0, look=(0.5, 0.0), blink=None, hand_n=None, hand_f=None, meter='$0.00', wave=None):
+    """DORIS — a mini Minnesota grandma: sensible shoes, navy slacks, a floral blouse under a peach cardigan, a red lanyard with a
+    «REAL HUMAN» badge and a taxi meter on her belly (meter text), a big teased auburn bouffant with a headset band over it and a
+    mic arm, half-moon glasses on the nose on a bead chain, rosy cheeks, smile lines"""
+    E = X(expr)
+    if blink is None: blink = ((t + 1.3) % 4.4) < 0.13
+    br = 0.25 * math.sin(t * 2.2)
+    # legs + shoes
+    for k_, dx in enumerate((-2.6, 2.6)):
+        c = SLACK if k_ else dark(SLACK, 0.85)
+        sp.cap((dx, 16.0), (dx, 2.6), 2.2, 1.9, tones(c))
+        sp.ell(dx + 1.0, 1.4, 3.0, 1.5, tones((60, 44, 40)))
+    # far arm
+    shF = (-5.6, 31.0 + br)
+    hf = hand_f if hand_f is not None else (-7.4, 19.0)
+    kF, eF = ik(shF, hf, 6.0, 5.6, -1.0)
+    sp.cap(shF, kF, 2.2, 1.9, tones(dark(CARD_D, 0.84))); sp.cap(kF, eF, 1.9, 1.6, tones(dark(CARD_D, 0.84)))
+    sp.ell(eF[0], eF[1], 1.5, 1.4, tones(dark(SKIN_D, 0.9)))
+    # torso: cardigan open over a blouse
+    tor = sp.union([sp.m_ell(0.6, 24.0, 8.6, 9.6), sp.m_ell(0.4, 31.0, 7.6, 4.0)], tones(CARD_D))
+    bl = tor & (DX.XC > -1.0) & (DX.XC < 5.4) & (DX.YC > 16.0)
+    sp.paint(bl, tones(BLOUSE), None)
+    for q in range(6): sp.dot(0.6 + (q % 3) * 1.6, 30.0 - q * 2.2, (230, 110, 140))                   # floral dots
+    for q in range(4): sp.dot(5.8, 28.4 - q * 3.0, (250, 240, 220))                                  # buttons
+    # lanyard + badge + taxi meter
+    thin(sp, (-1.4, 34.0), (1.8, 23.0), LANY, 0.45); thin(sp, (5.4, 34.0), (2.8, 23.0), LANY, 0.45)
+    bd = sp.m_super(2.4, 21.6, 2.8, 1.6, 4.0)[0]
+    sp.fill(bd, (250, 250, 246)); sp.fill(bd & ~erode(bd), INK)
+    sp.txt_box(['REAL', 'HUMAN'], (-0.2, 20.2, 5.0, 23.0), (30, 60, 140), pad=0.1)
+    mtr = sp.m_super(2.2, 14.6, 5.2, 3.6, 4.0)[0]
+    sp.paint(mtr, tones(METER), None, olc=INK)
+    win = sp.m_super(2.2, 14.6, 4.4, 2.2, 4.0)[0]
+    sp.fill(win, (30, 10, 12), keep=True)
+    sp.txt_box([meter], (-2.0, 12.6, 6.4, 16.6), LED, pad=0.1)
+    sp.anchors['meter'] = (2.2, 14.6)
+    # head: back hair -> face -> bangs dome -> headset
+    hx, hy = 1.8, 40.6
+    puffs = [(hx - 1.0, hy + 4.6, 8.6, 7.4), (hx - 6.0, hy + 0.6, 4.6, 6.4), (hx + 5.2, hy + 3.0, 3.6, 4.6), (hx - 6.8, hy - 4.0, 3.2, 4.0)]
+    back = sp.union([sp.m_ell(cx, cy, rx, ry) for (cx, cy, rx, ry) in puffs], tones(HAIR_D))
+    for q in range(7):
+        a = math.pi * (0.1 + 0.8 * q / 6)
+        thin(sp, (hx - 1.0 + math.cos(a) * 5.0, hy + 4.6 + math.sin(a) * 4.2), (hx - 1.0 + math.cos(a) * 7.8, hy + 4.6 + math.sin(a) * 6.6),
+             mix(HAIR_D, (255, 220, 180), 0.45), 0.24, mask=back)
+    face = sp.union([sp.m_ell(hx + 0.8, hy, 5.8, 6.2), sp.m_ell(hx + 1.6, hy - 2.8, 4.8, 3.8)], tones(SKIN_D))
+    bang = sp.union([sp.m_ell(hx + 0.4, hy + 5.4, 6.4, 3.0, -0.12), sp.m_ell(hx + 4.6, hy + 4.4, 2.8, 2.0, -0.4)], tones(HAIR_D))
+    thin(sp, (hx - 3.6, hy + 5.8), (hx + 3.0, hy + 6.6), mix(HAIR_D, (255, 220, 180), 0.45), 0.24, mask=bang)
+    lx, ly = look
+    for (ex, ew) in ((hx + 3.8, 3.4), (hx - 1.0, 3.0)):
+        DX.eye(sp, ex, hy + 1.0, ew, 3.2, E, (90, 130, 180), (lx, ly), blink, lash=(60, 30, 30), skin=SKIN_D, bold=1, flick=True)
+    for (ex, r) in ((hx + 3.8, 2.0), (hx - 1.0, 1.8)):                                                # half-moon reading glasses
+        lens = sp.m_ell(ex, hy - 0.2, r + 0.4, r * 0.75)[0] & (DX.YC < hy - 0.1)
+        sp.fill(lens & ~erode(lens), (150, 90, 160))
+    thin(sp, (hx + 1.4, hy - 0.3), (hx + 2.0, hy - 0.3), (150, 90, 160), 0.2)
+    DX.brow(sp, hx + 3.8, hy + 3.8, 3.2, E, -1, dark(HAIR_D, 0.7), th=1)
+    DX.brow(sp, hx - 1.0, hy + 3.7, 2.8, E, +1, dark(HAIR_D, 0.7), th=1)
+    for (bx_, by_, rx_) in ((hx + 4.2, hy - 2.0, 1.5), (hx - 1.8, hy - 1.8, 1.2)):
+        sp.fill(sp.m_ell(bx_, by_, rx_, rx_ * 0.7)[0] & face, mix(SKIN_D, (240, 110, 120), 0.45))
+    if sp.k >= 2:
+        thin(sp, (hx + 5.8, hy - 1.0), (hx + 4.8, hy - 3.6), dark(SKIN_D, 0.78), 0.14)
+        thin(sp, (hx - 2.6, hy - 1.0), (hx - 1.8, hy - 3.4), dark(SKIN_D, 0.8), 0.14)
+        for q in range(2): thin(sp, (hx + 5.6, hy + 1.6 - q * 0.8), (hx + 6.4, hy + 1.2 - q * 0.8), dark(SKIN_D, 0.8), 0.12)
+    sp.ell(hx + 6.4, hy - 0.6, 1.4, 1.3, tones(dark(SKIN_D, 0.95)))
+    mx, my = hx + 2.8, hy - 3.8
+    DX.mouth(sp, mx, my, 4.0, E, mouth_ * 0.8, (200, 70, 90), inside=(110, 30, 50), skin=SKIN_D, maxh=3.6)
+    stroke(sp, [(hx - 6.4, hy + 1.0), (hx - 3.6, hy + 11.2), (hx + 3.6, hy + 11.0), (hx + 7.0, hy + 2.0)], (50, 50, 60), 0.5)   # headset band
+    sp.ell(hx + 7.0, hy + 0.6, 1.3, 1.7, tones((50, 50, 60)))
+    stroke(sp, [(hx + 7.0, hy - 0.6), (hx + 7.4, hy - 3.4), (hx + 5.4, hy - 4.4)], (50, 50, 60), 0.3)
+    sp.blob(hx + 5.2, hy - 4.4, 0.6, (30, 30, 36))
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my), eyes=(hx + 0.8, hy + 1.2))
+    sp.outline(INK, 1)
+    # near arm
+    before = sp.m.copy()
+    shN = (7.4, 31.0 + br)
+    if wave is not None: hn = (12.0 + math.sin(wave * 9) * 1.6, 40.0)
+    else: hn = hand_n if hand_n is not None else (9.0, 19.0)
+    kN, eN = ik(shN, hn, 6.0, 5.6, -1.0 if wave is None else 1.0)
+    sp.cap(shN, kN, 2.3, 2.0, tones(CARD_D)); sp.cap(kN, eN, 2.0, 1.7, tones(CARD_D))
+    sp.ell(eN[0], eN[1], 1.6, 1.5, tones(SKIN_D))
+    sp.anchors['hand'] = eN; sp.anchors['hand_f'] = eF
+    new = sp.m & ~before
+    o = dilate(new) & ~sp.m
+    sp.col[o] = INK; sp.m |= o
+
+
+# ================================================================================ KIOSK (XFEENITY self-service) + DOOR
+def kiosk(sp, t=0.0, talk=0.0, chute=0.0):
+    """a white self-service pillar with a big tilted tablet head (the Fee-Bee face) and a dispenser chute; chute 0..1 = the flap open"""
+    sp.sup(0.0, 1.4, 9.0, 1.6, tones(KIO_D), n=3.0)
+    pil = sp.poly([(-4.2, 2.6), (4.2, 2.6), (3.4, 38.0), (-3.4, 38.0)], tones(KIO), grad=(38.0, 2.6))
+    sp.fill(pil & (np.abs(DX.YC - 30.0) < 0.6), PURP)
+    sp.fill(pil & (np.abs(DX.YC - 28.6) < 0.4), MINT_D)
+    ch = sp.m_super(0.0, 16.0, 3.2, 2.0, 4.0)[0]
+    sp.fill(ch, (40, 40, 50))
+    if chute > 0: sp.fill(sp.m_super(0.0, 14.6 - 1.4 * chute, 3.0, 0.5, 4.0)[0], (180, 180, 190))
+    sp.txt_box(['FEE-BEE'], (-3.2, 21.0, 3.2, 23.6), PURP, pad=0.1)
+    hd = sp.m_super(0.0, 48.0, 12.0, 10.0, 4.0)[0]
+    sp.paint(hd, tones(KIO), DX.lit(np.clip(DX.XC / 12.0, -0.9, 0.9), np.clip((DX.YC - 48.0) / 10.0, -0.9, 0.9)))
+    sc = sp.m_super(0.0, 48.0, 10.4, 8.4, 4.0)[0]
+    sp.fill(sc, (24, 36, 60), keep=True)
+    feebee_face(sp, 0.0, 49.0, 6.6, t, talk)
+    sp.anchors.update(screen=(0.0, 48.0), chute=(0.0, 15.0), head=(0.0, 48.0))
+
+
+def door(sp, t=0.0, open_=0.0, glow=1.0):
+    """EMPLOYEES ONLY door in the white back wall: a grey frame, the leaf swings in (narrows) and bright light pours from inside"""
+    W_, H_ = 26.0, 56.0
+    fr = sp.m_super(0.0, H_ / 2 + 0.6, W_ / 2 + 1.6, H_ / 2 + 1.2, 6.0)[0]
+    sp.paint(fr, tones((170, 168, 186)), None, olc=INK)
+    inner = sp.m_super(0.0, H_ / 2, W_ / 2, H_ / 2, 8.0)[0]
+    sp.fill(inner, mix((255, 250, 220), (255, 255, 255), 0.4 * glow) if open_ > 0.02 else (60, 60, 70), keep=True)
+    if open_ < 0.999:
+        w = W_ * (1 - open_ * 0.86)
+        x0 = -W_ / 2
+        leaf = sp.m_poly([(x0, 0.0), (x0 + w, 0.0 + 2.0 * open_), (x0 + w, H_ - 2.0 * open_), (x0, H_)])
+        sp.paint(leaf, tones((214, 212, 224)), None, olc=INK)
+        if open_ < 0.35:
+            sp.ell(x0 + w - 2.6, H_ * 0.48, 1.0, 0.8, tones((200, 170, 60)), ol=False)
+            pl = sp.m_super(x0 + w / 2, H_ * 0.72, w * 0.40, 5.4, 4.0)[0]
+            sp.fill(pl, (204, 36, 46)); sp.fill(pl & ~erode(pl), INK)
+            sp.txt_box(['EMPLOYEES', 'ONLY'], (x0 + w / 2 - w * 0.36, H_ * 0.72 - 4.6, x0 + w / 2 + w * 0.36, H_ * 0.72 + 4.6), (255, 255, 255), pad=0.2)
+    sp.anchors.update(center=(0.0, H_ / 2), head=(0.0, H_ * 0.8))

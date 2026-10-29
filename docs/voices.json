@@ -799,9 +799,9 @@
    "slug": "grim-ride",
    "char": "dashley",
    "voice_id": "LNZyyXPD0jcfm1UPIKsc",
-   "status": "active",
+   "status": "deleted",
    "name": "Dashley (DoomDash support bot)",
-   "voice_name": "grim-ride — Dashley (DoomDash support bot) (restored)",
+   "voice_name": "Grim Ride — Dashley (DoomDash support bot)",
    "lines": 9,
    "episodes": 3,
    "samples": [
@@ -829,7 +829,14 @@
    "account": {
     "category": "cloned",
     "description": "A relentlessly cheerful corporate customer-support AI assistant: a young adult American woman's voice, perky, sing-song, bright and a little too polite, slightly synthetic and robotic in rhythm, smiling through every sentence, clean studio sound. Comedic.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1792621744
    },
    "history": [
@@ -838,7 +845,10 @@
      "until": "2026-10-21",
      "note": "deleted, restored as IVC clone"
     }
-   ]
+   ],
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/LNZyyXPD0jcfm1UPIKsc/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiNzg5YmNmNjgtNDE4OC00NjJmLWIwYTUtMjNhZDUwNTQ1MGZkLm1wMyIsInRpbWVzdGFtcCI6MTc5MzI0MjgwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-29",
+   "deleted_reason": "manual"
   },
   {
    "slug": "grim-ride",
@@ -969,6 +979,122 @@
     "description": "A suburban American mom in her late thirties, brisk and judgmental, suspicious side-eye in her voice, clipped polite-but-final delivery, slight vocal fry, holding an iced coffee energy. Natural, comedic.",
     "settings": null,
     "created_at_unix": 1791319554
+   }
+  },
+  {
+   "slug": "land-of-the-fee",
+   "char": "duke",
+   "voice_id": "VwuOUTEifmEo5liYSsaS",
+   "status": "active",
+   "name": "Duke (bald eagle)",
+   "voice_name": "Land of the Fee — Duke (bald eagle)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [],
+   "design": {
+    "description": "A loud, macho, overconfident American man in his mid forties with a gravelly, raspy action-movie-trailer baritone. Over-the-top 80s action hero bravado and patriotic swagger, a little dim, roars when outraged, speaks every sentence like a heroic one-liner; when he loses, his voice deflates and goes small. Very expressive, comedic, punchy fast delivery. General American accent, native English speaker.",
+    "text": "[furious, roaring] REPRESENTATIVE! [proud, booming] I'm a bald eagle. I'm on the dollar! [determined, gritty] Fine. I'm talking to a human. [outraged] For what?!",
+    "picked": {
+     "i": 1,
+     "dur": 7.31,
+     "f0": 246.2,
+     "f0_iqr": 95.8,
+     "rate": 32.0,
+     "loud_sd": 4.4
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A loud, macho, overconfident American man in his mid forties with a gravelly, raspy action-movie-trailer baritone. Over-the-top 80s action hero bravado and patriotic swagger, a little dim, roars when outraged, speaks every sentence like a heroic one-liner; when he loses, his voice deflates and goes small. Very expressive, comedic, punchy fast delivery. General American accent, native English speaker.",
+    "settings": null,
+    "created_at_unix": 1793246006
+   }
+  },
+  {
+   "slug": "land-of-the-fee",
+   "char": "sal",
+   "voice_id": "0LhkTs3X3fXASzpzsM4I",
+   "status": "active",
+   "name": "Sal (pigeon)",
+   "voice_name": "Land of the Fee — Sal (pigeon)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [],
+   "design": {
+    "description": "A tired, unimpressed older man in his sixties from Brooklyn, New York. Thin nasal slightly raspy voice, very slow, low-energy dry deadpan delivery, sarcastic and street-smart, sounds like he has seen everything and cares about nothing. Thick Brooklyn accent. Short sentences, flat intonation, tiny pauses before the punchline. Native English speaker.",
+    "text": "[deadpan, bored] Not on yours. [dry] Pigeons don't pay rent. We collect it. [flat, unimpressed] Majestic.",
+    "picked": {
+     "i": 1,
+     "dur": 7.31,
+     "f0": 113.5,
+     "f0_iqr": 26.5,
+     "rate": 22.5,
+     "loud_sd": 5.7
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A tired, unimpressed older man in his sixties from Brooklyn, New York. Thin nasal slightly raspy voice, very slow, low-energy dry deadpan delivery, sarcastic and street-smart, sounds like he has seen everything and cares about nothing. Thick Brooklyn accent. Short sentences, flat intonation, tiny pauses before the punchline. Native English speaker.",
+    "settings": null,
+    "created_at_unix": 1793246011
+   }
+  },
+  {
+   "slug": "land-of-the-fee",
+   "char": "feebee",
+   "voice_id": "RwxygB5ruF7aNKTLfElp",
+   "status": "active",
+   "name": "Fee-Bee (AI support bot)",
+   "voice_name": "Land of the Fee — Fee-Bee (AI support bot)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [],
+   "design": {
+    "description": "A relentlessly cheerful young female AI customer-service assistant. Bright, bubbly, sing-song upbeat voice with rising intonation, over-polished and a little synthetic like a perfect corporate voice assistant, a fake customer-service smile in every word, fast and crisp, never stops being happy even when delivering bad news. American accent.",
+    "text": "[bubbly, chipper] Hi! I'm Fee-Bee, your AI helper! [cheerful] Sounds like you said, upgrade! Done! [sing-song] Sounds like you said, hummus!",
+    "picked": {
+     "i": 0,
+     "dur": 8.83,
+     "f0": 313.7,
+     "f0_iqr": 129.7,
+     "rate": 31.1,
+     "loud_sd": 7.1
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A relentlessly cheerful young female AI customer-service assistant. Bright, bubbly, sing-song upbeat voice with rising intonation, over-polished and a little synthetic like a perfect corporate voice assistant, a fake customer-service smile in every word, fast and crisp, never stops being happy even when delivering bad news. American accent.",
+    "settings": null,
+    "created_at_unix": 1793246015
+   }
+  },
+  {
+   "slug": "land-of-the-fee",
+   "char": "doris",
+   "voice_id": "N6PX5q8cQTh4FZMyFW3G",
+   "status": "active",
+   "name": "Doris (the last human rep)",
+   "voice_name": "Land of the Fee — Doris (the last human rep)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [],
+   "design": {
+    "description": "A sweet, warm, folksy grandmotherly woman in her late sixties from Minnesota. Friendly cozy voice, calls everyone hon, strong upbeat Minnesota accent with long round vowels, gentle and slow, smiling, completely unbothered while calmly delivering terrible news about money. Native English speaker.",
+    "text": "[warm, sweet] Hi, hon! I'm a real human! [sweet, matter-of-fact] That's nineteen ninety-nine a minute. [gently] Eye contact's extra, hon.",
+    "picked": {
+     "i": 0,
+     "dur": 9.4,
+     "f0": 256.0,
+     "f0_iqr": 111.1,
+     "rate": 23.5,
+     "loud_sd": 6.4
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A sweet, warm, folksy grandmotherly woman in her late sixties from Minnesota. Friendly cozy voice, calls everyone hon, strong upbeat Minnesota accent with long round vowels, gentle and slow, smiling, completely unbothered while calmly delivering terrible news about money. Native English speaker.",
+    "settings": null,
+    "created_at_unix": 1793246020
    }
   },
   {
@@ -1623,7 +1749,7 @@
    "slug": "sunny-palms-hoa",
    "char": "brenda",
    "voice_id": "SK1BhvqG7RGgUrYJyInI",
-   "status": "active",
+   "status": "deleted",
    "name": "Brenda",
    "voice_name": "Sunny Palms HOA — Brenda",
    "lines": 48,
@@ -1653,9 +1779,19 @@
    "account": {
     "category": "generated",
     "description": "A cheerful, syrupy-sweet American woman in her late fifties, a passive-aggressive suburban HOA president. Bright, slightly high-pitched, slightly nasal voice with a gentle Southern lilt, relentlessly polite with an edge of steel underneath, smiling audibly while she delivers bad news. Says 'bless your heart' as an insult. Native American English speaker.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1790665829
-   }
+   },
+   "preview_url": "https://api.us.elevenlabs.io/v1/voices/SK1BhvqG7RGgUrYJyInI/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiI0MjQwNjdiYTMxOWM0N2NjYmZmMGUyODkwM2Y3MDQxYyIsImZpbGVuYW1lIjoiNmY4MWM2NzgtMDc0NC00ZGUxLWFlYjItNTNjZWI2NWI0ZDE5Lm1wMyIsInRpbWVzdGFtcCI6MTc5MzI0MjgwMDAwMDAwMH0%3D",
+   "deleted_on": "2026-10-29",
+   "deleted_reason": "free slots"
   },
   {
    "slug": "sunny-palms-hoa",
@@ -1840,7 +1976,7 @@
    "slug": "thanks-randy",
    "char": "scandee",
    "voice_id": "3ANi4ZKHBsZCpmOHdUAL",
-   "status": "active",
+   "status": "deleted",
    "name": "SCAN-DEE (every machine)",
    "voice_name": "Thanks, Randy — SCAN-DEE (every machine)",
    "lines": 12,
@@ -1870,15 +2006,25 @@
    "account": {
     "category": "generated",
     "description": "A polite synthetic female voice of a supermarket self-checkout machine. Perfectly even, chipper, customer-service robotic tone, slightly too cheerful, clipped and precise articulation, no emotion at all, like an automated announcement. Adult woman, American English.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1792545236
-   }
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/3ANi4ZKHBsZCpmOHdUAL/ac992e55-36e4-4bab-9049-b941cc82ec98.mp3",
+   "deleted_on": "2026-10-29",
+   "deleted_reason": "free slots"
   },
   {
    "slug": "thanks-randy",
    "char": "joyce",
    "voice_id": "dJjx0RiCfuNSJOqSszkH",
-   "status": "active",
+   "status": "deleted",
    "name": "Nana Joyce",
    "voice_name": "Thanks, Randy — Nana Joyce",
    "lines": 12,
@@ -1908,9 +2054,19 @@
    "account": {
     "category": "generated",
     "description": "A tiny sweet elderly grandmother in her eighties from the American Midwest. Thin, high, sugary old-lady voice with a slight tremble, very polite and warm on the surface but passive-aggressive underneath, and the last word of every sentence turns sharp and steely. Gossipy and nosy, comedic timing. Native American English speaker.",
-    "settings": null,
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
     "created_at_unix": 1792545221
-   }
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/dJjx0RiCfuNSJOqSszkH/b017f575-9727-42d3-8e61-a5e0a169c775.mp3",
+   "deleted_on": "2026-10-29",
+   "deleted_reason": "free slots"
   },
   {
    "slug": "thanks-randy",
@@ -1922,7 +2078,6 @@
    "lines": 10,
    "episodes": 5,
    "samples": [
-    "library/voice_archive/thanks-randy/brayden_preview.mp3",
     "series/thanks-randy/voice/ep06/b1.mp3",
     "series/thanks-randy/voice/ep03/b1.mp3",
     "series/thanks-randy/voice/ep01/b2.mp3",
@@ -2150,8 +2305,8 @@
    "status": "active",
    "name": "Валера",
    "voice_name": "Валера и кот — Валера",
-   "lines": 67,
-   "episodes": 10,
+   "lines": 83,
+   "episodes": 13,
    "samples": [
     "series/valera-i-kot/voice/movie/v02.mp3",
     "series/valera-i-kot/voice/s2e01/v5.mp3",
@@ -2188,17 +2343,17 @@
    "status": "active",
    "name": "Кот Дембель",
    "voice_name": "valera-i-kot — Кот Дембель (restored)",
-   "lines": 33,
-   "episodes": 10,
+   "lines": 41,
+   "episodes": 13,
    "samples": [
     "series/valera-i-kot/voice/movie/c01.mp3",
+    "series/valera-i-kot/voice/s2e06/c3.mp3",
+    "series/valera-i-kot/voice/s2e05/c2.mp3",
+    "series/valera-i-kot/voice/s2e04/c3.mp3",
     "series/valera-i-kot/voice/s2e03/c3.mp3",
     "series/valera-i-kot/voice/movie/c03.mp3",
     "series/valera-i-kot/voice/ep02/c1.mp3",
-    "series/valera-i-kot/voice/s2e02/c2.mp3",
-    "series/valera-i-kot/voice/ep03/c1.mp3",
-    "series/valera-i-kot/voice/movie/c06.mp3",
-    "series/valera-i-kot/voice/movie/c05.mp3"
+    "series/valera-i-kot/voice/s2e02/c2.mp3"
    ],
    "design": {
     "description": "A lazy, cynical middle-aged Russian man's voice for a fat cartoon cat. Low, smooth and slightly husky, very slow bored deadpan delivery, dry sarcasm, sounds half-asleep and totally unimpressed. Native Russian speaker.",
@@ -2235,8 +2390,8 @@
    "status": "active",
    "name": "Баба Зина",
    "voice_name": "valera-i-kot — Баба Зина (restored)",
-   "lines": 23,
-   "episodes": 5,
+   "lines": 25,
+   "episodes": 7,
    "samples": [
     "series/valera-i-kot/voice/movie/z07.mp3",
     "series/valera-i-kot/voice/movie/z04.mp3",
@@ -2270,6 +2425,53 @@
    "history": [
     {
      "voice_id": "YLwEzYleYhWwRlkHH8jA",
+     "until": "2026-10-12",
+     "note": "deleted, restored as IVC clone"
+    }
+   ]
+  },
+  {
+   "slug": "valera-i-kot",
+   "char": "nina",
+   "voice_id": "pVPuMCjFhiIm88pqmX0y",
+   "status": "active",
+   "name": "Нина Петровна (ЖЭК)",
+   "voice_name": "valera-i-kot — Нина Петровна (ЖЭК) (restored)",
+   "lines": 17,
+   "episodes": 7,
+   "samples": [
+    "series/valera-i-kot/voice/s2e01/n3.mp3",
+    "series/valera-i-kot/voice/s2e06/n3.mp3",
+    "series/valera-i-kot/voice/s2e05/n1.mp3",
+    "series/valera-i-kot/voice/movie/n01.mp3",
+    "series/valera-i-kot/voice/s2e04/n1.mp3",
+    "series/valera-i-kot/voice/s2e05/n2.mp3",
+    "series/valera-i-kot/voice/ep04/n5.mp3",
+    "series/valera-i-kot/voice/s2e06/n2.mp3"
+   ],
+   "design": {
+    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
+    "text": "ЖЭК, слу́шаю. В труба́х, мужчи́на. До пятна́дцатого. Зна́чит, до сле́дующего. Э́то вода́. Служе́бная. Заявле́ния принима́ем по вто́рникам, с двух до двух пятна́дцати.",
+    "picked": {
+     "i": 1,
+     "dur": 13.56,
+     "f0": 177.8,
+     "f0_iqr": 41.3,
+     "rate": 16.2,
+     "loud_sd": 5.0
+    }
+   },
+   "account": {
+    "category": "cloned",
+    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1791781536
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/9dk6dPXhLLtqmUWeVU6p/1c3dc72a-57d2-4a0e-a964-2879386a5c09.mp3",
+   "deleted_reason": "free slots",
+   "history": [
+    {
+     "voice_id": "9dk6dPXhLLtqmUWeVU6p",
      "until": "2026-10-12",
      "note": "deleted, restored as IVC clone"
     }
@@ -2324,60 +2526,13 @@
   },
   {
    "slug": "valera-i-kot",
-   "char": "nina",
-   "voice_id": "pVPuMCjFhiIm88pqmX0y",
-   "status": "active",
-   "name": "Нина Петровна (ЖЭК)",
-   "voice_name": "valera-i-kot — Нина Петровна (ЖЭК) (restored)",
-   "lines": 10,
-   "episodes": 4,
-   "samples": [
-    "series/valera-i-kot/voice/s2e01/n3.mp3",
-    "series/valera-i-kot/voice/movie/n01.mp3",
-    "series/valera-i-kot/voice/ep04/n5.mp3",
-    "series/valera-i-kot/voice/ep04/n1.mp3",
-    "series/valera-i-kot/voice/ep04/n2.mp3",
-    "series/valera-i-kot/voice/s2e03/n1.mp3",
-    "series/valera-i-kot/voice/ep04/n4.mp3",
-    "series/valera-i-kot/voice/s2e01/n1.mp3"
-   ],
-   "design": {
-    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
-    "text": "ЖЭК, слу́шаю. В труба́х, мужчи́на. До пятна́дцатого. Зна́чит, до сле́дующего. Э́то вода́. Служе́бная. Заявле́ния принима́ем по вто́рникам, с двух до двух пятна́дцати.",
-    "picked": {
-     "i": 1,
-     "dur": 13.56,
-     "f0": 177.8,
-     "f0_iqr": 41.3,
-     "rate": 16.2,
-     "loud_sd": 5.0
-    }
-   },
-   "account": {
-    "category": "cloned",
-    "description": "A condescending Russian housing-office clerk woman in her fifties. Cold, slow, indifferent and slightly haughty voice, speaks as if doing you a big favor, calm and bored. Native Russian speaker.",
-    "settings": null,
-    "created_at_unix": 1791781536
-   },
-   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/9dk6dPXhLLtqmUWeVU6p/1c3dc72a-57d2-4a0e-a964-2879386a5c09.mp3",
-   "deleted_reason": "free slots",
-   "history": [
-    {
-     "voice_id": "9dk6dPXhLLtqmUWeVU6p",
-     "until": "2026-10-12",
-     "note": "deleted, restored as IVC clone"
-    }
-   ]
-  },
-  {
-   "slug": "valera-i-kot",
    "char": "semenych",
    "voice_id": "wB7e2HF2LrmqM3QcPn0B",
    "status": "active",
    "name": "Семёныч",
-   "voice_name": "Валера и кот — Семёныч",
-   "lines": 10,
-   "episodes": 1,
+   "voice_name": "valera-i-kot — Семёныч (restored)",
+   "lines": 11,
+   "episodes": 2,
    "samples": [
     "series/valera-i-kot/voice/movie/s10.mp3",
     "series/valera-i-kot/voice/movie/s02.mp3",
@@ -2401,17 +2556,10 @@
     }
    },
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "An eccentric intelligent Russian man around sixty, a former literature teacher and charming drinker. Theatrical, pompous, declamatory delivery, soft warm baritone, slightly nasal, a little tipsy and ironic, very articulate. Native Russian speaker.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1791792734
+    "settings": null,
+    "created_at_unix": 1792725887
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/B5J7DQRqcdz5aZwL642J/dd87b634-78d3-45a8-8a29-efbb6c8ea229.mp3",
    "deleted_reason": "auto: room for prokhor/fox",
@@ -2430,8 +2578,8 @@
    "status": "active",
    "name": "Баба Люба",
    "voice_name": "valera-i-kot — Баба Люба (restored)",
-   "lines": 9,
-   "episodes": 4,
+   "lines": 10,
+   "episodes": 5,
    "samples": [
     "series/valera-i-kot/voice/movie/l02.mp3",
     "series/valera-i-kot/voice/movie/l01.mp3",
@@ -2440,7 +2588,7 @@
     "series/valera-i-kot/voice/movie/l03.mp3",
     "series/valera-i-kot/voice/ep05/l1.mp3",
     "series/valera-i-kot/voice/movie/l04.mp3",
-    "series/valera-i-kot/voice/s2e03/l1.mp3"
+    "series/valera-i-kot/voice/s2e05/l1.mp3"
    ],
    "design": {
     "description": "A slow, heavy Russian grandmother around eighty. Low, raspy and breathy elderly female voice, very slow deadpan delivery with long pauses, dry and unimpressed. Native Russian speaker.",
@@ -2477,12 +2625,13 @@
    "status": "active",
    "name": "Гена (сосед сверху)",
    "voice_name": "Валера и кот — Гена (сосед сверху)",
-   "lines": 3,
-   "episodes": 1,
+   "lines": 4,
+   "episodes": 2,
    "samples": [
     "series/valera-i-kot/voice/s2e02/g2.mp3",
     "series/valera-i-kot/voice/s2e02/g3.mp3",
-    "series/valera-i-kot/voice/s2e02/g1.mp3"
+    "series/valera-i-kot/voice/s2e02/g1.mp3",
+    "series/valera-i-kot/voice/s2e06/g1.mp3"
    ],
    "design": {
     "description": "A loud, cheerful, raspy Russian handyman in his late forties, a neighbour who has been renovating his flat for years. Hoarse jolly bass voice, slightly deaf from power tools so he always half-shouts, warm and good-natured, simple working-class manner, laughs easily. Native Russian speaker, plain provincial Russian accent.",
@@ -2510,17 +2659,17 @@
    "status": "deleted",
    "name": "Колян",
    "voice_name": "Валера и кот — Колян",
-   "lines": 8,
-   "episodes": 1,
+   "lines": 10,
+   "episodes": 2,
    "samples": [
     "series/valera-i-kot/voice/movie/k05.mp3",
     "series/valera-i-kot/voice/movie/k07.mp3",
     "series/valera-i-kot/voice/movie/k02.mp3",
+    "series/valera-i-kot/voice/s2e04/k02.mp3",
     "series/valera-i-kot/voice/movie/k03.mp3",
     "series/valera-i-kot/voice/movie/k08.mp3",
     "series/valera-i-kot/voice/movie/k01.mp3",
-    "series/valera-i-kot/voice/movie/k04.mp3",
-    "series/valera-i-kot/voice/movie/k06.mp3"
+    "series/valera-i-kot/voice/s2e04/k01.mp3"
    ],
    "design": {
     "description": "A huge, slow, taciturn Russian working-class man in his forties. Very deep, low, rumbling bass voice, lazy and sleepy, slightly hoarse, minimal intonation, speaks rarely and very briefly but warmly. Native Russian speaker.",
@@ -2577,5 +2726,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-10-23 03:24"
+ "updated": "2026-10-29 03:53"
 }

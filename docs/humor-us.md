@@ -295,3 +295,32 @@ time.com / abc7ny.com (age limits), knowyourmeme.com / napoleoncat.com (сент
 ## 21.10.2026 — антураж «Thanks, Randy» E01 (визуальные надписи, `engine/props/randydecor.py`)
 В других US-мультах не повторять, внутри сериала — сквозные.
 - **Shop'n'Weep:** «SHOP'N WEEP — PRICES THAT MOVE YOU (TO TEARS)», «SINCE 1987», «TURKEYS $3.99/LB* / *LB = LITTLE BIT», «HAPPY THANKSGIVING — NO REFUNDS ON GRATITUDE», «SELF-CHECKOUT: YOU WORK HERE NOW», «ATTENDANT ON BREAK SINCE 2019», «BUTTERBUTT — AMERICAS MOST FROZEN TURKEY», «BUTTERBUTT — THAW TIME: 5 DAYS (LOL)», «LIMIT 1 CRANBERRY CAN PER FAMILY», «GOURDS (DO NOT EAT)», «PUMPKINS $19.99 EA», «TISSUES > AISLE 7 (NEXT TO EGGS)», «BAGS 10C / BAG FOR BAGS 25C», «ALL TURKEYS FROZEN (SORRY)», «LANE CLOSED (FOREVER)», пакет «THANK YOU!», фартук «KISS THE COOK (DON'T)», экран «GRANDMA DETECTED · NANA 98 LB × $4.99/LB = $489.02».
+
+## 29.10.2026 — разведка для «Land of the Fee» (белоголовый орлан против американских поборов)
+Поиск 29.10.2026 (WebSearch, выдача US). Формат: мем / тема → смысл → как вкладываем → дата → статус.
+
+| Мем / тема | Смысл | Как вкладываем | Дата | Статус |
+|---|---|---|---|---|
+| **Стоимость жизни** | Insurify 2026: 79 % тревожит стоимость жизни; неподъёмны продукты 55 % (было 37 %), бензин 57 %, автостраховка 42 % (было 31 %); аренда — 53 % миллениалов и зумеров. Talker Research (апр. 2026): 2026 — «stressful» (35 %) | Каждая серия — один побор: поддержка, аренда, ER, автостраховка, билеты, лоукостер | 2026 | основа сезона |
+| **ИИ-поддержка** | 43,9 % кричат «HUMAN!»/«REPRESENTATIVE!» в трубку (Parloa), 75 % недовольны (Glance 2026), 85–89 % хотят человека (Metrigy, Infobip) | E01: «REPRESENTATIVE!!»; Фи-Би превращает слово в платную услугу; живой человек — $19.99/мин | 2026 | E01, сквозной |
+| **Открытая запись на медстраховку 2027** | Старт 1.11.2026, медиана +14–15 % к взносам (Peterson-KFF, healthinsurance.org) | E03: счёт ER, «skin-to-skin contact», prior authorization | окт 2026 | E03 |
+| **«Preparing for my Netflix documentary»** | Тренд 2026 (июнь–осень, KnowYourMeme, YPulse): «готовлюсь к интервью о драме жизни» | E06: Дюк «готовится к интервью» в камеру | 2026 | специя |
+| **Крик орла = крик ястреба** | В кино орланам подкладывают крик краснохвостого ястреба; настоящий орлан пищит | «Sal, hit the SCREAM» (колонка) vs писк; E05 Рекс — «голос всех орлов» | evergreen | сквозной, байт на комментарии |
+| **Мусорные сборы** | «convenience / amenity / pet / resort / service / facility fee», basic economy | Названия и стикеры серий | evergreen | основа |
+
+Источники: insurify (kpcnews.com, homenewshere.com), talkerresearch / news12.com, cybernews.com (Parloa), glance.cx, consumeraffairs.com,
+familiesusa.org, healthinsurance.org, kffhealthnews.org, knowyourmeme.com, ypulse.com, tribune.com.pk.
+**Риск:** бот поддержки уже был в «Grim Ride» (Dashley «Sorry, I didn't catch that!») — у нас другой гэг: бот всё слышит и продаёт.
+**Не трогаем:** реальных политиков, партии, гимн целиком (только каламбур названия), религиозные надписи на деньгах.
+
+### Пародийные бренды (банк §4)
+«XFEENITY» (провайдер), «Fee-Bee™ AI», «Liberty Plaza», «Slice of Freedom», «Nail It», «Liberty Lofts / S.P. Holdings LLC»,
+«St. Overcharge Medical Center», «United We Bill», «State Fee Insurance», «TicketMaxed», «Penny Air».
+
+### Заложено в «Land of the Fee», сезон 1 (не повторять в других US мультах)
+E01 (сделан 29.10.2026): «REPRESENTATIVE!!», «Sounds like you said — UPGRADE / HUMMUS / HUMAN!», «I'm a BALD EAGLE. I'm on the DOLLAR!» —
+«Not on YOURS.», моль из кошелька, «HUMAN FEE $19.99/MIN», «Eye contact's EXTRA, hon.», писк орлана + «Majestic.», Сэл на голове Дюка.
+Антураж E01: «XFEENITY PAST DUE», «RENT $2,400», «PAPER BILL FEE $9.99 (BY EMAIL)», «LATE FEE FOR LATE FEE», «MAJESTIC SINCE 1782»,
+«WORLD'S OKAYEST EAGLE», «HOME SWEET RENTED HOME», «WI-FI: DOWN (AGAIN)», «NO PIGEONS», «NOW 100% AI!», «*HUMANS AVAILABLE (FEES APPLY)»,
+«PARKING $5 / 15 MIN», «COIN LAUNDRY $8 A LOAD (LOL)», «NO HUMANS! (YAY!)», «YOUR CALL IS IMPORTANT TO US (IT ISN'T)»,
+«SERVICE DESK: CLOSED (FOREVER)», «HUMANS BY APPOINTMENT», «$1,299 + FEES», «FREE FRIES (FOR PIGEONS)». E02–E06 — в `season1_script.txt`.
