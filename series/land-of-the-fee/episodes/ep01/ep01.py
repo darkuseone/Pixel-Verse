@@ -22,7 +22,7 @@ from props.feekit import A, wpt, aout
 from timeline import DUR, FPS, VOICE, SLUG, CUTS, NAMES, TWIST, CHIRP
 
 EPI = Episode('ep01', VOICE, DUR, FPS, colors=K.COL, slug=SLUG,
-              endcard=dict(style='fee', lang='us', promise='NEXT: $95 TO APPLY?!'))
+              endcard=dict(style='fee', lang='us', promise='NEXT: $95 TO APPLY?!', cy=1470))
 APT, MALL, STORE = K.world('apartment'), K.world('mall'), K.world('store')
 
 
@@ -272,7 +272,7 @@ SHOW = K.Show(EPI, 1, ['REPRESENTATIVE!!'], hook_t=(0.08, 1.90), hook_y=330, hoo
                         (K.st('+$19.99', fg=(130, 255, 160), size=60), 22.95, 23.40, 700, 760),
                         (SEND, 23.50, 25.45, 540, 340),
                         (K.st('$59.97', fg=(255, 90, 90), size=72), 27.42, 27.55, 760, 700),
-                        (CHOICE, 28.95, 31.0, 540, 1450)],
+                        (CHOICE, 28.95, 31.0, 540, 390)],
               flashes=[14.72, TWIST], mosaics=[CUTS[4]],
               cap_y={0: 1420, 1: 470, 2: 1300, 3: 1420, 4: 1420, 5: 1400, 6: 1420, 7: 470, 8: 640, 9: 1420, 10: 1450, 11: 560})
 
