@@ -58,3 +58,4 @@
 - `P.build(bk, 'dir/x')` создаёт только родителя — каталог создавать самому.
 - US «Land of the Fee» (29.10): орлан Дюк + голубь Сэл, манера «Intaglio Pop» (гравюрная штриховка), STATUS в `series/land-of-the-fee/STATUS.md`. Слоты голосов 30/30 — удаление только с «да» владельца (фильтр авто-режима).
 - Звук «на слух» (тест 30.10): скил `/earshot` — earshot слушает финал (critique, синхрон по `sound/cues.json`, sheet), банк звуков кодом `engine/earshot_sfx.py`, `VOICE_LUFS`, музыка без обрывов (duck 0,55), саб на ударах. E01 «Land of the Fee»: needs work → launch-grade.
+- US с 30.10.2026: только YouTube + Instagram (TikTok US не ведём — показы уходят в Молдову); X — позже. Слот Land of the Fee: Нью-Йорк 16:15 / 16:30.
