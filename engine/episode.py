@@ -18,10 +18,12 @@ COVER_SEC = 0.1  # длительность вшитой обложки в на�
 
 
 class Episode:
-    def __init__(s, ep, voice, dur, fps=30, colors=COL, slug=P.PDZ, cap_words=3, endcard=None):
-        """endcard=dict(style='fm'|'default'|..., lang='us'|'ru', sec=1.0, cy=None): «SUBSCRIBE!/ПОДПИШИСЬ!» in the last second (engine/endcard.py)"""
+    def __init__(s, ep, voice, dur, fps=30, colors=COL, slug=P.PDZ, cap_words=3, endcard=None, promo=None):
+        """endcard=dict(style='fm'|'default'|..., lang='us'|'ru', sec=1.0, cy=None): «SUBSCRIBE!/ПОДПИШИСЬ!» in the last second (engine/endcard.py)
+        promo='ru': the course chip under the series plate from 3 s to the end card (engine/promo.py, owner 30.10.2026)"""
         s.ep, s.voice, s.dur, s.fps, s.slug = ep, voice, dur, fps, slug
         s.endcard = endcard
+        s.promo = promo
         s.bk = ep if slug == P.PDZ else f'{slug}-{ep}'      # build/ subfolder
         s.env = {}
         for vid, vep, key, t0, a, b, who, txt in voice:
@@ -94,6 +96,9 @@ class Episode:
         def render(t):                               # animated decals / ambience read the frame time
             stage.T_NOW[0] = t
             fr = render0(t)
+            if s.promo:
+                import promo as PR
+                PR.draw(fr, t, s.dur, s.promo)
             ec = s.endcard
             if ec:                                   # end card «SUBSCRIBE!» (rule 12.10.2026), drawn on top of everything
                 import endcard as EC
