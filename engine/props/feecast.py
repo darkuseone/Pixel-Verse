@@ -928,3 +928,43 @@ def laptop(sp, t=0.0, screen='ticket'):
     sp.fill(sc, (240, 60, 90) if (screen == 'ticket' and int(t * 3) % 2) else (30, 40, 70), keep=True)
     sp.txt_box(['$600'], (-6.0, 6.2, 6.0, 11.4), (255, 255, 255), pad=0.2)
     sp.anchors.update(screen=(0.0, 8.8))
+
+
+# ================================================================================ E06: the coconut Fee-Bee, a cocktail, the bag sizer
+def coconut(sp, t=0.0, talk=0.0, awake=1.0):
+    """a coconut on the palm that wakes up as a Fee-Bee speaker: brown husk, then two glowing eyes and a mint smile (awake 0..1)"""
+    m = sp.ell(0.0, 4.0, 4.2, 4.0, tones((120, 76, 40)))
+    for q in range(5): thin(sp, (-3.0 + q * 1.4, 7.2), (-2.4 + q * 1.4, 1.0), (90, 56, 30), 0.25, mask=m)
+    if awake > 0.05:
+        k = min(1.0, awake)
+        for ex in (-1.4, 1.4):
+            sp.blob(ex, 5.0, 0.7 * k, MINT, keep=True)
+            sp.blob(ex - 0.15, 5.2, 0.25 * k, (255, 255, 255), keep=True)
+        op = min(1.0, talk * 1.4)
+        if op < 0.08:
+            for q in range(7):
+                u = (q - 3) / 3.0
+                sp.blob(u * 1.8, 2.8 + 0.6 * u * u, 0.32 * k, MINT, keep=True)
+        else:
+            mm = sp.m_ell(0.0, 2.6, 1.8, 0.5 + 1.2 * op)[0]
+            sp.fill(mm, MINT, keep=True); sp.fill(erode(mm), (20, 60, 50), keep=True)
+    sp.anchors.update(head=(0.0, 4.0), center=(0.0, 4.0))
+
+
+def cocktail(sp, h):
+    x, y = h
+    sp.poly([(x - 1.6, y + 4.0), (x + 1.6, y + 4.0), (x + 0.3, y + 1.0), (x - 0.3, y + 1.0)], tones((255, 150, 80)), grad=(y + 4.0, y + 1.0))
+    thin(sp, (x, y + 1.0), (x, y - 0.6), (220, 220, 230), 0.25)
+    sp.ell(x, y - 0.8, 1.2, 0.3, tones((220, 220, 230)), ol=False)
+    sp.sup(x + 1.6, y + 4.8, 1.2, 0.6, tones((255, 80, 140)), n=2.0, ol=False)                    # tiny umbrella
+    thin(sp, (x + 1.6, y + 4.8), (x + 0.6, y + 3.4), (240, 240, 240), 0.15)
+
+
+def sizer_front(sp, t=0.0, w=19.0, h=22.0):
+    """the front bars of the metal carry-on sizer frame (drawn OVER whoever is squeezed inside)"""
+    for x in (-w / 2, w / 2):
+        thin(sp, (x, 0.0), (x, h), (150, 150, 160), 0.9)
+    thin(sp, (-w / 2, h), (w / 2, h), (150, 150, 160), 0.9)
+    pl = sp.m_super(0.0, h - 2.6, 4.6, 1.6, 4.0)[0]
+    sp.fill(pl, (255, 214, 60)); sp.m |= pl
+    sp.txt_box(['MAX'], (-4.0, h - 4.0, 4.0, h - 1.2), (20, 20, 30), pad=0.1)

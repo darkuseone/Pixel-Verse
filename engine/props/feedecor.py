@@ -265,6 +265,33 @@ def dress_stage(W):
 DRESS.update(stadium=dress_stadium, stage=dress_stage)
 
 
+# ---------------------------------------------------------------- E06: Penny Air gate, the beach
+def dress_gate(W):
+    D.attach(W, [
+        (D.plate(196, 44, ['PENNY AIR', "WE'LL GET YOU THERE (EVENTUALLY)"], bg=(255, 214, 60), colors=[NAVY, BLK], border=NAVY,
+                 weights=[1.3, 0.5], pad=1.2), 30, 196),
+        (D.plate(84, 52, ['SEAT $89', 'BAG $65', 'AIR $5'], bg=(20, 30, 50), colors=[YEL, YEL, MINT], border=None, pad=1.0), 476, 70),
+        (D.plate(84, 52, ['GATE 13', 'DELAYED', '(VIBES)'], bg=(20, 30, 50), colors=[WH, RED, WH], border=None, pad=1.0), 599, 76),
+        (D.plate(70, 50, ['FLIGHT', 'SOUTH', 'ON TIME*'], bg=(20, 30, 50), colors=[WH, WH, YEL], border=None, pad=1.0), 707, 88),
+        (D.plate(110, 20, ['IF IT FITS, IT SHIPS'], bg=WH, fg=RED, border=RED, pad=0.6), 262, 470),
+        (D.plate(60, 16, ['SNACKS $14'], bg=YEL, fg=BLK, border=BLK, pad=0.5), 1148, 450),
+        (D.sticker('POWERED BY FEE-BEE', bg=PURP, fg=WH, w=86, h=12, tilt=-3), 104, 340),
+    ])
+    D.anim(W, dust_beam((700, 100, 1180, 480), n=18, seed=61))
+
+
+def dress_beach(W):
+    D.attach(W, [
+        (D.plate(110, 24, ['BEACH ACCESS $25'], bg=WH, fg=RED, border=RED, pad=0.8, tilt=-3), 520, 560),
+        (D.plate(64, 16, ['$40/HR'], bg=YEL, fg=BLK, border=BLK, pad=0.5), 280, 430),
+        (D.plate(70, 26, ['NO FREE', 'SUNSETS'], bg=CREAM, colors=[NAVY, RED], border=NAVY, pad=0.6, tilt=4), 1130, 520),
+    ])
+    D.anim(W, clouds(0, 200, n=3, seed=71))
+
+
+DRESS.update(gate=dress_gate, beach=dress_beach)
+
+
 def dress(name, W):
     fn = DRESS.get(name)
     if fn: fn(W)

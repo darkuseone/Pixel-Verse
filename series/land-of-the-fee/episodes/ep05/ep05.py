@@ -185,11 +185,11 @@ assert len(R) == len(CUTS) - 1 == len(NAMES)
 SEND = K.st_lines(['SEND THIS TO SOMEONE', 'WHO PAID FEES FOR FEES'], size=38, colors=[(255, 255, 255), (130, 255, 200)])
 VIRAL = K.st_lines(['EAGLE SOUNDS LIKE A DOLPHIN', '4.1M VIEWS'], size=36, colors=[(255, 255, 255), (255, 214, 80)])
 CHOICE = K.st_lines(['WHO SCREAMS BETTER?', 'A) DUKE  B) REX'], size=42, colors=[(255, 214, 80), (130, 255, 200)])
-SHOW = K.Show(EPI, 5, ['$600 NOSEBLEEDS?!'], hook_t=(0.08, 2.00), hook_y=330, hook_size=62,
+SHOW = K.Show(EPI, 5, ['$600 NOSEBLEEDS?!'], hook_t=(0.08, 2.00), hook_y=330, hook_size=54,
               stickers=[(K.st('FEE FEE?!', fg=(255, 90, 110), size=72), 13.70, 15.00, 540, 330),
-                        (K.st('REX?!', fg=(255, 214, 80), size=90), 17.58, 19.80, 540, 330),
+                        (K.st('REX?!', fg=(255, 214, 80), size=70), 17.58, 19.80, 205, 330),
                         (SEND, 25.90, 28.40, 540, 340),
-                        (VIRAL, 29.20, 31.70, 540, 1010),
+                        (VIRAL, 29.20, 31.70, 540, 1080),
                         (CHOICE, 32.40, DUR, 540, 390)],
               flashes=[TWIST, REX_SCREAM, CHIRP[0] + 0.7], mosaics=[CUTS[4], CUTS[7]],
               cap_y={0: 600, 1: 450, 2: 1420, 3: 450, 4: 1420, 5: 1420, 6: 1420, 7: 1180, 8: 1420, 9: 620})
