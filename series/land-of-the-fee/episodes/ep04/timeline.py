@@ -76,8 +76,8 @@ HAAS = 'adelay=0|18'
 STOP = "volume='if(between(t,17.12,17.52),0.30,1)':eval=frame"
 BEDS = [
     (X + 'street_amb_loop.mp3', 8.0, 0.0, 15.00, 1.6, True, HAAS),
-    (X + 'highway_amb_loop.mp3', 8.0, 15.00, 20.10, 0.5, True, HAAS),
-    (X + 'highway_amb_loop.mp3', 8.0, 20.10, DUR, 0.6, True, HAAS),
+    (X + 'highway_amb_loop.mp3', 8.0, 15.00, 20.10, 0.28, True, HAAS),
+    (X + 'highway_amb_loop.mp3', 8.0, 20.10, DUR, 0.30, True, HAAS),
     (M, 16.0, 0.30, DUR, 0.65, 0.70, 'equalizer=f=2000:t=q:w=1.4:g=-5,bass=g=4:f=70,' + STOP + ',' + HAAS),
 ]
 

@@ -239,6 +239,32 @@ def dress_shoulder(W):
 DRESS.update(street=dress_street, highway=dress_highway, shoulder=dress_shoulder)
 
 
+# ---------------------------------------------------------------- E05: the stadium outside, the arena stage
+def dress_stadium(W):
+    D.attach(W, [
+        (D.plate(58, 164, ['REX', '&', 'THE', 'TALONS', 'THE', 'SCREAM', 'YOU', 'KNOW'], bg=CREAM, colors=[RED, NAVY, NAVY, RED, NAVY, NAVY, NAVY, NAVY],
+                 border=None, weights=[1.2, 0.7, 0.8, 1.0, 0.5, 0.5, 0.5, 0.5], pad=1.0, lead=0.5), 661, 236),
+        (D.plate(70, 180, ['TONITE', 'SOLD', 'OUT*', '*RESALE', '$600+'], bg=(40, 70, 160), colors=[WH, YEL, YEL, WH, WH],
+                 border=None, weights=[0.8, 1.0, 1.0, 0.5, 0.6], pad=1.0), 929, 210),
+        (D.plate(50, 130, ['NO', 'BIRDS', 'BEYOND', 'THIS', 'POINT'], bg=(200, 40, 48), colors=[WH] * 5, border=None, pad=1.0), 429, 276),
+        (D.plate(100, 22, ['ENTRY FEE $15'], bg=YEL, fg=BLK, border=BLK, pad=0.6), 556, 400),
+        (D.plate(90, 26, ['PARKING', '$60'], bg=WH, colors=[NAVY, RED], border=NAVY, pad=0.6), 40, 420),
+    ])
+    D.anim(W, blink(500, 120, 30, 10, (255, 240, 200), 1.6, 0.8))
+
+
+def dress_stage(W):
+    D.attach(W, [
+        (D.plate(200, 24, ['REX & THE TALONS'], bg=(200, 40, 48), fg=WH, border=WH, pad=0.8), 500, 452),
+        (D.plate(84, 16, ['MERCH $95'], bg=YEL, fg=BLK, border=BLK, pad=0.5), 40, 480),
+        (D.plate(84, 16, ['WATER $12'], bg=YEL, fg=BLK, border=BLK, pad=0.5), 1150, 480),
+    ])
+    D.anim(W, dust_beam((150, 60, 1130, 460), n=30, seed=51, col=(220, 230, 255)))
+
+
+DRESS.update(stadium=dress_stadium, stage=dress_stage)
+
+
 def dress(name, W):
     fn = DRESS.get(name)
     if fn: fn(W)

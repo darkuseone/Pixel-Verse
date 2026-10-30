@@ -898,3 +898,33 @@ def officer(sp, t=0.0, expr='glare', mouth_=0.0, look=(0.5, 0.0), blink=None, ha
     new = sp.m & ~before
     o = dilate(new) & ~sp.m
     sp.col[o] = INK; sp.m |= o
+
+
+# ================================================================================ E05: REX the red-tailed hawk (rock star) + laptop
+_REX = dict(EAGLE_W=(176, 112, 70), EAGLE_G=(130, 84, 52), EAGLE_B=(116, 72, 44), BEAK=(84, 84, 96), BEAK_D=(60, 60, 72),
+            IRIS_E=(170, 100, 40), JACK=(34, 34, 40), JRED=(70, 70, 84), JWHT=(206, 206, 216), GOLD=(206, 206, 216), LENS=(20, 20, 26))
+
+
+def rex(sp, t=0.0, **kw):
+    """REX, the red-tailed hawk whose scream every movie gives to the bald eagle: the same bird-of-prey build as Duke but leaner, a rusty
+    brown head and tail, a dark grey beak, a black leather jacket with silver piping and a silver chain, dark aviators ON the eyes, the
+    long head feather standing up like a mohawk (flop)"""
+    g = globals()
+    old = {k: g[k] for k in _REX}
+    g.update(_REX)
+    try:
+        kw.setdefault('shades', 'eyes'); kw.setdefault('flop', 0.9); kw.setdefault('puff', -0.6)
+        duke(sp, t=t, **kw)
+    finally:
+        g.update(old)
+
+
+def laptop(sp, t=0.0, screen='ticket'):
+    """an open laptop on the table (side-ish view): the screen faces the viewer a little, a sticker «TICKETMAXED»"""
+    sp.poly([(-9.0, 0.0), (9.0, 0.0), (8.0, 1.6), (-8.0, 1.6)], tones((170, 174, 186)), grad=(1.6, 0.0))
+    lid = sp.m_super(0.0, 8.8, 8.4, 6.6, 4.0)[0]
+    sp.paint(lid, tones((60, 64, 76)), None, olc=INK)
+    sc = sp.m_super(0.0, 8.8, 7.4, 5.6, 4.0)[0]
+    sp.fill(sc, (240, 60, 90) if (screen == 'ticket' and int(t * 3) % 2) else (30, 40, 70), keep=True)
+    sp.txt_box(['$600'], (-6.0, 6.2, 6.0, 11.4), (255, 255, 255), pad=0.2)
+    sp.anchors.update(screen=(0.0, 8.8))

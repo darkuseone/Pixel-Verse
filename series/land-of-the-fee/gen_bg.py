@@ -75,6 +75,13 @@ BG = {
              'speakers on both sides, a drum riser, microphone stands, colorful stage lights and light beams cutting through haze, a huge '
              'blank video screen above the stage, trusses with lamps. The crowd floor in the lower third is EMPTY dark floor. No people, '
              'no text, no logos.',
+    'gate': 'Inside a cheap budget airline terminal at an American airport, eye-level wide view: a bright yellow check-in counter on the left '
+            'with a blank screen and a metal carry-on bag sizer frame next to it, rows of grey connected seats in the middle, a big window '
+            'on the right with a yellow airplane parked outside and a blue sky, blank departure screens hanging from the ceiling, a vending '
+            'machine. Shiny floor across the lower third, empty, no people, no text.',
+    'beach': 'An empty tropical beach at golden hour, eye-level wide view: a single tall palm tree with coconuts in the middle-right, white '
+             'sand across the lower half, a calm turquoise sea, a big orange sun near the horizon, a few clouds, one empty wooden beach '
+             'lounger and a striped umbrella on the left. No people, no birds, no text.',
 }
 
 if __name__ == '__main__':

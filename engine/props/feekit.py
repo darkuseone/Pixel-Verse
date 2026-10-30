@@ -450,3 +450,74 @@ def label(big, text, cx, cy, fg=(255, 255, 255), bg=(30, 60, 120), size=34):
     d.text((20, 15), text, font=f, fill=fg)
     O.overlay(big, np.array(im), int(cx - im.size[0] / 2), int(cy - im.size[1] / 2), 1.0)
     if ST.LOG[0] is not None: ST.log('card', bbox=(cx - im.size[0] / 2, cy - im.size[1] / 2, cx + im.size[0] / 2, cy + im.size[1] / 2))
+
+
+# ---------------------------------------------------------------- E05: TicketMaxed screens + a concert crowd
+def ticket_ui(t, mode='price', price=600, step=0, w=820, h=1100):
+    """TicketMaxed in the browser: 'price' (REX & THE TALONS, seat NOSEBLEED, price climbing, HIGH DEMAND), 'queue' (#4,000,000 in line),
+    'cart' (fee lines appearing one by one up to `step`, total)"""
+    im = Image.new('RGB', (w, h), (18, 14, 36)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    d.rectangle([0, 0, w, 110], fill=(30, 90, 230))
+    f1 = O.pfont(44); d.text(((w - f1.getlength('TICKETMAXED')) / 2, 32), 'TICKETMAXED', font=f1, fill=(255, 255, 255))
+    ev = 'REX & THE TALONS - LIVE'
+    fe = 30
+    while O.pfont(fe).getlength(ev) > w - 60: fe -= 2
+    d.text(((w - O.pfont(fe).getlength(ev)) / 2, 140), ev, font=O.pfont(fe), fill=(255, 214, 80))
+    sub = 'THE SCREAM YOU KNOW'
+    d.text(((w - O.pfont(20).getlength(sub)) / 2, 186), sub, font=O.pfont(20), fill=(200, 190, 255))
+    if mode == 'price':
+        d.rounded_rectangle([60, 260, w - 60, 480], 20, fill=(40, 30, 70), outline=(120, 100, 200), width=4)
+        for i, ln in enumerate(['SEC 412  ROW ZZ', 'NOSEBLEED', '(BEHIND A PILLAR)']):
+            fs = 32 if i < 2 else 22
+            d.text(((w - O.pfont(fs).getlength(ln)) / 2, 290 + i * 56), ln, font=O.pfont(fs), fill=(255, 255, 255) if i < 2 else (180, 170, 220))
+        p = f'${price:,}'
+        fb = O.pfont(110)
+        d.text(((w - fb.getlength(p)) / 2, 560), p, font=fb, fill=(255, 70, 90))
+        if int(t * 4) % 2 == 0:
+            d.rounded_rectangle([w / 2 - 230, 740, w / 2 + 230, 820], 14, fill=(255, 70, 90))
+            d.text(((w - O.pfont(32).getlength('HIGH DEMAND!')) / 2, 762), 'HIGH DEMAND!', font=O.pfont(32), fill=(255, 255, 255))
+    elif mode == 'queue':
+        d.text(((w - O.pfont(34).getlength("YOU'RE IN LINE")) / 2, 280), "YOU'RE IN LINE", font=O.pfont(34), fill=(255, 255, 255))
+        n = f'#{4000000 - int(t * 3):,}'
+        fb = O.pfont(76)
+        d.text(((w - fb.getlength(n)) / 2, 360), n, font=fb, fill=(130, 255, 200))
+        d.rectangle([80, 500, w - 80, 540], outline=(130, 255, 200), width=4)
+        d.rectangle([86, 506, 86 + 8, 534], fill=(130, 255, 200))
+        d.text(((w - O.pfont(22).getlength('EST. WAIT: 3 BUSINESS YEARS')) / 2, 570), 'EST. WAIT: 3 BUSINESS YEARS', font=O.pfont(22), fill=(200, 190, 255))
+    elif mode == 'cart':
+        items = [('TICKET', '$600'), ('SERVICE FEE', '$89'), ('FACILITY FEE', '$45'), ('CONVENIENCE FEE', '$38'), ('FEE FEE', '$12')]
+        y = 260
+        for i, (a, b) in enumerate(items[:max(1, step)]):
+            col = (255, 255, 255) if i == 0 else ((255, 90, 110) if a == 'FEE FEE' else (255, 214, 80))
+            d.text((70, y), a, font=O.pfont(32), fill=col); d.text((w - 70 - O.pfont(32).getlength(b), y), b, font=O.pfont(32), fill=col)
+            y += 74
+        tot = 600 + sum(int(b[1:]) for a, b in items[1:max(1, step)])
+        d.line([(60, y + 6), (w - 60, y + 6)], fill=(200, 200, 220), width=4)
+        d.text((70, y + 30), 'TOTAL', font=O.pfont(44), fill=(255, 255, 255))
+        d.text((w - 70 - O.pfont(44).getlength(f'${tot}'), y + 30), f'${tot}', font=O.pfont(44), fill=(255, 70, 90))
+    a = np.array(im)
+    sp = FX.draw(lambda s_: C.feebee_face(s_, 0.0, 30.0, 22.0, t, 0.0, eq=False), 4.0)
+    blit(a, sp, w - 120, h - 40, 4.0)
+    out = np.zeros((h + 60, w + 60, 4), np.uint8)
+    out[..., :3] = (36, 38, 46); out[..., 3] = 255
+    out[30:30 + h, 30:30 + w, :3] = a
+    return out
+
+
+def crowd(big, t, y0, n=14, k=1.0, seed=7, cols=((24, 20, 40), (34, 28, 56), (20, 26, 48))):
+    """a concert crowd in silhouette along the bottom: heads + shoulders bobbing, raised arms, phone lights; k = how wild (jump height)"""
+    r = np.random.default_rng(seed)
+    P_ = [(r.random(), r.random() * 6.28, r.random()) for _ in range(n)]
+    im = Image.fromarray(big); d = ImageDraw.Draw(im)
+    for i, (u, ph, z) in enumerate(sorted(P_, key=lambda p: p[2])):
+        x = u * (OUT_W + 120) - 60
+        s = 0.8 + 0.6 * z
+        jump = abs(math.sin(t * (5 + z * 3) + ph)) * 40 * k * s
+        y = y0 + (1 - z) * 120 - jump
+        c = cols[i % len(cols)]
+        d.ellipse([x - 46 * s, y - 46 * s, x + 46 * s, y + 46 * s], fill=c)
+        d.rounded_rectangle([x - 90 * s, y + 30 * s, x + 90 * s, y + 400 * s], int(60 * s), fill=c)
+        if i % 3 == 0:
+            ax = x + 60 * s; d.line([(ax, y + 40 * s), (ax + 20 * s, y - 120 * s - jump * 0.5)], fill=c, width=int(26 * s))
+            if i % 2 == 0: d.rectangle([ax + 8 * s, y - 160 * s - jump * 0.5, ax + 36 * s, y - 112 * s - jump * 0.5], fill=(230, 240, 255))
+    big[:] = np.array(im)
