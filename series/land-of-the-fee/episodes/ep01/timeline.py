@@ -30,51 +30,82 @@ TWIST = 17.70
 CHIRP = (28.05, 29.25)           # Duke's real (wimpy) bald-eagle call
 
 X = 'series/land-of-the-fee/sfx/'
+E = X + 'es/'                    # sounds rendered from the earshot bank (engine/earshot_sfx.py), audited, code-made
+# sound design v2 (30.10.2026, earshot pass): hits with a sub layer on the reveals, swishes/whooshes placed so the peak lands just
+# after the cut, the music never stops (ducked under speech, stepped down 0.4 s before the door and the twist), effects panned to
+# where they are on screen, Fee-Bee's chimes from the mallet family. Earlier mix: sound/timeline_v1.py.
 SFX = [
     (X + 'phone_grip.mp3', 0.00, 1.2),
     (X + 'table_slam.mp3', 0.04, 3.0),
-    (X + 'feather_burst.mp3', 0.10, 6.0),
-    (X + 'assistant_wake.mp3', 1.40, 0.45),
-    (X + 'ka_ching.mp3', 3.25, 0.55),
-    (X + 'feather_burst.mp3', 3.95, 5.0),
-    (X + 'pigeon_coo.mp3', 6.45, 0.35),
-    (X + 'fry_munch.mp3', 6.55, 6.0),
-    (X + 'fry_munch.mp3', 8.05, 5.0),
-    (X + 'wallet_moth.mp3', 8.15, 9.0),
-    (X + 'wing_flap.mp3', 8.62, 0.9),
-    (X + 'whoosh_fly.mp3', 9.20, 0.7),
-    (X + 'wing_flap.mp3', 10.10, 0.7),
+    (E + 'hit_punch.wav', 0.04, 0.55),
+    (E + 'hit_sub.wav', 0.04, 0.50),
+    (X + 'feather_burst.mp3', 0.10, 6.0, None, None, -0.3),
+    (E + 'swish_flick.wav', 1.29, 0.32, None, None, 0.3),
+    (E + 'chime_up4.wav', 1.42, 0.24),
+    (E + 'pop_step.wav', 3.22, 0.30),
+    (X + 'ka_ching.mp3', 3.24, 0.45),
+    (E + 'swell_short.wav', 3.69, 0.30),
+    (X + 'feather_burst.mp3', 3.95, 4.0, None, None, -0.2),
+    (X + 'pigeon_coo.mp3', 6.45, 0.35, None, None, 0.5),
+    (X + 'fry_munch.mp3', 6.55, 6.0, None, None, 0.5),
+    (X + 'fry_munch.mp3', 8.05, 5.0, None, None, 0.5),
+    (E + 'knock_wood.wav', 8.15, 0.30, None, None, -0.5),
+    (X + 'wallet_moth.mp3', 8.15, 9.0, None, None, -0.4),
+    (E + 'whoosh_cape.wav', 8.06, 0.45),
+    (X + 'wing_flap.mp3', 8.62, 0.9, None, None, -0.5),
+    (X + 'whoosh_fly.mp3', 9.20, 0.6),
+    (X + 'wing_flap.mp3', 10.10, 0.7, None, None, 0.4),
+    (E + 'whoosh_whip.wav', 11.04, 0.35),
     (X + 'glass_doors.mp3', 11.10, 1.2),
-    (X + 'talons_tile.mp3', 11.18, 1.6),
-    (X + 'assistant_wake.mp3', 12.55, 0.35),
-    (X + 'hummus_plop.mp3', 14.30, 1.3),
-    (X + 'door_burst.mp3', 14.70, 1.0),
-    (X + 'holy_choir.mp3', 14.74, 0.65),
-    (X + 'twist_sting.mp3', 17.66, 0.75),
-    (X + 'ka_ching.mp3', 17.72, 0.75),
-    (X + 'meter_tick.mp3', 18.00, 1.6),
-    (X + 'meter_tick.mp3', 22.70, 1.6),
-    (X + 'ka_ching.mp3', 22.95, 0.70),
-    (X + 'talons_tile.mp3', 23.42, 1.8),
-    (X + 'whoosh_fly.mp3', 23.60, 0.5),
-    (X + 'talons_tile.mp3', 24.30, 1.6),
-    (X + 'assistant_wake.mp3', 25.45, 0.35),
-    (X + 'ka_ching.mp3', 27.40, 0.80),
+    (X + 'talons_tile.mp3', 11.18, 1.6, None, None, 0.4),
+    (E + 'celesta_bb.wav', 12.55, 0.22, None, None, -0.4),
+    (X + 'hummus_plop.mp3', 14.30, 1.3, None, None, -0.4),
+    (E + 'drip_bloop.wav', 14.32, 0.22, None, None, -0.4),
+    (E + 'popin_round.wav', 14.40, 0.22),
+    (E + 'impact_short.wav', 14.70, 0.55, None, None, 0.4),
+    (E + 'hit_sub.wav', 14.70, 0.45),
+    (X + 'door_burst.mp3', 14.70, 1.0, None, None, 0.4),
+    (X + 'holy_choir.mp3', 14.74, 0.6, None, None, 0.3),
+    (E + 'riser_snatch.wav', 17.31, 0.35),
+    (E + 'sub_drop_twist.wav', 17.70, 0.70),
+    (X + 'twist_sting.mp3', 17.66, 0.60),
+    (X + 'ka_ching.mp3', 17.72, 0.60),
+    (E + 'pop_soft.wav', 17.72, 0.22),
+    (X + 'meter_tick.mp3', 18.00, 1.6, None, None, 0.2),
+    (E + 'hit_punch.wav', 20.16, 0.30, None, None, -0.3),
+    (E + 'shutter_snap.wav', 22.93, 0.30, None, None, 0.4),
+    (X + 'meter_tick.mp3', 22.70, 1.4, None, None, 0.4),
+    (X + 'ka_ching.mp3', 22.95, 0.60, None, None, 0.4),
+    (E + 'pop_step.wav', 22.95, 0.20, None, None, 0.3),
+    (E + 'whoosh_sleeve.wav', 23.28, 0.40, None, None, 0.3),
+    (X + 'talons_tile.mp3', 23.42, 1.8, None, None, 0.2),
+    (E + 'pop_soft.wav', 23.50, 0.22),
+    (X + 'talons_tile.mp3', 24.30, 1.6, None, None, -0.2),
+    (E + 'swish_flick.wav', 25.33, 0.25, None, None, -0.3),
+    (E + 'celesta_bb.wav', 25.47, 0.20, None, None, -0.3),
+    (X + 'ka_ching.mp3', 27.40, 0.70, None, None, -0.3),
+    (E + 'hit_sub.wav', 27.40, 0.40),
+    (E + 'pop_wide.wav', 27.42, 0.25),
     (X + 'meter_tick.mp3', 27.50, 1.4),
     (X + 'big_inhale.mp3', 27.58, 0.9),
     (X + 'eagle_chirp.mp3', CHIRP[0], 1.15),
-    (X + 'pigeon_coo.mp3', 29.30, 0.25),
-    (X + 'ka_ching.mp3', 30.00, 0.35),                 # end card «SUBSCRIBE!» pops (coin clink)
+    (E + 'pop_soft.wav', 28.95, 0.20),
+    (X + 'pigeon_coo.mp3', 29.30, 0.25, None, None, -0.2),
+    (E + 'pop_wide.wav', 30.00, 0.30),               # end card «SUBSCRIBE!» pops in
+    (E + 'glock_d6.wav', 30.02, 0.22),
 ]
 
-M = 'series/land-of-the-fee/music/freedom_kazoo_16s.mp3'
+M = 'series/land-of-the-fee/music/freedom_kazoo_v2_16s.mp3'
+HAAS = 'adelay=0|14'                                  # 14 ms on the right channel: width for the room tone and the music
+STOP = "volume='if(between(t,14.32,14.72)+between(t,17.30,17.70),0.30,1)':eval=frame"   # step down before the hits, back on them
 BEDS = [
-    (X + 'apt_amb_loop.mp3', 8.0, 0.0, 8.62, 0.8, True),
-    (X + 'mall_amb_loop.mp3', 8.0, 8.62, 11.15, 0.9, True),
-    (X + 'store_amb_loop.mp3', 8.0, 11.15, DUR, 0.8, True),
-    (M, 16.0, 1.40, 14.70, 0.24, True),
-    (M, 16.0, 20.10, 27.55, 0.20, True),
+    (X + 'apt_amb_loop.mp3', 8.0, 0.0, 8.62, 0.8, True, HAAS),
+    (X + 'mall_amb_loop.mp3', 8.0, 8.62, 11.15, 0.9, True, HAAS),
+    (X + 'store_amb_loop.mp3', 8.0, 11.15, DUR, 0.8, True, HAAS),
+    (M, 16.0, 0.30, DUR, 0.50, 0.55, 'equalizer=f=2000:t=q:w=1.4:g=-5,bass=g=4:f=70,' + STOP + ',' + HAAS),   # ducked 5 dB under speech
 ]
 
-VFX = {'feebee': 'highpass=f=160,lowpass=f=7600,aecho=0.5:0.3:14:0.12'}
-VGAIN = {'duke': 1.45, 'sal': 1.6, 'feebee': 1.35, 'doris': 1.5}
+VOICE_LUFS = -14.5               # every line measured and brought to one loudness (o2 was 6 dB under the rest)
+VFX = {'feebee': 'highpass=f=150,lowpass=f=8000,aecho=1.0:0.85:14:0.10'}   # the old aecho=0.5 in-gain cut her by 6 dB
+VGAIN = {'duke': 1.0, 'sal': 1.0, 'feebee': 1.0, 'doris': 1.0}
+MASTER_EQ = 'equalizer=f=50:t=q:w=1.0:g=4.5,equalizer=f=90:t=q:w=1.0:g=2,equalizer=f=2400:t=q:w=1.2:g=-1.5'   # earshot: thin bottom, honky 1-4 kHz

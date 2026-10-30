@@ -7,6 +7,8 @@
 - Пилот E01 «REPRESENTATIVE!» (31,0 с, поворот 17,70 с / 57 %) — `episodes/ep01/`.
 - Риг feepix/feecast/feekit/feedecor, голоса duke/sal/feebee/doris, 23 SFX, музыка кодом, задники apartment/mall/store.
 
+- 30.10.2026: звук E01 переделан через earshot (скил `/earshot`): v1 needs work → v4 launch-grade, Фи-Би больше не тихая; 26 звуков банка в `sfx/es/`, музыка v2.
+
 ## Дальше
 1. Ждать «ок»/правки владельца по сценарию и пилоту. После «ок» — E02–E06 подряд (`/episode land-of-the-fee rest`).
 2. Новые задники: E02 офис Liberty Lofts + крыша, E03 ER + стеклянная башня, E04 хайвей + машина, E05 стадион, E06 аэропорт + пляж.
@@ -17,5 +19,6 @@
 - Голоса выбраны по метрикам без прослушки.
 
 ## Команды
+earshot: `bash engine/earshot_setup.sh`, затем `/home/user/tools/earshot/.venv/bin/python engine/earshot_listen.py episodes/ep01/final.mp4 episodes/ep01/sound/cues.json ../../build/land-of-the-fee-ep01/vN`.
 `cd episodes/ep01 && python3 cover.py && python3 ep01.py all && python3 mix.py ../../../../build/land-of-the-fee-ep01/noaudio.mp4 final.mp4`;
 критик `python3 engine/critic.py series/land-of-the-fee/episodes/ep01 [--times ...]`.

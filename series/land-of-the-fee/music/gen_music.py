@@ -109,7 +109,7 @@ def cymbal(dur=0.6, seed=7):
     return x * np.exp(-t * 6) * 0.35
 
 
-def march():
+def march(name='freedom_kazoo_16s', low=1.0, kz=0.30, lp=7500):
     """8 bars of 4/4 @ 120 bpm = 16 s: B-flat major oom-pah, snare drags, kazoo tune (original), glockenspiel-ish answer"""
     bpm = 120; b = 60 / bpm; L = 8 * 4 * b
     buf = np.zeros(int(L * SR))
@@ -120,12 +120,15 @@ def march():
         r1, r2 = roots[bar]
         for beat in range(4):
             t0 = (bar * 4 + beat) * b
-            if beat % 2 == 0: add(buf, tuba(hz(r1 if beat == 0 else r2), b * 0.8, a=0.01, d=0.2, s=0.5, r=0.05), t0, 0.55)
+            if beat % 2 == 0:
+                add(buf, tuba(hz(r1 if beat == 0 else r2), b * 0.8, a=0.01, d=0.2, s=0.5, r=0.05), t0, 0.55 * low)
+                add(buf, tone(hz(r1 if beat == 0 else r2) / 2, b * 0.9, 'sine', a=0.01, d=0.3, s=0.6, r=0.05), t0, 0.35 * (low - 1.0))
             else:
                 for n in chords[bar]: add(buf, tone(hz(n), b * 0.35, 'brass', a=0.005, d=0.08, s=0.3, r=0.03), t0, 0.06)
             add(buf, snare(seed=bar * 4 + beat) * 0.8, t0 + (b / 2 if beat % 2 else 0), 0.35 if beat % 2 else 0.18)
             add(buf, snare(0.08, seed=200 + bar * 4 + beat) * 0.5, t0 + b * 0.75, 0.12)
-        add(buf, kick(0.35), bar * 4 * b, 0.6)
+        add(buf, kick(0.35), bar * 4 * b, 0.6 * low)
+        if low > 1.0: add(buf, kick(0.3), bar * 4 * b + 2 * b, 0.45 * low)
         if bar % 4 == 3:
             for k in range(8): add(buf, snare(0.06, seed=300 + k) * 0.6, bar * 4 * b + 3 * b + k * b / 8, 0.10 + 0.03 * k)
             add(buf, cymbal(), (bar + 1) * 4 * b % L, 0.5)
@@ -137,11 +140,12 @@ def march():
             ('D#5', 20, 0.75), ('D5', 20.75, 0.25), ('C5', 21, 1), ('A4', 22, 1), ('F4', 23, 1),
             ('G4', 24, 1), ('D#5', 25, 1), ('D5', 26, 1), ('C5', 27, 1),
             ('A#4', 28, 2.5), ('F4', 30.5, 0.5), ('A#4', 31, 0.5)]
-    for n, st, du in tune: add(buf, kazoo(hz(n), du * b * 0.95, a=0.02, d=0.3, s=0.75, r=0.06), st * b, 0.30)
+    for n, st, du in tune: add(buf, kazoo(hz(n), du * b * 0.95, a=0.02, d=0.3, s=0.75, r=0.06), st * b, kz)
     for n, st in (('D6', 2.5), ('F6', 6.5), ('D#6', 10.5), ('C6', 14.5), ('D6', 18.5), ('A5', 22.5), ('D#6', 26.5), ('D6', 30.5)):
         add(buf, tone(hz(n), 0.4, 'vib', a=0.002, d=0.15, s=0.05, r=0.1), st * b, 0.10)
-    save(buf, 'freedom_kazoo_16s', lp=7500)
+    save(buf, name, lp=lp)
 
 
 if __name__ == '__main__':
     march()
+    march('freedom_kazoo_v2_16s', low=1.6, kz=0.22, lp=6000)      # earshot pass 30.10.2026: body in the low end, softer mids

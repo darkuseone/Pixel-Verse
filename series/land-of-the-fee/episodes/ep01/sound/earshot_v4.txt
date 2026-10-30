@@ -1,0 +1,47 @@
+final_v4.mp4: 0:00.00-0:31.02 (31.0 s). Loudness -14.0 LUFS integrated, true peak -0.7 dBTP, LRA 3.8 LU; loudest 0:16.00-0:19.00 (-11.7 LUFS short-term). True peak -0.7 dBTP on decoded lossy audio (codec overshoot included: fine for a delivered file; a master should be <= -1 dBTP before encoding). 1 stop-down(s)/gap(s): 0:19.85 0.3 s drop. Quiet tail 0.4 s (drop). No steady beat grid (pulse clarity 0.10 < 0.15). 3 section(s): 0:00.00-0:03.00 glitch hop music?, music box | voice: voice-over narration; 0:03.00-0:12.35 funk music?, vocal chop | voice: voice-over narration; 0:12.35-0:31.02 also: ding, clang, child speech, kid speaking (AST) | voice: voice-over narration. 165 events (5.3/s); 20 tagged (6 whoosh, 4 ui, 3 note, 3 drum, 1 hit, 1 voice, 1 key, 1 riser; tags are hints). Strongest accents over a running bed: 0:21.31 +54 dB, 0:29.88 +41 dB, 0:24.91 +38 dB. Sync to 18 cuts: 56% have an onset within 1 frame (chance 33%), 94% within 100 ms, median |offset| 28 ms; 6% land on a strong accent (>= 15 dB over the bed) within 1 frame (chance 7%); 1 met by a whoosh / riser peak. Sync to 28 cues: 68% have an onset within 1 frame (chance 33%), 96% within 100 ms, median |offset| 16 ms; 7% land on a strong accent (>= 15 dB over the bed) within 1 frame (chance 7%); 1 met by a whoosh / riser peak.
+earshot critique: final_v4.mp4 (31.0 s) vs 7 reference films (bundled launch films)
+VERDICT: launch-grade - 21 of 23 scored metrics in range (weighted 92%), 0 critical and 1 major issues.
+FIX FIRST (most important first):
+  1. [major] music is heard in only 57% of 5 s windows (refs 67% .. 100%); no music at 0:20.00-0:31.02: run one continuous track under the whole film and duck it under VO instead of stopping it
+  2. [minor] honky or harsh mids: cut 1-3 kHz on the loudest layer by 2 dB (-5.0 dB share, refs -19.1 dB .. -10.5 dB)
+  tip: voice detected in 86% of windows: duck music 3-6 dB under the voice and keep SFX out of 1-4 kHz while it speaks
+SCORECARD                                      value   ok range                        ref median  status
+  loudness integrated loudness             -14.0 LUFS   -16.0 LUFS .. -9.0 LUFS (web)   -14.8 LUFS  ok
+  loudness true peak                        -0.7 dBTP   <= 0.0 dBTP (decoded lossy)       0.6 dBTP  ok
+  realness realness (p_real)                     0.98   >= 0.77 (realness model)                    ok
+  music    music presence                         57%   >= 62%                                100%  low (major)
+  sync     onset on visual events +-100ms         72%   >= 45%                                 81%  ok
+  loudness loudness range                      3.8 LU   0.7 LU .. 13.2 LU                   5.5 LU  ok
+  loudness loudest 3 s above integrated        2.3 LU   0.6 LU .. 4.0 LU                    2.3 LU  ok
+  arc      time to first sound                 0.04 s   <= 0.58 s                           0.13 s  ok
+  ending   dead air at the end                 0.31 s   <= 2.15 s                           0.04 s  ok
+  arc      longest silent gap inside           0.20 s   <= 1.91 s                           0.02 s  ok
+  ending   final moment vs integrated          3.3 LU   -3.7 LU .. 7.1 LU                   0.2 LU  ok
+  density  onset density                      3.71 /s   2.16 /s .. 8.52 /s                 5.66 /s  ok
+  density  salient hit density                1.71 /s   0.05 /s .. 1.86 /s                 1.25 /s  ok
+  arc      opening level (first 10%)          -0.5 LU   -19.0 LU .. 3.7 LU                 -1.1 LU  ok
+  arc      closing level (last 10%)           -1.9 LU   -15.8 LU .. 1.2 LU                 -3.0 LU  ok
+  ending   final fade / ring-out length        0.32 s   <= 3.04 s                           0.27 s  ok
+  spectrum sub 20-60 Hz share                -16.6 dB   -17.7 dB .. -2.6 dB                -6.6 dB  ok
+  spectrum low 60-250 Hz share                -6.3 dB   -8.2 dB .. -0.6 dB                 -4.2 dB  ok
+  spectrum low-mid 250-1k share               -4.0 dB   -18.3 dB .. -0.2 dB                -5.3 dB  ok
+  spectrum mid 1-4 kHz share                  -5.0 dB   -20.6 dB .. -9.0 dB               -12.4 dB  high (minor)
+  spectrum presence 4-8 kHz share            -16.7 dB   -31.8 dB .. -11.6 dB              -17.8 dB  ok
+  spectrum air 8-16 kHz share                -22.3 dB   -35.7 dB .. -9.7 dB               -23.6 dB  ok
+  stereo   stereo width (side vs mid)        -13.8 dB   -15.5 dB .. -4.0 dB                -8.5 dB  ok
+LOUDNESS ARC (LU vs integrated at 0%, 10% .. 100% of the film; not scored):
+  this film      -0.2   -0.5   +1.0   -0.3   -1.3   +1.2   +1.7   -0.7   -1.7   -1.8   -0.7
+  refs median    -1.3   -0.8   +0.3   -0.3   -0.2   +0.2   +0.0   -0.4   +0.9   -0.3   -7.4
+NOT SCORED (style choices, shown for context):
+  voice / speech presence                                           86%   refs p10-p90 0% .. 100%
+  tempo                                                         108 BPM   refs p10-p90 115 BPM .. 136 BPM
+  position of the loudest 3 s                                      0.57   refs p10-p90 0.10 .. 0.83
+  final hit ring-out                                             0.99 s   refs p10-p90 1.06 s .. 3.58 s
+  stop-downs                                                  13.5 /min   refs p10-p90 0.0 /min .. 9.1 /min
+  visual events (cuts, big changes)                             0.58 /s   refs p10-p90 0.31 /s .. 1.42 /s
+  visual events with a salient hit +-100 ms            39% (chance 29%)   refs p10-p90 8% .. 49%
+  visual events with an onset +-1 frame                44% (chance 29%)   refs p10-p90 34% .. 59%
+  visual events on the beat grid +-70 ms               28% (chance 24%)   refs p10-p90 20% .. 45%
+  brightness (median spectral centroid)                         2146 Hz   refs p10-p90 1183 Hz .. 3030 Hz
+  L/R correlation                                                  0.92   refs p10-p90 0.58 .. 0.86
+realness: final_v4.mp4: real or pro-produced (p_real 0.98, mean of 8 4 s windows; file thresholds lo 0.4 / hi 0.77, weak calibration): 0 of 8 windows lean synthesized (p_real < 0.5); mean CLAP head score +3.3. No window leans synthesized (lowest p_real 0.96); that does not rule out a code-made layer under a louder real mix (most are missed): judge the source files and stems.
