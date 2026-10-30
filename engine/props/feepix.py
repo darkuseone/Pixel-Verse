@@ -64,7 +64,9 @@ class Spr(TX.Spr):
             v = np.asarray(val, np.float32)
             b0, b1, b2 = bands
             s.col[mask] = b
-            if engrave and 600 <= sum(pal[1]) < 700:                      # skin: soft solid shade, engraving lines make faces dirty
+            r_, g_, b_ = pal[1]
+            skin = r_ > 150 and 15 <= r_ - g_ <= 75 and 0 <= g_ - b_ <= 60
+            if engrave and (skin or 585 <= sum(pal[1]) < 700):          # skin: soft solid shade, engraving lines make faces dirty
                 s.col[mask & (v < b0)] = mid
                 s.col[mask & (v >= b0) & (v < b1)] = np.array(mix(pal[1], pal[0], 0.22), np.uint8)
             elif engrave:

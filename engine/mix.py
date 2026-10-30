@@ -54,7 +54,14 @@ def run(slug, ep, T, video=None, out_mp4=None):
         bf = (',' + bed[6]) if len(bed) > 6 and bed[6] else ''
         i = add_input(P.ROOT / path)
         dur = t1 - t0; n = int(dur / (loop - 0.5)) + 1
-        if n > 1:
+        if n > 1 and not getattr(T, 'LOOP_LEGACY', False):
+            # 30.10.2026: asplit + acrossfade of one stream stopped after the FIRST pass (a bed longer than its loop went silent:
+            # found by earshot, «no music after 0:15»). The loops are seamless (ElevenLabs loop=True, code-synth wraps its tail),
+            # so aloop repeats them sample-exactly. LOOP_LEGACY = True in a timeline reproduces the old (buggy) beds.
+            chains.append(f'[{i}:a]atrim=0:{loop},asetpts=PTS-STARTPTS,aresample=44100,aformat=channel_layouts=stereo,'
+                          f'aloop=loop=-1:size={int(loop * 44100)},asetpts=N/SR/TB[b{k}_0]')
+            n = 1
+        elif n > 1:
             chains.append(f'[{i}:a]atrim=0:{loop},asetpts=PTS-STARTPTS,aresample=44100,aformat=channel_layouts=stereo,asplit={n}' +
                           ''.join(f'[b{k}_{j}]' for j in range(n)))
         else:

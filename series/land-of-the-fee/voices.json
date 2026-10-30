@@ -95,6 +95,66 @@
       },
       "voice_id": "N6PX5q8cQTh4FZMyFW3G",
       "voice": "Land of the Fee — Doris (the last human rep)"
+    },
+    "madison": {
+      "name": "Madison (leasing agent, E02)",
+      "voice_id": "FGY2WhTYpPnrIDTdsKH5",
+      "voice": "Laura - Enthusiast, Quirky Attitude (premade)",
+      "premade": true,
+      "color_caption": [
+        255,
+        150,
+        200
+      ],
+      "style": "[bubbly] [vocal fry] — Gen-Z leasing agent, «love that for you»"
+    },
+    "chuck": {
+      "name": "Dr. Chuck / insurance agent Chuck (E03)",
+      "voice_id": "iP95p4xoKVk53GoZ742B",
+      "voice": "Chris - Charming, Down-to-Earth (premade)",
+      "premade": true,
+      "color_caption": [
+        170,
+        220,
+        255
+      ],
+      "style": "[tired] [flat] — the same guy in two hats"
+    },
+    "nurse": {
+      "name": "Nurse (E03)",
+      "voice_id": "cgSgspJ2msm6clMCkdW9",
+      "voice": "Jessica - Playful, Bright, Warm (premade)",
+      "premade": true,
+      "color_caption": [
+        255,
+        200,
+        220
+      ],
+      "style": "[soothing] — hugs, bills the hug"
+    },
+    "officer": {
+      "name": "Sky Patrol officer (E04)",
+      "voice_id": "pNInz6obpgDQGcFmaJgB",
+      "voice": "Adam - Dominant, Firm (premade)",
+      "premade": true,
+      "color_caption": [
+        150,
+        200,
+        255
+      ],
+      "style": "[firm] [cop] — writes the drone ticket"
+    },
+    "rex": {
+      "name": "Rex, red-tailed hawk rock star (E05)",
+      "voice_id": "SOYHLrjzK2X1ezoPC6cr",
+      "voice": "Harry - Fierce Warrior (premade)",
+      "premade": true,
+      "color_caption": [
+        255,
+        130,
+        90
+      ],
+      "style": "[rough] [washed-up rocker] — the scream of every movie eagle"
     }
   }
 }

@@ -120,6 +120,49 @@ def dress_store(W):
 DRESS = dict(apartment=dress_apartment, mall=dress_mall, store=dress_store)
 
 
+# ---------------------------------------------------------------- E02: Liberty Lofts leasing office, courtyard, roof
+def dress_leasing(W):
+    D.attach(W, [
+        (D.plate(132, 196, ['LIBERTY', 'LOFTS', 'LUXURY', 'LIVING', 'FROM $2,400*'], bg=(28, 44, 96), colors=[YEL, YEL, WH, WH, MINT],
+                 border=(200, 160, 60), weights=[1.1, 1.1, 0.8, 0.8, 0.6], bw=1.4, pad=1.6), 32, 112),
+        (D.plate(110, 164, ['*FEES', 'APPLY', '(ALL', 'OF THEM)'], bg=CREAM, colors=[RED, RED, NAVY, NAVY], border=(140, 60, 50),
+                 weights=[1.2, 1.2, 0.8, 0.8], pad=1.6), 205, 138),
+        (D.plate(116, 96, ['NOW', 'LEASING!', '(YOUR', 'WALLET)'], bg=(30, 40, 70), colors=[MINT, MINT, WH, WH], border=None,
+                 weights=[1.0, 1.0, 0.6, 0.6], pad=1.6), 669, 142),
+        (D.plate(300, 24, ['APPLICATION FEE $95 - NON-REFUNDABLE'], bg=RED, fg=WH, border=WH, pad=1.0), 22, 486),
+        (D.plate(52, 14, ['CANDY 50C'], bg=YEL, fg=BLK, border=BLK, pad=0.5), 178, 372),
+        (D.plate(124, 26, ['MANAGED BY', 'S.P. HOLDINGS LLC'], bg=WH, colors=[NAVY, NAVY], border=NAVY, pad=0.8), 414, 292),
+        (D.plate(44, 14, ['COFFEE $3'], bg=WH, fg=BLK, border=BLK, pad=0.5), 742, 318),
+        (D.sticker('POOL VIEW!', bg=(60, 160, 220), fg=WH, w=56, h=12, tilt=-4), 1000, 380),
+    ])
+    D.anim(W, dust_beam((700, 60, 1200, 520), n=24, seed=17))
+
+
+def dress_courtyard(W):
+    D.attach(W, [
+        (D.plate(124, 52, ['RESORT-STYLE', 'AMENITIES'], bg=WH, colors=[NAVY, RED], border=(110, 70, 40), pad=1.4), 48, 394),
+        (D.plate(96, 32, ['WATER $4', '(IT IS TAP)'], bg=YEL, colors=[BLK, RED], border=BLK, pad=0.8), 1022, 412),
+        (D.plate(104, 22, ['PRIVATE BEACH CLUB'], bg=(60, 160, 220), fg=WH, border=WH, pad=0.8), 772, 424),
+        (D.plate(110, 28, ['FITNESS', 'CENTER'], bg=RED, colors=[WH, WH], border=WH, pad=0.8), 880, 536),
+        (D.plate(78, 16, ['CABANA $25/HR'], bg=CREAM, fg=NAVY, border=NAVY, pad=0.6), 132, 560),
+        (D.sticker('INFINITY POOL', bg=PURP, fg=WH, w=64, h=12, tilt=3), 486, 648),
+    ])
+    D.anim(W, clouds(10, 170, n=4, seed=8))
+
+
+def dress_roof(W):
+    D.attach(W, [
+        (D.plate(124, 44, ['S.P. HOLDINGS', 'HQ'], bg=(40, 40, 50), colors=[YEL, WH], border=(200, 160, 60), weights=[0.9, 1.2], pad=1.2), 560, 470),
+        (D.plate(86, 28, ['ROOF ACCESS', '$5'], bg=YEL, colors=[BLK, RED], border=BLK, pad=0.8), 106, 440),
+        (D.plate(70, 16, ['PIGEON TV+'], bg=PURP, fg=WH, border=WH, pad=0.6), 936, 452),
+        (D.plate(200, 20, ['PENTHOUSE NESTS - NOW LEASING'], bg=CREAM, fg=NAVY, border=NAVY, pad=0.8), 600, 664),
+    ])
+    D.anim(W, clouds(10, 230, n=4, seed=12))
+
+
+DRESS.update(leasing=dress_leasing, courtyard=dress_courtyard, roof=dress_roof)
+
+
 def dress(name, W):
     fn = DRESS.get(name)
     if fn: fn(W)

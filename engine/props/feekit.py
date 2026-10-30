@@ -18,7 +18,8 @@ from props import feedecor as DEC
 from props.dibspix import blit
 
 SLUG = 'land-of-the-fee'
-COL = dict(duke=(255, 206, 60), sal=(206, 170, 255), feebee=(130, 255, 200), doris=(255, 186, 150))
+COL = dict(duke=(255, 206, 60), sal=(206, 170, 255), feebee=(130, 255, 200), doris=(255, 186, 150), madison=(255, 150, 200),
+           chuck=(170, 220, 255), nurse=(255, 200, 220), officer=(150, 200, 255), rex=(255, 130, 90))
 INK = FX.INK
 GREEN = (18, 70, 48)                                        # title outline: banknote ink
 FILL = ((150, 255, 196), (100, 236, 226), (80, 196, 255))   # mint (top) -> aqua -> cyan (bottom)
@@ -247,8 +248,10 @@ def screen_ui(t, talk=0.0, brand='XFEENITY SUPPORT', stamp=None, stamp_k=0.0, w=
     im = Image.new('RGB', (w, h), (22, 30, 56)); d = ImageDraw.Draw(im); d.fontmode = '1'
     for y in range(0, h, 8): d.line([(0, y), (w, y)], fill=(26, 36, 64))
     d.rectangle([0, 0, w, 120], fill=(110, 60, 180))
-    f1, f2 = O.pfont(40), O.pfont(22)
-    d.text(((w - f1.getlength(brand)) / 2, 26), brand, font=f1, fill=(255, 255, 255))
+    s1 = 40
+    while O.pfont(s1).getlength(brand) > w - 50 and s1 > 16: s1 -= 2
+    f1, f2 = O.pfont(s1), O.pfont(22)
+    d.text(((w - f1.getlength(brand)) / 2, 26 + (40 - s1) // 2), brand, font=f1, fill=(255, 255, 255))
     d.text(((w - f2.getlength(sub)) / 2, 80), sub, font=f2, fill=(180, 255, 220))
     a = np.array(im)
     sp = FX.draw(lambda s_: C.feebee_face(s_, 0.0, 70.0, 40.0, t, talk), 6.0)

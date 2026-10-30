@@ -28,6 +28,34 @@ BG = {
              'long white counter on the left with nobody behind it, bright cold LED ceiling light panels. The middle of the store is an open '
              'empty space. On the right part of the back wall a large plain empty white wall section. Polished white floor across the lower '
              'third, empty, reflections, clean and sterile, no people.',
+    'leasing': 'Interior of a glossy American apartment complex leasing office, eye-level wide view. Left: a white modern desk with a laptop, '
+               'a bowl of candy and a small potted succulent, two chairs in front of it. Back wall: big blank framed posters, a glass door to the '
+               'outside, a wall-mounted blank screen, a shelf with blank binders and a coffee machine. Right: a big window showing a sunny '
+               'apartment complex courtyard. Light grey walls with a navy accent wall, pendant lamps, a beige carpet across the lower third, '
+               'empty, no people. Bright warm daylight.',
+    'courtyard': 'A small sad apartment complex courtyard on a sunny afternoon, eye-level wide view. Middle: a tiny round inflatable kiddie pool '
+                 'on dry patchy grass. Left: a wooden fence with a blank sign board, a lonely plastic lounge chair. Right: a concrete pad with an '
+                 'old exercise mat, a vending machine with blank labels against the wall. Background: three-story beige apartment buildings with '
+                 'small balconies, air conditioner units, a dumpster, power lines and a blue sky. Patchy grass and concrete across the lower third, '
+                 'empty, no people, no animals.',
+    'roof': 'The flat tar rooftop of a three-story American apartment building on a sunny afternoon, eye-level wide view. Middle: a big '
+            'galvanized steel HVAC unit with a round vent cap on top, a satellite dish, pipes and a small roof access door hut on the left. '
+            'Background: a suburban skyline with other flat roofs, a water tower, power lines, palm-less trees, a blue sky with puffy clouds. '
+            'Grey gravel roof surface across the lower third, empty, a low brick parapet at the front edge, no people, no birds.',
+    'er': 'Interior of a small American hospital emergency room bay, eye-level wide view. Middle: a hospital bed with white sheets and a raised '
+          'back, a metal IV pole on the right of it, a vital signs monitor on a wall arm with a blank screen, a pastel blue privacy curtain '
+          'half drawn on a ceiling rail on the left. Back wall: pale green tiles, a blank whiteboard, a hand sanitizer dispenser, a glove box '
+          'holder, a small window with blinds. Right: a rolling cart with a blank box printer on top and supply drawers. Speckled vinyl floor '
+          'across the lower third, empty, no people. Cold fluorescent ceiling light.',
+    'tower': 'A tall modern glass office skyscraper seen from across a city street on a sunny day, eye-level looking slightly up. The tower '
+             'fills the middle and right with a huge mirror-like blue glass facade reflecting clouds and the sky. Left: a smaller brick '
+             'building, a street lamp, a blank billboard on a pole. Blue sky with puffy clouds at the top. A sidewalk and street across the '
+             'lower part, empty, no people, no cars, no birds.',
+    'billing': 'Interior of a cramped hospital back office, eye-level wide view. Left half: a doctor desk with a beige computer, a desk lamp, '
+               'blank framed diplomas on the wall, a skeleton model, a coat hook. Right half, right next to it: an insurance call center '
+               'cubicle desk with a headset hook, a phone, a stack of paper forms, a blank motivational poster on a grey cubicle wall. One '
+               'single rolling office chair between the two desks. Fluorescent light, a water cooler, grey carpet across the lower third, '
+               'empty, no people.',
 }
 
 if __name__ == '__main__':

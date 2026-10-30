@@ -22,6 +22,7 @@ BEAK = (250, 196, 46)                # big yellow beak + talons
 BEAK_D = (206, 140, 30)
 IRIS_E = (236, 204, 70)              # pale yellow eagle eye
 JACK = (40, 54, 116)                 # navy track jacket
+GOWN = (176, 210, 232)               # hospital gown pale blue
 JRED = (204, 42, 50)
 JWHT = (246, 244, 236)
 GOLD = (238, 198, 72)
@@ -168,7 +169,8 @@ def _wing_hand(sp, e, d, open_=0.6, col=EAGLE_B):
 
 
 def duke(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-         walk=None, lean=0.0, puff=0.0, flop=0.0, shades='head', tremble=0.0, fly=None, legs=True, jacket=True, sweat=0.0):
+         walk=None, lean=0.0, puff=0.0, flop=0.0, shades='head', tremble=0.0, fly=None, legs=True, jacket=True, sweat=0.0,
+         gown=False, brace=False):
     """DUKE — barrel chest in a navy 80s track jacket (red chest stripe, white piping, popped collar, zip half open over brown chest
     feathers), a gold chain with a coin medallion, short feathered «trousers» and tiny yellow talons, a white tail peeking under the
     jacket; a white fist of a head with heavy furrowed brows (always glaring), pale yellow eyes, a giant hooked yellow beak (the mouth),
@@ -193,7 +195,8 @@ def duke(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, hand
     else:
         hf = hand_f if hand_f is not None else Q(-17.0 - swing * 0.6, 26.0)
         kF, eF = ik(shF, hf, 9.0, 8.0, -1.0)
-    sl = tones(dark(JACK, 0.8)) if jacket else tones(dark(EAGLE_B, 0.85))
+    if gown: jacket = False
+    sl = tones(dark(JACK, 0.8)) if jacket else (tones(dark(GOWN, 0.85)) if gown else tones(dark(EAGLE_B, 0.85)))
     sp.cap(shF, kF, 4.0, 3.2, sl)
     sp.cap(kF, eF, 3.2, 2.4, sl)
     _wing_hand(sp, eF, math.atan2(eF[1] - kF[1], eF[0] - kF[0]), 0.9 if flying else 0.5, dark(EAGLE_B, 0.85))
@@ -243,8 +246,13 @@ def duke(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, hand
         sp.dot(mx_ - 0.4, my_ + 0.2, (250, 240, 200)); sp.dot(mx_ + 0.6, my_ - 0.4, (180, 130, 40))
         sp.anchors['medal'] = (mx_, my_)
     else:
-        body = sp.union([sp.m_ell(bx, by, 16.0 * pk, 18.4), sp.m_ell(*Q(1.0, 46.0), 13.0 * pk, 7.4)], tones(EAGLE_B))
-        for q in range(14):
+        body = sp.union([sp.m_ell(bx, by, 16.0 * pk, 18.4), sp.m_ell(*Q(1.0, 46.0), 13.0 * pk, 7.4)], tones(GOWN if gown else EAGLE_B))
+        if gown:                                                                                          # hospital gown: tiny diamond print, ties
+            for q in range(-14, 16, 4):
+                for r_ in range(16, 52, 4):
+                    sp.blob(bx + q + (r_ % 8) * 0.5, r_, 0.45, dark(GOWN, 0.72), mask=body)
+            thin(sp, Q(-2.0, 50.0), Q(-4.0, 44.0), (250, 250, 250), 0.3, mask=body)
+        for q in range(0 if gown else 14):
             x_ = bx - 12 + (q % 7) * 4 + (q // 7) * 2; y_ = by + 8 - (q // 7) * 10
             thin(sp, (x_, y_), (x_ + 1.6, y_ - 1.6), dark(EAGLE_B, 0.7), 0.3, mask=body)
     # ---------------------------------------------------------------- neck ruff + head
@@ -252,6 +260,10 @@ def duke(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, hand
     hx += jit
     ruff = sp.union([sp.m_ell(hx - 0.4, hy - 8.6, 8.6, 3.6)] + [sp.m_ell(hx - 7.0 + q * 2.4, hy - 10.6 - (q % 2) * 0.8, 1.6, 2.0) for q in range(7)],
                     tones(EAGLE_W))
+    if brace:                                                                                            # beige foam neck brace
+        br_ = sp.sup(hx - 0.2, hy - 8.4, 9.6, 3.2, tones((236, 214, 180)), n=3.0)
+        thin(sp, (hx - 9.0, hy - 8.4), (hx + 8.6, hy - 8.4), (200, 176, 140), 0.25, mask=br_)
+        sp.fill(sp.m_super(hx + 3.0, hy - 8.4, 1.6, 1.4, 3.0)[0], (210, 210, 220))
     head = sp.union([sp.m_ell(hx, hy, 9.6, 8.8), sp.m_ell(hx - 3.6, hy + 1.4, 6.6, 7.2), sp.m_ell(hx + 3.4, hy - 3.8, 6.4, 4.6)], tones(EAGLE_W))
     for q in range(5):                                                                                  # feather flicks on the head
         thin(sp, (hx - 8.0 + q * 1.4, hy + 4.0 - q * 1.8), (hx - 6.4 + q * 1.4, hy + 3.0 - q * 1.8), EAGLE_G, 0.22, mask=head)
@@ -317,7 +329,7 @@ def duke(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, hand
     else:
         hn = hand_n if hand_n is not None else Q(17.6 + swing * 0.6, 26.0)
         kN, eN = ik(shN, hn, 9.0, 8.0, -1.0)
-    sl = tones(JACK) if jacket else tones(EAGLE_B)
+    sl = tones(JACK) if jacket else (tones(GOWN) if gown else tones(EAGLE_B))
     a1 = sp.cap(shN, kN, 4.2, 3.4, sl)
     a2 = sp.cap(kN, eN, 3.4, 2.6, sl)
     if jacket:
@@ -504,3 +516,265 @@ def door(sp, t=0.0, open_=0.0, glow=1.0):
             sp.fill(pl, (204, 36, 46)); sp.fill(pl & ~erode(pl), INK)
             sp.txt_box(['EMPLOYEES', 'ONLY'], (x0 + w / 2 - w * 0.36, H_ * 0.72 - 4.6, x0 + w / 2 + w * 0.36, H_ * 0.72 + 4.6), (255, 255, 255), pad=0.2)
     sp.anchors.update(center=(0.0, H_ / 2), head=(0.0, H_ * 0.8))
+
+
+# ================================================================================ E02: MADISON (leasing agent) + props
+SKIN_M = (236, 196, 164)
+HAIR_M = (226, 190, 120)             # honey blonde high ponytail
+BLAZER = (214, 196, 170)             # oversized beige blazer
+TOP_M = (250, 250, 246)
+JEAN_M = (110, 140, 190)
+LATTE = (196, 150, 110)
+
+
+def tablet(sp, h, t=0.0, talk=0.0, screen='feebee'):
+    """a tablet held up in the hand: white bezel, the screen shows Fee-Bee (or a form)"""
+    x, y = h
+    m = sp.m_super(x + 1.0, y + 3.4, 4.4, 3.4, 4.0)[0]
+    sp.paint(m, tones((236, 236, 242)), None, olc=INK)
+    sc = sp.m_super(x + 1.0, y + 3.4, 3.7, 2.7, 4.0)[0]
+    sp.fill(sc, (24, 36, 60), keep=True)
+    if screen == 'feebee': feebee_face(sp, x + 1.0, y + 3.6, 2.0, t, talk, eq=False)
+    else:
+        for q in range(3): thin(sp, (x - 1.8, y + 5.0 - q * 1.3), (x + 3.6, y + 5.0 - q * 1.3), (200, 210, 230), 0.25, keep=True)
+    sp.anchors['tablet'] = (x + 1.0, y + 3.4)
+
+
+def latte(sp, h, sip=0.0):
+    """an iced latte in a clear cup with a green straw"""
+    x, y = h
+    cup = sp.poly([(x - 1.6, y + 4.6), (x + 1.6, y + 4.6), (x + 1.2, y - 0.4), (x - 1.2, y - 0.4)], tones((230, 236, 240)), grad=(y + 4.6, y - 0.4))
+    sp.fill(cup & (DX.YC < y + 3.4), LATTE)
+    sp.fill(cup & (DX.YC < y + 1.4), dark(LATTE, 0.8))
+    thin(sp, (x + 0.4, y + 4.4), (x + 1.2 - sip, y + 7.2), (60, 170, 90), 0.35)
+    sp.ell(x, y + 4.7, 1.8, 0.5, tones((240, 244, 248)), ol=False)
+
+
+def madison(sp, t=0.0, expr='hype', mouth_=0.0, look=(0.5, 0.0), blink=None, hand_n=None, hand_f=None, point=False, sip=0.0):
+    """MADISON, 23, leasing agent: white sneakers, mom jeans, a cropped white top under an oversized beige blazer, a huge honey-blonde
+    high ponytail with a claw clip, long lashes, glossy lips, an iced latte in the far hand and a tablet (Fee-Bee) in the near one;
+    point=True: the latte straw points UP (at the roof)"""
+    E = X(expr)
+    if blink is None: blink = ((t + 0.6) % 3.6) < 0.12
+    br = 0.25 * math.sin(t * 2.4)
+    for k_, dx in enumerate((-2.2, 2.2)):
+        c = JEAN_M if k_ else dark(JEAN_M, 0.86)
+        sp.cap((dx, 21.0), (dx * 1.1, 3.0), 2.4, 2.0, tones(c))
+        sp.ell(dx * 1.1 + 1.0, 1.4, 2.8, 1.5, tones((246, 246, 244)))
+        sp.fill(sp.m_ell(dx * 1.1 + 1.0, 1.4, 2.8, 1.5)[0] & (DX.YC < 0.6), (190, 190, 196))
+    # far arm (latte)
+    shF = (-4.6, 37.0 + br)
+    hf = hand_f if hand_f is not None else ((-1.0, 47.0) if point else (-6.4, 26.0))
+    kF, eF = ik(shF, hf, 6.0, 5.8, -1.0)
+    sp.cap(shF, kF, 2.4, 2.0, tones(dark(BLAZER, 0.85))); sp.cap(kF, eF, 2.0, 1.7, tones(dark(BLAZER, 0.85)))
+    sp.ell(eF[0], eF[1], 1.3, 1.2, tones(dark(SKIN_M, 0.9)))
+    latte(sp, (eF[0], eF[1] - 1.0), sip)
+    # torso: oversized blazer open over a cropped top
+    tor = sp.union([sp.m_super(0.8, 30.0, 7.6, 9.2, 2.8)], tones(BLAZER))
+    top = tor & (DX.XC > -1.0) & (DX.XC < 4.4) & (DX.YC > 24.0)
+    sp.paint(top, tones(TOP_M), None)
+    sp.fill(tor & (DX.YC < 22.0) & (DX.XC > -1.0) & (DX.XC < 4.4), JEAN_M)
+    thin(sp, (-1.0, 38.0), (0.4, 26.0), dark(BLAZER, 0.7), 0.25); thin(sp, (4.4, 38.0), (3.4, 26.0), dark(BLAZER, 0.7), 0.25)
+    sp.dot(-2.6, 30.0, (240, 220, 160))
+    # head
+    hx, hy = 1.6, 45.2
+    sp.cap((hx - 0.6, 39.0), (hx - 0.2, 41.0), 1.4, 1.4, tones(SKIN_M))
+    pony = sp.union([sp.m_ell(hx - 4.6, hy + 7.6, 3.0, 2.6), sp.m_ell(hx - 7.4, hy + 4.0, 2.4, 4.6, 0.4), sp.m_ell(hx - 8.4, hy - 0.6, 1.8, 3.2, 0.2)],
+                    tones(HAIR_M))
+    face = sp.union([sp.m_ell(hx, hy, 5.0, 5.6), sp.m_ell(hx + 1.0, hy - 2.6, 4.0, 3.2)], tones(SKIN_M))
+    hair = sp.union([sp.m_ell(hx - 0.6, hy + 4.0, 5.6, 2.8, -0.15), sp.m_ell(hx - 4.0, hy + 1.0, 2.0, 3.6)], tones(HAIR_M))
+    sp.sup(hx - 3.2, hy + 6.8, 1.8, 0.9, tones((214, 70, 110)), n=3.0)                                     # claw clip
+    thin(sp, (hx - 4.0, hy + 4.0), (hx + 3.6, hy + 5.4), mix(HAIR_M, (255, 250, 220), 0.5), 0.25, mask=hair)
+    lx, ly = look
+    for (ex, ew) in ((hx + 3.0, 3.2), (hx - 1.4, 2.8)):
+        DX.eye(sp, ex, hy + 0.8, ew, 3.0, E, (110, 90, 60), (lx, ly), blink, lash=(40, 24, 30), skin=SKIN_M, bold=2, flick=True)
+    DX.brow(sp, hx + 3.0, hy + 3.8, 3.0, E, -1, dark(HAIR_M, 0.6), th=1)
+    DX.brow(sp, hx - 1.4, hy + 3.7, 2.6, E, +1, dark(HAIR_M, 0.6), th=1)
+    for (bx_, by_, rx_) in ((hx + 3.6, hy - 2.0, 1.3), (hx - 2.2, hy - 1.8, 1.1)):
+        sp.fill(sp.m_ell(bx_, by_, rx_, rx_ * 0.7)[0] & face, mix(SKIN_M, (240, 120, 130), 0.4))
+    sp.ell(hx + 5.6, hy - 0.4, 1.1, 1.1, tones(dark(SKIN_M, 0.95)))
+    mx, my = hx + 2.4, hy - 3.4
+    DX.mouth(sp, mx, my, 3.6, E, mouth_ * 0.8, (226, 90, 130), inside=(110, 30, 50), skin=SKIN_M, maxh=3.2)
+    for (ex_, ey_) in ((hx - 4.4, hy - 1.0),):
+        sp.blob(ex_, ey_, 0.6, (240, 210, 90))                                                             # hoop earring
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my), eyes=(hx + 0.8, hy + 0.8))
+    sp.outline(INK, 1)
+    # near arm (tablet)
+    before = sp.m.copy()
+    shN = (6.6, 37.0 + br)
+    hn = hand_n if hand_n is not None else (9.6, 29.0)
+    kN, eN = ik(shN, hn, 6.0, 5.8, -1.0)
+    sp.cap(shN, kN, 2.5, 2.1, tones(BLAZER)); sp.cap(kN, eN, 2.1, 1.8, tones(BLAZER))
+    sp.ell(eN[0], eN[1], 1.4, 1.3, tones(SKIN_M))
+    tablet(sp, eN, t, 0.0)
+    sp.anchors['hand'] = eN; sp.anchors['hand_f'] = eF
+    new = sp.m & ~before
+    o = dilate(new) & ~sp.m
+    sp.col[o] = INK; sp.m |= o
+
+
+def rubber_duck(sp, t=0.0, bob=1.0):
+    y = math.sin(t * 2.2) * 0.4 * bob
+    sp.ell(0.0, 2.2 + y, 3.2, 2.2, tones((252, 214, 40)))
+    sp.ell(2.2, 4.8 + y, 1.8, 1.7, tones((252, 214, 40)))
+    sp.ell(3.9, 4.6 + y, 1.0, 0.5, tones((240, 120, 40)), ol=False)
+    sp.dot(2.6, 5.4 + y, (20, 20, 20))
+
+
+def dumbbell(sp, t=0.0):
+    thin(sp, (-4.0, 1.4), (4.0, 1.4), (150, 150, 160), 0.5)
+    for x in (-4.2, 4.2): sp.sup(x, 1.4, 1.2, 1.6, tones((50, 50, 60)), n=3.0)
+
+
+def keyring(sp, h, t=0.0, n=7):
+    """Sal's giant landlord key ring, hanging from his beak: a brass ring with a fan of keys that jingle"""
+    x, y = h
+    ring = sp.m_ell(x, y - 1.6, 1.6, 1.6)[0] & ~sp.m_ell(x, y - 1.6, 0.9, 0.9)[0]
+    sp.fill(ring, (214, 170, 60))
+    for i in range(n):
+        a = -math.pi / 2 + (i - n / 2) * 0.26 + math.sin(t * 14 + i) * 0.10
+        x1, y1 = x + math.cos(a) * 1.6, y - 1.6 + math.sin(a) * 1.6
+        x2, y2 = x + math.cos(a) * 5.4, y - 1.6 + math.sin(a) * 5.4
+        thin(sp, (x1, y1), (x2, y2), (226, 196, 90) if i % 2 else (190, 196, 206), 0.32)
+        sp.blob(x1, y1, 0.45, (226, 196, 90) if i % 2 else (190, 196, 206))
+
+
+def briefcase(sp, h=(0.0, 0.0), t=0.0):
+    """a tiny leather briefcase standing on its base (h = base centre)"""
+    x, y = h
+    sp.sup(x, y + 2.4, 3.6, 2.4, tones((110, 66, 40)), n=3.4)
+    stroke(sp, [(x - 1.2, y + 4.7), (x - 1.0, y + 5.8), (x + 1.0, y + 5.8), (x + 1.2, y + 4.7)], (60, 40, 30), 0.35)
+    thin(sp, (x - 3.4, y + 3.0), (x + 3.4, y + 3.0), (214, 170, 60), 0.22)
+    sp.blob(x, y + 3.0, 0.45, (214, 170, 60))
+
+
+
+# ================================================================================ E03: DR. CHUCK (doctor / insurance agent) + NURSE
+SKIN_C = (232, 188, 160)
+HAIR_C = (120, 96, 80)
+COAT = (246, 248, 250)
+SHIRT_C = (190, 214, 236)
+TIE = (150, 40, 60)
+SCRUB = (240, 150, 180)
+SKIN_N = (196, 140, 110)
+HAIR_N = (60, 40, 34)
+
+
+def chuck(sp, t=0.0, expr='dead', mouth_=0.0, look=(0.5, 0.0), blink=None, mode='doctor', hand_n=None, hand_f=None, phone_=False, spin=0.0):
+    """DR. CHUCK, 50s, the same tired man in two jobs: mode 'doctor' = white coat + stethoscope + name tag DR. CHUCK; mode 'insurer' =
+    no coat, a phone headset + a lanyard UNITED WE BILL. Both: thinning comb-forward hair, huge eye bags, a five-o'clock shadow,
+    a short tie with the SAME coffee stain (the clue)"""
+    E = X(expr)
+    if blink is None: blink = ((t + 0.8) % 4.0) < 0.13
+    br = 0.25 * math.sin(t * 1.8)
+    for k_, dx in enumerate((-2.6, 2.6)):
+        c = (70, 74, 90) if k_ else dark((70, 74, 90), 0.85)
+        sp.cap((dx, 22.0), (dx, 3.0), 2.4, 2.1, tones(c))
+        sp.ell(dx + 1.2, 1.4, 3.0, 1.5, tones((50, 40, 36)))
+    shF = (-6.4, 40.0 + br)
+    hf = hand_f if hand_f is not None else (-8.0, 27.0)
+    kF, eF = ik(shF, hf, 6.6, 6.2, -1.0)
+    armc = COAT if mode == 'doctor' else SHIRT_C
+    sp.cap(shF, kF, 2.6, 2.2, tones(dark(armc, 0.86))); sp.cap(kF, eF, 2.2, 1.9, tones(dark(armc, 0.86)))
+    sp.ell(eF[0], eF[1], 1.5, 1.4, tones(dark(SKIN_C, 0.9)))
+    tor = sp.union([sp.m_super(0.6, 32.0, 8.4, 10.6, 2.6)], tones(SHIRT_C))
+    thin(sp, (2.2, 41.6), (2.6, 30.0), TIE, 0.9, mask=tor)
+    sp.blob(2.4, 34.0, 0.9, (150, 110, 70))                                                       # the coffee stain
+    if mode == 'doctor':
+        coat = tor & ((DX.XC < -0.6) | (DX.XC > 5.0))
+        sp.paint(coat, tones(COAT), None)
+        sp.poly([(-7.6, 24.0), (-2.0, 24.0), (-2.6, 16.0), (-7.8, 17.0)], tones(COAT)); sp.poly([(4.4, 24.0), (9.4, 24.0), (9.6, 17.0), (5.0, 16.0)], tones(COAT))
+        stroke(sp, [(-0.8, 41.0), (-1.6, 34.0), (0.4, 30.6)], (70, 74, 90), 0.4)                   # stethoscope
+        stroke(sp, [(5.4, 41.0), (6.2, 34.0), (4.4, 30.6)], (70, 74, 90), 0.4)
+        sp.blob(2.4, 29.8, 1.0, (190, 196, 206))
+        tag = sp.m_super(6.6, 37.0, 2.4, 1.0, 4.0)[0]; sp.fill(tag, (250, 250, 250)); sp.fill(tag & ~erode(tag), INK)
+        sp.txt_box(['DR. CHUCK'], (4.4, 36.0, 8.8, 38.0), (30, 60, 140), pad=0.1)
+    else:
+        thin(sp, (-1.4, 41.0), (1.6, 30.0), (200, 40, 60), 0.4); thin(sp, (5.6, 41.0), (3.6, 30.0), (200, 40, 60), 0.4)
+        tag = sp.m_super(2.6, 28.6, 2.6, 1.4, 4.0)[0]; sp.fill(tag, (250, 250, 250)); sp.fill(tag & ~erode(tag), INK)
+        sp.txt_box(['UNITED', 'WE BILL'], (0.2, 27.4, 5.0, 29.8), (200, 40, 60), pad=0.1)
+    hx, hy = 1.8, 48.6
+    sp.cap((hx - 0.4, 42.0), (hx, 44.0), 1.8, 1.8, tones(SKIN_C))
+    face = sp.union([sp.m_ell(hx, hy, 5.8, 6.2), sp.m_ell(hx + 0.8, hy - 2.6, 4.8, 3.8)], tones(SKIN_C))
+    DX.stubble(sp, sp.m_ell(hx + 1.0, hy - 3.6, 5.0, 2.6)[0] & face, dark(SKIN_C, 0.72), 0.35, 5)
+    hair = sp.union([sp.m_ell(hx - 3.8, hy + 2.4, 2.6, 3.4), sp.m_ell(hx - 0.6, hy + 5.4, 4.6, 1.6, -0.1)], tones(HAIR_C))
+    for q in range(4): thin(sp, (hx - 3.0 + q * 1.6, hy + 6.2), (hx - 1.0 + q * 1.8, hy + 4.8), dark(HAIR_C, 0.7), 0.2)   # comb-forward strands
+    lx, ly = look
+    for (ex, ew) in ((hx + 3.4, 3.2), (hx - 1.4, 2.8)):
+        DX.eye(sp, ex, hy + 1.0, ew, 2.8, E, (110, 120, 90), (lx, ly), blink, lash=(50, 34, 30), skin=SKIN_C, bold=1,
+               bag=dark(SKIN_C, 0.72))
+    DX.brow(sp, hx + 3.4, hy + 3.6, 3.2, E, -1, dark(HAIR_C, 0.8), th=1.4)
+    DX.brow(sp, hx - 1.4, hy + 3.5, 2.8, E, +1, dark(HAIR_C, 0.8), th=1.4)
+    sp.ell(hx + 6.0, hy - 0.6, 1.6, 1.5, tones(dark(SKIN_C, 0.95)))
+    mx, my = hx + 2.6, hy - 3.6
+    DX.mouth(sp, mx, my, 4.0, E, mouth_ * 0.8, (150, 80, 70), inside=(90, 24, 30), skin=SKIN_C, maxh=3.4)
+    if mode == 'insurer':                                                                         # phone headset
+        stroke(sp, [(hx - 5.4, hy + 1.0), (hx - 2.0, hy + 6.8), (hx + 3.6, hy + 6.4), (hx + 6.2, hy + 1.6)], (40, 40, 46), 0.45)
+        sp.ell(hx + 6.0, hy + 0.8, 1.2, 1.6, tones((40, 40, 46)))
+        stroke(sp, [(hx + 6.0, hy - 0.4), (hx + 6.0, hy - 3.0), (hx + 4.2, hy - 3.6)], (40, 40, 46), 0.3)
+        sp.blob(hx + 4.0, hy - 3.6, 0.55, (20, 20, 24))
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my), eyes=(hx + 0.8, hy + 1.0))
+    sp.outline(INK, 1)
+    before = sp.m.copy()
+    shN = (7.6, 40.0 + br)
+    hn = hand_n if hand_n is not None else (10.0, 27.0)
+    kN, eN = ik(shN, hn, 6.6, 6.2, -1.0)
+    sp.cap(shN, kN, 2.7, 2.3, tones(armc)); sp.cap(kN, eN, 2.3, 2.0, tones(armc))
+    sp.ell(eN[0], eN[1], 1.6, 1.5, tones(SKIN_C))
+    if phone_: phone(sp, eN, t, 0.0, screen=None)
+    sp.anchors['hand'] = eN
+    new = sp.m & ~before
+    o = dilate(new) & ~sp.m
+    sp.col[o] = INK; sp.m |= o
+
+
+def nurse(sp, t=0.0, expr='warm', mouth_=0.0, look=(0.5, 0.0), blink=None, hug=0.0, hand_n=None, hand_f=None):
+    """the NURSE: pink scrubs, a tight bun with a pencil, a lanyard, teal crocs; hug 0..1 opens both arms wide"""
+    E = X(expr)
+    if blink is None: blink = ((t + 0.3) % 3.9) < 0.12
+    for k_, dx in enumerate((-2.4, 2.4)):
+        c = SCRUB if k_ else dark(SCRUB, 0.86)
+        sp.cap((dx, 21.0), (dx, 3.0), 2.4, 2.1, tones(c))
+        sp.ell(dx + 1.0, 1.5, 2.9, 1.6, tones((60, 190, 180)))
+    shF = (-5.6, 37.0)
+    hf = hand_f if hand_f is not None else ((-13.0, 40.0) if hug > 0.5 else (-7.0, 26.0))
+    kF, eF = ik(shF, hf, 6.0, 5.8, -1.0)
+    sp.cap(shF, kF, 2.3, 2.0, tones(dark(SCRUB, 0.86))); sp.cap(kF, eF, 1.9, 1.6, tones(dark(SKIN_N, 0.9)))
+    sp.ell(eF[0], eF[1], 1.4, 1.3, tones(dark(SKIN_N, 0.9)))
+    tor = sp.union([sp.m_super(0.6, 29.6, 7.8, 9.2, 2.6)], tones(SCRUB))
+    sp.fill(sp.m_poly([(-0.6, 38.6), (4.4, 38.6), (1.9, 34.6)]) & tor, dark(SCRUB, 0.75))           # v-neck
+    hx, hy = 1.8, 44.6
+    face = sp.union([sp.m_ell(hx, hy, 5.2, 5.8), sp.m_ell(hx + 0.8, hy - 2.4, 4.2, 3.4)], tones(SKIN_N))
+    hair = sp.union([sp.m_ell(hx - 0.8, hy + 4.4, 5.4, 2.6, -0.1), sp.m_ell(hx - 3.6, hy + 7.6, 2.8, 2.6), sp.m_ell(hx - 4.4, hy + 1.6, 1.8, 3.0)],
+                    tones(HAIR_N))
+    thin(sp, (hx - 6.0, hy + 9.0), (hx - 1.4, hy + 6.8), (240, 200, 60), 0.35)                       # pencil in the bun
+    lx, ly = look
+    for (ex, ew) in ((hx + 3.2, 3.2), (hx - 1.4, 2.8)):
+        DX.eye(sp, ex, hy + 0.8, ew, 3.0, E, (70, 50, 34), (lx, ly), blink, lash=(30, 20, 20), skin=SKIN_N, bold=2, flick=True)
+    DX.brow(sp, hx + 3.2, hy + 3.8, 3.0, E, -1, HAIR_N, th=1)
+    DX.brow(sp, hx - 1.4, hy + 3.7, 2.6, E, +1, HAIR_N, th=1)
+    sp.ell(hx + 5.6, hy - 0.4, 1.3, 1.3, tones(dark(SKIN_N, 0.95)))
+    mx, my = hx + 2.4, hy - 3.4
+    DX.mouth(sp, mx, my, 3.8, E, mouth_ * 0.8, (170, 70, 90), inside=(100, 30, 40), skin=SKIN_N, maxh=3.4)
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my), eyes=(hx + 0.8, hy + 0.8))
+    sp.outline(INK, 1)
+    before = sp.m.copy()
+    shN = (7.0, 37.0)
+    hn = hand_n if hand_n is not None else ((16.0, 40.0) if hug > 0.5 else (9.0, 26.0))
+    kN, eN = ik(shN, hn, 6.0, 5.8, -1.0)
+    sp.cap(shN, kN, 2.4, 2.1, tones(SCRUB)); sp.cap(kN, eN, 2.0, 1.7, tones(SKIN_N))
+    sp.ell(eN[0], eN[1], 1.5, 1.4, tones(SKIN_N))
+    sp.anchors['hand'] = eN
+    new = sp.m & ~before
+    o = dilate(new) & ~sp.m
+    sp.col[o] = INK; sp.m |= o
+
+
+def receipt(sp, t=0.0, n=4, lines=None):
+    """a long paper receipt curling out of a printer, itemised"""
+    L = lines or ['SKIN-TO-SKIN $39.99', 'ICE PACK $180', 'ASPIRIN $45', 'TISSUE (USED) $12']
+    h = 4.2 * len(L) + 2.0
+    m = sp.m_super(0.0, h / 2, 7.0, h / 2, 6.0)[0]
+    sp.paint(m, tones((252, 250, 240)), None, olc=(160, 160, 160))
+    for i, line in enumerate(L):
+        sp.txt_box([line], (-6.4, h - 4.0 - i * 4.2, 6.4, h - 1.2 - i * 4.2), (40, 40, 50) if i else (200, 40, 48), pad=0.1)
