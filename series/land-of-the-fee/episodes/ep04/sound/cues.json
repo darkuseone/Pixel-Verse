@@ -1,0 +1,164 @@
+{
+ "fps": 30,
+ "total": 990,
+ "events": [
+  {
+   "f": 1.5,
+   "kind": "hit",
+   "id": "hook:scream",
+   "weight": 1.5
+  },
+  {
+   "f": 7.5,
+   "kind": "pop",
+   "id": "letter",
+   "weight": 0.6
+  },
+  {
+   "f": 100.5,
+   "kind": "whoosh",
+   "id": "cut:dash",
+   "weight": 0.6,
+   "dur": 8
+  },
+  {
+   "f": 101.4,
+   "kind": "bell",
+   "id": "feebee",
+   "weight": 0.6
+  },
+  {
+   "f": 159.0,
+   "kind": "pop",
+   "id": "stamp",
+   "weight": 1.0
+  },
+  {
+   "f": 178.5,
+   "kind": "whoosh",
+   "id": "cut:dollar",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 181.5,
+   "kind": "swell",
+   "id": "puff",
+   "weight": 0.8,
+   "dur": 10
+  },
+  {
+   "f": 325.5,
+   "kind": "whoosh",
+   "id": "cut:sell",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 327.0,
+   "kind": "click",
+   "id": "door",
+   "weight": 0.7
+  },
+  {
+   "f": 411.0,
+   "kind": "click",
+   "id": "speaker",
+   "weight": 0.6
+  },
+  {
+   "f": 418.5,
+   "kind": "hit",
+   "id": "scream:takeoff",
+   "weight": 1.5
+  },
+  {
+   "f": 420.0,
+   "kind": "pop",
+   "id": "sticker:freedom",
+   "weight": 0.6
+  },
+  {
+   "f": 450.0,
+   "kind": "whoosh",
+   "id": "cut:soar",
+   "weight": 1.0,
+   "dur": 12
+  },
+  {
+   "f": 525.0,
+   "kind": "riser",
+   "id": "twist:build",
+   "weight": 1.0,
+   "dur": 20
+  },
+  {
+   "f": 526.5,
+   "kind": "hit",
+   "id": "twist:drone",
+   "weight": 2.0
+  },
+  {
+   "f": 603.0,
+   "kind": "land",
+   "id": "duke:lands",
+   "weight": 1.0
+  },
+  {
+   "f": 609.0,
+   "kind": "pop",
+   "id": "sticker:send",
+   "weight": 0.6
+  },
+  {
+   "f": 702.0,
+   "kind": "click",
+   "id": "ticket:tear",
+   "weight": 0.7
+  },
+  {
+   "f": 714.0,
+   "kind": "pop",
+   "id": "sticker:900",
+   "weight": 1.0
+  },
+  {
+   "f": 762.0,
+   "kind": "whoosh",
+   "id": "cut:bird",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 765.0,
+   "kind": "hit",
+   "id": "duke:bird",
+   "weight": 0.8
+  },
+  {
+   "f": 862.5,
+   "kind": "whoosh",
+   "id": "cut:button",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 933.6,
+   "kind": "hit",
+   "id": "honk",
+   "weight": 0.8
+  },
+  {
+   "f": 930.0,
+   "kind": "pop",
+   "id": "sticker:choice",
+   "weight": 0.6
+  },
+  {
+   "f": 960.0,
+   "kind": "pop",
+   "id": "endcard",
+   "weight": 1.0
+  }
+ ]
+}

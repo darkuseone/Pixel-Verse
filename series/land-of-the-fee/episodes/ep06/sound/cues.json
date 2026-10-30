@@ -1,0 +1,190 @@
+{
+ "fps": 30,
+ "total": 930,
+ "events": [
+  {
+   "f": 1.2,
+   "kind": "hit",
+   "id": "hook:scream",
+   "weight": 1.5
+  },
+  {
+   "f": 66.0,
+   "kind": "whoosh",
+   "id": "cut:kiosk",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 157.5,
+   "kind": "whoosh",
+   "id": "cut:dollar",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 282.0,
+   "kind": "whoosh",
+   "id": "cut:fold",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 322.5,
+   "kind": "whoosh",
+   "id": "cut:takeoff",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 424.5,
+   "kind": "whoosh",
+   "id": "cut:sea",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 517.5,
+   "kind": "whoosh",
+   "id": "cut:twist",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 597.0,
+   "kind": "whoosh",
+   "id": "cut:prices",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 661.5,
+   "kind": "whoosh",
+   "id": "cut:sal",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 736.5,
+   "kind": "whoosh",
+   "id": "cut:upgrade",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 801.0,
+   "kind": "whoosh",
+   "id": "cut:button",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 66.6,
+   "kind": "bell",
+   "id": "kiosk",
+   "weight": 0.6
+  },
+  {
+   "f": 138.0,
+   "kind": "pop",
+   "id": "stamp",
+   "weight": 1.0
+  },
+  {
+   "f": 286.5,
+   "kind": "hit",
+   "id": "fold:squeeze",
+   "weight": 1.0
+  },
+  {
+   "f": 298.5,
+   "kind": "pop",
+   "id": "sticker:fits",
+   "weight": 0.6
+  },
+  {
+   "f": 417.0,
+   "kind": "pop",
+   "id": "speaker",
+   "weight": 0.6
+  },
+  {
+   "f": 425.4,
+   "kind": "hit",
+   "id": "scream",
+   "weight": 1.5
+  },
+  {
+   "f": 489.0,
+   "kind": "land",
+   "id": "landing",
+   "weight": 0.8
+  },
+  {
+   "f": 519.0,
+   "kind": "riser",
+   "id": "twist",
+   "weight": 2.0
+  },
+  {
+   "f": 519.0,
+   "kind": "hit",
+   "id": "twist:hit",
+   "weight": 2.0
+  },
+  {
+   "f": 604.5,
+   "kind": "pop",
+   "id": "price0",
+   "weight": 0.8
+  },
+  {
+   "f": 622.5,
+   "kind": "pop",
+   "id": "price1",
+   "weight": 0.8
+  },
+  {
+   "f": 640.5,
+   "kind": "pop",
+   "id": "price2",
+   "weight": 0.8
+  },
+  {
+   "f": 666.0,
+   "kind": "pop",
+   "id": "sticker:send",
+   "weight": 0.6
+  },
+  {
+   "f": 768.0,
+   "kind": "pop",
+   "id": "sticker:sunset",
+   "weight": 0.6
+  },
+  {
+   "f": 804.0,
+   "kind": "hit",
+   "id": "button:scream",
+   "weight": 1.5
+  },
+  {
+   "f": 849.0,
+   "kind": "pop",
+   "id": "sticker:s2",
+   "weight": 0.6
+  },
+  {
+   "f": 870.0,
+   "kind": "pop",
+   "id": "sticker:choice",
+   "weight": 0.6
+  },
+  {
+   "f": 900.0,
+   "kind": "pop",
+   "id": "endcard",
+   "weight": 1.0
+  }
+ ]
+}

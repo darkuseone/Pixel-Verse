@@ -1,0 +1,15 @@
+{
+  "d1": ["duke", "[outraged, shouting] FOUR HUNDRED a month?! It's a 2009 HATCHBACK!"],
+  "f1": ["feebee", "[chipper, sing-song] Sounds like you said — ADD a DRIVER!"],
+  "s1": ["sal", "[deadpan, bored] Hi."],
+  "d2": ["duke", "[proud, booming, heroic] I'm a BALD EAGLE. I'm on the DOLLAR!"],
+  "s2": ["sal", "[deadpan, dry] Dollar can't afford gas either."],
+  "d3": ["duke", "[heroic, determined, booming] Eagles don't NEED cars! Sal, hit the SCREAM!"],
+  "d4": ["duke", "[joyful, soaring, shouting] No insurance! No GAS! No—"],
+  "o1": ["officer", "[firm, loud, through a police loudspeaker] Unregistered DRONE! Land NOW!"],
+  "o2": ["officer", "[firm, cop, deadpan] No flight plan. No license. No AIRCRAFT insurance."],
+  "o3": ["officer", "[firm, flat] That's nine hundred a MONTH."],
+  "d5": ["duke", "[outraged, shouting] I'm a BIRD!"],
+  "o4": ["officer", "[deadpan, unimpressed] Birds got a PILOT'S license?"],
+  "s3": ["sal", "[deadpan, smug, slow] Need a ride? Twenty BUCKS."]
+}

@@ -1,0 +1,172 @@
+{
+ "fps": 30,
+ "total": 900,
+ "events": [
+  {
+   "f": 1.5,
+   "kind": "hit",
+   "id": "hook:scream",
+   "weight": 1.5
+  },
+  {
+   "f": 85.5,
+   "kind": "whoosh",
+   "id": "cut:amenities",
+   "weight": 0.8,
+   "dur": 10
+  },
+  {
+   "f": 106.5,
+   "kind": "pop",
+   "id": "duck",
+   "weight": 0.7
+  },
+  {
+   "f": 102.0,
+   "kind": "pop",
+   "id": "sticker:resort",
+   "weight": 0.6
+  },
+  {
+   "f": 142.5,
+   "kind": "whoosh",
+   "id": "cut:dollar",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 144.6,
+   "kind": "swell",
+   "id": "duke:puff",
+   "weight": 0.8,
+   "dur": 10
+  },
+  {
+   "f": 219.0,
+   "kind": "click",
+   "id": "sal:keys",
+   "weight": 0.6
+  },
+  {
+   "f": 280.5,
+   "kind": "whoosh",
+   "id": "cut:tablet",
+   "weight": 0.7,
+   "dur": 8
+  },
+  {
+   "f": 281.1,
+   "kind": "bell",
+   "id": "feebee:wake",
+   "weight": 0.6
+  },
+  {
+   "f": 331.5,
+   "kind": "pop",
+   "id": "stamp:petfee",
+   "weight": 1.0
+  },
+  {
+   "f": 345.0,
+   "kind": "whoosh",
+   "id": "cut:pet",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 346.8,
+   "kind": "hit",
+   "id": "duke:notapet",
+   "weight": 0.8
+  },
+  {
+   "f": 451.5,
+   "kind": "whoosh",
+   "id": "cut:lord",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 525.0,
+   "kind": "riser",
+   "id": "twist:build",
+   "weight": 1.0,
+   "dur": 20
+  },
+  {
+   "f": 525.6,
+   "kind": "hit",
+   "id": "twist:roof",
+   "weight": 2.0
+  },
+  {
+   "f": 527.4,
+   "kind": "pop",
+   "id": "sticker:landlord",
+   "weight": 0.8
+  },
+  {
+   "f": 549.0,
+   "kind": "land",
+   "id": "duke:lands",
+   "weight": 0.8
+  },
+  {
+   "f": 618.0,
+   "kind": "whoosh",
+   "id": "cut:rent",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 619.8,
+   "kind": "hit",
+   "id": "duke:pay",
+   "weight": 0.8
+  },
+  {
+   "f": 741.0,
+   "kind": "click",
+   "id": "briefcase",
+   "weight": 0.7
+  },
+  {
+   "f": 756.0,
+   "kind": "whoosh",
+   "id": "cut:renew",
+   "weight": 0.6,
+   "dur": 8
+  },
+  {
+   "f": 759.0,
+   "kind": "pop",
+   "id": "sticker:send",
+   "weight": 0.6
+  },
+  {
+   "f": 808.5,
+   "kind": "hit",
+   "id": "renew:kaching",
+   "weight": 1.2
+  },
+  {
+   "f": 820.5,
+   "kind": "whoosh",
+   "id": "cut:button",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 840.0,
+   "kind": "pop",
+   "id": "sticker:choice",
+   "weight": 0.6
+  },
+  {
+   "f": 870.0,
+   "kind": "pop",
+   "id": "endcard",
+   "weight": 1.0
+  }
+ ]
+}

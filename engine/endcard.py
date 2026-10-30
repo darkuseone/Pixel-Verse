@@ -5,7 +5,7 @@ where it covers no face and no caption.
   python3 engine/endcard.py apply series/<slug>/episodes/epNN [--lang us|ru] [--sec 1.0]   # finished final.mp4, no re-render
   python3 engine/endcard.py preview <style> <lang> out.png
 In new episodes the card goes straight into the render: Episode(..., endcard=dict(style=..., lang=...)) (engine/episode.py).
-Styles: 'fm' (Florida Man: postcard letters + (ALLEGEDLY) stamp + pixel bell), 'randy' («Thanks, Randy»: price-tag feast letters + bell + (STILL FROZEN) tag), 'taiga' («Прохор»: campfire letters, snow caps, icicles), 'default' (any series: Press Start 2P, outline, glow).
+Styles: 'fee' («Land of the Fee»: Dollar Neon letters + bell + banknote), 'fm' (Florida Man: postcard letters + (ALLEGEDLY) stamp + pixel bell), 'randy' («Thanks, Randy»: price-tag feast letters + bell + (STILL FROZEN) tag), 'taiga' («Прохор»: campfire letters, snow caps, icicles), 'default' (any series: Press Start 2P, outline, glow).
 """
 import sys, math, subprocess, pathlib, importlib, os
 import numpy as np
@@ -85,6 +85,15 @@ def card(style='default', lang='us', width=None, promise=None):
         row = np.zeros((max(tag.shape[0], bell.shape[0]), bell.shape[1] + 24 + tag.shape[1], 4), np.uint8)
         row[(row.shape[0] - bell.shape[0]) // 2:(row.shape[0] - bell.shape[0]) // 2 + bell.shape[0], :bell.shape[1]] = bell
         row[(row.shape[0] - tag.shape[0]) // 2:(row.shape[0] - tag.shape[0]) // 2 + tag.shape[0], bell.shape[1] + 24:] = tag
+        img = _stack([title, row], width, gap=6)
+    elif style == 'fee':                                         # «Land of the Fee»: Dollar Neon letters + bell + a little banknote
+        from props import feekit as K
+        title = fit(K.title_trim(K.hook_title([txt], 104 if width <= 1080 else 124, width=width + 300)), width - 60)
+        note = K.banknote('LAND OF THE FEE', '(FEES APPLY)', w=440, h=120)
+        bell = _bell(11)
+        row = np.zeros((max(note.shape[0], bell.shape[0]), bell.shape[1] + 24 + note.shape[1], 4), np.uint8)
+        row[(row.shape[0] - bell.shape[0]) // 2:(row.shape[0] - bell.shape[0]) // 2 + bell.shape[0], :bell.shape[1]] = bell
+        row[(row.shape[0] - note.shape[0]) // 2:(row.shape[0] - note.shape[0]) // 2 + note.shape[0], bell.shape[1] + 24:] = note
         img = _stack([title, row], width, gap=6)
     elif style == 'winter':                                      # «Валера и кот»: frosty winter_title letters (the series hook style) + bell
         title = fit(_trim(O.winter_title([txt], 92 if width <= 1080 else 110, width=width + 300)), width - 60)

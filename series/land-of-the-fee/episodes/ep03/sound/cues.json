@@ -1,0 +1,178 @@
+{
+ "fps": 30,
+ "total": 924,
+ "events": [
+  {
+   "f": 1.5,
+   "kind": "hit",
+   "id": "hook:scream",
+   "weight": 1.5
+  },
+  {
+   "f": 7.5,
+   "kind": "pop",
+   "id": "bill:slide",
+   "weight": 0.6
+  },
+  {
+   "f": 69.0,
+   "kind": "whoosh",
+   "id": "cut:flashback",
+   "weight": 0.8,
+   "dur": 10
+  },
+  {
+   "f": 103.5,
+   "kind": "hit",
+   "id": "smack:window",
+   "weight": 2.0
+  },
+  {
+   "f": 105.0,
+   "kind": "pop",
+   "id": "sticker:birdvswindow",
+   "weight": 0.6
+  },
+  {
+   "f": 118.5,
+   "kind": "whoosh",
+   "id": "cut:hug",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 141.0,
+   "kind": "pop",
+   "id": "sticker:+39.99",
+   "weight": 1.0
+  },
+  {
+   "f": 159.0,
+   "kind": "swell",
+   "id": "duke:puff",
+   "weight": 0.8,
+   "dur": 10
+  },
+  {
+   "f": 300.0,
+   "kind": "whoosh",
+   "id": "cut:phone",
+   "weight": 0.6,
+   "dur": 8
+  },
+  {
+   "f": 300.6,
+   "kind": "bell",
+   "id": "feebee",
+   "weight": 0.6
+  },
+  {
+   "f": 384.0,
+   "kind": "pop",
+   "id": "stamp",
+   "weight": 1.0
+  },
+  {
+   "f": 409.5,
+   "kind": "whoosh",
+   "id": "cut:doc",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 412.2,
+   "kind": "hit",
+   "id": "duke:note",
+   "weight": 0.8
+  },
+  {
+   "f": 522.0,
+   "kind": "riser",
+   "id": "twist:build",
+   "weight": 1.0,
+   "dur": 20
+  },
+  {
+   "f": 522.6,
+   "kind": "hit",
+   "id": "twist:split",
+   "weight": 2.0
+  },
+  {
+   "f": 523.5,
+   "kind": "pop",
+   "id": "sticker:sameguy",
+   "weight": 0.8
+  },
+  {
+   "f": 546.0,
+   "kind": "whoosh",
+   "id": "cut:wide",
+   "weight": 0.6,
+   "dur": 8
+  },
+  {
+   "f": 576.0,
+   "kind": "click",
+   "id": "chair:roll",
+   "weight": 0.6
+  },
+  {
+   "f": 643.5,
+   "kind": "whoosh",
+   "id": "cut:call",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 706.5,
+   "kind": "whoosh",
+   "id": "cut:me",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 709.5,
+   "kind": "hit",
+   "id": "me",
+   "weight": 0.8
+  },
+  {
+   "f": 732.0,
+   "kind": "land",
+   "id": "faint",
+   "weight": 1.0
+  },
+  {
+   "f": 733.5,
+   "kind": "pop",
+   "id": "sticker:send",
+   "weight": 0.6
+  },
+  {
+   "f": 798.6,
+   "kind": "hit",
+   "id": "hug:kaching",
+   "weight": 1.2
+  },
+  {
+   "f": 811.5,
+   "kind": "whoosh",
+   "id": "cut:button",
+   "weight": 0.5,
+   "dur": 8
+  },
+  {
+   "f": 864.0,
+   "kind": "pop",
+   "id": "sticker:choice",
+   "weight": 0.6
+  },
+  {
+   "f": 894.0,
+   "kind": "pop",
+   "id": "endcard",
+   "weight": 1.0
+  }
+ ]
+}

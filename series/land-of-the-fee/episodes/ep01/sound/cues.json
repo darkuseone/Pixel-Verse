@@ -1,0 +1,186 @@
+{
+ "fps": 30,
+ "total": 930,
+ "events": [
+  {
+   "f": 1.5,
+   "kind": "hit",
+   "id": "hook:scream:table",
+   "weight": 1.5
+  },
+  {
+   "f": 42.0,
+   "kind": "whoosh",
+   "id": "cut:phone",
+   "weight": 0.8,
+   "dur": 10
+  },
+  {
+   "f": 42.6,
+   "kind": "bell",
+   "id": "feebee:wake",
+   "weight": 0.6
+  },
+  {
+   "f": 96.6,
+   "kind": "pop",
+   "id": "phone:stamp:upgraded",
+   "weight": 1.0
+  },
+  {
+   "f": 117.6,
+   "kind": "whoosh",
+   "id": "cut:proud",
+   "weight": 0.6,
+   "dur": 8
+  },
+  {
+   "f": 119.4,
+   "kind": "swell",
+   "id": "duke:puff",
+   "weight": 0.8,
+   "dur": 10
+  },
+  {
+   "f": 198.0,
+   "kind": "whoosh",
+   "id": "cut:sal",
+   "weight": 0.6,
+   "dur": 8
+  },
+  {
+   "f": 244.5,
+   "kind": "click",
+   "id": "wallet:open",
+   "weight": 0.7
+  },
+  {
+   "f": 258.6,
+   "kind": "whoosh",
+   "id": "cut:fly",
+   "weight": 1.2,
+   "dur": 20
+  },
+  {
+   "f": 334.5,
+   "kind": "whoosh",
+   "id": "cut:store",
+   "weight": 0.8,
+   "dur": 10
+  },
+  {
+   "f": 334.5,
+   "kind": "land",
+   "id": "duke:land",
+   "weight": 0.8
+  },
+  {
+   "f": 376.5,
+   "kind": "bell",
+   "id": "kiosk:wake",
+   "weight": 0.5
+  },
+  {
+   "f": 432.0,
+   "kind": "drop",
+   "id": "hummus:plop",
+   "weight": 1.0
+  },
+  {
+   "f": 441.0,
+   "kind": "hit",
+   "id": "door:burst",
+   "weight": 1.5
+  },
+  {
+   "f": 441.6,
+   "kind": "swell",
+   "id": "holy:light",
+   "weight": 1.0,
+   "dur": 24
+  },
+  {
+   "f": 529.5,
+   "kind": "riser",
+   "id": "twist:build",
+   "weight": 1.0,
+   "dur": 24
+  },
+  {
+   "f": 531.0,
+   "kind": "hit",
+   "id": "twist:fee",
+   "weight": 2.0
+  },
+  {
+   "f": 531.6,
+   "kind": "pop",
+   "id": "sticker:humanfee",
+   "weight": 0.8
+  },
+  {
+   "f": 603.0,
+   "kind": "whoosh",
+   "id": "cut:what",
+   "weight": 0.6,
+   "dur": 8
+  },
+  {
+   "f": 688.5,
+   "kind": "pop",
+   "id": "meter:+19.99",
+   "weight": 1.0
+  },
+  {
+   "f": 702.0,
+   "kind": "whoosh",
+   "id": "cut:run",
+   "weight": 1.0,
+   "dur": 12
+  },
+  {
+   "f": 705.0,
+   "kind": "pop",
+   "id": "sticker:send",
+   "weight": 0.6
+  },
+  {
+   "f": 763.5,
+   "kind": "whoosh",
+   "id": "cut:kiosk2",
+   "weight": 0.7,
+   "dur": 8
+  },
+  {
+   "f": 822.0,
+   "kind": "hit",
+   "id": "kiosk:human:kaching",
+   "weight": 1.2
+  },
+  {
+   "f": 826.5,
+   "kind": "whoosh",
+   "id": "cut:button",
+   "weight": 0.6,
+   "dur": 8
+  },
+  {
+   "f": 841.5,
+   "kind": "tick",
+   "id": "duke:chirp",
+   "weight": 1.0
+  },
+  {
+   "f": 868.5,
+   "kind": "pop",
+   "id": "sticker:choice",
+   "weight": 0.6
+  },
+  {
+   "f": 900.0,
+   "kind": "pop",
+   "id": "endcard:subscribe",
+   "weight": 1.0
+  }
+ ]
+}
