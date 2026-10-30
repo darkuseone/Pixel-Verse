@@ -161,7 +161,7 @@ def r_prices(t, u):
              tremble=0.5 if hit == 3 else 0.0, hand_n=(14.0, 26.0))
     def fx_(big, v_):
         for x in PRICES:
-            if t >= x: K.dollars(big, t, x, 790, 1300, n=6, seed=int(x * 10))
+            if t >= x: K.dollars(big, t, x, 380, 1500, n=6, seed=int(x * 10))
     return K.shot(BEACH, K.light_beach, cx, cy, Z, acts=[duke], fx_=fx_)
 
 
