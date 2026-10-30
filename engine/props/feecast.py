@@ -660,7 +660,8 @@ SKIN_N = (196, 140, 110)
 HAIR_N = (60, 40, 34)
 
 
-def chuck(sp, t=0.0, expr='dead', mouth_=0.0, look=(0.5, 0.0), blink=None, mode='doctor', hand_n=None, hand_f=None, phone_=False, spin=0.0):
+def chuck(sp, t=0.0, expr='dead', mouth_=0.0, look=(0.5, 0.0), blink=None, mode='doctor', hand_n=None, hand_f=None, phone_=False, spin=0.0,
+          phone_f=False, headset=None):
     """DR. CHUCK, 50s, the same tired man in two jobs: mode 'doctor' = white coat + stethoscope + name tag DR. CHUCK; mode 'insurer' =
     no coat, a phone headset + a lanyard UNITED WE BILL. Both: thinning comb-forward hair, huge eye bags, a five-o'clock shadow,
     a short tie with the SAME coffee stain (the clue)"""
@@ -677,6 +678,7 @@ def chuck(sp, t=0.0, expr='dead', mouth_=0.0, look=(0.5, 0.0), blink=None, mode=
     armc = COAT if mode == 'doctor' else SHIRT_C
     sp.cap(shF, kF, 2.6, 2.2, tones(dark(armc, 0.86))); sp.cap(kF, eF, 2.2, 1.9, tones(dark(armc, 0.86)))
     sp.ell(eF[0], eF[1], 1.5, 1.4, tones(dark(SKIN_C, 0.9)))
+    if phone_f: phone(sp, eF, t, 0.0, screen=None)
     tor = sp.union([sp.m_super(0.6, 32.0, 8.4, 10.6, 2.6)], tones(SHIRT_C))
     thin(sp, (2.2, 41.6), (2.6, 30.0), TIE, 0.9, mask=tor)
     sp.blob(2.4, 34.0, 0.9, (150, 110, 70))                                                       # the coffee stain
@@ -696,7 +698,8 @@ def chuck(sp, t=0.0, expr='dead', mouth_=0.0, look=(0.5, 0.0), blink=None, mode=
     hx, hy = 1.8, 48.6
     sp.cap((hx - 0.4, 42.0), (hx, 44.0), 1.8, 1.8, tones(SKIN_C))
     face = sp.union([sp.m_ell(hx, hy, 5.8, 6.2), sp.m_ell(hx + 0.8, hy - 2.6, 4.8, 3.8)], tones(SKIN_C))
-    DX.stubble(sp, sp.m_ell(hx + 1.0, hy - 3.6, 5.0, 2.6)[0] & face, dark(SKIN_C, 0.72), 0.35, 5)
+    if sp.k <= 2: DX.stubble(sp, sp.m_ell(hx + 1.0, hy - 3.6, 5.0, 2.6)[0] & face, mix(SKIN_C, (110, 100, 100), 0.45), 0.25, 5)
+    else: sp.fill(sp.m_ell(hx + 1.0, hy - 3.8, 5.0, 2.4)[0] & face, mix(SKIN_C, (150, 140, 140), 0.25))   # shadow, not a checker
     hair = sp.union([sp.m_ell(hx - 3.8, hy + 2.4, 2.6, 3.4), sp.m_ell(hx - 0.6, hy + 5.4, 4.6, 1.6, -0.1)], tones(HAIR_C))
     for q in range(4): thin(sp, (hx - 3.0 + q * 1.6, hy + 6.2), (hx - 1.0 + q * 1.8, hy + 4.8), dark(HAIR_C, 0.7), 0.2)   # comb-forward strands
     lx, ly = look
@@ -708,7 +711,7 @@ def chuck(sp, t=0.0, expr='dead', mouth_=0.0, look=(0.5, 0.0), blink=None, mode=
     sp.ell(hx + 6.0, hy - 0.6, 1.6, 1.5, tones(dark(SKIN_C, 0.95)))
     mx, my = hx + 2.6, hy - 3.6
     DX.mouth(sp, mx, my, 4.0, E, mouth_ * 0.8, (150, 80, 70), inside=(90, 24, 30), skin=SKIN_C, maxh=3.4)
-    if mode == 'insurer':                                                                         # phone headset
+    if headset if headset is not None else mode == 'insurer':                                    # phone headset
         stroke(sp, [(hx - 5.4, hy + 1.0), (hx - 2.0, hy + 6.8), (hx + 3.6, hy + 6.4), (hx + 6.2, hy + 1.6)], (40, 40, 46), 0.45)
         sp.ell(hx + 6.0, hy + 0.8, 1.2, 1.6, tones((40, 40, 46)))
         stroke(sp, [(hx + 6.0, hy - 0.4), (hx + 6.0, hy - 3.0), (hx + 4.2, hy - 3.6)], (40, 40, 46), 0.3)
@@ -778,3 +781,120 @@ def receipt(sp, t=0.0, n=4, lines=None):
     sp.paint(m, tones((252, 250, 240)), None, olc=(160, 160, 160))
     for i, line in enumerate(L):
         sp.txt_box([line], (-6.4, h - 4.0 - i * 4.2, 6.4, h - 1.2 - i * 4.2), (40, 40, 50) if i else (200, 40, 48), pad=0.1)
+
+
+# ================================================================================ E04: the hatchback, the Sky Patrol drone, the officer
+CAR = (206, 52, 48)
+CAR_D = (140, 34, 34)
+RUST = (150, 90, 40)
+COP = (54, 70, 110)
+COP_HAT = (150, 120, 80)
+
+
+DUKE_IN_CAR = 0.355            # Duke's scale relative to the car's (the car is 3.5 m long = 52 sprite px; Duke 1.9 m = 80 sprite px)
+
+
+def hatchback(sp, t=0.0, part='all', sale=False, honk=0.0, drive=0.0):
+    """a tiny dented 2009 red hatchback, side view facing right: rust spots, a bungee-corded bumper, a donut spare; the windows are
+    LEFT OPEN (transparent) so whoever sits inside shows through; part='body' paints only the body around the window holes.
+    sale=True: a «FOR SALE $500 OBO» card in the rear window; drive = wheel rotation phase"""
+    W2, base = 26.0, 3.2
+    bob = math.sin(t * 9.0) * 0.25 * (1.0 if drive else 0.0)
+    body = sp.union([sp.m_super(0.0, 9.0 + bob, W2, 5.6, 3.0), sp.m_super(-3.0, 17.4 + bob, 15.4, 5.2, 2.6)], tones(CAR))
+    win = sp.m_super(-1.6, 18.0 + bob, 13.2, 3.8, 3.0)[0] & body
+    pillar = (DX.XC > -2.6) & (DX.XC < -0.6)
+    hole = win & ~pillar
+    sp.m[hole] = False                                                                              # see-through windows
+    sp.fill(win & pillar, CAR_D)
+    for (x, y, r) in ((-18.0, 7.0, 1.6), (12.0, 11.0, 1.2), (-6.0, 6.0, 1.0)):                     # rust + dents
+        sp.fill(sp.m_ell(x, y + bob, r * 1.4, r)[0] & body & ~hole, RUST)
+    thin(sp, (-25.0, 6.0 + bob), (-19.0, 6.4 + bob), (40, 40, 44), 0.6)                             # bungee-corded bumper
+    sp.ell(-26.0, 11.0 + bob, 1.6, 3.0, tones((40, 40, 44)))
+    sp.ell(24.6, 10.2 + bob, 1.4, 1.2, tones((255, 236, 160)), ol=False, gloss=1.0)                 # headlight
+    sp.ell(-25.2, 13.0 + bob, 0.9, 1.0, tones((220, 40, 40)), ol=False)
+    for wx in (-15.0, 15.0):
+        sp.ell(wx, base + 1.0, 4.4, 4.4, tones((30, 30, 36)))
+        sp.ell(wx, base + 1.0, 2.0, 2.0, tones((180, 180, 190)))
+        a = drive * 6.0
+        thin(sp, (wx + math.cos(a) * 1.8, base + 1.0 + math.sin(a) * 1.8), (wx - math.cos(a) * 1.8, base + 1.0 - math.sin(a) * 1.8), (90, 90, 100), 0.3)
+    if sale:
+        pl = sp.m_super(-11.0, 18.2 + bob, 3.4, 2.6, 4.0)[0]
+        sp.fill(pl, (252, 250, 240)); sp.m |= pl
+        sp.txt_box(['FOR', 'SALE', '$500'], (-14.0, 16.0 + bob, -8.0, 20.6 + bob), (200, 40, 48), pad=0.1)
+    if honk > 0:
+        for q in range(3):
+            thin(sp, (27.5 + q * 1.2, 14.0 - q * 1.2), (28.5 + q * 1.2, 15.0 + q * 0.6), (255, 255, 255), 0.25)
+    sp.anchors.update(seat=(-2.0, 9.0), seat_p=(8.0, 9.0), center=(0.0, 12.0))
+    sp.outline(INK, 1)
+    sp.m[hole] = False
+
+
+def drone(sp, t=0.0, siren=True):
+    """the SKY PATROL police drone: four rotors (blurred), a white body with a blue stripe, a red/blue siren bar, a loudspeaker"""
+    y0 = 10.0 + math.sin(t * 5.0) * 0.6
+    sp.sup(0.0, y0, 7.0, 2.6, tones((240, 242, 248)), n=3.0)
+    sp.fill(sp.m_super(0.0, y0 - 0.4, 6.6, 0.6, 4.0)[0], (40, 70, 150))
+    sp.txt_box(['SKY PATROL'], (-5.6, y0 + 0.2, 5.6, y0 + 2.2), (40, 70, 150), pad=0.1)
+    for x in (-9.0, 9.0):
+        thin(sp, (x * 0.6, y0 + 1.0), (x, y0 + 3.0), (80, 80, 90), 0.4)
+        blade = sp.m_ell(x, y0 + 3.4, 4.0, 0.6)[0]
+        sp.fill(blade & ((DX.XC * 3 + int(t * 40)) % 2 < 1), (190, 196, 210)); sp.m |= blade
+    on = int(t * 6) % 2 == 0
+    sp.sup(-1.8, y0 + 3.0, 1.6, 0.9, tones((230, 40, 40) if (siren and on) else (120, 40, 40)), n=3.0)
+    sp.sup(1.8, y0 + 3.0, 1.6, 0.9, tones((40, 90, 240) if (siren and not on) else (40, 50, 120)), n=3.0)
+    sp.ell(5.0, y0 - 2.6, 1.6, 1.2, tones((60, 60, 70)))                                            # loudspeaker
+    sp.ell(-3.0, y0 - 2.4, 1.0, 1.0, tones((30, 30, 36)))                                            # camera
+    sp.dot(-3.0, y0 - 2.4, (255, 60, 60))
+    sp.anchors.update(center=(0.0, y0), head=(0.0, y0))
+    sp.outline(INK, 1)
+
+
+def officer(sp, t=0.0, expr='glare', mouth_=0.0, look=(0.5, 0.0), blink=None, hand_n=None, hand_f=None, ticket=False):
+    """the SKY PATROL officer: a campaign hat, mirrored aviators pushed up on the hat, a horseshoe moustache, a navy uniform with a gold badge,
+    a ticket book in the far hand, a pen in the near one"""
+    E = X(expr)
+    if blink is None: blink = ((t + 1.4) % 4.2) < 0.13
+    for k_, dx in enumerate((-2.8, 2.8)):
+        c = COP if k_ else dark(COP, 0.86)
+        sp.cap((dx, 22.0), (dx, 3.0), 2.6, 2.2, tones(c))
+        sp.ell(dx + 1.2, 1.4, 3.2, 1.6, tones((24, 24, 28)), gloss=1.0)
+    shF = (-6.6, 41.0)
+    hf = hand_f if hand_f is not None else ((-4.0, 29.0) if ticket else (-8.0, 27.0))
+    kF, eF = ik(shF, hf, 6.8, 6.4, -1.0)
+    sp.cap(shF, kF, 2.7, 2.3, tones(dark(COP, 0.86))); sp.cap(kF, eF, 2.3, 2.0, tones(dark(COP, 0.86)))
+    sp.ell(eF[0], eF[1], 1.5, 1.4, tones(dark(SKIN_C, 0.9)))
+    if ticket:
+        tk = sp.m_super(eF[0] + 1.4, eF[1] + 2.6, 2.6, 3.4, 4.0)[0]
+        sp.fill(tk, (252, 250, 236)); sp.m |= tk; sp.fill(tk & ~erode(tk), INK)
+        for q in range(3): thin(sp, (eF[0] - 0.4, eF[1] + 4.2 - q * 1.2), (eF[0] + 3.0, eF[1] + 4.2 - q * 1.2), (120, 120, 130), 0.2)
+    tor = sp.union([sp.m_super(0.6, 32.6, 8.8, 10.8, 2.6)], tones(COP))
+    sp.ell(-3.4, 36.0, 1.4, 1.6, tones((236, 196, 70)), gloss=1.0)                                  # badge
+    thin(sp, (-8.0, 23.6), (9.2, 23.6), (30, 30, 34), 0.9)                                          # belt
+    hx, hy = 1.8, 49.0
+    sp.cap((hx - 0.4, 42.4), (hx, 44.4), 1.9, 1.9, tones(SKIN_C))
+    face = sp.union([sp.m_ell(hx, hy, 5.8, 6.0), sp.m_ell(hx + 0.8, hy - 2.6, 4.8, 3.8)], tones(SKIN_C))
+    lx, ly = look
+    for (ex, ew) in ((hx + 3.4, 3.2), (hx - 1.4, 2.8)):
+        DX.eye(sp, ex, hy + 0.8, ew, 2.8, E, (80, 100, 120), (lx, ly), blink, lash=(40, 30, 30), skin=SKIN_C, bold=1)
+    DX.brow(sp, hx + 3.4, hy + 3.4, 3.4, E, -1, (90, 70, 50), th=1.6)
+    DX.brow(sp, hx - 1.4, hy + 3.3, 2.8, E, +1, (90, 70, 50), th=1.6)
+    sp.ell(hx + 6.0, hy - 0.6, 1.6, 1.5, tones(dark(SKIN_C, 0.95)))
+    mx, my = hx + 2.6, hy - 3.8
+    DX.mouth(sp, mx, my, 4.0, E, mouth_ * 0.8, (150, 80, 70), inside=(90, 24, 30), skin=SKIN_C, maxh=3.4)
+    stroke(sp, [(hx - 0.4, my - 2.4), (hx - 0.2, my + 0.8), (hx + 5.4, my + 0.8), (hx + 5.6, my - 2.4)], (100, 76, 54), 0.7)   # horseshoe moustache
+    hat = sp.union([sp.m_super(hx + 0.4, hy + 6.4, 9.6, 1.0, 4.0), sp.m_ell(hx + 0.4, hy + 8.8, 4.8, 2.8)], tones(COP_HAT))
+    thin(sp, (hx - 3.6, hy + 7.6), (hx + 4.4, hy + 7.6), (60, 50, 40), 0.4)
+    for ex in (hx - 1.6, hx + 2.6): sp.ell(ex, hy + 7.6, 1.4, 0.9, tones((140, 170, 200)), ol=False, gloss=1.0)   # aviators on the hat
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my), eyes=(hx + 0.8, hy + 0.8))
+    sp.outline(INK, 1)
+    before = sp.m.copy()
+    shN = (7.8, 41.0)
+    hn = hand_n if hand_n is not None else ((9.6, 29.0) if ticket else (10.0, 27.0))
+    kN, eN = ik(shN, hn, 6.8, 6.4, -1.0)
+    sp.cap(shN, kN, 2.8, 2.4, tones(COP)); sp.cap(kN, eN, 2.4, 2.1, tones(SKIN_C))
+    sp.ell(eN[0], eN[1], 1.6, 1.5, tones(SKIN_C))
+    if ticket: thin(sp, eN, (eN[0] - 2.4, eN[1] + 2.0), (40, 40, 160), 0.35)
+    sp.anchors['hand'] = eN
+    new = sp.m & ~before
+    o = dilate(new) & ~sp.m
+    sp.col[o] = INK; sp.m |= o

@@ -56,6 +56,25 @@ BG = {
                'cubicle desk with a headset hook, a phone, a stack of paper forms, a blank motivational poster on a grey cubicle wall. One '
                'single rolling office chair between the two desks. Fluorescent light, a water cooler, grey carpet across the lower third, '
                'empty, no people.',
+    'street': 'A modest American suburban street on a sunny morning, eye-level side view. Background: a small beige ranch house with a '
+              'garage, a mailbox on a post, a lawn with a few dandelions, a basketball hoop over the garage, power lines, a blue sky. The '
+              'concrete driveway in the middle foreground is EMPTY. A sidewalk and the street asphalt across the lower third, empty, no cars, '
+              'no people, no animals.',
+    'highway': 'A wide American interstate highway seen from the side and slightly above on a sunny day: a long traffic jam of many cars and '
+               'trucks bumper to bumper on all lanes in the lower half, a concrete median barrier, blank green overhead highway signs on a '
+               'gantry, light poles, distant hills, billboards with blank faces, a big open blue sky with clouds in the upper half. No people, '
+               'no text, no birds.',
+    'shoulder': 'The grassy shoulder of an American interstate highway on a sunny day, eye-level side view: dry grass and a gravel shoulder '
+                'across the lower third (empty), a metal guardrail, behind it the highway with a traffic jam of cars, a blank green highway '
+                'sign on a post, power lines, a blue sky. No people, no text.',
+    'stadium': 'Outside a big American concert stadium at sunset, eye-level wide view: a tall curved concrete stadium wall with arched gates '
+               'and closed metal turnstiles, huge blank banners hanging on the wall, stadium light towers glowing, an orange and purple '
+               'sunset sky. In front: an empty parking lot with painted lines, a concrete curb and a sidewalk across the lower third, a few '
+               'traffic cones, a trash can. No people, no text.',
+    'stage': 'Inside a big rock concert arena at night, view from the crowd floor toward the stage: a wide black stage with stacks of '
+             'speakers on both sides, a drum riser, microphone stands, colorful stage lights and light beams cutting through haze, a huge '
+             'blank video screen above the stage, trusses with lamps. The crowd floor in the lower third is EMPTY dark floor. No people, '
+             'no text, no logos.',
 }
 
 if __name__ == '__main__':

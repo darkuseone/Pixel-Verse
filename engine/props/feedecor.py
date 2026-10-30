@@ -163,6 +163,82 @@ def dress_roof(W):
 DRESS.update(leasing=dress_leasing, courtyard=dress_courtyard, roof=dress_roof)
 
 
+# ---------------------------------------------------------------- E03: St. Overcharge ER, Panorama Tower, the billing back office
+def dress_er(W):
+    D.attach(W, [
+        (D.plate(136, 116, ['PATIENT: DUKE', 'ICE PACK $180', 'ASPIRIN $45', 'TISSUE (USED) $12', 'HUG $39.99'], bg=WH,
+                 colors=[NAVY, RED, RED, RED, RED], border=None, weights=[0.8, 0.7, 0.7, 0.7, 0.7], pad=1.4, align='l'), 956, 176),
+        (D.plate(150, 22, ['ST. OVERCHARGE MEDICAL CENTER'], bg=NAVY, fg=WH, border=WH, pad=0.8), 600, 60),
+        (D.plate(86, 26, ['ER WAIT 6 HRS', '(OR $$$ FOR 5)'], bg=YEL, colors=[BLK, RED], border=BLK, pad=0.6), 1110, 300),
+        (D.plate(56, 16, ['GLOVES $8 EA'], bg=WH, fg=RED, border=RED, pad=0.5), 1174, 266),
+        (D.plate(64, 16, ['PRINTER: BILLS'], bg=(40, 40, 50), fg=MINT, border=None, pad=0.5), 1040, 392),
+        (D.sticker('PARKING $40/HR', bg=RED, fg=WH, w=70, h=12, tilt=-4), 30, 420),
+        (D.plate(70, 14, ['BREATHING EXTRA'], bg=MINT, fg=(20, 40, 50), border=None, pad=0.5), 410, 262),
+    ])
+    D.anim(W, blink(470, 226, 18, 4, (90, 255, 140), 0.8, 0.55))
+
+
+def dress_tower(W):
+    D.attach(W, [
+        (D.plate(156, 96, ['PANORAMA', 'TOWER', 'NOW 100% GLASS', '(BIRDS: SORRY)'], bg=(30, 60, 120), colors=[WH, WH, MINT, YEL],
+                 border=(200, 210, 230), weights=[1.0, 1.0, 0.6, 0.6], pad=1.4), 176, 422),
+        (D.plate(240, 26, ['PANORAMA TOWER - WINDOW CLEANING $2M/YR'], bg=CREAM, fg=NAVY, border=NAVY, pad=0.8), 640, 452),
+    ])
+    D.anim(W, clouds(0, 260, n=5, seed=21))
+
+
+def dress_billing(W):
+    D.attach(W, [
+        (D.plate(110, 100, ['DR. CHUCK', 'M.D.', '(MOSTLY)'], bg=CREAM, colors=[NAVY, NAVY, RED], border=(150, 110, 60), pad=1.4), 58, 168),
+        (D.plate(76, 82, ['CHUCK', 'CLAIMS', 'DEPT.'], bg=CREAM, colors=[NAVY, RED, NAVY], border=(110, 40, 40), pad=1.2), 216, 190),
+        (D.plate(110, 100, ['EVERY NO', 'COUNTS!', 'UNITED', 'WE BILL'], bg=WH, colors=[RED, RED, NAVY, NAVY], border=None,
+                 weights=[0.9, 0.9, 0.7, 0.7], pad=1.4), 792, 182),
+        (D.plate(100, 18, ['APPROVED / DENIED'], bg=YEL, fg=BLK, border=BLK, pad=0.6), 770, 520),
+        (D.plate(64, 14, ['COFFEE: 3RD POT'], bg=WH, fg=(110, 70, 40), border=(110, 70, 40), pad=0.5), 1120, 600),
+    ])
+    D.anim(W, dust_beam((300, 80, 1000, 500), n=14, seed=31))
+
+
+DRESS.update(er=dress_er, tower=dress_tower, billing=dress_billing)
+
+
+# ---------------------------------------------------------------- E04: suburban street, the jammed interstate, the shoulder
+GSIGN = (30, 110, 60)
+
+
+def dress_street(W):
+    D.attach(W, [
+        (D.plate(58, 16, ['BILLS ONLY'], bg=WH, fg=RED, border=RED, pad=0.5), 126, 424),
+        (D.plate(104, 46, ['WE BUY', 'UGLY CARS', '$500 CASH'], bg=YEL, colors=[BLK, RED, BLK], border=BLK, pad=1.0, tilt=-3), 300, 438),
+        (D.plate(50, 44, ['LOST', 'PIGEON?', '(NO)'], bg=WH, colors=[RED, BLK, BLK], border=(150, 150, 150), pad=0.8, tilt=4), 78, 196),
+        (D.plate(72, 16, ['FEE-THROW $2'], bg=WH, fg=RED, border=RED, pad=0.5), 898, 238),
+        (D.sticker('STATE FEE INSURED*', bg=NAVY, fg=WH, w=86, h=12, tilt=2), 820, 408),
+    ])
+    D.anim(W, clouds(0, 200, n=4, seed=41))
+
+
+def dress_highway(W):
+    D.attach(W, [
+        (D.plate(88, 56, ['EXIT 9', 'TOLL $8'], bg=GSIGN, colors=[WH, WH], border=WH, bw=1.2, pad=1.2), 430, 276),
+        (D.plate(88, 56, ['EXPRESS', 'LANE $14'], bg=GSIGN, colors=[WH, YEL], border=WH, bw=1.2, pad=1.2), 537, 276),
+        (D.plate(88, 56, ['SKY LANE', '$900/MO'], bg=GSIGN, colors=[WH, YEL], border=WH, bw=1.2, pad=1.2), 652, 276),
+        (D.plate(136, 62, ['STATE FEE', 'LIKE A BAD', 'NEIGHBOR'], bg=WH, colors=[RED, NAVY, NAVY], border=RED, pad=1.2), 89, 334),
+        (D.plate(90, 44, ['DRONE', 'ZONE'], bg=(30, 40, 70), colors=[MINT, YEL], border=None, pad=1.2), 1095, 342),
+    ])
+    D.anim(W, clouds(0, 230, n=5, seed=43))
+
+
+def dress_shoulder(W):
+    D.attach(W, [
+        (D.plate(196, 88, ['DRONE', 'CHECKPOINT', '1 MI'], bg=GSIGN, colors=[WH, WH, YEL], border=WH, bw=1.4, pad=1.6), 802, 309),
+        (D.plate(120, 16, ['NO STOPPING (FEE)'], bg=YEL, fg=BLK, border=BLK, pad=0.5), 300, 612),
+    ])
+    D.anim(W, clouds(0, 200, n=4, seed=45))
+
+
+DRESS.update(street=dress_street, highway=dress_highway, shoulder=dress_shoulder)
+
+
 def dress(name, W):
     fn = DRESS.get(name)
     if fn: fn(W)

@@ -383,3 +383,70 @@ def cover_make(frame, title, n=1, out='cover.png', title_size=96, plate_y=None, 
         g[SAFE_BOTTOM - GRID[0]:] = (g[SAFE_BOTTOM - GRID[0]:] * 0.45).astype(np.uint8)
         Image.fromarray(g).resize((270, 360), Image.LANCZOS).save(str(out).replace('.png', '_grid.png'))
     return big
+
+
+
+# ---------------------------------------------------------------- E03: the itemised bill (insert, output res), glass crack, split screen
+def bill_ui(lines, total=None, title='ST. OVERCHARGE MEDICAL CENTER', w=760, hi=0, t=0.0):
+    """a long paper hospital bill: header, itemised lines (Press Start 2P, auto-fitted), the highlighted line hi in red, a TOTAL"""
+    fs = 30
+    while max(O.pfont(fs).getlength(l) for l in lines) > w - 100 and fs > 14: fs -= 2
+    h = 150 + len(lines) * (fs + 26) + (110 if total else 30)
+    im = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    d.rectangle([0, 0, w - 1, h - 1], fill=(252, 250, 240, 255), outline=(150, 150, 150, 255), width=4)
+    for x in range(0, w, 24): d.polygon([(x, h - 1), (x + 12, h - 14), (x + 24, h - 1)], fill=(0, 0, 0, 0))     # torn edge
+    ft = 26
+    while O.pfont(ft).getlength(title) > w - 60 and ft > 12: ft -= 2
+    d.text(((w - O.pfont(ft).getlength(title)) / 2, 30), title, font=O.pfont(ft), fill=(30, 60, 120, 255))
+    d.line([(30, 90), (w - 30, 90)], fill=(160, 160, 160, 255), width=3)
+    y = 120
+    for i, l in enumerate(lines):
+        if i == hi:
+            d.rectangle([24, y - 8, w - 24, y + fs + 8], fill=(255, 226, 226, 255))
+        d.text((44, y), l, font=O.pfont(fs), fill=(200, 30, 40, 255) if i == hi else (40, 40, 50, 255))
+        y += fs + 26
+    if total:
+        d.line([(30, y), (w - 30, y)], fill=(40, 40, 50, 255), width=4)
+        fT = 40
+        while O.pfont(fT).getlength(total) > w - 80 and fT > 16: fT -= 2
+        d.text(((w - O.pfont(fT).getlength(total)) / 2, y + 24), total, font=O.pfont(fT), fill=(200, 30, 40, 255))
+    return np.array(im)
+
+
+def crack(big, t, t0, cx, cy, r=260, seed=3):
+    """a star crack on glass from the impact point (white lines + a shimmer), grows in 0.08 s"""
+    if t < t0: return
+    k = min(1.0, (t - t0) / 0.08)
+    rng = np.random.default_rng(seed)
+    im = Image.fromarray(big); d = ImageDraw.Draw(im)
+    for i in range(11):
+        a = i / 11 * 2 * math.pi + rng.random() * 0.4
+        L = r * (0.5 + rng.random() * 0.6) * k
+        pts = [(cx, cy)]
+        for j in range(1, 4):
+            rr = L * j / 3
+            pts.append((cx + math.cos(a + (rng.random() - 0.5) * 0.3) * rr, cy + math.sin(a + (rng.random() - 0.5) * 0.3) * rr))
+        d.line(pts, fill=(240, 250, 255), width=5)
+    for q in (0.35, 0.7):
+        d.ellipse([cx - r * q * k, cy - r * q * k * 0.9, cx + r * q * k, cy + r * q * k * 0.9], outline=(230, 245, 255), width=3)
+    big[:] = np.array(im)
+
+
+def split(left, right, gap=12, col=(255, 214, 90)):
+    """vertical split screen of two full frames (each squeezed to half width by cropping its centre)"""
+    W2 = (OUT_W - gap) // 2
+    out = np.zeros_like(left); out[:] = col
+    lx = (OUT_W - W2) // 2
+    out[:, :W2] = left[:, lx:lx + W2]
+    out[:, W2 + gap:W2 + gap + W2] = right[:, lx:lx + W2]
+    return out
+
+
+def label(big, text, cx, cy, fg=(255, 255, 255), bg=(30, 60, 120), size=34):
+    """a small pixel caption plate (split-screen labels: DOCTOR / INSURANCE)"""
+    f = O.pfont(size); tw = f.getlength(text)
+    im = Image.new('RGBA', (int(tw) + 40, size + 30), (0, 0, 0, 0)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    d.rounded_rectangle([0, 0, im.size[0] - 1, im.size[1] - 1], 10, fill=bg + (235,), outline=(255, 255, 255, 255), width=3)
+    d.text((20, 15), text, font=f, fill=fg)
+    O.overlay(big, np.array(im), int(cx - im.size[0] / 2), int(cy - im.size[1] / 2), 1.0)
+    if ST.LOG[0] is not None: ST.log('card', bbox=(cx - im.size[0] / 2, cy - im.size[1] / 2, cx + im.size[0] / 2, cy + im.size[1] / 2))
