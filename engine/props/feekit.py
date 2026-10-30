@@ -224,7 +224,7 @@ def title_trim(a):
 
 
 # ---------------------------------------------------------------- banknote plate (series badge / covers / end card)
-def banknote(line1, line2, w=640, h=200):
+def banknote(line1, line2, w=640, h=200, big2=False):
     """a dollar bill: cream paper, a thick money-green frame with a guilloche wave band, corner seals with «$», the series name + episode"""
     img = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(img); d.fontmode = '1'
     d.rectangle([0, 0, w - 1, h - 1], fill=GREEN + (255,))
@@ -240,10 +240,11 @@ def banknote(line1, line2, w=640, h=200):
         d.text((cx - fs.getlength('$') / 2, cy - 15), '$', font=fs, fill=GREEN + (255,))
     s1 = int(h * 0.24)
     while O.pfont(s1).getlength(line1) > w - 180 and s1 > 10: s1 -= 2
-    s2 = int(s1 * 0.62)
+    s2 = int(s1 * (1.0 if big2 else 0.62))
     while O.pfont(s2).getlength(line2) > w - 200 and s2 > 8: s2 -= 2
-    d.text(((w - O.pfont(s1).getlength(line1)) / 2, h * 0.27), line1, font=O.pfont(s1), fill=GREEN + (255,))
-    d.text(((w - O.pfont(s2).getlength(line2)) / 2, h * 0.27 + s1 + 18), line2, font=O.pfont(s2), fill=(200, 40, 48, 255))
+    y1 = (h - s1 - s2 - 24) / 2 if big2 else h * 0.27
+    d.text(((w - O.pfont(s1).getlength(line1)) / 2, y1), line1, font=O.pfont(s1), fill=GREEN + (255,))
+    d.text(((w - O.pfont(s2).getlength(line2)) / 2, y1 + s1 + (24 if big2 else 18)), line2, font=O.pfont(s2), fill=(200, 40, 48, 255))
     return np.array(img)
 
 
@@ -367,13 +368,25 @@ GRID = (240, 1680)
 SAFE_BOTTOM = 1520
 
 
-def cover_make(frame, title, n=1, out='cover.png', title_size=96, plate_y=None, grid_preview=True):
-    """banknote plate «LAND OF THE FEE / EPISODE N/6» at the TOP of the 3:4 grid zone (y ~262), the title right under it, a soft dark
-    band behind both; faces in the middle, nothing that matters below y 1520. Writes cover.png + cover_grid.png"""
+def _title_lines(title):
+    """one long title -> two balanced lines (split at the space nearest the middle)"""
+    if len(title) != 1 or ' ' not in title[0] or len(title[0]) <= 9: return list(title)
+    w = title[0].split(' ')
+    best = min(range(1, len(w)), key=lambda i: abs(len(' '.join(w[:i])) - len(' '.join(w[i:]))))
+    return [' '.join(w[:best]), ' '.join(w[best:])]
+
+
+def cover_make(frame, title, n=1, out='cover.png', title_size=118, plate_y=None, grid_preview=True):
+    """banknote plate «LAND OF THE FEE / EPISODE N/6» at the TOP of the 3:4 grid zone (y ~262), BIG (owner 30.10.2026: the name and
+    the episode must read in the channel grid), the title in 1-2 lines at the largest size that fits, a soft dark band behind both;
+    faces lower (head ~y 1180), nothing that matters below y 1520. Writes cover.png + cover_grid.png"""
     big = frame.copy()
-    p = banknote('LAND OF THE FEE', f'EPISODE {n}/6', w=660, h=200)
+    p = banknote('LAND OF THE FEE', f'EPISODE {n}/6', w=1020, h=300, big2=True)
     py = GRID[0] + 22 if plate_y is None else plate_y
-    t = hook_title(title, title_size)
+    lines = _title_lines(title)
+    ts = title_size
+    while max(O.pfont(ts).getlength(l) for l in lines) > OUT_W - 70 and ts > 40: ts -= 4
+    t = hook_title(lines, ts)
     ty = py + p.shape[0] - 6
     y1 = ty + t.shape[0]
     shade = np.zeros((big.shape[0], 1, 1), np.float32)
