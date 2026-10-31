@@ -9,3 +9,5 @@
 
 Пересборка: `python3 build.py [course|prompts|checklists]` (нужны `pip install markdown` и Playwright из окружения), архив: `cd starter-kit && zip -qr ../out/starter-kit.zip .`.
 Исходники текста — `src/<doc>/*.md` (шорткоды описаны в `build.py`), оформление — `src/style.css`, схемы экранов — `src/ui.py`, картинки — `img/` (кадры из серий канала).
+
+Ссылка на Telegram-приложение продажи (31.10.2026): `t.me/markusbrown_bot/kurs` — пока неактивна, в тексты и описания не вставлять.
