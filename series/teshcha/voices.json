@@ -1,0 +1,101 @@
+{
+  "cartoon": "Тёща на недельку",
+  "slug": "teshcha",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "tolik": {
+      "name": "Толик",
+      "color_caption": [
+        90,
+        225,
+        215
+      ],
+      "style": "[pompous] [panicking] [whining] — пыжится, срывается в писк",
+      "design": {
+        "description": "A wiry, nervous Russian man in his early forties, a self-important loser who believes he is the boss of the house. Medium-high reedy tenor, slightly nasal, puffed-up pompous delivery that cracks into a squeaky panicked whine. Fast, expressive, funny. Native Russian speaker, plain urban Russian accent.",
+        "text": "Я в э́том до́ме мужи́к! Как э́то — на неде́льку?! Ра́иса Заха́ровна, э́то моё кре́сло! Я пятна́дцать лет его́ продавли́вал! Све́та! Све́та, иди́ сюда́! Ну всё, я споко́ен. Я соверше́нно споко́ен!",
+        "picked": {
+          "i": 1,
+          "dur": 11.23,
+          "f0": 242.4,
+          "f0_iqr": 66.1,
+          "rate": 24.8,
+          "loud_sd": 5.5
+        }
+      },
+      "voice_id": "B0jmt8McoEVGc4Ts8fcx",
+      "voice": "Тёща на недельку — Толик"
+    },
+    "raisa": {
+      "name": "Раиса Захаровна (тёща)",
+      "color_caption": [
+        255,
+        110,
+        175
+      ],
+      "style": "[sweet] [sugary] [bossy] — сладкий яд, завуч на пенсии",
+      "design": {
+        "description": "A domineering Russian mother-in-law in her late sixties, a retired school headmistress. Loud, chesty, sugary-sweet alto voice with steel underneath, drawn-out affectionate words that hide commands, theatrical sighs, unhurried and totally in charge. Native Russian speaker, warm provincial Russian accent.",
+        "text": "То́лечка, я на неде́льку. Су́мки бери́, не стой. Мужи́к, та́пки сними́, я помы́ла. Све́точка, он у тебя́ опя́ть похуде́л. Ой, давле́ние. Ничего́, ничего́, я тут поживу́, помогу́.",
+        "picked": {
+          "i": 2,
+          "dur": 17.24,
+          "f0": 320.0,
+          "f0_iqr": 88.9,
+          "rate": 13.9,
+          "loud_sd": 5.9
+        }
+      },
+      "voice_id": "5iZCrjsY2thP3UsjA1Ha",
+      "voice": "Тёща на недельку — Раиса Захаровна (тёща)"
+    },
+    "pusya": {
+      "name": "Пуся (той-терьер)",
+      "color_caption": [
+        255,
+        222,
+        80
+      ],
+      "style": "[deep] [deadpan] — бас дальнобойщика, только в камеру",
+      "design": {
+        "description": "A tiny trembling lapdog voiced by a weary, cynical old Russian long-haul trucker. Extremely deep, raspy, gravelly bass, heavy smoker's voice, slow flat deadpan delivery, totally unimpressed, as if he has seen everything twice. Native Russian speaker.",
+        "text": "Пла́вали. Мы у сестры́ так на неде́льку три го́да жи́ли. Я два килогра́мма, но я всё ви́жу. Зятьёв бы́ло мно́го. Кре́сло — моё. Пла́вали.",
+        "picked": {
+          "i": 2,
+          "dur": 21.08,
+          "f0": 333.3,
+          "f0_iqr": 105.4,
+          "rate": 11.2,
+          "loud_sd": 4.9
+        }
+      },
+      "voice_id": "94UP8JoYQP8SeAvwcEFv",
+      "voice": "Тёща на недельку — Пуся (той-терьер)"
+    },
+    "sveta": {
+      "name": "Света (жена)",
+      "color_caption": [
+        175,
+        235,
+        110
+      ],
+      "style": "[tired] [guilty] [fast] — между мужем и мамой",
+      "design": {
+        "description": "A tired Russian woman in her late thirties, a wife stuck between her husband and her mother. Warm mid-range female voice, fast, apologetic and a bit guilty, exhausted sighs, sometimes snaps. Native Russian speaker, plain urban Russian accent.",
+        "text": "То́ля, э́то же ма́ма! Ну что ты начина́ешь? Я ма́мину кварти́ру сдала́, на год. Нам ипоте́ку плати́ть. Ма́ма, ну хва́тит. То́ля, ну хва́тит уже́!",
+        "picked": {
+          "i": 1,
+          "dur": 12.12,
+          "f0": 195.1,
+          "f0_iqr": 63.7,
+          "rate": 19.5,
+          "loud_sd": 5.6
+        }
+      },
+      "voice_id": "YvBldwNnE8ctQ8bDGWNM",
+      "voice": "Тёща на недельку — Света (жена)"
+    }
+  },
+  "music": {},
+  "sfx": []
+}
