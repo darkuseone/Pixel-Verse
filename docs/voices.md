@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-10-23 03:24.
+Обновлено: 2026-11-01 23:36.
 
 ## agent-dibs
 
@@ -36,8 +36,8 @@
 |---|---|---|---|---|---|
 | Grim | `grim` | `9kccWXrItNrNr72CRNY3` | active | 44 / 7 | grim-ride — Grim (restored) |
 | Edgar | `edgar` | `qSoNm6CDt8qHyugcvk47` | active | 27 / 7 | grim-ride — Edgar (restored) |
-| Harold | `harold` | `eFOwKI3LNrA1UWjisXHn` | active | 19 / 6 | grim-ride — Harold (restored) |
-| Dashley (DoomDash support bot) | `dashley` | `LNZyyXPD0jcfm1UPIKsc` | active | 9 / 3 | grim-ride — Dashley (DoomDash support bot) (restored) |
+| Harold | `harold` | `eFOwKI3LNrA1UWjisXHn` | deleted 2026-11-01 | 19 / 6 | grim-ride — Harold (restored) |
+| Dashley (DoomDash support bot) | `dashley` | `LNZyyXPD0jcfm1UPIKsc` | library_or_premade | 9 / 3 | Grim Ride — Dashley (DoomDash support bot) |
 | Kayden | `kayden` | `wISugChlyIgdUxhS0vFR` | deleted 2026-10-12 | 9 / 4 | Grim Ride — Kayden |
 | Todd | `todd` | `9rXbTqAmpdfkBx20G31c` | library_or_premade | 9 / 4 | Grim Ride — Todd |
 | Trick-or-treat Mom | `mom` | `UNaE6Ed6rSceF3pSO5yL` | library_or_premade | 3 / 2 | Grim Ride — Trick-or-treat Mom |
@@ -46,11 +46,11 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Мазутыч | `maz` | `xSY5jZDD2Tge1l2uwiQn` | active | 58 / 7 | Мазутыч — Мазутыч |
 | Дин-Дон (моноколесо) | `wheel` | `qCq2QOkDqmbtFpDmNPRP` | active | 19 / 7 | mazutych — Дин-Дон (моноколесо) (restored) |
 | Зоя (АЗС) | `zoya` | `tmuyzPXDJGIQYqD2DsN3` | active | 17 / 5 | mazutych — Зоя (АЗС) (restored) |
 | Борис Борисыч | `boss` | `tucKspJ994E6SUPePYF5` | active | 17 / 5 | mazutych — Борис Борисыч (restored) |
 | Толик (водитель бензовоза) | `tolik` | `cL7vvvUcXjn22DU68RzU` | active | 11 / 4 | mazutych — Толик (водитель бензовоза) (restored) |
+| Мазутыч | `maz` | `xSY5jZDD2Tge1l2uwiQn` | deleted 2026-11-01 | 58 / 7 | Мазутыч — Мазутыч |
 | Инспектор Столбов (ДПС) | `cop` | `sqjFPShWaZX3JdS3utu1` | library_or_premade | 8 / 1 | Мазутыч — Инспектор Столбов (ДПС) |
 | Вадик (барыга) | `vadik` | `3YcbIhxRmKe16pBspvSh` | library_or_premade | 7 / 1 | Мазутыч — Вадик (барыга) |
 
@@ -78,18 +78,27 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Brenda | `brenda` | `SK1BhvqG7RGgUrYJyInI` | active | 48 / 7 | Sunny Palms HOA — Brenda |
+| Brenda | `brenda` | `SK1BhvqG7RGgUrYJyInI` | library_or_premade | 48 / 7 | Sunny Palms HOA — Brenda |
 | Dale | `dale` | `Ii27fPpQjUvsObpI9Ex2` | deleted 2026-10-22 | 46 / 7 | Sunny Palms HOA — Dale |
 | Earl the Gator | `earl` | `LnoWNLqEhWQWVHwQFlpP` | deleted 2026-10-21 | 27 / 7 | Sunny Palms HOA — Earl the Gator |
 | Payment Tablet | `tablet` | `pmf8vtu31xjkFqYKEPwq` | deleted 2026-10-06 | 5 / 1 | Sunny Palms HOA — Payment Tablet |
+
+## teshcha
+
+| Герой | char | voice_id | Статус | Реплик / серий | Голос |
+|---|---|---|---|---|---|
+| Толик | `tolik` | `B0jmt8McoEVGc4Ts8fcx` | active | 0 / 0 | Тёща на недельку — Толик |
+| Раиса Захаровна (тёща) | `raisa` | `5iZCrjsY2thP3UsjA1Ha` | active | 0 / 0 | Тёща на недельку — Раиса Захаровна (тёща) |
+| Пуся (той-терьер) | `pusya` | `94UP8JoYQP8SeAvwcEFv` | active | 0 / 0 | Тёща на недельку — Пуся (той-терьер) |
+| Света (жена) | `sveta` | `YvBldwNnE8ctQ8bDGWNM` | active | 0 / 0 | Тёща на недельку — Света (жена) |
 
 ## thanks-randy
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Randy | `randy` | `TchZIvpJmfER4pUh0mLj` | active | 27 / 6 | Thanks, Randy — Randy |
-| SCAN-DEE (every machine) | `scandee` | `3ANi4ZKHBsZCpmOHdUAL` | active | 12 / 5 | Thanks, Randy — SCAN-DEE (every machine) |
-| Nana Joyce | `joyce` | `dJjx0RiCfuNSJOqSszkH` | active | 12 / 5 | Thanks, Randy — Nana Joyce |
+| Randy | `randy` | `TchZIvpJmfER4pUh0mLj` | deleted 2026-11-01 | 27 / 6 | Thanks, Randy — Randy |
+| SCAN-DEE (every machine) | `scandee` | `3ANi4ZKHBsZCpmOHdUAL` | library_or_premade | 12 / 5 | Thanks, Randy — SCAN-DEE (every machine) |
+| Nana Joyce | `joyce` | `dJjx0RiCfuNSJOqSszkH` | library_or_premade | 12 / 5 | Thanks, Randy — Nana Joyce |
 | Brayden | `brayden` | `MIUbQ8ecRUmaOKYrVlLG` | deleted 2026-10-23 | 10 / 5 | Thanks, Randy — Brayden |
 | Tom (frozen turkey) | `tom` | `HIEYuk97dd40Gpi6GtRn` | deleted 2026-10-23 | 9 / 6 | Thanks, Randy — Tom (frozen turkey) |
 | Captain Dunn (fire dept.) | `dunn` | `OXWVo11izezT9DaOSbK4` | library_or_premade | 5 / 1 | Thanks, Randy — Captain Dunn (fire dept.) |
@@ -101,15 +110,15 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Валера | `valera` | `rBeJLZF1kJdbvH3OTV0M` | active | 67 / 10 | Валера и кот — Валера |
-| Кот Дембель | `cat` | `YVkh6e91HD5qbnYVass7` | active | 33 / 10 | valera-i-kot — Кот Дембель (restored) |
-| Баба Зина | `zina` | `zYrh5fGxYuTn3sXH3sMw` | active | 23 / 5 | valera-i-kot — Баба Зина (restored) |
+| Валера | `valera` | `1q0c8LfKB7t97Mup7LOS` | active | 90 / 15 | Валера и кот — Валера |
+| Кот Дембель | `cat` | `YVkh6e91HD5qbnYVass7` | active | 49 / 15 | valera-i-kot — Кот Дембель (restored) |
+| Баба Зина | `zina` | `zYrh5fGxYuTn3sXH3sMw` | active | 25 / 7 | valera-i-kot — Баба Зина (restored) |
+| Нина Петровна (ЖЭК) | `nina` | `pVPuMCjFhiIm88pqmX0y` | active | 17 / 7 | valera-i-kot — Нина Петровна (ЖЭК) (restored) |
 | Кассирша Тамара | `tamara` | `EJfoq1w8EoRCsRnCWoOc` | active | 13 / 3 | valera-i-kot — Кассирша Тамара (restored) |
-| Нина Петровна (ЖЭК) | `nina` | `pVPuMCjFhiIm88pqmX0y` | active | 10 / 4 | valera-i-kot — Нина Петровна (ЖЭК) (restored) |
-| Семёныч | `semenych` | `wB7e2HF2LrmqM3QcPn0B` | active | 10 / 1 | Валера и кот — Семёныч |
-| Баба Люба | `lyuba` | `bB7ZYDhHF7rhyK82vKpu` | active | 9 / 4 | valera-i-kot — Баба Люба (restored) |
-| Гена (сосед сверху) | `gena` | `ZszdQcL5WjzUTdPEv3YN` | active | 3 / 1 | Валера и кот — Гена (сосед сверху) |
-| Колян | `kolyan` | `obfzPRwPXc0avd4LPuzH` | deleted 2026-10-12 | 8 / 1 | Валера и кот — Колян |
+| Семёныч | `semenych` | `wB7e2HF2LrmqM3QcPn0B` | active | 11 / 2 | valera-i-kot — Семёныч (restored) |
+| Баба Люба | `lyuba` | `bB7ZYDhHF7rhyK82vKpu` | active | 10 / 5 | valera-i-kot — Баба Люба (restored) |
+| Колян | `kolyan` | `obfzPRwPXc0avd4LPuzH` | deleted 2026-10-12 | 10 / 2 | Валера и кот — Колян |
+| Гена (сосед сверху) | `gena` | `ZszdQcL5WjzUTdPEv3YN` | deleted 2026-11-01 | 4 / 2 | Валера и кот — Гена (сосед сверху) |
 | Автоответчик ЖЭКа | `robot` | `uQiZyJqZ7ePaB8bwME8n` | library_or_premade | 2 / 1 | Marusya G – Persuasive Outbound Caller |
 
 ## Защищённые (личные голоса владельца)

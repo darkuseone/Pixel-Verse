@@ -23,8 +23,11 @@
           "loud_sd": 5.9
         }
       },
-      "voice_id": "rBeJLZF1kJdbvH3OTV0M",
-      "voice": "Валера и кот — Валера"
+      "voice_id": "1q0c8LfKB7t97Mup7LOS",
+      "voice": "Валера и кот — Валера",
+      "previous_voice_ids": [
+        "rBeJLZF1kJdbvH3OTV0M"
+      ]
     },
     "cat": {
       "name": "Кот Дембель",

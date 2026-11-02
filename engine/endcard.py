@@ -86,7 +86,11 @@ def card(style='default', lang='us', width=None, promise=None):
         row[(row.shape[0] - bell.shape[0]) // 2:(row.shape[0] - bell.shape[0]) // 2 + bell.shape[0], :bell.shape[1]] = bell
         row[(row.shape[0] - tag.shape[0]) // 2:(row.shape[0] - tag.shape[0]) // 2 + tag.shape[0], bell.shape[1] + 24:] = tag
         img = _stack([title, row], width, gap=6)
-    elif style == 'winter':                                      # «Валера и кот»: frosty winter_title letters (the series hook style) + bell
+    elif style == 'teshcha':                                     # «Тёща на недельку»: «тёщин халат» letters (raspberry, gold shine) + bell
+        from props import teshkit as K
+        title = fit(K.title_trim(K.hook_title([txt], 96 if width <= 1080 else 116, width=width + 300)), width - 60)
+        img = _stack([title, _bell(11)], width, gap=6)
+    elif style == 'winter':                                     # «Валера и кот»: frosty winter_title letters (the series hook style) + bell
         title = fit(_trim(O.winter_title([txt], 92 if width <= 1080 else 110, width=width + 300)), width - 60)
         img = _stack([title, _bell(11)], width, gap=6)
     else:
