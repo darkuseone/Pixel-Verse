@@ -34,7 +34,9 @@ def run(slug, ep, T, video=None, out_mp4=None):
         labels.append(f'[s{k}]')
 
     speech = '+'.join(f'between(t,{t0 - 0.05:.2f},{t0 + (b - a) + 0.1:.2f})' for _, _, _, t0, a, b, _, _ in VOICE)
-    for k, (path, loop, t0, t1, g, duck) in enumerate(BEDS):
+    for k, bed in enumerate(BEDS):
+        path, loop, t0, t1, g, duck = bed[:6]
+        bed_af = (',' + bed[6]) if len(bed) > 6 and bed[6] else ''       # optional per-bed filter (e.g. an EQ dip under the voice band)
         i = add_input(P.ROOT / path)
         dur = t1 - t0; n = int(dur / (loop - 0.5)) + 1
         if n > 1:
@@ -47,7 +49,7 @@ def run(slug, ep, T, video=None, out_mp4=None):
             chains.append(f'{cur}[b{k}_{j}]acrossfade=d=0.5:c1=tri:c2=tri[bx{k}_{j}]'); cur = f'[bx{k}_{j}]'
         d = int(t0 * 1000)
         vol = f"volume='if(gt({speech},0),{g * 0.4:.3f},{g:.3f})':eval=frame" if duck else f'volume={g}'
-        chains.append(f'{cur}atrim=0:{dur},afade=t=in:d=0.02,afade=t=out:st={max(0.0, dur - 0.3):.2f}:d=0.3,adelay={d}|{d},{vol}[bed{k}]')
+        chains.append(f'{cur}atrim=0:{dur}{bed_af},afade=t=in:d=0.02,afade=t=out:st={max(0.0, dur - 0.3):.2f}:d=0.3,adelay={d}|{d},{vol}[bed{k}]')
         labels.append(f'[bed{k}]')
 
     master = getattr(T, 'MASTER', 1.0)

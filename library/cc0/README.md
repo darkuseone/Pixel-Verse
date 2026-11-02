@@ -40,21 +40,21 @@
 меряю долю энергии в полосе 400–4000 Гц (мелодия): нужно ≥ 0,4; обработка `highpass=90`, −18 LUFS.
 | Файл | Автор | Страница | Длина | Настроение |
 |---|---|---|---|---|
-| ukulele_loop | StarNinjas | opengameart.org/content/ukulele-forest-beginning-loop-and-end | 8,5 с луп | укулеле — лёгкий бытовой ситком |
 | badinerie_flute | Spring Spring | opengameart.org/content/badinerie | 60 с | Бах «Шутка», флейта — суета, комичный хаос |
 | flute_strings | Spring Spring | opengameart.org/content/minimalistic-flute-strings-tune | 60 с | флейта и струнные — спокойный фон |
 | town_cheerful | cynicmusic | opengameart.org/content/town-theme-rpg | 60 с | весёлая «городская» тема |
-| sad_orchestral | obscure music | opengameart.org/content/sad-orchestral-theme | 60 с | грустный оркестр — неудача героя (комичный контраст) |
 | happy_lullaby | cynicmusic | opengameart.org/content/happy-lullaby-song17 | 40 с | колыбельная — ирония, умиление |
-| komiku_melodica | Komiku | archive.org/details/komiku-animal-summer-music-camp («Play the melodica for me!») | 60 с | мелодика, чудаковатая бытовая комедия |
-| komiku_ukulele | Komiku | там же («Play the ukulele for me!») | 56 с | укулеле, лёгкий ситком |
 | komiku_mandolin | Komiku | там же («A happy mandolin is a happy mandolin!») | 60 с | мандолина, весёлая суета |
 | komiku_fetch_contest | Komiku | archive.org/details/Komiku-Poupis_incredible_adventures («Fetch Contest») | 42 с | бодрая игровая тема |
 | komiku_shoe_shop | Komiku | archive.org/details/Komiku-HeliceAwesomeDanceAdventure («Shoe shop») | 60 с | «магазинный» грув |
 | komiku_weekly_fair | Komiku | archive.org/details/Komiku-Poupis_incredible_adventures («The Weekly Fair») | 60 с | ярмарка, праздничная суета |
-| komiku_walk | Komiku | там же («Time For The Walk Of The Day») | 60 с | прогулка, спокойный позитив |
+
+| komiku_sax_sad | Komiku | archive.org/details/komiku-animal-summer-music-camp («Saxophone is sad but beautiful!») | 60 с | грустный саксофон — комичная тоска героя |
+| komiku_sax_sky | Komiku | там же («Practicing the saxophone looking at the sky!») | 60 с | саксофон, задумчиво |
+
+Владелец 02.11.2026: из пробника понравились мандолина, Fetch Contest, Shoe shop, Weekly Fair (весёлые); мелодика, укулеле, прогулка, грустный оркестр/пианино — «не по смыслу», убраны. Для грусти — не пианино, а саксофон.
 
 Komiku — французский композитор, публикует всю музыку под CC0 (archive.org, лицензия на странице альбома: publicdomain/zero/1.0).
 
 Использование: в `timeline.py` пути `library/cc0/sfx/<имя>.mp3` и `library/cc0/music/<имя>.mp3`; музыка в `BEDS` с `loop_sec` = длина
-файла (52–60 с), громкость 1,2–1,3 с дакингом (под речью ×0,4): так подложка ≈ 13 дБ ниже речи; при 0,15–0,3 её не слышно (замер 02.11.2026).
+файла (52–60 с), громкость 0,8–0,9 с дакингом (под речью ×0,4) и вырезом частот голоса (7-й элемент BEDS: `equalizer=f=1500:t=q:w=0.7:g=-7,equalizer=f=3200:t=q:w=1:g=-4`): речь на 16–18 дБ громче музыки, музыку слышно в паузах. При 1,2–1,3 без выреза музыка перебивала голоса (владелец 02.11.2026), при 0,15–0,3 её не слышно.
