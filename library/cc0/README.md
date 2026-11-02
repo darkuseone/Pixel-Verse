@@ -46,6 +46,15 @@
 | town_cheerful | cynicmusic | opengameart.org/content/town-theme-rpg | 60 с | весёлая «городская» тема |
 | sad_orchestral | obscure music | opengameart.org/content/sad-orchestral-theme | 60 с | грустный оркестр — неудача героя (комичный контраст) |
 | happy_lullaby | cynicmusic | opengameart.org/content/happy-lullaby-song17 | 40 с | колыбельная — ирония, умиление |
+| komiku_melodica | Komiku | archive.org/details/komiku-animal-summer-music-camp («Play the melodica for me!») | 60 с | мелодика, чудаковатая бытовая комедия |
+| komiku_ukulele | Komiku | там же («Play the ukulele for me!») | 56 с | укулеле, лёгкий ситком |
+| komiku_mandolin | Komiku | там же («A happy mandolin is a happy mandolin!») | 60 с | мандолина, весёлая суета |
+| komiku_fetch_contest | Komiku | archive.org/details/Komiku-Poupis_incredible_adventures («Fetch Contest») | 42 с | бодрая игровая тема |
+| komiku_shoe_shop | Komiku | archive.org/details/Komiku-HeliceAwesomeDanceAdventure («Shoe shop») | 60 с | «магазинный» грув |
+| komiku_weekly_fair | Komiku | archive.org/details/Komiku-Poupis_incredible_adventures («The Weekly Fair») | 60 с | ярмарка, праздничная суета |
+| komiku_walk | Komiku | там же («Time For The Walk Of The Day») | 60 с | прогулка, спокойный позитив |
+
+Komiku — французский композитор, публикует всю музыку под CC0 (archive.org, лицензия на странице альбома: publicdomain/zero/1.0).
 
 Использование: в `timeline.py` пути `library/cc0/sfx/<имя>.mp3` и `library/cc0/music/<имя>.mp3`; музыка в `BEDS` с `loop_sec` = длина
 файла (52–60 с), громкость 1,2–1,3 с дакингом (под речью ×0,4): так подложка ≈ 13 дБ ниже речи; при 0,15–0,3 её не слышно (замер 02.11.2026).
