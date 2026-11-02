@@ -392,7 +392,7 @@ PC = dict(fur=(220, 176, 120), fur_hi=(244, 210, 160), fur_sh=(180, 132, 84), pi
 
 
 def pusya(CH, cam, t=0.0, mouth_=0.0, expr='deadpan', look=(0.0, 0.0), shiver=1.0, sweater=True, ball=0.0, outline_=True,
-          blink=True):
+          blink=True, ears_down=False):
     """frontal sitting toy terrier, anchor = floor point under the body. ~8 units tall incl. ears.
     expr: deadpan | smug | shock | sleepy.  shiver: tremble amount. ball: 0..1 swelling into a ball (E03)."""
     P = PC
@@ -425,6 +425,10 @@ def pusya(CH, cam, t=0.0, mouth_=0.0, expr='deadpan', look=(0.0, 0.0), shiver=1.
     Hd = Layer(cam)
     hc = Q(0, 5.4)
     for sx in (-1, 1):                                                                                        # giant radar ears
+        if ears_down:                                                                                         # ears pressed flat (too loud)
+            poly(Hd, [Q(sx * 0.9, 6.5), Q(sx * 1.6, 5.3), Q(sx * 3.6, 4.6)], P['fur'])
+            poly(Hd, [Q(sx * 1.1, 6.2), Q(sx * 1.6, 5.5), Q(sx * 3.2, 4.85)], P['pink'])
+            continue
         poly(Hd, [Q(sx * 0.7, 6.3), Q(sx * 1.75, 5.5), Q(sx * 3.2, 9.0)], P['fur'])
         poly(Hd, [Q(sx * 1.0, 6.25), Q(sx * 1.65, 5.85), Q(sx * 2.85, 8.4)], P['pink'])
     ell(Hd, hc, 1.7, 1.55, P['fur'], 0, None, P['fur_sh'], th_sh=-0.72)                                              # apple head

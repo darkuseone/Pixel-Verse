@@ -1,0 +1,13 @@
+{
+ "t1": ["tolik", "[desperate, shouting through a pillow, sleepy and angry] Раиса Заха́ровна! Семь утра́, а телеви́зор на всю гро́мкость!"],
+ "r1": ["raisa", "[shrill, loud, not hearing well, cheerful] Что? То́лечка, говори́ гро́мче, у меня́ сериа́л!"],
+ "t2": ["tolik", "[pleading, loud] Сде́лайте поти́ше! Сосе́ди же спят!"],
+ "r2": ["raisa", "[shrill, sugary, dismissive] Сосе́ди пусть то́же смо́трят. Хоро́ший сериа́л!"],
+ "t3": ["tolik", "[sneaky whisper, proud of himself] Всё. Пульт — в морози́лку."],
+ "r3": ["raisa", "[shrill, smug, triumphant] А у меня́ запасно́й пульт. Я без него́ из до́ма не выхожу́!"],
+ "p1": ["pusya", "[deep raspy bass, deadpan, tired, to camera] Я тут тре́тий день ничего́ не слы́шу."],
+ "t4": ["tolik", "[smug, relieved, then proud] Вот вам нау́шники. Тишина́... Я в э́том до́ме мужи́к!"],
+ "r4": ["raisa", "[screaming at the top of her lungs, can't hear herself, emotional about the soap opera] МАРИ́НА, НЕ ВЕРЬ ЕМУ́! ОН ЖЕ ЖЕНА́Т!"],
+ "t5": ["tolik", "[panicked, waving arms] Раиса Заха́ровна, ти́ше! Вы тепе́рь гро́мче телеви́зора!"],
+ "r5": ["raisa", "[shrill, sweet, pulling off one earphone] Что, То́лечка? Сде́лать погро́мче?"]
+}

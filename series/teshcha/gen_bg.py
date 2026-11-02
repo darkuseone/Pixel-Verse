@@ -32,7 +32,7 @@ BG = {
                'falling snow. The balcony is packed with junk along the walls: glass preserving jars on wooden shelves at the right, old '
                'wooden skis and a sled leaning on the wall, a bicycle wheel, cardboard boxes, an old car tyre, a metal basin; on the far '
                'left a glazed balcony door leading into a warm yellow-lit room. Cold blue moonlight and the warm light from the door. '
-               'The floor in the middle is clear empty space.',,
+               'The floor in the middle is clear empty space.',
     'kitchen': 'A tiny Soviet panel-block kitchen in the morning, warm light. On the left an old white rounded fridge with a small freezer '
                'compartment door on top and many magnets; a gas stove with a kettle and pots in the middle back; a small window with tulle and '
                'pots of seedlings on the sill; tiled walls with a rooster-pattern tile strip; a wall cupboard with jars; a small kitchen table '

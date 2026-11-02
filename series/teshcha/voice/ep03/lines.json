@@ -1,0 +1,12 @@
+{
+ "r1": ["raisa", "[shrill, sugary, caring and pushy] То́лечка, ты похуде́л. Съешь ещё таре́лочку!"],
+ "t1": ["tolik", "[mouth full, mumbling, desperate] Раиса Заха́ровна, я уже́ пя́тую доеда́ю!"],
+ "r2": ["raisa", "[shrill, matter-of-fact] Э́то была́ заку́ска. Сейча́с бу́дет горя́чее."],
+ "t2": ["tolik", "[pleading, loud] Я на дие́те! Мне нельзя́!"],
+ "r3": ["raisa", "[shrill, sweet, proud of herself] Хорошо́. Вот тебе́ диети́ческое — оливье́. Без хле́ба."],
+ "t3": ["tolik", "[sneaky whisper] Пу́ся, выруча́й. Ешь, пока́ она́ не ви́дит."],
+ "r4": ["raisa", "[shrill, delighted, alarmed] Ой, Пу́сечка похуде́л! Ему́ то́же доба́вки!"],
+ "p1": ["pusya", "[deep raspy bass, out of breath, deadpan, to camera] Я бо́льше не могу́. Э́то всё То́лик."],
+ "s1": ["sveta", "[surprised, coming home from work] Ма́ма, То́ля же попра́вился!"],
+ "r5": ["raisa", "[shrill, sweet, poisonous] Зна́чит, ты его́ пло́хо корми́ла, Све́точка."]
+}
