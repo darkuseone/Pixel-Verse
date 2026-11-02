@@ -84,7 +84,7 @@ BEDS = [
     (C + 'room_tone_apartment.mp3', 11.5, T0['pusya2'], T0['loop'], 0.8, False),
     (C + 'wind_inside_1.mp3', 11.5, T0['loop'], DUR, 0.9, False),
 ]
-VGAIN = {'tolik': 1.45, 'raisa': 1.45, 'pusya': 1.6, 'sveta': 1.45}
+VGAIN = {'tolik': 1.45, 'raisa': 1.95, 'pusya': 2.1, 'sveta': 1.7}
 
 if __name__ == '__main__':
     for i, s in enumerate(SHOTS): print(f"{i:2d} {s['t0']:6.2f} {s['t1'] - s['t0']:5.2f} {s['name']} {s.get('key', '')}")
