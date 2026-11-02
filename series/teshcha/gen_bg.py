@@ -32,7 +32,28 @@ BG = {
                'falling snow. The balcony is packed with junk along the walls: glass preserving jars on wooden shelves at the right, old '
                'wooden skis and a sled leaning on the wall, a bicycle wheel, cardboard boxes, an old car tyre, a metal basin; on the far '
                'left a glazed balcony door leading into a warm yellow-lit room. Cold blue moonlight and the warm light from the door. '
-               'The floor in the middle is clear empty space.',
+               'The floor in the middle is clear empty space.',,
+    'kitchen': 'A tiny Soviet panel-block kitchen in the morning, warm light. On the left an old white rounded fridge with a small freezer '
+               'compartment door on top and many magnets; a gas stove with a kettle and pots in the middle back; a small window with tulle and '
+               'pots of seedlings on the sill; tiled walls with a rooster-pattern tile strip; a wall cupboard with jars; a small kitchen table '
+               'with an oilcloth tablecloth with fruit pattern at the right; a calendar spot on the wall left blank; a radio on the shelf. The '
+               'floor in the middle is clear.',
+    'hallway': 'A narrow Soviet apartment entrance hallway: the padded brown front door on the right, a coat rack on the wall crowded with '
+               'winter coats, fur hats and scarves, a shoe rack with felt boots and slippers on the floor, an oval mirror with a small shelf '
+               'under it, patterned wallpaper, a wall telephone, a runner rug on the parquet floor, a ceiling lamp; on the left a doorway into '
+               'a warm room. The middle of the floor is clear.',
+    'yard': 'A Soviet residential courtyard on a frosty winter morning: a row of rusty metal garages on the left, a nine-storey panel '
+            'apartment block in the background with lit windows, a small bus stop shelter on the right with a bench, bare trees with frost, '
+            'snow on the ground and on the garage roofs, a lamp post, a trash bin; light grey sky, breath-cold atmosphere. The road in the '
+            'front lower part is clear and empty.',
+    'office': 'A small shabby window-sales office in a strip mall: a desk with an old computer monitor and a stack of brochures on the left, '
+              'sample plastic windows with white frames mounted on the walls, a big window display, a water cooler, a wall clock, a potted '
+              'plant, a filing cabinet, grey carpet tiles, fluorescent ceiling lights. Signs and posters are completely blank. The middle '
+              'of the floor is clear.',
+    'minibus': 'Inside an old Russian minibus taxi (marshrutka) in winter: rows of worn seats with patterned upholstery seen from the front '
+               'aisle, frosted windows with snowy street outside, hand rails, a fare box near the driver seat at the front left, a small '
+               'dashboard with a little icon area and fringe curtains, a fluffy steering wheel cover. No people. The aisle in the middle is '
+               'clear.'
 }
 
 

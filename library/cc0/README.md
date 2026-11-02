@@ -49,10 +49,8 @@
 | komiku_shoe_shop | Komiku | archive.org/details/Komiku-HeliceAwesomeDanceAdventure («Shoe shop») | 60 с | «магазинный» грув |
 | komiku_weekly_fair | Komiku | archive.org/details/Komiku-Poupis_incredible_adventures («The Weekly Fair») | 60 с | ярмарка, праздничная суета |
 
-| komiku_sax_sad | Komiku | archive.org/details/komiku-animal-summer-music-camp («Saxophone is sad but beautiful!») | 60 с | грустный саксофон — комичная тоска героя |
-| komiku_sax_sky | Komiku | там же («Practicing the saxophone looking at the sky!») | 60 с | саксофон, задумчиво |
 
-Владелец 02.11.2026: из пробника понравились мандолина, Fetch Contest, Shoe shop, Weekly Fair (весёлые); мелодика, укулеле, прогулка, грустный оркестр/пианино — «не по смыслу», убраны. Для грусти — не пианино, а саксофон.
+Владелец 02.11.2026: из пробника понравились мандолина, Fetch Contest, Shoe shop, Weekly Fair (весёлые); мелодика, укулеле, прогулка, грустный оркестр/пианино — «не по смыслу», убраны. Грустный саксофон тоже убран (02.11.2026: «это же ситком» — подложки только весёлые, и в «грустной» части тоже).
 
 Komiku — французский композитор, публикует всю музыку под CC0 (archive.org, лицензия на странице альбома: publicdomain/zero/1.0).
 

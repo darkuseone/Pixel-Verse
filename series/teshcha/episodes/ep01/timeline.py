@@ -78,7 +78,7 @@ SFX = [
 VOICE_DIP = 'equalizer=f=1500:t=q:w=0.7:g=-7,equalizer=f=3200:t=q:w=1:g=-4'   # carve the voice band out of the music
 BEDS = [
     (CM + 'komiku_weekly_fair.mp3', 59.5, 0.0, TWIST, 0.8, True, VOICE_DIP),
-    (CM + 'komiku_sax_sad.mp3', 59.5, TWIST + 0.6, DUR, 0.9, True, VOICE_DIP),
+    (CM + 'komiku_shoe_shop.mp3', 59.5, TWIST + 0.6, DUR, 0.85, True, VOICE_DIP),
     (C + 'wind_inside_1.mp3', 11.5, T0['teeth'], T0['pusya2'], 0.8, False),
     (C + 'wind_inside_1.mp3', 11.5, T0['loop'], DUR, 0.7, False),
 ]
