@@ -130,7 +130,7 @@ def _tolik_head(Hd, Fh, P, expr, t, m, look, hat, blink, cold):
     ell(Hd, Fh(1.9, 25.15), 0.95, 0.42, _mix(P['skin_sh'], P['stub'], 0.5), 0.12)                                  # stubble
     ell(Hd, Fh(-1.15, 27.1), 1.05, 1.45, P['skin'], 0.15, P['skin_hi'], P['skin_sh'])                       # big sticking-out ear
     ell(Hd, Fh(-1.1, 27.1), 0.55, 0.9, P['cheek'])
-    if hat is None:
+    if hat is None or hat == 'down':
         ell(Hd, Fh(0.35, 29.15), 2.35, 1.25, P['hair'], 0.05, P['hair_hi'], P['hair_sh'])                    # short top
         for k in range(4):                                                                                   # spiky bangs
             x0 = 0.6 + k * 0.55
@@ -156,6 +156,11 @@ def _tolik_head(Hd, Fh, P, expr, t, m, look, hat, blink, cold):
         s_ = 1 if k == 0 else -1
         base = c[1] - r - 0.5 - lift
         cap(Hd, (c[0] - 0.6, base - s_ * bt * 0.4), (c[0] + 0.6, base + s_ * bt * 0.4), 0.27, 0.22, P['brow'])
+    if hat == 'down':                                                                                        # hat yanked down over the eyes
+        ell(Hd, Fh(0.7, 28.9), 2.75, 2.1, P['hat'], 0, P['hat_hi'], P['hat_sh'])
+        cap(Hd, Fh(-2.0, 27.0), Fh(3.4, 27.0), 0.62, 0.62, P['hat_sh'])
+        for k in range(6): cap(Hd, Fh(-1.6 + k * 0.95, 27.4), Fh(-1.4 + k * 0.95, 30.0), 0.12, 0.12, P['hat_sh'])
+        ell(Hd, Fh(0.4, 31.2), 0.95, 0.9, (246, 240, 230), 0, (255, 255, 255), (206, 200, 196))
     ell(Hd, Fh(1.9, 26.1), 0.7, 0.4, P['cheek'])
     poly(Hd, [Fh(3.0, 26.9), Fh(4.45, 25.85), Fh(3.05, 25.65)], P['skin_sh'])                                   # long pointy nose
     poly(Hd, [Fh(3.05, 26.8), Fh(4.3, 25.95), Fh(3.15, 25.9)], P['skin'])

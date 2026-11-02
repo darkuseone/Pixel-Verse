@@ -121,6 +121,28 @@
       "voice_id": "io2Z9FXP5Y1UP9oCclyU",
       "voice": "голос Раисы, хор",
       "post_af": "asplit=3[a][b][c];[a]asetrate=44100*0.9,aresample=44100,atempo=1.111[a1];[b]asetrate=44100*1.1,aresample=44100,atempo=0.909,adelay=70|70[b1];[c]adelay=140|140,volume=0.8[c1];[a1][b1][c1]amix=inputs=3:normalize=0,volume=0.75"
+    },
+    "raisa_vm": {
+      "name": "Раиса — голосовое сообщение",
+      "color_caption": [
+        255,
+        110,
+        175
+      ],
+      "style": "голос Раисы; телефонный фильтр в миксе (VFX)",
+      "voice_id": "io2Z9FXP5Y1UP9oCclyU",
+      "voice": "голос Раисы"
+    },
+    "tolik_echo": {
+      "name": "Толик — с эхом в пустой квартире",
+      "color_caption": [
+        90,
+        225,
+        215
+      ],
+      "style": "голос Толика; эхо в миксе (VFX)",
+      "voice_id": "B0jmt8McoEVGc4Ts8fcx",
+      "voice": "голос Толика"
     }
   },
   "music": {},

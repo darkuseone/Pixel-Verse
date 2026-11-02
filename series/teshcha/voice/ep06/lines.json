@@ -1,0 +1,10 @@
+{
+ "r1": ["raisa", "[sweet, a little sad, standing at the door with her bags] То́лечка, год прошёл, квартира́нты съе́хали. Я уезжа́ю домо́й."],
+ "t1": ["tolik", "[disbelief, then ecstatic, shouting with joy] Уезжа́ете?! Насовсе́м?! Ура́!"],
+ "t2": ["tolik_echo", "[smug, relaxed, slow, then loud and proud] Моё кре́сло. Мой пульт. Я в э́том до́ме мужи́к!"],
+ "t3": ["tolik", "[sad, lonely, sheepish, on the phone] Раи́са Заха́ровна... А мо́жет, верну́тесь? На неде́льку?"],
+ "r2": ["raisa", "[shrill, overjoyed, shouting through a hole in the wall] То́лечка, а я сосе́днюю кварти́ру купи́ла! Сейча́с дверь сде́лаем!"],
+ "p1": ["pusya", "[deep raspy bass, deadpan, satisfied, to camera] Кре́сло опя́ть моё."],
+ "s1": ["sveta", "[cheerful, tired, shrugging] То́ля, э́то же ма́ма!"],
+ "t4": ["tolik", "[crying, half happy half horrified, voice breaking] Навсегда́?!"]
+}

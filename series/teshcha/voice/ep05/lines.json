@@ -1,0 +1,12 @@
+{
+ "t1": ["tolik", "[desperate, staring at the buzzing phone, loud] Пятьдеся́т голосовы́х от тёщи! Я же на рабо́те!"],
+ "r1": ["raisa_vm", "[shrill, chatty, endless voice message, cheerful] То́лечка, купи́ хле́ба. А ещё я тебе́ расскажу́, как в се́мьдесят девя́том году́..."],
+ "t2": ["tolik", "[firm, decisive, pressing a button] Всё, ста́влю без зву́ка. Хлеб куплю́ — и хва́тит."],
+ "p1": ["pusya", "[deep raspy bass, deadpan, to camera] Хлеб — э́то то́лько нача́ло."],
+ "t3": ["tolik", "[angry, determined, bursting in] Раи́са Заха́ровна, хва́тит мне писа́ть! [pause] [unsure, quieter] Раи́са Заха́ровна?"],
+ "r2": ["raisa_vm", "[quiet, weak, frightened, whispering voice message] То́лечка... я в ли́фте застря́ла. С су́мками. Помоги́."],
+ "t4": ["tolik", "[heroic, straining, grunting] Держи́тесь, Раи́са Заха́ровна! Я иду́!"],
+ "r3": ["raisa", "[sincere, touched, quiet, not sweet for once] Спаси́бо, То́ля. Ты... мужи́к."],
+ "t5": ["tolik", "[moved, proud, almost crying] Я в э́том до́ме мужи́к!"],
+ "l1": ["lyusya", "[low, husky, cheerful, coming out of the lift with a suitcase] А мы то́же на неде́льку!"]
+}
