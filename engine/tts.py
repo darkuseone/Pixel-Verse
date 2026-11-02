@@ -33,8 +33,13 @@ def lines(slug, ep, keys):
         out = base / 'voice' / ep / f'{k}.mp3'
         if (keys and k not in keys) or (not keys and out.exists()):
             continue
-        vid = voices['characters'][who]['voice_id']
-        _post(f'{API}/text-to-speech/{vid}?output_format=mp3_44100_128', {'text': text, 'model_id': model}, out)
+        ch = voices['characters'][who]
+        _post(f'{API}/text-to-speech/{ch["voice_id"]}?output_format=mp3_44100_128', {'text': text, 'model_id': model}, out)
+        if ch.get('post_af'):                       # a character voiced by another one's voice, re-pitched (no extra account slot)
+            import subprocess
+            tmp = str(out) + '.raw.mp3'; os.replace(out, tmp)
+            subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', tmp, '-af', ch['post_af'], '-b:a', '128k', str(out)], check=True)
+            os.remove(tmp)
 
 
 if __name__ == '__main__':

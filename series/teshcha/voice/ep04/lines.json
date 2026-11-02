@@ -1,0 +1,12 @@
+{
+ "r1": ["raisa", "[shrill, sugary, bossy, pulling a knitted hat onto his head] То́лечка, на у́лице ми́нус два. Ша́пку наде́нь!"],
+ "t1": ["tolik", "[indignant, pompous, voice cracking] Раи́са Заха́ровна, мне со́рок оди́н год! Я сам решу́!"],
+ "r2": ["raisa", "[shrill, sweet and poisonous] Со́рок оди́н, а голова́ одна́. Без ша́пки — менинги́т!"],
+ "t2": ["tolik", "[pompous, puffed up, proud] Я в э́том до́ме мужи́к!"],
+ "r3": ["raisa", "[shrill, triumphant] Мужи́к — в ша́пке!"],
+ "t3": ["tolik", "[sneaky, then happy and relieved, laughing] Наконе́ц-то свобо́да! Тут она́ меня́ не ви́дит."],
+ "l1": ["lyusya", "[low, husky, bored minibus driver, flat and slow] То́ля, ша́пку наде́нь. Мне Ра́я звони́ла."],
+ "b1": ["babki", "[old women scolding together, loud, sweet] Наде́нь ша́пку, сыно́к!"],
+ "t4": ["tolik", "[defeated, mumbling, then paranoid whisper] Наде́л, наде́л... Отку́да она́ всё ви́дит?!"],
+ "p1": ["pusya", "[deep raspy bass, deadpan, tired, to camera] Я то́же был про́тив. Не помогло́."]
+}

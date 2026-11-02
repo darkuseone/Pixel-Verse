@@ -97,6 +97,30 @@
       },
       "voice_id": "YvBldwNnE8ctQ8bDGWNM",
       "voice": "Тёща на недельку — Света (жена)"
+    },
+    "lyusya": {
+      "name": "Люся (сестра тёщи, водитель маршрутки)",
+      "color_caption": [
+        200,
+        140,
+        255
+      ],
+      "style": "[low] [husky] [bored] — прокуренная маршрутчица",
+      "voice_id": "io2Z9FXP5Y1UP9oCclyU",
+      "voice": "голос Раисы на 2,5 тона ниже (слотов в аккаунте нет)",
+      "post_af": "asetrate=44100*0.86,aresample=44100,atempo=1.1628,equalizer=f=300:t=q:w=1:g=3"
+    },
+    "babki": {
+      "name": "Бабушки в маршрутке (хор)",
+      "color_caption": [
+        240,
+        240,
+        250
+      ],
+      "style": "хор из трёх сдвинутых копий голоса Раисы",
+      "voice_id": "io2Z9FXP5Y1UP9oCclyU",
+      "voice": "голос Раисы, хор",
+      "post_af": "asplit=3[a][b][c];[a]asetrate=44100*0.9,aresample=44100,atempo=1.111[a1];[b]asetrate=44100*1.1,aresample=44100,atempo=0.909,adelay=70|70[b1];[c]adelay=140|140,volume=0.8[c1];[a1][b1][c1]amix=inputs=3:normalize=0,volume=0.75"
     }
   },
   "music": {},
