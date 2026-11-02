@@ -35,19 +35,22 @@
       ],
       "style": "[sweet] [sugary] [bossy] — сладкий яд, завуч на пенсии",
       "design": {
-        "description": "A domineering Russian mother-in-law in her late sixties, a retired school headmistress. Loud, chesty, sugary-sweet alto voice with steel underneath, drawn-out affectionate words that hide commands, theatrical sighs, unhurried and totally in charge. Native Russian speaker, warm provincial Russian accent.",
-        "text": "То́лечка, я на неде́льку. Су́мки бери́, не стой. Мужи́к, та́пки сними́, я помы́ла. Све́точка, он у тебя́ опя́ть похуде́л. Ой, давле́ние. Ничего́, ничего́, я тут поживу́, помогу́.",
+        "description": "A cartoonish, annoying Russian mother-in-law in her early seventies. Shrill, nasal, high-pitched elderly woman's voice, a bit raspy and screechy, sugary-sweet and nagging at the same time, drawn-out whiny vowels, loud and theatrical, exactly like the stereotypical mother-in-law from old Russian jokes. Clearly old, not young. Native Russian speaker, provincial accent.",
+        "text": "То́лечка, здра́вствуй! Я к вам прие́хала на неде́льку! Су́мки зано́си, не стой! Мужи́к, та́пки сними́, я полы́ помы́ла. Све́точка, он у тебя́ опя́ть похуде́л. Ой, давле́ние!",
         "picked": {
-          "i": 2,
-          "dur": 17.24,
-          "f0": 320.0,
-          "f0_iqr": 88.9,
-          "rate": 13.9,
-          "loud_sd": 5.9
+          "i": 0,
+          "dur": 13.24,
+          "f0": 266.7,
+          "f0_iqr": 40.9,
+          "rate": 19.7,
+          "loud_sd": 6.3
         }
       },
-      "voice_id": "5iZCrjsY2thP3UsjA1Ha",
-      "voice": "Тёща на недельку — Раиса Захаровна (тёща)"
+      "voice_id": "io2Z9FXP5Y1UP9oCclyU",
+      "voice": "Тёща на недельку — Раиса Захаровна (тёща)",
+      "previous_voice_ids": [
+        "5iZCrjsY2thP3UsjA1Ha"
+      ]
     },
     "pusya": {
       "name": "Пуся (той-терьер)",

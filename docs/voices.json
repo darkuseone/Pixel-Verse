@@ -750,11 +750,10 @@
    "voice_id": "eFOwKI3LNrA1UWjisXHn",
    "status": "deleted",
    "name": "Harold",
-   "voice_name": "grim-ride — Harold (restored)",
+   "voice_name": "Grim Ride — Harold",
    "lines": 19,
    "episodes": 6,
    "samples": [
-    "library/voice_archive/grim-ride/harold_preview.mp3",
     "series/grim-ride/voice/movie/h06.mp3",
     "series/grim-ride/voice/movie/h07.mp3",
     "series/grim-ride/voice/movie/h04.mp3",
@@ -1824,9 +1823,15 @@
    "status": "active",
    "name": "Толик",
    "voice_name": "Тёща на недельку — Толик",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 5,
+   "episodes": 1,
+   "samples": [
+    "series/teshcha/voice/ep01/t3.mp3",
+    "series/teshcha/voice/ep01/t4.mp3",
+    "series/teshcha/voice/ep01/t2.mp3",
+    "series/teshcha/voice/ep01/t1.mp3",
+    "series/teshcha/voice/ep01/t5.mp3"
+   ],
    "design": {
     "description": "A wiry, nervous Russian man in his early forties, a self-important loser who believes he is the boss of the house. Medium-high reedy tenor, slightly nasal, puffed-up pompous delivery that cracks into a squeaky panicked whine. Fast, expressive, funny. Native Russian speaker, plain urban Russian accent.",
     "text": "Я в э́том до́ме мужи́к! Как э́то — на неде́льку?! Ра́иса Заха́ровна, э́то моё кре́сло! Я пятна́дцать лет его́ продавли́вал! Све́та! Све́та, иди́ сюда́! Ну всё, я споко́ен. Я соверше́нно споко́ен!",
@@ -1849,31 +1854,43 @@
   {
    "slug": "teshcha",
    "char": "raisa",
-   "voice_id": "5iZCrjsY2thP3UsjA1Ha",
+   "voice_id": "io2Z9FXP5Y1UP9oCclyU",
    "status": "active",
    "name": "Раиса Захаровна (тёща)",
    "voice_name": "Тёща на недельку — Раиса Захаровна (тёща)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 5,
+   "episodes": 1,
+   "samples": [
+    "series/teshcha/voice/ep01/r5.mp3",
+    "series/teshcha/voice/ep01/r4.mp3",
+    "series/teshcha/voice/ep01/r1.mp3",
+    "series/teshcha/voice/ep01/r3.mp3",
+    "series/teshcha/voice/ep01/r2.mp3"
+   ],
    "design": {
-    "description": "A domineering Russian mother-in-law in her late sixties, a retired school headmistress. Loud, chesty, sugary-sweet alto voice with steel underneath, drawn-out affectionate words that hide commands, theatrical sighs, unhurried and totally in charge. Native Russian speaker, warm provincial Russian accent.",
-    "text": "То́лечка, я на неде́льку. Су́мки бери́, не стой. Мужи́к, та́пки сними́, я помы́ла. Све́точка, он у тебя́ опя́ть похуде́л. Ой, давле́ние. Ничего́, ничего́, я тут поживу́, помогу́.",
+    "description": "A cartoonish, annoying Russian mother-in-law in her early seventies. Shrill, nasal, high-pitched elderly woman's voice, a bit raspy and screechy, sugary-sweet and nagging at the same time, drawn-out whiny vowels, loud and theatrical, exactly like the stereotypical mother-in-law from old Russian jokes. Clearly old, not young. Native Russian speaker, provincial accent.",
+    "text": "То́лечка, здра́вствуй! Я к вам прие́хала на неде́льку! Су́мки зано́си, не стой! Мужи́к, та́пки сними́, я полы́ помы́ла. Све́точка, он у тебя́ опя́ть похуде́л. Ой, давле́ние!",
     "picked": {
-     "i": 2,
-     "dur": 17.24,
-     "f0": 320.0,
-     "f0_iqr": 88.9,
-     "rate": 13.9,
-     "loud_sd": 5.9
+     "i": 0,
+     "dur": 13.24,
+     "f0": 266.7,
+     "f0_iqr": 40.9,
+     "rate": 19.7,
+     "loud_sd": 6.3
     }
    },
    "account": {
     "category": "generated",
-    "description": "A domineering Russian mother-in-law in her late sixties, a retired school headmistress. Loud, chesty, sugary-sweet alto voice with steel underneath, drawn-out affectionate words that hide commands, theatrical sighs, unhurried and totally in charge. Native Russian speaker, warm provincial Russian accent.",
+    "description": "A cartoonish, annoying Russian mother-in-law in her early seventies. Shrill, nasal, high-pitched elderly woman's voice, a bit raspy and screechy, sugary-sweet and nagging at the same time, drawn-out whiny vowels, loud and theatrical, exactly like the stereotypical mother-in-law from old Russian jokes. Clearly old, not young. Native Russian speaker, provincial accent.",
     "settings": null,
-    "created_at_unix": 1793576120
-   }
+    "created_at_unix": 1793580698
+   },
+   "history": [
+    {
+     "voice_id": "5iZCrjsY2thP3UsjA1Ha",
+     "until": "2026-11-02"
+    }
+   ]
   },
   {
    "slug": "teshcha",
@@ -1882,9 +1899,12 @@
    "status": "active",
    "name": "Пуся (той-терьер)",
    "voice_name": "Тёща на недельку — Пуся (той-терьер)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/teshcha/voice/ep01/p1.mp3",
+    "series/teshcha/voice/ep01/p2.mp3"
+   ],
    "design": {
     "description": "A tiny trembling lapdog voiced by a weary, cynical old Russian long-haul trucker. Extremely deep, raspy, gravelly bass, heavy smoker's voice, slow flat deadpan delivery, totally unimpressed, as if he has seen everything twice. Native Russian speaker.",
     "text": "Пла́вали. Мы у сестры́ так на неде́льку три го́да жи́ли. Я два килогра́мма, но я всё ви́жу. Зятьёв бы́ло мно́го. Кре́сло — моё. Пла́вали.",
@@ -1911,9 +1931,11 @@
    "status": "active",
    "name": "Света (жена)",
    "voice_name": "Тёща на недельку — Света (жена)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/teshcha/voice/ep01/s1.mp3"
+   ],
    "design": {
     "description": "A tired Russian woman in her late thirties, a wife stuck between her husband and her mother. Warm mid-range female voice, fast, apologetic and a bit guilty, exhausted sighs, sometimes snaps. Native Russian speaker, plain urban Russian accent.",
     "text": "То́ля, э́то же ма́ма! Ну что ты начина́ешь? Я ма́мину кварти́ру сдала́, на год. Нам ипоте́ку плати́ть. Ма́ма, ну хва́тит. То́ля, ну хва́тит уже́!",
@@ -2293,7 +2315,7 @@
    "voice_id": "1q0c8LfKB7t97Mup7LOS",
    "status": "active",
    "name": "Валера",
-   "voice_name": "Валера и кот — Валера",
+   "voice_name": "valera-i-kot — Валера (restored)",
    "lines": 90,
    "episodes": 15,
    "samples": [
@@ -2319,17 +2341,10 @@
     }
    },
    "account": {
-    "category": "generated",
+    "category": "cloned",
     "description": "Deep, low-pitched, hoarse bass-baritone voice of a heavyset Russian man in his mid-fifties, a retired army warrant officer. Gravelly smoker's rasp, chesty and booming, bossy and blunt like giving orders, self-important, but not screaming. Native Russian speaker, plain provincial Russian accent.",
-    "settings": {
-     "stability": 0.5,
-     "use_speaker_boost": true,
-     "similarity_boost": 0.75,
-     "style": 0.0,
-     "speed": 1.0
-    },
-    "labels": {},
-    "created_at_unix": 1790647550
+    "settings": null,
+    "created_at_unix": 1793576184
    },
    "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/rBeJLZF1kJdbvH3OTV0M/7ab1df18-7ca6-4288-817a-136b0fef764c.mp3",
    "deleted_reason": "auto: room for teshcha/sveta",
@@ -2745,5 +2760,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-11-01 23:36"
+ "updated": "2026-11-02 00:51"
 }
