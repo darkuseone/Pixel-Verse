@@ -76,7 +76,7 @@ SFX = [
 ]
 
 BEDS = [
-    (CM + 'ukulele_loop.mp3', 8.3, 0.0, TWIST, 1.3, True),
+    (CM + 'komiku_melodica.mp3', 59.5, 0.0, TWIST, 1.2, True),
     (CM + 'sad_orchestral.mp3', 59.5, TWIST + 0.6, DUR, 1.2, True),
     (C + 'wind_inside_1.mp3', 11.5, T0['teeth'], T0['pusya2'], 0.8, False),
     (C + 'wind_inside_1.mp3', 11.5, T0['loop'], DUR, 0.7, False),
