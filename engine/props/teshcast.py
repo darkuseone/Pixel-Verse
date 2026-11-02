@@ -257,6 +257,15 @@ RC = dict(skin=(240, 192, 162), skin_hi=(252, 216, 190), skin_sh=(206, 150, 124)
           curl_sh=(214, 94, 150), net=(110, 70, 96), robe=(250, 206, 216), robe_hi=(255, 228, 234), robe_sh=(222, 160, 178),
           rose=(206, 34, 84), rose_hi=(240, 86, 124), rose_sh=(150, 20, 60), leaf=(84, 150, 82), gold=(246, 196, 60),
           gold_hi=(255, 240, 170), pearl=(250, 248, 240), slip=(176, 40, 92), slip_hi=(214, 80, 130), pom=(255, 236, 246))
+LYUSYA = dict(hair=(120, 60, 150), hair_hi=(160, 100, 190), curl=(130, 70, 160), curl_hi=(170, 110, 200), curl_sh=(90, 40, 116),
+              net=(130, 70, 160), robe=(86, 60, 50), robe_hi=(120, 90, 74), robe_sh=(60, 40, 34), rose=(70, 48, 40), rose_hi=(96, 70, 58),
+              rose_sh=(56, 38, 32), leaf=(70, 48, 40), lip=(150, 40, 120), slip=(40, 40, 46), slip_hi=(70, 70, 80), pom=(40, 40, 46))
+GRANNY = [dict(hair=(200, 200, 206), hair_hi=(236, 236, 240), curl=(206, 206, 212), curl_hi=(240, 240, 244), curl_sh=(160, 160, 170),
+               net=(150, 150, 160), robe=(80, 110, 170), robe_hi=(120, 150, 206), robe_sh=(56, 80, 130), rose=(240, 240, 250),
+               rose_hi=(255, 255, 255), rose_sh=(200, 200, 220), leaf=(80, 110, 170)),
+          dict(hair=(150, 90, 60), hair_hi=(190, 130, 90), curl=(160, 100, 66), curl_hi=(200, 140, 100), curl_sh=(110, 66, 40),
+               net=(110, 66, 40), robe=(90, 140, 90), robe_hi=(130, 180, 120), robe_sh=(60, 100, 60), rose=(230, 200, 80),
+               rose_hi=(250, 230, 130), rose_sh=(180, 150, 50), leaf=(60, 100, 60))]
 RPOSE = dict(
     stand=dict(n=(3.6, 9.4), f=(-3.4, 9.6), bn=1, bf=-1, nleg=(0.05, 0.0), fleg=(-0.05, 0.0)),
     hips=dict(n=(3.6, 10.6), f=(-3.6, 10.6), bn=-1, bf=1, nleg=(0.16, 0.0), fleg=(-0.16, 0.0)),
@@ -325,10 +334,11 @@ def _raisa_head(Hd, Fh, P, expr, t, m, look, blink, call):
 
 
 def raisa(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='sweet', look=0.0, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-          blink=True, outline_=True):
-    """expr: sweet (sugary smile with a gold tooth) | smug | stern | angry | shock | shout | normal. Anchor = floor."""
+          blink=True, outline_=True, pal=None):
+    """expr: sweet (sugary smile with a gold tooth) | smug | stern | angry | shock | shout | normal. Anchor = floor.
+    pal: palette overrides (RC keys) — her sister Lyusya and the minibus grannies are recoloured Raisas."""
     pose = pose or RPOSE['stand']
-    P = RC
+    P = dict(RC, **pal) if pal else RC
     br = 0.12 * math.sin(t * 2.0)
     sh_n, sh_f = H(3.1, 15.0 + br), H(-2.9, 15.2 + br)
     sit = pose is RPOSE['sit'] or pose.get('nleg', (0, 0))[0] > 1.0

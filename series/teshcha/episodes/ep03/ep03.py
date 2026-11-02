@@ -92,8 +92,8 @@ def food_table(CH, v, t, extra=0):
     """the mountain of plates on the kitchen table in front of Tolik"""
     L = Layer(v.wcam())
     for i in range(5):                                                       # stack of eaten plates
-        F.ell(L, (980, TOP - 4 - i * 6), 34, 10, (244, 244, 236), 0, (255, 255, 255), (200, 204, 210))
-    plate(L, 1060, TOP + 4, 40, 'cutlet')
+        F.ell(L, (1025, TOP - 4 - i * 6), 34, 10, (244, 244, 236), 0, (255, 255, 255), (200, 204, 210))
+    plate(L, 1095, TOP + 4, 40, 'cutlet')
     plate(L, 1150, TOP - 2, 36, 'blini')
     plate(L, 1100, TOP - 22, 34, 'golubtsy')
     bowl(L, 1205, TOP - 6, 30)
@@ -141,12 +141,14 @@ def held_plate(food):
 
 # ---------------------------------------------------------------- shots
 def r_hook(t, u, extra=1):
-    """«Толечка, ты похудел. Съешь ещё тарелочку!» — Tolik at the table behind a mountain of food, Raisa brings yet another plate"""
-    v = view_at(KIT, 930, 420, 1.12 + 0.03 * sm(u / 3), 180, 330)
+    """«Толечка, ты похудел. Съешь ещё тарелочку!» — tight two-shot: Tolik with full cheeks at the food mountain,
+    Raisa looms behind him pushing yet another plate at his face; slow pull-back reveals the table"""
+    z = 1.42 - 0.14 * sm(u / 2.6)
+    v = view_at(KIT, 880, 400 + 30 * sm(u / 2.6), z, 170, 300)
 
     def draw(CH, v_):
-        raisa_st(CH, v_, t, 'sweet', prop_n=held_plate('cutlet'))
-        tolik_sit(CH, v_, t, 'whine')
+        raisa_st(CH, v_, t, 'sweet', pos=(790, 700, 15.6), prop_n=held_plate('cutlet'))
+        tolik_sit(CH, v_, t, 'whine', k=1.25)
         food_table(CH, v_, t, extra)
     return kitchen(v, t, draw, steam=(1250, TOP - 60))
 
@@ -273,11 +275,19 @@ def r_ball(t, u):
 
 
 def r_sveta(t, u):
-    """«Мама, Толя же поправился!» — Sveta home from work in the hallway, bag in hand, staring at round Tolik"""
-    v = view_at(HALL, 760, 430, 1.25, 180, 330)
+    """«Мама, Толя же поправился!» — Sveta home from work in the hallway, staring at Tolik whose tracksuit now bursts on the belly"""
+    v = view_at(HALL, 735, 430, 1.25, 180, 330)
 
     def draw(CH, v_):
-        cam = v_.cam(820, 690, 13.5, flip=True)
+        ct = v_.cam(650, 690, 13.5)
+        rt = T.tolik(CH, ct, T.TPOSE['stand'], t=t, mouth_=0.0, expr='whine', hat=None)
+        L = Layer(ct)                                                          # the belly: tracksuit stretched tight, zip about to give
+        F.ell(L, F.H(1.4, 13.2), 4.6, 3.9, (34, 176, 168), 0.4, (80, 210, 196), (20, 130, 124))
+        F.cap(L, F.H(1.6, 16.6), F.H(1.9, 9.8), 0.18, 0.18, (236, 236, 240))
+        F.dot(L, F.H(5.4, 13.6 + 0.4 * math.sin(t * 9)), (236, 236, 240), 0.35)
+        F.outline(L, T.OL); CH.add(L)
+        face(v_, ct, rt)
+        cam = v_.cam(830, 690, 13.5, flip=True)
         r = T.sveta(CH, cam, T.SPOSE['shrug'], t=t, mouth_=mouth('sveta', t), expr='shock')
         face(v_, cam, r)
     return SH.generic(HALL, v, t, draw, light=light_hall(v), motes=(500, 60, 900, 300))
@@ -312,9 +322,9 @@ def shot_at(t):
 SHOW = K.Show(EPI, 1, 3, ['ЕЩЁ', 'ТАРЕЛОЧКУ?!'], hook_t=(0.06, 2.8), hook_y=200,
               stickers=[(O.sticker('5-Я ТАРЕЛКА', fg=(255, 222, 80), size=62), F0['tolik_full'] + 0.3, F0['hot'], 540, 560),
                         (O.sticker('ШАР?!', fg=(255, 120, 150), size=110), TL.TWIST + 0.3, F0['ball'], 540, 560),
-                        (O.sticker('+5 КГ', fg=(255, 186, 214), size=70), F0['sveta'] + 0.4, F0['button'], 540, 560)],
+                        (O.sticker('+5 КГ', fg=(255, 186, 214), size=70), F0['sveta'] + 0.4, F0['button'], 290, 1080)],
               flashes=[TL.TWIST + 0.02], mosaics=[F0['under'], F0['sveta']],
-              cap_y={'hook': 1500, 'ball': 1450, 'twist': 1450, 'under': 1450, 'peek': 1450}, cap_default=1380)
+              cap_y={'hook': 1500, 'ball': 1120, 'twist': 1450, 'under': 1450, 'peek': 1450}, cap_default=1380)
 
 
 def render(t):
