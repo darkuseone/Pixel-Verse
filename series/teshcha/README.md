@@ -21,7 +21,7 @@
 рулоном, ТВ. Таблички — `teshkit.decorate`.
 
 ## Звук
-Свои звуки `sfx/` (22 шт., `sfxcheck` ок), музыка кодом `music/gen_music.py` (`sitcom_theme_15s`, `sitcom_uhoh_15s`).
+С 02.11.2026 основа — общая CC0-библиотека `library/cc0/` (реальные записи + джазовые подложки: `quirky_jazz` до поворота, `jazzy_blues` после). Свои звуки `sfx/` (22 шт., `sfxcheck` ок), музыка кодом `music/gen_music.py` (`sitcom_theme_15s`, `sitcom_uhoh_15s`).
 Голоса Voice Design (`voices.json`, eleven_v4).
 
 ## Обложки

@@ -11,6 +11,8 @@ LUFS = -14.0
 VEP = 'ep01_t'
 S = f'series/{SLUG}/sfx/'
 MUS = f'series/{SLUG}/music/'
+C = 'library/cc0/sfx/'
+CM = 'library/cc0/music/'
 PHONE = 'highpass=f=320,lowpass=f=3200,acompressor=threshold=0.2:ratio=4,volume=1.25'
 VFX = {}
 
@@ -56,33 +58,31 @@ T1 = {s['name']: s['t1'] for s in SHOTS}
 TWIST = T0['reveal']
 
 SFX = [
-    (S + 'doorbell_soviet.mp3', 0.0, 0.25), (S + 'door_open_creak.mp3', 0.05, 0.7),
-    (S + 'dog_tags_shiver.mp3', 0.5, 0.5),
-    (S + 'bag_thud_jars.mp3', T0['raisa_door'] + 0.3, 0.8),
-    (S + 'lift_doors_open.mp3', T0['raisa_door'] + 1.0, 0.7),
-    (S + 'bags_slide_pile.mp3', T0['raisa_door'] + 1.6, 1.0),
-    (S + 'armchair_springs.mp3', T0['manly'] + 0.05, 0.9),
-    (S + 'wet_floor_squeak.mp3', T0['raisa_chair'] + 1.4, 0.5),
-    (S + 'slippers_shuffle.mp3', T0['run'] - 0.2, 0.8),
-    (S + 'phone_call_tone.mp3', T0['phone'] + 0.0, 0.35),
-    (S + 'keys_jingle.mp3', TWIST + 0.15, 0.6),
-    (S + 'twist_hit.mp3', TWIST + 0.05, 0.9), (S + 'vinyl_scratch.mp3', TWIST, 0.5),
-    (S + 'twist_hit.mp3', T0['nagod'], 0.4),
-    (S + 'teeth_chatter_man.mp3', T0['teeth'], 0.75), (S + 'campbed_creak.mp3', T0['teeth'] + 0.1, 0.5),
-    (S + 'blanket_rustle.mp3', T0['pusya2'] + 0.1, 0.7),
-    (S + 'doorbell_soviet.mp3', T0['bell'], 0.55),
-    (S + 'teeth_chatter_man.mp3', T0['loop'] + 0.2, 0.4),
+    (C + 'doorbell_3.mp3', 0.0, 0.35, 0.0, 1.6), (C + 'door_apartment_open.mp3', 0.15, 0.5),
+    (C + 'canvas_bag_drop.mp3', T0['raisa_door'] + 0.3, 0.9), (C + 'bottle_clink.mp3', T0['raisa_door'] + 0.35, 0.35),
+    (S + 'lift_doors_open.mp3', T0['raisa_door'] + 1.0, 0.5),
+    (S + 'bags_slide_pile.mp3', T0['raisa_door'] + 1.6, 0.8),
+    (C + 'chair_creak.mp3', T0['manly'] + 0.05, 0.9), (C + 'chair_creak.mp3', T0['manly'] + 0.35, 0.6),
+    (C + 'floor_squeak.mp3', T0['raisa_chair'] + 1.35, 0.8),
+    (C + 'slipper_steps.mp3', T0['run'] - 0.3, 0.6, 0.0, 0.8),
+    (C + 'phone_dial_tone.mp3', T0['phone'] + 0.0, 0.25, 0.0, 1.2),
+    (C + 'keys_lock.mp3', TWIST + 0.2, 0.5, 0.0, 1.2),
+    (S + 'twist_hit.mp3', TWIST + 0.05, 0.8), (C + 'vinyl_scratch.mp3', TWIST, 0.4),
+    (C + 'whoosh_3.mp3', T0['nagod'], 0.6),
+    (C + 'teeth_chatter.mp3', T0['teeth'], 0.9),
+    (C + 'cloth_rustle.mp3', T0['pusya2'] + 0.1, 0.9),
+    (C + 'doorbell_3.mp3', T0['bell'], 0.5, 0.0, 1.6),
+    (C + 'teeth_chatter.mp3', T0['loop'] + 0.1, 0.5),
 ]
 
 BEDS = [
-    (S + 'amb_stairwell.mp3', 7.8, 0.0, T0['manly'], 2.6, False),
-    (MUS + 'sitcom_theme_15s.mp3', 15.0, 0.0, TWIST, 0.2, True),
-    (S + 'amb_flat_tv.mp3', 7.8, T0['manly'], T0['phone'], 2.4, False),
-    (S + 'amb_stairwell.mp3', 7.8, T0['phone'], T0['teeth'], 2.6, False),
-    (MUS + 'sitcom_uhoh_15s.mp3', 15.0, TWIST + 0.5, DUR, 0.22, True),
-    (S + 'amb_balcony_wind.mp3', 7.8, T0['teeth'], T0['pusya2'], 0.5, False),
-    (S + 'amb_flat_tv.mp3', 7.8, T0['pusya2'], T0['loop'], 2.4, False),
-    (S + 'amb_balcony_wind.mp3', 7.8, T0['loop'], DUR, 0.45, False),
+    (C + 'room_tone_apartment.mp3', 11.5, 0.0, T0['manly'], 0.9, False),
+    (CM + 'quirky_jazz.mp3', 59.5, 0.0, TWIST, 0.16, True),
+    (C + 'room_tone_apartment.mp3', 11.5, T0['manly'], T0['teeth'], 0.8, False),
+    (CM + 'jazzy_blues.mp3', 51.5, TWIST + 0.6, DUR, 0.15, True),
+    (C + 'wind_inside_1.mp3', 11.5, T0['teeth'], T0['pusya2'], 1.0, False),
+    (C + 'room_tone_apartment.mp3', 11.5, T0['pusya2'], T0['loop'], 0.8, False),
+    (C + 'wind_inside_1.mp3', 11.5, T0['loop'], DUR, 0.9, False),
 ]
 VGAIN = {'tolik': 1.45, 'raisa': 1.45, 'pusya': 1.6, 'sveta': 1.45}
 
