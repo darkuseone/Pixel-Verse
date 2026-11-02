@@ -99,9 +99,9 @@ TPOSE = dict(
     stand=dict(n=(2.6, 13.4), f=(-2.2, 13.6), bn=1, bf=-1, nleg=(0.04, 0.0), fleg=(-0.04, 0.0)),
     proud=dict(n=(3.2, 20.6), f=(-2.6, 14.0), bn=1, bf=-1, nleg=(0.18, 0.0), fleg=(-0.2, 0.0), chest=1.0),     # fist on chest
     fists=dict(n=(3.6, 17.6), f=(-3.2, 17.4), bn=1, bf=-1, nleg=(0.22, 0.0), fleg=(-0.22, 0.0), chest=1.0),    # «Я мужик!» pose
-    shock=dict(n=(5.0, 24.6), f=(-4.0, 24.8), bn=1, bf=-1, nleg=(0.1, 0.0), fleg=(-0.1, 0.0)),                 # hands up, jaw drop
+    shock=dict(n=(5.2, 20.4), f=(-3.6, 20.6), bn=1, bf=-1, nleg=(0.1, 0.0), fleg=(-0.1, 0.0)),                 # hands up, jaw drop
     cheeks=dict(n=(2.9, 25.6), f=(-0.6, 25.8), bn=1, bf=-1, nleg=(0.05, 0.0), fleg=(-0.05, 0.0)),              # «Home Alone» hands
-    phone=dict(n=(2.4, 26.2), f=(-2.2, 13.6), bn=1, bf=-1, nleg=(0.05, 0.0), fleg=(-0.05, 0.0)),               # phone at the ear
+    phone=dict(n=(4.0, 20.2), f=(-2.2, 13.6), bn=1, bf=-1, nleg=(0.05, 0.0), fleg=(-0.05, 0.0)),               # phone at the ear
     carry=dict(n=(1.6, 7.2), f=(0.4, 7.4), bn=1, bf=1, nleg=(0.35, 0.0), fleg=(-0.3, 0.0), lean=1.8),         # dragging a bag low
     sit=dict(n=(4.4, 13.8), f=(3.6, 14.0), bn=1, bf=1, nleg=(1.55, 0.0), fleg=(1.45, 0.0)),
     shiver=dict(n=(0.2, 19.0), f=(2.4, 18.6), bn=1, bf=-1, nleg=(0.04, 0.0), fleg=(-0.04, 0.0)),               # hugging himself
@@ -125,8 +125,8 @@ def _tolik_head(Hd, Fh, P, expr, t, m, look, hat, blink, cold):
         cap(Hd, Fh(-1.6, 27.4), Fh(-2.1, 23.6), 1.15, 0.95, P['hair'], P['hair_hi'], P['hair_sh'])
         for k in range(3):
             cap(Hd, Fh(-2.3 + k * 0.45, 24.4), Fh(-2.5 + k * 0.5, 22.9 - (k % 2) * 0.4), 0.32, 0.16, P['hair'])
-    ell(Hd, Fh(0.7, 27.25), 2.25, 2.75, P['skin'], -0.05, P['skin_hi'], P['skin_sh'])                       # narrow long skull
-    ell(Hd, Fh(1.55, 25.35), 1.65, 1.05, P['skin'], 0.1, None, P['skin_sh'])                                # chin
+    ell(Hd, Fh(0.7, 27.25), 2.25, 2.75, P['skin'], -0.05, None, P['skin_sh'], th_sh=-0.72)                       # narrow long skull
+    ell(Hd, Fh(1.55, 25.35), 1.65, 1.05, P['skin'], 0.1)                                # chin
     ell(Hd, Fh(1.9, 25.15), 0.95, 0.42, _mix(P['skin_sh'], P['stub'], 0.5), 0.12)                                  # stubble
     ell(Hd, Fh(-1.15, 27.1), 1.05, 1.45, P['skin'], 0.15, P['skin_hi'], P['skin_sh'])                       # big sticking-out ear
     ell(Hd, Fh(-1.1, 27.1), 0.55, 0.9, P['cheek'])
@@ -142,7 +142,7 @@ def _tolik_head(Hd, Fh, P, expr, t, m, look, hat, blink, cold):
         for k in range(5): cap(Hd, Fh(-1.3 + k * 0.95, 28.4), Fh(-1.1 + k * 0.95, 30.0), 0.12, 0.12, P['hat_sh'])
         ell(Hd, Fh(0.4, 31.0), 0.95, 0.9, (246, 240, 230), 0, (255, 255, 255), (206, 200, 196))
     lk = (look, 0.0)
-    eyes = [(Fh(1.45, 27.35), 0.46), (Fh(2.6, 27.25), 0.56)]
+    eyes = [(Fh(1.15, 27.5), 0.56), (Fh(2.35, 27.4), 0.66)]
     bl = blink and (t % 3.3) < 0.1 and expr not in ('shout', 'scream', 'shock')
     ex = {'scream': 'shout', 'shout': 'shout', 'shock': 'shock', 'proud': 'normal', 'smug': 'smug', 'sad': 'normal',
           'whine': 'normal', 'angry': 'normal', 'cold': 'normal'}.get(expr, 'normal')
@@ -155,14 +155,14 @@ def _tolik_head(Hd, Fh, P, expr, t, m, look, hat, blink, cold):
     for k, (c, r) in enumerate(eyes):
         s_ = 1 if k == 0 else -1
         base = c[1] - r - 0.5 - lift
-        cap(Hd, (c[0] - 0.55, base - s_ * bt * 0.3), (c[0] + 0.55, base + s_ * bt * 0.3), 0.2, 0.16, P['brow'])
+        cap(Hd, (c[0] - 0.6, base - s_ * bt * 0.4), (c[0] + 0.6, base + s_ * bt * 0.4), 0.27, 0.22, P['brow'])
     ell(Hd, Fh(1.9, 26.1), 0.7, 0.4, P['cheek'])
-    poly(Hd, [Fh(2.7, 27.4), Fh(4.35, 25.95), Fh(3.0, 25.75)], P['skin_sh'])                                   # long pointy nose
-    poly(Hd, [Fh(2.75, 27.3), Fh(4.2, 26.05), Fh(3.1, 26.0)], P['skin'])
-    dot(Hd, Fh(3.5, 26.6), P['skin_hi'], 0.16)
+    poly(Hd, [Fh(3.0, 26.9), Fh(4.45, 25.85), Fh(3.05, 25.65)], P['skin_sh'])                                   # long pointy nose
+    poly(Hd, [Fh(3.05, 26.8), Fh(4.3, 25.95), Fh(3.15, 25.9)], P['skin'])
+    dot(Hd, Fh(3.6, 26.4), P['skin_hi'], 0.16)
     mm = max(m, {'scream': 0.95, 'shout': 0.7, 'shock': 0.55}.get(expr, 0.0))
     mc = Fh(2.75, 24.95 - 0.25 * mm)
-    mouth(Hd, mc, 0.62, mm, {'proud': 'proud', 'smug': 'smug'}.get(expr, 'sad' if expr in ('sad', 'whine', 'angry') else 'normal'),
+    mouth(Hd, mc, 0.82, mm, {'proud': 'proud', 'smug': 'smug'}.get(expr, 'sad' if expr in ('sad', 'whine', 'angry') else 'normal'),
           lip=(176, 96, 88))
     cap(Hd, Fh(2.35, 25.55), Fh(3.45, 25.68), 0.2, 0.2, P['must'])                                             # pencil moustache
     if cold > 0.4:
@@ -286,7 +286,7 @@ def _robe_roses(L, cxy, rx, ry, P, seed=0):
 
 def _raisa_head(Hd, Fh, P, expr, t, m, look, blink, call):
     ell(Hd, Fh(1.0, 16.2), 2.7, 1.4, P['skin'], 0, None, P['skin_sh'])                                       # double chin
-    ell(Hd, Fh(0.6, 18.6), 3.05, 3.0, P['skin'], 0, P['skin_hi'], P['skin_sh'])                               # round face
+    ell(Hd, Fh(0.6, 18.6), 3.05, 3.0, P['skin'], 0, None, P['skin_sh'], th_sh=-0.72)                               # round face
     ell(Hd, Fh(-1.75, 18.4), 0.7, 0.95, P['skin'], 0, None, P['skin_sh'])                                       # ear
     ell(Hd, Fh(-1.75, 17.15), 0.42, 0.55, P['gold'], 0, P['gold_hi'], None)                                     # gold hoop earring
     ell(Hd, Fh(-1.75, 17.15), 0.2, 0.3, P['skin_sh'])
@@ -302,7 +302,7 @@ def _raisa_head(Hd, Fh, P, expr, t, m, look, blink, call):
         cap(Hd, Fh(a0, 22.6 - abs(k - 2) * 0.5), Fh(a1, 23.1 - abs(k - 1.5) * 0.5), 0.05, 0.05, P['net'])
     for k in range(3):                                                                                         # curls on the forehead
         ell(Hd, Fh(0.9 + k * 0.9, 20.75 - (k % 2) * 0.15), 0.42, 0.36, P['hair'], 0, P['hair_hi'], None)
-    eyes = [(Fh(1.2, 18.85), 0.42), (Fh(2.45, 18.8), 0.5)]
+    eyes = [(Fh(1.15, 18.95), 0.5), (Fh(2.5, 18.9), 0.6)]
     bl = blink and (t % 4.1) < 0.1
     ex = {'sweet': 'sweet', 'smug': 'smug', 'shock': 'shock', 'shout': 'shout', 'angry': 'normal', 'stern': 'normal'}.get(expr, 'normal')
     for c, r in eyes:
@@ -320,7 +320,7 @@ def _raisa_head(Hd, Fh, P, expr, t, m, look, blink, call):
     dot(Hd, Fh(0.55, 17.25), (110, 64, 50), 0.22)                                                             # mole
     mm = max(m, {'shout': 0.7, 'shock': 0.5}.get(expr, 0.0))
     mc = Fh(2.55, 16.85 - 0.2 * mm)
-    mouth(Hd, mc, 0.8, mm, {'sweet': 'grin'}.get(expr, expr if expr in ('smug', 'angry') else 'normal'), lip=P['lip'], gold=[1, 2])
+    mouth(Hd, mc, 0.95, mm, {'sweet': 'grin'}.get(expr, expr if expr in ('smug', 'angry') else 'normal'), lip=P['lip'], gold=[1, 2])
     return mc
 
 
@@ -427,7 +427,7 @@ def pusya(CH, cam, t=0.0, mouth_=0.0, expr='deadpan', look=(0.0, 0.0), shiver=1.
     for sx in (-1, 1):                                                                                        # giant radar ears
         poly(Hd, [Q(sx * 0.7, 6.3), Q(sx * 1.75, 5.5), Q(sx * 3.2, 9.0)], P['fur'])
         poly(Hd, [Q(sx * 1.0, 6.25), Q(sx * 1.65, 5.85), Q(sx * 2.85, 8.4)], P['pink'])
-    ell(Hd, hc, 1.7, 1.55, P['fur'], 0, P['fur_hi'], P['fur_sh'])                                              # apple head
+    ell(Hd, hc, 1.7, 1.55, P['fur'], 0, None, P['fur_sh'], th_sh=-0.72)                                              # apple head
     ell(Hd, Q(0, 4.55), 0.85, 0.62, P['fur_hi'])                                                              # muzzle
     bl = blink and (t % 3.9) < 0.09
     e_ex = {'shock': 'shock', 'smug': 'squint', 'sleepy': 'squint'}.get(expr, 'normal')
@@ -450,7 +450,7 @@ def pusya(CH, cam, t=0.0, mouth_=0.0, expr='deadpan', look=(0.0, 0.0), shiver=1.
     mm = max(mouth_, 0.5 if expr == 'shock' else 0.0)
     mc = Q(0, 4.3)
     if mm > 0.08:
-        mouth(Hd, mc, 0.42, mm, inner=(90, 20, 30), teeth=(255, 255, 255))
+        mouth(Hd, mc, 0.55, mm, inner=(90, 20, 30), teeth=(255, 255, 255))
     else:
         cap(Hd, Q(-0.35, 4.35), Q(0, 4.25), 0.07, 0.07, P['fur_sh']); cap(Hd, Q(0, 4.25), Q(0.35, 4.35), 0.07, 0.07, P['fur_sh'])
     _merge(L, Hd, OL)
@@ -505,12 +505,12 @@ def sveta(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='tired', look=0.0, hand_n=
     cap(Hd, Fh(0.3, 19.0), Fh(0.6, 20.6), 0.85, 0.85, P['skin'], P['skin_hi'], P['skin_sh'])
     cap(Hd, Fh(-1.6, 23.8), Fh(-3.0, 20.4), 0.95, 0.6, P['hair'], P['hair_hi'], P['hair_sh'])                  # ponytail
     ell(Hd, Fh(-1.5, 23.7), 0.55, 0.55, P['scr'])                                                              # scrunchie
-    ell(Hd, Fh(0.7, 22.4), 2.35, 2.65, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    ell(Hd, Fh(0.7, 22.4), 2.35, 2.65, P['skin'], 0, None, P['skin_sh'], th_sh=-0.72)
     ell(Hd, Fh(0.4, 24.1), 2.5, 1.35, P['hair'], 0.05, P['hair_hi'], P['hair_sh'])
     cap(Hd, Fh(-1.3, 23.6), Fh(-1.6, 21.2), 0.7, 0.5, P['hair'])
     cap(Hd, Fh(2.4, 24.0), Fh(2.9, 22.2), 0.35, 0.15, P['hair'])                                                 # loose strand
     ell(Hd, Fh(-1.1, 22.2), 0.55, 0.8, P['skin'], 0, None, P['skin_sh'])
-    eyes = [(Fh(1.35, 22.5), 0.4), (Fh(2.4, 22.45), 0.47)]
+    eyes = [(Fh(1.1, 22.6), 0.5), (Fh(2.2, 22.55), 0.56)]
     bl = blink and (t % 3.6) < 0.1
     ex = {'shock': 'shock', 'smile': 'normal'}.get(expr, 'normal')
     for c, r in eyes:
@@ -521,9 +521,9 @@ def sveta(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='tired', look=0.0, hand_n=
         s_ = 1 if k == 0 else -1
         b = c[1] - r - 0.45
         cap(Hd, (c[0] - 0.5, b - s_ * bt * 0.28), (c[0] + 0.5, b + s_ * bt * 0.28), 0.16, 0.13, P['hair_sh'])
-    poly(Hd, [Fh(2.6, 22.6), Fh(3.35, 21.4), Fh(2.75, 21.25)], P['skin_sh'])
+    poly(Hd, [Fh(2.8, 22.0), Fh(3.4, 21.3), Fh(2.8, 21.15)], P['skin_sh'])
     mc = Fh(2.05, 20.75 - 0.2 * mouth_)
-    mouth(Hd, mc, 0.42, mouth_, 'sad' if expr in ('guilty', 'sad', 'tired') else 'happy' if expr == 'smile' else 'normal', lip=P['lip'])
+    mouth(Hd, mc, 0.56, mouth_, 'sad' if expr in ('guilty', 'sad', 'tired') else 'happy' if expr == 'smile' else 'normal', lip=P['lip'])
     _merge(L, Hd, OL)
     A = Layer(cam)
     tn = hand_n if hand_n is not None else H(*pose['n'])

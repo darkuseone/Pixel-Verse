@@ -1,4 +1,4 @@
-"""E01 «На недельку?!» — the mother-in-law arrives «for a week» with a mountain of plaid bags (more pour out of the lift), takes Tolik's
+"""E01 «Я к вам на недельку!» (v2) — the mother-in-law arrives «for a week» with a mountain of plaid bags (more pour out of the lift), takes Tolik's
 armchair («Я в этом доме мужик!» — «Мужик, тапки сними. Я помыла.»), Pusya drops the clue («три года жили»), TWIST: Sveta herself has
 rented out mum's flat «на год». Tolik sleeps on the balcony; Pusya in his armchair: «Отправь тому…»; doorbell: «Это Люся. Тоже на
 недельку!» -> loop into the opening scream.
@@ -35,7 +35,7 @@ OUT_L = (872.0, 652.0, 13.6)         # Tolik stepped out onto the landing, facin
 SVETA = (176.0, 706.0, 14.6)         # Sveta coming up the stairs, facing right
 CHAIR = (600.0, 650.0)
 TAG = R.plate(54, 16, ['КВАРТИРАНТАМ'], bg=(250, 244, 220), colors=[(176, 30, 40)], border=(120, 100, 70), pad=1.2)
-CHAIR_TAG = R.plate(44, 14, ['ТОЛИКОВО'], bg=(236, 210, 130), colors=[(60, 30, 20)], border=(90, 60, 30), pad=1.0)
+CHAIR_TAG = R.plate(72, 20, ['КРЕСЛО ТОЛИКА'], bg=(236, 210, 130), colors=[(60, 30, 20)], border=(90, 60, 30), pad=1.0)
 
 
 def mouth(who, t, k=1.7):
@@ -118,25 +118,36 @@ def raisa_l(CH, v, t, pos=RAI_L, k=1.0, pusya=True, **kw):
     r = T.raisa(CH, cam, t=t, mouth_=mouth('raisa', t), **kw)
     face(v, cam, r, 3.6)
     if pusya:
-        px, py = u2w(v, cam, F.H(3.4, 9.6))
+        px, py = u2w(v, cam, F.H(3.4, 9.0))
         T.pusya(CH, v.cam(px, py, un * k * 0.62), t=t, expr='deadpan')
     return cam, r
 
 
 # ---------------------------------------------------------------- shots
-def r_hook(t, u, scream=True):
-    """«На недельку?!» — waist-up Tolik screaming in the doorway, hands on cheeks; the curlers of the mother-in-law in the
-    foreground at the bottom-left, a plaid bag at the bottom-right"""
+def r_tolik_cu(t, u, scream=True):
+    """«Как на недельку?! Света сказала — на один денёчек!» — waist-up Tolik in the doorway, horrified; the curlers of the
+    mother-in-law in the foreground at the bottom-left, a plaid bag at the bottom-right"""
     x, y, un = DOOR
     k = 1.25
     hx, hy = x - 1.3 * un * k, y + 40 - 27.2 * un * k
     v = view_at(LAND, hx + 40, hy, 1.42 + 0.03 * u, 190, 330)
 
     def draw(CH, v_):
-        tolik_door(CH, v_, t, (x, y + 40, un), k, pose=T.TPOSE['shock'], expr='scream' if scream else 'shock', shake=0.05)
+        tolik_door(CH, v_, t, (x, y + 40, un), k, pose=T.TPOSE['shock'], expr='shout', shake=0.04)
         L = Layer(v_.wcam()); T.chelnok(L, 1066, 820, 150, 110, 0.06, 4); CH.add(L)
         raisa_l(CH, v_, t, (836, 760, 15.6), 1.0, pusya=False, expr='smug')
     return landing(v, t, draw, extra_pile=False)
+
+
+def r_hook(t, u):
+    """«Толечка, здравствуй! Я к вам приехала на недельку!» — two-shot at the door: the mother-in-law in curlers with Pusya and a
+    mountain of plaid bags, Tolik in the doorway with his jaw on the floor (readable without sound)"""
+    v = view_at(LAND, 856 - 10 * sm(u / 3.0), 300, 1.15 + 0.04 * sm(u / 3.0), 180, 330)
+
+    def draw(CH, v_):
+        raisa_l(CH, v_, t, pose=T.RPOSE['hold'])
+        tolik_door(CH, v_, t, expr='shock', pose=T.TPOSE['shock'])
+    return landing(v, t, draw)
 
 
 def r_raisa_door(t, u):
@@ -155,14 +166,16 @@ def r_raisa_door(t, u):
     return big
 
 
-def room(v, t, draw=None, tv=0.0, prints=0, px0=800.0):
+def room(v, t, draw=None, tv=0.0, prints=0, px0=800.0, py0=690.0, big_prints=1.0):
     CH, FX = K.begin()
     big = v.bg()
     if prints:
         L = Layer(v.wcam())
         for i in range(prints):
-            px, py = px0 - 60 - i * 52, 690 + (i % 2) * 16
-            F.ell(L, (px, py), 16, 6, (86, 58, 36)); F.ell(L, (px + 18, py), 5, 4, (86, 58, 36))
+            g = big_prints
+            px, py = px0 - 60 * g - i * 52 * g, py0 + (i % 2) * 14 * g
+            F.ell(L, (px, py), 16 * g, 6 * g, (78, 52, 32)); F.ell(L, (px + 18 * g, py), 5 * g, 4 * g, (78, 52, 32))
+            for k_ in range(3): F.ell(L, (px - 6 * g + k_ * 7 * g, py - 4 * g), 2.2 * g, 1.6 * g, (110, 76, 46))
         CH.add(L)
     if draw: draw(CH, v)
     CH.comp(big, K.light_room(v, tv))
@@ -176,7 +189,7 @@ def room(v, t, draw=None, tv=0.0, prints=0, px0=800.0):
 
 def chair(CH, v, s, part):
     L = Layer(v.wcam()); T.armchair(L, CHAIR[0], CHAIR[1], s, part)
-    if part == 'back': K.decal_layer(L, v, CHAIR_TAG, CHAIR[0] - 18 * s - 22, CHAIR[1] - 236 * s + 14 * s)
+    if part == 'back': K.decal_layer(L, v, CHAIR_TAG, CHAIR[0] - 18 * s - 36, CHAIR[1] - 236 * s + 14 * s)
     CH.add(L)
 
 
@@ -208,7 +221,22 @@ def r_manly(t, u):
     return room(v, t, draw, prints=4)
 
 
+def r_prints(t, u):
+    """«Я полы помыла.» — accent on the dirty footprints across the freshly washed floor, ending at Tolik's slippers"""
+    v = view_at(ROOM, 780, 470, 1.44, 180, 330)
+
+    def draw(CH, v_):
+        c2 = v_.cam(862.0, 600.0, 11.0, flip=True)
+        T.tolik(CH, c2, T.TPOSE['stand'], t=t, expr='sad', look=0.3)
+    big = room(v, t, draw, prints=4, px0=858.0, py0=592.0, big_prints=1.25)
+    for i in range(4):                                                             # shine sparkles on the washed floor
+        sx, sy = v.opt(700 + i * 55, 640 + (i % 2) * 18)
+        fx.glow(big, sx, sy, 46, (255, 255, 255), 0.55 * abs(math.sin(t * 8 + i)))
+    return big
+
+
 def r_raisa_chair(t, u):
+    if u > 1.3: return r_prints(t, u)
     """«Мужик, тапки сними. Я помыла.» — close on her sweet gold-tooth smile, then tilt down to his slippers and the dirty prints"""
     tilt = sm((u - 1.3) / 0.6)
     s, un = 0.82, 15.0
@@ -231,7 +259,7 @@ def r_raisa_chair(t, u):
     return big
 
 
-def r_pusya1(t, u):
+def r_pusya1_unused(t, u):
     """«Мы у сестры так на недельку… три года жили.» — Pusya on the armrest, trembling, deadpan to camera, slow push-in"""
     un = 21.0
     x, y = 660.0, 640.0
@@ -260,7 +288,7 @@ def r_phone(t, u, k_out=0.0):
     v = view_at(LAND, hx + 30, hy + 40, 1.38, 190, 300)
 
     def draw(CH, v_):
-        tolik_door(CH, v_, t, (x, y + 30, un), k, pose=T.TPOSE['phone'], expr='shout', prop_n=lambda L, h: T.phone(L, h, -1.6))
+        tolik_door(CH, v_, t, (x, y + 30, un), k, pose=T.TPOSE['phone'], expr='shout', prop_n=lambda L, h: T.phone(L, h, -1.75))
     return landing(v, t, draw)
 
 
@@ -275,7 +303,7 @@ def r_reveal(t, u):
     v = view_at(LAND, cx, cy, Z, lerp(190, 180, k), lerp(300, 330, k))
 
     def draw(CH, v_):
-        tolik_door(CH, v_, t, (x, y + 30, un), 1.3, pose=T.TPOSE['phone'], expr='shock', prop_n=lambda L, h: T.phone(L, h, -1.6))
+        tolik_door(CH, v_, t, (x, y + 30, un), 1.3, pose=T.TPOSE['phone'], expr='shock', prop_n=lambda L, h: T.phone(L, h, -1.75))
         sx, sy, su = SVETA
         cam = v_.cam(sx, sy, su)
         r = T.sveta(CH, cam, T.SPOSE['keys'], t=t, mouth_=mouth('sveta', t), expr='guilty', prop_n=lambda L, h: T.keys(L, h, t))
@@ -299,7 +327,7 @@ def r_nagod(t, u):
     v = view_at(LAND, hx + 30, hy, 1.4 + 0.05 * sm(u / 0.3), 190, 320)
 
     def draw(CH, v_):
-        tolik_door(CH, v_, t, (x, y + 60, un), k, pose=T.TPOSE['shock'], expr='scream', shake=0.12)
+        tolik_door(CH, v_, t, (x, y + 60, un), k, pose=T.TPOSE['shock'], expr='scream', shake=0.08)
     big = landing(v, t, draw)
     B.shake(big, t, 12, 37)
     if u < 0.5: fx.vhs(big, t, 0.8 * (1 - u / 0.5))
@@ -392,7 +420,7 @@ def r_loop(t, u, scream=None, expr=None):
     seat = K.B_BED[1] - 58
     fx_, fy_ = K.B_BED[0] + 10 - 2.0 * un, seat + 13.6 * un - 27.0 * un
     v = view_at(BALC, fx_, fy_, 1.42, 180, 300)
-    m = sm(u / 0.5) if scream is None else scream
+    m = max(mouth('tolik', t), sm(u / 0.3)) if scream is None else scream
 
     def draw(CH, v_):
         L = Layer(v_.wcam()); T.campbed(L, K.B_BED[0], K.B_BED[1], 240, 1.6); CH.add(L)
@@ -405,7 +433,7 @@ def r_loop(t, u, scream=None, expr=None):
     return big
 
 
-SHOT = dict(hook=r_hook, raisa_door=r_raisa_door, manly=r_manly, raisa_chair=r_raisa_chair, pusya1=r_pusya1, run=r_run,
+SHOT = dict(hook=r_hook, tolik_cu=r_tolik_cu, teeth=lambda t, u: r_balcony(t, u), raisa_door=r_raisa_door, manly=r_manly, raisa_chair=r_raisa_chair, run=r_run,
             phone=r_phone, reveal=r_reveal, nagod=r_nagod, balcony=r_balcony, pusya2=r_pusya2, bell=r_bell, lyusya=r_lyusya,
             loop=r_loop)
 
@@ -416,22 +444,18 @@ def shot_at(t):
     return TL.SHOTS[-1]
 
 
-SHOW = K.Show(EPI, 1, 1, ['НА НЕДЕЛЬКУ?!'], hook_t=(0.06, 2.6), hook_y=300,
-              stickers=[(O.sticker('3 ГОДА?!', fg=(255, 222, 80), size=66), F0['pusya1'] + 2.4, F0['run'], 790, 560),
-                        (O.sticker('НА ГОД?!', fg=(255, 120, 150), size=84), TL.TWIST + 1.5, F0['nagod'], 700, 640),
-                        (O.sticker('ДЕНЬ 1', fg=(255, 186, 214), size=54), F0['balcony'] + 0.3, F0['pusya2'], 820, 520)],
-              flashes=[TL.TWIST + 0.02], mosaics=[F0['manly'], F0['phone'], F0['balcony']],
-              cap_y={'hook': 1420, 'pusya1': 1420, 'pusya2': 1420, 'reveal': 1380}, cap_default=1340)
-QUESTION = K.question('ТЁЩА ПРИЕХАЛА:', 'НА НЕДЕЛЬКУ / НАВСЕГДА?')
+SHOW = K.Show(EPI, 1, 1, ['Я К ВАМ', 'НА НЕДЕЛЬКУ!'], hook_t=(0.06, 2.8), hook_y=200,
+              stickers=[(O.sticker('СЛЕДЫ!', fg=(255, 222, 80), size=70), F0['raisa_chair'] + 1.45, F0['run'], 330, 1020),
+                        (O.sticker('НА ГОД?!', fg=(255, 120, 150), size=84), TL.TWIST + 1.9, F0['nagod'], 700, 640),
+                        (O.sticker('ДЕНЬ 1', fg=(255, 186, 214), size=54), F0['teeth'] + 0.1, F0['pusya2'], 820, 520)],
+              flashes=[TL.TWIST + 0.02], mosaics=[F0['manly'], F0['phone'], F0['teeth']],
+              cap_y={'hook': 1505, 'tolik_cu': 1420, 'pusya2': 1420, 'reveal': 1380, 'raisa_chair': 1120}, cap_default=1340)
 
 
 def render(t):
     s = shot_at(t)
     big = SHOT[s['name']](t, t - s['t0'])
     SHOW.apply(big, t, s['name'])
-    q0 = F0['pusya2'] + 1.6
-    if q0 <= t < TL.DUR - 1.0:
-        O.draw_sticker(big, QUESTION, t, q0, TL.DUR - 1.0, 540, 1640)
     return big
 
 

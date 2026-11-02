@@ -1,4 +1,4 @@
-"""E01 cover «НА НЕДЕЛЬКУ?!» — code only (no xAI edit, no neural faces): the landing, Tolik screaming in the doorway, the
+"""E01 cover «Я К ВАМ НА НЕДЕЛЬКУ!» — code only (no xAI edit, no neural faces): the landing, Tolik screaming in the doorway, the
 mother-in-law in curlers with Pusya and the plaid bags in front; the embroidered doily plate at the top of the 3:4 grid zone and the
 «тёщин халат» title under it.   python3 cover.py  ->  cover.png, series covers/cover_s01e01.png, cover_grid.png"""
 import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[4] / 'engine'))
@@ -22,10 +22,10 @@ def frame(t=0.41):
     v = view_at(E.LAND, 905, hy, 1.42, 180, 330)
 
     def draw(CH, v_):
-        cam = v_.cam(1000, 575, un * 1.15, flip=True)
-        T.tolik(CH, cam, T.TPOSE['shock'], t=t, mouth_=1.0, expr='scream')
+        cam = v_.cam(1000, 640, un * 1.15, flip=True)
+        T.tolik(CH, cam, T.TPOSE['shock'], t=t, mouth_=0.9, expr='shout')
         L = Layer(v_.wcam()); T.chelnok(L, 1000, 640, 120, 92, 0.06, 4); T.chelnok(L, 1070, 660, 110, 86, -0.05, 2); CH.add(L)
-        cam2 = v_.cam(830, 640, 18.0)
+        cam2 = v_.cam(830, 680, 18.0)
         r = T.raisa(CH, cam2, T.RPOSE['hold'], t=t, expr='sweet')
         px, py = E.u2w(v_, cam2, (1003.4, 990.4))
         T.pusya(CH, v_.cam(px, py, 18.0 * 0.62), t=t, expr='deadpan')
@@ -40,7 +40,7 @@ def cover(big):
     out = (out * (1 - shade)).astype(np.uint8)
     d = K.doily(780, 210, ['ТЁЩА НА НЕДЕЛЬКУ', 'СЕРИЯ 1/6'])
     O.overlay(out, d, (1080 - d.shape[1]) // 2, 250, 1.0)
-    ttl = K.title_trim(K.hook_title(['НА НЕДЕЛЬКУ?!'], 84, width=1400))
+    ttl = K.title_trim(K.hook_title(['Я К ВАМ', 'НА НЕДЕЛЬКУ!'], 84, width=1400))
     if ttl.shape[1] > 1040:
         f = 1040 / ttl.shape[1]
         ttl = np.array(Image.fromarray(ttl).resize((int(ttl.shape[1] * f), int(ttl.shape[0] * f)), Image.NEAREST))
