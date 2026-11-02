@@ -75,13 +75,14 @@ SFX = [
     (C + 'teeth_chatter.mp3', T0['loop'] + 0.1, 0.5),
 ]
 
+VOICE_DIP = 'equalizer=f=1500:t=q:w=0.7:g=-7,equalizer=f=3200:t=q:w=1:g=-4'   # carve the voice band out of the music
 BEDS = [
-    (CM + 'komiku_melodica.mp3', 59.5, 0.0, TWIST, 1.2, True),
-    (CM + 'sad_orchestral.mp3', 59.5, TWIST + 0.6, DUR, 1.2, True),
+    (CM + 'komiku_weekly_fair.mp3', 59.5, 0.0, TWIST, 0.8, True, VOICE_DIP),
+    (CM + 'komiku_sax_sad.mp3', 59.5, TWIST + 0.6, DUR, 0.9, True, VOICE_DIP),
     (C + 'wind_inside_1.mp3', 11.5, T0['teeth'], T0['pusya2'], 0.8, False),
     (C + 'wind_inside_1.mp3', 11.5, T0['loop'], DUR, 0.7, False),
 ]
-VGAIN = {'tolik': 1.45, 'raisa': 1.95, 'pusya': 2.1, 'sveta': 1.7}
+VGAIN = {'tolik': 1.85, 'raisa': 2.2, 'pusya': 2.3, 'sveta': 2.0}
 
 if __name__ == '__main__':
     for i, s in enumerate(SHOTS): print(f"{i:2d} {s['t0']:6.2f} {s['t1'] - s['t0']:5.2f} {s['name']} {s.get('key', '')}")
