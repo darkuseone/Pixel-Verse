@@ -58,7 +58,7 @@ T1 = {s['name']: s['t1'] for s in SHOTS}
 TWIST = T0['reveal']
 
 SFX = [
-    (C + 'doorbell_3.mp3', 0.0, 0.35, 0.0, 1.6), (C + 'door_apartment_open.mp3', 0.15, 0.5),
+    (S + 'doorbell_bird.mp3', 0.0, 0.6, 0.0, 1.15), (C + 'door_apartment_open.mp3', 0.15, 0.5),
     (C + 'canvas_bag_drop.mp3', T0['raisa_door'] + 0.3, 0.9), (C + 'bottle_clink.mp3', T0['raisa_door'] + 0.35, 0.35),
     (S + 'lift_doors_open.mp3', T0['raisa_door'] + 1.0, 0.5),
     (S + 'bags_slide_pile.mp3', T0['raisa_door'] + 1.6, 0.8),
@@ -71,18 +71,15 @@ SFX = [
     (C + 'whoosh_3.mp3', T0['nagod'], 0.6),
     (C + 'teeth_chatter.mp3', T0['teeth'], 0.9),
     (C + 'cloth_rustle.mp3', T0['pusya2'] + 0.1, 0.9),
-    (C + 'doorbell_3.mp3', T0['bell'], 0.5, 0.0, 1.6),
+    (S + 'doorbell_bird.mp3', T0['bell'] - 0.15, 0.75),
     (C + 'teeth_chatter.mp3', T0['loop'] + 0.1, 0.5),
 ]
 
 BEDS = [
-    (C + 'room_tone_apartment.mp3', 11.5, 0.0, T0['manly'], 0.9, False),
-    (CM + 'quirky_jazz.mp3', 59.5, 0.0, TWIST, 0.16, True),
-    (C + 'room_tone_apartment.mp3', 11.5, T0['manly'], T0['teeth'], 0.8, False),
-    (CM + 'jazzy_blues.mp3', 51.5, TWIST + 0.6, DUR, 0.15, True),
-    (C + 'wind_inside_1.mp3', 11.5, T0['teeth'], T0['pusya2'], 1.0, False),
-    (C + 'room_tone_apartment.mp3', 11.5, T0['pusya2'], T0['loop'], 0.8, False),
-    (C + 'wind_inside_1.mp3', 11.5, T0['loop'], DUR, 0.9, False),
+    (CM + 'ukulele_loop.mp3', 8.3, 0.0, TWIST, 0.3, True),
+    (CM + 'sad_orchestral.mp3', 59.5, TWIST + 0.6, DUR, 0.28, True),
+    (C + 'wind_inside_1.mp3', 11.5, T0['teeth'], T0['pusya2'], 0.8, False),
+    (C + 'wind_inside_1.mp3', 11.5, T0['loop'], DUR, 0.7, False),
 ]
 VGAIN = {'tolik': 1.45, 'raisa': 1.95, 'pusya': 2.1, 'sveta': 1.7}
 

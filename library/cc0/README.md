@@ -10,7 +10,7 @@
 |---|---|---|
 | door_apartment_open | 1702 | дверь квартиры открывается |
 | door_apartment_close | 1704 | дверь квартиры закрывается |
-| doorbell_2 / doorbell_3 / doorbell_4 | 0160 / 0161 / 1604 | дверной звонок (мягкий «дин-дон», механический) |
+| doorbell_2 / doorbell_3 / doorbell_4 | 0160 / 0161 / 1604 | дверной звонок (электронный «дин-дон» — владелец: «как объявление в аэропорту», для квартир не брать) |
 | intercom_ring | 2373 | домофон |
 | elevator_ride | 1711 | лифт едет (гул, 10 с) |
 | canvas_bag_drop | 0576 | тканевая сумка падает на пол |
@@ -35,15 +35,17 @@
 | small_dog_bark | 0682 | лай маленькой собаки |
 | gong_strong | 1483 | гонг |
 
-## music/ — OpenGameArt (CC0), фрагменты 52–60 с, −20 LUFS, затухание в конце
-| Файл | Автор | Страница | Настроение |
-|---|---|---|---|
-| quirky_jazz | Spring Spring | opengameart.org/content/quirky-jazz | чудаковатый джаз — комедия, ситком |
-| cafe_jazz | OatCog | opengameart.org/content/coffee-house-bump | лёгкий джаз кафе — быт, фон |
-| jazzy_blues | LushoGames | opengameart.org/content/jazzy-blues | блюз — неудача героя, грусть с юмором |
-| fridge_is_hungry | congusbongus | opengameart.org/content/the-fridge-is-hungry | бытовая комедийная тема |
-| catch_me_if_you_can | poinl | opengameart.org/content/catch-me-if-you-can | погоня, суета |
-| jazz_slow | Pro Sensory | opengameart.org/content/jazz-slower | медленный джаз — вечер, ожидание |
+## music/ — OpenGameArt (CC0), с 02.11.2026 только «яркие» треки
+Первая партия (джаз/блюз) убрана: 60–90 % энергии ниже 150 Гц, на динамике телефона звучала как гул. Перед добавлением подложки
+меряю долю энергии в полосе 400–4000 Гц (мелодия): нужно ≥ 0,4; обработка `highpass=90`, −18 LUFS.
+| Файл | Автор | Страница | Длина | Настроение |
+|---|---|---|---|---|
+| ukulele_loop | StarNinjas | opengameart.org/content/ukulele-forest-beginning-loop-and-end | 8,5 с луп | укулеле — лёгкий бытовой ситком |
+| badinerie_flute | Spring Spring | opengameart.org/content/badinerie | 60 с | Бах «Шутка», флейта — суета, комичный хаос |
+| flute_strings | Spring Spring | opengameart.org/content/minimalistic-flute-strings-tune | 60 с | флейта и струнные — спокойный фон |
+| town_cheerful | cynicmusic | opengameart.org/content/town-theme-rpg | 60 с | весёлая «городская» тема |
+| sad_orchestral | obscure music | opengameart.org/content/sad-orchestral-theme | 60 с | грустный оркестр — неудача героя (комичный контраст) |
+| happy_lullaby | cynicmusic | opengameart.org/content/happy-lullaby-song17 | 40 с | колыбельная — ирония, умиление |
 
 Использование: в `timeline.py` пути `library/cc0/sfx/<имя>.mp3` и `library/cc0/music/<имя>.mp3`; музыка в `BEDS` с `loop_sec` = длина
-файла (52–60 с), громкость 0,12–0,18 с дакингом.
+файла (52–60 с), громкость 0,25–0,3 с дакингом (под речью ×0,4).
