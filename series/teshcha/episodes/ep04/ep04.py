@@ -30,6 +30,7 @@ SH.init(EPI, day=101)
 HALL = SH.world('hallway')
 YARD = SH.world('yard')
 MINI = SH.world('minibus')
+CUTS, NAMES = TL.CUTS, TL.NAMES
 F0 = TL.T0
 TOL = (700.0, 692.0, 15.0)        # Tolik in the hallway (floor point, unit), facing left
 RAI = (560.0, 700.0, 15.6)        # Raisa facing right

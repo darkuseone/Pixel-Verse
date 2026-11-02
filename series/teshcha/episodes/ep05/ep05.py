@@ -30,6 +30,7 @@ SH.init(EPI, day=230)
 OFF = SH.world('office')
 HALL = SH.world('hallway')
 LAND = SH.LAND
+CUTS, NAMES = TL.CUTS, TL.NAMES
 F0 = TL.T0
 RED = (184, 30, 40)
 YEL = (255, 244, 170)

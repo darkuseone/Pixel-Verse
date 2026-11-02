@@ -35,7 +35,7 @@ CLIP = {k: _dur(ROOT / 'series' / SLUG / 'voice' / VEP / f'{k}.mp3') for k in LI
 
 BEATS = [
     ('L', 'r1', 'hook'), ('L', 't1', 'dance'), ('L', 't2', 'chair'), ('P', 1.1, 'days'), ('L', 't3', 'call'), ('P', 0.6, 'twist'),
-    ('L', 'r2', 'hole'), ('L', 'p1', 'pusya'), ('L', 's1', 'sveta'), ('L', 't4', 'cry'), ('P', 0.5, 'loop'),
+    ('L', 'r2', 'hole'), ('L', 'p1', 'pusya'), ('L', 's1', 'sveta'), ('L', 't4', 'cry'), ('P', 0.95, 'loop'),
 ]
 PAD = 0.07
 SHOTS, VOICE = [], []
