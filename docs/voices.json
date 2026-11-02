@@ -1818,22 +1818,60 @@
   },
   {
    "slug": "teshcha",
+   "char": "tolik",
+   "voice_id": "B0jmt8McoEVGc4Ts8fcx",
+   "status": "active",
+   "name": "Толик",
+   "voice_name": "Тёща на недельку — Толик",
+   "lines": 25,
+   "episodes": 6,
+   "samples": [
+    "series/teshcha/voice/ep05/t3.mp3",
+    "series/teshcha/voice/ep02/t4.mp3",
+    "series/teshcha/voice/ep02/t1.mp3",
+    "series/teshcha/voice/ep04/t3.mp3",
+    "series/teshcha/voice/ep06/t3.mp3",
+    "series/teshcha/voice/ep04/t1.mp3",
+    "series/teshcha/voice/ep01/t1.mp3",
+    "series/teshcha/voice/ep01/t4.mp3"
+   ],
+   "design": {
+    "description": "A wiry, nervous Russian man in his early forties, a self-important loser who believes he is the boss of the house. Medium-high reedy tenor, slightly nasal, puffed-up pompous delivery that cracks into a squeaky panicked whine. Fast, expressive, funny. Native Russian speaker, plain urban Russian accent.",
+    "text": "Я в э́том до́ме мужи́к! Как э́то — на неде́льку?! Ра́иса Заха́ровна, э́то моё кре́сло! Я пятна́дцать лет его́ продавли́вал! Све́та! Све́та, иди́ сюда́! Ну всё, я споко́ен. Я соверше́нно споко́ен!",
+    "picked": {
+     "i": 1,
+     "dur": 11.23,
+     "f0": 242.4,
+     "f0_iqr": 66.1,
+     "rate": 24.8,
+     "loud_sd": 5.5
+    }
+   },
+   "account": {
+    "category": "generated",
+    "description": "A wiry, nervous Russian man in his early forties, a self-important loser who believes he is the boss of the house. Medium-high reedy tenor, slightly nasal, puffed-up pompous delivery that cracks into a squeaky panicked whine. Fast, expressive, funny. Native Russian speaker, plain urban Russian accent.",
+    "settings": null,
+    "created_at_unix": 1793576115
+   }
+  },
+  {
+   "slug": "teshcha",
    "char": "raisa",
    "voice_id": "io2Z9FXP5Y1UP9oCclyU",
    "status": "active",
    "name": "Раиса Захаровна (тёща)",
    "voice_name": "Тёща на недельку — Раиса Захаровна (тёща)",
-   "lines": 15,
-   "episodes": 3,
+   "lines": 21,
+   "episodes": 6,
    "samples": [
     "series/teshcha/voice/ep01/r5.mp3",
+    "series/teshcha/voice/ep06/r2.mp3",
     "series/teshcha/voice/ep03/r3.mp3",
+    "series/teshcha/voice/ep06/r1.mp3",
+    "series/teshcha/voice/ep04/r2.mp3",
     "series/teshcha/voice/ep01/r1.mp3",
     "series/teshcha/voice/ep02/r3.mp3",
-    "series/teshcha/voice/ep02/r4.mp3",
-    "series/teshcha/voice/ep02/r1.mp3",
-    "series/teshcha/voice/ep03/r1.mp3",
-    "series/teshcha/voice/ep03/r4.mp3"
+    "series/teshcha/voice/ep02/r4.mp3"
    ],
    "design": {
     "description": "A cartoonish, annoying Russian mother-in-law in her early seventies. Shrill, nasal, high-pitched elderly woman's voice, a bit raspy and screechy, sugary-sweet and nagging at the same time, drawn-out whiny vowels, loud and theatrical, exactly like the stereotypical mother-in-law from old Russian jokes. Clearly old, not young. Native Russian speaker, provincial accent.",
@@ -1862,55 +1900,20 @@
   },
   {
    "slug": "teshcha",
-   "char": "tolik",
-   "voice_id": "B0jmt8McoEVGc4Ts8fcx",
-   "status": "active",
-   "name": "Толик",
-   "voice_name": "Тёща на недельку — Толик",
-   "lines": 13,
-   "episodes": 3,
-   "samples": [
-    "series/teshcha/voice/ep02/t4.mp3",
-    "series/teshcha/voice/ep02/t1.mp3",
-    "series/teshcha/voice/ep01/t1.mp3",
-    "series/teshcha/voice/ep01/t4.mp3",
-    "series/teshcha/voice/ep02/t5.mp3",
-    "series/teshcha/voice/ep03/t1.mp3",
-    "series/teshcha/voice/ep01/t2.mp3",
-    "series/teshcha/voice/ep02/t2.mp3"
-   ],
-   "design": {
-    "description": "A wiry, nervous Russian man in his early forties, a self-important loser who believes he is the boss of the house. Medium-high reedy tenor, slightly nasal, puffed-up pompous delivery that cracks into a squeaky panicked whine. Fast, expressive, funny. Native Russian speaker, plain urban Russian accent.",
-    "text": "Я в э́том до́ме мужи́к! Как э́то — на неде́льку?! Ра́иса Заха́ровна, э́то моё кре́сло! Я пятна́дцать лет его́ продавли́вал! Све́та! Све́та, иди́ сюда́! Ну всё, я споко́ен. Я соверше́нно споко́ен!",
-    "picked": {
-     "i": 1,
-     "dur": 11.23,
-     "f0": 242.4,
-     "f0_iqr": 66.1,
-     "rate": 24.8,
-     "loud_sd": 5.5
-    }
-   },
-   "account": {
-    "category": "generated",
-    "description": "A wiry, nervous Russian man in his early forties, a self-important loser who believes he is the boss of the house. Medium-high reedy tenor, slightly nasal, puffed-up pompous delivery that cracks into a squeaky panicked whine. Fast, expressive, funny. Native Russian speaker, plain urban Russian accent.",
-    "settings": null,
-    "created_at_unix": 1793576115
-   }
-  },
-  {
-   "slug": "teshcha",
    "char": "pusya",
    "voice_id": "94UP8JoYQP8SeAvwcEFv",
    "status": "active",
    "name": "Пуся (той-терьер)",
    "voice_name": "Тёща на недельку — Пуся (той-терьер)",
-   "lines": 3,
-   "episodes": 3,
+   "lines": 6,
+   "episodes": 6,
    "samples": [
     "series/teshcha/voice/ep03/p1.mp3",
+    "series/teshcha/voice/ep04/p1.mp3",
     "series/teshcha/voice/ep02/p1.mp3",
-    "series/teshcha/voice/ep01/p2.mp3"
+    "series/teshcha/voice/ep01/p2.mp3",
+    "series/teshcha/voice/ep05/p1.mp3",
+    "series/teshcha/voice/ep06/p1.mp3"
    ],
    "design": {
     "description": "A tiny trembling lapdog voiced by a weary, cynical old Russian long-haul trucker. Extremely deep, raspy, gravelly bass, heavy smoker's voice, slow flat deadpan delivery, totally unimpressed, as if he has seen everything twice. Native Russian speaker.",
@@ -1938,11 +1941,12 @@
    "status": "active",
    "name": "Света (жена)",
    "voice_name": "Тёща на недельку — Света (жена)",
-   "lines": 2,
-   "episodes": 2,
+   "lines": 3,
+   "episodes": 3,
    "samples": [
     "series/teshcha/voice/ep01/s1.mp3",
-    "series/teshcha/voice/ep03/s1.mp3"
+    "series/teshcha/voice/ep03/s1.mp3",
+    "series/teshcha/voice/ep06/s1.mp3"
    ],
    "design": {
     "description": "A tired Russian woman in her late thirties, a wife stuck between her husband and her mother. Warm mid-range female voice, fast, apologetic and a bit guilty, exhausted sighs, sometimes snaps. Native Russian speaker, plain urban Russian accent.",
@@ -1961,6 +1965,84 @@
     "description": "A tired Russian woman in her late thirties, a wife stuck between her husband and her mother. Warm mid-range female voice, fast, apologetic and a bit guilty, exhausted sighs, sometimes snaps. Native Russian speaker, plain urban Russian accent.",
     "settings": null,
     "created_at_unix": 1793576129
+   }
+  },
+  {
+   "slug": "teshcha",
+   "char": "lyusya",
+   "voice_id": "io2Z9FXP5Y1UP9oCclyU",
+   "status": "active",
+   "name": "Люся (сестра тёщи, водитель маршрутки)",
+   "voice_name": "Тёща на недельку — Раиса Захаровна (тёща)",
+   "lines": 2,
+   "episodes": 2,
+   "samples": [
+    "series/teshcha/voice/ep04/l1.mp3",
+    "series/teshcha/voice/ep05/l1.mp3"
+   ],
+   "account": {
+    "category": "generated",
+    "description": "A cartoonish, annoying Russian mother-in-law in her early seventies. Shrill, nasal, high-pitched elderly woman's voice, a bit raspy and screechy, sugary-sweet and nagging at the same time, drawn-out whiny vowels, loud and theatrical, exactly like the stereotypical mother-in-law from old Russian jokes. Clearly old, not young. Native Russian speaker, provincial accent.",
+    "settings": null,
+    "created_at_unix": 1793580698
+   }
+  },
+  {
+   "slug": "teshcha",
+   "char": "raisa_vm",
+   "voice_id": "io2Z9FXP5Y1UP9oCclyU",
+   "status": "active",
+   "name": "Раиса — голосовое сообщение",
+   "voice_name": "Тёща на недельку — Раиса Захаровна (тёща)",
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/teshcha/voice/ep05/r1.mp3",
+    "series/teshcha/voice/ep05/r2.mp3"
+   ],
+   "account": {
+    "category": "generated",
+    "description": "A cartoonish, annoying Russian mother-in-law in her early seventies. Shrill, nasal, high-pitched elderly woman's voice, a bit raspy and screechy, sugary-sweet and nagging at the same time, drawn-out whiny vowels, loud and theatrical, exactly like the stereotypical mother-in-law from old Russian jokes. Clearly old, not young. Native Russian speaker, provincial accent.",
+    "settings": null,
+    "created_at_unix": 1793580698
+   }
+  },
+  {
+   "slug": "teshcha",
+   "char": "babki",
+   "voice_id": "io2Z9FXP5Y1UP9oCclyU",
+   "status": "active",
+   "name": "Бабушки в маршрутке (хор)",
+   "voice_name": "Тёща на недельку — Раиса Захаровна (тёща)",
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/teshcha/voice/ep04/b1.mp3"
+   ],
+   "account": {
+    "category": "generated",
+    "description": "A cartoonish, annoying Russian mother-in-law in her early seventies. Shrill, nasal, high-pitched elderly woman's voice, a bit raspy and screechy, sugary-sweet and nagging at the same time, drawn-out whiny vowels, loud and theatrical, exactly like the stereotypical mother-in-law from old Russian jokes. Clearly old, not young. Native Russian speaker, provincial accent.",
+    "settings": null,
+    "created_at_unix": 1793580698
+   }
+  },
+  {
+   "slug": "teshcha",
+   "char": "tolik_echo",
+   "voice_id": "B0jmt8McoEVGc4Ts8fcx",
+   "status": "active",
+   "name": "Толик — с эхом в пустой квартире",
+   "voice_name": "Тёща на недельку — Толик",
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/teshcha/voice/ep06/t2.mp3"
+   ],
+   "account": {
+    "category": "generated",
+    "description": "A wiry, nervous Russian man in his early forties, a self-important loser who believes he is the boss of the house. Medium-high reedy tenor, slightly nasal, puffed-up pompous delivery that cracks into a squeaky panicked whine. Fast, expressive, funny. Native Russian speaker, plain urban Russian accent.",
+    "settings": null,
+    "created_at_unix": 1793576115
    }
   },
   {
@@ -2768,5 +2850,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-11-02 04:38"
+ "updated": "2026-11-02 05:14"
 }
