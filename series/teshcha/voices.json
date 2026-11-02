@@ -143,6 +143,30 @@
       "style": "голос Толика; эхо в миксе (VFX)",
       "voice_id": "B0jmt8McoEVGc4Ts8fcx",
       "voice": "голос Толика"
+    },
+    "granny": {
+      "name": "Бабушка у подъезда",
+      "color_caption": [
+        240,
+        240,
+        250
+      ],
+      "style": "голос Раисы выше и тоньше (фильтр)",
+      "voice_id": "io2Z9FXP5Y1UP9oCclyU",
+      "voice": "голос Раисы, фильтр",
+      "post_af": "asetrate=44100*1.1,aresample=44100,atempo=0.9091,highpass=f=180"
+    },
+    "granny2": {
+      "name": "Бабушка у подъезда 2",
+      "color_caption": [
+        220,
+        230,
+        250
+      ],
+      "style": "голос Раисы ниже (фильтр)",
+      "voice_id": "io2Z9FXP5Y1UP9oCclyU",
+      "voice": "голос Раисы, фильтр",
+      "post_af": "asetrate=44100*0.92,aresample=44100,atempo=1.087"
     }
   },
   "music": {},

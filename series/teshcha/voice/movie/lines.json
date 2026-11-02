@@ -1,0 +1,170 @@
+{
+ "o1": [
+  "tolik",
+  "[whispering, conspiratorial, hiding in a closet with a flashlight] Сего́дня мне со́рок два. А тёща гото́вит за́говор."
+ ],
+ "o2": [
+  "tolik",
+  "[whispering, listing evidence, scared] Цеме́нт. Руле́тка. Чемода́н. Пу́ся, э́то не к добру́."
+ ],
+ "o3": [
+  "pusya",
+  "[deep raspy bass, deadpan] Э́то к ремо́нту."
+ ],
+ "k1": [
+  "raisa",
+  "[shrill, sugary, busy] То́лечка, сади́сь. Ка́ша осты́ла уже́."
+ ],
+ "k2": [
+  "tolik",
+  "[hopeful, fishing for congratulations] Раи́са Заха́ровна, а вы ничего́ не забы́ли? Како́й сего́дня день?"
+ ],
+ "k3": [
+  "raisa",
+  "[shrill, sweet, dismissive] Вто́рник, То́лечка. Ешь ка́шу."
+ ],
+ "k4": [
+  "tolik",
+  "[offended, pompous, then sulking] Ну и ла́дно. Я в э́том до́ме мужи́к. Мне пра́здники не нужны́."
+ ],
+ "k5": [
+  "pusya",
+  "[deep raspy bass, deadpan, to camera] Со́рок два го́да. Ка́ша. Вто́рник."
+ ],
+ "h1": [
+  "raisa",
+  "[whispering into the phone, conspiratorial] Лю́ся, цеме́нт купи́ла? Балко́н замуру́ем к ве́черу. Гла́вное — что́бы То́лик не узна́л."
+ ],
+ "h2": [
+  "raisa",
+  "[whispering, practical] А по́сле дня рожде́ния — чемода́н, и всё."
+ ],
+ "h3": [
+  "tolik",
+  "[horrified whisper] Замуру́ют. На балко́не. В мой день рожде́ния."
+ ],
+ "h4": [
+  "tolik",
+  "[dramatic, bitter, whispering] Год она́ меня́ му́чила. А сего́дня реши́ла зако́нчить."
+ ],
+ "h5": [
+  "pusya",
+  "[deep raspy bass, deadpan] Логи́чно."
+ ],
+ "e1": [
+  "tolik",
+  "[sneaky, determined whisper] Пу́ся, план тако́й. Ухожу́ на рыба́лку до но́чи. Без меня́ не замуру́ют."
+ ],
+ "e2": [
+  "granny",
+  "[old woman gossip, loud, excited] Де́вочки, То́лик с у́дочкой! Куда́ э́то он в свой день рожде́ния?"
+ ],
+ "e3": [
+  "granny2",
+  "[old woman, bossy, loud] Звони́ Ра́е!"
+ ],
+ "e4": [
+  "lyusya",
+  "[low, husky, bored minibus driver] То́ля, сади́сь. Ра́я сказа́ла — домо́й тебя́ верну́ть."
+ ],
+ "e5": [
+  "tolik",
+  "[shocked, betrayed, shouting] Лю́ся! Вы что, все заодно́?!"
+ ],
+ "e6": [
+  "lyusya",
+  "[low, husky, flat but warm] Мы — семья́, То́ля."
+ ],
+ "e7": [
+  "tolik",
+  "[defeated, mumbling] Окружи́ли. Всем двором."
+ ],
+ "s1": [
+  "tolik",
+  "[whispering, military tone, serious] Окопа́лись. Вход оди́н, вы́ход — то́же."
+ ],
+ "s2": [
+  "pusya",
+  "[deep raspy bass, deadpan, to camera] Со́рок два го́да. Дуршла́г."
+ ],
+ "s3": [
+  "tolik",
+  "[heroic, dramatic farewell] Пу́ся, е́сли не верну́сь — кре́сло твоё."
+ ],
+ "s4": [
+  "pusya",
+  "[deep raspy bass, deadpan] Оно́ и так моё."
+ ],
+ "m1": [
+  "tolik",
+  "[shouting, charging in, heroic] Ру́ки вверх! Мужика́ не замуру́ешь!"
+ ],
+ "m2": [
+  "raisa",
+  "[quiet, sincere, gentle, no sweetness at all] То́лечка... э́то тебе́. Ты год на балко́не мёрз. С днём рожде́ния."
+ ],
+ "m3": [
+  "sveta",
+  "[awkward, sighing] Сюрпри́з был. Был."
+ ],
+ "m4": [
+  "tolik",
+  "[stunned, confused, quiet] Э́то... мне? А цеме́нт?"
+ ],
+ "m5": [
+  "lyusya",
+  "[low, husky, flat] Цеме́нт — для стен. Чтоб не ду́ло."
+ ],
+ "m6": [
+  "pusya",
+  "[deep raspy bass, deadpan, to camera] Нело́вко вы́шло."
+ ],
+ "f1": [
+  "tolik",
+  "[guilty, then puffed up and proud] Да́льше я сам. Как мужи́к."
+ ],
+ "f2": [
+  "raisa",
+  "[sweet, patient, in the dark] То́лечка, не тро́гай. Ты мужи́к — тебе́ нельзя́."
+ ],
+ "f3": [
+  "tolik",
+  "[touched, quiet, thoughtful] А ведь она́ меня́ тогда́ мужико́м назвала́. Пе́рвый раз."
+ ],
+ "g1": [
+  "granny",
+  "[old woman singing loudly and off-key, happy] Ля-ля-ля-а-а! То́лику — сорок два-а-а!"
+ ],
+ "p1": [
+  "tolik",
+  "[standing with a glass, moved, sincere] Раи́са Заха́ровна, я ду́мал, вы меня́ замуру́ете. А вы мне — кабине́т."
+ ],
+ "p2": [
+  "tolik",
+  "[generous, emotional, loud] Остава́йтесь у нас ско́лько хоти́те! Хоть навсегда́!"
+ ],
+ "p3": [
+  "raisa",
+  "[surprised, touched, quiet] То́лечка... а я ведь за́втра уезжа́ла. Насовсе́м. Кабине́т — пода́рок на проща́ние."
+ ],
+ "p4": [
+  "sveta",
+  "[amused, teasing] То́ля, ты сам сказа́л. При всех."
+ ],
+ "p5": [
+  "raisa",
+  "[shrill, overjoyed, triumphant] Ну раз ты про́сишь — остаю́сь! Навсегда́!"
+ ],
+ "p6": [
+  "lyusya",
+  "[low, husky, cheerful] И я тогда́ на неде́льку!"
+ ],
+ "p7": [
+  "tolik",
+  "[stunned, weak, voice breaking] Я... в э́том до́ме... мужи́к."
+ ],
+ "b1": [
+  "tolik",
+  "[content, relaxed, then proud and loud] Ну хоть кабине́т мой. Ти́хо. Тепло́. Я в э́том до́ме мужи́к!"
+ ]
+}
