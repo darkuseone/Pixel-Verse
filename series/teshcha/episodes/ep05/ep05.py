@@ -262,7 +262,7 @@ def r_thanks(t, u):
     v = view_at(LAND, x + 50, y + 50 - 21 * un + 30, 1.4, 180, 300)
 
     def draw(CH, v_):
-        cam, r = raisa(CH, v_, t, x, y + 50, un, pose='hold', expr='normal', look=0.5)
+        cam, r = raisa(CH, v_, t, x, y + 50, un, pose='hold', expr='sweet', look=0.5)
         pusya_held(CH, v_, cam, r, t, 7.0)
     return landing(v, t, draw)
 
@@ -318,7 +318,7 @@ def shot_at(t):
 SHOW = K.Show(EPI, 1, 5, ['50 ГОЛОСОВЫХ', 'ОТ ТЁЩИ!'], hook_t=(0.06, 2.8), hook_y=200,
               stickers=[(O.sticker('БЕЗ ЗВУКА', fg=(150, 200, 255), size=78), F0['mute'] + 1.1, F0['pusya'], 540, 560),
                         (O.sticker('ЛИФТ!', fg=(255, 120, 150), size=120), TL.TWIST + 0.4, F0['lift'], 540, 1290),
-                        (O.sticker('ТОЖЕ?!', fg=(200, 140, 255), size=110), F0['button'] + 0.5, TL.DUR, 540, 520)],
+                        (O.sticker('ТОЖЕ?!', fg=(200, 140, 255), size=110), F0['button'] + 0.5, F0['loop'], 540, 520)],
               flashes=[TL.TWIST + 0.02], mosaics=[F0['pusya'], F0['lift']],
               cap_y={'hook': 1500, 'vm1': 1640, 'twist': 1640, 'pusya': 1450}, cap_default=1380)
 
