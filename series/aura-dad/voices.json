@@ -1,0 +1,68 @@
+{
+  "cartoon": "Aura Dad",
+  "slug": "aura-dad",
+  "lang": "us",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "doug": {
+      "name": "Doug",
+      "color_caption": [
+        255,
+        226,
+        70
+      ],
+      "style": "[proud] [outraged] — loud quirky sitcom dad, cracks when shocked",
+      "voice_id": "QI6dMUTCXXVqw27WrlQs",
+      "voice": "Aura Dad — Doug",
+      "library": {
+        "public_owner_id": "e5a64bf09c56b5dc8f3ff781cb38746e236d3a29077c2743908e65228c6916cf",
+        "voice_id": "QI6dMUTCXXVqw27WrlQs"
+      }
+    },
+    "kayden": {
+      "name": "Kayden",
+      "color_caption": [
+        170,
+        255,
+        90
+      ],
+      "style": "[flat] [bored] — chill Gen Z son, explains like to grandpa",
+      "voice_id": "i32gAGa2D3T8nPzY1EsZ",
+      "voice": "Aura Dad — Kayden",
+      "library": {
+        "public_owner_id": "dd1eda40db59afac225411b47dc4c918f0b881dd11afb5a70f8e97437e9297da",
+        "voice_id": "i32gAGa2D3T8nPzY1EsZ"
+      }
+    },
+    "tammy": {
+      "name": "Tammy",
+      "color_caption": [
+        255,
+        150,
+        200
+      ],
+      "style": "[tired] [sarcastic] — warm raspy mom",
+      "voice_id": "lRGgBdmdfHYNiqPVpbiS",
+      "voice": "Aura Dad — Tammy",
+      "library": {
+        "public_owner_id": "8c5cc7dd51bc2dd2b13c32e48033355ac5696aadcc2ad953a58a99ed3309034f",
+        "voice_id": "lRGgBdmdfHYNiqPVpbiS"
+      }
+    },
+    "mirra": {
+      "name": "MIRRA",
+      "color_caption": [
+        90,
+        240,
+        230
+      ],
+      "style": "[calm] [dry] — polite AI mirror, slightly taunting",
+      "voice_id": "rL5thyifUCj65q3mamdf",
+      "voice": "Aura Dad — MIRRA",
+      "library": {
+        "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+        "voice_id": "rL5thyifUCj65q3mamdf"
+      }
+    }
+  }
+}

@@ -295,3 +295,23 @@ time.com / abc7ny.com (age limits), knowyourmeme.com / napoleoncat.com (сент
 ## 21.10.2026 — антураж «Thanks, Randy» E01 (визуальные надписи, `engine/props/randydecor.py`)
 В других US-мультах не повторять, внутри сериала — сквозные.
 - **Shop'n'Weep:** «SHOP'N WEEP — PRICES THAT MOVE YOU (TO TEARS)», «SINCE 1987», «TURKEYS $3.99/LB* / *LB = LITTLE BIT», «HAPPY THANKSGIVING — NO REFUNDS ON GRATITUDE», «SELF-CHECKOUT: YOU WORK HERE NOW», «ATTENDANT ON BREAK SINCE 2019», «BUTTERBUTT — AMERICAS MOST FROZEN TURKEY», «BUTTERBUTT — THAW TIME: 5 DAYS (LOL)», «LIMIT 1 CRANBERRY CAN PER FAMILY», «GOURDS (DO NOT EAT)», «PUMPKINS $19.99 EA», «TISSUES > AISLE 7 (NEXT TO EGGS)», «BAGS 10C / BAG FOR BAGS 25C», «ALL TURKEYS FROZEN (SORRY)», «LANE CLOSED (FOREVER)», пакет «THANK YOU!», фартук «KISS THE COOK (DON'T)», экран «GRANDMA DETECTED · NANA 98 LB × $4.99/LB = $489.02».
+
+## 03.11.2026 — разведка для «Aura Dad» (лук-максинг, аура, Аризона)
+| Мем / тема | Смысл | Как вкладываем | Статус |
+|---|---|---|---|
+| South Park S29E3 «You Like That On Your Face» (14.10.2026) | лук-максинг, аура-баттлы, мьюинг, могинг, дети в «Сефоре», взрослый лезет в косметику | ориентир по темам сезона; шутки/героев не берём | ориентир |
+| looksmaxxing / mewing (язык к нёбу ради челюсти) | тренд TikTok, критикуют врачи | E01: папа «мьюит» и замолкает — аура растёт, потому что он молчит | E01 |
+| mogging («замогал» = выглядит лучше просто стоя рядом) | зеро-сам рейтинг внешности | E04: сосед Бретт, стельки +4 / +6 | заложено |
+| aura / aura points / aura farming | «крутость» в баллах, «фармить ауру» = быть крутым без усилий | счётчик сезона −400 на телефоне сына; E03 аура-фарминг у гриля | E01, заложено |
+| Sephora kids (дети 10–12 лет с кремами на $300) | тема CBS/Fox 2024–2026 | E02: чек $340, у мамы «nine-step routine» на $900 | заложено |
+| стример-лукмаксер (новости 2026) | лицо тренда | не называем, реальных людей не трогаем | нельзя |
+| bonesmashing, таблетки | опасные тренды | не показываем и не называем (вред детям) | нельзя |
+
+### Банк «Аризона / пригород Финикса» (пополняется)
+112°F на градуснике, сагуаро, гравий вместо газона, бассейн с забором, «SCORPION SEASON!», монсун, Lake Pleasant «BOAT DAY», haboob (пыльная буря), snowbirds, HOA-гравий, тайл-пол «терракота».
+
+### Пародийные бренды (банк §4)
+SEPHORIA (косметика), AURA SCAN PRO ($9.99/week), MIRRA Smart Mirror, Tipsy Rhino (сыворотка $84), GLOWY RECIPE, STANLEE (термос), Cost-Go (уже в банке), MewMaster.
+
+### Заложено в «Aura Dad», сезон 1 (не повторять в других US мультах)
+E01 использовано 03.11.2026: «minus four hundred», «I own a BOAT and a Cost-Go card!», «It can't even FIND your jawline», MIRRA «No TALKING», «He hasn't said ONE word since breakfast. It's beautiful.», «It's because you stopped TALKING», «I've still GOT it!», «Recalculating… Welcome BACK, Doug.»; надписи LIVE LAUGH LATTE, WORLD'S OKAYEST DAD, COST-GO MEMBER 2004, 112 F, SCORPION SEASON!, HOME IS WHERE THE WIFI IS, DECAF = BETRAYAL, «DOUG: ONE PUMP OF COLOGNE. ONE.», HIS/HERS, SPF 100 ARIZONA STRENGTH, TIPSY RHINO $84.

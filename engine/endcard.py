@@ -90,6 +90,10 @@ def card(style='default', lang='us', width=None, promise=None):
         from props import teshkit as K
         title = fit(K.title_trim(K.hook_title([txt], 96 if width <= 1080 else 116, width=width + 300)), width - 60)
         img = _stack([title, _bell(11)], width, gap=6)
+    elif style == 'auradad':                                     # «Aura Dad»: holographic lilac -> aqua -> mint letters + bell + aura chip
+        from props import aurakit as K
+        title = fit(K.title_trim(K.hook_title([txt], 104 if width <= 1080 else 124, width=width + 300)), width - 60)
+        img = _stack([title, _bell(11)], width, gap=6)
     elif style == 'winter':                                     # «Валера и кот»: frosty winter_title letters (the series hook style) + bell
         title = fit(_trim(O.winter_title([txt], 92 if width <= 1080 else 110, width=width + 300)), width - 60)
         img = _stack([title, _bell(11)], width, gap=6)
