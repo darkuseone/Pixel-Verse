@@ -32,6 +32,8 @@ DPOSE = dict(
     mug=dict(n=(4.6, 16.2), f=(-2.6, 11.8), bn=1, bf=-1, nleg=(0.05, 0.0), fleg=(-0.05, 0.0)),            # coffee mug at the belly
     point=dict(n=(3.2, 19.0), f=(-2.6, 11.8), bn=1, bf=-1, nleg=(0.05, 0.0), fleg=(-0.05, 0.0)),          # thumb at his own chest
     fists=dict(n=(3.8, 15.4), f=(-1.0, 15.2), bn=1, bf=-1, nleg=(0.1, 0.0), fleg=(-0.1, 0.0)),            # fists clenched, mewing hard
+    sit=dict(n=(4.2, 14.4), f=(-2.2, 12.4), bn=1, bf=-1, nleg=(1.5, 1.62), fleg=(1.42, 1.6)),           # sitting on the ground (anchor y + 10 un)
+    reach=dict(n=(7.0, 15.0), f=(-2.6, 11.8), bn=1, bf=-1, nleg=(0.15, 0.0), fleg=(-0.15, 0.0)),        # hand offered forward
 )
 
 
@@ -646,3 +648,89 @@ def speaker(L, x, y, s=1.0):
     fell(L, (x, y - 44 * s), 16 * s, 5 * s, (214, 192, 244))
     fpoly(L, [(x - 12 * s, y - 38 * s), (x + 12 * s, y - 38 * s), (x + 12 * s, y - 14 * s), (x - 12 * s, y - 14 * s)], (18, 24, 38))
     return (x - 12 * s, y - 38 * s, x + 12 * s, y - 14 * s)
+
+
+# ======================================================================================= BRETT (the mogging neighbour)
+BC = dict(skin=(232, 166, 120), skin_hi=(250, 196, 150), skin_sh=(196, 126, 88), vein=(200, 110, 90), hair=(60, 40, 30),
+          tank=(250, 250, 250), tank_sh=(210, 214, 224), short=(220, 80, 50), short_hi=(250, 120, 80), short_sh=(170, 50, 30),
+          shoe=(250, 250, 250), shoe_sh=(200, 204, 214), sole=(255, 140, 60), sock=(250, 250, 250), brow=(50, 34, 26))
+BPOSE = dict(
+    stand=dict(n=(3.4, 12.6), f=(-3.2, 12.8), bn=1, bf=-1, nleg=(0.08, 0.0), fleg=(-0.08, 0.0)),
+    flex=dict(n=(4.6, 25.0), f=(-4.4, 25.0), bn=1, bf=-1, nleg=(0.18, 0.0), fleg=(-0.18, 0.0)),         # double biceps
+    fall=dict(n=(6.0, 22.0), f=(-5.6, 22.0), bn=1, bf=-1, nleg=(-0.5, 0.3), fleg=(0.6, 0.0)),
+    sit=dict(n=(5.6, 12.4), f=(-3.0, 10.4), bn=1, bf=-1, nleg=(1.5, 1.62), fleg=(1.42, 1.6)),
+)
+
+
+def brett(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='smug', look=0.0, hand_n=None, hand_f=None, lift=0.0, blink=True,
+          outline_=True, lean=0.0):
+    """«fridge with a tiny head»: a huge boxy torso in a white tank top, veins, a brick jaw WIDER than the tiny skull, short legs,
+    high-top sneakers. lift: hidden height insoles (units) — the sneakers grow tall. expr: smug | friendly | scared | shock | whisper"""
+    pose = pose or BPOSE['stand']
+    P = BC
+    br = 0.12 * math.sin(t * 1.8)
+    base = 7.4 + lift                                                                                     # hip height
+    sh_n, sh_f = H(3.8 + lean, base + 13.4 + br), H(-3.6 + lean, base + 13.6 + br)
+    hp_n, hp_f = H(1.6, base), H(-1.4, base)
+    sk = (P['skin'], P['skin_hi'], P['skin_sh'])
+    L = Layer(cam)
+    for hp, lg in ((hp_f, pose['fleg']), (hp_n, pose['nleg'])):
+        A = Layer(cam)
+        k, e = _limb(A, hp, *lg, 3.6, 3.4 + lift * 0.0, 1.5, 1.1, *sk)
+        cap(A, hp, (hp[0] + (k[0] - hp[0]) * 0.9, hp[1] + (k[1] - hp[1]) * 0.9), 1.9, 1.8, P['short'], P['short_hi'], P['short_sh'])
+        hh = 1.6 + lift                                                                                  # sneaker height grows with insoles
+        poly(A, [(e[0] - 1.1, e[1] - hh), (e[0] + 1.0, e[1] - hh), (e[0] + 1.3, e[1] + 0.8), (e[0] + 3.0, e[1] + 0.8),
+                 (e[0] + 3.0, e[1] + 1.6 + lift * 0.0), (e[0] - 1.2, e[1] + 1.6)], P['shoe'])
+        poly(A, [(e[0] - 1.25, e[1] + 1.0), (e[0] + 3.05, e[1] + 1.0), (e[0] + 3.05, e[1] + 1.7), (e[0] - 1.25, e[1] + 1.7)], P['sole'])
+        _merge(L, A, OL)
+    A = Layer(cam)
+    tf = hand_f if hand_f is not None else H(pose['f'][0], pose['f'][1] + lift)
+    ka, ea = _limb(A, sh_f, 0, 0, 4.4, 4.0, 1.7, 1.3, *sk, target=tf, bend=pose.get('bf', -1))
+    ell(A, ea, 1.15, 1.05, *sk[:1], 0, sk[1], sk[2])
+    _merge(L, A, OL)
+    T = Layer(cam)                                                                                        # the fridge torso
+    poly(T, [H(-4.8 + lean, base + 14.6 + br), H(5.2 + lean, base + 14.6 + br), H(4.0, base + 0.6), H(-3.8, base + 0.6)], P['tank'])
+    cap(T, H(-4.6 + lean, base + 14.2 + br), H(-3.6, base + 1.0), 0.7, 0.6, P['tank_sh'])
+    poly(T, [H(-2.0 + lean, base + 14.8 + br), H(2.6 + lean, base + 14.8 + br), H(1.6 + lean, base + 12.2 + br), H(-1.0 + lean, base + 12.2 + br)], P['skin'])
+    for j in range(3):                                                                                    # abs through the tank
+        cap(T, H(0.4, base + 3.0 + j * 2.4), H(2.6, base + 3.0 + j * 2.4), 0.12, 0.12, P['tank_sh'])
+    _merge(L, T, OL)
+    Hd = Layer(cam)
+    def Fh(x, h): return H(x + lean * 1.1, h + br + base)
+    cap(Hd, Fh(0.2, 14.4), Fh(0.6, 16.0), 2.2, 2.0, *sk)                                                 # bull neck
+    ell(Hd, Fh(0.4, 18.6), 1.7, 1.8, P['skin'], 0, P['skin_hi'], P['skin_sh'])                           # tiny skull
+    poly(Hd, [Fh(-1.6, 17.6), Fh(3.6, 17.6), Fh(3.8, 15.0), Fh(-1.4, 14.8)], P['skin'])                  # brick jaw, wider than the head
+    cap(Hd, Fh(-1.4, 15.0), Fh(3.7, 15.1), 0.25, 0.25, P['skin_sh'])
+    ell(Hd, Fh(0.3, 20.1), 1.6, 0.6, P['hair'])                                                          # buzz cut
+    ex = {'smug': 'smug', 'friendly': 'normal', 'scared': 'shock', 'shock': 'shock', 'whisper': 'normal'}.get(expr, 'normal')
+    eyes = [(Fh(1.0, 18.8), 0.32), (Fh(1.85, 18.75), 0.36)]
+    bl = blink and (t % 3.5) < 0.1
+    for c, r in eyes:
+        eye(Hd, c, r, ex, (look, 0.0), iris=(60, 110, 160), lid=P['skin_sh'], blink=bl)
+    for c, r in eyes:
+        b = c[1] - r - 0.3
+        tilt = 0.12 if expr in ('smug',) else -0.12 if expr in ('scared', 'whisper') else 0.0
+        cap(Hd, (c[0] - 0.35, b + tilt), (c[0] + 0.35, b - tilt), 0.14, 0.12, P['brow'])
+    ell(Hd, Fh(2.35, 18.0), 0.3, 0.38, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    mm = max(mouth_, {'shock': 0.5, 'scared': 0.3}.get(expr, 0.0))
+    mc = Fh(2.0, 16.3 - 0.2 * mm)
+    mouth(Hd, mc, 0.75, mm, {'smug': 'grin', 'friendly': 'grin'}.get(expr, 'sad' if expr in ('scared', 'whisper') else 'normal'),
+          lip=(180, 100, 80))
+    dot(Hd, Fh(2.4, 15.4), P['skin_sh'], 0.2)                                                           # chin dimple
+    _merge(L, Hd, OL)
+    A = Layer(cam)
+    tn = hand_n if hand_n is not None else H(pose['n'][0], pose['n'][1] + lift)
+    kna, ena = _limb(A, sh_n, 0, 0, 4.4, 4.0, 1.75, 1.35, *sk, target=tn, bend=pose.get('bn', 1))
+    cap(A, (sh_n[0] + (kna[0] - sh_n[0]) * 0.3, sh_n[1] + (kna[1] - sh_n[1]) * 0.3), kna, 0.1, 0.1, P['vein'])
+    ell(A, ena, 1.2, 1.1, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    _merge(L, A, OL)
+    if outline_: outline(L, OL)
+    CH.add(L)
+    return dict(hand_n=ena, hand_f=ea, mouth=mc, head=Fh(1.2, 17.6), top=Fh(0.4, 20.6), feet=H(0, 0))
+
+
+def insole(L, x, y, s=1.0, label=None):
+    """a thick foam height insole lying / flying (world px)"""
+    from props.folk import ell as fell
+    fell(L, (x, y), 18 * s, 6 * s, (255, 220, 170), 0.0, (255, 240, 210), (220, 180, 130))
+    fell(L, (x - 4 * s, y - 2 * s), 10 * s, 2 * s, (255, 160, 120))

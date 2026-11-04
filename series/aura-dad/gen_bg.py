@@ -40,6 +40,11 @@ BG = {
                 'black metal curbside mailboxes on posts stand on the sidewalk in the middle of the picture, side by side, close together. '
                 'Lawn sprinklers, a recycling bin, desert mountains far away, clear blue sky. The sidewalk in front of the mailboxes is '
                 'clear empty space.',
+    'bedroom': 'A suburban master bedroom in Arizona at night, cosy and slightly messy. A king bed with a lavender duvet and many pillows '
+               'against the back wall in the centre-left, a padded headboard; nightstands with lamps (warm light) on both sides, an alarm '
+               'clock, a phone charger, a glass of water; a window with blinds on the right with blue moonlight and a cactus silhouette '
+               'outside; a ceiling fan; a dresser with a mirror on the far right; a dog bed with a blanket on the floor at the foot of the bed; '
+               'framed family photos (blank), soft carpet. The floor in front of the bed is clear empty space.',
 }
 
 

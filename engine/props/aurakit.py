@@ -454,3 +454,30 @@ def cam_blink(big, v, t, k=1.0):
     import fx
     if (t * 2.2) % 1.0 < 0.55:
         fx.glow(big, *v.opt(Y_CAM[0] - 6, Y_CAM[1] + 2), 18 * v.Z * 3, (255, 40, 40), 0.9 * k)
+
+
+# ---------------------------------------------------------------- cul-de-sac (bg/culdesac.png 1280x720)
+C_MAIL = [(605.0, 565.0), (678.0, 565.0)]
+C_DOOR_P = (180.0, 360.0)                        # Pruitt front door (left house)
+C_BELL = (206.0, 286.0, 244.0, 332.0)            # smart doorbell screen box
+C_BOX = (812.0, 372.0)                           # empty «+6 IN» box on Brett's porch (clue)
+
+
+def decorate_cul(Wd):
+    D.attach(Wd, [
+        (D.plate(40, 12, ['THE PRUITTS'], bg=(250, 250, 240), colors=[INK], border=None, pad=0.8), 584, 430),
+        (D.plate(40, 12, ['KOWALSKI'], bg=(255, 140, 60), colors=[INK], border=None, pad=0.8), 658, 430),
+        (D.plate(56, 30, ['SLOW', 'DADS AT', 'PLAY'], bg=(255, 220, 60), colors=[INK, INK, INK], border=INK, pad=1.2), 30, 470),
+        (D.plate(60, 24, ['WE BELIEVE', 'IN GAINS'], bg=(255, 255, 255), colors=[(220, 80, 50), INK], border=(220, 80, 50), pad=1.2,
+                 tilt=-3), 1100, 452),
+        (D.plate(62, 14, ["BRETT'S GYM"], bg=(30, 30, 36), colors=[(255, 140, 60)], border=None, pad=0.8), 1012, 266),
+        (D.plate(44, 18, ['HOA: GRAVEL', 'ONLY'], bg=(255, 255, 255), colors=[RED, INK], border=RED, pad=1.0), 410, 470),
+        (D.plate(40, 14, ['NO SOLICITING'], bg=(250, 250, 240), colors=[RED], border=INK, pad=0.8), 140, 300),
+        (D.plate(30, 18, ['+6 IN', 'LIFTS'], bg=(200, 160, 110), colors=[INK, RED], border=(120, 90, 60), pad=1.0), C_BOX[0], C_BOX[1]),
+        (D.plate(42, 50, [' '], bg=(18, 24, 38), border=(90, 90, 100), round_=4), C_BELL[0] - 2, C_BELL[1] - 2),
+    ])
+
+
+def light_cul(v):
+    keys = [(*v.opt(1000.0, 40.0), 1800, (255, 236, 200), 0.35)]
+    return Light(amb=(1.03, 1.0, 0.95), keys=keys, rim=(1, -0.5, (255, 236, 200), 0.4), grad=(1.04, 0.94))
