@@ -108,6 +108,21 @@
         "public_owner_id": "727a4db472b0ad6692a9b7d2ef08001e4cf5ef6c378fb278444fa1ca2dcb6e01",
         "voice_id": "S0ypc51SmsvcKXTWvjqJ"
       }
+    },
+    "brett": {
+      "name": "Brett",
+      "color_caption": [
+        255,
+        140,
+        60
+      ],
+      "style": "[bro] [low] alpha neighbour",
+      "voice_id": "UXrpoYalpW5MpGiFHq3z",
+      "voice": "Aura Dad — Brett",
+      "library": {
+        "public_owner_id": "675db5c1a341e2f820aefb00825680aa042d958a4a3aef3200735c799210dcb4",
+        "voice_id": "UXrpoYalpW5MpGiFHq3z"
+      }
     }
   }
 }

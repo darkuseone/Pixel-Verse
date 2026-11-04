@@ -183,10 +183,10 @@ KPOSE = dict(
 
 
 def kayden(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='bored', look=0.0, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-           blink=True, outline_=True, screen=None):
-    """expr: bored (half-lidded, lips pressed: always mewing) | flat | shock | smirk.  screen: colour of the phone screen glow"""
+           blink=True, outline_=True, screen=None, pal=None):
+    """pal: palette overrides (his friends). expr: bored (half-lidded, lips pressed: always mewing) | flat | shock | smirk.  screen: colour of the phone screen glow"""
     pose = pose or KPOSE['stand']
-    P = KC
+    P = dict(KC, **pal) if pal else KC
     br = 0.12 * math.sin(t * 1.9)
     sh_n, sh_f = H(1.5, 21.8 + br), H(-1.3, 22.0 + br)
     hp_n, hp_f = H(0.8, 12.6), H(-0.6, 12.6)
@@ -623,3 +623,26 @@ def receipt(L, h, length=8.0, wob=0.0):
         cap(L, a, b, 0.55, 0.55, (252, 250, 244))
     for i in range(1, 10):
         cap(L, (pts[i][0] - 0.35, pts[i][1]), (pts[i][0] + 0.25, pts[i][1]), 0.05, 0.05, (150, 150, 160))
+
+
+FRIEND_PALS = [dict(hood=(70, 120, 220), hood_hi=(110, 160, 250), hood_sh=(44, 80, 170), string=(255, 255, 255),
+                    hair=(30, 22, 20), hair_hi=(70, 52, 44), hair_sh=(16, 12, 10), skin=(170, 112, 80), skin_hi=(200, 140, 104),
+                    skin_sh=(132, 84, 58), shoe_b=(255, 90, 90)),
+               dict(hood=(240, 120, 60), hood_hi=(255, 160, 100), hood_sh=(190, 80, 36), string=(40, 40, 50),
+                    hair=(230, 200, 120), hair_hi=(250, 230, 160), hair_sh=(190, 150, 80), shoe_b=(90, 200, 255))]
+
+
+def burger(L, x, y, s=1.0, ang=0.0):
+    """a flipped burger patty in world px"""
+    from props.folk import ell as fell
+    fell(L, (x, y), 14 * s, 5 * s, (110, 64, 40), ang, (150, 96, 60), (80, 44, 28))
+    fell(L, (x - 3 * s, y - 2 * s), 6 * s, 1.5 * s, (160, 110, 70), ang)
+
+
+def speaker(L, x, y, s=1.0):
+    """MIRRA's patio smart speaker (world px): a lavender cylinder with a dark face screen on top of it"""
+    from props.folk import ell as fell, poly as fpoly, cap as fcap
+    fpoly(L, [(x - 16 * s, y - 44 * s), (x + 16 * s, y - 44 * s), (x + 16 * s, y), (x - 16 * s, y)], (186, 156, 226))
+    fell(L, (x, y - 44 * s), 16 * s, 5 * s, (214, 192, 244))
+    fpoly(L, [(x - 12 * s, y - 38 * s), (x + 12 * s, y - 38 * s), (x + 12 * s, y - 14 * s), (x - 12 * s, y - 14 * s)], (18, 24, 38))
+    return (x - 12 * s, y - 38 * s, x + 12 * s, y - 14 * s)

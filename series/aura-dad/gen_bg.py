@@ -34,6 +34,12 @@ BG = {
                 'stucco block wall, the back of the neighbour house with a red tile roof and a small security camera under the eave, '
                 'palm trees, a tall saguaro cactus, desert mountains far away, blue sky with a few clouds. Gravel and desert plants, '
                 'string lights over the patio. The patio floor in front of the grill and the pool edge is clear empty space.',
+    'culdesac': 'A sunny suburban cul-de-sac street in Phoenix, Arizona, morning. Two beige stucco houses with red tile roofs and '
+                'two-car garages face the viewer, gravel front yards with agave, barrel cactus and a palo verde tree, a basketball hoop '
+                'over one garage, a parked minivan. In the foreground a light concrete sidewalk and the edge of the asphalt street. Two '
+                'black metal curbside mailboxes on posts stand on the sidewalk in the middle of the picture, side by side, close together. '
+                'Lawn sprinklers, a recycling bin, desert mountains far away, clear blue sky. The sidewalk in front of the mailboxes is '
+                'clear empty space.',
 }
 
 

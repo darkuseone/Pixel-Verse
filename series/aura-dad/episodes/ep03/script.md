@@ -1,0 +1,3 @@
+# S01E03 «AURA FARMING?!» — 33,1 с, поворот 18,3 с = 55 % (тип «сеть видит всё»)
+Кайден объясняет аура-фарминг и просит не позориться → «I INVENTED acting cool» → очки, «Sup, boys. Just grilling. Like a LEGEND», бургер улетает и не возвращается → «крутой уход» спиной — в бассейн → «Nobody saw that. We're FINE.» → поворот: камера соседа (мигала с первого кадра, табличка SMILE! YOU'RE ON CAMERA) выложила видео, 2,1M просмотров → «Grill Dad Falls In is TRENDING» → MIRRA с колонки: «+900. The internet LOVES a fall» → «I've still GOT it!» — и тонет.
+Слои: вода бассейна поверх тела Дага (окклюдер из задника), агава на переднем плане с параллаксом.

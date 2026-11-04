@@ -15,7 +15,7 @@ from props import auracast as A
 SLUG = 'aura-dad'
 BG = PATHS.series(SLUG) / 'bg'
 COL = dict(doug=(255, 226, 70), kayden=(170, 255, 90), tammy=(255, 150, 200), mirra=(90, 240, 230), lily=(220, 170, 255),
-           skylar=(255, 190, 120), brett=(255, 140, 60), kid=(200, 230, 255))
+           skylar=(255, 190, 120), brett=(255, 140, 60), kid=(200, 230, 255), jaxon=(120, 200, 255))
 INK, VIOLET, LILAC, AQUA, MINT = (30, 22, 40), (44, 18, 70), (214, 186, 255), (110, 230, 240), (150, 250, 190)
 RED, GREEN, CREAM, WOOD = (226, 46, 70), (60, 200, 110), (252, 246, 232), (120, 76, 44)
 
@@ -184,6 +184,15 @@ def phone_ui(value, t=0.0, mode='score', w=520, h=920, label=None):
         _txt(d, (w // 2, cy - 10), s, 92 if len(s) <= 4 else 74, col)
         _txt(d, (w // 2, cy + 90), 'AURA', 40, (255, 255, 255, 255))
         bars = [('JAWLINE', 0.05 if neg else 0.2), ('RIZZ', 0.1 if neg else 0.9), ('SILENCE', 0.15 if neg else 1.0)]
+    elif mode == 'video':                                                          # viral clip: big view counter
+        d.rectangle([40, cy - 170, w - 40, cy + 110], fill=(14, 12, 20, 255))
+        d.polygon([(w // 2 - 40, cy - 90), (w // 2 - 40, cy + 10), (w // 2 + 50, cy - 40)], fill=(255, 255, 255, 230))
+        _txt(d, (w // 2, cy + 150), label or 'GRILL DAD', 30, (255, 255, 255, 255))
+        _txt(d, (w // 2, cy + 200), 'FALLS IN', 30, (255, 255, 255, 255))
+        s_ = f'{value / 1e6:.1f}M VIEWS'
+        _txt(d, (w // 2, cy + 270), s_, 40, (255, 90, 110, 255))
+        bars = []
+        label = None
     elif mode == 'jaw':
         a = t * 6.0
         for i in range(8):                                                        # loading spinner
@@ -412,3 +421,36 @@ def fg_bags(L, x, y, s=1.0):
         fpoly(L, [(bx - 26 * s, by - 70 * s), (bx + 26 * s, by - 70 * s), (bx + 30 * s, by), (bx - 30 * s, by)], col)
         fcap(L, (bx - 12 * s, by - 70 * s), (bx - 4 * s, by - 92 * s), 2.5 * s, 2.5 * s, (40, 30, 40))
         fcap(L, (bx - 4 * s, by - 92 * s), (bx + 12 * s, by - 70 * s), 2.5 * s, 2.5 * s, (40, 30, 40))
+
+
+# ---------------------------------------------------------------- backyard (bg/backyard.png 1280x720)
+Y_CAM = (1095.0, 182.0)                         # the neighbour's security camera (clue of E03)
+Y_GRILL = (110.0, 330.0)
+Y_SPEAKER = (250.0, 398.0)                      # MIRRA's patio speaker on the cooler
+
+
+def decorate_yard(Wd):
+    D.attach(Wd, [
+        (D.plate(66, 36, ['POOL RULES', 'NO RUNNING', 'NO DAD DIVES'], bg=(255, 255, 255), colors=[(40, 110, 200), INK, RED],
+                 border=(40, 110, 200), weights=[1, 0.7, 0.7], pad=1.2), 592, 290),
+        (D.plate(54, 22, ['SMILE!', "YOU'RE ON CAMERA"], bg=(255, 220, 60), colors=[INK, INK], border=INK, weights=[1, 0.6], pad=1.0),
+         1062, 224),
+        (D.plate(54, 22, ['BEWARE OF DOG', "(HE'S LAZY)"], bg=(250, 250, 240), colors=[RED, INK], border=INK, weights=[1, 0.7], pad=1.0,
+                 tilt=-3), 455, 296),
+        (D.plate(40, 14, ['GRILL SARGE'], bg=(30, 30, 36), colors=[(255, 200, 80)], border=(120, 120, 130), pad=0.8), 92, 350),
+        (D.plate(56, 16, ['NO LIFEGUARD. EVER.'], bg=(214, 40, 50), colors=[(255, 255, 255)], border=None, pad=0.8), 1110, 434),
+        (D.plate(26, 12, ['93 F'], bg=(255, 255, 255), colors=[(40, 110, 200)], border=(40, 110, 200), pad=0.8, round_=3), 470, 452),
+        (D.plate(44, 16, ['SCORPION', 'XING'], bg=(255, 214, 60), colors=[INK, INK], border=INK, pad=0.8, tilt=6), 1180, 300),
+        (D.plate(40, 14, ['KEEP OFF', 'CACTUS'], bg=(250, 250, 240), colors=[(60, 140, 90), INK], border=(60, 140, 90), pad=0.8), 770, 330),
+    ])
+
+
+def light_yard(v, k=1.0):
+    keys = [(*v.opt(900.0, 60.0), 1600, (255, 200, 130), 0.4 * k), (*v.opt(150.0, 100.0), 800, (255, 220, 150), 0.2)]
+    return Light(amb=(1.04, 0.98, 0.9), keys=keys, rim=(1, -0.5, (255, 210, 140), 0.45), grad=(1.04, 0.94))
+
+
+def cam_blink(big, v, t, k=1.0):
+    import fx
+    if (t * 2.2) % 1.0 < 0.55:
+        fx.glow(big, *v.opt(Y_CAM[0] - 6, Y_CAM[1] + 2), 18 * v.Z * 3, (255, 40, 40), 0.9 * k)
