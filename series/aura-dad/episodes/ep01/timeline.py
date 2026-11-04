@@ -64,10 +64,10 @@ SFX = [
     (C + 'rimshot_joke.mp3', DUR - 1.05, 0.45),
 ]
 
-VOICE_DIP = 'equalizer=f=1500:t=q:w=0.7:g=-7,equalizer=f=3200:t=q:w=1:g=-4'
+VOICE_DIP = 'equalizer=f=1500:t=q:w=0.8:g=-10,equalizer=f=3200:t=q:w=1:g=-7,equalizer=f=500:t=q:w=1:g=-4'
 BEDS = [
-    (CM + 'komiku_fetch_contest.mp3', 59.5, 0.0, TWIST, 0.8, True, VOICE_DIP),
-    (CM + 'komiku_mandolin.mp3', 59.5, TWIST + 0.5, DUR, 0.85, True, VOICE_DIP),
+    (CM + 'komiku_fetch_contest.mp3', 59.5, 0.0, TWIST, 0.45, True, VOICE_DIP),
+    (CM + 'komiku_mandolin.mp3', 59.5, TWIST + 0.5, DUR, 0.5, True, VOICE_DIP),
     (S + 'amb_birds_desert.mp3', 8.0, 0.0, T0['mirra'], 3.5, True),
     (S + 'amb_birds_desert.mp3', 8.0, T0['tammy'], DUR, 4.5, True),
 ]

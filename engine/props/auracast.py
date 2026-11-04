@@ -35,7 +35,7 @@ DPOSE = dict(
 )
 
 
-def _doug_head(Hd, Fh, P, expr, t, m, look, blink, shine):
+def _doug_head(Hd, Fh, P, expr, t, m, look, blink, shine, mask=False):
     sk = (P['skin'], P['skin_hi'], P['skin_sh'])
     # no chin: a fat neck as wide as the jaw
     cap(Hd, Fh(0.2, 20.6), Fh(0.7, 23.2), 2.35, 2.25, *sk)
@@ -54,6 +54,8 @@ def _doug_head(Hd, Fh, P, expr, t, m, look, blink, shine):
         a2 = Fh(2.7 + 0.15 * k, 28.4 + 0.25 * k)
         cap(Hd, a0, a1, 0.1, 0.12, P['hair']); cap(Hd, a1, a2, 0.12, 0.08, P['hair'])
     cap(Hd, Fh(-1.7, 26.4), Fh(-2.3, 25.9), 0.22, 0.16, (168, 150, 140))                                 # grey tuft over the ear
+    if mask:                                                                                              # white sheet face mask
+        ell(Hd, Fh(1.75, 24.3), 2.35, 2.3, (248, 248, 244), 0, (255, 255, 255), (214, 216, 222))
     # wrap-around shades pushed up on the dome
     cap(Hd, Fh(0.4, 28.7), Fh(3.7, 28.2), 0.62, 0.55, P['shade'])
     cap(Hd, Fh(1.1, 28.95), Fh(2.6, 28.75), 0.14, 0.12, P['shade_hi'])
@@ -72,8 +74,9 @@ def _doug_head(Hd, Fh, P, expr, t, m, look, blink, shine):
         b = c[1] - r - 0.45 - lift
         cap(Hd, (c[0] - 0.55, b - s_ * bt * 0.35 + 0.0), (c[0] + 0.55, b + s_ * bt * 0.35), 0.22, 0.18, P['brow'])
     red = expr in ('shout', 'angry', 'mew')
-    ell(Hd, Fh(1.4, 24.0), 0.75 + (0.45 if puff else 0), 0.5 + (0.3 if puff else 0), P['red'] if red else P['cheek'])
-    ell(Hd, Fh(3.25, 24.05), 0.45 + (0.3 if puff else 0), 0.4 + (0.25 if puff else 0), P['red'] if red else P['cheek'])
+    if not mask:
+      ell(Hd, Fh(1.4, 24.0), 0.75 + (0.45 if puff else 0), 0.5 + (0.3 if puff else 0), P['red'] if red else P['cheek'])
+      ell(Hd, Fh(3.25, 24.05), 0.45 + (0.3 if puff else 0), 0.4 + (0.25 if puff else 0), P['red'] if red else P['cheek'])
     ell(Hd, Fh(3.75, 24.75), 0.6, 0.55, P['skin'], 0, P['skin_hi'], P['skin_sh'])                         # button nose
     dot(Hd, Fh(3.6, 24.95), P['skin_hi'], 0.17)
     if puff:                                                                                               # mewing: lips pressed shut
@@ -95,7 +98,7 @@ def _doug_head(Hd, Fh, P, expr, t, m, look, blink, shine):
 
 
 def doug(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='normal', look=0.0, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-         lean=0.0, shake=0.0, shine=0.0, blink=True, outline_=True, bob=0.0):
+         lean=0.0, shake=0.0, shine=0.0, blink=True, outline_=True, bob=0.0, mask=False, band=False):
     """expr: normal | shout | shock | proud | smug | angry | sad | happy | mew (cheeks puffed, lips pressed, tongue up).
     shine: 0..1 twinkle star on the dome. bob: belly/breath bob amplitude."""
     pose = pose or DPOSE['stand']
@@ -150,7 +153,8 @@ def doug(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='normal', look=0.0, hand_n=
     Hd = Layer(cam)
     hx = 0.35 + ln * 1.1
     def Fh(x, h): return H(hx + x - 0.35, h + br)
-    mc = _doug_head(Hd, Fh, P, expr, t, mouth_, look, blink, shine)
+    mc = _doug_head(Hd, Fh, P, expr, t, mouth_, look, blink, shine, mask)
+    if band: spa_band(Hd, Fh(0.6, 27.6), 3.3, 1.0)
     _merge(L, Hd, OL)
     A = Layer(cam)
     tn = hand_n if hand_n is not None else H(pose['n'][0] + jx, pose['n'][1])
@@ -270,8 +274,9 @@ TPOSE = dict(
 
 
 def tammy(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='tired', look=0.0, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-          blink=True, outline_=True):
-    """expr: tired (half-lidded, unimpressed) | bliss (eyes closed, serene smile) | roll (eyes rolled up) | smirk | shock"""
+          blink=True, outline_=True, mask=False, patches=False, band=False):
+    """mask: white sheet face mask; patches: gold under-eye patches; band: bunny-ear spa headband.
+    expr: tired (half-lidded, unimpressed) | bliss (eyes closed, serene smile) | roll (eyes rolled up) | smirk | shock"""
     pose = pose or TPOSE['stand']
     P = TC
     br = 0.12 * math.sin(t * 1.7)
@@ -309,6 +314,7 @@ def tammy(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='tired', look=0.0, hand_n=
         cap(Hd, Fh(x * 0.6, 28.2), Fh(x, h), 0.28, 0.12, P['hair'])                                          # loose strands up
     cap(Hd, Fh(-0.9, 26.6), Fh(1.0, 26.8), 0.25, 0.25, (240, 120, 170))                                     # scrunchie
     cap(Hd, Fh(2.4, 25.8), Fh(3.0, 22.6), 0.22, 0.12, P['hair'])                                             # loose strand at the face
+    if mask: ell(Hd, Fh(1.4, 22.7), 2.0, 2.1, (248, 248, 244), 0, (255, 255, 255), (214, 216, 222))
     ex = {'tired': 'squint', 'bliss': 'closed', 'roll': 'normal', 'smirk': 'smug', 'shock': 'shock'}.get(expr, 'normal')
     eyes = [(Fh(1.35, 23.5), 0.46), (Fh(2.45, 23.45), 0.52)]
     bl = blink and (t % 4.3) < 0.1 and expr not in ('bliss',)
@@ -324,13 +330,17 @@ def tammy(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='tired', look=0.0, hand_n=
         bt = {'tired': 0.15, 'roll': -0.3, 'bliss': -0.4, 'smirk': 0.35, 'shock': -0.5}.get(expr, 0.0)
         b = c[1] - r - 0.45
         cap(Hd, (c[0] - 0.5, b - s_ * bt * 0.3), (c[0] + 0.5, b + s_ * bt * 0.3), 0.14, 0.12, P['brow'])
-    ell(Hd, Fh(1.2, 22.5), 0.6, 0.38, P['cheek']); ell(Hd, Fh(2.8, 22.5), 0.38, 0.34, P['cheek'])
+    if patches:
+        for (c, r) in eyes: ell(Hd, (c[0] + 0.05, c[1] + r * 1.25), r * 1.15, r * 0.45, (250, 200, 70), 0.15, (255, 236, 150), (210, 150, 40))
+    elif not mask:
+        ell(Hd, Fh(1.2, 22.5), 0.6, 0.38, P['cheek']); ell(Hd, Fh(2.8, 22.5), 0.38, 0.34, P['cheek'])
     ell(Hd, Fh(3.0, 23.0), 0.42, 0.55, P['skin'], 0, P['skin_hi'], P['skin_sh'])
     mm = max(mouth_, {'shock': 0.5}.get(expr, 0.0))
     mc = Fh(2.3, 21.7 - 0.2 * mm)
     mouth(Hd, mc, 0.6, mm, {'bliss': 'happy', 'smirk': 'smug'}.get(expr, 'normal'), lip=P['lip'])
     for (x, h) in ((-1.2, 22.6),):
         ell(Hd, Fh(x, h), 0.35, 0.5, (250, 200, 80))                                                           # earring
+    if band: spa_band(Hd, Fh(0.4, 25.4), 2.6, 0.85)
     _merge(L, Hd, OL)
     A = Layer(cam)
     tn = hand_n if hand_n is not None else H(*pose['n'])
@@ -397,3 +407,219 @@ def mirra(L, cx, cy, s, t, talk=0.0, expr='calm', glow=(90, 240, 230)):
         cap(L, W(-1.6, 2.8), W(0, 2.1), 0.3 * s, 0.3 * s, glow); cap(L, W(0, 2.1), W(1.6, 2.8), 0.3 * s, 0.3 * s, glow)
     else:
         cap(L, W(-1.7, 2.1), W(0, 2.8), 0.3 * s, 0.3 * s, glow); cap(L, W(0, 2.8), W(1.7, 2.1), 0.3 * s, 0.3 * s, glow)
+
+
+def spa_band(Hd, c, w, s=1.0, col=(255, 182, 214), hi=(255, 220, 236)):
+    """fluffy bunny-ear spa headband across the head at c (unit coords), half-width w"""
+    cap(Hd, (c[0] - w, c[1] + 0.2 * s), (c[0] + w, c[1] - 0.1 * s), 0.55 * s, 0.55 * s, col, hi, None)
+    for dx in (-0.55, 0.7):
+        ell(Hd, (c[0] + dx * w * 0.6, c[1] - 1.5 * s), 0.55 * s, 1.35 * s, col, 0.15 * (1 if dx > 0 else -1), hi, None)
+        ell(Hd, (c[0] + dx * w * 0.6, c[1] - 1.4 * s), 0.25 * s, 0.85 * s, (255, 140, 180), 0.15 * (1 if dx > 0 else -1))
+
+
+# ======================================================================================= LILY (11, the «Sephora kid»)
+LC = dict(skin=(246, 204, 176), skin_hi=(255, 226, 202), skin_sh=(214, 160, 132), cheek=(250, 150, 160), hair=(232, 186, 100),
+          hair_hi=(250, 216, 140), hair_sh=(190, 140, 64), tee=(255, 240, 248), tee_sh=(226, 200, 216), skirt=(186, 156, 226),
+          skirt_hi=(214, 192, 244), skirt_sh=(146, 116, 188), sock=(255, 255, 255), shoe=(255, 150, 200), cup=(150, 230, 210),
+          cup_sh=(100, 180, 170))
+LPOSE = dict(
+    stand=dict(n=(2.2, 7.2), f=(-1.9, 7.4), bn=1, bf=-1, nleg=(0.04, 0.0), fleg=(-0.04, 0.0)),
+    show=dict(n=(4.4, 12.4), f=(-1.9, 7.4), bn=1, bf=-1, nleg=(0.06, 0.0), fleg=(-0.06, 0.0)),        # shows a jar / the receipt
+    cup=dict(n=(2.8, 10.4), f=(2.0, 10.2), bn=1, bf=1, nleg=(0.04, 0.0), fleg=(-0.04, 0.0)),         # hugs the tumbler
+)
+
+
+def lily(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='happy', look=0.0, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
+         blink=True, outline_=True, mask=False, patches=True, band=True, pal=None):
+    """11-year-old beauty vlogger: ~19 units tall, big head, high side ponytail with a scrunchie, gold under-eye patches,
+    bunny spa headband.  expr: happy | proud | shock | smug.  pal: palette overrides (the store's crowd of Sephora kids)"""
+    pose = pose or LPOSE['stand']
+    P = dict(LC, **pal) if pal else LC
+    br = 0.1 * math.sin(t * 2.6)
+    sh_n, sh_f = H(1.0, 12.6 + br), H(-0.9, 12.7 + br)
+    hp_n, hp_f = H(0.5, 6.6), H(-0.4, 6.6)
+    sk = (P['skin'], P['skin_hi'], P['skin_sh'])
+    L = Layer(cam)
+    for hp, lg in ((hp_f, pose['fleg']), (hp_n, pose['nleg'])):
+        A = Layer(cam)
+        k, e = _limb(A, hp, *lg, 3.4, 3.1, 0.62, 0.5, *sk)
+        cap(A, (e[0], e[1] - 1.6), (e[0], e[1] - 0.3), 0.55, 0.55, P['sock'])
+        ellt(A, (e[0] + 0.6, e[1] + 0.2), 1.25, 0.6, (P['shoe'], (255, 200, 228), (210, 100, 150)))
+        _merge(L, A, OL)
+    A = Layer(cam)
+    tf = hand_f if hand_f is not None else H(*pose['f'])
+    ka, ea = _limb(A, sh_f, 0, 0, 2.7, 2.5, 0.55, 0.45, *sk, target=tf, bend=pose.get('bf', -1))
+    ell(A, ea, 0.55, 0.52, *sk[:1], 0, sk[1], sk[2])
+    if prop_f: prop_f(A, ea)
+    _merge(L, A, OL)
+    T = Layer(cam)
+    poly(T, [H(-2.6, 7.6), H(3.0, 7.6), H(2.0, 4.4), H(-1.8, 4.4)], P['skirt'])                              # pleated skirt
+    for j in range(4): cap(T, H(-1.6 + j * 1.1, 7.4), H(-1.4 + j * 1.1, 4.6), 0.08, 0.08, P['skirt_sh'])
+    ellt(T, H(0.2, 10.2 + br * 0.5), 2.1, 2.8, (P['tee'], (255, 255, 255), P['tee_sh']))                    # oversized tee
+    ell(T, H(0.6, 10.4), 0.9, 0.7, (255, 150, 200))                                                         # heart print
+    _merge(L, T, OL)
+    Hd = Layer(cam)
+    def Fh(x, h): return H(x, h + br)
+    cap(Hd, Fh(0.2, 12.6), Fh(0.3, 13.8), 0.6, 0.6, *sk)
+    cap(Hd, Fh(-1.6, 18.4), Fh(-3.0, 14.6), 0.95, 0.6, P['hair'], P['hair_hi'], P['hair_sh'])               # side ponytail
+    ell(Hd, Fh(-1.4, 18.0), 0.5, 0.4, (170, 140, 255))                                                       # scrunchie
+    ell(Hd, Fh(0.6, 16.4), 2.75, 2.85, P['skin'], 0, P['skin_hi'], P['skin_sh'], th_sh=-0.7)                # big round kid head
+    ell(Hd, Fh(0.2, 18.4), 2.8, 1.5, P['hair'], 0.1, P['hair_hi'], P['hair_sh'])
+    cap(Hd, Fh(1.5, 18.6), Fh(3.0, 17.5), 0.5, 0.35, P['hair'])                                              # side-swept bangs
+    ell(Hd, Fh(-1.6, 16.3), 0.5, 0.7, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    if mask: ell(Hd, Fh(1.3, 15.9), 2.2, 2.2, (248, 248, 244), 0, (255, 255, 255), (214, 216, 222))
+    ex = {'happy': 'normal', 'proud': 'squint', 'shock': 'shock', 'smug': 'smug'}.get(expr, 'normal')
+    eyes = [(Fh(1.2, 16.5), 0.55), (Fh(2.45, 16.45), 0.62)]
+    bl = blink and (t % 3.1) < 0.1 and expr != 'shock'
+    for c, r in eyes:
+        eye(Hd, c, r, ex, (look, 0.0), iris=(90, 140, 210), lid=(220, 170, 200), lash=(50, 30, 40), blink=bl, bulge=1.15)
+    for k, (c, r) in enumerate(eyes):
+        s_ = 1 if k == 0 else -1
+        b = c[1] - r - 0.5 - (0.3 if expr == 'shock' else 0)
+        cap(Hd, (c[0] - 0.45, b + s_ * 0.05), (c[0] + 0.45, b - s_ * 0.05), 0.13, 0.11, P['hair_sh'])
+    if patches:
+        for (c, r) in eyes: ell(Hd, (c[0] + 0.05, c[1] + r * 1.3), r * 1.1, r * 0.45, (250, 200, 70), 0.15, (255, 236, 150), (210, 150, 40))
+    elif not mask:
+        ell(Hd, Fh(1.0, 15.3), 0.55, 0.35, P['cheek'])
+    ell(Hd, Fh(3.05, 15.75), 0.35, 0.4, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    mm = max(mouth_, {'shock': 0.55}.get(expr, 0.0))
+    mc = Fh(2.2, 14.6 - 0.2 * mm)
+    mouth(Hd, mc, 0.55, mm, {'happy': 'grin', 'proud': 'smug', 'smug': 'smug'}.get(expr, 'normal'), lip=(230, 100, 130))
+    if band: spa_band(Hd, Fh(0.4, 18.3), 2.7, 0.8)
+    _merge(L, Hd, OL)
+    A = Layer(cam)
+    tn = hand_n if hand_n is not None else H(*pose['n'])
+    kna, ena = _limb(A, sh_n, 0, 0, 2.7, 2.5, 0.58, 0.46, *sk, target=tn, bend=pose.get('bn', 1))
+    ell(A, ena, 0.56, 0.53, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    if prop_n: prop_n(A, ena)
+    _merge(L, A, OL)
+    if outline_: outline(L, OL)
+    CH.add(L)
+    return dict(hand_n=ena, hand_f=ea, mouth=mc, head=Fh(1.1, 16.3), top=Fh(0.3, 19.6))
+
+
+KID_PALS = [dict(hair=(80, 50, 34), hair_hi=(120, 80, 52), hair_sh=(56, 34, 22), tee=(200, 240, 255), skirt=(120, 200, 180),
+                 skirt_hi=(160, 230, 210), skirt_sh=(80, 150, 140), shoe=(120, 200, 255)),
+            dict(hair=(40, 30, 30), hair_hi=(80, 60, 56), hair_sh=(24, 18, 18), skin=(186, 130, 96), skin_hi=(210, 156, 120),
+                 skin_sh=(150, 98, 70), tee=(255, 250, 200), skirt=(255, 170, 120), skirt_hi=(255, 200, 160), skirt_sh=(220, 130, 90)),
+            dict(hair=(200, 90, 50), hair_hi=(236, 130, 80), hair_sh=(150, 60, 30), tee=(230, 255, 220), skirt=(255, 150, 200),
+                 skirt_hi=(255, 190, 220), skirt_sh=(210, 100, 150), shoe=(170, 255, 90))]
+
+
+# ======================================================================================= SKYLAR (teen store clerk)
+SC = dict(skin=(226, 172, 136), skin_hi=(244, 198, 164), skin_sh=(190, 134, 104), hair=(40, 28, 34), hair_hi=(90, 64, 80),
+          hair_sh=(24, 16, 20), top=(34, 32, 40), top_hi=(64, 60, 74), top_sh=(20, 18, 24), lip=(200, 80, 110), tag=(250, 250, 250))
+SPOSE = dict(
+    stand=dict(n=(2.8, 12.4), f=(-2.4, 12.6), bn=1, bf=-1),
+    lean=dict(n=(4.6, 13.8), f=(3.6, 13.6), bn=1, bf=1),                 # elbows on the counter
+    spray=dict(n=(6.4, 18.0), f=(-2.4, 12.6), bn=1, bf=-1),              # tester bottle held out
+)
+
+
+def skylar(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='bored', look=0.0, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
+           blink=True, outline_=True, gum=0.0):
+    """bored teen clerk, drawn waist-up behind a counter (legs are never seen): high ponytail, winged liner, black tee + name tag.
+    expr: bored | flat | smirk.  Anchor = floor point under her (hidden by the counter)."""
+    pose = pose or SPOSE['stand']
+    P = SC
+    br = 0.1 * math.sin(t * 1.6)
+    sh_n, sh_f = H(1.4, 21.0 + br), H(-1.2, 21.2 + br)
+    sk = (P['skin'], P['skin_hi'], P['skin_sh'])
+    top = (P['top'], P['top_hi'], P['top_sh'])
+    L = Layer(cam)
+    A = Layer(cam)
+    tf = hand_f if hand_f is not None else H(*pose['f'])
+    ka, ea = _limb(A, sh_f, 0, 0, 3.9, 3.6, 0.75, 0.6, *sk, target=tf, bend=pose.get('bf', -1))
+    ell(A, sh_f, 1.0, 0.9, *top[:1], 0, top[1], top[2])
+    ell(A, ea, 0.66, 0.62, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    if prop_f: prop_f(A, ea)
+    _merge(L, A, OL)
+    T = Layer(cam)
+    ellt(T, H(0.3, 16.6 + br * 0.5), 2.6, 5.0, top)
+    poly(T, [H(-2.2, 13.0), H(2.8, 13.0), H(3.2, 6.0), H(-2.6, 6.0)], P['top'])
+    poly(T, [H(1.4, 18.6), H(3.0, 18.6), H(3.0, 17.4), H(1.4, 17.4)], P['tag'])                                # name tag
+    cap(T, H(1.6, 18.0), H(2.8, 18.0), 0.1, 0.1, (60, 60, 70))
+    _merge(L, T, OL)
+    Hd = Layer(cam)
+    def Fh(x, h): return H(x, h + br)
+    cap(Hd, Fh(0.2, 21.0), Fh(0.4, 22.6), 0.7, 0.7, *sk)
+    cap(Hd, Fh(-0.6, 27.6), Fh(-2.6, 23.0), 0.9, 0.5, P['hair'], P['hair_hi'], P['hair_sh'])                 # high ponytail
+    ell(Hd, Fh(0.7, 24.4), 2.1, 2.45, P['skin'], 0, P['skin_hi'], P['skin_sh'], th_sh=-0.7)
+    ell(Hd, Fh(0.4, 26.3), 2.3, 1.0, P['hair'], 0.05, P['hair_hi'], P['hair_sh'])                             # slicked-back hair
+    ell(Hd, Fh(-0.6, 27.2), 0.8, 0.6, P['hair'], 0, P['hair_hi'], P['hair_sh'])                               # bun knot
+    ell(Hd, Fh(-1.2, 24.4), 0.45, 0.65, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    dot(Hd, Fh(-1.2, 23.7), (230, 230, 240), 0.22)                                                            # stud
+    ex = {'bored': 'squint', 'flat': 'squint', 'smirk': 'smug'}.get(expr, 'normal')
+    eyes = [(Fh(1.3, 24.7), 0.45), (Fh(2.35, 24.65), 0.5)]
+    bl = blink and (t % 2.6) < 0.12
+    for c, r in eyes:
+        eye(Hd, c, r, ex, (look, 0.0), iris=(70, 50, 40), lid=(150, 110, 140), lash=(20, 14, 18), blink=bl)
+        cap(Hd, (c[0] + r * 0.8, c[1] - r * 0.4), (c[0] + r * 1.6, c[1] - r * 0.9), 0.1, 0.06, (20, 14, 18))   # winged liner
+    for k, (c, r) in enumerate(eyes):
+        b = c[1] - r - 0.45
+        cap(Hd, (c[0] - 0.45, b), (c[0] + 0.45, b - 0.1), 0.12, 0.1, P['hair'])
+    ell(Hd, Fh(2.85, 24.1), 0.35, 0.48, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    mm = max(mouth_, 0.0)
+    mc = Fh(2.2, 23.0 - 0.2 * mm)
+    if gum > 0 and mm < 0.1:
+        ell(Hd, (mc[0] + 0.5, mc[1]), 0.3 + 1.2 * gum, 0.3 + 1.2 * gum, (255, 150, 200), 0, (255, 200, 228), None)
+    mouth(Hd, mc, 0.5, mm, {'smirk': 'smug'}.get(expr, 'normal'), lip=P['lip'])
+    _merge(L, Hd, OL)
+    A = Layer(cam)
+    tn = hand_n if hand_n is not None else H(*pose['n'])
+    kna, ena = _limb(A, sh_n, 0, 0, 3.9, 3.6, 0.78, 0.62, *sk, target=tn, bend=pose.get('bn', 1))
+    ell(A, sh_n, 1.05, 0.95, P['top'], 0, P['top_hi'], P['top_sh'])
+    ell(A, ena, 0.68, 0.64, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    if prop_n: prop_n(A, ena)
+    _merge(L, A, OL)
+    if outline_: outline(L, OL)
+    CH.add(L)
+    return dict(hand_n=ena, hand_f=ea, mouth=mc, head=Fh(1.0, 24.4), top=Fh(0.3, 27.8), tag=H(2.2, 18.0))
+
+
+# ======================================================================================= more props
+def tumbler(L, h, col=(150, 230, 210), sh=(100, 180, 170)):
+    """giant STANLEE tumbler with a straw, held at hand h"""
+    c = (h[0] + 0.4, h[1] - 1.2)
+    poly(L, [(c[0] - 0.9, c[1] - 2.0), (c[0] + 0.9, c[1] - 2.0), (c[0] + 0.7, c[1] + 2.0), (c[0] - 0.7, c[1] + 2.0)], col)
+    cap(L, (c[0] + 0.5, c[1] - 1.6), (c[0] + 0.5, c[1] + 1.6), 0.18, 0.18, sh)
+    cap(L, (c[0] - 1.0, c[1] - 2.1), (c[0] + 1.0, c[1] - 2.1), 0.3, 0.3, (240, 240, 244))
+    cap(L, (c[0] + 0.2, c[1] - 2.2), (c[0] + 0.6, c[1] - 3.6), 0.12, 0.12, (255, 150, 200))
+    ell(L, (c[0] + 1.1, c[1] - 0.6), 0.45, 0.9, col)
+
+
+def jar(L, h, col=(255, 200, 220), lid=(230, 190, 90)):
+    """skincare jar held at hand h"""
+    c = (h[0] + 0.5, h[1] - 0.6)
+    ell(L, c, 0.9, 0.7, col, 0, (255, 236, 244), None)
+    cap(L, (c[0] - 0.9, c[1] - 0.6), (c[0] + 0.9, c[1] - 0.6), 0.28, 0.28, lid)
+
+
+def bottle(L, h, col=(214, 186, 255)):
+    """tester spray bottle held at hand h"""
+    c = (h[0] + 0.3, h[1] - 1.0)
+    poly(L, [(c[0] - 0.45, c[1] - 0.9), (c[0] + 0.45, c[1] - 0.9), (c[0] + 0.5, c[1] + 0.9), (c[0] - 0.5, c[1] + 0.9)], col)
+    cap(L, (c[0], c[1] - 1.0), (c[0], c[1] - 1.5), 0.2, 0.2, (240, 240, 244))
+    cap(L, (c[0], c[1] - 1.5), (c[0] + 0.5, c[1] - 1.5), 0.12, 0.12, (240, 240, 244))
+
+
+def basket(L, h, items=((255, 200, 220), (150, 250, 190), (214, 186, 255), (255, 214, 120), (120, 230, 240))):
+    """store basket hanging from hand h, overflowing with jars and bottles"""
+    c = (h[0] + 0.2, h[1] + 2.4)
+    cap(L, (c[0] - 1.6, c[1] - 1.2), (h[0], h[1]), 0.1, 0.1, (40, 30, 40))
+    cap(L, (c[0] + 1.6, c[1] - 1.2), (h[0], h[1]), 0.1, 0.1, (40, 30, 40))
+    for i, col in enumerate(items):
+        x = c[0] - 1.4 + i * 0.7
+        cap(L, (x, c[1] - 1.0), (x + 0.1 * (i % 2), c[1] - 2.0 - 0.4 * (i % 3)), 0.32, 0.3, col)
+    poly(L, [(c[0] - 2.0, c[1] - 1.2), (c[0] + 2.0, c[1] - 1.2), (c[0] + 1.6, c[1] + 0.9), (c[0] - 1.6, c[1] + 0.9)], (30, 30, 36))
+    for j in range(4): cap(L, (c[0] - 1.6 + j * 1.05, c[1] - 1.0), (c[0] - 1.4 + j * 0.95, c[1] + 0.7), 0.1, 0.1, (80, 80, 90))
+
+
+def receipt(L, h, length=8.0, wob=0.0):
+    """a long paper receipt hanging from hand h down towards the floor"""
+    x0, y0 = h
+    pts = [(x0 + 0.3 * math.sin(wob + i * 0.6) * (i / 10), y0 + length * i / 10) for i in range(11)]
+    for a, b in zip(pts, pts[1:]):
+        cap(L, a, b, 0.55, 0.55, (252, 250, 244))
+    for i in range(1, 10):
+        cap(L, (pts[i][0] - 0.35, pts[i][1]), (pts[i][0] + 0.25, pts[i][1]), 0.05, 0.05, (150, 150, 160))

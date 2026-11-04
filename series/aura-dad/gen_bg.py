@@ -22,6 +22,18 @@ BG = {
                 'grey-blue with a gentle diagonal shine and reflects nothing. Around it: lavender painted walls, white subway tiles, two wall '
                 'sconces, a small window with frosted glass on the right, a towel ring with a fluffy aqua towel, a succulent in a pot, '
                 'toothbrush cup, soap dispenser, a bath mat on light grey tile floor. The space in front of the sink is clear.',
+    'sephoria': 'Inside a trendy beauty cosmetics store in a big suburban shopping mall, bright and glossy. Left half: tall glowing white '
+                'shelves packed with hundreds of colourful skincare bottles, jars and tubes in pastel pink, lavender, mint and gold, little '
+                'tester stands, round mirrors on poles. Back wall: a wide glass shopfront and open entrance showing a mall corridor with a '
+                'fountain, palm plants and other shop fronts. Right third: a long white checkout counter with a card terminal, a small '
+                'display of mini products and paper shopping bags behind it. Black and white striped accent band along the top of the walls, '
+                'pink neon ring lights on the ceiling, glossy white floor tiles with reflections. The floor in the middle is clear empty space.',
+    'backyard': 'A sunny suburban backyard in Phoenix, Arizona, late afternoon golden light. Centre and right: a kidney-shaped turquoise '
+                'swimming pool with a white coping edge and a small diving board, a pool float shaped like a flamingo, ripples. Left: a '
+                'stainless steel barbecue grill on a stone patio with a striped umbrella, a cooler and patio chairs. Background: a tan '
+                'stucco block wall, the back of the neighbour house with a red tile roof and a small security camera under the eave, '
+                'palm trees, a tall saguaro cactus, desert mountains far away, blue sky with a few clouds. Gravel and desert plants, '
+                'string lights over the patio. The patio floor in front of the grill and the pool edge is clear empty space.',
 }
 
 

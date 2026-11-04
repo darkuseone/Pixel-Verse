@@ -14,7 +14,8 @@ from props import auracast as A
 
 SLUG = 'aura-dad'
 BG = PATHS.series(SLUG) / 'bg'
-COL = dict(doug=(255, 226, 70), kayden=(170, 255, 90), tammy=(255, 150, 200), mirra=(90, 240, 230))
+COL = dict(doug=(255, 226, 70), kayden=(170, 255, 90), tammy=(255, 150, 200), mirra=(90, 240, 230), lily=(220, 170, 255),
+           skylar=(255, 190, 120), brett=(255, 140, 60), kid=(200, 230, 255))
 INK, VIOLET, LILAC, AQUA, MINT = (30, 22, 40), (44, 18, 70), (214, 186, 255), (110, 230, 240), (150, 250, 190)
 RED, GREEN, CREAM, WOOD = (226, 46, 70), (60, 200, 110), (252, 246, 232), (120, 76, 44)
 
@@ -34,11 +35,16 @@ def q(im, colors=110):
     return np.array(im.quantize(colors=colors, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE).convert('RGB'))
 
 
-def build(force=False):
-    cache = PATHS.build('props', 'auradad.npz')
+NAMES = ['kitchen', 'bathroom']
+
+
+def build(force=False, names=None):
+    global NAMES
+    if names: NAMES = list(names)
+    cache = PATHS.build('props', 'auradad_' + '_'.join(NAMES) + '.npz')
     if os.path.exists(cache) and not force:
         d = np.load(cache); return {k: d[k] for k in d.files}
-    out = {n: q(Image.open(BG / f'{n}.png').convert('RGB')) for n in ('kitchen', 'bathroom')}
+    out = {n: q(Image.open(BG / f'{n}.png').convert('RGB')) for n in NAMES}
     np.savez_compressed(cache, **out)
     return out
 
@@ -58,7 +64,18 @@ def decorate(W):
         (D.plate(40, 16, ['DECAF =', 'BETRAYAL'], bg=(250, 240, 220), colors=[WOOD, RED], border=WOOD, pad=1.0, tilt=5), 334, 300),
         (D.plate(66, 66, [' '], bg=(18, 24, 38), border=(70, 74, 90), bw=1.5, round_=5), K_FRIDGE_SCREEN[0], K_FRIDGE_SCREEN[1]),
     ])
+    D.attach(W['kitchen'], [                                                       # more set dressing (owner 04.11: denser antourage)
+        (D.plate(40, 30, ['MY DAD', '(BALD)', 'BY LILY 3RD'], bg=(255, 255, 250), colors=[(60, 120, 220), RED, INK], border=(200, 200, 210),
+                 weights=[1, 1, 0.55], pad=1.2, tilt=-5), 64, 300),
+        (D.plate(42, 26, ['CHORES:', 'KAYDEN: TRASH', 'DOUG: VIBES'], bg=(250, 250, 240), colors=[INK, (60, 140, 90), RED],
+                 border=(160, 160, 170), weights=[1, 0.7, 0.7], pad=1.0, tilt=2), 160, 262),
+        (D.plate(30, 10, ['NO SUGAR'], bg=(255, 255, 255), colors=[RED], border=RED, pad=0.6), 333, 336),
+        (D.plate(26, 12, ['HOT AF'], bg=(230, 60, 50), colors=[(255, 240, 200)], border=None, pad=0.8, tilt=-8), 780, 300),
+        (D.plate(36, 18, ['MONSOON', 'SALE!'], bg=(120, 200, 230), colors=[INK, RED], border=INK, pad=1.0, tilt=4), 870, 232),
+    ])
     D.attach(W['bathroom'], [
+        (D.plate(40, 22, ['SCALE', 'LIES'], bg=(255, 255, 255), colors=[INK, RED], border=INK, pad=1.2, tilt=-3), 1010, 560),
+        (D.plate(46, 14, ['MEWMASTER 3000'], bg=(170, 255, 90), colors=[INK], border=INK, pad=0.8), 450, 386),
         (D.plate(58, 30, ['DOUG:', 'ONE PUMP OF', 'COLOGNE. ONE.'], bg=(255, 240, 130), colors=[RED, INK, INK], border=None,
                  weights=[1, 0.7, 0.7], pad=1.5, tilt=6), 714, 240),
         (D.plate(50, 12, ['MIRRA SMART MIRROR'], bg=(60, 64, 80), colors=[AQUA], border=(30, 32, 40), pad=0.8), 608, 356),
@@ -313,3 +330,85 @@ class Show:
         for ma in s.mosaics:
             if ma <= t < ma + 0.3: O.mosaic(big, int(lerp(40, 1, (t - ma) / 0.3)))
         return big
+
+
+# ---------------------------------------------------------------- SEPHORIA store (bg/sephoria.png 1280x720)
+S_FLOOR = 640.0
+S_COUNTER = [(866, 414), (1135, 414), (1280, 436), (1280, 720), (1104, 720), (1098, 640), (896, 560), (874, 560)]   # front occluder
+S_RINGS = [(515.0, 45.0), (992.0, 40.0)]
+
+
+def decorate_store(Wd):
+    D.attach(Wd, [
+        (D.plate(150, 30, ['SEPHORIA'], bg=(20, 20, 24), colors=[(255, 255, 255)], border=(255, 150, 200), bw=1.5, pad=2.0), 590, 96),
+        (D.plate(70, 24, ['GLOW UP', 'OR GO HOME'], bg=(255, 182, 214), colors=[VIOLET, VIOLET], border=VIOLET, pad=1.2), 1170, 186),
+        (D.plate(46, 20, ['AGES 8+', 'ANTI-AGING'], bg=(255, 255, 255), colors=[INK, RED], border=INK, pad=1.0, tilt=-3), 470, 410),
+        (D.plate(44, 16, ['TIPSY RHINO', '$84'], bg=(255, 220, 230), colors=[VIOLET, RED], border=VIOLET, pad=0.8), 236, 152),
+        (D.plate(40, 16, ['GLOWY', 'RECIPE $68'], bg=(200, 255, 220), colors=[(30, 120, 80), RED], border=(30, 120, 80), pad=0.8), 236, 266),
+        (D.plate(46, 18, ['RETINOL', 'FOR KIDS?'], bg=(255, 250, 200), colors=[INK, RED], border=INK, pad=0.8, tilt=2), 380, 230),
+        (D.plate(52, 18, ['LIMIT 40', 'PER CHILD'], bg=(255, 255, 255), colors=[RED, INK], border=RED, pad=1.0), 60, 380),
+        (D.plate(50, 14, ['NO STANLEES', 'ON TESTERS'], bg=(40, 40, 46), colors=[(255, 220, 120), (255, 255, 255)], border=None, pad=0.8),
+         900, 470),
+        (D.plate(44, 16, ['PAY HERE', ':('], bg=(255, 150, 200), colors=[INK, INK], border=INK, pad=0.8), 1170, 300),
+        (D.plate(36, 14, ['REWARDS: 0'], bg=(20, 20, 24), colors=[(150, 250, 190)], border=None, pad=0.8), 960, 386),
+    ])
+
+
+def light_store(v):
+    keys = [(*v.opt(x, y), 1000, (255, 170, 220), 0.35) for x, y in S_RINGS]
+    keys.append((*v.opt(700.0, 300.0), 1400, (255, 250, 240), 0.3))
+    return Light(amb=(1.0, 0.98, 1.02), keys=keys, rim=(1, -0.3, (255, 200, 236), 0.4), grad=(1.03, 0.94))
+
+
+# ---------------------------------------------------------------- layers: occluders from the background + parallax foreground
+_OCC = {}
+
+
+def occluder(world, poly, key):
+    """RGBA sprite (world px) cut from the background inside poly: drawn AFTER the heroes so a counter / table / doorframe stands
+    in front of them (a second layer of the same painting)"""
+    if key in _OCC: return _OCC[key]
+    xs = [p[0] for p in poly]; ys = [p[1] for p in poly]
+    x0, y0 = int(min(xs)), int(min(ys)); x1, y1 = int(max(xs)), int(max(ys))
+    x1 = min(x1, world.shape[1]); y1 = min(y1, world.shape[0])
+    m = Image.new('L', (x1 - x0, y1 - y0), 0)
+    ImageDraw.Draw(m).polygon([(x - x0, y - y0) for x, y in poly], fill=255)
+    spr = np.zeros((y1 - y0, x1 - x0, 4), np.uint8)
+    spr[..., :3] = world[y0:y1, x0:x1]
+    spr[..., 3] = np.array(m)
+    _OCC[key] = (spr, x0, y0)
+    return _OCC[key]
+
+
+def draw_occluder(big, v, occ):
+    spr, x0, y0 = occ
+    ST.blit_world(big, v, spr, x0, y0)
+
+
+def fgcam(v, par=0.35, xref=640.0):
+    """camera for a foreground layer (closer than the heroes): it slides faster than the background when the camera pans"""
+    from stage import ACam
+    k = ST.PX[0]
+    X0 = v.X0 + (v.X0 - (xref - 180 / v.Z)) * par
+    return ACam(0.0, 0.0, -X0 * v.Z / k, (-v.Y0 * v.Z + v.oy) / k, v.Z / k)
+
+
+def fg_plant(L, x, y, s=1.0, pot=(214, 110, 70)):
+    """potted desert plant (agave) in the foreground, world px"""
+    from props.folk import cap as fcap, ell as fell, poly as fpoly
+    for i, a in enumerate((-1.1, -0.6, -0.15, 0.3, 0.75, 1.2)):
+        ln = (70 + 25 * ((i + 1) % 3)) * s
+        tip = (x + math.sin(a) * ln, y - 40 * s - math.cos(a) * ln)
+        fcap(L, (x, y - 36 * s), tip, 9 * s, 2 * s, (90, 160, 110), (140, 210, 150), (60, 120, 80))
+    fpoly(L, [(x - 34 * s, y - 40 * s), (x + 34 * s, y - 40 * s), (x + 26 * s, y + 20 * s), (x - 26 * s, y + 20 * s)], pot)
+    fcap(L, (x - 36 * s, y - 40 * s), (x + 36 * s, y - 40 * s), 6 * s, 6 * s, (236, 140, 96))
+
+
+def fg_bags(L, x, y, s=1.0):
+    """a pile of SEPHORIA shopping bags (foreground)"""
+    from props.folk import cap as fcap, poly as fpoly
+    for i, col in enumerate([(255, 182, 214), (214, 186, 255), (150, 250, 190)]):
+        bx = x + i * 46 * s; by = y + (i % 2) * 10 * s
+        fpoly(L, [(bx - 26 * s, by - 70 * s), (bx + 26 * s, by - 70 * s), (bx + 30 * s, by), (bx - 30 * s, by)], col)
+        fcap(L, (bx - 12 * s, by - 70 * s), (bx - 4 * s, by - 92 * s), 2.5 * s, 2.5 * s, (40, 30, 40))
+        fcap(L, (bx - 4 * s, by - 92 * s), (bx + 12 * s, by - 70 * s), 2.5 * s, 2.5 * s, (40, 30, 40))

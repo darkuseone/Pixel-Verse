@@ -63,6 +63,51 @@
         "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
         "voice_id": "rL5thyifUCj65q3mamdf"
       }
+    },
+    "lily": {
+      "name": "Lily",
+      "color_caption": [
+        220,
+        170,
+        255
+      ],
+      "style": "[bubbly] beauty-vlogger kid",
+      "voice_id": "FgiNpTIapnCbaD6xiqIo",
+      "voice": "Aura Dad — Lily",
+      "library": {
+        "public_owner_id": "0a2b6902206ee5c247450ff82caa110406aedfb7173a54281db01ffe36abe033",
+        "voice_id": "FgiNpTIapnCbaD6xiqIo"
+      }
+    },
+    "skylar": {
+      "name": "Skylar",
+      "color_caption": [
+        255,
+        190,
+        120
+      ],
+      "style": "[dry] [bored] valley-girl store clerk",
+      "voice_id": "hv8WzBOrsvuSUeIQGOCM",
+      "voice": "Aura Dad — Skylar",
+      "library": {
+        "public_owner_id": "d171153b15af821ebe77aecb02c476ff93af4dbaaafb5e56f4563be43667c331",
+        "voice_id": "hv8WzBOrsvuSUeIQGOCM"
+      }
+    },
+    "jaxon": {
+      "name": "Jaxon",
+      "color_caption": [
+        120,
+        200,
+        255
+      ],
+      "style": "[hyped] Kayden's friend",
+      "voice_id": "S0ypc51SmsvcKXTWvjqJ",
+      "voice": "Aura Dad — Jaxon",
+      "library": {
+        "public_owner_id": "727a4db472b0ad6692a9b7d2ef08001e4cf5ef6c378fb278444fa1ca2dcb6e01",
+        "voice_id": "S0ypc51SmsvcKXTWvjqJ"
+      }
     }
   }
 }

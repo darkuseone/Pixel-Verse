@@ -457,9 +457,18 @@
    "status": "library_or_premade",
    "name": "Doug",
    "voice_name": "Aura Dad — Doug",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 9,
+   "episodes": 2,
+   "samples": [
+    "series/aura-dad/voice/ep02/d1.mp3",
+    "series/aura-dad/voice/ep01/d1.mp3",
+    "series/aura-dad/voice/ep02/d2.mp3",
+    "series/aura-dad/voice/ep02/d4.mp3",
+    "series/aura-dad/voice/ep01/d5.mp3",
+    "series/aura-dad/voice/ep02/d3.mp3",
+    "series/aura-dad/voice/ep01/d3.mp3",
+    "series/aura-dad/voice/ep01/d4.mp3"
+   ]
   },
   {
    "slug": "aura-dad",
@@ -468,20 +477,14 @@
    "status": "library_or_premade",
    "name": "Kayden",
    "voice_name": "Aura Dad — Kayden",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
-  },
-  {
-   "slug": "aura-dad",
-   "char": "tammy",
-   "voice_id": "lRGgBdmdfHYNiqPVpbiS",
-   "status": "library_or_premade",
-   "name": "Tammy",
-   "voice_name": "Aura Dad — Tammy",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 4,
+   "episodes": 1,
+   "samples": [
+    "series/aura-dad/voice/ep01/k1.mp3",
+    "series/aura-dad/voice/ep01/k3.mp3",
+    "series/aura-dad/voice/ep01/k2.mp3",
+    "series/aura-dad/voice/ep01/k4.mp3"
+   ]
   },
   {
    "slug": "aura-dad",
@@ -490,6 +493,62 @@
    "status": "library_or_premade",
    "name": "MIRRA",
    "voice_name": "Aura Dad — MIRRA",
+   "lines": 3,
+   "episodes": 2,
+   "samples": [
+    "series/aura-dad/voice/ep01/m1.mp3",
+    "series/aura-dad/voice/ep02/m1.mp3",
+    "series/aura-dad/voice/ep01/m2.mp3"
+   ]
+  },
+  {
+   "slug": "aura-dad",
+   "char": "tammy",
+   "voice_id": "lRGgBdmdfHYNiqPVpbiS",
+   "status": "library_or_premade",
+   "name": "Tammy",
+   "voice_name": "Aura Dad — Tammy",
+   "lines": 2,
+   "episodes": 2,
+   "samples": [
+    "series/aura-dad/voice/ep01/t1.mp3",
+    "series/aura-dad/voice/ep02/t1.mp3"
+   ]
+  },
+  {
+   "slug": "aura-dad",
+   "char": "skylar",
+   "voice_id": "hv8WzBOrsvuSUeIQGOCM",
+   "status": "library_or_premade",
+   "name": "Skylar",
+   "voice_name": "Aura Dad — Skylar",
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/aura-dad/voice/ep02/s1.mp3",
+    "series/aura-dad/voice/ep02/s2.mp3"
+   ]
+  },
+  {
+   "slug": "aura-dad",
+   "char": "lily",
+   "voice_id": "FgiNpTIapnCbaD6xiqIo",
+   "status": "library_or_premade",
+   "name": "Lily",
+   "voice_name": "Aura Dad — Lily",
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/aura-dad/voice/ep02/l1.mp3"
+   ]
+  },
+  {
+   "slug": "aura-dad",
+   "char": "jaxon",
+   "voice_id": "S0ypc51SmsvcKXTWvjqJ",
+   "status": "library_or_premade",
+   "name": "Jaxon",
+   "voice_name": "Aura Dad — Jaxon",
    "lines": 0,
    "episodes": 0,
    "samples": []
@@ -2941,5 +3000,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-11-03 23:26"
+ "updated": "2026-11-04 07:03"
 }
