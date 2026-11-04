@@ -481,3 +481,25 @@ def decorate_cul(Wd):
 def light_cul(v):
     keys = [(*v.opt(1000.0, 40.0), 1800, (255, 236, 200), 0.35)]
     return Light(amb=(1.03, 1.0, 0.95), keys=keys, rim=(1, -0.5, (255, 236, 200), 0.4), grad=(1.04, 0.94))
+
+
+# ---------------------------------------------------------------- bedroom (bg/bedroom.png 1280x720, night)
+R_DOGBED = (1000.0, 568.0)
+R_LAMPS = [(135.0, 265.0), (683.0, 265.0)]
+R_NIGHTSTAND = (700.0, 360.0)
+
+
+def decorate_bed(Wd):
+    D.attach(Wd, [
+        (D.plate(50, 22, ['HIS SIDE', '(SNORES)'], bg=(250, 250, 240), colors=[INK, RED], border=None, pad=1.0, tilt=-3), 286, 140),
+        (D.plate(38, 24, ['BOAT', 'DAY 2019'], bg=(120, 200, 230), colors=[INK, INK], border=None, pad=1.0), 474, 136),
+        (D.plate(40, 14, ['BISCUIT'], bg=(255, 150, 60), colors=[INK], border=INK, pad=0.8), 980, 520),
+        (D.plate(56, 18, ['HAIR TODAY', 'GONE TOMORROW'], bg=(255, 240, 200), colors=[VIOLET, RED], border=VIOLET, pad=1.0, tilt=2), 1110, 400),
+        (D.plate(36, 16, ['CPAP?', 'NO.'], bg=(255, 255, 255), colors=[INK, RED], border=INK, pad=0.8), 46, 430),
+    ])
+
+
+def light_bed(v, k=1.0):
+    keys = [(*v.opt(x, y), 900, (255, 190, 110), 0.55 * k) for x, y in R_LAMPS]
+    keys.append((*v.opt(980.0, 260.0), 900, (130, 160, 255), 0.35))
+    return Light(amb=(0.86, 0.82, 0.92), keys=keys, rim=(1, -0.3, (150, 180, 255), 0.45), grad=(1.0, 0.86))

@@ -37,7 +37,7 @@ DPOSE = dict(
 )
 
 
-def _doug_head(Hd, Fh, P, expr, t, m, look, blink, shine, mask=False):
+def _doug_head(Hd, Fh, P, expr, t, m, look, blink, shine, mask=False, hat=None, hairs=5):
     sk = (P['skin'], P['skin_hi'], P['skin_sh'])
     # no chin: a fat neck as wide as the jaw
     cap(Hd, Fh(0.2, 20.6), Fh(0.7, 23.2), 2.35, 2.25, *sk)
@@ -50,7 +50,7 @@ def _doug_head(Hd, Fh, P, expr, t, m, look, blink, shine, mask=False):
     ell(Hd, Fh(1.7, 22.25), 1.7, 0.42, P['skin_sh'])                                                     # neck crease (no chin)
     ell(Hd, Fh(-0.9, 28.8), 1.3, 0.8, P['dome_hi'], -0.5)                                                # dome shine
     dot(Hd, Fh(0.3, 29.4), (255, 255, 255), 0.35)
-    for k in range(5):                                                                                    # five-strand comb-over
+    for k in range(hairs):                                                                                # five-strand comb-over
         a0 = Fh(-2.5 + 0.1 * k, 26.6 + 0.55 * k)
         a1 = Fh(0.0 + 0.2 * k, 29.6 + 0.12 * k - (0.1 * k * k * 0.1))
         a2 = Fh(2.7 + 0.15 * k, 28.4 + 0.25 * k)
@@ -58,10 +58,19 @@ def _doug_head(Hd, Fh, P, expr, t, m, look, blink, shine, mask=False):
     cap(Hd, Fh(-1.7, 26.4), Fh(-2.3, 25.9), 0.22, 0.16, (168, 150, 140))                                 # grey tuft over the ear
     if mask:                                                                                              # white sheet face mask
         ell(Hd, Fh(1.75, 24.3), 2.35, 2.3, (248, 248, 244), 0, (255, 255, 255), (214, 216, 222))
-    # wrap-around shades pushed up on the dome
-    cap(Hd, Fh(0.4, 28.7), Fh(3.7, 28.2), 0.62, 0.55, P['shade'])
-    cap(Hd, Fh(1.1, 28.95), Fh(2.6, 28.75), 0.14, 0.12, P['shade_hi'])
-    cap(Hd, Fh(-1.6, 28.4), Fh(0.5, 28.75), 0.16, 0.16, (30, 26, 34))
+    if hat == 'beanie':                                                                                   # knit beanie over the dome
+        ell(Hd, Fh(0.5, 28.0), 3.6, 2.7, (90, 70, 160), 0, (130, 110, 200), (60, 46, 120))
+        cap(Hd, Fh(-3.0, 26.6), Fh(3.9, 26.6), 0.65, 0.65, (60, 46, 120))
+        for j in range(6): cap(Hd, Fh(-2.4 + j * 1.1, 26.9), Fh(-2.2 + j * 1.1, 29.6), 0.1, 0.1, (60, 46, 120))
+        ell(Hd, Fh(0.4, 30.8), 0.9, 0.8, (255, 220, 120))
+    elif hat == 'shower':                                                                                 # clear shower cap
+        ell(Hd, Fh(0.4, 28.2), 3.75, 2.6, (210, 236, 250), 0, (250, 255, 255), (170, 200, 220))
+        for j in range(7): cap(Hd, Fh(-3.2 + j * 1.1, 26.0), Fh(-3.0 + j * 1.1, 26.6), 0.18, 0.18, (170, 200, 220))
+    else:
+        # wrap-around shades pushed up on the dome
+        cap(Hd, Fh(0.4, 28.7), Fh(3.7, 28.2), 0.62, 0.55, P['shade'])
+        cap(Hd, Fh(1.1, 28.95), Fh(2.6, 28.75), 0.14, 0.12, P['shade_hi'])
+        cap(Hd, Fh(-1.6, 28.4), Fh(0.5, 28.75), 0.16, 0.16, (30, 26, 34))
     # face
     ex = {'shout': 'shout', 'shock': 'shock', 'smug': 'smug', 'proud': 'normal', 'mew': 'squint', 'angry': 'normal',
           'happy': 'squint', 'sad': 'normal'}.get(expr, 'normal')
@@ -100,7 +109,7 @@ def _doug_head(Hd, Fh, P, expr, t, m, look, blink, shine, mask=False):
 
 
 def doug(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='normal', look=0.0, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-         lean=0.0, shake=0.0, shine=0.0, blink=True, outline_=True, bob=0.0, mask=False, band=False):
+         lean=0.0, shake=0.0, shine=0.0, blink=True, outline_=True, bob=0.0, mask=False, band=False, hat=None, hairs=5, wet=0.0):
     """expr: normal | shout | shock | proud | smug | angry | sad | happy | mew (cheeks puffed, lips pressed, tongue up).
     shine: 0..1 twinkle star on the dome. bob: belly/breath bob amplitude."""
     pose = pose or DPOSE['stand']
@@ -155,7 +164,9 @@ def doug(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='normal', look=0.0, hand_n=
     Hd = Layer(cam)
     hx = 0.35 + ln * 1.1
     def Fh(x, h): return H(hx + x - 0.35, h + br)
-    mc = _doug_head(Hd, Fh, P, expr, t, mouth_, look, blink, shine, mask)
+    mc = _doug_head(Hd, Fh, P, expr, t, mouth_, look, blink, shine, mask, hat, hairs)
+    if wet > 0:                                                                                           # serum gleam on the dome
+        for j in range(3): dot(Hd, Fh(-1.5 + j * 1.4, 28.4 + (j % 2) * 0.8), (200, 255, 230), 0.35 * wet)
     if band: spa_band(Hd, Fh(0.6, 27.6), 3.3, 1.0)
     _merge(L, Hd, OL)
     A = Layer(cam)
@@ -734,3 +745,71 @@ def insole(L, x, y, s=1.0, label=None):
     from props.folk import ell as fell
     fell(L, (x, y), 18 * s, 6 * s, (255, 220, 170), 0.0, (255, 240, 210), (220, 180, 130))
     fell(L, (x - 4 * s, y - 2 * s), 10 * s, 2 * s, (255, 160, 120))
+
+
+# ======================================================================================= BISCUIT (basset hound, profile)
+GC = dict(fur=(222, 170, 110), fur_hi=(244, 200, 140), fur_sh=(180, 126, 76), white=(250, 246, 236), black=(60, 44, 36),
+          ear=(150, 96, 56), ear_sh=(110, 66, 36), nose=(40, 30, 30), mane=(250, 210, 110), mane_hi=(255, 236, 160),
+          mane_sh=(210, 160, 70))
+
+
+def biscuit(CH, cam, t=0.0, mane=0.0, lick=0.0, walk=0.0, blink=True, outline_=True, wind=0.0):
+    """long, low, sad basset hound facing +x, ~11 units long, ~7 tall. mane 0..1: a flowing rock-star mane grows from the head
+    down the back (E05); lick: tongue out; walk: leg swing amplitude; wind: mane waving amount."""
+    P = GC
+    L = Layer(cam)
+    sw = math.sin(t * 7.0) * walk
+    A_ = Layer(cam)
+    for (x, s_) in ((-3.6, 1), (-2.8, -1), (2.8, 1), (3.6, -1)):                                      # stubby legs
+        cap(A_, H(x, 2.6), H(x + 0.5 * sw * s_, 0.3), 0.75, 0.7, P['fur'], P['fur_hi'], P['fur_sh'])
+        ell(A_, H(x + 0.5 * sw * s_ + 0.4, 0.3), 0.95, 0.45, P['white'])
+    _merge(L, A_, OL)
+    if mane > 0:                                                                                           # mane behind the body
+        M = Layer(cam)
+        n = 9
+        for i in range(n):
+            ph = t * 4.0 * (0.4 + wind) + i * 0.7
+            x0 = 3.6 - i * 0.95
+            ln = (3.0 + 4.5 * (i / n)) * mane
+            cap(M, H(x0, 6.4 - i * 0.05), H(x0 - 1.0 - 1.4 * wind * (0.5 + 0.5 * math.sin(ph)), 6.4 - ln + 0.8 * math.sin(ph) * wind),
+                0.9 * mane + 0.3, 0.5, P['mane'], P['mane_hi'], P['mane_sh'])
+        _merge(L, M, OL)
+    T = Layer(cam)
+    ell(T, H(0.0, 3.9), 5.2, 2.0, P['fur'], 0, P['fur_hi'], P['fur_sh'])                                    # sausage body
+    ell(T, H(-1.0, 4.9), 2.6, 1.0, P['black'])                                                             # saddle patch
+    ell(T, H(2.2, 3.0), 2.0, 0.9, P['white'])                                                              # chest
+    cap(T, H(-5.0, 4.8), H(-6.6, 6.6), 0.35, 0.2, P['fur'])                                                # tail up
+    dot(T, H(-6.6, 6.7), P['white'], 0.3)
+    _merge(L, T, OL)
+    Hd = Layer(cam)
+    ell(Hd, H(5.2, 5.2), 1.8, 1.6, P['fur'], 0, P['fur_hi'], P['fur_sh'])                                  # head
+    ell(Hd, H(6.8, 4.6), 1.3, 0.95, P['white'], 0.1)                                                      # long muzzle
+    ell(Hd, H(7.9, 4.9), 0.42, 0.35, P['nose'])
+    cap(Hd, H(6.5, 3.9), H(7.6, 4.0), 0.4, 0.45, P['white'])                                               # jowls
+    if lick > 0:
+        cap(Hd, H(7.4, 4.0), H(7.8 + 0.4 * lick, 3.1 - 0.3 * math.sin(t * 20)), 0.3, 0.32, (236, 110, 130))
+    bl = blink and (t % 3.3) < 0.12
+    if bl: cap(Hd, H(5.7, 5.7), H(6.3, 5.7), 0.08, 0.08, (40, 30, 30))
+    else:
+        ell(Hd, H(6.0, 5.65), 0.42, 0.36, (250, 250, 246)); dot(Hd, H(6.12, 5.6), (40, 26, 20), 0.22)
+        dot(Hd, H(6.2, 5.72), (255, 255, 255), 0.08)
+        cap(Hd, H(5.55, 5.38), H(6.45, 5.32), 0.12, 0.1, (180, 120, 80))                                  # droopy lower lid (sad eyes)
+    cap(Hd, H(5.5, 6.25), H(6.4, 6.05), 0.12, 0.1, (120, 76, 44))
+    if mane > 0:                                                                                           # mane top + bangs
+        ell(Hd, H(4.6, 6.6), 2.1 * mane + 0.4, 1.3 * mane + 0.3, P['mane'], 0, P['mane_hi'], P['mane_sh'])
+        cap(Hd, H(5.4, 6.8), H(6.6, 5.9 - 0.3 * math.sin(t * 5) * wind), 0.6 * mane, 0.3, P['mane'], P['mane_hi'], None)
+    cap(Hd, H(4.6, 6.0), H(4.0, 2.6), 0.7, 0.9, P['ear'], None, P['ear_sh'])                               # long droopy ear
+    _merge(L, Hd, OL)
+    if outline_: outline(L, OL)
+    CH.add(L)
+    return dict(head=H(5.6, 5.2), mouth=H(7.4, 4.0))
+
+
+def serum(L, h, empty=False):
+    """the $200 hair serum dropper bottle at hand h"""
+    c = (h[0] + 0.3, h[1] - 0.8)
+    poly(L, [(c[0] - 0.55, c[1] - 0.7), (c[0] + 0.55, c[1] - 0.7), (c[0] + 0.6, c[1] + 0.9), (c[0] - 0.6, c[1] + 0.9)],
+         (120, 70, 40) if not empty else (200, 170, 140))
+    cap(L, (c[0], c[1] - 0.8), (c[0], c[1] - 1.6), 0.25, 0.2, (30, 30, 36))
+    ell(L, (c[0], c[1] - 1.8), 0.35, 0.3, (30, 30, 36))
+    cap(L, (c[0] - 0.4, c[1] + 0.1), (c[0] + 0.4, c[1] + 0.1), 0.2, 0.2, (250, 220, 120))
