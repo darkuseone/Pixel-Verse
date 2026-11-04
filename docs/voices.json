@@ -457,17 +457,17 @@
    "status": "library_or_premade",
    "name": "Doug",
    "voice_name": "Aura Dad — Doug",
-   "lines": 9,
-   "episodes": 2,
+   "lines": 16,
+   "episodes": 4,
    "samples": [
     "series/aura-dad/voice/ep02/d1.mp3",
+    "series/aura-dad/voice/ep03/d3.mp3",
     "series/aura-dad/voice/ep01/d1.mp3",
     "series/aura-dad/voice/ep02/d2.mp3",
     "series/aura-dad/voice/ep02/d4.mp3",
-    "series/aura-dad/voice/ep01/d5.mp3",
-    "series/aura-dad/voice/ep02/d3.mp3",
-    "series/aura-dad/voice/ep01/d3.mp3",
-    "series/aura-dad/voice/ep01/d4.mp3"
+    "series/aura-dad/voice/ep03/d1.mp3",
+    "series/aura-dad/voice/ep03/d2.mp3",
+    "series/aura-dad/voice/ep04/d1.mp3"
    ]
   },
   {
@@ -477,11 +477,14 @@
    "status": "library_or_premade",
    "name": "Kayden",
    "voice_name": "Aura Dad — Kayden",
-   "lines": 4,
-   "episodes": 1,
+   "lines": 7,
+   "episodes": 3,
    "samples": [
+    "series/aura-dad/voice/ep03/k1.mp3",
+    "series/aura-dad/voice/ep04/k1.mp3",
     "series/aura-dad/voice/ep01/k1.mp3",
     "series/aura-dad/voice/ep01/k3.mp3",
+    "series/aura-dad/voice/ep03/k2.mp3",
     "series/aura-dad/voice/ep01/k2.mp3",
     "series/aura-dad/voice/ep01/k4.mp3"
    ]
@@ -493,9 +496,10 @@
    "status": "library_or_premade",
    "name": "MIRRA",
    "voice_name": "Aura Dad — MIRRA",
-   "lines": 3,
-   "episodes": 2,
+   "lines": 5,
+   "episodes": 4,
    "samples": [
+    "series/aura-dad/voice/ep03/m1.mp3",
     "series/aura-dad/voice/ep01/m1.mp3",
     "series/aura-dad/voice/ep02/m1.mp3",
     "series/aura-dad/voice/ep01/m2.mp3"
@@ -508,8 +512,8 @@
    "status": "library_or_premade",
    "name": "Tammy",
    "voice_name": "Aura Dad — Tammy",
-   "lines": 2,
-   "episodes": 2,
+   "lines": 3,
+   "episodes": 3,
    "samples": [
     "series/aura-dad/voice/ep01/t1.mp3",
     "series/aura-dad/voice/ep02/t1.mp3"
@@ -531,6 +535,17 @@
   },
   {
    "slug": "aura-dad",
+   "char": "brett",
+   "voice_id": "UXrpoYalpW5MpGiFHq3z",
+   "status": "library_or_premade",
+   "name": "Brett",
+   "voice_name": "Aura Dad — Brett",
+   "lines": 2,
+   "episodes": 1,
+   "samples": []
+  },
+  {
+   "slug": "aura-dad",
    "char": "lily",
    "voice_id": "FgiNpTIapnCbaD6xiqIo",
    "status": "library_or_premade",
@@ -549,9 +564,11 @@
    "status": "library_or_premade",
    "name": "Jaxon",
    "voice_name": "Aura Dad — Jaxon",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/aura-dad/voice/ep03/j1.mp3"
+   ]
   },
   {
    "slug": "florida-man",
@@ -3000,5 +3017,5 @@
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
   "Em7IfQCID6d4WZTp4VkN": "Cartman"
  },
- "updated": "2026-11-04 07:03"
+ "updated": "2026-11-04 07:11"
 }

@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-11-04 07:03.
+Обновлено: 2026-11-04 07:11.
 
 ## agent-dibs
 
@@ -25,13 +25,14 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Doug | `doug` | `QI6dMUTCXXVqw27WrlQs` | library_or_premade | 9 / 2 | Aura Dad — Doug |
-| Kayden | `kayden` | `i32gAGa2D3T8nPzY1EsZ` | library_or_premade | 4 / 1 | Aura Dad — Kayden |
-| MIRRA | `mirra` | `rL5thyifUCj65q3mamdf` | library_or_premade | 3 / 2 | Aura Dad — MIRRA |
-| Tammy | `tammy` | `lRGgBdmdfHYNiqPVpbiS` | library_or_premade | 2 / 2 | Aura Dad — Tammy |
+| Doug | `doug` | `QI6dMUTCXXVqw27WrlQs` | library_or_premade | 16 / 4 | Aura Dad — Doug |
+| Kayden | `kayden` | `i32gAGa2D3T8nPzY1EsZ` | library_or_premade | 7 / 3 | Aura Dad — Kayden |
+| MIRRA | `mirra` | `rL5thyifUCj65q3mamdf` | library_or_premade | 5 / 4 | Aura Dad — MIRRA |
+| Tammy | `tammy` | `lRGgBdmdfHYNiqPVpbiS` | library_or_premade | 3 / 3 | Aura Dad — Tammy |
 | Skylar | `skylar` | `hv8WzBOrsvuSUeIQGOCM` | library_or_premade | 2 / 1 | Aura Dad — Skylar |
+| Brett | `brett` | `UXrpoYalpW5MpGiFHq3z` | library_or_premade | 2 / 1 | Aura Dad — Brett |
 | Lily | `lily` | `FgiNpTIapnCbaD6xiqIo` | library_or_premade | 1 / 1 | Aura Dad — Lily |
-| Jaxon | `jaxon` | `S0ypc51SmsvcKXTWvjqJ` | library_or_premade | 0 / 0 | Aura Dad — Jaxon |
+| Jaxon | `jaxon` | `S0ypc51SmsvcKXTWvjqJ` | library_or_premade | 1 / 1 | Aura Dad — Jaxon |
 
 ## florida-man
 
