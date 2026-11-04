@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-11-02 05:14.
+Обновлено: 2026-11-04 07:11.
 
 ## agent-dibs
 
@@ -20,6 +20,19 @@
 | The Chief | `chief` | `rEkmbL8g1KnVDXo1RoDN` | deleted 2026-10-06 | 4 / 3 | Agent Dibs — The Chief |
 | Mrs. Wozniak | `mrs_w` | `pP2cFkzWZzNw0LkjA4ec` | deleted 2026-10-06 | 3 / 2 | Agent Dibs — Mrs. Wozniak |
 | NY Cabbie | `cabbie` | `PpmimHEhUDo0e4uO8FFz` | deleted 2026-10-06 | 1 / 1 | Agent Dibs — NY Cabbie |
+
+## aura-dad
+
+| Герой | char | voice_id | Статус | Реплик / серий | Голос |
+|---|---|---|---|---|---|
+| Doug | `doug` | `QI6dMUTCXXVqw27WrlQs` | library_or_premade | 16 / 4 | Aura Dad — Doug |
+| Kayden | `kayden` | `i32gAGa2D3T8nPzY1EsZ` | library_or_premade | 7 / 3 | Aura Dad — Kayden |
+| MIRRA | `mirra` | `rL5thyifUCj65q3mamdf` | library_or_premade | 5 / 4 | Aura Dad — MIRRA |
+| Tammy | `tammy` | `lRGgBdmdfHYNiqPVpbiS` | library_or_premade | 3 / 3 | Aura Dad — Tammy |
+| Skylar | `skylar` | `hv8WzBOrsvuSUeIQGOCM` | library_or_premade | 2 / 1 | Aura Dad — Skylar |
+| Brett | `brett` | `UXrpoYalpW5MpGiFHq3z` | library_or_premade | 2 / 1 | Aura Dad — Brett |
+| Lily | `lily` | `FgiNpTIapnCbaD6xiqIo` | library_or_premade | 1 / 1 | Aura Dad — Lily |
+| Jaxon | `jaxon` | `S0ypc51SmsvcKXTWvjqJ` | library_or_premade | 1 / 1 | Aura Dad — Jaxon |
 
 ## florida-man
 
@@ -87,14 +100,16 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Толик | `tolik` | `B0jmt8McoEVGc4Ts8fcx` | active | 25 / 6 | Тёща на недельку — Толик |
-| Раиса Захаровна (тёща) | `raisa` | `io2Z9FXP5Y1UP9oCclyU` | active | 21 / 6 | Тёща на недельку — Раиса Захаровна (тёща) |
-| Пуся (той-терьер) | `pusya` | `94UP8JoYQP8SeAvwcEFv` | active | 6 / 6 | Тёща на недельку — Пуся (той-терьер) |
-| Света (жена) | `sveta` | `YvBldwNnE8ctQ8bDGWNM` | active | 3 / 3 | Тёща на недельку — Света (жена) |
-| Люся (сестра тёщи, водитель маршрутки) | `lyusya` | `io2Z9FXP5Y1UP9oCclyU` | active | 2 / 2 | Тёща на недельку — Раиса Захаровна (тёща) |
+| Толик | `tolik` | `B0jmt8McoEVGc4Ts8fcx` | active | 44 / 7 | Тёща на недельку — Толик |
+| Раиса Захаровна (тёща) | `raisa` | `io2Z9FXP5Y1UP9oCclyU` | active | 29 / 7 | Тёща на недельку — Раиса Захаровна (тёща) |
+| Пуся (той-терьер) | `pusya` | `94UP8JoYQP8SeAvwcEFv` | active | 12 / 7 | Тёща на недельку — Пуся (той-терьер) |
+| Люся (сестра тёщи, водитель маршрутки) | `lyusya` | `io2Z9FXP5Y1UP9oCclyU` | active | 6 / 3 | Тёща на недельку — Раиса Захаровна (тёща) |
+| Света (жена) | `sveta` | `YvBldwNnE8ctQ8bDGWNM` | active | 5 / 4 | Тёща на недельку — Света (жена) |
 | Раиса — голосовое сообщение | `raisa_vm` | `io2Z9FXP5Y1UP9oCclyU` | active | 2 / 1 | Тёща на недельку — Раиса Захаровна (тёща) |
+| Бабушка у подъезда | `granny` | `io2Z9FXP5Y1UP9oCclyU` | active | 2 / 1 | Тёща на недельку — Раиса Захаровна (тёща) |
 | Бабушки в маршрутке (хор) | `babki` | `io2Z9FXP5Y1UP9oCclyU` | active | 1 / 1 | Тёща на недельку — Раиса Захаровна (тёща) |
 | Толик — с эхом в пустой квартире | `tolik_echo` | `B0jmt8McoEVGc4Ts8fcx` | active | 1 / 1 | Тёща на недельку — Толик |
+| Бабушка у подъезда 2 | `granny2` | `io2Z9FXP5Y1UP9oCclyU` | active | 1 / 1 | Тёща на недельку — Раиса Захаровна (тёща) |
 
 ## thanks-randy
 
