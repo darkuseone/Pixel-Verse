@@ -1,8 +1,7 @@
 # Autocheck aura-dad ep01
 
-Frames: 11 (middle of every shot). Audio: -.
+Frames: 11 (middle of every shot). Audio: -14.3 LUFS, mean -18.0 dB, peak -0.1 dB.
 
-- **FIX** TEXT_FACE 34.10s button — caption covers a face (29% of it) at (908, 1496) box (45, 1360, 1035, 1444)
 - **FIX** TIMING — twist at 21.38 s = 60% (50–60 %, <= 18 s)
 - **NIT** CUT_SIGN 16.64s mew — sign cut by the frame edge (92% visible, 51 px tall), sharp box (0, 1516, 192, 1568)
 - **NIT** CUT_SIGN 26.18s cheer — sign cut by the frame edge (90% visible, 76 px tall), sharp box (0, 549, 184, 625)
@@ -15,7 +14,6 @@ Frames: 11 (middle of every shot). Audio: -.
 - **NIT** TIMING — shot 17.53–21.38 lasts 3.9 s (> 3 s)
 - **NIT** TIMING — shot 21.38–25.38 lasts 4.0 s (> 3 s)
 - **NIT** TIMING — shot 32.36–35.85 lasts 3.5 s (> 3 s)
-- **NIT** AUDIO — no final.mp4 yet
 
-RESULT: 2 FIX, 12 NIT
+RESULT: 1 FIX, 11 NIT
 Review sheets: /home/user/Pixel-Verse/build/aura-dad-ep01/review
