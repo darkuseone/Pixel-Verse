@@ -451,6 +451,61 @@
    "deleted_reason": "free slots"
   },
   {
+   "slug": "batya",
+   "char": "batya",
+   "voice_id": "1kb4Md8n0kMNktygYhDF",
+   "status": "library_or_premade",
+   "name": "Батя (Виктор)",
+   "voice_name": "Батя сам — Батя (Виктор)",
+   "lines": 7,
+   "episodes": 1,
+   "samples": [
+    "series/batya/voice/ep01/b2.mp3",
+    "series/batya/voice/ep01/b7.mp3",
+    "series/batya/voice/ep01/b1.mp3",
+    "series/batya/voice/ep01/b3.mp3",
+    "series/batya/voice/ep01/b5.mp3",
+    "series/batya/voice/ep01/b4.mp3",
+    "series/batya/voice/ep01/b6.mp3"
+   ],
+   "history": [
+    {
+     "voice_id": "9AjtU6o19uipv7QL8dLL",
+     "until": "2026-11-08"
+    }
+   ]
+  },
+  {
+   "slug": "batya",
+   "char": "tema",
+   "voice_id": "LPf2cDNk9zbJ4Ldj29gC",
+   "status": "library_or_premade",
+   "name": "Тёма",
+   "voice_name": "Батя сам — Тёма",
+   "lines": 3,
+   "episodes": 1,
+   "samples": [
+    "series/batya/voice/ep01/t1.mp3",
+    "series/batya/voice/ep01/t3.mp3",
+    "series/batya/voice/ep01/t2.mp3"
+   ]
+  },
+  {
+   "slug": "batya",
+   "char": "ira",
+   "voice_id": "Vt0E1AMTZdoht6B8DhXP",
+   "status": "library_or_premade",
+   "name": "Мама Ира",
+   "voice_name": "Батя сам — Мама Ира",
+   "lines": 3,
+   "episodes": 1,
+   "samples": [
+    "series/batya/voice/ep01/i2.mp3",
+    "series/batya/voice/ep01/i1.mp3",
+    "series/batya/voice/ep01/i3.mp3"
+   ]
+  },
+  {
    "slug": "florida-man",
    "char": "tanner",
    "voice_id": "GpiDvTn0zpQeiQA9VdB7",
@@ -1823,17 +1878,17 @@
    "status": "active",
    "name": "Толик",
    "voice_name": "Тёща на недельку — Толик",
-   "lines": 25,
-   "episodes": 6,
+   "lines": 44,
+   "episodes": 7,
    "samples": [
+    "series/teshcha/voice/movie/b1.mp3",
     "series/teshcha/voice/ep05/t3.mp3",
+    "series/teshcha/voice/movie/o2.mp3",
+    "series/teshcha/voice/movie/e1.mp3",
     "series/teshcha/voice/ep02/t4.mp3",
+    "series/teshcha/voice/movie/p1.mp3",
     "series/teshcha/voice/ep02/t1.mp3",
-    "series/teshcha/voice/ep04/t3.mp3",
-    "series/teshcha/voice/ep06/t3.mp3",
-    "series/teshcha/voice/ep04/t1.mp3",
-    "series/teshcha/voice/ep01/t1.mp3",
-    "series/teshcha/voice/ep01/t4.mp3"
+    "series/teshcha/voice/movie/h3.mp3"
    ],
    "design": {
     "description": "A wiry, nervous Russian man in his early forties, a self-important loser who believes he is the boss of the house. Medium-high reedy tenor, slightly nasal, puffed-up pompous delivery that cracks into a squeaky panicked whine. Fast, expressive, funny. Native Russian speaker, plain urban Russian accent.",
@@ -1861,17 +1916,17 @@
    "status": "active",
    "name": "Раиса Захаровна (тёща)",
    "voice_name": "Тёща на недельку — Раиса Захаровна (тёща)",
-   "lines": 21,
-   "episodes": 6,
+   "lines": 29,
+   "episodes": 7,
    "samples": [
+    "series/teshcha/voice/movie/p3.mp3",
+    "series/teshcha/voice/movie/h1.mp3",
     "series/teshcha/voice/ep01/r5.mp3",
+    "series/teshcha/voice/movie/m2.mp3",
     "series/teshcha/voice/ep06/r2.mp3",
     "series/teshcha/voice/ep03/r3.mp3",
     "series/teshcha/voice/ep06/r1.mp3",
-    "series/teshcha/voice/ep04/r2.mp3",
-    "series/teshcha/voice/ep01/r1.mp3",
-    "series/teshcha/voice/ep02/r3.mp3",
-    "series/teshcha/voice/ep02/r4.mp3"
+    "series/teshcha/voice/ep04/r2.mp3"
    ],
    "design": {
     "description": "A cartoonish, annoying Russian mother-in-law in her early seventies. Shrill, nasal, high-pitched elderly woman's voice, a bit raspy and screechy, sugary-sweet and nagging at the same time, drawn-out whiny vowels, loud and theatrical, exactly like the stereotypical mother-in-law from old Russian jokes. Clearly old, not young. Native Russian speaker, provincial accent.",
@@ -1905,12 +1960,14 @@
    "status": "active",
    "name": "Пуся (той-терьер)",
    "voice_name": "Тёща на недельку — Пуся (той-терьер)",
-   "lines": 6,
-   "episodes": 6,
+   "lines": 12,
+   "episodes": 7,
    "samples": [
     "series/teshcha/voice/ep03/p1.mp3",
+    "series/teshcha/voice/movie/k5.mp3",
     "series/teshcha/voice/ep04/p1.mp3",
     "series/teshcha/voice/ep02/p1.mp3",
+    "series/teshcha/voice/movie/s2.mp3",
     "series/teshcha/voice/ep01/p2.mp3",
     "series/teshcha/voice/ep05/p1.mp3",
     "series/teshcha/voice/ep06/p1.mp3"
@@ -1936,15 +1993,41 @@
   },
   {
    "slug": "teshcha",
+   "char": "lyusya",
+   "voice_id": "io2Z9FXP5Y1UP9oCclyU",
+   "status": "active",
+   "name": "Люся (сестра тёщи, водитель маршрутки)",
+   "voice_name": "Тёща на недельку — Раиса Захаровна (тёща)",
+   "lines": 6,
+   "episodes": 3,
+   "samples": [
+    "series/teshcha/voice/movie/e4.mp3",
+    "series/teshcha/voice/ep04/l1.mp3",
+    "series/teshcha/voice/movie/m5.mp3",
+    "series/teshcha/voice/movie/e6.mp3",
+    "series/teshcha/voice/movie/p6.mp3",
+    "series/teshcha/voice/ep05/l1.mp3"
+   ],
+   "account": {
+    "category": "generated",
+    "description": "A cartoonish, annoying Russian mother-in-law in her early seventies. Shrill, nasal, high-pitched elderly woman's voice, a bit raspy and screechy, sugary-sweet and nagging at the same time, drawn-out whiny vowels, loud and theatrical, exactly like the stereotypical mother-in-law from old Russian jokes. Clearly old, not young. Native Russian speaker, provincial accent.",
+    "settings": null,
+    "created_at_unix": 1793580698
+   }
+  },
+  {
+   "slug": "teshcha",
    "char": "sveta",
    "voice_id": "YvBldwNnE8ctQ8bDGWNM",
    "status": "active",
    "name": "Света (жена)",
    "voice_name": "Тёща на недельку — Света (жена)",
-   "lines": 3,
-   "episodes": 3,
+   "lines": 5,
+   "episodes": 4,
    "samples": [
     "series/teshcha/voice/ep01/s1.mp3",
+    "series/teshcha/voice/movie/m3.mp3",
+    "series/teshcha/voice/movie/p4.mp3",
     "series/teshcha/voice/ep03/s1.mp3",
     "series/teshcha/voice/ep06/s1.mp3"
    ],
@@ -1969,26 +2052,6 @@
   },
   {
    "slug": "teshcha",
-   "char": "lyusya",
-   "voice_id": "io2Z9FXP5Y1UP9oCclyU",
-   "status": "active",
-   "name": "Люся (сестра тёщи, водитель маршрутки)",
-   "voice_name": "Тёща на недельку — Раиса Захаровна (тёща)",
-   "lines": 2,
-   "episodes": 2,
-   "samples": [
-    "series/teshcha/voice/ep04/l1.mp3",
-    "series/teshcha/voice/ep05/l1.mp3"
-   ],
-   "account": {
-    "category": "generated",
-    "description": "A cartoonish, annoying Russian mother-in-law in her early seventies. Shrill, nasal, high-pitched elderly woman's voice, a bit raspy and screechy, sugary-sweet and nagging at the same time, drawn-out whiny vowels, loud and theatrical, exactly like the stereotypical mother-in-law from old Russian jokes. Clearly old, not young. Native Russian speaker, provincial accent.",
-    "settings": null,
-    "created_at_unix": 1793580698
-   }
-  },
-  {
-   "slug": "teshcha",
    "char": "raisa_vm",
    "voice_id": "io2Z9FXP5Y1UP9oCclyU",
    "status": "active",
@@ -1999,6 +2062,26 @@
    "samples": [
     "series/teshcha/voice/ep05/r1.mp3",
     "series/teshcha/voice/ep05/r2.mp3"
+   ],
+   "account": {
+    "category": "generated",
+    "description": "A cartoonish, annoying Russian mother-in-law in her early seventies. Shrill, nasal, high-pitched elderly woman's voice, a bit raspy and screechy, sugary-sweet and nagging at the same time, drawn-out whiny vowels, loud and theatrical, exactly like the stereotypical mother-in-law from old Russian jokes. Clearly old, not young. Native Russian speaker, provincial accent.",
+    "settings": null,
+    "created_at_unix": 1793580698
+   }
+  },
+  {
+   "slug": "teshcha",
+   "char": "granny",
+   "voice_id": "io2Z9FXP5Y1UP9oCclyU",
+   "status": "active",
+   "name": "Бабушка у подъезда",
+   "voice_name": "Тёща на недельку — Раиса Захаровна (тёща)",
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/teshcha/voice/movie/e2.mp3",
+    "series/teshcha/voice/movie/g1.mp3"
    ],
    "account": {
     "category": "generated",
@@ -2043,6 +2126,25 @@
     "description": "A wiry, nervous Russian man in his early forties, a self-important loser who believes he is the boss of the house. Medium-high reedy tenor, slightly nasal, puffed-up pompous delivery that cracks into a squeaky panicked whine. Fast, expressive, funny. Native Russian speaker, plain urban Russian accent.",
     "settings": null,
     "created_at_unix": 1793576115
+   }
+  },
+  {
+   "slug": "teshcha",
+   "char": "granny2",
+   "voice_id": "io2Z9FXP5Y1UP9oCclyU",
+   "status": "active",
+   "name": "Бабушка у подъезда 2",
+   "voice_name": "Тёща на недельку — Раиса Захаровна (тёща)",
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/teshcha/voice/movie/e3.mp3"
+   ],
+   "account": {
+    "category": "generated",
+    "description": "A cartoonish, annoying Russian mother-in-law in her early seventies. Shrill, nasal, high-pitched elderly woman's voice, a bit raspy and screechy, sugary-sweet and nagging at the same time, drawn-out whiny vowels, loud and theatrical, exactly like the stereotypical mother-in-law from old Russian jokes. Clearly old, not young. Native Russian speaker, provincial accent.",
+    "settings": null,
+    "created_at_unix": 1793580698
    }
   },
   {
@@ -2836,6 +2938,7 @@
   }
  ],
  "unlisted_account_voices": {
+  "16sLehIBT5yDCW6ZNKGj": "Paper Survivors — Narrator",
   "N6PX5q8cQTh4FZMyFW3G": "Land of the Fee — Doris (the last human rep)",
   "RwxygB5ruF7aNKTLfElp": "Land of the Fee — Fee-Bee (AI support bot)",
   "0LhkTs3X3fXASzpzsM4I": "Land of the Fee — Sal (pigeon)",
@@ -2847,8 +2950,7 @@
   "LakpqgKj0ywvEMqSS2OQ": "Кощей из панельки — Баба Яга",
   "jdVj8kVEH8bb83ryznli": "Кощей из панельки — Кощей",
   "14NozJq5eoBmDc1FXFDq": "NIKITA2",
-  "7fU3YUxRrVGjNaZ5dzEH": "NIKITA",
-  "Em7IfQCID6d4WZTp4VkN": "Cartman"
+  "7fU3YUxRrVGjNaZ5dzEH": "NIKITA"
  },
- "updated": "2026-11-02 05:14"
+ "updated": "2026-11-08 20:32"
 }

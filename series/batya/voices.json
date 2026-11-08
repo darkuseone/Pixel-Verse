@@ -1,0 +1,52 @@
+{
+  "cartoon": "Батя сам",
+  "slug": "batya",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "batya": {
+      "name": "Батя (Виктор)",
+      "color_caption": [
+        255,
+        130,
+        120
+      ],
+      "style": "[dramatic] [heroic] [weak] — низкий хрипловатый бас, театральный; в болезни жалобный",
+      "voice_id": "1kb4Md8n0kMNktygYhDF",
+      "voice": "Батя сам — Батя (Виктор)",
+      "library": {
+        "public_owner_id": "5c8ffdcdf1475e4e2f8c5fb9b4e07f940f1327ba746cc14673b48ef1e7202d7e",
+        "voice_id": "1kb4Md8n0kMNktygYhDF"
+      }
+    },
+    "tema": {
+      "name": "Тёма",
+      "color_caption": [
+        190,
+        240,
+        80
+      ],
+      "style": "[deadpan] — монотонный молодой голос, сухо в камеру",
+      "voice_id": "LPf2cDNk9zbJ4Ldj29gC",
+      "voice": "Батя сам — Тёма",
+      "library": {
+        "public_owner_id": "0b17eff94370707032185757beffba27e5a25c8d5e499c77be1222d7baaf2712",
+        "voice_id": "LPf2cDNk9zbJ4Ldj29gC"
+      }
+    },
+    "ira": {
+      "name": "Мама Ира",
+      "color_caption": [
+        255,
+        200,
+        70
+      ],
+      "style": "[dry] [hoarse] — сухо, ровно, тепло в глубине",
+      "voice_id": "Vt0E1AMTZdoht6B8DhXP",
+      "voice": "Батя сам — Мама Ира",
+      "library": {
+        "public_owner_id": "11247a8647abcf8aeb5195b93b6043e0b0c5a7646a521806eed2a3924f6621d0",
+        "voice_id": "Vt0E1AMTZdoht6B8DhXP"
+      }
+    }
+  }
+}

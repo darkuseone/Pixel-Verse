@@ -133,9 +133,10 @@ def _batya_head(Hd, Fh, P, expr, t, m, look, blink, sick, glasses, towel):
         _sweat(Hd, Fh, t, n=3, area=((0.2, 23.4), (2.8, 25.0)))
         cap(Hd, Fh(3.9, 22.85), Fh(4.0, 22.35 - 0.2 * math.sin(t * 2)), 0.12, 0.08, (190, 226, 255))           # runny nose
     if towel:                                                                                # wet folded towel on the forehead
-        poly(Hd, [Fh(-1.0, 25.3), Fh(3.7, 25.5), Fh(3.8, 26.6), Fh(-1.1, 26.4)], (244, 244, 250))
-        cap(Hd, Fh(-1.0, 25.35), Fh(3.7, 25.55), 0.14, 0.14, (196, 206, 226))
-        for k in range(4): dot(Hd, Fh(-0.2 + k * 1.1, 26.0), (120, 170, 230), 0.12)
+        poly(Hd, [Fh(-0.4, 24.95), Fh(3.5, 25.05), Fh(3.6, 26.05), Fh(-0.5, 25.95)], (240, 244, 250))
+        cap(Hd, Fh(-0.4, 25.0), Fh(3.5, 25.1), 0.13, 0.13, (186, 200, 226))
+        cap(Hd, Fh(-0.5, 25.95), Fh(3.6, 26.05), 0.1, 0.1, (210, 220, 240))
+        for k in range(2): ell(Hd, Fh(0.6 + k * 1.9, 24.75 - 0.4 * ((t * 0.8 + k * 0.5) % 1.0)), 0.13, 0.2, (150, 196, 250))
     return mc
 
 
