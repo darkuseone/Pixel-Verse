@@ -56,29 +56,30 @@ T1 = {s['name']: s['t1'] for s in SHOTS}
 TWIST = T0['twist']
 
 SFX = [
-    (S + 'thermo_beep.mp3', 0.0, 0.45), (C + 'cloth_rustle.mp3', 0.3, 0.35),
+    (S + 'thermo_beep.mp3', 0.0, 0.14), (C + 'cloth_rustle.mp3', 0.3, 0.35),
     (C + 'phone_key_click.mp3', T0['selfie'] + 0.05, 0.5),
     (S + 'handbell_ring.mp3', T0['will'] + 0.25, 0.4), (C + 'cloth_rustle.mp3', T0['will'] + 1.6, 0.35),
     (S + 'handbell_ring.mp3', T0['bell'], 0.55), (S + 'handbell_ring.mp3', T0['bell'] + 1.3, 0.5),
-    (C + 'door_apartment_open.mp3', T0['ira_in'] - 0.1, 0.45), (C + 'slipper_steps.mp3', T0['ira_in'] + 0.3, 0.45),
+    (C + 'door_apartment_open.mp3', T0['ira_in'] - 0.1, 0.32), (C + 'slipper_steps.mp3', T0['ira_in'] + 0.3, 0.45),
     (C + 'bottle_clink.mp3', T0['ira_in'] + 1.7, 0.35),
-    (S + 'sneeze_woman.mp3', T0['sneeze'] - 0.05, 0.85),
+    (S + 'sneeze_woman.mp3', T0['sneeze'] - 0.05, 0.12),
     (C + 'cloth_rustle.mp3', T0['cover'] + 0.05, 0.55),
-    (S + 'thermo_beep.mp3', TWIST - 0.02, 0.75), (C + 'vinyl_scratch.mp3', TWIST + 0.3, 0.4),
+    (S + 'thermo_beep.mp3', TWIST - 0.02, 0.2), (C + 'vinyl_scratch.mp3', TWIST + 0.3, 0.4),
     (C + 'whoosh_1.mp3', T0['jump'], 0.7), (C + 'boing_cartoon.mp3', T0['jump'] + 0.15, 0.4), (C + 'gong_strong.mp3', T0['jump'] + 0.3, 0.3),
     (S + 'pot_boil.mp3', T0['kitchen'], 0.4), (C + 'bottle_clink.mp3', T0['kitchen'] + 0.5, 0.35),
     (S + 'pot_boil.mp3', T0['smoke'], 0.45), (C + 'whoosh_3.mp3', T0['smoke'] + 0.7, 0.3), (C + 'whoosh_3.mp3', T0['smoke'] + 1.4, 0.3),
     (C + 'bottle_clink.mp3', T0['taste'] + 0.5, 0.3),
     (C + 'chair_creak.mp3', T0['button'] + 0.5, 0.5),
-    (S + 'thermo_beep.mp3', T0['loop'], 0.35),
+    (S + 'thermo_beep.mp3', T0['loop'], 0.12),
 ]
 
 VOICE_DIP = 'equalizer=f=1500:t=q:w=0.7:g=-7,equalizer=f=3200:t=q:w=1:g=-4'   # carve the voice band out of the music
 BEDS = [
-    (CM + 'komiku_mandolin.mp3', 59.5, 0.0, TWIST, 0.8, True, VOICE_DIP),
-    (CM + 'komiku_fetch_contest.mp3', 41.5, TWIST + 0.25, DUR, 0.8, True, VOICE_DIP),
+    (CM + 'komiku_mandolin.mp3', 59.5, 0.0, TWIST, 0.5, True, VOICE_DIP),
+    (CM + 'komiku_fetch_contest.mp3', 41.5, TWIST + 0.25, DUR, 0.5, True, VOICE_DIP),
 ]
 VGAIN = {'batya': 2.0, 'tema': 2.1, 'ira': 2.1}
+VNORM = -16.0        # every line levelled to -16 LUFS before the mix (owner 09.11: voices were quiet under music and SFX)
 
 if __name__ == '__main__':
     for i, s in enumerate(SHOTS): print(f"{i:2d} {s['t0']:6.2f} {s['t1'] - s['t0']:5.2f} {s['name']} {s.get('key', '')}")

@@ -14,6 +14,6 @@ description: Производство одной серии PIXEL VERSE по к�
 5. **Код серии** `epNN.py` + `timeline.py` (DUR, CUTS, TWIST, SFX, BEDS) на `engine/episode.py`; `Episode(..., endcard=dict(style=<стиль сериала>, lang=<ru|us>))` — плашка подписки в последнюю секунду.
 6. **Обложка** `cover.py` (сетка профиля: табличка сверху 3:4, заголовок под ней, лица ниже, ничего важного ниже y 1520) → `cover.png` + `cover_grid.png`. До рендера.
 7. **Контроль до рендера (0 токенов):** `python3 engine/critic.py series/<slug>/episodes/epNN` → `autocheck.md` + мини-листы. Смотреть только мини-листы и кроп подозрительного. Править код, повторить по нужным `--times`.
-8. **Рендер:** `python3 epNN.py all` (по планам, в фоне; ждать соседний рендер только `pgrep -f "^python3 epMM"`) → `python3 mix.py <noaudio> final.mp4`.
+8. **Рендер:** `python3 epNN.py all` (по планам, в фоне; ждать соседний рендер только `pgrep -f "^python3 epMM"`) → `python3 mix.py <noaudio> final.mp4` (в `timeline.py` `VNORM = -16.0`) → `python3 engine/mixcheck.py series/<slug>/episodes/epNN` (голос / SFX / музыка: нужен «OK»).
 9. **Финал:** мини-лист кадров из `final.mp4`, длина/громкость (autocheck AUDIO). Нашёл огрех → `python3 epNN.py shots <i|name>` → mix. Отчёт в `critic.md`.
 10. **Сдача:** `meta.md`, `script.md` (доля поворота), коммит + пуш; `SendUserFile` final.mp4 + cover.png + 2–3 строки (кредиты, переиспользовано, что подрезал). Обновить `STATUS.md`, после сезона — `docs/series-list.md` и `/publish`.
