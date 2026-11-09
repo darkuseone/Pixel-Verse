@@ -477,6 +477,112 @@ def ira(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='dry', look=0.0, hand_n=None
     return dict(hand_n=en, hand_f=ef, mouth=mc, head=Fh(1.0, 21.5), top=Fh(0.7, 24.6))
 
 
+VC = dict(IC, skin=(240, 204, 182), skin_hi=(255, 228, 210), skin_sh=(200, 158, 140), cheek=(240, 140, 140),
+          hair=(246, 246, 250), hair_hi=(255, 255, 255), hair_sh=(206, 208, 220), brow=(190, 190, 200),
+          card=(120, 60, 110), card_hi=(156, 92, 146), card_sh=(86, 38, 78), blouse=(236, 220, 170), button=(240, 220, 120),
+          pants=(120, 60, 110), pants_hi=(156, 92, 146), pants_sh=(86, 38, 78), slip=(120, 120, 128), lip=(200, 100, 100),
+          glass=(120, 90, 60), shawl=(236, 222, 190), shawl_hi=(255, 246, 220), shawl_sh=(190, 170, 130))
+
+
+def _baba_head(Hd, Fh, P, expr, t, m, look, blink, sick, specs):
+    """round soft face, a white dandelion halo of hair, big round glasses with thick lenses, wrinkles, rosy cheeks"""
+    for k in range(22):                                                                                          # dandelion halo
+        a = k / 22 * 2 * math.pi
+        r = 3.1 + 0.25 * math.sin(k * 2.7 + t * 1.5)
+        ell(Hd, Fh(0.8 + r * math.cos(a), 22.0 + r * 0.95 * math.sin(a)), 0.95, 0.95, P['hair'], 0, P['hair_hi'], P['hair_sh'])
+    ell(Hd, Fh(0.8, 22.4), 3.0, 2.8, P['hair'], 0, P['hair_hi'], P['hair_sh'])
+    cap(Hd, Fh(0.4, 17.8), Fh(0.6, 19.6), 0.7, 0.65, P['skin'], P['skin_hi'], P['skin_sh'])
+    ell(Hd, Fh(0.9, 21.2), 2.35, 2.45, P['skin'], 0, P['skin_hi'], P['skin_sh'], th_sh=-0.7)
+    ell(Hd, Fh(1.2, 19.6), 1.5, 0.85, P['skin'], 0.1)
+    ex = 'shock' if expr == 'shock' else 'squint' if expr in ('happy', 'sweet') else 'normal'
+    eyes = [(Fh(1.1, 21.3), 0.45), (Fh(2.3, 21.25), 0.5)]
+    bl = blink and (t % 3.9) < 0.1 and expr != 'shock'
+    for c, r in eyes:                                                                                            # big thick glasses
+        ell(Hd, c, r * 1.85, r * 1.75, P['glass']); ell(Hd, c, r * 1.55, r * 1.45, (236, 244, 250))
+        eye(Hd, c, r * 1.15, ex, (look, 0.0), iris=(90, 120, 160), lid=P['skin_sh'], blink=bl, lash=(60, 50, 60))
+        dot(Hd, (c[0] + r * 0.6, c[1] - r * 0.7), (255, 255, 255), r * 0.35)
+    cap(Hd, (eyes[0][0][0] + 0.75, eyes[0][0][1]), (eyes[1][0][0] - 0.8, eyes[1][0][1]), 0.1, 0.1, P['glass'])
+    for k, (c, r) in enumerate(eyes):
+        s_ = 1 if k == 0 else -1
+        bt = {'worried': -0.6, 'shock': -0.6, 'dry': 0.2}.get(expr, -0.2)
+        base = c[1] - r * 1.75 - 0.35
+        cap(Hd, (c[0] - 0.55, base - s_ * bt * 0.3), (c[0] + 0.55, base + s_ * bt * 0.3), 0.16, 0.12, P['brow'])
+    for k in range(3):                                                                                           # forehead wrinkles
+        cap(Hd, Fh(0.3, 23.0 + k * 0.4), Fh(2.3, 23.05 + k * 0.4), 0.06, 0.06, P['skin_sh'])
+    for c, r in eyes:                                                                                            # crow's feet
+        cap(Hd, (c[0] + r * 1.9, c[1] - 0.2), (c[0] + r * 2.4, c[1] - 0.4), 0.05, 0.05, P['skin_sh'])
+    poly(Hd, [Fh(2.6, 21.0), Fh(3.35, 20.0), Fh(2.6, 19.8)], P['skin_sh'])                                     # soft potato nose
+    ell(Hd, Fh(2.85, 20.2), 0.55, 0.45, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    ell(Hd, Fh(1.6, 20.3), 0.65, 0.4, P['cheek']); ell(Hd, Fh(3.0, 20.4), 0.35, 0.3, P['cheek'])
+    mm = max(m, 0.5 if expr == 'shock' else 0.0)
+    mc = Fh(2.15, 19.55 - 0.2 * mm)
+    mouth(Hd, mc, 0.6, mm, 'smug' if expr in ('happy', 'sweet') else 'sad' if expr == 'worried' else 'normal', lip=P['lip'])
+    cap(Hd, (mc[0] - 0.9, mc[1] - 0.3), (mc[0] - 0.75, mc[1] + 0.25), 0.05, 0.05, P['skin_sh'])                # smile lines
+    return mc
+
+
+def babushka(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='dry', look=0.0, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
+        coat=False, scarf=False, legs=True, sick=0.0, specs=False, blink=True, outline_=True):
+    """Babushka Valentina, Batya's mother (E06): «dandelion» — white fluffy hair halo, big round glasses, wrinkles, plum dress under a
+    crocheted shawl, felt boots. expr: sweet | happy | shock | dry | worried. Same rig and poses as Ira (IPOSE)."""
+    pose = pose or IPOSE['stand']
+    P = dict(VC)
+    br = 0.1 * math.sin(t * 2.3)
+    sh_n, sh_f = H(1.6, 17.6 + br), H(-1.7, 17.7 + br)
+    hp_n, hp_f = H(0.8, 9.6), H(-0.8, 9.6)
+    pants = (P['pants'], P['pants_hi'], P['pants_sh'])
+    top = (P['coat'], P['coat_hi'], P['coat_sh']) if coat else (P['card'], P['card_hi'], P['card_sh'])
+    L = Layer(cam)
+    if legs:
+        for hp, lg in ((hp_f, pose['fleg']), (hp_n, pose['nleg'])):
+            A = Layer(cam)
+            k_, e_ = _limb(A, hp, *lg, 5.0, 4.6, 1.05, 0.85, *pants)
+            ellt(A, (e_[0] + 0.6, e_[1] - 0.2), 1.35, 0.85, (P['slip'], (150, 150, 156), (80, 80, 86)))     # felt boots
+            _merge(L, A, OL)
+    A = Layer(cam)
+    tf = hand_f if hand_f is not None else H(pose['f'][0], pose['f'][1])
+    kf, ef = _limb(A, sh_f, 0, 0, 3.8, 3.5, 0.95, 0.8, *top, target=tf, bend=pose.get('bf', -1))
+    ell(A, ef, 0.72, 0.7, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    if prop_f: prop_f(A, ef)
+    _merge(L, A, OL)
+    T = Layer(cam)                                                                                              # compact barrel body
+    poly(T, [H(-2.3, 18.4 + br), H(2.3, 18.4 + br), H(2.9, 13.0), H(2.8, 7.2 if coat else 8.6), H(-2.7, 7.2 if coat else 8.6), H(-2.9, 13.0)], top[0])
+    ellt(T, H(0.0, 14.6 + br), 2.85, 4.0, top)
+    if not coat:
+        poly(T, [H(0.1, 18.3 + br), H(1.5, 18.3 + br), H(1.0, 13.4), H(0.6, 13.4)], P['blouse'])               # blouse in the V
+        for k in range(4): dot(T, H(1.15 - k * 0.05, 16.4 - k * 1.8), P['button'], 0.2)
+        for k in range(8): cap(T, H(-2.6 + k * 0.72, 8.7), H(-2.55 + k * 0.72, 9.3), 0.1, 0.1, P['card_sh'])   # knit hem
+        cap(T, H(0.1, 18.3 + br), H(1.0, 8.7), 0.12, 0.12, P['card_sh'])
+    else:
+        cap(T, H(0.9, 18.2), H(1.3, 7.3), 0.12, 0.12, P['coat_sh'])
+        for k in range(3): dot(T, H(1.6, 16.0 - k * 2.4), (60, 40, 30), 0.2)
+    if True:                                                                                                    # crocheted shawl
+        sh = (P['shawl'], P['shawl_hi'], P['shawl_sh'])
+        poly(T, [H(-2.9, 18.6 + br), H(3.0, 18.6 + br), H(2.2, 13.2), H(0.4, 11.4), H(-1.6, 13.2)], sh[0])
+        for k in range(6): dot(T, H(-1.4 + k * 0.7, 12.8 - abs(k - 2.5) * 0.4), P['shawl_sh'], 0.28)
+        for k in range(5): dot(T, H(-2.0 + k * 1.1, 16.6), P['shawl_hi'], 0.3)
+    if scarf:
+        sc = (P['scarf'], P['scarf_hi'], P['scarf_sh'])
+        ellt(T, H(0.2, 18.4 + br), 2.4, 1.0, sc)
+        cap(T, H(1.4, 18.0), H(1.8, 13.6), 0.6, 0.5, *sc)
+        for k in range(4): cap(T, H(1.2 + k * 0.2, 13.5), H(1.25 + k * 0.2, 12.9), 0.07, 0.07, P['scarf_sh'])
+    _merge(L, T, OL)
+    Hd = Layer(cam)
+
+    def Fh(x, h): return H(x, h + br)
+    mc = _baba_head(Hd, Fh, P, expr, t, mouth_, look, blink, sick, specs)
+    _merge(L, Hd, OL)
+    A = Layer(cam)
+    tn = hand_n if hand_n is not None else H(pose['n'][0], pose['n'][1])
+    kn, en = _limb(A, sh_n, 0, 0, 3.8, 3.5, 1.0, 0.82, *top, target=tn, bend=pose.get('bn', 1))
+    ell(A, en, 0.75, 0.72, P['skin'], 0, P['skin_hi'], P['skin_sh'])
+    if prop_n: prop_n(A, en)
+    _merge(L, A, OL)
+    if outline_: outline(L, OL)
+    CH.add(L)
+    return dict(hand_n=en, hand_f=ef, mouth=mc, head=Fh(1.0, 21.5), top=Fh(0.7, 24.6))
+
+
 # ======================================================================================= props (unit coords, held in a hand)
 def thermometer(L, h, ang=-0.6, size=1.0):
     """digital thermometer in a hand: white body, grey metal tip; the LCD digits are a decal added by the shot"""
@@ -550,7 +656,8 @@ def battery_world(L, x, y, s=1.0):
 NB = [dict(coat=(70, 90, 130), hat=(110, 80, 50), scarf=(200, 60, 60), skin=(236, 190, 160)),
       dict(coat=(120, 60, 50), hat=(60, 60, 70), scarf=(230, 200, 80), skin=(226, 176, 146)),
       dict(coat=(60, 100, 70), hat=(150, 40, 60), scarf=(240, 240, 240), skin=(240, 200, 172)),
-      dict(coat=(90, 80, 110), hat=(120, 110, 100), scarf=(90, 150, 200), skin=(232, 186, 150))]
+      dict(coat=(90, 80, 110), hat=(120, 110, 100), scarf=(90, 150, 200), skin=(232, 186, 150)),
+      dict(coat=(236, 150, 30), hat=(40, 40, 48), scarf=(40, 40, 48), skin=(238, 196, 166))]          # 4: the courier (E05)
 
 
 def neighbour(CH, cam, t=0.0, kind=0, mouth_=0.0, expr='normal', held=True):
