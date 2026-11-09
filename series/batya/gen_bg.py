@@ -46,6 +46,16 @@ BG = {
             'coat rack with winter coats and fur hats, a shoe shelf with boots, a mirror, an old wall telephone, wallpaper with a faded '
             'pattern. On the right a doorway to a dark room. Worn parquet floor with a long runner rug. The floor in the middle is clear '
             'empty space.',
+    'room': 'The living room of a small Soviet panel-block apartment in the evening, warm ceiling lamp light, cold dark blue window. '
+            'In the centre against a plain wallpapered wall a wide clear empty space of bare wall and floor (where new furniture will '
+            'stand), with torn brown cardboard, styrofoam pieces and bubble wrap scattered on the floor. On the left an old sofa with a '
+            'crocheted blanket and a small tube TV on a stand. On the right a window with tulle, a radiator, and a door to the hallway. A '
+            'patterned rug on the parquet floor, a ceiling lamp with a glass shade, a wall clock. The floor in the middle is clear.',
+    'garage': 'Inside an old Soviet brick garage (garage cooperative) on a late November afternoon, a warm work lamp light: a long '
+              'wooden workbench along the back wall covered with tools, a vice, jars of screws, wood shavings and sawdust everywhere on '
+              'the concrete floor, planks of wood leaning on the wall, old tyres, a shelf with paint cans, a calendar and a blank poster '
+              'on the wall, an old radio, a hanging bulb, the half-open metal garage door on the right showing grey snowy daylight. '
+              'The floor in front of the workbench is clear empty space.',
 }
 
 

@@ -56,6 +56,24 @@
         "public_owner_id": "ace88408e1699e0c7fa8acacb1bba7be4e62b44d37f2e7e2e7689c0dd89b2395",
         "voice_id": "9AjtU6o19uipv7QL8dLL"
       }
+    },
+    "kurier": {
+      "name": "kurier",
+      "voice_id": "g1G73EpCIdK4HUyDiLYF",
+      "voice": "Батя сам — kurier",
+      "library": {
+        "public_owner_id": "0eabac8faaa9bda174bdfc68458950267caf25a5b5daf5151fd1a2c8df1d7a38",
+        "voice_id": "g1G73EpCIdK4HUyDiLYF"
+      }
+    },
+    "babushka": {
+      "name": "babushka",
+      "voice_id": "ZgfahluxUmUzBjjL81NN",
+      "voice": "Батя сам — babushka",
+      "library": {
+        "public_owner_id": "7c6cca692da713287a1d9601ee89fe6b4ff9724c645410c1b179a6b9d869db2a",
+        "voice_id": "ZgfahluxUmUzBjjL81NN"
+      }
     }
   }
 }
