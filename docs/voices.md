@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-11-08 20:32.
+Обновлено: 2026-11-09 05:41.
 
 ## agent-dibs
 
@@ -25,9 +25,12 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Батя (Виктор) | `batya` | `1kb4Md8n0kMNktygYhDF` | library_or_premade | 7 / 1 | Батя сам — Батя (Виктор) |
-| Тёма | `tema` | `LPf2cDNk9zbJ4Ldj29gC` | library_or_premade | 3 / 1 | Батя сам — Тёма |
-| Мама Ира | `ira` | `Vt0E1AMTZdoht6B8DhXP` | library_or_premade | 3 / 1 | Батя сам — Мама Ира |
+| Батя (Виктор) | `batya` | `1kb4Md8n0kMNktygYhDF` | library_or_premade | 26 / 4 | Батя сам — Батя (Виктор) |
+| Тёма | `tema` | `LPf2cDNk9zbJ4Ldj29gC` | library_or_premade | 10 / 4 | Батя сам — Тёма |
+| Мама Ира | `ira` | `Vt0E1AMTZdoht6B8DhXP` | library_or_premade | 8 / 4 | Батя сам — Мама Ира |
+| sosed | `sosed` | `9AjtU6o19uipv7QL8dLL` | library_or_premade | 3 / 2 | Батя сам — sosed |
+| kurier | `kurier` | `g1G73EpCIdK4HUyDiLYF` | library_or_premade | 0 / 0 | Батя сам — kurier |
+| babushka | `babushka` | `ZgfahluxUmUzBjjL81NN` | library_or_premade | 0 / 0 | Батя сам — babushka |
 
 ## florida-man
 

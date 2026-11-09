@@ -457,16 +457,17 @@
    "status": "library_or_premade",
    "name": "Батя (Виктор)",
    "voice_name": "Батя сам — Батя (Виктор)",
-   "lines": 7,
-   "episodes": 1,
+   "lines": 26,
+   "episodes": 4,
    "samples": [
+    "series/batya/voice/ep02/b2.mp3",
+    "series/batya/voice/ep03/b1.mp3",
+    "series/batya/voice/ep04/b2.mp3",
     "series/batya/voice/ep01/b2.mp3",
     "series/batya/voice/ep01/b7.mp3",
     "series/batya/voice/ep01/b1.mp3",
-    "series/batya/voice/ep01/b3.mp3",
-    "series/batya/voice/ep01/b5.mp3",
-    "series/batya/voice/ep01/b4.mp3",
-    "series/batya/voice/ep01/b6.mp3"
+    "series/batya/voice/ep03/b2.mp3",
+    "series/batya/voice/ep02/b6.mp3"
    ],
    "history": [
     {
@@ -482,12 +483,17 @@
    "status": "library_or_premade",
    "name": "Тёма",
    "voice_name": "Батя сам — Тёма",
-   "lines": 3,
-   "episodes": 1,
+   "lines": 10,
+   "episodes": 4,
    "samples": [
+    "series/batya/voice/ep02/t2.mp3",
+    "series/batya/voice/ep03/t2.mp3",
+    "series/batya/voice/ep04/t1.mp3",
+    "series/batya/voice/ep04/t2.mp3",
     "series/batya/voice/ep01/t1.mp3",
-    "series/batya/voice/ep01/t3.mp3",
-    "series/batya/voice/ep01/t2.mp3"
+    "series/batya/voice/ep02/t1.mp3",
+    "series/batya/voice/ep04/t3.mp3",
+    "series/batya/voice/ep01/t3.mp3"
    ]
   },
   {
@@ -497,13 +503,55 @@
    "status": "library_or_premade",
    "name": "Мама Ира",
    "voice_name": "Батя сам — Мама Ира",
-   "lines": 3,
-   "episodes": 1,
+   "lines": 8,
+   "episodes": 4,
    "samples": [
+    "series/batya/voice/ep02/i2.mp3",
+    "series/batya/voice/ep04/i1.mp3",
     "series/batya/voice/ep01/i2.mp3",
     "series/batya/voice/ep01/i1.mp3",
-    "series/batya/voice/ep01/i3.mp3"
+    "series/batya/voice/ep04/i2.mp3",
+    "series/batya/voice/ep01/i3.mp3",
+    "series/batya/voice/ep03/i1.mp3",
+    "series/batya/voice/ep02/i1.mp3"
    ]
+  },
+  {
+   "slug": "batya",
+   "char": "sosed",
+   "voice_id": "9AjtU6o19uipv7QL8dLL",
+   "status": "library_or_premade",
+   "name": "sosed",
+   "voice_name": "Батя сам — sosed",
+   "lines": 3,
+   "episodes": 2,
+   "samples": [
+    "series/batya/voice/ep03/s1.mp3",
+    "series/batya/voice/ep03/s2.mp3",
+    "series/batya/voice/ep02/s1.mp3"
+   ]
+  },
+  {
+   "slug": "batya",
+   "char": "kurier",
+   "voice_id": "g1G73EpCIdK4HUyDiLYF",
+   "status": "library_or_premade",
+   "name": "kurier",
+   "voice_name": "Батя сам — kurier",
+   "lines": 0,
+   "episodes": 0,
+   "samples": []
+  },
+  {
+   "slug": "batya",
+   "char": "babushka",
+   "voice_id": "ZgfahluxUmUzBjjL81NN",
+   "status": "library_or_premade",
+   "name": "babushka",
+   "voice_name": "Батя сам — babushka",
+   "lines": 0,
+   "episodes": 0,
+   "samples": []
   },
   {
    "slug": "florida-man",
@@ -2952,5 +3000,5 @@
   "14NozJq5eoBmDc1FXFDq": "NIKITA2",
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA"
  },
- "updated": "2026-11-08 20:32"
+ "updated": "2026-11-09 05:41"
 }
