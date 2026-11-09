@@ -47,6 +47,15 @@
         "public_owner_id": "11247a8647abcf8aeb5195b93b6043e0b0c5a7646a521806eed2a3924f6621d0",
         "voice_id": "Vt0E1AMTZdoht6B8DhXP"
       }
+    },
+    "sosed": {
+      "name": "sosed",
+      "voice_id": "9AjtU6o19uipv7QL8dLL",
+      "voice": "Батя сам — sosed",
+      "library": {
+        "public_owner_id": "ace88408e1699e0c7fa8acacb1bba7be4e62b44d37f2e7e2e7689c0dd89b2395",
+        "voice_id": "9AjtU6o19uipv7QL8dLL"
+      }
     }
   }
 }

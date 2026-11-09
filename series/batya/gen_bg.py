@@ -27,6 +27,12 @@ BG = {
                'window with tulle and pots of seedlings on the sill, wooden wall cupboards with glass jars of buckwheat and salt. On the right '
                'a small kitchen table with a checked oilcloth tablecloth, a stool, a radio on a shelf, a blank wall calendar. Worn linoleum '
                'floor. The floor in the middle is clear empty space.',
+    'yard': 'A courtyard of Soviet nine-storey panel blocks on a frosty winter morning at dawn, minus twenty degrees: deep fresh snow, '
+            'a row of old snow-covered Soviet cars parked along the building in the middle ground; in the centre an old boxy red Lada '
+            'hatchback with its hood closed, the snow brushed off it, standing on a cleared patch of snow; on the right the entrance '
+            'porch (podyezd) of the building with a metal door, a small canopy and a bench covered with snow; on the left a lamp post '
+            'with a warm light and a bare tree with frost; on the building wall next to the door a round blank wall plate; frosty haze, '
+            'pink-blue sky, lit windows. The snowy ground in the front is clear empty space.',
 }
 
 

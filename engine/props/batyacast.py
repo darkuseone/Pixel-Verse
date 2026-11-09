@@ -141,7 +141,8 @@ def _batya_head(Hd, Fh, P, expr, t, m, look, blink, sick, glasses, towel):
 
 
 def batya(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='normal', look=0.0, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-          lean=None, legs=True, vest=True, apron=False, sick=0.0, glasses=True, towel=False, blink=True, shake=0.0, outline_=True):
+          lean=None, legs=True, vest=True, apron=False, sick=0.0, glasses=True, towel=False, blink=True, shake=0.0, outline_=True,
+          hat=False, frost=0.0):
     """expr: normal | shout | shock | dying | sad | whine | angry | fists | smug | proud | happy.
     legs=False: only from the hips up (in bed under the blankets). apron: mum's frilly flowery apron. sick 0..1: red nose, sweat."""
     pose = pose or BPOSE['stand']
@@ -216,7 +217,14 @@ def batya(CH, cam, pose=None, t=0.0, mouth_=0.0, expr='normal', look=0.0, hand_n
     hx = 0.4 + ln * 1.0
 
     def Fh(x, h): return H(hx + x - 0.4, h + br)
-    mc = _batya_head(Hd, Fh, P, expr, t, mouth_, look, blink, sick, glasses, towel)
+    mc = _batya_head(Hd, Fh, P, expr, t, mouth_, look, blink, sick, glasses and not hat, towel)
+    if hat:                                                                                   # burgundy knitted hat with a pompon
+        ell(Hd, Fh(0.85, 26.2), 3.25, 1.75, P['sw'], 0, P['sw_hi'], P['sw_sh'])
+        cap(Hd, Fh(-2.3, 25.3), Fh(4.0, 25.4), 0.62, 0.62, P['knit'])
+        for k in range(7): cap(Hd, Fh(-1.6 + k * 0.85, 25.8), Fh(-1.5 + k * 0.85, 27.3), 0.1, 0.1, P['sw_sh'])
+        ell(Hd, Fh(0.6, 28.2), 0.95, 0.85, P['knit'], 0, (255, 255, 255), P['knit_sh'])
+    if frost > 0:                                                                             # frost on brows / sideburns
+        for k in range(9): dot(Hd, Fh(-0.9 + (k % 5) * 0.85, 24.9 - (k // 5) * 2.2 + 0.2 * (k % 2)), (236, 246, 255), 0.13 * frost + 0.05)
     _merge(L, Hd, OL)
     # near arm
     A = Layer(cam)
@@ -518,3 +526,64 @@ def tray(L, h, t=0.0, steam=True):
 def pills_box(L, x, y, w, hgt, col, stripe):
     poly(L, [(x, y), (x + w, y), (x + w, y - hgt), (x, y - hgt)], col)
     cap(L, (x + 0.1 * w, y - hgt * 0.55), (x + 0.9 * w, y - hgt * 0.55), hgt * 0.12, hgt * 0.12, stripe)
+
+
+def battery(L, h, w=1.0):
+    """car battery «АКБ» held in front: black box, red and blue terminals, a carry strap"""
+    x, y = h[0] + 0.6 * w, h[1]
+    poly(L, [(x - 1.6 * w, y - 1.8 * w), (x + 1.6 * w, y - 1.8 * w), (x + 1.6 * w, y + 0.6 * w), (x - 1.6 * w, y + 0.6 * w)], (34, 34, 40))
+    poly(L, [(x - 1.6 * w, y - 1.8 * w), (x + 1.6 * w, y - 1.8 * w), (x + 1.5 * w, y - 1.5 * w), (x - 1.5 * w, y - 1.5 * w)], (70, 70, 82))
+    cap(L, (x - 1.0 * w, y - 1.9 * w), (x - 1.0 * w, y - 2.2 * w), 0.22 * w, 0.22 * w, (210, 40, 40))
+    cap(L, (x + 1.0 * w, y - 1.9 * w), (x + 1.0 * w, y - 2.2 * w), 0.22 * w, 0.22 * w, (40, 80, 200))
+    poly(L, [(x - 1.0 * w, y - 0.9 * w), (x + 1.0 * w, y - 0.9 * w), (x + 1.0 * w, y - 0.2 * w), (x - 1.0 * w, y - 0.2 * w)], (246, 206, 30))
+
+
+def battery_world(L, x, y, s=1.0):
+    """battery lying in bed, world px (bottom-centre x, y)"""
+    poly(L, [(x - 22 * s, y - 26 * s), (x + 22 * s, y - 26 * s), (x + 22 * s, y), (x - 22 * s, y)], (34, 34, 40))
+    poly(L, [(x - 22 * s, y - 26 * s), (x + 22 * s, y - 26 * s), (x + 20 * s, y - 22 * s), (x - 20 * s, y - 22 * s)], (70, 70, 82))
+    cap(L, (x - 13 * s, y - 27 * s), (x - 13 * s, y - 31 * s), 3 * s, 3 * s, (210, 40, 40))
+    cap(L, (x + 13 * s, y - 27 * s), (x + 13 * s, y - 31 * s), 3 * s, 3 * s, (40, 80, 200))
+    poly(L, [(x - 13 * s, y - 15 * s), (x + 13 * s, y - 15 * s), (x + 13 * s, y - 6 * s), (x - 13 * s, y - 6 * s)], (246, 206, 30))
+
+
+NB = [dict(coat=(70, 90, 130), hat=(110, 80, 50), scarf=(200, 60, 60), skin=(236, 190, 160)),
+      dict(coat=(120, 60, 50), hat=(60, 60, 70), scarf=(230, 200, 80), skin=(226, 176, 146)),
+      dict(coat=(60, 100, 70), hat=(150, 40, 60), scarf=(240, 240, 240), skin=(240, 200, 172)),
+      dict(coat=(90, 80, 110), hat=(120, 110, 100), scarf=(90, 150, 200), skin=(232, 186, 150))]
+
+
+def neighbour(CH, cam, t=0.0, kind=0, mouth_=0.0, expr='normal', held=True):
+    """a neighbour in a winter coat and fur hat holding his car battery (the queue in E02)"""
+    P = NB[kind % len(NB)]
+    sk = (P['skin'], _mix(P['skin'], (255, 255, 255), 0.25), _mix(P['skin'], (120, 70, 50), 0.25))
+    co = (P['coat'], _mix(P['coat'], (255, 255, 255), 0.2), _mix(P['coat'], (0, 0, 0), 0.3))
+    br = 0.1 * math.sin(t * 2.2 + kind)
+    L = Layer(cam)
+    for x0 in (-0.9, 0.9):
+        cap(L, H(x0, 9.5), H(x0, 0.6), 0.9, 0.8, (40, 40, 48))
+        ellt(L, H(x0 + 0.6, 0.4), 1.4, 0.55, ((50, 36, 30), (80, 60, 50), (30, 20, 16)))
+    ellt(L, H(0.0, 13.8 + br), 3.0, 6.0, co)
+    for k in range(4): dot(L, H(0.9, 17.0 - k * 2.0), (40, 30, 30), 0.2)
+    ellt(L, H(0.2, 19.6 + br), 2.2, 0.9, (P['scarf'], _mix(P['scarf'], (255, 255, 255), 0.3), _mix(P['scarf'], (0, 0, 0), 0.3)))
+    ell(L, H(0.6, 22.2 + br), 2.0, 2.2, sk[0], 0, sk[1], sk[2])
+    ell(L, H(2.4, 21.9 + br), 0.55, 0.45, _mix(P['skin'], (230, 90, 90), 0.5))                   # red frosty nose
+    eye(L, H(1.2, 22.7 + br), 0.38, 'shock' if expr == 'shock' else 'normal', (0.4, 0.0), iris=(70, 60, 50))
+    eye(L, H(2.0, 22.7 + br), 0.42, 'shock' if expr == 'shock' else 'normal', (0.4, 0.0), iris=(70, 60, 50))
+    cap(L, H(0.8, 23.5 + br), H(1.5, 23.4 + br), 0.12, 0.1, (70, 50, 40)); cap(L, H(1.7, 23.4 + br), H(2.4, 23.5 + br), 0.12, 0.1, (70, 50, 40))
+    mouth(L, H(1.7, 21.0 + br), 0.5, mouth_, 'happy' if expr == 'happy' else 'normal', lip=(170, 90, 80))
+    ellt(L, H(0.5, 25.1 + br), 2.4, 1.3, (P['hat'], _mix(P['hat'], (255, 255, 255), 0.25), _mix(P['hat'], (0, 0, 0), 0.3)))   # fur hat
+    for sx in (-1.6,): ellt(L, H(sx, 22.6 + br), 0.7, 1.4, (P['hat'], _mix(P['hat'], (255, 255, 255), 0.25), _mix(P['hat'], (0, 0, 0), 0.3)))
+    hand = H(2.8, 14.0)
+    cap(L, H(1.6, 18.6), hand, 0.85, 0.75, *co)
+    ell(L, hand, 0.7, 0.65, sk[0], 0, sk[1], sk[2])
+    if held: battery(L, (hand[0] + 0.4, hand[1] + 0.4), 0.9)
+    outline(L, OL)
+    CH.add(L)
+    return dict(head=H(0.8, 22.2 + br), mouth=H(1.7, 21.0 + br))
+
+
+def hot_water_bottle(L, x, y, s=1.0):
+    ell(L, (x, y), 18 * s, 13 * s, (214, 60, 60), 0, (240, 100, 100), (160, 30, 30))
+    cap(L, (x + 16 * s, y - 4 * s), (x + 24 * s, y - 8 * s), 4 * s, 3.5 * s, (160, 30, 30))
+
