@@ -33,6 +33,19 @@ BG = {
             'porch (podyezd) of the building with a metal door, a small canopy and a bench covered with snow; on the left a lamp post '
             'with a warm light and a bare tree with frost; on the building wall next to the door a round blank wall plate; frosty haze, '
             'pink-blue sky, lit windows. The snowy ground in the front is clear empty space.',
+    'balcony': 'A narrow glazed Soviet panel-block balcony (loggia) at night, cluttered: on the left old wooden window frames with single '
+               'glass, dark blue night outside with snow and lit windows of panel blocks across the yard. In the centre against the back '
+               'brick wall an old white rounded Soviet chest freezer with a closed lid and a chrome handle, frost on it, a small blank '
+               'metal plate on its front. To the right of the freezer an old oil-filled electric radiator heater glowing warm orange, and '
+               'wooden boxes of green seedlings on a shelf under a pink-purple grow lamp. Clutter: three-litre glass jars on shelves, old '
+               'skis, a bicycle wheel, a sledge, a cardboard box, an old stool, a bare light bulb hanging from a wire. Worn painted wooden '
+               'floor. On the far right edge a white balcony door with glass to the dark apartment. The floor in front of the freezer is '
+               'clear empty space.',
+    'hall': 'A dark narrow Soviet apartment hallway at night, all lamps off, cold blue moonlight from the kitchen door. On the left wall at '
+            'eye level an old grey electricity meter box with a round glass window and a spinning disc, a blank paper notice under it. A '
+            'coat rack with winter coats and fur hats, a shoe shelf with boots, a mirror, an old wall telephone, wallpaper with a faded '
+            'pattern. On the right a doorway to a dark room. Worn parquet floor with a long runner rug. The floor in the middle is clear '
+            'empty space.',
 }
 
 
