@@ -1,0 +1,12 @@
+{
+ "b1": ["batya", "[excited, loud, shouting over noise] Два́дцать девя́тое — День ма́тери! Пода́рок де́лаем са́ми!"],
+ "t1": ["tema", "[deadpan, flat, to camera] Ба́тя реши́л: магази́н — для сла́бых. Мы в гараже́."],
+ "b2": ["batya", "[confident, proud, squinting] Руле́тка не нужна́. У меня́ глаз — алма́з!"],
+ "t2": ["tema", "[deadpan, flat] Табуре́тка. Три ноги́. Э́то конте́нт."],
+ "b3": ["batya", "[proud, defensive, cheerful] Три ноги́ — усто́йчивее! Как штати́в!"],
+ "g1": ["babushka", "[delighted, warm, emotional, loud] Ви́тенька! Э́то мне?! Сыно́к, сам сде́лал!"],
+ "b4": ["batya", "[confused, embarrassed, quiet] Ма́ма… Вообще́-то э́то для И́ры…"],
+ "i1": ["ira", "[warm, dry, smiling] Ви́тя. Стол я накры́ла сама́. Сади́тесь."],
+ "g2": ["babushka", "[worried, caring, fussing] Ви́тенька, ты похуде́л! И лоб горя́чий!"],
+ "b5": ["batya", "[weak, childish, whining, dramatic] Ма́ма… Три́дцать семь и два́…"]
+}

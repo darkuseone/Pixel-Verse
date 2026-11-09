@@ -32,7 +32,7 @@ def search(lang='ru', gender=None, age=None, accent=None, q=None, n=12):
     d = _req('GET', f'{API}/shared-voices?' + urllib.parse.urlencode(p))
     vs = [v for v in d.get('voices', []) if not lang or v.get('language') == lang][:n]
     for v in vs:
-        print(f"{v['voice_id']}  owner={v['public_owner_id'][:12]}…  {v.get('gender')}/{v.get('age')}/{v.get('accent')}  "
+        print(f"{v['voice_id']}  owner={v['public_owner_id']}  {v.get('gender')}/{v.get('age')}/{v.get('accent')}  "
               f"notice={v.get('notice_period')}d  {v['name']}\n    {(v.get('description') or '')[:200].replace(chr(10), ' ')}")
     json.dump(vs, open(P.build('voices', 'lib', 'last_search.json'), 'w'), ensure_ascii=False, indent=1)
     return vs

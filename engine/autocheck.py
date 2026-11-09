@@ -7,6 +7,10 @@ render log (stage.LOG) and checks what a vision critic used to find by eye — a
   HEAD_CUT     a face cut by the frame edge
   SEAM         (--seams, experimental) a straight colour step across the frame; off by default: too many false hits
   TIMING       length 30–38 s, twist at 50–60 % and <= 18 s, shots longer than 3.2 s
+  PACE         a gap in speech > 1.5 s in the first 10 s (S02E02: 3.7 s of knocking + a notice-board insert = −40 pts in 5 s,
+               08.11.2026), > 2.5 s later on (NIT)
+  ENDING       a spoken ask after the twist («Пишите…», «напишите», «в комменты», «подпишись», «comment»…) — the retention curve
+               drops 12–15 pts right after it (08.11.2026, formula §11.8); more than 0.6 s after the last line (end on the punchline)
   AUDIO        integrated -14 ±1 LUFS (test rule 25.10.2026) or legacy mean -20…-22 dB, peak <= 0 dB (from final.mp4 if present)
   COVER        cover.png + cover_grid.png exist
 
@@ -122,6 +126,41 @@ def timing(tl):
         if not (0.50 <= r <= 0.60) or tw > 18.0: F.append(dict(code='TIMING', sev='FIX', msg=f'twist at {tw:.2f} s = {r:.0%} (50–60 %, <= 18 s)'))
     for a, b in zip(tl.CUTS[:-1], tl.CUTS[1:]):
         if b - a > 3.2: F.append(dict(code='TIMING', sev='NIT', msg=f'shot {a:.2f}–{b:.2f} lasts {b - a:.1f} s (> 3 s)'))
+    return F + pace(tl) + ending(tl)
+
+
+def pace(tl):
+    """Silent stretches between lines: the first 10 s must keep talking (a mute beat or a sign to read there = swipe)."""
+    vo = sorted((v for v in getattr(tl, 'VOICE', []) if isinstance(v, (list, tuple)) and len(v) >= 6), key=lambda v: v[3])
+    F, end = [], 0.0
+    for v in vo:
+        gap = v[3] - end
+        if end < 10.0 and gap > 1.5:
+            F.append(dict(code='PACE', sev='FIX', msg=f'{gap:.1f} s without speech at {end:.2f}–{v[3]:.2f} s — in the first 10 s every shot carries '
+                                                     f'a line (S02E02 lost 40 pts on a mute knock + notice insert, formula §11.8)'))
+        elif gap > 2.5:
+            F.append(dict(code='PACE', sev='NIT', msg=f'{gap:.1f} s without speech at {end:.2f}–{v[3]:.2f} s — action + SFX there?'))
+        end = max(end, v[3] + v[5])
+    return F
+
+
+ASK = re.compile(r'(?<!\w)(пишите|напишите|пиши в|в коммент|коммент[ыа]|отправь тому|отправьте|подпишись|подписывайтесь)'
+                 r'|\b(comment|subscribe|send this to|tag a)\b', re.I)
+
+
+def ending(tl):
+    """Spoken ask after the twist and the tail after the last line (VOICE rows: key, vep, file, start, 0, dur, tags, caption)."""
+    vo = [v for v in getattr(tl, 'VOICE', []) if isinstance(v, (list, tuple)) and len(v) >= 6]
+    if not vo: return []
+    F, dur = [], tl.DUR
+    tw = getattr(tl, 'TWIST', None) or dur * 0.5
+    for v in vo:
+        cap = str(v[-1]).replace('\u0301', '')
+        if v[3] >= tw and ASK.search(cap):
+            F.append(dict(code='ENDING', sev='FIX', msg=f'spoken ask at {v[3]:.2f} s «{cap[:48]}» — viewers swipe right after it (cliff −12 pts, '
+                                                     f'formula §11.8); keep the question as on-screen text over the button + pinned comment'))
+    tail = dur - max(v[3] + v[5] for v in vo)
+    if tail > 0.6: F.append(dict(code='ENDING', sev='NIT', msg=f'{tail:.1f} s after the last line — end on the punchline (<= 0.5 s)'))
     return F
 
 

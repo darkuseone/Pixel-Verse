@@ -3,28 +3,44 @@ Timeline module provides DUR, VOICE, SFX, BEDS and optionally VFX (speaker -> ex
 and VGAIN (speaker -> gain). Beds are looped with acrossfade, faded and ducked under speech.
 Optional T.LUFS (e.g. -14, owner's test rule 25.10.2026): two-pass loudnorm of the final mix to LUFS / -1 dBTP instead of the
 plain MASTER gain (older timelines without LUFS keep their exact old sound).
+Optional T.VNORM (e.g. -16, owner 09.11.2026: «музыка и звуки громкие, голоса тихие»): every voice line is levelled to this integrated
+loudness before the mix (gain = VNORM − measured LUFS of the line, ×VTRIM[speaker] if given), so whispered / «weak» takes are not buried
+under music and SFX. Without VNORM the old per-speaker VGAIN is used.
 Usage from an episode folder:  python3 mix.py [noaudio.mp4 final.mp4]   (mix.py there calls run(...))"""
 import json
 import os
+import re
 import subprocess
 import paths as P
 
 PHONE = 'highpass=f=320,lowpass=f=3200,acompressor=threshold=0.2:ratio=4,volume=1.3'
 
 
+def _lufs(path):
+    r = subprocess.run(['ffmpeg', '-nostats', '-i', str(path), '-af', 'ebur128', '-f', 'null', '-'], capture_output=True, text=True).stderr
+    v = re.findall(r'I:\s+(-?[\d.]+) LUFS', r)
+    return float(v[-1]) if v and float(v[-1]) > -60 else None
+
+
 def run(slug, ep, T, video=None, out_mp4=None):
     DUR, VOICE, SFX, BEDS = T.DUR, T.VOICE, T.SFX, T.BEDS
     VFX = getattr(T, 'VFX', {}); VGAIN = getattr(T, 'VGAIN', {})
+    VNORM = getattr(T, 'VNORM', None); VTRIM = getattr(T, 'VTRIM', {})
     inputs, chains, labels = [], [], []
 
     def add_input(path):
         inputs.extend(['-i', str(path)]); return len(inputs) // 2 - 1
 
     for vid, vep, key, t0, a, b, who, txt in VOICE:
-        i = add_input(P.series(slug) / 'voice' / vep / f'{key}.mp3'); d = int(t0 * 1000)
+        src = P.series(slug) / 'voice' / vep / f'{key}.mp3'
+        i = add_input(src); d = int(t0 * 1000)
         extra = (',' + VFX[who]) if who in VFX else ''
+        g = VGAIN.get(who, 1.45)
+        if VNORM is not None:
+            lv = _lufs(src)
+            if lv is not None: g = min(8.0, max(0.5, 10 ** ((VNORM - lv) / 20))) * VTRIM.get(who, 1.0)
         chains.append(f'[{i}:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.01,afade=t=out:st={max(0, b - a - 0.03):.3f}:d=0.03,'
-                      f'aresample=44100,aformat=channel_layouts=stereo{extra},volume={VGAIN.get(who, 1.45)},adelay={d}|{d}[v_{vid}]')
+                      f'aresample=44100,aformat=channel_layouts=stereo{extra},volume={g:.3f},adelay={d}|{d}[v_{vid}]')
         labels.append(f'[v_{vid}]')
     for k, s in enumerate(SFX):
         path, t0, g = s[:3]; a, b = (s[3], s[4]) if len(s) > 4 else (None, None)
