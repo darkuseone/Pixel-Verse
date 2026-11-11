@@ -5,3 +5,6 @@ __pycache__/
 *.wav
 *seg_*.mp4
 *_noaudio.mp4
+# стиль 2.5D: модель глубины качается сама; листы проверки глубины
+library/models/
+*.depth_check.png
