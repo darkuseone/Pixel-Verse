@@ -263,7 +263,7 @@ D_STACHE = [(56, 36, 28), (84, 58, 42), (112, 82, 58), (146, 112, 80)]
 def dibs(sp, pose='stand', t=0.0, mouth_=0.0, expr='normal', look=0.0, blink=None, shades=False, hands=None, props=None,
          soot=0.0, sweat=0.0, flap=0.0, legs=True, clip_h=None, breath=True, beard=0.0, wind=0.0, badge22=False):
     pose = POSE[pose] if isinstance(pose, str) else pose
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     br = (0.6 * math.sin(t * 2.2)) if breath else 0.0
     hipy = 22.0
     hipL, hipR = (-8.0, hipy), (7.0, hipy)
@@ -403,7 +403,7 @@ def thug_torso(sp, cx, cy, rx, ry, br, n=2.2):
 def terry(sp, pose='stand', t=0.0, mouth_=0.0, expr='nervous', look=0.0, blink=None, shades=False, hands=None, props=None,
           soot=0.0, sweat=0.0, legs=True, clip_h=None, breath=True, hat=True):
     pose = POSE[pose] if isinstance(pose, str) else pose
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     br = (0.5 * math.sin(t * 2.4 + 1)) if breath else 0.0
     hipy = 34.0
     hipL, hipR = (-5.0, hipy), (5.0, hipy)
@@ -465,7 +465,7 @@ G_SKIN = [(148, 92, 66), (194, 132, 96), (226, 168, 126), (246, 204, 164)]
 def gary(sp, pose='stand', t=0.0, mouth_=0.0, expr='normal', look=0.0, blink=None, shades=False, hands=None, props=None,
          soot=0.0, sweat=0.0, legs=True, clip_h=None, breath=True, hat=True, badge=False):
     pose = POSE[pose] if isinstance(pose, str) else pose
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     br = (0.7 * math.sin(t * 2.0 + 2)) if breath else 0.0
     hipy = 15.0
     hipL, hipR = (-7.0, hipy), (7.0, hipy)
@@ -559,7 +559,7 @@ DEB_PINK = (232, 86, 160)
 def deb(sp, pose='hold', t=0.0, mouth_=0.0, expr='smile', look=0.0, blink=None, hands=None, props=None, sweat=0.0, legs=False,
         clip_h=None, breath=True, headset=True, lean=0.0):
     pose = POSE[pose] if isinstance(pose, str) else pose
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     br = (0.5 * math.sin(t * 2.1 + 0.5)) if breath else 0.0
     G = dict(shL=(-15.0, 48.0 + br), shR=(13.0, 48.0 + br), head=(2.0 + lean, 66.0 + br), hip=18.0, rx=18.0, arm=22.0, hrx=14.0, hry=13.5)
     tl, tr, bl, bR = hand_targets(pose, G)
@@ -628,7 +628,7 @@ B_SHOE = [(170, 174, 186), (214, 218, 228), (244, 246, 250), (255, 255, 255)]
 def brad(sp, pose='stand', t=0.0, mouth_=0.0, expr='grin', look=0.0, blink=None, hands=None, props=None, legs=True, clip_h=None,
          breath=True, shades_up=True, ting=0.0, sweat=0.0):
     pose = POSE[pose] if isinstance(pose, str) else pose
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     br = (0.5 * math.sin(t * 2.3 + 3)) if breath else 0.0
     hipy = 30.0
     hipL, hipR = (-5.5, hipy), (5.5, hipy)
@@ -703,7 +703,7 @@ def lady(sp, who='mrs_w', pose='hold', t=0.0, mouth_=0.0, expr='deadpan', look=0
          clip_h=24.0, breath=True, step=0.0):
     pose = POSE[pose] if isinstance(pose, str) else pose
     L = LADIES[who]
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     br = (0.4 * math.sin(t * 2.0 + len(who))) if breath else 0.0
     G = dict(shL=(-14.0, 46.0 + br), shR=(12.0, 46.0 + br), head=(2.0, 66.0 + br), hip=16.0, rx=16.0, arm=20.0, hrx=12.0, hry=13.0)
     tl, tr, bl, bR = hand_targets(pose, G)
@@ -773,7 +773,7 @@ R_CAP = [(60, 44, 30), (96, 72, 48), (130, 102, 70), (168, 140, 100)]
 
 
 def marty(sp, pose='sit', t=0.0, mouth_=0.0, expr='deadpan', look=0.0, blink=None, hands=None, props=None, legs=True, clip_h=None, breath=True):
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     br = (0.4 * math.sin(t * 3.0)) if breath else 0.0
     # tail curling behind
     pts = [(-6 - 9 * math.sin(k * 0.35) - k * 0.6, 3 + k * 1.4 + 2 * math.sin(t * 2 + k * 0.4)) for k in range(14)]
@@ -830,7 +830,7 @@ T_SUIT = [(30, 46, 30), (50, 74, 48), (76, 104, 70), (120, 150, 108)]
 def tech(sp, pose='stand', t=0.0, mouth_=0.0, expr='nervous', look=0.0, blink=None, hands=None, props=None, legs=True, clip_h=None,
          breath=True, helmet=True):
     pose = POSE[pose] if isinstance(pose, str) else pose
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     br = (0.5 * math.sin(t * 2.6)) if breath else 0.0
     hipy = 24.0
     hipL, hipR = (-8.0, hipy), (8.0, hipy)
@@ -877,7 +877,7 @@ C_FUR = [(150, 150, 178), (198, 198, 218), (234, 234, 244), (255, 255, 255)]
 
 
 def cat(sp, pose='sit', t=0.0, mouth_=0.0, expr='smug', look=0.0, blink=None, lid=0.55, tail=0.5, legs=True, clip_h=None, **_):
-    X = dict(EXPR.get(expr, EXPR['normal'])); X['lid'] = lid * 0.75; X['eo'] = 1.0
+    X = dict((expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))); X['lid'] = lid * 0.75; X['eo'] = 1.0
     br = 0.3 * math.sin(t * 2.0)
     # tail curling around the paws
     sw = math.sin(t * 2.3) * tail
@@ -989,7 +989,7 @@ BEA_CARD = [(90, 70, 130), (130, 104, 176), (166, 140, 210), (206, 186, 240)]
 def bea(sp, pose='hold', t=0.0, mouth_=0.0, expr='deadpan', look=0.0, blink=None, hands=None, props=None, legs=False, clip_h=None,
         breath=True, gum=0.0, **_):
     pose = POSE[pose] if isinstance(pose, str) else pose
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     br = (0.4 * math.sin(t * 1.8)) if breath else 0.0
     G = dict(shL=(-14.0, 46.0 + br), shR=(12.0, 46.0 + br), head=(2.0, 66.0 + br), hip=16.0, rx=16.0, arm=21.0, hrx=12.0, hry=13.0)
     tl, tr, bl, bR = hand_targets(pose, G)
@@ -1046,7 +1046,7 @@ W_JEANS = [(30, 44, 80), (44, 64, 110), (62, 90, 146), (100, 130, 186)]
 def worker(sp, pose='stand', t=0.0, mouth_=0.0, expr='deadpan', look=0.0, blink=None, hands=None, props=None, legs=True, clip_h=None,
            breath=True, **_):
     pose = POSE[pose] if isinstance(pose, str) else pose
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     br = (0.6 * math.sin(t * 1.9)) if breath else 0.0
     hipy = 24.0
     hipL, hipR = (-8.0, hipy), (8.0, hipy)
@@ -1116,7 +1116,7 @@ def townie(sp, variant=0, pose='stand', t=0.0, mouth_=0.0, expr='normal', look=0
            breath=True, **_):
     """a Chicagoan bundled up for winter; variant picks coat, hat, skin, facial hair, glasses"""
     pose = POSE[pose] if isinstance(pose, str) else pose
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     r = np.random.default_rng(variant * 7 + 3)
     coat = ramp(TOWN_COATS[variant % len(TOWN_COATS)]); hatc = ramp(TOWN_HATS[(variant * 3) % len(TOWN_HATS)])
     skin = TOWN_SKIN[(variant * 5 + 1) % len(TOWN_SKIN)]
@@ -1179,7 +1179,7 @@ S_SKIN = [(150, 96, 74), (200, 140, 108), (232, 182, 146), (250, 216, 184)]
 
 def sal(sp, t=0.0, look=0.0, expr='nervous', blink=None, clip_h=None, **_):
     """Sal hiding behind his counter: tall pleated chef hat, bushy brows, worried eyes (the rest is under the ledge)"""
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     hx, hy = 2.0, 20.0
     face = sp.union([sp.m_ell(hx, hy, 11.0, 11.5), sp.m_ell(hx + 1.0, hy - 6, 10.0, 7.0)], S_SKIN)
     bl_ = _blink(t + 1.3, blink)
@@ -1275,7 +1275,7 @@ CHF_HAIR = [(120, 120, 130), (164, 164, 174), (204, 204, 212), (236, 236, 242)]
 def chief(sp, pose='stand', t=0.0, mouth_=0.0, expr='deadpan', look=0.0, blink=None, hands=None, props=None, legs=True, clip_h=None,
           breath=True, **_):
     pose = POSE[pose] if isinstance(pose, str) else pose
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     br = (0.4 * math.sin(t * 1.6)) if breath else 0.0
     hipy = 30.0
     hipL, hipR = (-7.0, hipy), (7.0, hipy)
@@ -1463,7 +1463,7 @@ def cabbie(sp, pose='rest', t=0.0, mouth_=0.0, expr='deadpan', look=0.0, blink=N
            breath=True, **_):
     """New York cabbie: tweed flat cap, heavy five-o'clock shadow, hooked nose, toothpick, gold chain, ribbed white tank under an open
     leather jacket, hairy forearm resting on the window ('rest')"""
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     br = (0.3 * math.sin(t * 1.7)) if breath else 0.0
     G = dict(shL=(-17.0, 50.0 + br), shR=(16.0, 50.0 + br), head=(3.0, 72.0 + br), hip=18.0, rx=18.0, arm=24.0, hrx=12.5, hry=13.5)
     if pose == 'rest':

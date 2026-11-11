@@ -28,6 +28,7 @@ XTRA = dict(bored=dict(eo=0.85, pu=0.55, bt=0.05, bl=0.1, mo=0.0, mc=-0.1, lid=0
 
 
 def X(expr):
+    if isinstance(expr, dict): return dict(expr)                  # плавная мимика (props/mimic.py) подаёт готовый словарь
     e = dict(XTRA.get(expr) or EXPR.get(expr, EXPR['normal']))
     return e
 

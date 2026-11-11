@@ -57,6 +57,7 @@ def txt(sp, s_, i0, j0, c, keep=True):
 
 
 def X(expr):
+    if isinstance(expr, dict): return dict(expr)                  # плавная мимика (props/mimic.py) подаёт готовый словарь
     return dict(XTRA.get(expr) or EXPR.get(expr, EXPR['normal']))
 
 

@@ -89,7 +89,7 @@ def head(Hd, F, HS, expr, t, mouth, look, blink=True, shades=False, sweat=0.0, b
     """generic 3/4 head facing +x. F(x, y) maps head-local coordinates (origin = head centre, ~3 units radius) to layer coords.
     HS: skin(3 tones), skull(rx, ry), jaw(cx, cy, rx, ry), nose(r, col), eye(iris col, scale), brow(col, thick), stache(col, size) | None,
     lip, teeth, back(Hd, F), front(Hd, F, ctx) callbacks."""
-    X = EXPR.get(expr, EXPR['normal'])
+    X = (expr if isinstance(expr, dict) else EXPR.get(expr, EXPR['normal']))
     sk, skh, sks = HS['skin']
     if blush > 0:
         sk, skh, sks = [lerpc(c, (250, 84, 76), blush) for c in HS['skin']]
