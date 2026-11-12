@@ -48,7 +48,7 @@ def wx_(name):
     return 'ocean_night' if name == 'night' else 'ocean'
 
 
-def car_cu(t, head, z, base=(0.8, 0.0), Z=1.35, cx=600.0, cy=380.0, kick_=(0, 0), fx_=None, **kw):
+def car_cu(t, head, z, base=(0.8, 0.0), Z=1.35, cx=600.0, cy=380.0, kick_=(0, 0), fx_=None, roof=None, **kw):
     name = 'ocean_night' if raining(t) else 'ocean'
     light = K.light_rain if raining(t) else K.light_sunset
     v = K.V(name, cx, cy, Z)
@@ -56,7 +56,7 @@ def car_cu(t, head, z, base=(0.8, 0.0), Z=1.35, cx=600.0, cy=380.0, kick_=(0, 0)
     k, dy = FACE('vince', t, base, **d)
     wx, wy = car_at_head(v, head[0], head[1] + dy * 10, z)
     acts = CM_fg(K.car_group(v, wx, wy, t, vince_kw=k, z=z))
-    acts[-1].P['roof'] = roof_k(t); acts[-1].P['fog'] = 1.0 if t > SUN + 3 else 0.0
+    acts[-1].P['roof'] = roof_k(t) if roof is None else roof; acts[-1].P['fog'] = 0.0 if roof is not None else (1.0 if t > SUN + 3 else 0.0)
     def f(big, _):
         if level(t) > 0.01: water(big, t, 1920 - level(t) * 900)
         if raining(t): K.rain(big, t, 1.0)
@@ -175,7 +175,10 @@ def r_sweat(t, u):
 
 
 def r_convert(t, u):
-    return car_cu(t, (470, 960), 3.6 * (1 + 0.03 * u), (0.9, -0.2), sweat=2.0)
+    def roofbar(big, v):
+        big[700:800] = (70, 60, 96); big[800:812] = (40, 30, 60)
+        for x in range(60, 1080, 220): big[700:800, x:x + 14] = (90, 80, 120)
+    return car_cu(t, (470, 1080), 3.6 * (1 + 0.03 * u), (0.9, -0.2), sweat=2.0, roof=0.0, fx_=roofbar)
 
 
 def r_button(t, u):

@@ -116,7 +116,7 @@ def r_hook(t, u):
 
 def r_tv(t, u):
     v = K.V('studio', 250.0, 420.0, 1.1)
-    big, _ = room(t, 1.1, 250.0, 420.0, acts=[vince_act(v, t, x=380.0)], fran=False, dof_k=10)
+    big, _ = room(t, 1.1, 250.0, 420.0, acts=[vince_act(v, t, x=345.0)], fran=False, dof_k=10)
     return big
 
 
@@ -126,7 +126,7 @@ def r_six(t, u):
 
 def r_fran(t, u):
     v = K.V('studio', 1000.0, 380.0, 1.05)
-    big, _ = room(t, 1.05, 1000.0, 380.0, acts=[vince_act(v, t, x=880.0, flip=False)], dof_k=10)
+    big, _ = room(t, 1.05, 1000.0, 380.0, acts=[vince_act(v, t, x=935.0, flip=False)], dof_k=10)
     return big
 
 
@@ -177,7 +177,7 @@ def r_lapse(t, u):
 
 def r_twist(t, u):
     v = K.V('studio', 1000.0, 400.0, 1.05)
-    big, _ = room(t, 1.05, 1000.0, 400.0, acts=[vince_act(v, t, x=880.0, flip=False)], dawn=1.0, dof_k=10,
+    big, _ = room(t, 1.05, 1000.0, 400.0, acts=[vince_act(v, t, x=935.0, flip=False)], dawn=1.0, dof_k=10,
                   kick=kick(t, [(TWIST + 0.05, 1.0)]))
     O.draw_sticker(big, ST_LVL, t, T['f2'] + 0.6, CUTS[10], 540, 360)
     return big
@@ -198,7 +198,7 @@ def r_elec(t, u):
 
 def r_share(t, u):
     v = K.V('studio', 1000.0, 400.0, 1.0)
-    big, _ = room(t, 1.0, 1000.0, 400.0, acts=[vince_act(v, t, x=880.0, flip=False)], dawn=1.0, dof_k=10)
+    big, _ = room(t, 1.0, 1000.0, 400.0, acts=[vince_act(v, t, x=935.0, flip=False)], dawn=1.0, dof_k=10)
     return big
 
 
@@ -232,8 +232,8 @@ assert len(R) == len(CUTS) - 1 == len(NAMES)
 SHOW = K.Show(EPI, 6, ['FINALLY?'], hook_t=(0.10, 2.4), hook_y=260, hook_size=100,
               stickers=[(K.st('GAME FUND: -$461', fg=(90, 236, 255), size=46), T['v6'], CUTS[15], 540, 330)],
               flashes=[TWIST, CUTS[13], CUTS[15]], mosaics=[CUTS[8]],
-              cap_y={0: 1500, 1: 1300, 2: 1500, 3: 1300, 4: 1500, 5: 1560, 6: 1500, 7: 1560, 8: 1300, 9: 1300, 10: 1500, 11: 1520,
-                     12: 1300, 13: 1560, 14: 1520, 15: 1500})
+              cap_y={0: 1500, 1: 1300, 2: 1500, 3: 1620, 4: 1500, 5: 1560, 6: 1500, 7: 1560, 8: 1300, 9: 1300, 10: 1500, 11: 1520,
+                     12: 1620, 13: 1560, 14: 1520, 15: 1500})
 
 
 def render(t):
