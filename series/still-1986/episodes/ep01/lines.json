@@ -1,0 +1,70 @@
+{
+ "v1": [
+  "vince",
+  "[smooth, smug, late-night radio DJ, slow and cool] Ocean Drive. Sunset. And I'm parking for FREE, baby."
+ ],
+ "f1": [
+  "fran",
+  "[deadpan, raspy, unimpressed] Honey. Nobody parks free on Ocean Drive."
+ ],
+ "v2": [
+  "vince",
+  "[smug, confident, flipping a coin] Watch me. It's eighty-six. Parking's a QUARTER."
+ ],
+ "f2": [
+  "fran",
+  "[bored, dry, tired] Honey, it's twenty twenty-six. There's an APP."
+ ],
+ "v3": [
+  "vince",
+  "[outraged, shouting, voice cracking] Fourteen an HOUR?! Plus a CONVENIENCE fee?!"
+ ],
+ "v4": [
+  "vince",
+  "[furious, high squeaky outraged] Convenient for WHO?!"
+ ],
+ "v5": [
+  "vince",
+  "[scheming, sly, quiet, very pleased with himself] New plan. If I never STOP, it's not PARKING."
+ ],
+ "f3": [
+  "fran",
+  "[flat, bored, to the camera] Lap forty-seven. Send this to your friend who does this."
+ ],
+ "v6": [
+  "vince",
+  "[exhausted, sleepy, but still trying to sound cool] Still FREE, baby."
+ ],
+ "v7": [
+  "vince",
+  "[ecstatic, overjoyed, shouting] FREE PARKING!"
+ ],
+ "r1": [
+  "rey",
+  "[chill, calm, unbothered, warm] Tow and storage. Three-fifty, amigo."
+ ],
+ "v8": [
+  "vince",
+  "[outraged, shrill, betrayed] It SAID free!"
+ ],
+ "r2": [
+  "rey",
+  "[calm, patient, matter-of-fact] Parking's free. The RIDE'S three-fifty."
+ ],
+ "v9": [
+  "vince",
+  "[proud but defeated, dramatic, wind in his hair] Still the coolest guy on Ocean Drive."
+ ],
+ "f4": [
+  "fran",
+  "[deadpan, raspy, dry punchline] Coolest guy on a TOW truck, honey."
+ ],
+ "v10": [
+  "vince",
+  "[desperate, digging in his pockets, proud] FINE! I'll pay in QUARTERS!"
+ ],
+ "r3": [
+  "rey",
+  "[calm, deadpan, holding up a phone] Tow's pay-by-APP, amigo."
+ ]
+}

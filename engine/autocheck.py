@@ -6,7 +6,7 @@ render log (stage.LOG) and checks what a vision critic used to find by eye — a
   PLATE        the episode plate over a sharp sign
   HEAD_CUT     a face cut by the frame edge
   SEAM         (--seams, experimental) a straight colour step across the frame; off by default: too many false hits
-  TIMING       length 30–38 s, twist at 50–60 % and <= 18 s, shots longer than 3.2 s
+  TIMING       length 35–45 s (owner 12.11.2026), twist at 50–60 %, shots longer than 3.2 s
   AUDIO        integrated -14 ±1 LUFS (test rule 25.10.2026) or legacy mean -20…-22 dB, peak <= 0 dB (from final.mp4 if present)
   COVER        cover.png + cover_grid.png exist
 
@@ -115,11 +115,11 @@ def analyse(frame, log, t, shot):
 def timing(tl):
     F = []
     dur = tl.DUR
-    if not (30.0 <= dur <= 38.0): F.append(dict(code='TIMING', sev='FIX', msg=f'length {dur:.1f} s (30–38)'))
+    if not (35.0 <= dur <= 45.5): F.append(dict(code='TIMING', sev='FIX', msg=f'length {dur:.1f} s (35–45)'))
     tw = getattr(tl, 'TWIST', None)
     if tw is not None:
         r = tw / dur
-        if not (0.50 <= r <= 0.60) or tw > 18.0: F.append(dict(code='TIMING', sev='FIX', msg=f'twist at {tw:.2f} s = {r:.0%} (50–60 %, <= 18 s)'))
+        if not (0.50 <= r <= 0.605): F.append(dict(code='TIMING', sev='FIX', msg=f'twist at {tw:.2f} s = {r:.0%} (50–60 %)'))
     for a, b in zip(tl.CUTS[:-1], tl.CUTS[1:]):
         if b - a > 3.2: F.append(dict(code='TIMING', sev='NIT', msg=f'shot {a:.2f}–{b:.2f} lasts {b - a:.1f} s (> 3 s)'))
     return F

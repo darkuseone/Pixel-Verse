@@ -5,7 +5,7 @@ where it covers no face and no caption.
   python3 engine/endcard.py apply series/<slug>/episodes/epNN [--lang us|ru] [--sec 1.0]   # finished final.mp4, no re-render
   python3 engine/endcard.py preview <style> <lang> out.png
 In new episodes the card goes straight into the render: Episode(..., endcard=dict(style=..., lang=...)) (engine/episode.py).
-Styles: 'fm' (Florida Man: postcard letters + (ALLEGEDLY) stamp + pixel bell), 'randy' («Thanks, Randy»: price-tag feast letters + bell + (STILL FROZEN) tag), 'taiga' («Прохор»: campfire letters, snow caps, icicles), 'default' (any series: Press Start 2P, outline, glow).
+Styles: 'v86' («STILL 1986»: chrome letters + bell + VHS label with the promise), 'fm' (Florida Man: postcard letters + (ALLEGEDLY) stamp + pixel bell), 'randy' («Thanks, Randy»: price-tag feast letters + bell + (STILL FROZEN) tag), 'taiga' («Прохор»: campfire letters, snow caps, icicles), 'default' (any series: Press Start 2P, outline, glow).
 """
 import sys, math, subprocess, pathlib, importlib, os
 import numpy as np
@@ -86,6 +86,16 @@ def card(style='default', lang='us', width=None, promise=None):
         row[(row.shape[0] - bell.shape[0]) // 2:(row.shape[0] - bell.shape[0]) // 2 + bell.shape[0], :bell.shape[1]] = bell
         row[(row.shape[0] - tag.shape[0]) // 2:(row.shape[0] - tag.shape[0]) // 2 + tag.shape[0], bell.shape[1] + 24:] = tag
         img = _stack([title, row], width, gap=6)
+    elif style == 'v86':                                         # «STILL 1986»: chrome 80s letters + bell + VHS label «(IT'S 1986)»
+        from props import v86kit as K
+        title = fit(K.title_trim(K.chrome_title([txt], 96 if width <= 1080 else 116, width=width + 300)), width - 60)
+        tag = K.vhs_label("(IT'S 1986)", promise or 'STILL 1986', w=480, h=120)
+        bell = _bell(11)
+        row = np.zeros((max(tag.shape[0], bell.shape[0]), bell.shape[1] + 24 + tag.shape[1], 4), np.uint8)
+        row[(row.shape[0] - bell.shape[0]) // 2:(row.shape[0] - bell.shape[0]) // 2 + bell.shape[0], :bell.shape[1]] = bell
+        row[(row.shape[0] - tag.shape[0]) // 2:(row.shape[0] - tag.shape[0]) // 2 + tag.shape[0], bell.shape[1] + 24:] = tag
+        img = _stack([title, row], width, gap=6)
+        promise = None
     elif style == 'teshcha':                                     # «Тёща на недельку»: «тёщин халат» letters (raspberry, gold shine) + bell
         from props import teshkit as K
         title = fit(K.title_trim(K.hook_title([txt], 96 if width <= 1080 else 116, width=width + 300)), width - 60)

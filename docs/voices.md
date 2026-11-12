@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-11-02 05:14.
+Обновлено: 2026-11-12 22:12.
 
 ## agent-dibs
 
@@ -74,6 +74,18 @@
 | Лиса (курьер «Лиса-Экспресс») | `fox` | `049gV87VLzOb4th1QiGx` | library_or_premade | 2 / 1 | Прохор — Лиса (курьер «Лиса-Экспресс») |
 | Белка-охранник | `squirrel` | `emZnToZuXhR4oQGQ3LhD` | library_or_premade | 2 / 1 | Прохор — Белка-охранник |
 
+## still-1986
+
+| Герой | char | voice_id | Статус | Реплик / серий | Голос |
+|---|---|---|---|---|---|
+| Fran (neon flamingo sign) | `fran` | `dadIF2xtWrmWMJgTn47F` | active | 4 / 1 | STILL 1986 — Fran (neon flamingo sign) |
+| Vince Velour | `vince` | `kVv0pQADO7gCW0VPlTsR` | library_or_premade | 10 / 1 | STILL 1986 — Vince Velour |
+| Rey (tow truck driver) | `rey` | `vRzW3mEGVjW5jXimKSf1` | library_or_premade | 3 / 1 | STILL 1986 — Rey (tow truck driver) |
+| Tiffany (box office, Gen Z) | `tiffany` | `hv8WzBOrsvuSUeIQGOCM` | library_or_premade | 0 / 0 | STILL 1986 — Tiffany (box office, Gen Z) |
+| Officer Diaz (marine patrol) | `diaz` | `KvaCHcJoMXfOzwtsULOZ` | library_or_premade | 0 / 0 | STILL 1986 — Officer Diaz (marine patrol) |
+| Gary (Vince's boss) | `gary` | `SDARFhQygpPvpLh7Ad1B` | library_or_premade | 0 / 0 | STILL 1986 — Gary (Vince's boss) |
+| ROOF-E (car assistant) | `roofe` | `weA4Q36twV5kwSaTEL0Q` | library_or_premade | 0 / 0 | STILL 1986 — ROOF-E (car assistant) |
+
 ## sunny-palms-hoa
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
@@ -87,14 +99,16 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Толик | `tolik` | `B0jmt8McoEVGc4Ts8fcx` | active | 25 / 6 | Тёща на недельку — Толик |
-| Раиса Захаровна (тёща) | `raisa` | `io2Z9FXP5Y1UP9oCclyU` | active | 21 / 6 | Тёща на недельку — Раиса Захаровна (тёща) |
-| Пуся (той-терьер) | `pusya` | `94UP8JoYQP8SeAvwcEFv` | active | 6 / 6 | Тёща на недельку — Пуся (той-терьер) |
-| Света (жена) | `sveta` | `YvBldwNnE8ctQ8bDGWNM` | active | 3 / 3 | Тёща на недельку — Света (жена) |
-| Люся (сестра тёщи, водитель маршрутки) | `lyusya` | `io2Z9FXP5Y1UP9oCclyU` | active | 2 / 2 | Тёща на недельку — Раиса Захаровна (тёща) |
+| Толик | `tolik` | `B0jmt8McoEVGc4Ts8fcx` | active | 44 / 7 | Тёща на недельку — Толик |
+| Раиса Захаровна (тёща) | `raisa` | `io2Z9FXP5Y1UP9oCclyU` | active | 29 / 7 | Тёща на недельку — Раиса Захаровна (тёща) |
+| Пуся (той-терьер) | `pusya` | `94UP8JoYQP8SeAvwcEFv` | active | 12 / 7 | Тёща на недельку — Пуся (той-терьер) |
+| Люся (сестра тёщи, водитель маршрутки) | `lyusya` | `io2Z9FXP5Y1UP9oCclyU` | active | 6 / 3 | Тёща на недельку — Раиса Захаровна (тёща) |
+| Света (жена) | `sveta` | `YvBldwNnE8ctQ8bDGWNM` | active | 5 / 4 | Тёща на недельку — Света (жена) |
 | Раиса — голосовое сообщение | `raisa_vm` | `io2Z9FXP5Y1UP9oCclyU` | active | 2 / 1 | Тёща на недельку — Раиса Захаровна (тёща) |
+| Бабушка у подъезда | `granny` | `io2Z9FXP5Y1UP9oCclyU` | active | 2 / 1 | Тёща на недельку — Раиса Захаровна (тёща) |
 | Бабушки в маршрутке (хор) | `babki` | `io2Z9FXP5Y1UP9oCclyU` | active | 1 / 1 | Тёща на недельку — Раиса Захаровна (тёща) |
 | Толик — с эхом в пустой квартире | `tolik_echo` | `B0jmt8McoEVGc4Ts8fcx` | active | 1 / 1 | Тёща на недельку — Толик |
+| Бабушка у подъезда 2 | `granny2` | `io2Z9FXP5Y1UP9oCclyU` | active | 1 / 1 | Тёща на недельку — Раиса Захаровна (тёща) |
 
 ## thanks-randy
 
@@ -109,6 +123,12 @@
 | Officer Patty (TSA) | `patty` | `j4ogMUtanUuqkUCotVOx` | library_or_premade | 4 / 1 | Thanks, Randy — Officer Patty (TSA) |
 | Carol (Turkey Talk-Line) | `carol` | `xfJvbnf19p6r0uEM0iJQ` | library_or_premade | 4 / 1 | Thanks, Randy — Carol (Turkey Talk-Line) |
 | Kyle (Best Bye cashier) | `kyle` | `o66JG48gZPKDedxBW6sr` | library_or_premade | 1 / 1 | Thanks, Randy — Kyle (Best Bye cashier) |
+
+## unlisted: Кощей из панельки
+
+| Герой | char | voice_id | Статус | Реплик / серий | Голос |
+|---|---|---|---|---|---|
+| Кощей из панельки — Кощей | `Кощей` | `jdVj8kVEH8bb83ryznli` | deleted 2026-11-12 | 0 / 0 | Кощей из панельки — Кощей |
 
 ## valera-i-kot
 
