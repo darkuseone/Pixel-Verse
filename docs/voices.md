@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-11-12 09:24.
+Обновлено: 2026-11-12 22:12.
 
 ## agent-dibs
 
@@ -78,9 +78,13 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Fran (neon flamingo sign) | `fran` | `dadIF2xtWrmWMJgTn47F` | active | 0 / 0 | STILL 1986 — Fran (neon flamingo sign) |
-| Vince Velour | `vince` | `kVv0pQADO7gCW0VPlTsR` | library_or_premade | 0 / 0 | STILL 1986 — Vince Velour |
-| Rey (tow truck driver) | `rey` | `vRzW3mEGVjW5jXimKSf1` | library_or_premade | 0 / 0 | STILL 1986 — Rey (tow truck driver) |
+| Fran (neon flamingo sign) | `fran` | `dadIF2xtWrmWMJgTn47F` | active | 4 / 1 | STILL 1986 — Fran (neon flamingo sign) |
+| Vince Velour | `vince` | `kVv0pQADO7gCW0VPlTsR` | library_or_premade | 10 / 1 | STILL 1986 — Vince Velour |
+| Rey (tow truck driver) | `rey` | `vRzW3mEGVjW5jXimKSf1` | library_or_premade | 3 / 1 | STILL 1986 — Rey (tow truck driver) |
+| Tiffany (box office, Gen Z) | `tiffany` | `hv8WzBOrsvuSUeIQGOCM` | library_or_premade | 0 / 0 | STILL 1986 — Tiffany (box office, Gen Z) |
+| Officer Diaz (marine patrol) | `diaz` | `KvaCHcJoMXfOzwtsULOZ` | library_or_premade | 0 / 0 | STILL 1986 — Officer Diaz (marine patrol) |
+| Gary (Vince's boss) | `gary` | `SDARFhQygpPvpLh7Ad1B` | library_or_premade | 0 / 0 | STILL 1986 — Gary (Vince's boss) |
+| ROOF-E (car assistant) | `roofe` | `weA4Q36twV5kwSaTEL0Q` | library_or_premade | 0 / 0 | STILL 1986 — ROOF-E (car assistant) |
 
 ## sunny-palms-hoa
 

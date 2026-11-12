@@ -27,6 +27,31 @@ BG = {
             'board, a tall palm tree, a fire hydrant, right a small pastel yellow motel with a blank neon arrow sign and an ice machine. '
             'Deep violet and magenta sky with the last orange glow on the horizon, the first stars, warm street lamps turning on. '
             'Foreground: sidewalk with a low curb and an empty asphalt street across the whole lower third, puddles reflecting neon.',
+    'club': 'Eye-level side view of the entrance of a retro 1980s Miami Beach nightclub at night: a pastel art deco facade with glowing '
+            'pink and turquoise neon tube outlines, a big blank marquee sign above double doors with chrome handles, on the right a small '
+            'ticket booth with a glass window, a round speaker grille and a counter slot, a blank screen inside the booth; red velvet rope '
+            'on chrome posts in front, a short red carpet, palm trees in pots, a wet sidewalk reflecting neon across the lower third, '
+            'purple night sky. Empty, no people.',
+    'disco': 'Interior of a retro 1980s neon nightclub dance floor at night, eye-level wide view: a glowing checkered light-up dance floor '
+             'in pink, turquoise and yellow squares across the lower third, a mirror ball hanging from the ceiling, purple haze, neon tube '
+             'lines on dark walls, a DJ booth with blank screens at the back, a bar with stools at the side, light beams from the ceiling. '
+             'Empty, no people.',
+    'marina': 'Eye-level side view of a Miami marina at sunset: a long wooden dock with bollards and coiled ropes across the lower third, '
+              'a small blank rental shack with a striped awning and a big blank chalkboard sign on the left, white sailboats and yachts '
+              'in the water behind, palm trees, the Miami skyline far away across the bay, a huge orange-pink sunset sky reflected in '
+              'calm water. Empty, no people, no small boats on the dock side.',
+    'bay': 'Wide open Biscayne Bay water at sunset seen from water level: calm rippling water across the lower half with long golden '
+           'and pink sun reflections, the Miami skyline with pastel towers and a long causeway bridge far away, a few distant sailboats, '
+           'a huge glowing sunset sky with purple clouds. Empty, no people, no boats in the foreground.',
+    'mall': 'Eye-level side view of the outside of a big electronics store in an outdoor Miami shopping mall at midnight: a wide glass '
+            'storefront with closed sliding doors and a metal security gate half down, glowing screens and boxes visible inside, a big '
+            'blank neon sign above, blank posters in the windows, queue barrier posts with belts along the sidewalk, palm trees in '
+            'planters, mall lamps glowing, a dark purple night sky. Empty sidewalk across the lower third, no people.',
+    'studio': 'Interior of a small cluttered retro studio apartment at night, eye-level side view: left an old chunky CRT television on '
+              'a low wooden stand with a game console and tangled cables, a beanbag chair and a pink couch in the middle, blank framed '
+              '80s posters on the walls, a lava lamp, a rotary-style phone, VHS tapes; right a big window with blinds open showing the '
+              'night street outside with neon signs glowing pink and turquoise across the street; a ceiling fan, warm lamp light. '
+              'Wooden floor across the lower third, empty, no people.',
 }
 
 NIGHT = ('Exactly the same scene, same buildings, same composition, same camera, but at night: black-violet night sky with stars, '

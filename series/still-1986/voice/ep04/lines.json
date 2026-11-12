@@ -1,0 +1,54 @@
+{
+ "v1": [
+  "vince",
+  "[fake coughing, weak sick voice into the phone] Boss... I got the eighty-six FLU. [coughs]"
+ ],
+ "g1": [
+  "gary",
+  "[pompous, sympathetic, on the phone] Rest up, Vince. Doctor's ORDERS."
+ ],
+ "f1": [
+  "fran",
+  "[deadpan, raspy] Honey. Half this line has the flu."
+ ],
+ "v2": [
+  "vince",
+  "[whispering, amused] Nice disguise, buddy. Hiding from your BOSS?"
+ ],
+ "g2": [
+  "gary",
+  "[fake deep gruff voice, proud] Like a NINJA."
+ ],
+ "v3": [
+  "vince",
+  "[sly, whispering] Watch this. I'll call mine and tell him I'm better."
+ ],
+ "g3": [
+  "gary",
+  "[fake coughing, weak sick voice] Gary speaking... I've got the FLU."
+ ],
+ "v4": [
+  "vince",
+  "[shocked, shouting] GARY?!"
+ ],
+ "g4": [
+  "gary",
+  "[panicking, high pitched] VINCE?!"
+ ],
+ "f2": [
+  "fran",
+  "[flat, to the camera] Send this to your boss. He's in line too."
+ ],
+ "g5": [
+  "gary",
+  "[whispering, conspiratorial] Nobody saw NOTHING."
+ ],
+ "v5": [
+  "vince",
+  "[smug, cool] Deal. And I'm taking FRIDAY."
+ ],
+ "f3": [
+  "fran",
+  "[deadpan, dry punchline] Honey. The whole office is taking Friday."
+ ]
+}

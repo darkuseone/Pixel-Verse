@@ -74,3 +74,40 @@ def dress(name, W):
             (pole_sign(60, 40, ['NO PARKING', 'ANYTIME'], 36, bg=WH, fg=RED, border=RED), 300, 450),
         ])
         D.anim(W, moths(836, 300)); D.anim(W, moths(74, 300, seed=9))
+    elif name == 'club':
+        D.attach(W, [
+            (D.plate(440, 120, ['NEON PALACE', "86 NIGHT TONIGHT"], bg=(60, 20, 70), fg=PINK, border=CYAN, colors=[PINK, CYAN], round_=12), 300, 55),
+            (D.plate(90, 22, ['TICKETS'], bg=(30, 20, 40), fg=YEL, border=YEL), 790, 262),
+            (D.plate(84, 40, ['CASH', 'NOT KING'], bg=WH, fg=RED, border=RED), 812, 400),
+            (D.plate(64, 34, ['DRESS CODE:', 'PASTEL'], bg=(250, 240, 250), fg=(150, 40, 120), border=(150, 40, 120)), 200, 300),
+            (D.plate(70, 30, ['NO REFUNDS', 'NO REGRETS'], bg=YEL, fg=INK, border=INK), 560, 330),
+        ])
+    elif name == 'disco':
+        D.attach(W, [
+            (D.plate(150, 40, ['SILENT DISCO'], bg=(30, 16, 50), fg=CYAN, border=PINK), 565, 205),
+            (D.plate(110, 60, ['HEADPHONES', '$15', '+ FEES'], bg=WH, fg=INK, border=PINK, colors=[INK, RED, (120, 120, 140)]), 1120, 300),
+            (D.plate(80, 26, ['BAR: $22'], bg=(30, 16, 50), fg=YEL, border=YEL), 120, 300),
+        ])
+    elif name == 'marina':
+        D.attach(W, [
+            (D.plate(84, 70, ['SPEEDBOAT', '$900/DAY', '+FUEL', '+CAPTAIN'], bg=(30, 40, 36), fg=WH, border=(140, 100, 60),
+                     colors=[YEL, WH, CYAN, PINK]), 128, 462),
+            (D.plate(120, 26, ["CAPT. RICO'S RENTALS"], bg=(250, 240, 220), fg=(30, 90, 150), border=(30, 90, 150)), 40, 308),
+            (D.plate(70, 22, ['NO WAKE'], bg=WH, fg=RED, border=RED), 1100, 470),
+            (D.plate(60, 30, ['PEDAL', '$25/HR'], bg=PINK, fg=WH, border=WH), 270, 470),
+        ])
+        D.anim(W, gulls(seed=5, box=(300, 60, 1280, 220)))
+    elif name == 'bay':
+        D.anim(W, gulls(n=4, seed=8, box=(0, 80, 1280, 300)))
+    elif name == 'mall':
+        D.attach(W, [
+            (D.plate(380, 90, ['BYTE BUY', 'MIDNIGHT LAUNCH'], bg=(40, 16, 60), fg=PINK, border=CYAN, colors=[PINK, CYAN], round_=10), 300, 160),
+            (D.plate(70, 50, ['THE DROP', '00:00'], bg=(20, 20, 30), fg=CYAN, border=CYAN), 255, 360),
+            (D.plate(70, 50, ['LIMIT 1', 'PER FAN'], bg=YEL, fg=INK, border=INK), 760, 360),
+            (D.plate(60, 26, ['LINE STARTS', 'HERE'], bg=WH, fg=RED, border=RED), 160, 470),
+        ])
+    elif name == 'studio':
+        D.attach(W, [
+            (D.plate(110, 36, ["IT'S 1986"], bg=(30, 16, 50), fg=PINK, border=CYAN), 405, 140),
+            (D.plate(64, 22, ['RENT DUE'], bg=WH, fg=RED, border=RED), 840, 330),
+        ])

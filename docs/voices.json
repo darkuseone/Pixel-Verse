@@ -1644,9 +1644,14 @@
    "status": "active",
    "name": "Fran (neon flamingo sign)",
    "voice_name": "STILL 1986 — Fran (neon flamingo sign)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": [],
+   "lines": 4,
+   "episodes": 1,
+   "samples": [
+    "series/still-1986/voice/ep01/f2.mp3",
+    "series/still-1986/voice/ep01/f3.mp3",
+    "series/still-1986/voice/ep01/f1.mp3",
+    "series/still-1986/voice/ep01/f4.mp3"
+   ],
    "design": {
     "description": "A bored, raspy elderly woman in her seventies, a retired bookkeeper from Brooklyn, New York who moved to Miami Beach decades ago. Thick old New York accent, smoky low gravelly voice, completely deadpan and unimpressed, dry and sarcastic, slow tired delivery, calls everyone honey. Comedic timing, warm underneath. Native American English speaker.",
     "text": "[deadpan, raspy] Honey. Nobody parks free on Ocean Drive. [bored] It's twenty twenty-six, sweetheart. There's an app. [dry] Lap forty-seven. Coolest guy on a tow truck, honey.",
@@ -1673,9 +1678,18 @@
    "status": "library_or_premade",
    "name": "Vince Velour",
    "voice_name": "STILL 1986 — Vince Velour",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 10,
+   "episodes": 1,
+   "samples": [
+    "series/still-1986/voice/ep01/v5.mp3",
+    "series/still-1986/voice/ep01/v1.mp3",
+    "series/still-1986/voice/ep01/v2.mp3",
+    "series/still-1986/voice/ep01/v3.mp3",
+    "series/still-1986/voice/ep01/v9.mp3",
+    "series/still-1986/voice/ep01/v10.mp3",
+    "series/still-1986/voice/ep01/v6.mp3",
+    "series/still-1986/voice/ep01/v4.mp3"
+   ]
   },
   {
    "slug": "still-1986",
@@ -1684,6 +1698,54 @@
    "status": "library_or_premade",
    "name": "Rey (tow truck driver)",
    "voice_name": "STILL 1986 — Rey (tow truck driver)",
+   "lines": 3,
+   "episodes": 1,
+   "samples": [
+    "series/still-1986/voice/ep01/r1.mp3",
+    "series/still-1986/voice/ep01/r2.mp3",
+    "series/still-1986/voice/ep01/r3.mp3"
+   ]
+  },
+  {
+   "slug": "still-1986",
+   "char": "tiffany",
+   "voice_id": "hv8WzBOrsvuSUeIQGOCM",
+   "status": "library_or_premade",
+   "name": "Tiffany (box office, Gen Z)",
+   "voice_name": "STILL 1986 — Tiffany (box office, Gen Z)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": []
+  },
+  {
+   "slug": "still-1986",
+   "char": "diaz",
+   "voice_id": "KvaCHcJoMXfOzwtsULOZ",
+   "status": "library_or_premade",
+   "name": "Officer Diaz (marine patrol)",
+   "voice_name": "STILL 1986 — Officer Diaz (marine patrol)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": []
+  },
+  {
+   "slug": "still-1986",
+   "char": "gary",
+   "voice_id": "SDARFhQygpPvpLh7Ad1B",
+   "status": "library_or_premade",
+   "name": "Gary (Vince's boss)",
+   "voice_name": "STILL 1986 — Gary (Vince's boss)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": []
+  },
+  {
+   "slug": "still-1986",
+   "char": "roofe",
+   "voice_id": "weA4Q36twV5kwSaTEL0Q",
+   "status": "library_or_premade",
+   "name": "ROOF-E (car assistant)",
+   "voice_name": "STILL 1986 — ROOF-E (car assistant)",
    "lines": 0,
    "episodes": 0,
    "samples": []
@@ -2977,5 +3039,5 @@
   "14NozJq5eoBmDc1FXFDq": "NIKITA2",
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA"
  },
- "updated": "2026-11-12 09:24"
+ "updated": "2026-11-12 22:12"
 }

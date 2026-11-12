@@ -56,6 +56,66 @@
         "public_owner_id": "5b1acccc4ff36c1eb721c4db3a6f60e5ffab849813b63af8e63ec80f05f18d90",
         "voice_id": "vRzW3mEGVjW5jXimKSf1"
       }
+    },
+    "tiffany": {
+      "name": "Tiffany (box office, Gen Z)",
+      "color_caption": [
+        200,
+        255,
+        140
+      ],
+      "style": "[monotone] [dry valley girl] bored ticket cashier",
+      "voice_id": "hv8WzBOrsvuSUeIQGOCM",
+      "voice": "STILL 1986 — Tiffany (box office, Gen Z)",
+      "library": {
+        "public_owner_id": "d171153b15af821ebe77aecb02c476ff93af4dbaaafb5e56f4563be43667c331",
+        "voice_id": "hv8WzBOrsvuSUeIQGOCM"
+      }
+    },
+    "diaz": {
+      "name": "Officer Diaz (marine patrol)",
+      "color_caption": [
+        120,
+        200,
+        255
+      ],
+      "style": "[gruff] [calm] marine patrol officer",
+      "voice_id": "KvaCHcJoMXfOzwtsULOZ",
+      "voice": "STILL 1986 — Officer Diaz (marine patrol)",
+      "library": {
+        "public_owner_id": "1a76b02cecffbd3f25a01b953eaecc6c05a281d4be25de83fa454db6a9c6eef6",
+        "voice_id": "KvaCHcJoMXfOzwtsULOZ"
+      }
+    },
+    "gary": {
+      "name": "Gary (Vince's boss)",
+      "color_caption": [
+        255,
+        230,
+        90
+      ],
+      "style": "[pompous] [nerdy] kiosk manager",
+      "voice_id": "SDARFhQygpPvpLh7Ad1B",
+      "voice": "STILL 1986 — Gary (Vince's boss)",
+      "library": {
+        "public_owner_id": "1c51ae02bb5bfe0d7670e024f4c6d9daab1cbbb6f1bd89582b6dc99e8a6accc9",
+        "voice_id": "SDARFhQygpPvpLh7Ad1B"
+      }
+    },
+    "roofe": {
+      "name": "ROOF-E (car assistant)",
+      "color_caption": [
+        230,
+        240,
+        255
+      ],
+      "style": "[robotic] [chipper] car infotainment voice",
+      "voice_id": "weA4Q36twV5kwSaTEL0Q",
+      "voice": "STILL 1986 — ROOF-E (car assistant)",
+      "library": {
+        "public_owner_id": "ba270c6087ca59ad54de29e892653a48b1e210c73799fbc2cc5d4e4cec126d59",
+        "voice_id": "weA4Q36twV5kwSaTEL0Q"
+      }
     }
   }
 }

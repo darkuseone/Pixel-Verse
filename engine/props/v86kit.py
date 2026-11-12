@@ -19,7 +19,9 @@ from props import v86cast as C
 from props import v86decor as DEC
 
 SLUG = 'still-1986'
-COL = dict(vince=(80, 235, 255), fran=(255, 110, 200), rey=(255, 170, 60))
+COL = dict(vince=(80, 235, 255), fran=(255, 110, 200), rey=(255, 170, 60), tiffany=(200, 255, 140), diaz=(120, 200, 255),
+           gary=(255, 230, 90), roofe=(230, 240, 255))
+WS = dict(ocean=1.34, ocean_night=1.34, side=1.34, club=2.2, disco=2.9, marina=2.2, bay=1.9, mall=2.7, studio=3.2)
 WSV = 1.34                       # world px per hero sprite px on the street (door of the pink hotel = 75 px = 2.3 m; hero 1.8 m = 110 px)
 PINK, CYAN, INK = (255, 70, 180), (60, 230, 255), VX.INK
 
@@ -82,15 +84,16 @@ def light_dusk(v):
 
 
 # ---------------------------------------------------------------- real-scale groups
-def car_group(v, wx, wy, t, vince_kw=None, flip=False, speed=0.0, lights=False, rot=0.0, z=1.0):
+def car_group(v, wx, wy, t, vince_kw=None, flip=False, speed=0.0, lights=False, rot=0.0, z=1.0, ws=None):
     """Vince's car with Vince seated: [car back, Vince, car front]. (wx, wy) = world px of the car's ground point under its
     centre; z = depth scale (1 = street plane). rot = degrees CCW (on the tow ramp) around the ground point"""
-    S = WSV * 3 * v.Z * z                                   # output px per hero sprite px
+    ws = ws or WSV
+    S = ws * 3 * v.Z * z                                    # output px per hero sprite px
     Sc = S * C.CAR_K
     d = -1 if flip else 1
     hx, hy = -6.0 * C.CAR_K + 1.6, 22.0 * C.CAR_K - 34.0     # hero feet anchor relative to the car origin (hero px): hips on the seat
     ox_, oy_ = hx * d, hy                                    # the rotation is done inside the sprite around the car origin (pivot)
-    k = WSV * z
+    k = ws * z
     vk = dict(vince_kw or {}); vk.setdefault('legs', False)
     vk.setdefault('hand_n', (24.0, 46.0)); vk.setdefault('hand_f', (-12.0, 37.0))
     acts = [A(C.car, wx, wy, Sc, flip=flip, part='back', t=t, rot=rot),
@@ -99,14 +102,15 @@ def car_group(v, wx, wy, t, vince_kw=None, flip=False, speed=0.0, lights=False, 
     return acts
 
 
-def tow_group(v, wx, wy, t, tilt=0.0, car_u=None, vince_kw=None, rey_kw=None, beacon=True, chains=False, z=1.0, spin=0.0):
+def tow_group(v, wx, wy, t, tilt=0.0, car_u=None, vince_kw=None, rey_kw=None, beacon=True, chains=False, z=1.0, spin=0.0, ws=None):
     """Rey's tow truck at real size (~6.5 m): bed (+ the car on its deck at position car_u 0..1) + cab in front (+x).
     (wx, wy) = ground point under the bed's chassis centre"""
-    S = WSV * 3 * v.Z * z; St = S * C.TOW_K; k = WSV * z * C.TOW_K
+    ws = ws or WSV
+    S = ws * 3 * v.Z * z; St = S * C.TOW_K; k = ws * z * C.TOW_K
     acts = [A(C.tow_bed, wx, wy, St, t=t, tilt=tilt, chains=chains, spin=spin)]
     if car_u is not None:
         px, py = C.deck_point(car_u, tilt)
-        acts += car_group(v, wx + px * k, wy - py * k, t, vince_kw=vince_kw, rot=tilt, z=z)
+        acts += car_group(v, wx + px * k, wy - py * k, t, vince_kw=vince_kw, rot=tilt, z=z, ws=ws)
     acts.append(A(C.tow_cab, wx + 112.0 * k, wy, St, t=t, beacon=beacon, rey_kw=rey_kw))
     return acts
 
@@ -398,3 +402,211 @@ def fine_print(t, t_zoom=0.25, w=OUT_W, h=OUT_H):
         d.text(((W_ - f2.getlength(s2)) / 2, 160), s2, font=f2, fill=(255, 110, 200))
     a = np.array(im.resize((w, h), Image.NEAREST))
     return a
+
+
+# ---------------------------------------------------------------- lights for E02–E06 worlds
+def light_club(v):
+    return Light(amb=(0.86, 0.80, 1.0), keys=_keys(v, [(520, 120, 520, (255, 70, 190), 0.45), (860, 300, 300, (80, 230, 255), 0.35)]), grad=(1.02, 0.9))
+
+
+def light_disco(v, t=0.0):
+    k = 0.5 + 0.5 * math.sin(t * 6)
+    return Light(amb=(0.78, 0.70, 1.0), keys=_keys(v, [(400, 100, 500, (255, 70, 190), 0.30 + 0.25 * k), (900, 100, 500, (60, 230, 255), 0.55 - 0.25 * k),
+                                                        (640, 600, 500, (255, 200, 90), 0.25)]), grad=(1.0, 1.05))
+
+
+def light_marina(v):
+    return Light(amb=(1.06, 0.95, 0.96), keys=_keys(v, [(780, 280, 900, (255, 170, 100), 0.35)]), grad=(1.05, 0.95))
+
+
+def light_mall(v):
+    return Light(amb=(0.84, 0.80, 1.0), keys=_keys(v, [(480, 200, 520, (255, 80, 190), 0.40), (540, 450, 400, (90, 220, 255), 0.30),
+                                                       (160, 300, 260, (255, 210, 130), 0.30)]), grad=(1.0, 0.92))
+
+
+def light_studio(v, tv=0.0):
+    keys = [(1060, 330, 500, (255, 160, 90), 0.30), (1150, 250, 400, (255, 70, 190), 0.30)]
+    if tv: keys.append((190, 330, 500, (120, 200, 255), 0.45 * tv))
+    return Light(amb=(0.90, 0.84, 0.96), keys=_keys(v, keys), grad=(1.0, 0.95))
+
+
+def light_rain(v):
+    return Light(amb=(0.72, 0.74, 0.96), keys=_keys(v, [(620, 300, 380, (255, 70, 190), 0.45), (1080, 260, 420, (70, 220, 255), 0.35)]), grad=(0.95, 0.85))
+
+
+def V(name, cx, cy, Z):
+    return view_at(world(name), cx, cy, Z, 180, 320)
+
+
+def S_of(v, name, z=1.0):
+    """output px per hero sprite px for world `name` at depth scale z"""
+    return WS[name] * 3 * v.Z * z
+
+
+# ---------------------------------------------------------------- crowd silhouettes (club, line, disco)
+def crowd(big, t, y0, y1, n=14, seed=1, cols=((255, 70, 190), (60, 230, 255)), headphones=False, dance=1.0, sunglasses=False, x0=0, x1=OUT_W,
+          h=(260, 420), dark=(26, 16, 46)):
+    """dark pixel silhouettes of people (heads, shoulders, bobbing to a beat) with a neon rim; headphones glow on the silent disco"""
+    g = np.random.default_rng(seed)
+    q = 6
+    for i in range(n):
+        x = g.uniform(x0, x1); y = g.uniform(y0, y1); H = g.uniform(*h) * (0.6 + 0.6 * (y - y0) / max(1, y1 - y0))
+        ph = g.random() * 6.28
+        bob = abs(math.sin(t * 6.0 * dance + ph)) * 18 * dance
+        hw = H * 0.16; bw = H * 0.32
+        cx, top = x + math.sin(t * 3 + ph) * 10 * dance, y - H - bob
+        X0, X1 = int(cx - bw), int(cx + bw); Y0, Y1 = int(top), int(y)
+        if X1 <= 0 or X0 >= OUT_W: continue
+        yy, xx = np.mgrid[max(0, Y0):min(OUT_H, Y1), max(0, X0):min(OUT_W, X1)]
+        if yy.size == 0: continue
+        xx_ = (xx // q) * q + q / 2; yy_ = (yy // q) * q + q / 2
+        head = ((xx_ - cx) / hw) ** 2 + ((yy_ - (top + hw * 1.1)) / (hw * 1.15)) ** 2 <= 1
+        body = (yy_ > top + hw * 2.0) & (np.abs(xx_ - cx) < bw * np.clip((yy_ - top - hw * 1.6) / (hw * 1.4), 0.3, 1.0))
+        m = head | body
+        reg = big[max(0, Y0):min(OUT_H, Y1), max(0, X0):min(OUT_W, X1)]
+        reg[m] = dark
+        c = np.array(cols[i % len(cols)], np.uint8)
+        edge = m & ~np.roll(m, q, 1)
+        reg[edge] = c
+        if headphones:
+            band = (np.abs(np.sqrt((xx_ - cx) ** 2 + (yy_ - (top + hw * 1.1)) ** 2) - hw * 1.25) < q) & (yy_ < top + hw * 1.2)
+            cups = ((np.abs(xx_ - (cx - hw * 1.15)) < q * 1.5) | (np.abs(xx_ - (cx + hw * 1.15)) < q * 1.5)) & (np.abs(yy_ - (top + hw * 1.2)) < q * 2.2)
+            reg[band | cups] = c
+        if sunglasses:
+            gl = (np.abs(yy_ - (top + hw)) < q) & (np.abs(xx_ - cx) < hw * 0.9)
+            reg[gl] = (10, 10, 14)
+    return big
+
+
+# ---------------------------------------------------------------- rain (E05)
+def rain(big, t, k=1.0, seed=2, col=(170, 200, 255), angle=0.22):
+    if k <= 0: return big
+    g = np.random.default_rng(seed)
+    n = int(160 * k)
+    P_ = g.random((n, 3))
+    for x0, y0, sp in P_:
+        L = 40 + 50 * sp
+        y = ((y0 * OUT_H + t * (1400 + 900 * sp)) % (OUT_H + 200)) - 100
+        x = (x0 * OUT_W + y * angle) % OUT_W
+        for j in range(0, int(L), 6):
+            yy = int(y + j); xx = int(x + j * angle)
+            if 0 <= yy < OUT_H - 6 and 0 <= xx < OUT_W - 3:
+                reg = big[yy:yy + 6, xx:xx + 3].astype(np.float32)
+                big[yy:yy + 6, xx:xx + 3] = np.clip(reg * 0.5 + np.array(col) * 0.5, 0, 255).astype(np.uint8)
+    return big
+
+
+# ---------------------------------------------------------------- UI screens (fees, rental board, car, TV)
+def _screen(w, h, S=4, bg=(14, 20, 40), bezel=(70, 72, 84)):
+    im = Image.new('RGBA', (w // S, h // S), (0, 0, 0, 0)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    d.rounded_rectangle([0, 0, w // S - 1, h // S - 1], 10, fill=bezel + (255,), outline=(24, 20, 40, 255), width=2)
+    d.rectangle([8, 8, w // S - 9, h // S - 9], fill=bg + (255,))
+    return im, d
+
+
+def fee_screen(t, rows, total=None, t_total=None, stamp=None, t_stamp=None, w=920, h=1100, title='TICKET • 86 NIGHT'):
+    """the box office screen: rows = [(t_appear, label, price)], each row slams in; optional total row and a red stamp"""
+    S = 4
+    im, d = _screen(w, h, S)
+    W_ = w // S
+    d.rectangle([8, 8, W_ - 9, 34], fill=(255, 70, 180, 255))
+    d.text((16, 16), title, font=O.pfont(9), fill=(255, 255, 255))
+    y = 46
+    for (ta, lab, pr) in rows:
+        if t < ta: break
+        f = O.pfont(9)
+        d.text((16, y), lab, font=f, fill=(200, 220, 255) if 'FEE' not in lab.upper() else (255, 160, 190))
+        d.text((W_ - 16 - f.getlength(pr), y), pr, font=f, fill=(255, 255, 255))
+        y += 22
+    if total and t_total is not None and t >= t_total:
+        d.line([(16, y + 2), (W_ - 16, y + 2)], fill=(255, 255, 255), width=2)
+        f = O.pfont(16)
+        d.text((16, y + 12), 'TOTAL', font=f, fill=(255, 214, 80)); d.text((W_ - 16 - f.getlength(total), y + 12), total, font=f, fill=(255, 214, 80))
+    a = np.array(im.resize((W_ * S, (h // S) * S), Image.NEAREST))
+    base = Image.new('RGBA', (a.shape[1] + 200, a.shape[0]), (0, 0, 0, 0)); base.paste(Image.fromarray(a), (100, 0))
+    if stamp and t_stamp is not None and t >= t_stamp:
+        k = min(1.0, (t - t_stamp) / 0.12); sc = 1.0 + 0.6 * (1 - k)
+        st_ = Image.fromarray(O.sticker(stamp, fg=(255, 70, 90), size=int(40 * sc))).rotate(-9, expand=True, resample=Image.NEAREST)
+        if st_.width > base.width: st_ = st_.resize((base.width, int(st_.height * base.width / st_.width)), Image.NEAREST)
+        base.alpha_composite(st_, ((base.width - st_.width) // 2, int(base.height * 0.62)))
+    return np.array(base)
+
+
+def car_screen(t, lines, w=860, h=520, col=(90, 236, 255)):
+    """ROOF-E infotainment screen: a rounded dark panel with a roof icon and lines of text (each line = (t_appear, text, colour))"""
+    S = 4
+    im, d = _screen(w, h, S, bg=(8, 14, 26), bezel=(30, 30, 40))
+    W_ = w // S
+    d.text((16, 14), 'ROOF-E', font=O.pfont(10), fill=col)
+    d.polygon([(W_ - 60, 34), (W_ - 40, 18), (W_ - 20, 34)], outline=col)                      # roof icon
+    y = 46
+    for (ta, txt, c) in lines:
+        if t < ta: continue
+        f = O.pfont(9 if len(txt) > 16 else 12)
+        d.text(((W_ - f.getlength(txt)) / 2, y), txt, font=f, fill=c)
+        y += 24
+    return np.array(im.resize((W_ * S, (h // S) * S), Image.NEAREST))
+
+
+def crt(screen_img, t, w=980, h=760):
+    """a chunky CRT television frame around an RGB/RGBA image (scanlines, curvature-ish vignette, glow)"""
+    tv = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(tv)
+    d.rounded_rectangle([0, 0, w - 1, h - 1], 40, fill=(60, 54, 62, 255), outline=(20, 16, 26, 255), width=8)
+    d.rounded_rectangle([40, 40, w - 220, h - 40], 60, fill=(10, 12, 16, 255))
+    for i in range(5): d.ellipse([w - 160, 120 + i * 90, w - 90, 170 + i * 90], fill=(40, 36, 44, 255), outline=(90, 86, 96, 255), width=3)
+    sx0, sy0, sx1, sy1 = 64, 64, w - 244, h - 64
+    scr = Image.fromarray(screen_img[..., :3] if screen_img.shape[2] == 4 else screen_img).resize((sx1 - sx0, sy1 - sy0), Image.NEAREST)
+    a = np.array(scr).astype(np.float32)
+    a[::6] *= 0.72
+    yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
+    vg = 1 - 0.35 * (((xx / a.shape[1] - 0.5) * 2) ** 4 + ((yy / a.shape[0] - 0.5) * 2) ** 4)
+    a = np.clip(a * vg[..., None], 0, 255).astype(np.uint8)
+    tv.paste(Image.fromarray(a), (sx0, sy0))
+    return np.array(tv)
+
+
+def progress_screen(t, frac, label='DAY-ONE UPDATE', sub='150 GB • 6 HRS LEFT', w=640, h=480):
+    im = Image.new('RGB', (w // 4, h // 4), (16, 20, 44)); d = ImageDraw.Draw(im); d.fontmode = '1'
+    W_, H_ = im.size
+    f, f2 = O.pfont(9), O.pfont(7)
+    d.text(((W_ - f.getlength(label)) / 2, 30), label, font=f, fill=(90, 236, 255))
+    d.rectangle([14, 56, W_ - 14, 70], outline=(255, 255, 255))
+    d.rectangle([16, 58, 16 + int((W_ - 32) * frac), 68], fill=(255, 70, 180))
+    d.text(((W_ - f2.getlength(sub)) / 2, 82), sub, font=f2, fill=(255, 214, 80))
+    d.text(((W_ - f2.getlength(f'{int(frac * 100)}%')) / 2, 98), f'{int(frac * 100)}%', font=f2, fill=(255, 255, 255))
+    return np.array(im.resize((w, h), Image.NEAREST))
+
+
+def pedal_group(v, wx, wy, t, vince_kw=None, ws=None, z=1.0, pedal=0.0, water_y=None, rock=0.0):
+    """pedal flamingo boat with Vince seated: [boat back, Vince, boat front]; water_y (world) cuts everything below the waterline"""
+    ws = ws or WSV
+    S = ws * 3 * v.Z * z; Sc = S * C.CAR_K
+    hx, hy = -6.0 * C.CAR_K + 1.6, 18.0 * C.CAR_K - 34.0
+    k = ws * z
+    vk = dict(vince_kw or {}); vk.setdefault('legs', False); vk.setdefault('hand_n', (22.0, 44.0)); vk.setdefault('hand_f', (-14.0, 40.0))
+    rot = rock * math.sin(t * 2.2)
+    acts = [A(C.pedal_flamingo, wx, wy, Sc, t=t, part='back', rot=rot),
+            A(C.vince, wx + hx * k, wy - hy * k, S, t=t, rot=rot, pivot=(-hx, -hy), **vk),
+            A(C.pedal_flamingo, wx, wy, Sc, t=t, part='front', pedal=pedal, rot=rot)]
+    if water_y is not None: acts = [WaterClip(a, water_y) for a in acts]
+    return acts
+
+
+class WaterClip:
+    """draw an actor only above the waterline (world y); a foam line is added where it meets the water"""
+    direct = True
+
+    def __init__(s, act, wy):
+        s.a, s.wy = act, wy
+
+    def __call__(s, big, v, lt):
+        tmp = big.copy()
+        s.a(tmp, v, lt)
+        y = int(v.opt(0, s.wy)[1])
+        y = max(0, min(big.shape[0], y))
+        diff = np.any(tmp[:y] != big[:y], axis=2)
+        big[:y][diff] = tmp[:y][diff]
+        cols = np.where(diff[max(0, y - 6):y].any(0))[0]
+        if len(cols) and y < big.shape[0] - 8:
+            big[y - 2:y + 6, cols] = np.clip(big[y - 2:y + 6, cols].astype(np.int32) + 70, 0, 255).astype(np.uint8)
+        s.last = getattr(s.a, 'last', None)
