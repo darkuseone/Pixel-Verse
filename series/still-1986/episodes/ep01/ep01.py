@@ -204,7 +204,6 @@ def lap_frame(name, light, t, x, lap, look=0.0):
     acts = K.car_group(v, x, OCEAN_Y + 22, t, vince_kw=kw, speed=20.0, lights=name == 'ocean_night')
     def f(big, _): fran_on_roof(big, v, t, look=look)
     big = K.shot(name, light, cx, 380.0, Z, acts=acts, par=(0, 0), fx_=f, t=t, bokeh_=name == 'ocean_night', dof_k=12)
-    fx.speed_lines(big, t, 0.25)
     return big
 
 
@@ -320,7 +319,7 @@ def r_coins(t, u):
     Z = 1.3
     v = V('side', 560.0, 330.0, Z)
     def quarters(sp, h):
-        for i in range(5): C.coin(sp, (h[0] - 2.0 + i * 1.3, h[1] - 0.5 + (i % 2) * 1.2))
+        for i in range(5): C.coin(sp, (h[0] - 5.0 + i * 2.2, h[1] + 1.5 + math.sin(i * 1.3) * 1.2), r=2.4)
     kw, dy = vface(t, (0.9, 0.3), hand_n=(26.0, 74.0 + 2 * math.sin(t * 11)), prop_n=quarters)
     wx, wy = car_at_head(v, 430, 1010 + dy * 10, 2.9)
     acts = fg(K.car_group(v, wx, wy, t, vince_kw=kw, z=2.9, rot=2.0))
@@ -333,12 +332,13 @@ def r_tow_app(t, u):
     v = V('side', 700.0, 360.0, Z)
     rk, dy = rface(t, (0.6, 0.0))
     S = WSV * 3 * v.Z * 2.4
-    wx, wy = wpt(v, 300, 1960 + dy * 10)
+    wx, wy = wpt(v, 170, 1960 + dy * 10)
     rey = A(C.rey, wx, wy, S, t=t, hand_n=(22.0, 60.0), **rk)
     rey.near = 0.99
     def f(big, _):
         ph = K.phone_screen(t, t_fee=37.75, title="Rey'sTow", zone='TOW + STORAGE', rate='$350', unit='PAY BY APP ONLY')
-        O.overlay(big, ph, 330, 280 + int(6 * math.sin(t * 3)), 1.0)
+        ph = np.array(Image.fromarray(ph).resize((int(ph.shape[1] * 0.8), int(ph.shape[0] * 0.8)), Image.NEAREST))
+        O.overlay(big, ph, 370, 300 + int(6 * math.sin(t * 3)), 1.0)
         if ST.LOG[0] is not None: ST.log('card', bbox=(520, 300, 520 + ph.shape[1], 300 + ph.shape[0]))
     return K.shot('side', K.light_dusk, 700.0, 360.0, Z, acts=[rey], focus=0.99, dof_k=30, fx_=f, t=t, kick=kick(t, [(37.75, 0.7)]))
 
@@ -392,7 +392,7 @@ SHOW = K.Show(EPI, 1, ['FREE', 'PARKING?'], hook_t=(0.10, 2.6), hook_y=250, hook
                         (K.st('LAP 47', fg=(255, 110, 200), size=64), 23.8, 25.5, 540, 520),
                         (K.st('FREE?!', fg=(255, 110, 200), size=84), 25.65, 27.6, 540, 560)],
               flashes=[TWIST, 27.95, 32.57], mosaics=[19.35],
-              cap_y={0: 1500, 1: 1180, 2: 1240, 3: 1180, 4: 520, 5: 1640, 6: 1500, 7: 1200, 8: 1200, 9: 1190, 10: 1200, 11: 1100,
+              cap_y={0: 1500, 1: 1180, 2: 1240, 3: 1180, 4: 1520, 5: 1640, 6: 1500, 7: 1200, 8: 1200, 9: 1190, 10: 1200, 11: 1500,
                      12: 1520, 13: 1500, 14: 1520, 15: 1620, 16: 1240, 17: 1480})
 
 

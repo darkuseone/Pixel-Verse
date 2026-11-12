@@ -66,10 +66,10 @@ def X(expr):
 
 
 # ================================================================================ hand props
-def coin(sp, h):
+def coin(sp, h, r=1.5):
     x, y = h
-    sp.ell(x + 0.8, y + 1.6, 1.5, 1.5, tones(GOLD), gloss=1.0)
-    sp.star(x + 0.4, y + 2.2, 0.8)
+    sp.ell(x + 0.8, y + 1.6, r, r, tones(GOLD), gloss=1.0)
+    sp.star(x + 0.8 - r * 0.3, y + 1.6 + r * 0.4, 0.8)
     sp.anchors['coin'] = (x + 0.8, y + 1.6)
 
 
