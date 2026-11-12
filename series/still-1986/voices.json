@@ -1,0 +1,61 @@
+{
+  "cartoon": "STILL 1986",
+  "slug": "still-1986",
+  "lang": "us",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "vince": {
+      "name": "Vince Velour",
+      "color_caption": [
+        80,
+        235,
+        255
+      ],
+      "style": "[smooth] [cheesy radio DJ] -> [outraged squeak] — 80s cool guy who lives like it's still 1986",
+      "voice_id": "kVv0pQADO7gCW0VPlTsR",
+      "voice": "STILL 1986 — Vince Velour",
+      "library": {
+        "public_owner_id": "869e0570b46eb298b69ca0643dae090e14b8d193fb5452ed61d49078eec62aec",
+        "voice_id": "kVv0pQADO7gCW0VPlTsR"
+      }
+    },
+    "fran": {
+      "name": "Fran (neon flamingo sign)",
+      "color_caption": [
+        255,
+        110,
+        200
+      ],
+      "style": "[deadpan] [raspy] Brooklyn retiree — bored neon sign who has seen everything since 1986",
+      "design": {
+        "description": "A bored, raspy elderly woman in her seventies, a retired bookkeeper from Brooklyn, New York who moved to Miami Beach decades ago. Thick old New York accent, smoky low gravelly voice, completely deadpan and unimpressed, dry and sarcastic, slow tired delivery, calls everyone honey. Comedic timing, warm underneath. Native American English speaker.",
+        "text": "[deadpan, raspy] Honey. Nobody parks free on Ocean Drive. [bored] It's twenty twenty-six, sweetheart. There's an app. [dry] Lap forty-seven. Coolest guy on a tow truck, honey.",
+        "picked": {
+          "i": 1,
+          "dur": 16.12,
+          "f0": 141.6,
+          "f0_iqr": 26.9,
+          "rate": 15.7,
+          "loud_sd": 5.3
+        }
+      },
+      "voice_id": "dadIF2xtWrmWMJgTn47F",
+      "voice": "STILL 1986 — Fran (neon flamingo sign)"
+    },
+    "rey": {
+      "name": "Rey (tow truck driver)",
+      "color_caption": [
+        255,
+        170,
+        60
+      ],
+      "style": "[chill] [deadpan] Miami tow driver, warm gravel, unbothered",
+      "voice_id": "vRzW3mEGVjW5jXimKSf1",
+      "voice": "STILL 1986 — Rey (tow truck driver)",
+      "library": {
+        "public_owner_id": "5b1acccc4ff36c1eb721c4db3a6f60e5ffab849813b63af8e63ec80f05f18d90",
+        "voice_id": "vRzW3mEGVjW5jXimKSf1"
+      }
+    }
+  }
+}

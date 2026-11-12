@@ -295,3 +295,29 @@ time.com / abc7ny.com (age limits), knowyourmeme.com / napoleoncat.com (сент
 ## 21.10.2026 — антураж «Thanks, Randy» E01 (визуальные надписи, `engine/props/randydecor.py`)
 В других US-мультах не повторять, внутри сериала — сквозные.
 - **Shop'n'Weep:** «SHOP'N WEEP — PRICES THAT MOVE YOU (TO TEARS)», «SINCE 1987», «TURKEYS $3.99/LB* / *LB = LITTLE BIT», «HAPPY THANKSGIVING — NO REFUNDS ON GRATITUDE», «SELF-CHECKOUT: YOU WORK HERE NOW», «ATTENDANT ON BREAK SINCE 2019», «BUTTERBUTT — AMERICAS MOST FROZEN TURKEY», «BUTTERBUTT — THAW TIME: 5 DAYS (LOL)», «LIMIT 1 CRANBERRY CAN PER FAMILY», «GOURDS (DO NOT EAT)», «PUMPKINS $19.99 EA», «TISSUES > AISLE 7 (NEXT TO EGGS)», «BAGS 10C / BAG FOR BAGS 25C», «ALL TURKEYS FROZEN (SORRY)», «LANE CLOSED (FOREVER)», пакет «THANK YOU!», фартук «KISS THE COOK (DON'T)», экран «GRANDMA DETECTED · NANA 98 LB × $4.99/LB = $489.02».
+
+## 12.11.2026 — разведка для «STILL 1986» (Майами-80-х, неделя релиза большой игры про Vice City)
+| Тема / мем | Смысл | Как вкладываем | Статус |
+|---|---|---|---|
+| Релиз большой игры про неоновый Vice City 19.11.2026 (после переносов) | Майами, неон, пальмы, 80-е на пике в ленте; «GTA-грипп»: рост отгулов на день выхода 9–17 % (BambooHR), CEO издателя шутил про «больничные 19 ноября» | Нить сезона «THE DROP», E04 — больничный в очереди в полночь. Название игры, логотипы, персонажи — НЕ используем | в работе |
+| «Remember November 2026» (полярный медведь, осень 2026) | ожидание ноября как события | можно отсылкой в реплике Фрэн («Remember November, honey») — специя, не опора | резерв |
+| Скрытые сборы / junk fees, автосборы | 78 % за запрет автосборов (WalletHub 2026), 41 % считают чаевые «вышедшими из-под контроля» (Bankrate) | E01 «convenience fee $3.50», E02 «fee fee», «dispute fee» | в работе |
+| Парковка через приложение, хищная эвакуация в Майами-Бич | вечная боль туристов и местных | E01: «PAY BY APP ONLY», «FREE PARKING*» на эвакуаторе | пилот |
+| Подписки на функции машины (подогрев сидений и т.п.) | «я купил машину, а функции арендую» | E05: крыша кабриолета по подписке | в работе |
+| Обновление первого дня 150 ГБ, базовый тариф интернета | вечная боль геймеров | E06 | в работе |
+| Цены Майами (аренда $2 200–3 200, страховка, марина) | «дороже Нью-Йорка» | E03 катер $900/день → педальный фламинго | в работе |
+Источники: pcgamesn.com (дата релиза), tech-insider.org / hrdive.com / gtaintel.com (отгулы), knowyourmeme.com (Remember November),
+fox11online.com (Bankrate), cnycentral.com (WalletHub), americanbazaaronline.com (рост счетов), miamilivingmagazine.com (цены).
+
+### Банк «Майами-1986» (фольклор и надписи, пополняется)
+Ocean Drive, ар-деко отели (мятный, розовый, лавандовый), неоновые трубки по карнизам, пальмы, закат, белый кабриолет с
+выдвижными фарами, пастельный пиджак с закатанными рукавами, лоферы без носков, маллет, авиаторы, кирпич-телефон, VHS,
+саксофон, синтвейв, фламинго, кафе под полосатой маркизой, роллеры, «HOTEL • VACANCY», «NO VACANCY», «SPRING BREAK '86»,
+«MIAMI BEACH PARKING — PAY BY APP», «TOW-AWAY ZONE», «$14/HR EVENT RATE», «VALET $60».
+Пародийные бренды (банк §4): ParkMeMaybe (приложение парковки), NEON PALACE (клуб), Rey's Towing 24 HR, ROOF-E (ассистент
+машины), Flamingo Pedal Co., Mallwave Vape & Case (киоск Винса), TicketGrabber (сборы).
+
+### Заложено в «STILL 1986», сезон 1 (не повторять в других US мультах)
+«It's eighty-six, baby» / «Honey, it's twenty twenty-six»; «FREE PARKING*» на эвакуаторе; «Convenient for WHO?!»; «If I never
+STOP, it's not PARKING»; «Parking's free. The RIDE's three-fifty»; «fee fee»; «dispute fee»; педальный фламинго тащит патруль;
+«eighty-six flu»; начальник в очереди; крыша по подписке, «That's a hatchback now»; Фрэн играет в игру.
