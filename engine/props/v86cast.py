@@ -42,6 +42,8 @@ TIRE = (30, 28, 40)
 TOW_W = (238, 236, 230)
 TOW_O = (255, 128, 30)
 STEEL = (120, 126, 146)
+CAR_K = 1.28                       # car sprite scale vs the hero scale (real proportions, owner rule 12.11.2026)
+TOW_K = 1.70                       # tow truck sprites vs the hero scale
 METER = (150, 158, 176)
 
 XTRA = dict(
@@ -98,7 +100,7 @@ def aviators(sp, eyes, hy, k=1.0, glint=0.0):
         m &= ~(ny > 0.55) | (np.abs(nx) < 0.85)
         g = np.clip((ny + 1) / 2, 0, 1)[..., None]                                   # 1 at the top
         tint = np.array(LENS_B, np.float32) * (1 - g) + np.array(LENS_T, np.float32) * g
-        a = 0.46 * k
+        a = 0.30 * k
         col[m] = col[m] * (1 - a) + tint[m] * a
         sp.col = np.clip(col, 0, 255).astype(np.uint8)
         e = m & ~erode(m)
@@ -177,11 +179,11 @@ def vince(sp, t=0.0, expr='cool', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_
     head = sp.union([sp.m_ell(hx + 0.4, hy, 7.6, 8.2), sp.m_super(hx + 1.2, hy - 4.0, 6.8, 4.2, 3.2)], tones(TAN))
     sp.ell(hx - 5.6, hy + 0.4, 1.6, 2.4, tones(dark(TAN, 0.92)))                                  # ear
     sp.blob(hx - 5.6, hy - 1.8, 0.45, GOLD)                                                        # stud
-    DX.stubble(sp, sp.m_ell(hx + 2.0, hy - 6.2, 6.4, 2.6)[0] & head, dark(TAN, 0.72), 0.22, 5)
+    DX.stubble(sp, sp.m_ell(hx + 2.0, hy - 6.6, 6.0, 2.2)[0] & head, dark(TAN, 0.76), 0.12, 5)
     lx, ly = look
     eyes = [(hx + 4.4, 4.4), (hx - 0.6, 3.8)]
-    DX.eye(sp, eyes[0][0], hy + 1.4, 4.4, 4.0, E, (60, 150, 190), (lx, ly), blink, lash=INK, skin=TAN, bold=1)
-    DX.eye(sp, eyes[1][0], hy + 1.4, 3.8, 3.8, E, (60, 150, 190), (lx, ly), blink, lash=INK, skin=TAN, bold=1)
+    DX.eye(sp, eyes[0][0], hy + 1.4, 4.4, 4.0, E, (30, 170, 236), (lx, ly), blink, lash=INK, skin=TAN, bold=1)
+    DX.eye(sp, eyes[1][0], hy + 1.4, 3.8, 3.8, E, (30, 170, 236), (lx, ly), blink, lash=INK, skin=TAN, bold=1)
     aviators(sp, eyes, hy + 1.4, shades, glint)
     DX.brow(sp, hx + 4.4, hy + 5.2, 4.4, E, +1, BLOND_D, th=2)
     DX.brow(sp, hx - 0.6, hy + 5.1, 3.8, E, -1, BLOND_D, th=2)
@@ -311,11 +313,15 @@ def _wheel(sp, x, y, r, t, spin):
     sp.star(x - r * 0.3, y + r * 0.3, 0.9)
 
 
-def car(sp, t=0.0, vince_kw=None, speed=0.0, lights=False, glow=0.0, stripe=True):
-    """the white wedge, side view facing +x, ~150 px long; vince_kw seats Vince (drawn between the seat and the door)"""
-    # interior: seat back + steering wheel behind Vince
-    sp.cap((-21.0, 26.0), (-18.5, 40.0), 3.4, 3.0, tones((246, 236, 220)))
-    if vince_kw is not None:
+def car(sp, t=0.0, vince_kw=None, speed=0.0, lights=False, glow=0.0, stripe=True, part='all'):
+    """the white wedge, side view facing +x, ~150 px long (draw at CAR_K x the hero scale: real ~4.4 m = 2.4 heights of a man);
+    part='back' (seat back only) / 'front' (everything that hides a seated hero) / 'all'; vince_kw seats Vince (part='all' only,
+    for the model sheet; in shots Vince is a separate actor between 'back' and 'front', see v86kit.car_group)"""
+    if part in ('all', 'back'):
+        sp.cap((-21.0, 26.0), (-18.5, 40.0), 3.4, 3.0, tones((246, 236, 220)))
+        sp.anchors.update(seat=(-6.0, 22.0))
+        if part == 'back': return
+    if vince_kw is not None and part == 'all':
         kw = dict(vince_kw); kw.setdefault('legs', False); kw.setdefault('ox', -6.0); kw.setdefault('oy', -17.0)
         kw.setdefault('hand_n', (10.4, 37.0)); kw.setdefault('hand_f', (-16.0, 31.0))
         vince(sp, t=t, **kw)
