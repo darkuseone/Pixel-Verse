@@ -129,7 +129,7 @@ def r_office(t, u):
                 cols=((255, 214, 80), (255, 140, 60)))
     def f(big, _): K.fran(big, 880, 640, 360, t, talk=CM.M.mouth(EPI.talk, 'fran', t), lid=0.6, look=-0.6)
     big = K.shot('mall', K.light_mall, cx, 420.0, Z, acts=acts, pre=pre, fx_=f, t=t, dof_k=12)
-    O.draw_sticker(big, ST_OFFICE, t, T['f2'] - 0.4, CUTS[9], 380, 1100)
+    O.draw_sticker(big, ST_OFFICE, t, T['f2'] - 0.4, CUTS[9], 540, 360)
     return big
 
 
