@@ -201,8 +201,8 @@ def shot(name, light, cx, cy, Z, acts=(), par=(0.0, 0.0), fx_=None, pre=None, t=
     """depth25.shot25 on a «STILL 1986» world + atmosphere: sunset motes, optional bokeh, the juicy grade (owner 12.11.2026)"""
     W_ = world(name)
     big = D25.shot25(W_, light, cx, cy, Z, depth(name), acts=acts, front=front, par=par, focus=focus, dof_k=dof_k, haze_=haze,
-                     bloom_=bloom, rays_=rays, pre=pre, emit=emit, fx_=None, sx=180, sy=320, vig=0, t=t, kick=(0, 0))
-    if bokeh_: AT.bokeh(big, t, box=(0, 0, OUT_W, 1000), seed=int(cx) % 7)
+                     bloom_=bloom, rays_=rays, pre=pre, emit=emit, fx_=None, sx=ST.W // 2, sy=ST.H // 2, vig=0, t=t, kick=(0, 0))
+    if bokeh_: AT.bokeh(big, t, seed=int(cx) % 7)
     if motes:
         col = (255, 214, 160) if name == 'ocean' else (255, 170, 230)
         AT.motes(big, t, n=34, col=col, seed=int(cx * 3) % 11, par=par[0] * 3)
@@ -435,7 +435,7 @@ def light_rain(v):
 
 
 def V(name, cx, cy, Z):
-    return view_at(world(name), cx, cy, Z, 180, 320)
+    return view_at(world(name), cx, cy, Z, ST.W // 2, ST.H // 2)
 
 
 def S_of(v, name, z=1.0):

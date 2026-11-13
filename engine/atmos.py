@@ -39,9 +39,10 @@ def _disc(r):
     return np.clip(1.0 - np.sqrt(xx * xx + yy * yy) / (r + 0.5), 0, 1)
 
 
-def motes(big, t, box=(0, 0, W_, H_), n=40, col=(255, 226, 170), seed=1, drift=(8.0, -14.0), px=6, a=0.9, par=0.0):
+def motes(big, t, box=None, n=40, col=(255, 226, 170), seed=1, drift=(8.0, -14.0), px=6, a=0.9, par=0.0):
     """dust / pollen motes: 3 depth layers; near layer bigger, softer and moves faster (parallax `par` px shifts layers)"""
-    x0, y0, x1, y1 = box
+    H_, W_ = big.shape[:2]
+    x0, y0, x1, y1 = box or (0, 0, W_, H_)
     r = np.random.default_rng(seed)
     P_ = r.random((n, 4))
     add = np.zeros(big.shape, np.float32)
@@ -64,9 +65,10 @@ def motes(big, t, box=(0, 0, W_, H_), n=40, col=(255, 226, 170), seed=1, drift=(
     return screen(big, add)
 
 
-def bokeh(big, t, n=14, cols=((255, 90, 200), (90, 236, 255), (255, 200, 120)), box=(0, 0, W_, 900), seed=3, r=(18, 46), a=0.32):
+def bokeh(big, t, n=14, cols=((255, 90, 200), (90, 236, 255), (255, 200, 120)), box=None, seed=3, r=(18, 46), a=0.32):
     """soft out-of-focus light discs (neon, lamps) drifting very slowly: depth behind the heroes"""
-    x0, y0, x1, y1 = box
+    H_, W_ = big.shape[:2]
+    x0, y0, x1, y1 = box or (0, 0, W_, int(H_ * 0.47))
     g = np.random.default_rng(seed)
     add = np.zeros(big.shape, np.float32)
     for i in range(n):
@@ -83,6 +85,7 @@ def bokeh(big, t, n=14, cols=((255, 90, 200), (90, 236, 255), (255, 200, 120)), 
 
 def sparks(big, x, y, t, t0, n=14, col=(255, 200, 240), seed=5, life=0.7, speed=420.0, px=6):
     """burst of sparks from (x, y) at t0, falling with gravity, fading"""
+    H_, W_ = big.shape[:2]
     u = t - t0
     if u < 0 or u > life: return big
     g = np.random.default_rng(seed)
@@ -102,6 +105,7 @@ def sparks(big, x, y, t, t0, n=14, col=(255, 200, 240), seed=5, life=0.7, speed=
 def flare(big, x, y, k=1.0, col=(255, 170, 110)):
     """sunset lens flare: a soft halo at the sun + 4 ghost discs toward and past the frame centre"""
     if k <= 0: return big
+    H_, W_ = big.shape[:2]
     add = np.zeros(big.shape, np.float32)
     cx, cy = W_ / 2, H_ / 2
     for j, (f, R, a) in enumerate(((0.0, 260, 0.30), (0.45, 50, 0.16), (0.8, 90, 0.10), (1.25, 36, 0.18), (1.6, 140, 0.07))):
