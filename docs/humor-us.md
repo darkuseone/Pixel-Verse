@@ -321,3 +321,5 @@ Ocean Drive, ар-деко отели (мятный, розовый, лаван�
 «It's eighty-six, baby» / «Honey, it's twenty twenty-six»; «FREE PARKING*» на эвакуаторе; «Convenient for WHO?!»; «If I never
 STOP, it's not PARKING»; «Parking's free. The RIDE's three-fifty»; «fee fee»; «dispute fee»; педальный фламинго тащит патруль;
 «eighty-six flu»; начальник в очереди; крыша по подписке, «That's a hatchback now»; Фрэн играет в игру.
+
+- Расширенная «Vince Velour's Guide to 1986» (13.11.2026): ТВ-спецвыпуск 80-х как рамка, картонная студийная публика + сверчки + табличка «APPLAUSE $1/CLAP», звонки в прямой эфир от всех, кому герой должен, «урок 3» после «урока 5», «PAID PROGRAMMING» реклама с бегущей строкой мелкого шрифта, кассета требует подписку, «Be kind. REWIND.».

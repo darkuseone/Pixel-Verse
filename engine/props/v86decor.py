@@ -106,6 +106,12 @@ def dress(name, W):
             (D.plate(70, 50, ['LIMIT 1', 'PER FAN'], bg=YEL, fg=INK, border=INK), 760, 360),
             (D.plate(60, 26, ['LINE STARTS', 'HERE'], bg=WH, fg=RED, border=RED), 160, 470),
         ])
+    elif name == 'tvstudio':
+        D.attach(W, [
+            (D.plate(220, 70, ['APPLAUSE', '$1 / CLAP'], bg=(40, 16, 60), fg=PINK, border=CYAN, colors=[PINK, YEL], round_=10), 770, 62),
+            (D.plate(330, 44, ['VINCE VELOUR LIVE'], bg=(250, 240, 230), fg=(200, 40, 120), border=CYAN), 95, 515),
+            (D.plate(120, 30, ['ON AIR'], bg=(200, 20, 40), fg=WH, border=WH), 30, 30),
+        ])
     elif name == 'studio':
         D.attach(W, [
             (D.plate(110, 36, ["IT'S 1986"], bg=(30, 16, 50), fg=PINK, border=CYAN), 405, 140),

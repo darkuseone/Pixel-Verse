@@ -52,6 +52,12 @@ BG = {
               '80s posters on the walls, a lava lamp, a rotary-style phone, VHS tapes; right a big window with blinds open showing the '
               'night street outside with neon signs glowing pink and turquoise across the street; a ceiling fan, warm lamp light. '
               'Wooden floor across the lower third, empty, no people.',
+    'tvstudio': 'Wide eye-level view of a retro 1986 late-night TV talk show studio set with a Miami theme: on the left a glossy pastel '
+                'host desk with a vintage microphone and a rotary phone, behind it a skyline backdrop painting with a pink sunset and '
+                'palm silhouettes; in the center-right a tall vertical blank screen (taller than wide) framed with glowing pink and '
+                'turquoise neon tubes; neon palm tree sculptures, a blank applause sign above, studio spotlights on rigs, a shiny dark '
+                'stage floor with reflections across the lower third, a few empty audience seats in dark silhouette at the bottom edge. '
+                'No people, no text.',
 }
 
 NIGHT = ('Exactly the same scene, same buildings, same composition, same camera, but at night: black-violet night sky with stars, '
