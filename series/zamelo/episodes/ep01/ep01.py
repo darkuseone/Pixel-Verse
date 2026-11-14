@@ -233,7 +233,7 @@ def r_dig(t, u):
 
 def hole_dig(k):
     def f(big, v):
-        x, y = 706.0, 604.0
+        x, y = 706.0, 556.0
         ox, oy = v.opt(x, y); Rx, Ry = (46 + 30 * k) * 3 * v.Z, (12 + 6 * k) * 3 * v.Z
         yy, xx = np.mgrid[0:big.shape[0], 0:big.shape[1]]
         m = ((xx - ox) / Rx) ** 2 + ((yy - oy) / Ry) ** 2 <= 1

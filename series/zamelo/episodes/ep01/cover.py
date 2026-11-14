@@ -18,5 +18,5 @@ def f(big, _):
     ph = K.push_screen(1.0, w=440, h=720, t_push=0.0)
     O.overlay(big, ph, 650, 840, 1.0)
 big = K.shot('facade', K.light_window, cx, cy, Z, acts=[z], focus=0.42, dof_k=18, fx_=f, t=t, snow_n=50)
-K.cover_make(big, ['ОСТАВЛЕН', 'У ДВЕРИ?!'], n=1, out=str(pathlib.Path(__file__).parent / 'cover.png'), title_size=86)
+K.cover_make(big, ['ОСТАВИЛИ', 'У ДВЕРИ?!'], n=1, out=str(pathlib.Path(__file__).parent / 'cover.png'), title_size=86)
 print('cover.png')
