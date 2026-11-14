@@ -394,15 +394,15 @@ def sms_screen(t, t_up=0.0, w=520, h=860):
 
 def r_ira2(t, u):
     Z = 1.7
-    cx, cy = 700.0, 420.0
+    cx, cy = 700.0, 500.0
     v = K.V('kitchen', cx, cy, Z)
     S = K.S_of(v, 'kitchen')
     ki, di = face(FI, 'ira', t, (-0.6, 0.0), hand_n=(16.0, 56.0), prop_n=C.phone)
-    ira = A(C.ira, 600.0, 712.0 + di, S, t=t, **ki); ira.near = 0.99
+    ira = A(C.ira, 665.0, 712.0 + di, S, t=t, **ki); ira.near = 0.99
     def f(big, _):
         if u > 0.6:
             ph = sms_screen(t, t_up=CUTS[13] + 0.7, w=430, h=700)
-            O.overlay(big, ph, 600, 560 + int(6 * math.sin(t * 3)), 1.0)
+            O.overlay(big, ph, 630, 520 + int(6 * math.sin(t * 3)), 1.0)
     return K.shot('kitchen', lambda _v: light_spring(v), cx, cy, Z, acts=[ira], pre=kitchen_pre(v), fx_=f, focus=0.9, dof_k=16, t=t,
                   snow=False)
 
@@ -411,16 +411,16 @@ def r_ira2(t, u):
 def r_defy(t, u):
     L = CUTS[15] - CUTS[14]
     Z = lerp(1.45, 1.3, glide(u / L))
-    cx, cy = 525.0, 470.0
+    cx, cy = 560.0, 470.0
     v = K.V('flood', cx, cy, Z)
     S = K.S_of(v, 'flood')
     kz, dz = face(FZ, 'zhora', t, (0.0, -0.3), hand_n=(24.0, 84.0) if u > 1.2 else (24.0, 60.0), hand_f=(-22.0, 54.0), frost=0.3)
-    z = A(C.zhora, 440.0, 735.0 + dz, S, t=t, **kz); z.near = 0.99
-    bx = lerp(720.0, 580.0, u / L)
+    z = A(C.zhora, 520.0, 735.0 + dz, S, t=t, **kz); z.near = 0.99
+    bx = lerp(700.0, 610.0, u / L)
     pb = A(parcel_box, bx, WL + 6 + 3 * math.sin(t * 2), S * 1.1, t=t); pb.near = 0.99
     def f(big, _):
         water_front(big, v, t, a=0.45)
-        ripple(big, v, 440.0, WL, t)
+        ripple(big, v, 520.0, WL, t)
         ox, oy = v.opt(bx, WL - 40)
         if u > 1.0: O.draw_sticker(big, ST_DOOR, t, CUTS[14] + 1.0, CUTS[15], 540, 700)
     return K.shot('flood', K.light_morning, cx, cy, Z, acts=[z, pb], fx_=f, focus=0.8, dof_k=10, t=t, snow=False)
