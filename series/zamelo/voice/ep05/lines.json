@@ -1,0 +1,15 @@
+{
+ "c0": ["chayka", "[dry, brisk, deadpan narrator, to camera] Да́льний Восто́к. Снег тут убира́ет управля́ющая компа́ния. А пла́тит за э́то — Жо́ра."],
+ "z1": ["zhora", "[fast, outraged, waving a receipt] Ты́сяча четы́реста за убо́рку сне́га?! Да я ж сам всё чи́щу!"],
+ "d1": ["disp", "[bored, flat, chewing a sandwich, on the phone] Мужчи́на, ну э́то вам не матери́к. У нас снег убира́ется весно́й. Сам."],
+ "z2": ["zhora", "[fast, outraged, shouting into the phone] Сам?! Я тут ста́рший по окну́! Тре́бую гре́йдер! Сего́дня же!"],
+ "d2": ["disp", "[bored, sighing] Ла́дно, ла́дно. Зая́вку при́няли. Жди́те."],
+ "z3": ["zhora", "[proud, to camera, triumphant] Во́т! Мы, дальневосто́чники, своего́ добива́емся!"],
+ "g1": ["gosha", "[sly, sweet, clapping from the next window] Жо́рик, ты геро́й! С меня́ икра́!"],
+ "v1": ["vitek", "[cheerful, shouting from a grader cab] Гре́йдер вызыва́ли? Го́род ма́ленький!"],
+ "v2": ["vitek", "[cheerful, muffled, from outside] Доро́гу почи́стил! А снег — к вам. Распиши́тесь!"],
+ "z4": ["zhora", "[outraged, in the dark, reading an sms] Ещё шестьсо́т?! За то, что меня́ закопа́ли?!"],
+ "i1": ["ira", "[tired, sarcastic, lighting a candle] Поздравля́ю, ста́рший по окну́. Окна́-то у нас бо́льше нет."],
+ "z5": ["zhora", "[quiet, defeated] Мы, дальневосто́чники, — привы́чные."],
+ "c1": ["chayka", "[deadpan, dry, poking his head through the snow] Привыка́й. Ты тепе́рь — подва́л."]
+}

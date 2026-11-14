@@ -119,6 +119,21 @@
         "public_owner_id": "460dabc9f96dd6cec09c54db9d5a484409dd3713222f3d0bdb12854bd8c837dd",
         "voice_id": "LTkx8oHrUXaND7aaxdTA"
       }
+    },
+    "disp": {
+      "name": "Диспетчер УК «Сугроб-Сервис»",
+      "color_caption": [
+        255,
+        180,
+        120
+      ],
+      "style": "[bored] [flat] — скучающая диспетчер УК, жуёт бутерброд",
+      "voice_id": "Vt0E1AMTZdoht6B8DhXP",
+      "voice": "Замело — Диспетчер УК «Сугроб-Сервис»",
+      "library": {
+        "public_owner_id": "11247a8647abcf8aeb5195b93b6043e0b0c5a7646a521806eed2a3924f6621d0",
+        "voice_id": "Vt0E1AMTZdoht6B8DhXP"
+      }
     }
   }
 }

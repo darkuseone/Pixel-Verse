@@ -3068,17 +3068,17 @@
    "status": "library_or_premade",
    "name": "Жора",
    "voice_name": "Замело — Жора",
-   "lines": 10,
-   "episodes": 2,
+   "lines": 23,
+   "episodes": 4,
    "samples": [
+    "series/zamelo/voice/ep03/z1.mp3",
+    "series/zamelo/voice/ep04/z1.mp3",
     "series/zamelo/voice/ep02/z1.mp3",
     "series/zamelo/voice/ep01/z2.mp3",
-    "series/zamelo/voice/ep02/z4.mp3",
-    "series/zamelo/voice/ep01/z1.mp3",
-    "series/zamelo/voice/ep02/z3.mp3",
-    "series/zamelo/voice/ep01/z5.mp3",
-    "series/zamelo/voice/ep02/z2.mp3",
-    "series/zamelo/voice/ep01/z6.mp3"
+    "series/zamelo/voice/ep03/z6.mp3",
+    "series/zamelo/voice/ep04/z4.mp3",
+    "series/zamelo/voice/ep03/z3.mp3",
+    "series/zamelo/voice/ep02/z4.mp3"
    ]
   },
   {
@@ -3088,16 +3088,52 @@
    "status": "library_or_premade",
    "name": "Чайка",
    "voice_name": "Замело — Чайка",
-   "lines": 7,
-   "episodes": 2,
+   "lines": 12,
+   "episodes": 4,
    "samples": [
+    "series/zamelo/voice/ep04/c0.mp3",
+    "series/zamelo/voice/ep03/c0.mp3",
     "series/zamelo/voice/ep02/c1.mp3",
     "series/zamelo/voice/ep02/c0.mp3",
     "series/zamelo/voice/ep01/c1.mp3",
     "series/zamelo/voice/ep01/c0.mp3",
     "series/zamelo/voice/ep02/c2.mp3",
-    "series/zamelo/voice/ep01/c2.mp3",
-    "series/zamelo/voice/ep01/c3.mp3"
+    "series/zamelo/voice/ep03/c1.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "vitek",
+   "voice_id": "g1G73EpCIdK4HUyDiLYF",
+   "status": "library_or_premade",
+   "name": "Витёк (один на весь город)",
+   "voice_name": "Замело — Витёк (один на весь город)",
+   "lines": 7,
+   "episodes": 2,
+   "samples": [
+    "series/zamelo/voice/ep04/v3.mp3",
+    "series/zamelo/voice/ep04/v4.mp3",
+    "series/zamelo/voice/ep01/v1.mp3",
+    "series/zamelo/voice/ep04/v1.mp3",
+    "series/zamelo/voice/ep04/v6.mp3",
+    "series/zamelo/voice/ep04/v5.mp3",
+    "series/zamelo/voice/ep04/v2.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "gosha",
+   "voice_id": "LTkx8oHrUXaND7aaxdTA",
+   "status": "library_or_premade",
+   "name": "Гоша (сосед)",
+   "voice_name": "Замело — Гоша (сосед)",
+   "lines": 4,
+   "episodes": 1,
+   "samples": [
+    "series/zamelo/voice/ep03/g1.mp3",
+    "series/zamelo/voice/ep03/g3.mp3",
+    "series/zamelo/voice/ep03/g4.mp3",
+    "series/zamelo/voice/ep03/g2.mp3"
    ]
   },
   {
@@ -3146,19 +3182,6 @@
   },
   {
    "slug": "zamelo",
-   "char": "vitek",
-   "voice_id": "g1G73EpCIdK4HUyDiLYF",
-   "status": "library_or_premade",
-   "name": "Витёк (один на весь город)",
-   "voice_name": "Замело — Витёк (один на весь город)",
-   "lines": 1,
-   "episodes": 1,
-   "samples": [
-    "series/zamelo/voice/ep01/v1.mp3"
-   ]
-  },
-  {
-   "slug": "zamelo",
    "char": "nina",
    "voice_id": "ZgfahluxUmUzBjjL81NN",
    "status": "library_or_premade",
@@ -3172,11 +3195,11 @@
   },
   {
    "slug": "zamelo",
-   "char": "gosha",
-   "voice_id": "LTkx8oHrUXaND7aaxdTA",
+   "char": "disp",
+   "voice_id": "Vt0E1AMTZdoht6B8DhXP",
    "status": "library_or_premade",
-   "name": "Гоша (сосед)",
-   "voice_name": "Замело — Гоша (сосед)",
+   "name": "Диспетчер УК «Сугроб-Сервис»",
+   "voice_name": "Замело — Диспетчер УК «Сугроб-Сервис»",
    "lines": 0,
    "episodes": 0,
    "samples": []
@@ -3196,5 +3219,5 @@
   "14NozJq5eoBmDc1FXFDq": "NIKITA2",
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA"
  },
- "updated": "2026-11-14 22:15"
+ "updated": "2026-11-14 22:34"
 }

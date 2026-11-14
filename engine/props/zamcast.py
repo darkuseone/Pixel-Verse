@@ -896,3 +896,138 @@ def ushanka_vitek(sp, h):
     band = sp.m_super(x - 0.2, y + 3.4, 6.4, 1.0, 4.0)[0]
     sp.fill(band, (250, 214, 40))
     for i in range(7): sp.fill(band & (DX.XC >= x - 6.0 + i * 1.8) & (DX.XC < x - 5.1 + i * 1.8), (30, 30, 40))
+
+
+# ================================================================================ ДИСПЕТЧЕР УК (в окне будки, по пояс) — E05
+FURCOAT = (120, 80, 60)
+
+
+def disp(sp, t=0.0, expr='deadpan', mouth_=0.0, look=(0.6, 0.0), blink=None, chew=0.0):
+    """the УК dispatcher: a bored lady in a fox fur hat and a fur coat, heavy blue eye shadow, gold hoop earrings, a phone at the ear,
+    a sandwich in the other hand (drawn from the waist)"""
+    E = X(expr)
+    if blink is None: blink = ((t + 1.7) % 4.4) < 0.12
+    body = sp.poly([(-14.0, 4.0), (14.0, 4.0), (12.6, 26.0), (8.0, 31.0), (-8.0, 31.0), (-12.6, 26.0)], tones(FURCOAT))
+    g = np.random.default_rng(17)
+    for q in range(46): sp.blob(g.uniform(-12, 12), g.uniform(6, 30), 0.4, dark(FURCOAT, 0.75), mask=body)
+    col_ = sp.union([sp.m_ell(-4.0, 31.0, 6.0, 3.2), sp.m_ell(5.0, 31.0, 6.0, 3.2)], tones((220, 120, 50)), frost=False)   # fox collar
+    for q in range(16): thin(sp, (-9.0 + q * 1.2, 28.6), (-9.4 + q * 1.2, 33.4), (255, 220, 190) if q % 3 == 0 else (190, 96, 40), 0.25, mask=col_)
+    sp.ell(0.0, 14.0, 0.7, 0.7, tones((240, 200, 70)), gloss=1.0, ol=False); sp.ell(0.0, 20.0, 0.7, 0.7, tones((240, 200, 70)), gloss=1.0, ol=False)
+    sp.sup(0.0, 3.0, 22.0, 3.0, tones((150, 110, 80)), n=4.0, frost=False)                                  # the desk ledge
+    hx, hy = 1.4, 40.0
+    head = sp.union([sp.m_ell(hx, hy, 6.4, 6.8), sp.m_ell(hx + 0.8, hy - 3.0, 5.4, 4.0)], tones((240, 196, 170)), frost=False)
+    soft_blush(sp, hx + 3.6, hy - 2.0, 2.0, 1.4, (240, 110, 130), 0.5)
+    lx, ly = look
+    DX.eye(sp, hx + 3.0, hy + 0.8, 3.6, 3.2, E, (80, 120, 90), (lx, ly), blink, lash=INK, skin=(240, 196, 170), bold=2, flick=True,
+           lidc=(120, 150, 230))
+    DX.eye(sp, hx - 1.6, hy + 0.8, 3.2, 3.0, E, (80, 120, 90), (lx, ly), blink, lash=INK, skin=(240, 196, 170), bold=2, flick=True,
+           lidc=(120, 150, 230))
+    DX.brow(sp, hx + 3.0, hy + 3.8, 3.2, E, +1, (90, 50, 40), th=1)
+    sp.ell(hx + 5.6, hy - 0.8, 1.3, 1.6, tones((230, 186, 160)), frost=False)
+    mx, my = hx + 3.0, hy - 4.2
+    m = max(mouth_, 0.3 * chew * (0.5 + 0.5 * math.sin(t * 11)))
+    DX.mouth(sp, mx, my, 3.8, E, m, (210, 40, 80), inside=(110, 30, 50), skin=(240, 196, 170), maxh=4.0)
+    sp.ell(hx - 5.0, hy - 2.6, 1.2, 1.6, tones((240, 200, 70)), gloss=1.0, ol=False)                     # gold hoop
+    hat = sp.union([sp.m_ell(hx - 0.4, hy + 6.6, 9.0, 5.0)], tones((220, 120, 50)), frost=False)          # fox fur hat
+    for q in range(30): thin(sp, (hx - 8 + q * 0.55, hy + 3.0), (hx - 8.4 + q * 0.55, hy + 10.6), mix((220, 120, 50), (255, 230, 200), 0.3 if q % 3 == 0 else 0.0), 0.2, mask=hat)
+    kN, eN = ik((9.0, 28.0), (hx + 6.0, hy - 1.0), 7.0, 7.0, -1.0)                                        # the phone at the ear
+    sp.cap((9.0, 28.0), kN, 3.2, 2.8, tones(FURCOAT)); sp.cap(kN, eN, 2.8, 2.4, tones(FURCOAT))
+    sp.sup(eN[0] + 0.6, eN[1] + 1.4, 1.4, 3.0, tones((40, 40, 50)), n=4.0)
+    sp.ell(eN[0], eN[1], 1.7, 1.6, tones((240, 196, 170)), frost=False)
+    kF, eF = ik((-9.0, 28.0), (-4.0, 22.0 + 2 * math.sin(t * 3)), 6.0, 6.0, 1.0)                           # the sandwich
+    sp.cap((-9.0, 28.0), kF, 3.0, 2.6, tones(FURCOAT)); sp.cap(kF, eF, 2.6, 2.2, tones(FURCOAT))
+    sp.sup(eF[0] + 2.6, eF[1] + 1.6, 3.4, 1.4, tones((230, 190, 120)), n=3.0)
+    sp.sup(eF[0] + 2.6, eF[1] + 2.4, 3.0, 0.5, tones((230, 90, 90)), n=3.0, ol=False)
+    sp.ell(eF[0], eF[1], 1.6, 1.5, tones((240, 196, 170)), frost=False)
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my))
+
+
+# ================================================================================ the УК grader (E05), drawn small, blit at ×3.2 hero scale
+GRADER = (255, 140, 30)
+
+
+def grader(sp, t=0.0, blade=0.0, beacon=True, vitek_kw=None, spin=0.0, snow=True):
+    """an orange road grader «СУГРОБ-СЕРВИС», side view facing +x, ~8.5 m long = 120 u (14 u/m: blit at ~2.1x the hero scale):
+    rear engine with a grille and an exhaust, tall glass cab with Витёк, a long arched front beam, a curved blade under it
+    (blade 0..1 lowered), rear tandem + front wheel, a flashing beacon, snow on the roof"""
+    O_ = GRADER
+    for x in (-46.0, -26.0):                                                                               # rear tandem tyres
+        sp.ell(x, 10.0, 10.0, 10.0, tones((34, 34, 42)))
+        for q in range(10):
+            a = q * 0.628 + t * spin * 0.2
+            thin(sp, (x + math.cos(a) * 8.6, 10 + math.sin(a) * 8.6), (x + math.cos(a) * 10.0, 10 + math.sin(a) * 10.0), (60, 60, 70), 0.6)
+        r_ = sp.ell(x, 10.0, 5.2, 5.2, tones((236, 196, 60)))
+        for q in range(5):
+            a = t * spin + q * 1.256
+            sp.blob(x + math.cos(a) * 3.4, 10 + math.sin(a) * 3.4, 0.7, (150, 110, 30), mask=r_)
+    sp.sup(-36.0, 22.0, 16.0, 3.0, tones((60, 60, 72)), n=4.0)                                               # tandem beam
+    sp.sup(-34.0, 31.0, 26.0, 8.0, tones(O_), n=5.0)                                                         # engine hood
+    sp.sup(-59.0, 31.0, 2.6, 7.0, tones((50, 50, 60)), n=4.0)                                                # rear grille
+    for q in range(5): thin(sp, (-60.6, 25.6 + q * 2.6), (-57.4, 25.6 + q * 2.6), (120, 120, 130), 0.4)
+    for q in range(6): thin(sp, (-50.0 + q * 4.0, 36.0), (-50.0 + q * 4.0, 27.0), dark(O_, 0.62), 0.5)      # hood louvres
+    sp.sup(-44.0, 44.0, 1.4, 6.0, tones((70, 70, 80)), n=4.0)                                                # exhaust
+    thin(sp, (-45.0, 50.4), (-43.0, 50.4), (30, 30, 36), 0.8)
+    sp.txt_box(['СУГРОБ-СЕРВИС'], (-56.0, 26.0, -14.0, 33.0), (40, 30, 30), pad=0.3)
+    sp.sup(-4.0, 40.0, 11.0, 16.0, tones(O_), n=6.0)                                                         # cab
+    win = sp.m_super(-3.4, 43.0, 9.0, 11.6, 6.0)[0]
+    sp.paint(win, [(56, 86, 140), (110, 150, 200), (196, 226, 250)], np.clip((DX.YC - 32) / 22.0, 0, 1), ol=False, frost=False)
+    thin(sp, (-3.4, 31.6), (-3.4, 54.4), dark(O_, 0.7), 0.8, mask=win)                                       # window post
+    if vitek_kw is not None:                                                                                 # Витёк at the wheel
+        sp.ell(1.4, 41.0, 4.2, 4.4, tones((236, 190, 160)), frost=False)
+        sp.ell(0.8, 45.4, 4.8, 2.4, tones((240, 200, 40)), frost=False)                                     # hard hat
+        sp.blob(3.6, 41.6, 0.7, (20, 20, 30)); thin(sp, (2.0, 38.6), (4.6, 39.0), (150, 60, 60), 0.4)
+        thin(sp, (4.0, 36.0), (8.0, 34.0), (40, 40, 50), 0.8)                                               # the wheel
+    for d in (-1.0, 1.0): thin(sp, (-4.0 + d * 0.6, 24.0), (-4.0 + d * 0.6, 23.0), (60, 60, 70), 0.4)
+    for q in range(4): thin(sp, (-14.4, 12.0 + q * 3.6), (-11.6, 12.0 + q * 3.6), (70, 70, 80), 0.5)       # ladder
+    thin(sp, (8.0, 52.0), (12.0, 54.0), (40, 40, 50), 0.5); sp.sup(12.6, 52.0, 1.0, 2.2, tones((40, 40, 50)), n=3.0)   # mirror
+    if snow:
+        sp.sup(-4.0, 56.6, 12.0, 1.8, tones((246, 250, 255)), n=3.0, frost=False)
+        sp.sup(-34.0, 39.4, 24.0, 1.4, tones((246, 250, 255)), n=3.0, frost=False)
+    if beacon:
+        on = int(t * 5) % 2 == 0
+        sp.sup(-4.0, 59.4, 3.0, 1.8, tones((255, 200, 40) if on else (170, 110, 20)), n=3.0)
+    sp.poly([(4.0, 26.0), (60.0, 30.0), (62.0, 24.0), (8.0, 20.0)], tones(O_))                               # arched front beam
+    sp.sup(60.0, 22.0, 4.0, 4.0, tones(O_), n=4.0)
+    sp.ell(58.0, 10.0, 10.0, 10.0, tones((34, 34, 42)))                                                      # front tyre
+    for q in range(10):
+        a = q * 0.628 + t * spin * 0.2
+        thin(sp, (58 + math.cos(a) * 8.6, 10 + math.sin(a) * 8.6), (58 + math.cos(a) * 10.0, 10 + math.sin(a) * 10.0), (60, 60, 70), 0.6)
+    r_ = sp.ell(58.0, 10.0, 5.2, 5.2, tones((236, 196, 60)))
+    for q in range(5):
+        a = t * spin + q * 1.256
+        sp.blob(58 + math.cos(a) * 3.4, 10 + math.sin(a) * 3.4, 0.7, (150, 110, 30), mask=r_)
+    by = 8.0 - 6.0 * blade                                                                                   # the blade (moldboard)
+    thin(sp, (14.0, 22.0), (18.0, by + 10.0), (60, 60, 72), 1.4); thin(sp, (34.0, 26.0), (30.0, by + 10.0), (60, 60, 72), 1.4)
+    sp.sup(24.0, by + 13.0, 18.0, 2.0, tones((70, 70, 80)), n=4.0)                                           # circle
+    sp.poly([(6.0, by + 11.0), (42.0, by + 11.0), (44.0, by + 4.0), (42.0, by), (6.0, by), (4.0, by + 4.0)], tones((206, 212, 226)))
+    thin(sp, (6.0, by + 0.4), (42.0, by + 0.4), (120, 126, 140), 0.6)
+    if snow: sp.sup(46.0, by + 4.0, 3.6, 4.0, tones((246, 250, 255)), n=2.6, frost=False)
+    sp.anchors.update(blade=(44.0, by + 4.0), cab=(-3.4, 43.0))
+
+
+def receipt_img(w=520, h=760, total=1400, extra=None, t=0.0, t_extra=0.0):
+    """the УК «СУГРОБ-СЕРВИС» receipt (an RGBA overlay, drawn at 1/4 and upscaled = pixel look)"""
+    from PIL import Image as _I, ImageDraw as _D
+    import overlays as _O
+    S_ = 4
+    wl, hl = w // S_, h // S_
+    im = _I.new('RGBA', (wl, hl), (0, 0, 0, 0)); d = _D.Draw(im); d.fontmode = '1'
+    d.rectangle([0, 0, wl - 1, hl - 1], fill=(250, 248, 236, 255), outline=(120, 120, 120, 255))
+    for x in range(0, wl, 6): d.polygon([(x, hl - 1), (x + 3, hl - 5), (x + 6, hl - 1)], fill=(0, 0, 0, 0))
+    def tx(y, s, size, col=(30, 30, 40)):
+        f = _O.pfont(size)
+        while f.getlength(s) > wl - 12 and size > 4: size -= 1; f = _O.pfont(size)
+        d.text(((wl - f.getlength(s)) / 2, y), s, font=f, fill=col)
+    tx(8, 'УК «СУГРОБ-СЕРВИС»', 9, (30, 60, 150))
+    tx(24, 'КВИТАНЦИЯ ЗА ЯНВАРЬ', 6, (80, 80, 90))
+    d.line([(8, 36), (wl - 8, 36)], fill=(120, 120, 130), width=1)
+    rows = [('ТЕПЛО', '4210'), ('ВОДА', '1080')]
+    f = _O.pfont(6)
+    for i, (a, b) in enumerate(rows):
+        d.text((8, 44 + i * 13), a, font=f, fill=(40, 40, 50)); d.text((wl - 8 - f.getlength(b), 44 + i * 13), b, font=f, fill=(40, 40, 50))
+    tx(74, 'УБОРКА СНЕГА:', 6, (200, 40, 40))
+    tx(86, f'{total} ₽', 12, (200, 40, 40))
+    if extra and t >= t_extra:
+        tx(112, 'ПЕРЕРАСЧЁТ:', 6, (200, 40, 40)); tx(124, extra, 12, (200, 40, 40))
+    a = np.array(im.resize((wl * S_, hl * S_), _I.NEAREST))
+    return a
