@@ -407,7 +407,7 @@ def push_screen(t, w=600, h=980, t_push=0.0):
     _fit_text(d, 6, wl - 7, 40, '07:12', 22, (255, 255, 255))
     _fit_text(d, 6, wl - 7, 70, 'ЧЕТВЕРГ, 14 ЯНВАРЯ', 6, (230, 240, 255))
     k = min(1.0, max(0.0, (t - t_push) / 0.18))
-    py = int(lerp(-80, 110, 1 - (1 - k) ** 3))
+    py = int(lerp(-80, 60, 1 - (1 - k) ** 3))
     d.rounded_rectangle([12, py, wl - 13, py + 96], 8, fill=(250, 250, 255, 255), outline=(120, 60, 200, 255), width=2)
     d.rounded_rectangle([18, py + 8, 34, py + 24], 4, fill=(120, 60, 200, 255))
     d.text((21, py + 12), 'О', font=O.pfont(9), fill=(255, 255, 255))
