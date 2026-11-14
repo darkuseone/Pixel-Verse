@@ -20,7 +20,8 @@ from props import zamdecor as DEC
 
 SLUG = 'zamelo'
 COL = dict(zhora=(255, 170, 60), chayka=(200, 235, 255), ira=(255, 130, 180), vitek=(150, 240, 110), nina=(215, 175, 255))
-WS = dict(facade=4.0, yard=1.4, door=3.4, landing=4.4, kitchen=3.6)
+WS = dict(facade=4.0, yard=1.4, door=3.4, landing=4.4, kitchen=3.6, cutaway=1.0)
+GULL = 0.55                      # seagull sprite scale vs the hero sprite scale (real ~0.35 m standing vs 1.8 m man)
 ORANGE, NAVY, SNOW = (255, 140, 30), (24, 32, 80), (240, 246, 255)
 INK = ZX.INK
 
@@ -88,6 +89,44 @@ def light_window(v):
 
 def light_pit(v):
     return Light(amb=(0.82, 0.90, 1.10), keys=_keys(v, [(640, 0, 700, (220, 236, 255), 0.30)]), grad=(1.08, 0.86))
+
+
+def light_cut(v):
+    return Light(amb=(1.02, 1.0, 1.04), keys=_keys(v, [(150, 600, 700, (255, 196, 130), 0.18)]), grad=(1.02, 0.98))
+
+
+SHAFT_X = (362.0, 424.0)          # the shaft along the outer wall in the cutaway (world px)
+SNOW_TOP = 132.0
+
+
+def shaft_cut(big, v, depth_y, t, seed=1):
+    """the shaft dug down along the wall in the cutaway world: from the snow surface to depth_y (world px); jagged walls,
+    shovel marks, a dark-blue inside going lighter at the bottom where the lamp of the phone shines"""
+    x0, x1 = SHAFT_X
+    y0, y1 = SNOW_TOP - 6, depth_y
+    if y1 <= y0: return
+    ox0, oy0 = v.opt(x0, y0); ox1, oy1 = v.opt(x1, y1)
+    H_, W_ = big.shape[:2]
+    ya, yb = max(0, int(oy0)), min(H_, int(oy1))
+    if ya >= yb: return
+    yy = np.arange(ya, yb)[:, None]; xx = np.arange(W_)[None, :]
+    wy = (yy / (3 * v.Z)) + v.Y0
+    jag_r = ox1 + (np.sin(wy / 9.0 + seed) * 4 + np.sin(wy / 3.7) * 2) * 3 * v.Z
+    m = (xx >= ox0) & (xx < jag_r)
+    k = np.clip((wy - y0) / max(1.0, y1 - y0), 0, 1)
+    col = (np.array((48, 62, 120), np.float32) * (1 - 0.35 * k) + np.array((120, 150, 210), np.float32) * 0.35 * k).reshape(-1, 3)
+    reg = big[ya:yb]
+    shade = 1.0 - 0.25 * np.clip((xx - ox0) / max(1.0, float(jag_r.mean()) - ox0), 0, 1)       # (1, W)
+    c = col[:, None, :] * shade[..., None]                                                    # (n, W, 3) via broadcast
+    c = np.broadcast_to(c, (yb - ya, W_, 3))
+    reg[m] = np.clip(c[m], 0, 255).astype(np.uint8)
+    edge = (xx >= jag_r - 3 * v.Z) & (xx < jag_r + 2 * v.Z)
+    reg[edge] = (210, 226, 252)
+    for q in range(int(y0) + 18, int(y1) - 6, 22):                         # shovel marks on the snow wall
+        _, sy = v.opt(x0, q)
+        if ya <= sy < yb - 3:
+            sx = int(jag_r[int(sy) - ya, 0] - 6 * v.Z)
+            big[int(sy):int(sy) + 3, max(0, sx - int(10 * v.Z)):sx] = (90, 110, 170)
 
 
 def light_landing(v):

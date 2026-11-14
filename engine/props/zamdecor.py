@@ -98,6 +98,13 @@ def dress(name, W, day=150):
         ])
         D.anim(W, gulls(n=5, seed=8, box=(0, 40, 1280, 200)))
         D.anim(W, smoke(420, 260, seed=2)); D.anim(W, smoke(1040, 305, seed=5))
+    elif name == 'cutaway':                                         # floor numbers on the side wall, a hand-painted arrow at the top
+        items = []
+        for i, y in enumerate((178, 300, 418, 535, 650, 765, 880, 995, 1112)):
+            items.append((R.plate(18, 18, [str(9 - i)], bg=(40, 80, 170), fg=WH, border=WH), 268, y))
+        items.append((board(70, 34, ['ЖОРА', '9 ЭТАЖ'], pole_h=10, seed=4, tilt=-4), 420, 92))
+        items.append((R.plate(52, 22, ['ПОДЪЕЗД'], bg=(40, 80, 170), fg=WH, border=WH), 283, 1062))
+        D.attach(W, items)
     elif name == 'door':
         D.attach(W, [
             (R.plate(70, 44, ['ОТКЛЮЧЕНИЕ', 'ВОДЫ 01.11'], bg=PAPER, fg=INKC, border=(170, 170, 170), wear=0.3, tilt=-4), 600, 300),

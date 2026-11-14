@@ -88,18 +88,64 @@ def parcel(sp, x=0.0, y=0.0, w=14.0, h=10.0):
     sp.anchors['parcel'] = (x, y + h / 2)
 
 
-def shovel(sp, h, ang=-1.2, l=34.0, snow=0.0):
-    """a snow shovel held at hand h: wooden handle + a wide aluminium scoop at the end, direction ang (radians)"""
+def soft_blush(sp, cx, cy, rx, ry, col, a=0.42):
+    """a soft rosy patch blended into the skin (no checker dots): cold-pinched cheeks"""
+    m, nx, ny = sp.m_ell(cx, cy, rx, ry)
+    m &= sp.m & ~sp.keep
+    if not m.any(): return
+    r2 = np.clip(nx * nx + ny * ny, 0, 1)
+    w = (1.0 - r2) * a
+    c = sp.col.astype(np.float32)
+    c[m] = c[m] * (1 - w[m, None]) + np.array(col, np.float32) * w[m, None]
+    sp.col = np.clip(c, 0, 255).astype(np.uint8)
+
+
+def quilt(sp, mask, seams, base, cx, rx, gloss=True):
+    """a down jacket: the mask split into horizontal bands by `seams` (y, sprite px, bottom->top); every band is a puffed tube with
+    its own light (bright upper half, dark bottom by the seam), a dark seam line with stitches and a nylon gloss streak"""
+    ys = [-1e9] + sorted(seams) + [1e9]
+    for y0, y1 in zip(ys[:-1], ys[1:]):
+        band = mask & (DX.YC >= y0) & (DX.YC < y1)
+        if not band.any(): continue
+        rows = np.where(band.any(1))[0]
+        top_y = max(y0, DX.YC[rows[-1], 0]); bot_y = min(y1, DX.YC[rows[0], 0])
+        mid = (min(y1, 1e3) + max(y0, -1e3)) / 2 if abs(y0) < 1e8 and abs(y1) < 1e8 else (top_y + bot_y) / 2
+        hh = max(1.0, (min(y1, top_y) - max(y0, bot_y)) / 2 + 0.6)
+        ny = np.clip((DX.YC - mid) / hh, -0.95, 0.95)
+        nx = np.clip((DX.XC - cx) / rx, -0.95, 0.95)
+        sp.paint(band, tones(base), DX.lit(nx * 0.85, ny * 0.8), ol=False)
+        if gloss and abs(y0) < 1e8 and abs(y1) < 1e8:
+            gl = band & (np.abs(DX.YC - (mid + hh * 0.45)) < 0.32) & (DX.XC > cx - rx * 0.75) & (DX.XC < cx - rx * 0.05)
+            sp.fill(gl, mix(base, (255, 255, 255), 0.55))
+    for y in seams:
+        sm_ = mask & (np.abs(DX.YC - y) < 0.38)
+        sp.fill(sm_, dark(base, 0.52))
+        for x in np.arange(cx - rx, cx + rx, 2.2):
+            sp.fill(sm_ & (np.abs(DX.XC - x) < 0.3) & (np.abs(DX.YC - y) < 0.2), dark(base, 0.35))
+    e = mask & ~erode(mask)
+    sp.col[e] = mix(dark(base, 0.5), INK, 0.4)
+
+
+def shovel(sp, h, ang=-1.2, l=40.0, snow=0.0):
+    """a real snow shovel (~1.3 m = 0.7 of a hero): wooden handle with a D-grip, a wide aluminium scoop with a rim, at hand h;
+    ang = direction from the hand to the scoop (radians)"""
     x, y = h
-    a, b = (x - math.cos(ang) * 6.0, y - math.sin(ang) * 6.0), (x + math.cos(ang) * l, y + math.sin(ang) * l)
-    thin(sp, a, b, (176, 120, 60), 1.0)
-    thin(sp, a, b, (214, 160, 90), 0.4)
-    px, py = -math.sin(ang), math.cos(ang)
-    e = (b[0] + math.cos(ang) * 6.0, b[1] + math.sin(ang) * 6.0)
-    pts = [(b[0] + px * 6.0, b[1] + py * 6.0), (e[0] + px * 7.0, e[1] + py * 7.0), (e[0] - px * 7.0, e[1] - py * 7.0), (b[0] - px * 6.0, b[1] - py * 6.0)]
-    sp.poly(pts, tones((190, 200, 214)), val=np.full(DX.XC.shape, 0.6, np.float32))
+    ca, sa = math.cos(ang), math.sin(ang)
+    a, b = (x - ca * 10.0, y - sa * 10.0), (x + ca * l, y + sa * l)
+    thin(sp, a, b, (150, 98, 50), 1.1)
+    thin(sp, (a[0] + 0.3, a[1] + 0.3), (b[0] + 0.3, b[1] + 0.3), (214, 160, 96), 0.35)
+    sp.ell(a[0] - ca * 1.6, a[1] - sa * 1.6, 2.0, 2.0, tones((40, 40, 50)), frost=False)                     # D-grip
+    px, py = -sa, ca
+    e = (b[0] + ca * 14.0, b[1] + sa * 14.0)
+    pts = [(b[0] + px * 4.0, b[1] + py * 4.0), (e[0] + px * 9.0, e[1] + py * 9.0), (e[0] - px * 9.0, e[1] - py * 9.0),
+           (b[0] - px * 4.0, b[1] - py * 4.0)]
+    m = sp.m_poly(pts)
+    v = np.clip(0.55 + ((DX.XC - b[0]) * px + (DX.YC - b[1]) * py) * 0.04, 0.05, 0.95)
+    sp.paint(m, tones((196, 206, 222)), v)
+    thin(sp, (e[0] + px * 9.0, e[1] + py * 9.0), (e[0] - px * 9.0, e[1] - py * 9.0), (120, 130, 150), 0.6)   # the rim
+    for q in (-4.0, 0.0, 4.0): thin(sp, (b[0] + px * q * 0.5, b[1] + py * q * 0.5), (e[0] + px * q, e[1] + py * q), (160, 172, 190), 0.22)
     if snow > 0:
-        sp.ell((b[0] + e[0]) / 2 + px * 1.0, (b[1] + e[1]) / 2 + py * 1.0, 5.0 * snow, 3.0 * snow, tones(SNOWC), frost=False)
+        sp.union([sp.m_ell((b[0] + e[0]) / 2 + px * 0.6, (b[1] + e[1]) / 2 + py * 0.6, 7.0 * snow, 3.6 * snow)], tones(SNOWC), frost=False)
     sp.anchors['scoop'] = e
 
 
@@ -117,98 +163,132 @@ def zhora(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, hand
     shF = Q(-12.0, 52.0 + br * 0.3)
     hf = hand_f if hand_f is not None else Q(-15.0 - swing * 0.6, 32.0)
     kF, eF = ik(shF, hf, 10.0, 9.0, -1.0)
-    sp.cap(shF, kF, 5.0, 4.4, tones(dark(ALASKA, 0.8)))
-    sp.cap(kF, eF, 4.4, 3.6, tones(dark(ALASKA, 0.8)))
-    sp.ell(eF[0], eF[1] - 0.4, 3.2, 3.0, tones(dark(MITT, 0.85)))
+    slF = sp.union([sp.m_cap(shF, kF, 5.2, 4.6), sp.m_cap(kF, eF, 4.6, 3.8)], tones(dark(ALASKA, 0.8)), ol=False)
+    quilt(sp, slF, [kF[1]], dark(ALASKA, 0.8), (shF[0] + eF[0]) / 2, 6.0, gloss=False)
+    sp.ell(eF[0], eF[1] - 0.4, 3.4, 3.2, tones(dark(MITT, 0.85)))
     if prop_f: prop_f(sp, eF)
     sp.anchors['hand_f'] = eF
-    # ---------------------------------------------------------------- legs: quilted pants + grey felt valenki
+    # ---------------------------------------------------------------- legs: quilted «ватные» pants + felt valenki with black galoshes
     if legs:
         sw = math.sin(walk) * 2.6 if walk is not None else 0.0
-        for k_, dx in enumerate((-4.2, 4.4)):
+        for k_, dx in enumerate((-4.4, 4.6)):
             near = k_ == 1
             s_ = sw if near else -sw
             fx_, fy_ = dx + s_ * 0.7, max(0.0, s_) * 0.5
             c = PANTS if near else dark(PANTS, 0.86)
-            sp.cap(Q(dx * 0.9, 28.0), (fx_ + ox, fy_ + 10.0 + oy), 4.6, 4.0, tones(c))
+            leg = sp.cap(Q(dx * 0.9, 28.0), (fx_ + ox, fy_ + 12.0 + oy), 4.8, 4.2, tones(c))
+            for q in (-1.6, 1.6): thin(sp, Q(dx * 0.9 + q, 27.0), (fx_ + ox + q, fy_ + 13.0 + oy), dark(c, 0.7), 0.22, mask=leg)
+            thin(sp, (fx_ + ox - 3.0, fy_ + 19.0 + oy), (fx_ + ox + 2.6, fy_ + 18.4 + oy), dark(c, 0.65), 0.25, mask=leg)  # knee crease
             vk = VALENKI if near else dark(VALENKI, 0.88)
-            sp.cap((fx_ + ox, fy_ + 10.0 + oy), (fx_ + 0.6 + ox, fy_ + 2.4 + oy), 4.4, 4.2, tones(vk))
-            sp.sup(fx_ + 2.0 + ox, fy_ + 2.0 + oy, 5.4, 2.4, tones(vk), n=2.2)
-    # ---------------------------------------------------------------- body: the round down «alaska»
-    hx, hy = Q(3.0, 66.0)
-    body = sp.union([sp.m_ell(*Q(0.6, 41.0), 16.0, 18.0), sp.m_ell(*Q(0.0, 27.0), 14.0, 6.0), sp.m_ell(*Q(1.0, 54.0), 13.0, 6.4)],
-                    tones(ALASKA))
-    for yq in (31.0, 38.0, 45.0, 52.0):                                    # quilting rows
-        y_ = Q(0, yq)[1]
-        sp.fill(body & (np.abs(DX.YC - y_) < 0.35) & (np.abs(DX.XC - Q(0.6, 0)[0]) < 15.0), dark(ALASKA, 0.74))
-    thin(sp, Q(4.0, 57.0), Q(4.8, 24.0), dark(ALASKA, 0.6), 0.35)          # zipper
-    for q in range(5): sp.dot(*Q(4.4, 26.0 + q * 6.4), (220, 220, 230))
-    tel = sp.m_poly([Q(1.2, 59.0), Q(8.0, 59.0), Q(4.6, 53.0)]) & body      # telnyashka in the collar V
+            boot = sp.union([sp.m_cap((fx_ + ox, fy_ + 13.0 + oy), (fx_ + 0.6 + ox, fy_ + 3.0 + oy), 4.8, 4.6),
+                             sp.m_super(fx_ + 2.2 + ox, fy_ + 2.6 + oy, 5.8, 2.8, 2.2)], tones(vk))
+            g = np.random.default_rng(11 + k_)
+            for q in range(26):                                             # felt speckle
+                sp.blob(fx_ + ox + g.uniform(-4, 7), fy_ + oy + g.uniform(3, 13), 0.28, dark(vk, 0.78), mask=boot)
+            sp.fill(sp.m_super(fx_ + 0.4 + ox, fy_ + 13.4 + oy, 5.2, 1.2, 3.0)[0], mix(vk, (255, 255, 255), 0.2))   # top fold
+            gal = boot & (DX.YC < fy_ + oy + 3.6)
+            sp.paint(gal, tones((40, 40, 52)), DX.lit(np.zeros_like(DX.XC), np.clip((DX.YC - fy_ - oy - 1.8) / 2.0, -0.9, 0.9)), ol=False)
+            thin(sp, (fx_ + ox - 2.0, fy_ + oy + 3.4), (fx_ + ox + 6.0, fy_ + oy + 3.2), (110, 110, 130), 0.2)       # galosh shine
+    # ---------------------------------------------------------------- body: the round quilted down «alaska»
+    hx, hy = Q(3.4, 67.0)
+    cxb = Q(0.6, 0)[0]
+    body = sp.union([sp.m_ell(*Q(0.6, 42.0), 16.6, 18.6), sp.m_ell(*Q(0.0, 27.0), 14.6, 6.0), sp.m_ell(*Q(1.0, 55.0), 13.4, 6.4)],
+                    tones(ALASKA), ol=False)
+    quilt(sp, body, [Q(0, y)[1] for y in (30.0, 36.6, 43.2, 49.8, 56.0)], ALASKA, cxb, 16.6)
+    thin(sp, Q(4.2, 59.0), Q(5.0, 23.0), dark(ALASKA, 0.45), 0.4)          # zipper
+    for q in range(12): sp.dot(*Q(4.6 + q * 0.03, 24.0 + q * 3.0), (230, 230, 236))
+    sp.ell(*Q(4.4, 57.0), 0.8, 1.4, tones((220, 220, 230)), frost=False)  # zipper pull
+    pk = sp.m_super(*Q(-9.0, 35.0), 4.0, 3.0, 4.0)[0] & body              # pocket with a flap + button
+    sp.fill(pk, dark(ALASKA, 0.78)); sp.fill(pk & ~erode(pk), dark(ALASKA, 0.5))
+    sp.blob(*Q(-9.0, 37.2), 0.6, (40, 40, 50))
+    sp.fill(sp.m_super(*Q(10.6, 47.0), 2.0, 1.0, 4.0)[0] & body, (40, 70, 160))     # a little sewn-on badge
+    tel = sp.m_poly([Q(1.6, 60.0), Q(8.4, 60.0), Q(5.0, 54.4)]) & body     # telnyashka in the collar V
     sp.fill(tel, WHITE)
-    for q in range(4): sp.fill(tel & (np.abs(DX.YC - Q(0, 54.0 + q * 1.4)[1]) < 0.35), TELNIK_B)
-    sp.fill(sp.m_super(*Q(-9.0, 35.0), 3.6, 2.6, 4.0)[0] & body, dark(ALASKA, 0.82))   # pocket
-    sp.dot(*Q(9.0, 48.0), (255, 255, 255))                                 # a little badge
-    collar = sp.union([sp.m_ell(hx - 1.6, hy - 8.4, 11.0, 3.8), sp.m_ell(hx - 7.4, hy - 5.0, 3.6, 4.4)], tones(FUR))   # fur collar
-    for q in range(14):
-        a = math.pi * (0.9 + 1.2 * q / 13)
-        x0, y0 = hx - 1.6 + math.cos(a) * 10.0, hy - 8.4 + math.sin(a) * 3.2
-        thin(sp, (x0, y0), (x0 + math.cos(a) * 1.4, y0 + math.sin(a) * 1.4), dark(FUR, 0.7), 0.3, mask=collar)
-    # ---------------------------------------------------------------- neck + head
-    head = sp.union([sp.m_ell(hx + 0.6, hy, 8.2, 8.6), sp.m_ell(hx + 1.8, hy - 4.2, 7.2, 5.6)], tones(SKIN_Z))
-    sp.ell(hx - 5.4, hy + 0.2, 1.6, 2.4, tones(dark(SKIN_Z, 0.9)))        # ear
+    for q in range(4): sp.fill(tel & (np.abs(DX.YC - Q(0, 55.2 + q * 1.3)[1]) < 0.32), TELNIK_B)
+    # fur collar: scalloped tufts around the neck
+    parts = [sp.m_ell(hx - 1.8, hy - 9.0, 11.6, 3.8), sp.m_ell(hx - 8.0, hy - 5.4, 3.8, 4.6)]
+    for q in range(9):
+        a = math.pi * (0.95 + 1.15 * q / 8)
+        parts.append(sp.m_ell(hx - 1.8 + math.cos(a) * 10.6, hy - 9.0 + math.sin(a) * 3.4, 2.2, 1.8))
+    collar = sp.union(parts, tones(FUR))
+    g = np.random.default_rng(7)
+    for q in range(26):
+        x0, y0 = g.uniform(hx - 12.0, hx + 9.0), g.uniform(hy - 12.0, hy - 5.0)
+        thin(sp, (x0, y0), (x0 + g.uniform(-0.8, 0.8), y0 + g.uniform(0.8, 1.8)), mix(FUR, (255, 230, 190), 0.35) if q % 3 == 0 else dark(FUR, 0.68), 0.2, mask=collar)
+    # ---------------------------------------------------------------- head (smooth skin, no frost hatching)
+    head = sp.union([sp.m_ell(hx + 0.6, hy, 8.6, 9.0), sp.m_ell(hx + 1.8, hy - 4.4, 7.4, 5.8)], tones(SKIN_Z), frost=False)
+    ear = sp.ell(hx - 5.8, hy + 0.2, 1.8, 2.6, tones(dark(SKIN_Z, 0.92)), frost=False)
+    thin(sp, (hx - 5.6, hy + 1.4), (hx - 5.9, hy - 1.0), dark(SKIN_Z, 0.7), 0.25)
+    soft_blush(sp, hx - 5.8, hy + 0.2, 2.0, 2.6, (230, 80, 80), 0.5)          # frozen red ear
+    soft_blush(sp, hx + 5.4, hy - 2.8, 3.0, 2.2, CHEEK, 0.55)
+    soft_blush(sp, hx - 1.8, hy - 2.6, 2.2, 1.8, CHEEK, 0.45)
     lx, ly = look
-    DX.eye(sp, hx + 4.2, hy + 1.4, 4.2, 4.0, E, (70, 130, 200), (lx, ly), blink, lash=INK, skin=SKIN_Z, bold=1)
-    DX.eye(sp, hx - 0.6, hy + 1.4, 3.6, 3.8, E, (70, 130, 200), (lx, ly), blink, lash=INK, skin=SKIN_Z, bold=1)
-    DX.brow(sp, hx + 4.2, hy + 5.4, 4.6, E, +1, MOUST, th=2, bushy=True)
-    DX.brow(sp, hx - 0.6, hy + 5.3, 3.8, E, -1, MOUST, th=2, bushy=True)
-    DX.blush(sp, hx + 4.6, hy - 2.4, 2.4, 1.6, CHEEK)
-    DX.blush(sp, hx - 1.6, hy - 2.2, 1.6, 1.4, CHEEK)
-    sp.ell(hx + 8.0, hy - 1.2, 2.4, 2.4, tones(NOSE), gloss=1.0)         # potato nose
-    sp.dot(hx + 7.6, hy - 2.8, dark(NOSE, 0.6))
-    mx, my = hx + 4.4, hy - 7.0
-    DX.mouth(sp, mx, my, 5.4, E, mouth_, (150, 60, 60), inside=(90, 24, 34), teeth=(255, 255, 250), skin=SKIN_Z, maxh=6.0)
-    must = sp.union([sp.m_ell(mx - 0.4, my + 2.7, 4.4, 1.2), sp.m_ell(mx + 2.8, my + 2.4, 2.2, 1.0)], tones(MOUST))  # brush moustache
-    for q in range(6): thin(sp, (mx - 3.8 + q * 1.4, my + 3.4), (mx - 4.0 + q * 1.4, my + 1.8), dark(MOUST, 0.7), 0.2, mask=must)
+    DX.eye(sp, hx + 4.6, hy + 1.6, 4.4, 4.2, E, (70, 130, 200), (lx, ly), blink, lash=INK, skin=SKIN_Z, bold=1)
+    DX.eye(sp, hx - 0.4, hy + 1.6, 3.8, 4.0, E, (70, 130, 200), (lx, ly), blink, lash=INK, skin=SKIN_Z, bold=1)
+    if sp.k >= 2:                                                          # eye bags + crow's feet
+        thin(sp, (hx + 2.8, hy - 0.8), (hx + 6.4, hy - 0.9), dark(SKIN_Z, 0.8), 0.14)
+        for q in range(3): thin(sp, (hx + 7.0, hy + 1.8 - q * 0.9), (hx + 8.2, hy + 2.2 - q * 1.3), dark(SKIN_Z, 0.78), 0.12)
+    DX.brow(sp, hx + 4.6, hy + 5.6, 4.8, E, +1, MOUST, th=2, bushy=True)
+    DX.brow(sp, hx - 0.4, hy + 5.5, 4.0, E, -1, MOUST, th=2, bushy=True)
+    nose = sp.ell(hx + 8.4, hy - 1.4, 2.6, 2.6, tones(NOSE), gloss=1.0, frost=False)      # potato nose
+    sp.blob(hx + 8.6, hy - 3.0, 0.5, dark(NOSE, 0.5))                       # nostril
+    sp.blob(hx + 7.8, hy - 0.4, 0.45, (255, 230, 220), keep=True)
+    mx, my = hx + 4.8, hy - 7.4
+    DX.stubble(sp, sp.m_ell(hx + 2.4, hy - 7.6, 6.6, 2.6)[0] & head, dark(SKIN_Z, 0.78), 0.18, 5)
+    DX.mouth(sp, mx, my, 5.8, E, mouth_, (150, 60, 60), inside=(90, 24, 34), teeth=(255, 255, 250), skin=SKIN_Z, maxh=6.4)
+    must = sp.union([sp.m_ell(mx - 0.4, my + 2.8, 4.6, 1.3), sp.m_ell(mx + 3.0, my + 2.5, 2.4, 1.1)], tones(MOUST))  # brush moustache
+    for q in range(9): thin(sp, (mx - 4.2 + q * 1.0, my + 3.6), (mx - 4.5 + q * 1.0, my + 1.7), dark(MOUST, 0.62) if q % 2 else mix(MOUST, (230, 200, 160), 0.3), 0.16, mask=must)
     if frost > 0:                                                          # rime on brows and moustache, icicles
         g = np.random.default_rng(5)
-        for q in range(int(14 * frost)):
-            x_, y_ = g.uniform(hx - 3, hx + 7), g.choice([hy + 5.6, my + 3.0])
-            sp.blob(x_, y_, 0.42, SNOWC, keep=True)
+        for q in range(int(18 * frost)):
+            x_, y_ = g.uniform(hx - 3, hx + 8), g.choice([hy + 6.0, my + 3.2])
+            sp.blob(x_, y_ + g.uniform(-0.5, 0.5), 0.36, SNOWC, keep=True)
         for q in range(int(3 * frost) + 1):
             x_ = mx - 3.0 + q * 2.4
-            thin(sp, (x_, my + 1.8), (x_ + 0.2, my + 0.4 - 0.6 * (q % 2)), (200, 230, 255), 0.4, keep=True)
-    # ---------------------------------------------------------------- the tall cone hat «петушок»
-    base_y = hy + 8.2
-    tip = (hx - 6.0 - 1.4 * math.sin(t * 2.4), hy + 26.0)
-    cone = sp.m_poly([(hx - 7.2, base_y), (hx + 8.2, base_y), (tip[0] + 2.0, tip[1]), (tip[0] - 1.2, tip[1] - 0.6)])
-    ny_ = np.clip((DX.YC - base_y) / 20.0, 0, 1)
-    band = (((DX.YC - base_y) // 3.2).astype(int) % 2) == 0
-    sp.paint(cone & band, tones(HAT_R), DX.lit(np.clip((DX.XC - hx) / 9.0, -0.9, 0.9), ny_ * 0.5))
-    sp.paint(cone & ~band, tones(HAT_W), DX.lit(np.clip((DX.XC - hx) / 9.0, -0.9, 0.9), ny_ * 0.5), ol=False)
-    cuff = sp.sup(hx + 0.6, base_y + 0.6, 8.6, 2.4, tones(HAT_W), n=3.0)
-    if sp.k >= 2: sp.txt_box(['SPORT'], (hx - 5.6, base_y - 1.2, hx + 6.6, base_y + 2.4), HAT_R, pad=0.1)
-    sp.ell(tip[0], tip[1] + 1.0, 3.0, 3.0, tones(HAT_W))                    # pompon
-    for q in range(6):
-        a = q * 1.05
-        thin(sp, (tip[0], tip[1] + 1.0), (tip[0] + math.cos(a) * 2.6, tip[1] + 1.0 + math.sin(a) * 2.6), dark(HAT_W, 0.8), 0.22)
+            thin(sp, (x_, my + 1.8), (x_ + 0.2, my + 0.2 - 0.6 * (q % 2)), (200, 230, 255), 0.36, keep=True)
+    # ---------------------------------------------------------------- the knitted cone hat «петушок»
+    base_y = hy + 8.6
+    tip = (hx - 6.0 - 1.4 * math.sin(t * 2.4), hy + 29.0)
+    cone = sp.m_poly([(hx - 7.6, base_y), (hx + 8.6, base_y), (tip[0] + 2.0, tip[1]), (tip[0] - 1.2, tip[1] - 0.6)])
+    nyc = np.clip((DX.YC - base_y) / 22.0, 0, 1)
+    val = DX.lit(np.clip((DX.XC - hx) / 9.0, -0.9, 0.9), nyc * 0.5)
+    band = (((DX.YC - base_y) // 3.4).astype(int) % 2) == 0
+    sp.paint(cone & band, tones(HAT_R), val, ol=False, frost=False)
+    sp.paint(cone & ~band, tones(HAT_W), val, ol=False, frost=False)
+    rib = cone & (((DX.XC * 1.2).astype(int) % 2) == 0)                   # knit ribs: darker columns
+    c = sp.col.astype(np.float32); c[rib] *= 0.9; sp.col = c.astype(np.uint8)
+    e = cone & ~erode(cone); sp.col[e] = mix(dark(HAT_R, 0.5), INK, 0.4)
+    cuff = sp.sup(hx + 0.6, base_y + 0.4, 9.2, 2.8, tones(HAT_W), n=3.0, frost=False)
+    rb = cuff & (((DX.XC * 1.5).astype(int) % 2) == 0)
+    c = sp.col.astype(np.float32); c[rb] *= 0.9; sp.col = c.astype(np.uint8)
+    if sp.k >= 2: sp.txt_box(['SPORT'], (hx - 6.0, base_y - 1.6, hx + 7.0, base_y + 2.4), HAT_R, pad=0.1)
+    pom = sp.ell(tip[0], tip[1] + 1.0, 3.4, 3.4, tones(HAT_W), frost=False)  # fluffy pompon
+    for q in range(14):
+        a = q * 0.45
+        thin(sp, (tip[0] + math.cos(a) * 1.2, tip[1] + 1.0 + math.sin(a) * 1.2), (tip[0] + math.cos(a) * 3.8, tip[1] + 1.0 + math.sin(a) * 3.8),
+             dark(HAT_W, 0.78) if q % 2 else (255, 255, 255), 0.2)
     if snowcap > 0:
-        sp.ell(tip[0] + 1.0, tip[1] + 3.6, 3.6 * snowcap, 2.0 * snowcap, tones(SNOWC), frost=False)
-        sp.ell(hx + 1.0, base_y + 3.2, 7.0 * snowcap, 1.8 * snowcap, tones(SNOWC), frost=False)
+        sp.union([sp.m_ell(tip[0] + 1.0, tip[1] + 3.8, 3.8 * snowcap, 2.0 * snowcap),
+                  sp.m_ell(hx + 1.0, base_y + 3.4, 7.4 * snowcap, 1.9 * snowcap)], tones(SNOWC), frost=False)
     if sweat > 0:
         for i, (x, y) in enumerate(((hx - 2.0, hy + 4.6), (hx + 6.0, hy + 4.0))[:int(1 + sweat)]):
             yy = y - ((t * 4.0 + i * 1.3) % 3.5)
             sp.ell(x, yy, 0.6, 1.0, tones((170, 220, 255)), ol=False)
-    sp.anchors.update(head=(hx, hy), mouth=(mx, my), eyes=(hx + 2.0, hy + 1.4), chest=Q(2.0, 44.0), hat=tip)
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my), eyes=(hx + 2.0, hy + 1.6), chest=Q(2.0, 44.0), hat=tip)
     # ---------------------------------------------------------------- near arm (over the body)
     before = sp.m.copy()
-    shN = Q(13.6, 52.0 + br * 0.3)
+    shN = Q(13.8, 52.0 + br * 0.3)
     hn = hand_n if hand_n is not None else Q(17.0 + swing * 0.6, 32.0)
     kN, eN = ik(shN, hn, 10.0, 9.0, -1.0)
-    sp.cap(shN, kN, 5.2, 4.6, tones(ALASKA))
-    sp.cap(kN, eN, 4.6, 3.8, tones(ALASKA))
+    slN = sp.union([sp.m_cap(shN, kN, 5.4, 4.8), sp.m_cap(kN, eN, 4.8, 4.0)], tones(ALASKA), ol=False)
+    quilt(sp, slN, [kN[1] + 0.3], ALASKA, (shN[0] + eN[0]) / 2, 6.0)
     if prop_n and getattr(prop_n, 'behind', False): prop_n(sp, eN)
-    sp.ell(eN[0], eN[1] - 0.4, 3.4, 3.2, tones(MITT))
-    thin(sp, (eN[0] - 2.6, eN[1] + 1.6), (eN[0] + 2.6, eN[1] + 1.6), WHITE, 0.4)   # mitten cuff stripe
+    mit = sp.ell(eN[0], eN[1] - 0.4, 3.6, 3.4, tones(MITT), frost=False)
+    sp.ell(eN[0] + 2.4, eN[1] + 0.8, 1.4, 1.8, tones(MITT), frost=False)  # thumb
+    for q in range(6):                                                     # knitted white zigzag band
+        x0 = eN[0] - 3.0 + q * 1.1
+        thin(sp, (x0, eN[1] + 1.5 + (q % 2) * 0.6), (x0 + 1.1, eN[1] + 1.5 + ((q + 1) % 2) * 0.6), WHITE, 0.26)
+    thin(sp, (eN[0] - 3.2, eN[1] + 2.7), (eN[0] + 3.2, eN[1] + 2.7), WHITE, 0.45)   # cuff stripe
     if prop_n and not getattr(prop_n, 'behind', False): prop_n(sp, eN)
     sp.anchors['hand'] = eN
     _arm_over(sp, before)
@@ -216,51 +296,67 @@ def zhora(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, hand
 
 # ================================================================================ ЧАЙКА
 def chayka(sp, t=0.0, expr='dry', mouth_=0.0, look=(0.5, 0.0), blink=None, chew=0.0, wing=0.0, fly=False, glasses=False):
-    """the seagull, side view facing +x (~28 px tall: a big gull is half a metre). chew 0..1 = jaw working on something;
-    wing 0..1 = the near wing lifted (a gesture); fly=True = wings spread"""
+    """the herring gull in winter plumage, side view facing +x (~30 px: draw it at ~0.2 of a hero's height in two-shots):
+    white body, silver-grey back with scalloped coverts, black primaries with white «mirrors», a streaky scruffy winter head,
+    a pale yellow eye with a red orbital ring under a droopy lid, a yellow beak with the red gonys spot, pink webbed feet"""
     E = X(expr)
     if blink is None: blink = ((t + 1.9) % 3.9) < 0.12
     br = 0.4 * math.sin(t * 1.7)
     if not fly:
-        for dx in (-1.6, 2.2):                                              # legs + a ring on the near leg
-            thin(sp, (dx, 7.0), (dx + 0.4, 0.8), GULL_LEG, 0.7)
-            sp.poly([(dx - 1.0, 0.0), (dx + 3.4, 0.0), (dx + 0.6, 1.4)], tones(GULL_LEG), frost=False)
-        sp.sup(2.4, 4.0, 1.2, 1.0, tones((240, 120, 40)), n=3.0)
-    sp.poly([(-13.0, 15.0), (-21.0, 12.0), (-20.0, 17.0), (-12.0, 19.0)], tones(GULL_W))           # tail
-    sp.poly([(-20.6, 12.4), (-21.0, 14.6), (-18.0, 14.0)], tones((40, 40, 50)), frost=False)
-    body = sp.union([sp.m_ell(0.0, 13.0 + br * 0.2, 12.0, 7.6), sp.m_ell(3.0, 10.0, 8.6, 6.4)], tones(GULL_W))
+        for k_, dx in enumerate((-1.8, 2.4)):                                # legs + webbed feet + a ring on the near leg
+            c = GULL_LEG if k_ else dark(GULL_LEG, 0.85)
+            thin(sp, (dx, 7.0), (dx + 0.4, 1.0), c, 0.7)
+            sp.poly([(dx - 1.6, 0.0), (dx + 4.0, 0.0), (dx + 0.8, 1.6)], tones(c), frost=False)
+            for q in range(3): thin(sp, (dx + 0.6, 1.0), (dx - 1.2 + q * 2.4, 0.1), dark(c, 0.7), 0.15)
+        sp.sup(2.6, 4.2, 1.2, 1.0, tones((240, 120, 40)), n=3.0, frost=False)
+    sp.poly([(-13.0, 15.0), (-21.0, 12.4), (-20.6, 17.0), (-12.0, 19.0)], tones(GULL_W))           # tail
+    body = sp.union([sp.m_ell(0.0, 13.0 + br * 0.2, 12.4, 7.8), sp.m_ell(3.0, 10.2, 9.0, 6.6)], tones(GULL_W), frost=False)
     if fly:
         for s_ in (-1, 1):
             a = 0.5 * math.sin(t * 9.0)
-            sp.poly([(-4.0, 16.0), (-14.0, 16.0 + s_ * 0 + 14.0 * math.cos(a)), (-24.0, 18.0 + 10.0 * math.cos(a)), (-2.0, 19.0)], tones(GULL_G))
+            sp.poly([(-4.0, 16.0), (-14.0, 16.0 + 14.0 * math.cos(a)), (-24.0, 18.0 + 10.0 * math.cos(a)), (-2.0, 19.0)], tones(GULL_G))
     wy = 15.0 + br * 0.2 + wing * 6.0
-    wng = sp.union([sp.m_ell(-3.0, wy, 10.6, 4.6, 0.12 + 0.4 * wing)], tones(GULL_G))
-    sp.fill(wng & (DX.XC < -9.0), (40, 40, 52))                                                  # black wing tips
-    for q in range(3): sp.dot(-11.0 + q * 1.6, wy - 0.4, WHITE)
-    for q in range(4): thin(sp, (-6.0 + q * 2.6, wy + 2.4), (-8.0 + q * 2.6, wy - 2.0), dark(GULL_G, 0.75), 0.22, mask=wng)
-    # scruffy head
+    wng = sp.union([sp.m_ell(-3.4, wy, 11.2, 4.8, 0.12 + 0.4 * wing)], tones(GULL_G), frost=False)
+    tipm = wng & (DX.XC < -9.6)
+    sp.fill(tipm, (34, 34, 46))                                            # black primaries
+    for q in range(4): sp.blob(-11.6 - q * 2.0, wy - 0.6 + q * 0.4, 0.5, WHITE, mask=wng, keep=True)   # white «mirrors»
+    for row in range(3):                                                    # scalloped coverts
+        for q in range(5):
+            x0 = -6.0 + q * 2.6 - row * 1.2; y0 = wy + 2.2 - row * 1.8
+            thin(sp, (x0 - 1.0, y0), (x0, y0 - 0.8), dark(GULL_G, 0.7), 0.18, mask=wng & ~tipm)
+            thin(sp, (x0, y0 - 0.8), (x0 + 1.0, y0), dark(GULL_G, 0.7), 0.18, mask=wng & ~tipm)
+    thin(sp, (-12.0, wy + 3.2), (4.0, wy + 3.6), mix(GULL_G, (255, 255, 255), 0.4), 0.3, mask=wng)       # white trailing edge
+    for q in range(6): thin(sp, (-4.0 + q * 2.2, 6.6), (-3.6 + q * 2.2, 5.6), (220, 224, 234), 0.18, mask=body)  # belly feathers
+    # scruffy streaky head
     hx, hy = 9.0, 23.0 + br * 0.4
-    sp.cap((5.0, 16.0), (hx - 0.4, hy - 2.0), 4.6, 4.2, tones(GULL_W))
-    head = sp.union([sp.m_ell(hx, hy, 5.6, 5.0)], tones(GULL_W))
-    for q in range(5):                                                     # ruffled feathers on top
-        x0 = hx - 3.0 + q * 1.4
-        thin(sp, (x0, hy + 4.4), (x0 - 0.6 + (q % 2) * 1.2, hy + 6.2 + (q % 3) * 0.4), GULL_W, 0.45)
+    sp.cap((5.0, 16.0), (hx - 0.4, hy - 2.0), 4.8, 4.4, tones(GULL_W), frost=False)
+    head = sp.union([sp.m_ell(hx, hy, 5.8, 5.2)], tones(GULL_W), frost=False)
+    g = np.random.default_rng(3)
+    for q in range(22):                                                     # winter streaks on the head and neck
+        x_, y_ = g.uniform(hx - 5.0, hx + 3.0), g.uniform(hy - 6.0, hy + 4.0)
+        thin(sp, (x_, y_), (x_ - 0.6, y_ - 0.5), (176, 160, 150), 0.16, mask=head | sp.m_cap((5.0, 16.0), (hx - 0.4, hy - 2.0), 4.8, 4.4)[0])
+    for q in range(6):                                                      # ruffled feathers on top
+        x0 = hx - 3.6 + q * 1.3
+        thin(sp, (x0, hy + 4.6), (x0 - 0.6 + (q % 2) * 1.2, hy + 6.6 + (q % 3) * 0.5), GULL_W, 0.42)
     lx, ly = look
-    DX.eye(sp, hx + 2.0, hy + 1.2, 3.4, 3.2, E, (236, 200, 60), (lx, ly), blink, lash=INK, skin=GULL_W, bold=1)
-    DX.brow(sp, hx + 2.0, hy + 3.8, 3.4, E, +1, dark(GULL_G, 0.7), th=1)
+    ex, ey = hx + 2.2, hy + 1.2
+    sp.ell(ex, ey, 1.95, 1.85, tones((226, 70, 60)), frost=False, ol=False)   # red orbital ring
+    DX.eye(sp, ex, ey, 3.2, 3.0, E, (244, 226, 120), (lx, ly), blink, lash=INK, skin=GULL_W, bold=1)
+    DX.brow(sp, ex, hy + 3.8, 3.6, E, +1, dark(GULL_G, 0.7), th=1)
     if glasses:
-        sp.fill(sp.m_super(hx + 2.4, hy + 1.2, 3.2, 1.8, 3.0)[0], (30, 30, 40))
+        sp.fill(sp.m_super(ex + 0.2, ey, 3.2, 1.8, 3.0)[0], (30, 30, 40))
         thin(sp, (hx - 1.6, hy + 1.6), (hx + 0.2, hy + 1.6), (30, 30, 40), 0.3)
-    # beak: upper fixed, lower drops with the voice (or chews)
+    # beak: upper fixed with a hooked tip, lower drops with the voice (or chews); the red gonys spot
     m = max(mouth_, 0.35 * chew * (0.5 + 0.5 * math.sin(t * 14.0)))
-    bx, by = hx + 4.2, hy - 0.6
-    sp.poly([(bx, by + 1.6), (bx + 7.4, by + 0.6), (bx + 8.2, by - 0.6), (bx, by - 0.2)], tones(BEAK), frost=False)
+    bx, by = hx + 4.4, hy - 0.6
+    sp.poly([(bx, by + 1.8), (bx + 7.2, by + 0.8), (bx + 8.6, by - 0.4), (bx + 7.6, by - 0.6), (bx, by - 0.2)], tones(BEAK), frost=False)
     a = math.radians(6 + 30 * m)
-    sp.poly([(bx, by - 0.4), (bx + 7.0 * math.cos(a), by - 0.6 - 7.0 * math.sin(a)), (bx + 5.4 * math.cos(a), by - 1.8 - 5.4 * math.sin(a)),
-             (bx, by - 1.6)], tones(BEAK), frost=False)
-    sp.blob(bx + 5.0 * math.cos(a), by - 1.2 - 5.0 * math.sin(a), 0.6, (220, 50, 40))                 # red spot
+    sp.poly([(bx, by - 0.4), (bx + 7.0 * math.cos(a), by - 0.6 - 7.0 * math.sin(a)), (bx + 5.4 * math.cos(a), by - 1.9 - 5.4 * math.sin(a)),
+             (bx, by - 1.7)], tones(BEAK), frost=False)
+    sp.blob(bx + 5.2 * math.cos(a), by - 1.3 - 5.2 * math.sin(a), 0.7, (220, 50, 40))
+    thin(sp, (bx + 0.6, by + 1.0), (bx + 2.2, by + 1.0), dark(BEAK, 0.6), 0.2)                    # nostril
     if m > 0.2: sp.fill(sp.m_poly([(bx + 0.4, by - 0.4), (bx + 5.0, by + 0.2), (bx + 5.0 * math.cos(a), by - 1.0 - 5.0 * math.sin(a))]), (150, 40, 50))
-    sp.anchors.update(head=(hx, hy), mouth=(bx + 4.0, by), eyes=(hx + 2.0, hy + 1.2))
+    sp.anchors.update(head=(hx, hy), mouth=(bx + 4.0, by), eyes=(ex, ey))
 
 
 # ================================================================================ ИРА
@@ -287,20 +383,23 @@ def ira(sp, t=0.0, expr='normal', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_
         for a in range(4): sp.blob(x + math.cos(a * 1.57) * 0.7, y + math.sin(a * 1.57) * 0.7, 0.45, WHITE, mask=hal)
         sp.blob(x, y, 0.35, (255, 220, 80), mask=hal)
     thin(sp, (-9.6, 33.0), (10.6, 33.0), dark(HALAT, 0.6), 0.6)              # belt
+    for q in (-5.0, 0.4, 6.0): thin(sp, (q, 31.0), (q + (q * 0.12), 19.0), dark(HALAT, 0.78), 0.22, mask=hal)   # folds
+    thin(sp, (2.0, 52.0), (4.6, 33.0), dark(HALAT, 0.62), 0.3, mask=hal)      # lapel edge
+    sp.blob(9.0, 33.6, 1.0, dark(HALAT, 0.6))                                  # belt knot
     shawl = sp.union([sp.m_ell(0.4, 51.0, 11.6, 5.0), sp.m_ell(-6.0, 45.0, 5.0, 6.0)], tones(SHAWL))
     for q in range(10):
         x0 = -10.0 + q * 2.2
         thin(sp, (x0, 47.0), (x0 + 0.3, 44.4 - (q % 2)), dark(SHAWL, 0.75), 0.25)                    # fringe
     hx, hy = 1.6, 62.0
     sp.cap((1.2, 53.0), (1.4, 56.0), 2.2, 2.2, tones(dark(SKIN_I, 0.9)))
-    head = sp.union([sp.m_ell(hx, hy, 6.0, 6.8), sp.m_ell(hx + 0.8, hy - 2.8, 5.0, 3.8)], tones(SKIN_I))
+    head = sp.union([sp.m_ell(hx, hy, 6.0, 6.8), sp.m_ell(hx + 0.8, hy - 2.8, 5.0, 3.8)], tones(SKIN_I), frost=False)
     lx, ly = look
     DX.eye(sp, hx + 3.0, hy + 1.0, 3.6, 3.6, E, (90, 120, 60), (lx, ly), blink, lash=INK, skin=SKIN_I, bold=2, flick=True)
     DX.eye(sp, hx - 1.4, hy + 1.0, 3.2, 3.4, E, (90, 120, 60), (lx, ly), blink, lash=INK, skin=SKIN_I, bold=2, flick=True)
     DX.brow(sp, hx + 3.0, hy + 4.2, 3.4, E, +1, HAIR_I, th=1)
     DX.brow(sp, hx - 1.4, hy + 4.1, 3.0, E, -1, HAIR_I, th=1)
     sp.ell(hx + 5.4, hy - 0.8, 1.2, 1.6, tones(dark(SKIN_I, 0.95)))
-    DX.blush(sp, hx + 2.8, hy - 2.4, 1.6, 1.0, (240, 140, 140))
+    soft_blush(sp, hx + 3.4, hy - 2.0, 2.0, 1.4, (240, 120, 130), 0.45)
     mx, my = hx + 3.0, hy - 4.2
     DX.mouth(sp, mx, my, 3.8, E, mouth_, (210, 70, 90), inside=(110, 30, 50), skin=SKIN_I, maxh=4.4)
     hair = sp.union([sp.m_ell(hx - 0.8, hy + 4.4, 6.6, 3.4), sp.m_ell(hx - 4.6, hy + 0.6, 2.4, 5.0), sp.m_ell(hx - 3.6, hy + 9.4, 4.2, 3.6)],
@@ -335,18 +434,20 @@ def vitek(sp, t=0.0, expr='cheerful', mouth_=0.0, look=(0.6, 0.0), blink=None, h
     sp.fill(bag & (np.abs(DX.YC - Q(0, 44.0)[1]) < 0.4), VIOLET_D)
     if sp.k >= 2: sp.txt_box(['ОЗНОБ'], (Q(-17.4, 0)[0], Q(0, 46.0)[1], Q(-8.0, 0)[0], Q(0, 50.0)[1]), (255, 255, 255), pad=0.1)
     sp.cap(Q(-5.0, 50.0 + br), Q(-7.0, 34.0), 2.8, 2.4, tones(dark(VIOLET, 0.82)))
-    jk = sp.union([sp.m_super(*Q(0.4, 41.0), 7.6, 13.0, 3.0)], tones(VIOLET))
+    jk = sp.union([sp.m_super(*Q(0.4, 41.0), 7.6, 13.0, 3.0)], tones(VIOLET), ol=False)
+    quilt(sp, jk, [Q(0, y)[1] for y in (33.0, 40.0, 47.0)], VIOLET, Q(0.4, 0)[0], 7.6)
+    thin(sp, Q(-4.6, 52.0), Q(-3.6, 30.0), (40, 30, 60), 0.6)                                           # backpack strap
     thin(sp, Q(2.0, 53.0), Q(2.4, 29.0), (230, 230, 240), 0.35)
     sp.fill(jk & (np.abs(DX.YC - Q(0, 40.0)[1]) < 0.6), (200, 240, 90))                               # reflective stripe
     hx, hy = Q(1.8, 62.0)
     sp.cap(Q(1.2, 53.0), (hx - 0.2, hy - 6.0), 2.0, 2.0, tones(dark(SKIN_V, 0.9)))
-    head = sp.union([sp.m_ell(hx, hy, 5.4, 6.4), sp.m_ell(hx + 0.8, hy - 2.6, 4.6, 3.6)], tones(SKIN_V))
+    head = sp.union([sp.m_ell(hx, hy, 5.4, 6.4), sp.m_ell(hx + 0.8, hy - 2.6, 4.6, 3.6)], tones(SKIN_V), frost=False)
     lx, ly = look
     DX.eye(sp, hx + 2.8, hy + 0.8, 3.4, 3.4, E, (90, 70, 50), (lx, ly), blink, lash=INK, skin=SKIN_V, bold=1)
     DX.eye(sp, hx - 1.4, hy + 0.8, 3.0, 3.2, E, (90, 70, 50), (lx, ly), blink, lash=INK, skin=SKIN_V, bold=1)
     DX.brow(sp, hx + 2.8, hy + 3.8, 3.2, E, +1, (90, 60, 40), th=1)
     sp.ell(hx + 5.0, hy - 0.8, 1.2, 1.6, tones(dark(SKIN_V, 0.95)))
-    DX.blush(sp, hx + 3.6, hy - 1.2, 1.2, 0.8, (236, 130, 120))
+    soft_blush(sp, hx + 3.6, hy - 1.6, 1.8, 1.2, (236, 110, 110), 0.5)
     mx, my = hx + 2.8, hy - 4.0
     DX.mouth(sp, mx, my, 4.0, E, mouth_, (170, 80, 80), inside=(90, 24, 34), skin=SKIN_V, maxh=4.4)
     sp.union([sp.m_ell(hx - 0.2, hy + 4.4, 6.0, 2.8)], tones(VIOLET))                                 # cap
@@ -377,9 +478,11 @@ def nina(sp, t=0.0, expr='kind', mouth_=0.0, look=(0.6, 0.0), blink=None, can=Tr
     sp.cap((-9.0, 42.0 + br), (-10.0, 28.0), 3.2, 2.8, tones(dark(CARDI, 0.82)))
     body = sp.union([sp.m_ell(0.4, 30.0, 12.0, 15.0), sp.m_ell(0.0, 42.0, 10.0, 5.0)], tones(CARDI))
     sp.fill(body & (DX.YC < 20.0), (120, 70, 110))                                                     # skirt
+    kn = body & (DX.YC >= 20.0) & ((((DX.XC * 1.4).astype(int) + (DX.YC * 1.4).astype(int)) % 3) == 0)
+    c_ = sp.col.astype(np.float32); c_[kn] *= 0.88; sp.col = c_.astype(np.uint8)                       # knit
     for q in range(4): sp.dot(3.0, 26.0 + q * 4.0, (230, 220, 180))
     hx, hy = 1.6, 54.0
-    head = sp.union([sp.m_ell(hx, hy, 6.4, 6.6)], tones(SKIN_N))
+    head = sp.union([sp.m_ell(hx, hy, 6.4, 6.6)], tones(SKIN_N), frost=False)
     lx, ly = look
     DX.eye(sp, hx + 3.0, hy + 0.8, 3.4, 3.2, E, (80, 110, 150), (lx, ly), blink, lash=INK, skin=SKIN_N, bold=1)
     DX.eye(sp, hx - 1.4, hy + 0.8, 3.0, 3.0, E, (80, 110, 150), (lx, ly), blink, lash=INK, skin=SKIN_N, bold=1)
@@ -387,7 +490,7 @@ def nina(sp, t=0.0, expr='kind', mouth_=0.0, look=(0.6, 0.0), blink=None, can=Tr
         ring = sp.m_ell(ex, hy + 0.8, r + 0.5, r + 0.5)[0] & ~sp.m_ell(ex, hy + 0.8, r - 0.1, r - 0.1)[0]
         sp.fill(ring, (60, 50, 60))
     sp.ell(hx + 5.6, hy - 1.0, 1.4, 1.6, tones(dark(SKIN_N, 0.95)))
-    DX.blush(sp, hx + 4.0, hy - 1.4, 1.2, 0.8, (236, 130, 120))
+    soft_blush(sp, hx + 3.8, hy - 1.8, 2.0, 1.3, (236, 110, 110), 0.5)
     mx, my = hx + 3.0, hy - 4.0
     DX.mouth(sp, mx, my, 3.6, E, mouth_, (170, 90, 90), inside=(90, 24, 34), skin=SKIN_N, maxh=3.8)
     for q in range(3): thin(sp, (hx + 4.6, hy - 2.0 - q * 0.8), (hx + 5.6, hy - 2.4 - q * 0.8), dark(SKIN_N, 0.8), 0.15)   # wrinkles
