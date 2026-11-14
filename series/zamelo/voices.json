@@ -77,6 +77,48 @@
         "public_owner_id": "7c6cca692da713287a1d9601ee89fe6b4ff9724c645410c1b179a6b9d869db2a",
         "voice_id": "ZgfahluxUmUzBjjL81NN"
       }
+    },
+    "tyoma": {
+      "name": "Тёма (сын)",
+      "color_caption": [
+        120,
+        220,
+        255
+      ],
+      "style": "[boyish] [excited] — мальчик 10 лет, женский голос «под мальчика», как в дубляже",
+      "voice_id": "rSfuQoQ3FY8SVKeraMAp",
+      "voice": "Замело — Тёма (сын)",
+      "library": {
+        "public_owner_id": "bfd67a1faea7631b99a7e1ab471651428008376848d80fc0edba1cf95e697773",
+        "voice_id": "rSfuQoQ3FY8SVKeraMAp"
+      }
+    },
+    "valya": {
+      "name": "Вахтёрша тётя Валя",
+      "color_caption": [
+        255,
+        200,
+        120
+      ],
+      "style": "[stern] [strict] — строгая вахтёрша (голос бабы Нины, ниже, суше)",
+      "voice_id": "ZgfahluxUmUzBjjL81NN",
+      "voice": "Замело — Баба Нина с 8-го",
+      "post_af": "asetrate=44100*0.9,aresample=44100,atempo=1.08"
+    },
+    "gosha": {
+      "name": "Гоша (сосед)",
+      "color_caption": [
+        200,
+        255,
+        140
+      ],
+      "style": "[sly] [sweet] — хитрый ласковый сосед 55 лет, «Жорик, родной!»",
+      "voice_id": "LTkx8oHrUXaND7aaxdTA",
+      "voice": "Замело — Гоша (сосед)",
+      "library": {
+        "public_owner_id": "460dabc9f96dd6cec09c54db9d5a484409dd3713222f3d0bdb12854bd8c837dd",
+        "voice_id": "LTkx8oHrUXaND7aaxdTA"
+      }
     }
   }
 }

@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-11-14 18:33.
+Обновлено: 2026-11-14 22:15.
 
 ## agent-dibs
 
@@ -149,11 +149,14 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Жора | `zhora` | `ws3YyKFd5whKb21yaXES` | library_or_premade | 0 / 0 | Замело — Жора |
-| Чайка | `chayka` | `8jZuc16g7EAxSX50j836` | library_or_premade | 0 / 0 | Замело — Чайка |
-| Ира (жена) | `ira` | `CsT9glYAgw8L02hu9od2` | library_or_premade | 0 / 0 | Замело — Ира (жена) |
-| Витёк (один на весь город) | `vitek` | `g1G73EpCIdK4HUyDiLYF` | library_or_premade | 0 / 0 | Замело — Витёк (один на весь город) |
-| Баба Нина с 8-го | `nina` | `ZgfahluxUmUzBjjL81NN` | library_or_premade | 0 / 0 | Замело — Баба Нина с 8-го |
+| Жора | `zhora` | `ws3YyKFd5whKb21yaXES` | library_or_premade | 10 / 2 | Замело — Жора |
+| Чайка | `chayka` | `8jZuc16g7EAxSX50j836` | library_or_premade | 7 / 2 | Замело — Чайка |
+| Ира (жена) | `ira` | `CsT9glYAgw8L02hu9od2` | library_or_premade | 3 / 2 | Замело — Ира (жена) |
+| Вахтёрша тётя Валя | `valya` | `ZgfahluxUmUzBjjL81NN` | library_or_premade | 3 / 1 | Замело — Баба Нина с 8-го |
+| Тёма (сын) | `tyoma` | `rSfuQoQ3FY8SVKeraMAp` | library_or_premade | 2 / 1 | Замело — Тёма (сын) |
+| Витёк (один на весь город) | `vitek` | `g1G73EpCIdK4HUyDiLYF` | library_or_premade | 1 / 1 | Замело — Витёк (один на весь город) |
+| Баба Нина с 8-го | `nina` | `ZgfahluxUmUzBjjL81NN` | library_or_premade | 1 / 1 | Замело — Баба Нина с 8-го |
+| Гоша (сосед) | `gosha` | `LTkx8oHrUXaND7aaxdTA` | library_or_premade | 0 / 0 | Замело — Гоша (сосед) |
 
 ## Защищённые (личные голоса владельца)
 

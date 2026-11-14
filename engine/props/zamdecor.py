@@ -105,6 +105,34 @@ def dress(name, W, day=150):
         items.append((board(70, 34, ['ЖОРА', '9 ЭТАЖ'], pole_h=10, seed=4, tilt=-4), 420, 92))
         items.append((R.plate(52, 22, ['ПОДЪЕЗД'], bg=(40, 80, 170), fg=WH, border=WH), 283, 1062))
         D.attach(W, items)
+    elif name == 'slope':
+        D.attach(W, [
+            (board(96, 40, ['ГОРКА «ШКОЛЬНАЯ»', 'ВЗРОСЛЫМ НЕЛЬЗЯ'], pole_h=14, colors=[BLUE, RED], seed=3, tilt=-4), 560, 330),
+            (board(84, 36, ['ОСТОРОЖНО:', 'ДЕТИ ЛЕТЯТ'], pole_h=12, colors=[RED, (40, 30, 30)], seed=5, tilt=3), 70, 640),
+            (R.plate(110, 30, ['ШКОЛА №9 ↓'], bg=(40, 80, 170), fg=WH, border=WH), 300, 1010),
+        ])
+        D.anim(W, gulls(n=3, seed=6, box=(0, 40, 720, 260)))
+    elif name == 'school':
+        D.attach(W, [
+            (R.plate(110, 66, ['БЕЗ СМЕНКИ', 'НЕ ВХОДИТЬ!'], bg=PAPER, fg=RED, border=RED, colors=[RED, INKC]), 448, 92),
+            (R.plate(110, 40, ['АКТИРОВКИ', 'НЕТ!'], bg=PAPER, fg=INKC, border=(170, 170, 170), tilt=-3), 600, 210),
+            (R.plate(110, 30, ['ВАХТА'], bg=(40, 80, 170), fg=WH, border=WH), 1040, 120),
+            (R.plate(130, 30, ['ШКОЛА №9'], bg=(40, 80, 170), fg=WH, border=WH), 180, 36),
+        ])
+    elif name == 'carfield':
+        D.attach(W, [
+            (board(120, 40, ['ПАРКОВКА ЖИЛЬЦОВ', 'ГДЕ-ТО ТУТ'], pole_h=16, colors=[BLUE, (40, 30, 30)], seed=2, tilt=-3), 980, 300),
+            (board(110, 44, ['ИЩУ КОРОЛЛУ.', 'БЕЛУЮ. С НАСТОМ'], pole_h=14, colors=[(40, 30, 30), RED], seed=7, tilt=3), 30, 330),
+        ])
+        D.anim(W, gulls(n=3, seed=11, box=(0, 30, 1280, 160)))
+        D.anim(W, smoke(560, 150, seed=4))
+    elif name == 'port':
+        D.attach(W, [
+            (R.plate(230, 44, ['РЫБПОРТ'], bg=(30, 70, 150), fg=WH, border=WH, round_=4), 757, 236),
+            (R.plate(70, 30, ['ПРОПУСК', 'СТРОГО'], bg=PAPER, fg=RED, border=RED), 150, 400),
+            (board(120, 40, ['ЯМЩИКАМ ВЪЕЗД', 'ЗАПРЕЩЁН'], pole_h=18, colors=[RED, (40, 30, 30)], seed=8, tilt=3), 1080, 470),
+        ])
+        D.anim(W, gulls(n=6, seed=12, box=(0, 40, 1280, 260)))
     elif name == 'door':
         D.attach(W, [
             (R.plate(70, 44, ['ОТКЛЮЧЕНИЕ', 'ВОДЫ 01.11'], bg=PAPER, fg=INKC, border=(170, 170, 170), wear=0.3, tilt=-4), 600, 300),

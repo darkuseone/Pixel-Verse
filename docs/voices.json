@@ -3068,9 +3068,18 @@
    "status": "library_or_premade",
    "name": "Жора",
    "voice_name": "Замело — Жора",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 10,
+   "episodes": 2,
+   "samples": [
+    "series/zamelo/voice/ep02/z1.mp3",
+    "series/zamelo/voice/ep01/z2.mp3",
+    "series/zamelo/voice/ep02/z4.mp3",
+    "series/zamelo/voice/ep01/z1.mp3",
+    "series/zamelo/voice/ep02/z3.mp3",
+    "series/zamelo/voice/ep01/z5.mp3",
+    "series/zamelo/voice/ep02/z2.mp3",
+    "series/zamelo/voice/ep01/z6.mp3"
+   ]
   },
   {
    "slug": "zamelo",
@@ -3079,9 +3088,17 @@
    "status": "library_or_premade",
    "name": "Чайка",
    "voice_name": "Замело — Чайка",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 7,
+   "episodes": 2,
+   "samples": [
+    "series/zamelo/voice/ep02/c1.mp3",
+    "series/zamelo/voice/ep02/c0.mp3",
+    "series/zamelo/voice/ep01/c1.mp3",
+    "series/zamelo/voice/ep01/c0.mp3",
+    "series/zamelo/voice/ep02/c2.mp3",
+    "series/zamelo/voice/ep01/c2.mp3",
+    "series/zamelo/voice/ep01/c3.mp3"
+   ]
   },
   {
    "slug": "zamelo",
@@ -3090,9 +3107,42 @@
    "status": "library_or_premade",
    "name": "Ира (жена)",
    "voice_name": "Замело — Ира (жена)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 3,
+   "episodes": 2,
+   "samples": [
+    "series/zamelo/voice/ep02/i1.mp3",
+    "series/zamelo/voice/ep01/i2.mp3",
+    "series/zamelo/voice/ep02/i2.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "valya",
+   "voice_id": "ZgfahluxUmUzBjjL81NN",
+   "status": "library_or_premade",
+   "name": "Вахтёрша тётя Валя",
+   "voice_name": "Замело — Баба Нина с 8-го",
+   "lines": 3,
+   "episodes": 1,
+   "samples": [
+    "series/zamelo/voice/ep02/v2.mp3",
+    "series/zamelo/voice/ep02/v1.mp3",
+    "series/zamelo/voice/ep02/v3.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "tyoma",
+   "voice_id": "rSfuQoQ3FY8SVKeraMAp",
+   "status": "library_or_premade",
+   "name": "Тёма (сын)",
+   "voice_name": "Замело — Тёма (сын)",
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/zamelo/voice/ep02/t1.mp3",
+    "series/zamelo/voice/ep02/t2.mp3"
+   ]
   },
   {
    "slug": "zamelo",
@@ -3101,9 +3151,11 @@
    "status": "library_or_premade",
    "name": "Витёк (один на весь город)",
    "voice_name": "Замело — Витёк (один на весь город)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/zamelo/voice/ep01/v1.mp3"
+   ]
   },
   {
    "slug": "zamelo",
@@ -3112,6 +3164,19 @@
    "status": "library_or_premade",
    "name": "Баба Нина с 8-го",
    "voice_name": "Замело — Баба Нина с 8-го",
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/zamelo/voice/ep01/n1.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "gosha",
+   "voice_id": "LTkx8oHrUXaND7aaxdTA",
+   "status": "library_or_premade",
+   "name": "Гоша (сосед)",
+   "voice_name": "Замело — Гоша (сосед)",
    "lines": 0,
    "episodes": 0,
    "samples": []
@@ -3131,5 +3196,5 @@
   "14NozJq5eoBmDc1FXFDq": "NIKITA2",
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA"
  },
- "updated": "2026-11-14 18:33"
+ "updated": "2026-11-14 22:15"
 }

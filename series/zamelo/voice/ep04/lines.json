@@ -1,0 +1,17 @@
+{
+ "c0": ["chayka", "[dry, brisk, deadpan narrator, to camera] Да́льний Восто́к. Авто́бус тут хо́дит — в апре́ле. Поэ́тому все е́здят на такси́. А такси́ — на соба́ках."],
+ "z1": ["zhora", "[fast, outraged, staring at the phone] Ско́лько?! Три ты́сячи до рабо́ты?! Тут же три киломе́тра!"],
+ "z2": ["zhora", "[fast, waving it off, proud] Ну и ла́дно. Пешко́м — э́то на матери́ке. Зака́зываю!"],
+ "v1": ["vitek", "[fast, cheerful, casual, pulling up] Такси́ «Ямщи́к», тари́ф «Эконо́м»! Сади́сь, брата́н!"],
+ "z3": ["zhora", "[surprised] Витёк?! Ты ж вчера́ курье́ром был!"],
+ "v2": ["vitek", "[cheerful, shrugging] Ну. Го́род-то ма́ленький."],
+ "z4": ["zhora", "[happy, wind in the face, shouting] Вот э́то серви́с! За три ты́щи — с ветерко́м!"],
+ "v3": ["vitek", "[fast, casual, stopping the sled] Всё, брата́н, прие́хали. У соба́к обе́д. А на «Эконо́ме» да́льше тя́нет пассажи́р."],
+ "z5": ["zhora", "[outraged] В смы́сле?! Я ж три ты́сячи заплати́л!"],
+ "v4": ["vitek", "[cheerful, sitting down in the sled] Так три ты́сячи — э́то соба́кам. А ты — беспла́тно."],
+ "z6": ["zhora", "[out of breath, pulling the sled, pleading] Бакла́н, ну хоть ты помоги́!"],
+ "c1": ["chayka", "[deadpan, dry] Я — ча́йка. А ты тепе́рь — ездово́й."],
+ "v5": ["vitek", "[cheerful, cracking an imaginary whip] Но-о, привы́чный!"],
+ "v6": ["vitek", "[cheerful, sly] Оце́ночку, брата́н. Соба́ки смо́трят."],
+ "z7": ["zhora", "[defeated, quiet, under the stare of six dogs] Пять звёзд."]
+}

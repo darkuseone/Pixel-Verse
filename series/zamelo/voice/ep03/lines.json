@@ -1,0 +1,15 @@
+{
+ "c0": ["chayka", "[dry, brisk, deadpan narrator, to camera] Да́льний Восто́к. За ночь насы́пало ещё метр. И тепе́рь все маши́ны во дворе́ — одина́ковые сугро́бы."],
+ "z1": ["zhora", "[fast, confident, walking with a shovel] Так. Споко́йно. Я ж флажо́к ста́вил! Вон он, мой. С на́дписью «Жо́ра»."],
+ "c1": ["chayka", "[deadpan, dry, to camera] Со́рок сугро́бов. И под ка́ждым — бе́лая «Коро́лла»."],
+ "g1": ["gosha", "[sly, sweet, sipping tea, lounging in a folding chair] До́брое у́тро, Жо́рик! Да-да, твой, твой. Копа́й, родно́й, не стесня́йся."],
+ "z2": ["zhora", "[fast, digging, out of breath, suspicious] Гош, а ты-то чего́ не копа́ешь? Тебе́ ж то́же е́хать."],
+ "g2": ["gosha", "[sly, chewing, lazy] А заче́м? Ты ж копа́ешь."],
+ "z3": ["zhora", "[fast, exhausted then happy] Два часа́! Но откопа́л же! Ла́сточка моя́!"],
+ "z4": ["zhora", "[confused, pressing a key fob, quiet] Не по́нял."],
+ "g3": ["gosha", "[sly, cheerful, getting into the car] Спаси́бо, Жо́рик! Э́то ж моя́. Я флажки́ но́чью поменя́л."],
+ "z5": ["zhora", "[outraged, shouting] А моя́-то где?!"],
+ "g4": ["gosha", "[cheerful, driving off, shouting from the car window] Да под мои́м флажко́м! Не пережива́й, с меня́ икра́!"],
+ "z6": ["zhora", "[angry, through clenched teeth, gripping the shovel] Ну ничего́. За́втра я ему́ флажки́ поменя́ю."],
+ "c2": ["chayka", "[deadpan, dry, to camera] За́втра — ещё метр. Зиму́ем."]
+}

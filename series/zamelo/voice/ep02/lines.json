@@ -1,0 +1,16 @@
+{
+ "c0": ["chayka", "[dry, brisk, deadpan narrator, to camera] Да́льний Восто́к. В шко́лу тут е́здят пря́мо из окна́. С девя́того этажа́. На ледя́нке."],
+ "i1": ["ira", "[fast, shouting out of the window, worried] Тёма, стой! Ты ж сме́нку забы́л! Без сме́нки тебя́ да́же на поро́г не пу́стят!"],
+ "z1": ["zhora", "[fast, confident, grabbing a bag] Споко́йно, мать. Мы, дальневосто́чники, — привы́чные. Щас догоню́!"],
+ "c1": ["chayka", "[deadpan, dry, to camera] Со́рок два го́да. В труса́х. На та́зике. [pause] Ну, допу́стим."],
+ "z2": ["zhora", "[fast, shouting while sliding down, wind in the face] Тёма-а-а! Сме́нку везу́!"],
+ "v1": ["valya", "[stern, strict, flat, bored] Без сме́нки не пущу́. Хоть ты с девя́того прие́хал, хоть с деся́того."],
+ "z3": ["zhora", "[fast, out of breath, triumphant] Стоя́ть! Вот она́, сме́нка! Держи́, сын!"],
+ "t1": ["tyoma", "[confused, boyish] Пап. А почему́ она́ моро́женая? Э́то ж пельме́ни."],
+ "v2": ["valya", "[stern, then sniffing, suddenly interested] Пельме́ни — э́то не сме́нка, мужчи́на. [pause] Хотя́. А дома́шние?"],
+ "z4": ["zhora", "[proud, quick] Ну а каки́е ещё? Жена́ лепи́ла. Це́лый килогра́мм!"],
+ "v3": ["valya", "[businesslike, quickly, hushed] Проходи́, ма́льчик. Бы́стренько."],
+ "t2": ["tyoma", "[amazed, excited, boyish] Пап, а что, так мо́жно бы́ло?!"],
+ "c2": ["chayka", "[deadpan, dry, to camera] Запомина́й. Сме́нка не нужна́. Ну́жен килогра́мм пельме́ней."],
+ "i2": ["ira", "[shouting out of the window, suspicious] Жо́ра! А пельме́ни-то где?!"]
+}
