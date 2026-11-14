@@ -5,7 +5,7 @@ where it covers no face and no caption.
   python3 engine/endcard.py apply series/<slug>/episodes/epNN [--lang us|ru] [--sec 1.0]   # finished final.mp4, no re-render
   python3 engine/endcard.py preview <style> <lang> out.png
 In new episodes the card goes straight into the render: Episode(..., endcard=dict(style=..., lang=...)) (engine/episode.py).
-Styles: 'v86' («STILL 1986»: chrome letters + bell + VHS label with the promise), 'fm' (Florida Man: postcard letters + (ALLEGEDLY) stamp + pixel bell), 'randy' («Thanks, Randy»: price-tag feast letters + bell + (STILL FROZEN) tag), 'taiga' («Прохор»: campfire letters, snow caps, icicles), 'default' (any series: Press Start 2P, outline, glow).
+Styles: 'v86' («STILL 1986»: chrome letters + bell + VHS label with the promise), 'fm' (Florida Man: postcard letters + (ALLEGEDLY) stamp + pixel bell), 'randy' («Thanks, Randy»: price-tag feast letters + bell + (STILL FROZEN) tag), 'taiga' («Прохор»: campfire letters, snow caps, icicles), 'zamelo' («Замело»: «аляска» letters in a snowdrift), 'default' (any series: Press Start 2P, outline, glow).
 """
 import sys, math, subprocess, pathlib, importlib, os
 import numpy as np
@@ -98,6 +98,10 @@ def card(style='default', lang='us', width=None, promise=None):
         promise = None
     elif style == 'teshcha':                                     # «Тёща на недельку»: «тёщин халат» letters (raspberry, gold shine) + bell
         from props import teshkit as K
+        title = fit(K.title_trim(K.hook_title([txt], 96 if width <= 1080 else 116, width=width + 300)), width - 60)
+        img = _stack([title, _bell(11)], width, gap=6)
+    elif style == 'zamelo':                                      # «Замело»: «аляска» letters half-buried in a snowdrift + bell
+        from props import zamkit as K
         title = fit(K.title_trim(K.hook_title([txt], 96 if width <= 1080 else 116, width=width + 300)), width - 60)
         img = _stack([title, _bell(11)], width, gap=6)
     elif style == 'winter':                                     # «Валера и кот»: frosty winter_title letters (the series hook style) + bell
