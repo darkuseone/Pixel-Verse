@@ -1,11 +1,12 @@
 # Autocheck zamelo ep01
 
-Frames: 14 (middle of every shot). Audio: -14.0 LUFS, mean -17.3 dB, peak -0.7 dB.
+Frames: 15 (middle of every shot). Audio: -14.0 LUFS, mean -17.4 dB, peak -1.1 dB.
 
-- **NIT** TIMING — shot 7.66–11.45 lasts 3.8 s (> 3 s)
-- **NIT** TIMING — shot 15.20–19.18 lasts 4.0 s (> 3 s)
-- **NIT** TIMING — shot 21.85–25.65 lasts 3.8 s (> 3 s)
-- **NIT** TIMING — shot 25.65–28.90 lasts 3.2 s (> 3 s)
+- **FIX** TEXT_FACE 16.55s shaft_a — caption covers a face (27% of it) at (283, 1160) box (172, 1177, 905, 1262)
+- **NIT** TIMING — shot 1.55–4.88 lasts 3.3 s (> 3 s)
+- **NIT** TIMING — shot 7.96–11.76 lasts 3.8 s (> 3 s)
+- **NIT** TIMING — shot 22.68–26.48 lasts 3.8 s (> 3 s)
+- **NIT** TIMING — shot 26.48–29.73 lasts 3.2 s (> 3 s)
 
-RESULT: 0 FIX, 4 NIT
+RESULT: 1 FIX, 4 NIT
 Review sheets: /home/user/Pixel-Verse/build/zamelo-ep01/review
