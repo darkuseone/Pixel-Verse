@@ -20,7 +20,7 @@ from props import zamdecor as DEC
 
 SLUG = 'zamelo'
 COL = dict(zhora=(255, 170, 60), chayka=(200, 235, 255), ira=(255, 130, 180), vitek=(150, 240, 110), nina=(215, 175, 255))
-WS = dict(facade=4.0, yard=1.4, door=3.4, landing=4.4, kitchen=3.6, cutaway=1.0, slope=0.62, school=5.6, carfield=1.15, port=1.35)
+WS = dict(facade=4.0, yard=1.4, door=3.4, landing=4.4, kitchen=3.6, cutaway=1.0, slope=0.62, school=5.6, carfield=1.15, port=1.35, flood=2.75)
 GULL = 0.55                      # seagull sprite scale vs the hero sprite scale (real ~0.35 m standing vs 1.8 m man)
 ORANGE, NAVY, SNOW = (255, 140, 30), (24, 32, 80), (240, 246, 255)
 INK = ZX.INK

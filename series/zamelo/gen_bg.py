@@ -43,9 +43,22 @@ BG = {
                'across the lower third.',
 }
 
+SPRING = ('Clean stylized 16-bit cartoon pixel art game background, bold readable shapes, big simple masses, crisp visible pixels, rich '
+          'but uncluttered detail, funny early-spring Russian Far East mood, bright fresh palette: clear blue sky, white puffy clouds, '
+          'warm sunlight, blue-turquoise meltwater, dirty grey leftover snow, like a modern indie pixel adventure game, wide 16:9 scene, '
+          'strong sense of depth. No characters, no people, no animals, no birds, no cars, no boats, no text, no letters, no numbers, '
+          'no logos; every sign, poster and plate is completely blank. ')
+BG['flood'] = ('Eye-level view from just outside the entrance of a Soviet nine-storey prefab panel apartment block on the first day of '
+               'spring after a huge snow melt: the whole courtyard is flooded by an enormous meltwater puddle like a lake, calm blue water '
+               'covering the lower half of the picture. On the left foreground the open metal entrance door of the block with a small '
+               'concrete canopy above it and two concrete steps going down under the water. In the water: the tops of a drowned bench, '
+               'the top bar of a children\'s swing and slide, a street lamp, a blank sign post, a floating blank cardboard box and a few '
+               'plastic bottles. Across the water other beige prefab apartment blocks reflected in it, bare birch trees with shiny drops, '
+               'dirty grey leftover snow banks melting along the far edge, a snow-capped volcano far behind. Bright spring sun, blue sky.')
+
 if __name__ == '__main__':
     names = sys.argv[1:] or list(BG)
     for n in names:
         outs = [OUT / f'{n}.png', OUT / f'{n}_b.png']
         if outs[0].exists(): print('skip', n); continue
-        xai.generate(STYLE + BG[n], [str(o) for o in outs])
+        xai.generate((SPRING if n == 'flood' else STYLE) + BG[n], [str(o) for o in outs])

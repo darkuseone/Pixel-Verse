@@ -126,6 +126,14 @@ def dress(name, W, day=150):
         ])
         D.anim(W, gulls(n=3, seed=11, box=(0, 30, 1280, 160)))
         D.anim(W, smoke(560, 150, seed=4))
+    elif name == 'flood':                                                     # E06: spring, the yard is a lake
+        D.attach(W, [
+            (R.plate(70, 50, ['ДО ЗИМЫ:', '183 ДНЯ'], bg=PAPER, fg=INKC, border=(150, 150, 150), colors=[INKC, BLUE]), 1010, 346),
+            (R.plate(80, 22, ['ПОДЪЕЗД 2'], bg=BLUE, fg=WH, border=WH), 175, 172),
+            (R.plate(84, 40, ['КУПАНИЕ', 'ЗАПРЕЩЕНО'], bg=PAPER, fg=RED, border=RED, wear=0.2, tilt=-3), 302, 330),
+            (R.plate(60, 30, ['ЛЁД', 'ТОНКИЙ'], bg=PAPER, fg=INKC, border=(170, 170, 170), wear=0.3, tilt=4), 20, 300),
+        ])
+        D.anim(W, gulls(n=4, seed=21, box=(400, 20, 1280, 180)))
     elif name == 'port':
         D.attach(W, [
             (R.plate(230, 44, ['РЫБПОРТ'], bg=(30, 70, 150), fg=WH, border=WH, round_=4), 757, 236),

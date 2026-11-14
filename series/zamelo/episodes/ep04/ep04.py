@@ -52,28 +52,28 @@ def team(t, v, x, y, S, run=True, lie=False, stare=False, rider=True, musher=Tru
     front (+x), Витёк standing on the runners at the back, Жора sitting in the bed. (x, y) = ground under the sled centre (world)."""
     k = S / (3 * v.Z)                                                          # world px per hero sprite px
     acts = []
-    Ss = S * 2.2
+    Ss = S * 1.8
     sl = A(C.sled, x, y, Ss, t=t); sl.near = 0.99
     acts.append(sl)
     if dogs_in:                                                                 # the dogs ride in the sled (after the twist)
         for i in range(6):
-            d = A(C.husky, x + (-30 + i * 9) * k, y - 10 * k - (i % 2) * 4 * k, S * 1.1, t=t, run=False, stare=True, ph=i)
+            d = A(C.husky, x + (-30 + i * 9) * k, y - 12 * k - (i % 2) * 4 * k, S * 1.0, t=t, run=False, stare=True, ph=i)
             d.near = 0.99; acts.append(d)
     elif not puller:
-        for i in range(3):
+        for i in range(2):
             for j in range(2):
-                xx = x + (64 + i * 34) * k + j * 6 * k
+                xx = x + (58 + i * 32) * k + j * 6 * k
                 yy = y + (j * 6 - 3) * k
                 d = A(C.husky, xx, yy, S * 1.35, t=t, run=run, lie=lie, stare=stare, ph=i * 1.7 + j)
                 d.near = 0.99; acts.append(d)
     if rider:
         kw, dy = face(FZ, 'zhora', t, look_z, sit=1.0, hand_n=(22.0, 50.0), hand_f=(-12.0, 44.0))
-        z = A(C.zhora, x - 4 * k, y - 8 * k + dy, S, t=t, **kw); z.near = 0.99
+        z = A(C.zhora, x - 4 * k, y + 4 * k + dy, S, t=t, **kw); z.near = 0.99
         acts.insert(1, z)
     if musher:
         kv, dv = face(FV, 'vitek', t, (0.9, 0.0), hand_n=(10.0, 40.0), post_hat=True)
         kv.pop('post_hat')
-        vk = A(C.vitek, x - 48 * k, y - 2 * k + dv, S * 0.95, t=t, post=hat_post, **kv); vk.near = 0.99
+        vk = A(C.vitek, x - 46 * k, y + dv, S * 0.95, t=t, post=hat_post, **kv); vk.near = 0.99
         acts.insert(0, vk)
     return acts
 
@@ -111,14 +111,14 @@ def r_gull(t, u):
 # ================================================================== 1: a sled taxi zooms past the buried bus stop «АВТОБУС — В АПРЕЛЕ»
 def r_reveal(t, u):
     L = CUTS[2] - CUTS[1]
-    Z = 1.25
-    cx, cy = 560.0, 470.0
+    Z = 1.15
+    cx, cy = 600.0, 500.0
     v = K.V('yard', cx, cy, Z)
-    S = K.WS['yard'] * 3 * v.Z * 1.25
-    x = lerp(260.0, 980.0, u / L)
-    acts = team(t, v, x, 640.0, S, rider=True, look_z=(0.9, 0.0))
+    S = K.WS['yard'] * 3 * v.Z * 1.1
+    x = lerp(300.0, 900.0, u / L)
+    acts = team(t, v, x, 560.0, S, rider=True, look_z=(0.9, 0.0))
     def f(big, _):
-        ox, oy = v.opt(x - 60, 640.0)
+        ox, oy = v.opt(x - 60, 560.0)
         K.puff(big, ox, oy, t, t - (t * 6 % 0.17), n=8, seed=int(t * 6), life=0.35, speed=320, px=12)
         fx.speed_lines(big, t, 0.15)
     return K.shot('yard', K.light_morning, cx, cy, Z, acts=acts, fx_=f, t=t, focus=0.8, dof_k=6, snow_n=60, glints=(0, 1400, 1080, 1900))
@@ -170,16 +170,16 @@ def r_order(t, u):
 
 # ================================================================== 4: the sled arrives at the window: «Такси «Ямщик»…» — «Витёк?!»
 def r_arrive(t, u):
-    Z = 1.05
-    cx, cy = 760.0, 450.0
+    Z = 0.95
+    cx, cy = 700.0, 470.0
     v = K.V('facade', cx, cy, Z)
-    S = K.S_of(v, 'facade') * 0.85
-    x = lerp(300.0, 560.0, glide(min(1.0, u / 1.2)))
-    acts = team(t, v, x, 690.0, S, run=u < 1.2, rider=False)
+    S = K.S_of(v, 'facade') * 0.8
+    x = lerp(300.0, 620.0, glide(min(1.0, u / 1.2)))
+    acts = team(t, v, x, 640.0, S, run=u < 1.2, rider=False)
     z = zhora_window(t, v, (-0.8, 0.0) if u > 1.0 else (0.9, -0.2), hand_n=(20.0, 50.0))
     def f(big, _):
         if u < 1.4:
-            ox, oy = v.opt(x + 40, 690.0)
+            ox, oy = v.opt(x + 40, 640.0)
             K.puff(big, ox, oy, t, CUTS[4] + 1.1, n=20, seed=3, life=0.5, speed=420, px=12)
     return K.shot('facade', K.light_morning, cx, cy, Z, acts=[z] + acts, fx_=f, t=t, focus=0.7, dof_k=8, snow_n=55)
 
@@ -197,14 +197,14 @@ def r_small(t, u):
 # ================================================================== 6: the ride: «Вот это сервис! За три тыщи — с ветерком!»
 def r_ride(t, u):
     L = CUTS[7] - CUTS[6]
-    Z = 1.9
+    Z = 1.3
     x = lerp(300.0, 760.0, u / L)
-    cx, cy = x + 40, 560.0
+    cx, cy = x + 50, 520.0
     v = K.V('yard', cx, cy, Z)
     S = K.WS['yard'] * 3 * v.Z * 1.25
-    acts = team(t, v, x, 640.0, S, look_z=(0.9, -0.3))
+    acts = team(t, v, x, 560.0, S, look_z=(0.9, -0.3))
     def f(big, _):
-        ox, oy = v.opt(x - 60, 640.0)
+        ox, oy = v.opt(x - 60, 560.0)
         K.puff(big, ox, oy, t, t - (t * 6 % 0.17), n=10, seed=int(t * 6), life=0.35, speed=320, px=12)
         fx.speed_lines(big, t, 0.28)
     return K.shot('yard', K.light_morning, cx, cy, Z, acts=acts, fx_=f, t=t, focus=0.8, dof_k=6, snow_n=90, par=(-12 + 24 * u / L, 0))
@@ -212,44 +212,44 @@ def r_ride(t, u):
 
 # ================================================================== 7: TWIST — the dogs lie down: «Всё, братан, приехали. У собак обед…»
 def r_twist(t, u):
-    Z = 1.6
-    x = 780.0
-    cx, cy = x + 60, 560.0
+    Z = 1.3
+    x = 760.0
+    cx, cy = x + 50, 520.0
     v = K.V('yard', cx, cy, Z)
     S = K.WS['yard'] * 3 * v.Z * 1.25
-    acts = team(t, v, x, 640.0, S, run=False, lie=True, look_z=(-0.8, 0.0))
+    acts = team(t, v, x, 560.0, S, run=False, lie=True, look_z=(-0.8, 0.0))
     return K.shot('yard', K.light_morning, cx, cy, Z, acts=acts, t=t, focus=0.8, dof_k=6, snow_n=60, kick=kick(t, [(TWIST, 1.1)]))
 
 
 # ================================================================== 8: CU Жора in the sled: «В смысле?! Я ж три тысячи заплатил!»
 def r_what(t, u):
-    Z = 3.0
-    x = 780.0
-    v = K.V('yard', x - 4, 560.0, Z)
+    Z = 2.6
+    x = 760.0
+    v = K.V('yard', x - 4, 500.0, Z)
     S = K.WS['yard'] * 3 * v.Z * 1.25
     kw, dy = face(FZ, 'zhora', t, (-0.6, 0.0), sit=1.0, hand_n=(24.0, 62.0), hand_f=(-14.0, 60.0))
     k = S / (3 * v.Z)
-    z = A(C.zhora, x - 4 * k, 640.0 - 8 * k + dy, S, t=t, **kw); z.near = 0.99
-    sl = A(C.sled, x, 640.0, S * 2.2, t=t); sl.near = 0.99
-    return K.shot('yard', K.light_morning, x - 4, 560.0, Z, acts=[sl, z], t=t, focus=0.9, dof_k=20, snow_n=50, kick=kick(t, [(27.6, 0.6)]))
+    z = A(C.zhora, x - 4 * k, 560.0 + 4 * k + dy, S, t=t, **kw); z.near = 0.99
+    sl = A(C.sled, x, 560.0, S * 1.8, t=t); sl.near = 0.99
+    return K.shot('yard', K.light_morning, x - 4, 500.0, Z, acts=[sl, z], t=t, focus=0.9, dof_k=20, snow_n=50, kick=kick(t, [(27.6, 0.6)]))
 
 
 # ================================================================== 9: Витёк sits in the sled, the dogs jump in: «Так три тысячи — это собакам…»
 def r_sitin(t, u):
-    Z = 1.6
-    x = 780.0
-    cx, cy = x, 560.0
+    Z = 1.3
+    x = 760.0
+    cx, cy = x + 30, 520.0
     v = K.V('yard', cx, cy, Z)
     S = K.WS['yard'] * 3 * v.Z * 1.25
     k = S / (3 * v.Z)
-    acts = team(t, v, x, 640.0, S, rider=False, musher=False, dogs_in=u > 1.0)
+    acts = team(t, v, x, 560.0, S, rider=False, musher=False, dogs_in=u > 1.0)
     kv, dv = face(FV, 'vitek', t, (0.9, 0.0), hand_n=(10.0, 44.0))
-    vk = A(C.vitek, x - 6 * k, 640.0 - 8 * k + dv, S * 0.95, t=t, post=hat_post, **kv); vk.near = 0.99
+    vk = A(C.vitek, x - 6 * k, 560.0 + 2 * k + dv, S * 0.95, t=t, post=hat_post, **kv); vk.near = 0.99
     kz, _ = face(FZ, 'zhora', t, (-0.8, 0.0), hand_n=(22.0, 40.0))
-    z = A(C.zhora, x + 46 * k, 644.0, S, t=t, flip=True, **kz); z.near = 0.99
+    z = A(C.zhora, x + 46 * k, 564.0, S, t=t, flip=True, **kz); z.near = 0.99
     if u <= 1.0:                                                              # the dogs still lie in front
         for i in range(6):
-            d = A(C.husky, x + (60 + (i // 2) * 30) * k, 640.0 + (i % 2) * 5 * k, S * 1.35, t=t, lie=True, run=False); d.near = 0.99
+            d = A(C.husky, x + (60 + (i // 2) * 30) * k, 560.0 + (i % 2) * 5 * k, S * 1.35, t=t, lie=True, run=False); d.near = 0.99
             acts.append(d)
     return K.shot('yard', K.light_morning, cx, cy, Z, acts=acts + [vk, z], t=t, focus=0.8, dof_k=6, snow_n=55)
 
@@ -257,49 +257,49 @@ def r_sitin(t, u):
 # ================================================================== 10: Жора in the harness pulls everyone; the gull: «Я — чайка. А ты теперь — ездовой.»
 def r_pull(t, u):
     L = CUTS[11] - CUTS[10]
-    Z = 1.55
-    x = lerp(700.0, 860.0, u / L)
-    cx, cy = x + 50, 560.0
+    Z = 1.3
+    x = lerp(680.0, 820.0, u / L)
+    cx, cy = x + 50, 520.0
     v = K.V('yard', cx, cy, Z)
     S = K.WS['yard'] * 3 * v.Z * 1.25
     k = S / (3 * v.Z)
-    acts = team(t, v, x, 640.0, S, rider=False, musher=False, dogs_in=True, puller=True)
+    acts = team(t, v, x, 560.0, S, rider=False, musher=False, dogs_in=True, puller=True)
     kv, dv = face(FV, 'vitek', t, (0.9, 0.0), hand_n=(12.0, 56.0 + 6 * math.sin(t * 8)))
-    vk = A(C.vitek, x - 6 * k, 640.0 - 8 * k + dv, S * 0.95, t=t, post=hat_post, **kv); vk.near = 0.99
+    vk = A(C.vitek, x - 6 * k, 560.0 + 2 * k + dv, S * 0.95, t=t, post=hat_post, **kv); vk.near = 0.99
     kz, dz = face(FZ, 'zhora', t, (0.9, 0.0), walk=t * 9.0, lean=1.2, sweat=1.0, hand_n=(20.0, 40.0), hand_f=(-14.0, 42.0))
-    z = A(C.zhora, x + 74 * k, 644.0 + dz, S, t=t, **kz); z.near = 0.99
+    z = A(C.zhora, x + 74 * k, 564.0 + dz, S, t=t, **kz); z.near = 0.99
     kc, _ = face(FC, 'chayka', t, (-0.4, 0.0))
-    g = A(C.chayka, x + 110 * k, 520.0 + 10 * math.sin(t * 3), S * K.GULL * 1.2, t=t, flip=True, fly=True, **kc); g.near = 0.99
+    g = A(C.chayka, x + 110 * k, 440.0 + 10 * math.sin(t * 3), S * K.GULL * 1.2, t=t, flip=True, fly=True, **kc); g.near = 0.99
     def f(big, _):
-        ax, ay = v.opt(x + 26 * k, 640.0 - 10 * k); bx, by = v.opt(x + 70 * k, 640.0 - 40 * k)
+        ax, ay = v.opt(x + 26 * k, 560.0 - 10 * k); bx, by = v.opt(x + 70 * k, 560.0 - 40 * k)
         for i in range(40):                                                    # the gang line from the sled to Жора's waist
             q = i / 39
             px, py = int(ax + (bx - ax) * q), int(ay + (by - ay) * q)
             big[py - 3:py + 3, px - 3:px + 3] = (200, 50, 60)
-        ox, oy = v.opt(x + 74 * k, 646.0)
+        ox, oy = v.opt(x + 74 * k, 566.0)
         K.puff(big, ox - 40, oy, t, t - (t * 4 % 0.25), n=6, seed=int(t * 4), life=0.3, speed=200, px=10)
     return K.shot('yard', K.light_morning, cx, cy, Z, acts=acts + [vk, z, g], fx_=f, t=t, focus=0.8, dof_k=6, snow_n=70)
 
 
 # ================================================================== 11: the port gate: six huskies stare: «Оценочку, братан. Собаки смотрят.» — «Пять звёзд.»
 def r_port(t, u):
-    Z = 1.45
-    cx, cy = 820.0, 470.0
+    Z = 1.0
+    cx, cy = 840.0, 420.0
     v = K.V('port', cx, cy, Z)
     S = K.WS['port'] * 3 * v.Z
     k = S / (3 * v.Z)
     acts = []
     for i in range(6):
-        d = A(C.husky, 700.0 + i * 26 * k * 0.9, 640.0 + (i % 2) * 8, S * 1.35, t=t, stare=True, run=False, ph=i); d.near = 0.99
+        d = A(C.husky, 735.0 + i * 26 * k * 0.9, 596.0 + (i % 2) * 8, S * 1.35, t=t, stare=True, run=False, ph=i); d.near = 0.99
         acts.append(d)
     kv, dv = face(FV, 'vitek', t, (0.9, 0.0), hand_n=(12.0, 48.0))
-    vk = A(C.vitek, 690.0, 640.0 + dv, S * 0.95, t=t, post=hat_post, **kv); vk.near = 0.99
+    vk = A(C.vitek, 722.0, 596.0 + dv, S * 0.95, t=t, post=hat_post, **kv); vk.near = 0.99
     kz, dz = face(FZ, 'zhora', t, (-0.5, 0.4), hand_n=(18.0, 50.0), prop_n=C.phone, sweat=1.0, frost=0.6)
-    z = A(C.zhora, 960.0, 650.0 + dz, S, t=t, flip=True, **kz); z.near = 0.99
+    z = A(C.zhora, 950.0, 606.0 + dz, S, t=t, flip=True, **kz); z.near = 0.99
     def f(big, _):
         if u > 0.4:
-            sc = K.rating_screen(t, stars=5 if t > 42.0 else 0, t_star=42.0, w=420, h=560)
-            O.overlay(big, sc, 600, 980 + int(5 * math.sin(t * 3)), 1.0)
+            sc = K.rating_screen(t, stars=5 if t > 42.0 else 0, t_star=42.0, w=380, h=500)
+            O.overlay(big, sc, 60, 560 + int(5 * math.sin(t * 3)), 1.0)
     return K.shot('port', K.light_morning, cx, cy, Z, acts=[vk] + acts + [z], fx_=f, t=t, focus=0.8, dof_k=8, snow_n=55)
 
 
@@ -307,11 +307,10 @@ R = [r_gull, r_reveal, r_phone, r_order, r_arrive, r_small, r_ride, r_twist, r_w
 assert len(R) == len(CUTS) - 1 == len(NAMES)
 
 SHOW = K.Show(EPI, 4, ['ТАКСИ —', '3000?!'], hook_t=(0.10, 2.4), hook_y=230, hook_size=84,
-              stickers=[(K.st('АВТОБУС — В АПРЕЛЕ', fg=(255, 255, 255), size=44), 2.0, 4.0, 540, 1250),
-                        (K.st('ОБЕД!', fg=(255, 110, 150), size=72), TWIST + 0.1, TWIST + 2.4, 540, 380),
+              stickers=[(K.st('ОБЕД!', fg=(255, 110, 150), size=72), TWIST + 0.1, TWIST + 2.4, 540, 380),
                         (K.st('×7', fg=(255, 80, 80), size=80), CUTS[2] + 0.5, CUTS[2] + 1.6, 820, 420)],
               flashes=[TWIST, CUTS[1]], mosaics=[CUTS[6]],
-              cap_y={0: 1480, 1: 1460, 2: 1700, 3: 1500, 4: 1460, 5: 1500, 6: 1460, 7: 1460, 8: 1480, 9: 1460, 10: 1460, 11: 820})
+              cap_y={0: 1400, 1: 1500, 2: 440, 3: 1500, 4: 1520, 5: 1500, 6: 1500, 7: 1500, 8: 1480, 9: 1500, 10: 1500, 11: 400})
 
 
 def render(t):
