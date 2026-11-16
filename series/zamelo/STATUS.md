@@ -1,0 +1,26 @@
+# «Замело» — статус (16.11.2026)
+
+## Готово — сезон 1 (6/6)
+- E01 «ОСТАВИЛИ У ДВЕРИ?!» 37,7 с (v2, одобрена: «хорошая серия, не переделывай»)
+- E02 «СМЕНКУ ЗАБЫЛ!» 43,6 с · E03 «ГДЕ МОЯ МАШИНА?!» 43,8 с · E04 «ТАКСИ — 3000?!» 43,9 с · E05 «1400 ЗА СНЕГ?!» 43,5 с · E06 «РАСТАЯЛО!» 42,0 с (финал, крючок «ДО ЗИМЫ: 183 ДНЯ»)
+- В каждой `episodes/epNN/`: final.mp4, cover.png, cover_grid.png, script.md, meta.md, код (epNN.py, timeline.py, mix.py, cover.py).
+- Файл выкладки `publish_s01.txt` (пн 16.11 – сб 21.11).
+- Правила владельца по сезону: без «отправь тому…» в роликах; в конце только «ПОДПИШИСЬ!»; хук «ситуация → борьба» (чайка-рассказчик крупно «Дальний Восток. …»); живой диалог с «но / поэтому / ну / даже».
+
+## Готово — фильм «Собрание жильцов» (16.11.2026)
+- `movie/final.mp4` 6:59, 16:9, HEVC 87 МБ, −14,2 LUFS / −1,4 dBTP; обложка MrBeast-стиль `movie/cover.jpg` (Жора + падающая квитанция 50 400 ₽); выкладка `movie/publish_movie.txt` (вс 22.11, 08:35, YouTube).
+- Пересборка: `python3 movie.py all` → `mix.py` → HEVC 2-pass 1500k (render-скил); AAC даёт перелёт пика → после кодирования `alimiter=limit=0.79`.
+
+## Ассеты
+- Риг: `engine/props/zampix.py`, `zamcast.py` (Жора, чайка, Ира, Витёк, баба Нина, Тёма, тётя Валя, Гоша, диспетчер УК, грейдер, хаски, нарты, «Королла», квитанция…), `zamkit.py`, `zamdecor.py`; плашка `endcard style='zamelo'`.
+- Задники `bg/`: facade, yard, kitchen, door, landing, cutaway, slope, school, carfield, port, flood (+ `*_b`, `flood_a`).
+- Голоса (Voice Library, без слотов): zhora, chayka, ira, vitek, nina, tyoma, gosha, disp; valya = голос nina с `post_af`.
+- Звуки `sfx/`: shovel_snow, seagull_cry, snow_dive, snow_plop, frost_wind_loop, grader_engine, snow_avalanche, splash_big, rowing, melt_drip_loop.
+
+## Дальше
+1. Оценка владельцем E02–E06 → правки по `/fix` (перерендер только затронутых планов).
+2. Сезон 2 (крючок — снова зима / «ДО ЗИМЫ: 183 ДНЯ»).
+
+## Известное
+- Рендер серии ≈ 12–15 мин в 4 процесса; `python3 epNN.py shots N …` + `mix.py` — точечные правки.
+- Поворот держим ≤ 60 %: при длинных репликах режем второстепенную реплику (так ушли v5 в E04, g1 в E05).

@@ -1,0 +1,139 @@
+{
+  "cartoon": "Замело",
+  "slug": "zamelo",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "zhora": {
+      "name": "Жора",
+      "color_caption": [
+        255,
+        170,
+        60
+      ],
+      "style": "[confident] [loud] [outraged] — громкий бодрый батя, «мы, дальневосточники, — привычные!»",
+      "voice_id": "ws3YyKFd5whKb21yaXES",
+      "voice": "Замело — Жора",
+      "library": {
+        "public_owner_id": "933ff031ab04d43e990d429e732baa31ad5e38a49ca38f6f001e5fe97383c316",
+        "voice_id": "ws3YyKFd5whKb21yaXES"
+      }
+    },
+    "chayka": {
+      "name": "Чайка",
+      "color_caption": [
+        200,
+        235,
+        255
+      ],
+      "style": "[deadpan] [dry] — старый боцман, низко, медленно, сухо, в камеру",
+      "voice_id": "8jZuc16g7EAxSX50j836",
+      "voice": "Замело — Чайка",
+      "library": {
+        "public_owner_id": "594651d1edee802e2a4581b7d6af239b53ea202b7571326d393e7e690bc69f78",
+        "voice_id": "8jZuc16g7EAxSX50j836"
+      }
+    },
+    "ira": {
+      "name": "Ира (жена)",
+      "color_caption": [
+        255,
+        130,
+        180
+      ],
+      "style": "[tired] [sarcastic] — звонко, быстро, устало",
+      "voice_id": "CsT9glYAgw8L02hu9od2",
+      "voice": "Замело — Ира (жена)",
+      "library": {
+        "public_owner_id": "5d0072f1d66ecd3b575cdec089b3ec7918ae7699510308ffe0ff8d3c320e03c3",
+        "voice_id": "CsT9glYAgw8L02hu9od2"
+      }
+    },
+    "vitek": {
+      "name": "Витёк (один на весь город)",
+      "color_caption": [
+        150,
+        240,
+        110
+      ],
+      "style": "[cheerful] [casual] — весёлый простой парень, «братан»",
+      "voice_id": "g1G73EpCIdK4HUyDiLYF",
+      "voice": "Замело — Витёк (один на весь город)",
+      "library": {
+        "public_owner_id": "0eabac8faaa9bda174bdfc68458950267caf25a5b5daf5151fd1a2c8df1d7a38",
+        "voice_id": "g1G73EpCIdK4HUyDiLYF"
+      }
+    },
+    "nina": {
+      "name": "Баба Нина с 8-го",
+      "color_caption": [
+        215,
+        175,
+        255
+      ],
+      "style": "[kind] [old] — добрая бабушка",
+      "voice_id": "ZgfahluxUmUzBjjL81NN",
+      "voice": "Замело — Баба Нина с 8-го",
+      "library": {
+        "public_owner_id": "7c6cca692da713287a1d9601ee89fe6b4ff9724c645410c1b179a6b9d869db2a",
+        "voice_id": "ZgfahluxUmUzBjjL81NN"
+      }
+    },
+    "tyoma": {
+      "name": "Тёма (сын)",
+      "color_caption": [
+        120,
+        220,
+        255
+      ],
+      "style": "[boyish] [excited] — мальчик 10 лет, женский голос «под мальчика», как в дубляже",
+      "voice_id": "rSfuQoQ3FY8SVKeraMAp",
+      "voice": "Замело — Тёма (сын)",
+      "library": {
+        "public_owner_id": "bfd67a1faea7631b99a7e1ab471651428008376848d80fc0edba1cf95e697773",
+        "voice_id": "rSfuQoQ3FY8SVKeraMAp"
+      }
+    },
+    "valya": {
+      "name": "Вахтёрша тётя Валя",
+      "color_caption": [
+        255,
+        200,
+        120
+      ],
+      "style": "[stern] [strict] — строгая вахтёрша (голос бабы Нины, ниже, суше)",
+      "voice_id": "ZgfahluxUmUzBjjL81NN",
+      "voice": "Замело — Баба Нина с 8-го",
+      "post_af": "asetrate=44100*0.9,aresample=44100,atempo=1.08"
+    },
+    "gosha": {
+      "name": "Гоша (сосед)",
+      "color_caption": [
+        200,
+        255,
+        140
+      ],
+      "style": "[sly] [sweet] — хитрый ласковый сосед 55 лет, «Жорик, родной!»",
+      "voice_id": "LTkx8oHrUXaND7aaxdTA",
+      "voice": "Замело — Гоша (сосед)",
+      "library": {
+        "public_owner_id": "460dabc9f96dd6cec09c54db9d5a484409dd3713222f3d0bdb12854bd8c837dd",
+        "voice_id": "LTkx8oHrUXaND7aaxdTA"
+      }
+    },
+    "disp": {
+      "name": "Диспетчер УК «Сугроб-Сервис»",
+      "color_caption": [
+        255,
+        180,
+        120
+      ],
+      "style": "[bored] [flat] — скучающая диспетчер УК, жуёт бутерброд",
+      "voice_id": "Vt0E1AMTZdoht6B8DhXP",
+      "voice": "Замело — Диспетчер УК «Сугроб-Сервис»",
+      "library": {
+        "public_owner_id": "11247a8647abcf8aeb5195b93b6043e0b0c5a7646a521806eed2a3924f6621d0",
+        "voice_id": "Vt0E1AMTZdoht6B8DhXP"
+      }
+    }
+  }
+}

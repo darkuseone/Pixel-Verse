@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-11-12 22:12.
+Обновлено: 2026-11-14 22:34.
 
 ## agent-dibs
 
@@ -78,13 +78,13 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Fran (neon flamingo sign) | `fran` | `dadIF2xtWrmWMJgTn47F` | active | 4 / 1 | STILL 1986 — Fran (neon flamingo sign) |
-| Vince Velour | `vince` | `kVv0pQADO7gCW0VPlTsR` | library_or_premade | 10 / 1 | STILL 1986 — Vince Velour |
-| Rey (tow truck driver) | `rey` | `vRzW3mEGVjW5jXimKSf1` | library_or_premade | 3 / 1 | STILL 1986 — Rey (tow truck driver) |
-| Tiffany (box office, Gen Z) | `tiffany` | `hv8WzBOrsvuSUeIQGOCM` | library_or_premade | 0 / 0 | STILL 1986 — Tiffany (box office, Gen Z) |
-| Officer Diaz (marine patrol) | `diaz` | `KvaCHcJoMXfOzwtsULOZ` | library_or_premade | 0 / 0 | STILL 1986 — Officer Diaz (marine patrol) |
-| Gary (Vince's boss) | `gary` | `SDARFhQygpPvpLh7Ad1B` | library_or_premade | 0 / 0 | STILL 1986 — Gary (Vince's boss) |
-| ROOF-E (car assistant) | `roofe` | `weA4Q36twV5kwSaTEL0Q` | library_or_premade | 0 / 0 | STILL 1986 — ROOF-E (car assistant) |
+| Fran (neon flamingo sign) | `fran` | `dadIF2xtWrmWMJgTn47F` | active | 27 / 7 | STILL 1986 — Fran (neon flamingo sign) |
+| Vince Velour | `vince` | `kVv0pQADO7gCW0VPlTsR` | library_or_premade | 63 / 7 | STILL 1986 — Vince Velour |
+| ROOF-E (car assistant) | `roofe` | `weA4Q36twV5kwSaTEL0Q` | library_or_premade | 9 / 2 | STILL 1986 — ROOF-E (car assistant) |
+| Rey (tow truck driver) | `rey` | `vRzW3mEGVjW5jXimKSf1` | library_or_premade | 8 / 3 | STILL 1986 — Rey (tow truck driver) |
+| Tiffany (box office, Gen Z) | `tiffany` | `hv8WzBOrsvuSUeIQGOCM` | library_or_premade | 7 / 2 | STILL 1986 — Tiffany (box office, Gen Z) |
+| Gary (Vince's boss) | `gary` | `SDARFhQygpPvpLh7Ad1B` | library_or_premade | 6 / 2 | STILL 1986 — Gary (Vince's boss) |
+| Officer Diaz (marine patrol) | `diaz` | `KvaCHcJoMXfOzwtsULOZ` | library_or_premade | 3 / 2 | STILL 1986 — Officer Diaz (marine patrol) |
 
 ## sunny-palms-hoa
 
@@ -144,6 +144,20 @@
 | Колян | `kolyan` | `obfzPRwPXc0avd4LPuzH` | deleted 2026-10-12 | 10 / 2 | Валера и кот — Колян |
 | Гена (сосед сверху) | `gena` | `ZszdQcL5WjzUTdPEv3YN` | deleted 2026-11-01 | 4 / 2 | Валера и кот — Гена (сосед сверху) |
 | Автоответчик ЖЭКа | `robot` | `uQiZyJqZ7ePaB8bwME8n` | library_or_premade | 2 / 1 | Marusya G – Persuasive Outbound Caller |
+
+## zamelo
+
+| Герой | char | voice_id | Статус | Реплик / серий | Голос |
+|---|---|---|---|---|---|
+| Жора | `zhora` | `ws3YyKFd5whKb21yaXES` | library_or_premade | 23 / 4 | Замело — Жора |
+| Чайка | `chayka` | `8jZuc16g7EAxSX50j836` | library_or_premade | 12 / 4 | Замело — Чайка |
+| Витёк (один на весь город) | `vitek` | `g1G73EpCIdK4HUyDiLYF` | library_or_premade | 7 / 2 | Замело — Витёк (один на весь город) |
+| Гоша (сосед) | `gosha` | `LTkx8oHrUXaND7aaxdTA` | library_or_premade | 4 / 1 | Замело — Гоша (сосед) |
+| Ира (жена) | `ira` | `CsT9glYAgw8L02hu9od2` | library_or_premade | 3 / 2 | Замело — Ира (жена) |
+| Вахтёрша тётя Валя | `valya` | `ZgfahluxUmUzBjjL81NN` | library_or_premade | 3 / 1 | Замело — Баба Нина с 8-го |
+| Тёма (сын) | `tyoma` | `rSfuQoQ3FY8SVKeraMAp` | library_or_premade | 2 / 1 | Замело — Тёма (сын) |
+| Баба Нина с 8-го | `nina` | `ZgfahluxUmUzBjjL81NN` | library_or_premade | 1 / 1 | Замело — Баба Нина с 8-го |
+| Диспетчер УК «Сугроб-Сервис» | `disp` | `Vt0E1AMTZdoht6B8DhXP` | library_or_premade | 0 / 0 | Замело — Диспетчер УК «Сугроб-Сервис» |
 
 ## Защищённые (личные голоса владельца)
 

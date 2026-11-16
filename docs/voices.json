@@ -1644,12 +1644,16 @@
    "status": "active",
    "name": "Fran (neon flamingo sign)",
    "voice_name": "STILL 1986 — Fran (neon flamingo sign)",
-   "lines": 4,
-   "episodes": 1,
+   "lines": 27,
+   "episodes": 7,
    "samples": [
     "series/still-1986/voice/ep01/f2.mp3",
     "series/still-1986/voice/ep01/f3.mp3",
+    "series/still-1986/voice/movie/ff1.mp3",
     "series/still-1986/voice/ep01/f1.mp3",
+    "series/still-1986/voice/ep05/f2.mp3",
+    "series/still-1986/voice/ep02/f2.mp3",
+    "series/still-1986/voice/ep03/f3.mp3",
     "series/still-1986/voice/ep01/f4.mp3"
    ],
    "design": {
@@ -1678,17 +1682,37 @@
    "status": "library_or_premade",
    "name": "Vince Velour",
    "voice_name": "STILL 1986 — Vince Velour",
-   "lines": 10,
-   "episodes": 1,
+   "lines": 63,
+   "episodes": 7,
    "samples": [
+    "series/still-1986/voice/movie/h1.mp3",
     "series/still-1986/voice/ep01/v5.mp3",
-    "series/still-1986/voice/ep01/v1.mp3",
-    "series/still-1986/voice/ep01/v2.mp3",
-    "series/still-1986/voice/ep01/v3.mp3",
-    "series/still-1986/voice/ep01/v9.mp3",
-    "series/still-1986/voice/ep01/v10.mp3",
-    "series/still-1986/voice/ep01/v6.mp3",
-    "series/still-1986/voice/ep01/v4.mp3"
+    "series/still-1986/voice/movie/l1.mp3",
+    "series/still-1986/voice/movie/m1.mp3",
+    "series/still-1986/voice/movie/f1.mp3",
+    "series/still-1986/voice/movie/s1.mp3",
+    "series/still-1986/voice/movie/d1.mp3",
+    "series/still-1986/voice/ep01/v1.mp3"
+   ]
+  },
+  {
+   "slug": "still-1986",
+   "char": "roofe",
+   "voice_id": "weA4Q36twV5kwSaTEL0Q",
+   "status": "library_or_premade",
+   "name": "ROOF-E (car assistant)",
+   "voice_name": "STILL 1986 — ROOF-E (car assistant)",
+   "lines": 9,
+   "episodes": 2,
+   "samples": [
+    "series/still-1986/voice/movie/xf1.mp3",
+    "series/still-1986/voice/movie/xc1.mp3",
+    "series/still-1986/voice/movie/xr2.mp3",
+    "series/still-1986/voice/movie/xr1.mp3",
+    "series/still-1986/voice/ep05/r1.mp3",
+    "series/still-1986/voice/ep05/r3.mp3",
+    "series/still-1986/voice/movie/xr3.mp3",
+    "series/still-1986/voice/ep05/r2.mp3"
    ]
   },
   {
@@ -1698,12 +1722,17 @@
    "status": "library_or_premade",
    "name": "Rey (tow truck driver)",
    "voice_name": "STILL 1986 — Rey (tow truck driver)",
-   "lines": 3,
-   "episodes": 1,
+   "lines": 8,
+   "episodes": 3,
    "samples": [
+    "series/still-1986/voice/movie/rc2.mp3",
+    "series/still-1986/voice/movie/rc1.mp3",
     "series/still-1986/voice/ep01/r1.mp3",
     "series/still-1986/voice/ep01/r2.mp3",
-    "series/still-1986/voice/ep01/r3.mp3"
+    "series/still-1986/voice/ep01/r3.mp3",
+    "series/still-1986/voice/movie/rl1.mp3",
+    "series/still-1986/voice/ep06/r2.mp3",
+    "series/still-1986/voice/ep06/r1.mp3"
    ]
   },
   {
@@ -1713,20 +1742,17 @@
    "status": "library_or_premade",
    "name": "Tiffany (box office, Gen Z)",
    "voice_name": "STILL 1986 — Tiffany (box office, Gen Z)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
-  },
-  {
-   "slug": "still-1986",
-   "char": "diaz",
-   "voice_id": "KvaCHcJoMXfOzwtsULOZ",
-   "status": "library_or_premade",
-   "name": "Officer Diaz (marine patrol)",
-   "voice_name": "STILL 1986 — Officer Diaz (marine patrol)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 7,
+   "episodes": 2,
+   "samples": [
+    "series/still-1986/voice/ep02/t2.mp3",
+    "series/still-1986/voice/ep02/t5.mp3",
+    "series/still-1986/voice/movie/tc1.mp3",
+    "series/still-1986/voice/ep02/t4.mp3",
+    "series/still-1986/voice/ep02/t6.mp3",
+    "series/still-1986/voice/ep02/t1.mp3",
+    "series/still-1986/voice/ep02/t3.mp3"
+   ]
   },
   {
    "slug": "still-1986",
@@ -1735,20 +1761,31 @@
    "status": "library_or_premade",
    "name": "Gary (Vince's boss)",
    "voice_name": "STILL 1986 — Gary (Vince's boss)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 6,
+   "episodes": 2,
+   "samples": [
+    "series/still-1986/voice/ep04/g3.mp3",
+    "series/still-1986/voice/movie/gc1.mp3",
+    "series/still-1986/voice/ep04/g1.mp3",
+    "series/still-1986/voice/ep04/g5.mp3",
+    "series/still-1986/voice/ep04/g2.mp3",
+    "series/still-1986/voice/ep04/g4.mp3"
+   ]
   },
   {
    "slug": "still-1986",
-   "char": "roofe",
-   "voice_id": "weA4Q36twV5kwSaTEL0Q",
+   "char": "diaz",
+   "voice_id": "KvaCHcJoMXfOzwtsULOZ",
    "status": "library_or_premade",
-   "name": "ROOF-E (car assistant)",
-   "voice_name": "STILL 1986 — ROOF-E (car assistant)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "name": "Officer Diaz (marine patrol)",
+   "voice_name": "STILL 1986 — Officer Diaz (marine patrol)",
+   "lines": 3,
+   "episodes": 2,
+   "samples": [
+    "series/still-1986/voice/movie/dc1.mp3",
+    "series/still-1986/voice/ep03/d1.mp3",
+    "series/still-1986/voice/ep03/d2.mp3"
+   ]
   },
   {
    "slug": "sunny-palms-hoa",
@@ -3023,6 +3060,149 @@
     "series/valera-i-kot/voice/ep04/r1.mp3",
     "series/valera-i-kot/voice/ep04/r2.mp3"
    ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "zhora",
+   "voice_id": "ws3YyKFd5whKb21yaXES",
+   "status": "library_or_premade",
+   "name": "Жора",
+   "voice_name": "Замело — Жора",
+   "lines": 23,
+   "episodes": 4,
+   "samples": [
+    "series/zamelo/voice/ep03/z1.mp3",
+    "series/zamelo/voice/ep04/z1.mp3",
+    "series/zamelo/voice/ep02/z1.mp3",
+    "series/zamelo/voice/ep01/z2.mp3",
+    "series/zamelo/voice/ep03/z6.mp3",
+    "series/zamelo/voice/ep04/z4.mp3",
+    "series/zamelo/voice/ep03/z3.mp3",
+    "series/zamelo/voice/ep02/z4.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "chayka",
+   "voice_id": "8jZuc16g7EAxSX50j836",
+   "status": "library_or_premade",
+   "name": "Чайка",
+   "voice_name": "Замело — Чайка",
+   "lines": 12,
+   "episodes": 4,
+   "samples": [
+    "series/zamelo/voice/ep04/c0.mp3",
+    "series/zamelo/voice/ep03/c0.mp3",
+    "series/zamelo/voice/ep02/c1.mp3",
+    "series/zamelo/voice/ep02/c0.mp3",
+    "series/zamelo/voice/ep01/c1.mp3",
+    "series/zamelo/voice/ep01/c0.mp3",
+    "series/zamelo/voice/ep02/c2.mp3",
+    "series/zamelo/voice/ep03/c1.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "vitek",
+   "voice_id": "g1G73EpCIdK4HUyDiLYF",
+   "status": "library_or_premade",
+   "name": "Витёк (один на весь город)",
+   "voice_name": "Замело — Витёк (один на весь город)",
+   "lines": 7,
+   "episodes": 2,
+   "samples": [
+    "series/zamelo/voice/ep04/v3.mp3",
+    "series/zamelo/voice/ep04/v4.mp3",
+    "series/zamelo/voice/ep01/v1.mp3",
+    "series/zamelo/voice/ep04/v1.mp3",
+    "series/zamelo/voice/ep04/v6.mp3",
+    "series/zamelo/voice/ep04/v5.mp3",
+    "series/zamelo/voice/ep04/v2.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "gosha",
+   "voice_id": "LTkx8oHrUXaND7aaxdTA",
+   "status": "library_or_premade",
+   "name": "Гоша (сосед)",
+   "voice_name": "Замело — Гоша (сосед)",
+   "lines": 4,
+   "episodes": 1,
+   "samples": [
+    "series/zamelo/voice/ep03/g1.mp3",
+    "series/zamelo/voice/ep03/g3.mp3",
+    "series/zamelo/voice/ep03/g4.mp3",
+    "series/zamelo/voice/ep03/g2.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "ira",
+   "voice_id": "CsT9glYAgw8L02hu9od2",
+   "status": "library_or_premade",
+   "name": "Ира (жена)",
+   "voice_name": "Замело — Ира (жена)",
+   "lines": 3,
+   "episodes": 2,
+   "samples": [
+    "series/zamelo/voice/ep02/i1.mp3",
+    "series/zamelo/voice/ep01/i2.mp3",
+    "series/zamelo/voice/ep02/i2.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "valya",
+   "voice_id": "ZgfahluxUmUzBjjL81NN",
+   "status": "library_or_premade",
+   "name": "Вахтёрша тётя Валя",
+   "voice_name": "Замело — Баба Нина с 8-го",
+   "lines": 3,
+   "episodes": 1,
+   "samples": [
+    "series/zamelo/voice/ep02/v2.mp3",
+    "series/zamelo/voice/ep02/v1.mp3",
+    "series/zamelo/voice/ep02/v3.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "tyoma",
+   "voice_id": "rSfuQoQ3FY8SVKeraMAp",
+   "status": "library_or_premade",
+   "name": "Тёма (сын)",
+   "voice_name": "Замело — Тёма (сын)",
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/zamelo/voice/ep02/t1.mp3",
+    "series/zamelo/voice/ep02/t2.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "nina",
+   "voice_id": "ZgfahluxUmUzBjjL81NN",
+   "status": "library_or_premade",
+   "name": "Баба Нина с 8-го",
+   "voice_name": "Замело — Баба Нина с 8-го",
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/zamelo/voice/ep01/n1.mp3"
+   ]
+  },
+  {
+   "slug": "zamelo",
+   "char": "disp",
+   "voice_id": "Vt0E1AMTZdoht6B8DhXP",
+   "status": "library_or_premade",
+   "name": "Диспетчер УК «Сугроб-Сервис»",
+   "voice_name": "Замело — Диспетчер УК «Сугроб-Сервис»",
+   "lines": 0,
+   "episodes": 0,
+   "samples": []
   }
  ],
  "unlisted_account_voices": {
@@ -3039,5 +3219,5 @@
   "14NozJq5eoBmDc1FXFDq": "NIKITA2",
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA"
  },
- "updated": "2026-11-12 22:12"
+ "updated": "2026-11-14 22:34"
 }
