@@ -151,8 +151,8 @@ def shovel(sp, h, ang=-1.2, l=40.0, snow=0.0):
 
 # ================================================================================ ЖОРА
 def zhora(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
-          legs=True, ox=0.0, oy=0.0, frost=0.0, sweat=0.0, walk=None, lean=0.0, snowcap=0.0, steam=0.0, undies=False, sit=0.0):
-    """ЖОРА. frost 0..1 = rime on brows, moustache and hat; snowcap 0..1 = a pile of snow on the hat; walk = phase (radians)"""
+          legs=True, ox=0.0, oy=0.0, frost=0.0, sweat=0.0, walk=None, lean=0.0, snowcap=0.0, steam=0.0, undies=False, sit=0.0, hat='sport'):
+    """ЖОРА. hat='sport' (the knitted cone) | 'fox' (the УК dispatcher's fox fur hat, the film finale). frost 0..1 = rime on brows, moustache and hat; snowcap 0..1 = a pile of snow on the hat; walk = phase (radians)"""
     E = X(expr)
     if blink is None: blink = ((t + 0.7) % 4.3) < 0.12
     br = 0.35 * math.sin(t * 2.0)
@@ -261,7 +261,13 @@ def zhora(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, hand
     # ---------------------------------------------------------------- the knitted cone hat «петушок»
     base_y = hy + 8.6
     tip = (hx - 6.0 - 1.4 * math.sin(t * 2.4), hy + 29.0)
-    cone = sp.m_poly([(hx - 7.6, base_y), (hx + 8.6, base_y), (tip[0] + 2.0, tip[1]), (tip[0] - 1.2, tip[1] - 0.6)])
+    if hat == 'fox':                                                          # the dispatcher's fox fur hat (a big round «кубанка»)
+        fox = sp.union([sp.m_ell(hx + 0.6, base_y + 3.0, 11.0, 6.4)], tones((222, 122, 50)), frost=False)
+        for q in range(44): thin(sp, (hx - 10.0 + q * 0.5, base_y - 2.0), (hx - 10.4 + q * 0.5, base_y + 8.6),
+                                 (255, 226, 196) if q % 4 == 0 else (184, 92, 36), 0.22, mask=fox)
+        sp.ell(hx + 0.6, base_y - 1.0, 11.4, 2.2, tones((240, 214, 186)), frost=False)
+        tip = (hx, base_y + 8.0)
+    cone = sp.m_poly([(hx - 7.6, base_y), (hx + 8.6, base_y), (tip[0] + 2.0, tip[1]), (tip[0] - 1.2, tip[1] - 0.6)]) if hat != 'fox' else np.zeros_like(DX.XC, bool)
     nyc = np.clip((DX.YC - base_y) / 22.0, 0, 1)
     val = DX.lit(np.clip((DX.XC - hx) / 9.0, -0.9, 0.9), nyc * 0.5)
     band = (((DX.YC - base_y) // 3.4).astype(int) % 2) == 0
@@ -270,12 +276,12 @@ def zhora(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, hand
     rib = cone & (((DX.XC * 1.2).astype(int) % 2) == 0)                   # knit ribs: darker columns
     c = sp.col.astype(np.float32); c[rib] *= 0.9; sp.col = c.astype(np.uint8)
     e = cone & ~erode(cone); sp.col[e] = mix(dark(HAT_R, 0.5), INK, 0.4)
-    cuff = sp.sup(hx + 0.6, base_y + 0.4, 9.2, 2.8, tones(HAT_W), n=3.0, frost=False)
+    cuff = sp.sup(hx + 0.6, base_y + 0.4, 9.2, 2.8, tones(HAT_W), n=3.0, frost=False) if hat != 'fox' else np.zeros_like(DX.XC, bool)
     rb = cuff & (((DX.XC * 1.5).astype(int) % 2) == 0)
     c = sp.col.astype(np.float32); c[rb] *= 0.9; sp.col = c.astype(np.uint8)
-    if sp.k >= 2: sp.txt_box(['SPORT'], (hx - 6.0, base_y - 1.6, hx + 7.0, base_y + 2.4), HAT_R, pad=0.1)
-    pom = sp.ell(tip[0], tip[1] + 1.0, 3.4, 3.4, tones(HAT_W), frost=False)  # fluffy pompon
-    for q in range(14):
+    if sp.k >= 2 and hat != 'fox': sp.txt_box(['SPORT'], (hx - 6.0, base_y - 1.6, hx + 7.0, base_y + 2.4), HAT_R, pad=0.1)
+    if hat != 'fox': sp.ell(tip[0], tip[1] + 1.0, 3.4, 3.4, tones(HAT_W), frost=False)  # fluffy pompon
+    for q in range(14 if hat != 'fox' else 0):
         a = q * 0.45
         thin(sp, (tip[0] + math.cos(a) * 1.2, tip[1] + 1.0 + math.sin(a) * 1.2), (tip[0] + math.cos(a) * 3.8, tip[1] + 1.0 + math.sin(a) * 3.8),
              dark(HAT_W, 0.78) if q % 2 else (255, 255, 255), 0.2)
@@ -478,7 +484,7 @@ def vitek(sp, t=0.0, expr='cheerful', mouth_=0.0, look=(0.6, 0.0), blink=None, h
 
 
 # ================================================================================ БАБА НИНА
-def nina(sp, t=0.0, expr='kind', mouth_=0.0, look=(0.6, 0.0), blink=None, can=True, legs=True):
+def nina(sp, t=0.0, expr='kind', mouth_=0.0, look=(0.6, 0.0), blink=None, can=True, legs=True, hand_n=None, prop_n=None):
     """баба Нина: a round granny in a red polka-dot headscarf, big round glasses, a green cardigan, a watering can"""
     E = X(expr)
     if blink is None: blink = ((t + 3.0) % 4.8) < 0.13
@@ -513,9 +519,10 @@ def nina(sp, t=0.0, expr='kind', mouth_=0.0, look=(0.6, 0.0), blink=None, can=Tr
     sp.poly([(hx - 1.0, hy - 6.0), (hx + 1.6, hy - 9.6), (hx + 3.0, hy - 6.4)], tones(SCARF_N))            # the knot under the chin
     sp.anchors.update(head=(hx, hy), mouth=(mx, my))
     before = sp.m.copy()
-    kN, eN = ik((8.0, 42.0 + br), (12.0, 32.0), 7.0, 7.0, -1.0)
+    kN, eN = ik((8.0, 42.0 + br), hand_n or (12.0, 32.0), 7.0, 7.0, -1.0)
     sp.cap((8.0, 42.0 + br), kN, 3.2, 2.8, tones(CARDI)); sp.cap(kN, eN, 2.8, 2.4, tones(CARDI))
-    if can:
+    if prop_n: prop_n(sp, eN)
+    if can and not hand_n:
         c = sp.sup(eN[0] + 5.0, eN[1] - 1.0, 4.0, 3.4, tones((90, 170, 220)), n=3.0)
         thin(sp, (eN[0] + 8.0, eN[1] - 0.6), (eN[0] + 13.0, eN[1] + 3.0), (70, 140, 190), 0.8)
         sp.ell(eN[0] + 13.4, eN[1] + 3.4, 1.0, 1.0, tones((70, 140, 190)))

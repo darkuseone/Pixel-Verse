@@ -43,6 +43,12 @@ BG = {
                'across the lower third.',
 }
 
+BG['roof'] = ('Eye-level view standing on a smooth white snow plain that has buried a Soviet town in the Russian Far East: in the centre '
+              'foreground the flat roof of a nine-storey prefab apartment block sticks out of the snow only knee-high - a low concrete '
+              'parapet, TV antennas, two ventilation pipes, and in the middle a square open roof hatch: a dark square hole in the snow with '
+              'the top rails of a steel ladder sticking out of it and a raised hatch lid. A trodden path of many footprints across the snow '
+              'leads to the hatch. Far behind: the roofs of other buried blocks with antennas, harbour cranes, a snow-capped volcano with a '
+              'thin plume of smoke. Cosy late-afternoon light, warm orange-pink sky, long blue shadows. Snow across the lower half.')
 SPRING = ('Clean stylized 16-bit cartoon pixel art game background, bold readable shapes, big simple masses, crisp visible pixels, rich '
           'but uncluttered detail, funny early-spring Russian Far East mood, bright fresh palette: clear blue sky, white puffy clouds, '
           'warm sunlight, blue-turquoise meltwater, dirty grey leftover snow, like a modern indie pixel adventure game, wide 16:9 scene, '
