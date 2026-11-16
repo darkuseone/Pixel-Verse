@@ -865,7 +865,7 @@ def render(t):
     s = TL.shot_at(t)
     u = t - s['t0']
     big = render_scene(t)
-    for im, t0, t1, cx, cy in stickers(): O.draw_sticker(big, im, t, t0, t1, cx, cy)
+    for im, t0, t1, cx, cy in stickers(): O.draw_sticker(big, im, t, t0, t1, min(cx, 1880 - im.shape[1] * 6 // 10), cy)   # never cut by the right edge (pop scale)
     if s['name'] not in NOCAP: EPI.captions.draw(big, t, 930)
     if s['name'] not in NOHUD: hud(big)
     if s['name'] in FLASH_AT and u < 0.15: O.flash(big, 0.6 * (1 - u / 0.15))
