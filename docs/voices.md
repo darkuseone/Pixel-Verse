@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-11-12 22:12.
+Обновлено: 2026-11-22 20:28.
 
 ## agent-dibs
 
@@ -42,6 +42,15 @@
 | Todd | `todd` | `9rXbTqAmpdfkBx20G31c` | library_or_premade | 9 / 4 | Grim Ride — Todd |
 | Trick-or-treat Mom | `mom` | `UNaE6Ed6rSceF3pSO5yL` | library_or_premade | 3 / 2 | Grim Ride — Trick-or-treat Mom |
 
+## klyuchevoy
+
+| Герой | char | voice_id | Статус | Реплик / серий | Голос |
+|---|---|---|---|---|---|
+| Фикус Аркадий | `fikus` | `2Zst4rvX5S2nMbiauLDN` | library_or_premade | 6 / 1 | Ключевой сотрудник — Фикус Аркадий |
+| Эдик Булкин | `edik` | `6Pm064JKx8KhPSIAdbHd` | library_or_premade | 4 / 1 | Ключевой сотрудник — Эдик Булкин |
+| Шеф Громов | `shef` | `SkGOoi8yfK3ONMNKMKj0` | library_or_premade | 3 / 1 | Ключевой сотрудник — Шеф Громов |
+| Людмила Степановна | `lyuda` | `Fy6bUBXCIVErEtK9FN5d` | library_or_premade | 0 / 0 | Ключевой сотрудник — Людмила Степановна |
+
 ## mazutych
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
@@ -78,13 +87,13 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Fran (neon flamingo sign) | `fran` | `dadIF2xtWrmWMJgTn47F` | active | 4 / 1 | STILL 1986 — Fran (neon flamingo sign) |
-| Vince Velour | `vince` | `kVv0pQADO7gCW0VPlTsR` | library_or_premade | 10 / 1 | STILL 1986 — Vince Velour |
-| Rey (tow truck driver) | `rey` | `vRzW3mEGVjW5jXimKSf1` | library_or_premade | 3 / 1 | STILL 1986 — Rey (tow truck driver) |
-| Tiffany (box office, Gen Z) | `tiffany` | `hv8WzBOrsvuSUeIQGOCM` | library_or_premade | 0 / 0 | STILL 1986 — Tiffany (box office, Gen Z) |
-| Officer Diaz (marine patrol) | `diaz` | `KvaCHcJoMXfOzwtsULOZ` | library_or_premade | 0 / 0 | STILL 1986 — Officer Diaz (marine patrol) |
-| Gary (Vince's boss) | `gary` | `SDARFhQygpPvpLh7Ad1B` | library_or_premade | 0 / 0 | STILL 1986 — Gary (Vince's boss) |
-| ROOF-E (car assistant) | `roofe` | `weA4Q36twV5kwSaTEL0Q` | library_or_premade | 0 / 0 | STILL 1986 — ROOF-E (car assistant) |
+| Fran (neon flamingo sign) | `fran` | `dadIF2xtWrmWMJgTn47F` | active | 27 / 7 | STILL 1986 — Fran (neon flamingo sign) |
+| Vince Velour | `vince` | `kVv0pQADO7gCW0VPlTsR` | library_or_premade | 63 / 7 | STILL 1986 — Vince Velour |
+| ROOF-E (car assistant) | `roofe` | `weA4Q36twV5kwSaTEL0Q` | library_or_premade | 9 / 2 | STILL 1986 — ROOF-E (car assistant) |
+| Rey (tow truck driver) | `rey` | `vRzW3mEGVjW5jXimKSf1` | library_or_premade | 8 / 3 | STILL 1986 — Rey (tow truck driver) |
+| Tiffany (box office, Gen Z) | `tiffany` | `hv8WzBOrsvuSUeIQGOCM` | library_or_premade | 7 / 2 | STILL 1986 — Tiffany (box office, Gen Z) |
+| Gary (Vince's boss) | `gary` | `SDARFhQygpPvpLh7Ad1B` | library_or_premade | 6 / 2 | STILL 1986 — Gary (Vince's boss) |
+| Officer Diaz (marine patrol) | `diaz` | `KvaCHcJoMXfOzwtsULOZ` | library_or_premade | 3 / 2 | STILL 1986 — Officer Diaz (marine patrol) |
 
 ## sunny-palms-hoa
 

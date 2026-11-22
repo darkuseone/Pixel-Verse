@@ -1,0 +1,68 @@
+{
+  "cartoon": "Ключевой сотрудник",
+  "slug": "klyuchevoy",
+  "lang": "ru",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "edik": {
+      "name": "Эдик Булкин",
+      "color_caption": [
+        255,
+        214,
+        90
+      ],
+      "style": "[бодро] [уверенно] самоуверенный менеджер, в панике срывается вверх",
+      "voice_id": "6Pm064JKx8KhPSIAdbHd",
+      "voice": "Ключевой сотрудник — Эдик Булкин",
+      "library": {
+        "public_owner_id": "5925c61403ed4789310a76ac76e80923c3a82b0140cfbe7d0aac2951d846dd46",
+        "voice_id": "6Pm064JKx8KhPSIAdbHd"
+      }
+    },
+    "fikus": {
+      "name": "Фикус Аркадий",
+      "color_caption": [
+        120,
+        230,
+        130
+      ],
+      "style": "[сухо] [хрипло] [лениво] старый вахтёр в горшке",
+      "voice_id": "2Zst4rvX5S2nMbiauLDN",
+      "voice": "Ключевой сотрудник — Фикус Аркадий",
+      "library": {
+        "public_owner_id": "f6e5b990f5a72a3fe509fcc6545b585c10e1d833a2065cfa019602e17643a741",
+        "voice_id": "2Zst4rvX5S2nMbiauLDN"
+      }
+    },
+    "shef": {
+      "name": "Шеф Громов",
+      "color_caption": [
+        255,
+        120,
+        110
+      ],
+      "style": "[громко] [начальственно] бас, тепло-фальшиво",
+      "voice_id": "SkGOoi8yfK3ONMNKMKj0",
+      "voice": "Ключевой сотрудник — Шеф Громов",
+      "library": {
+        "public_owner_id": "e560cff6983838369e6b8ae549c8b7d1dddab867b53105ec7e407389c133edaf",
+        "voice_id": "SkGOoi8yfK3ONMNKMKj0"
+      }
+    },
+    "lyuda": {
+      "name": "Людмила Степановна",
+      "color_caption": [
+        210,
+        170,
+        255
+      ],
+      "style": "[сухо] [учительским тоном] бухгалтер",
+      "voice_id": "Fy6bUBXCIVErEtK9FN5d",
+      "voice": "Ключевой сотрудник — Людмила Степановна",
+      "library": {
+        "public_owner_id": "f46967951c3eaff3868d4466c03a01bb76aceeb1c4ca7bf295f6182f604d8c87",
+        "voice_id": "Fy6bUBXCIVErEtK9FN5d"
+      }
+    }
+  }
+}
