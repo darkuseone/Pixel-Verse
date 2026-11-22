@@ -82,7 +82,19 @@ def frame_fill():
     return f
 
 
+def dress_kassa(W):
+    D.attach(W, [
+        (R.plate(110, 22, ['КАССА'], bg=(170, 30, 40), fg=(250, 220, 120), border=(250, 220, 120)), 597, 82),
+        (R.plate(70, 22, ['ОБЕД', '13:00–14:00'], bg=WH, colors=[RED, BLK], border=RED, pad=0.8), 478, 150),
+        (R.plate(230, 18, ['ГРАФИК ОТПУСКОВ 2027'], bg=(40, 70, 130), fg=WH, border=BRASS), 112, 118),
+        (R.plate(84, 52, ['ПРЕМИЯ —', 'ПО ИТОГАМ', 'ГОДА*'], bg=(252, 246, 236), colors=[BLK, BLK, RED], border=None, pad=1.2, tilt=-2), 944, 168),
+        (R.plate(96, 30, ['*ИТОГИ —', 'ПЛОХИЕ'], bg=YEL, colors=[BLK, RED], border=None, pad=1.0, tilt=3), 1050, 280),
+        (R.plate(60, 30, ['НЕ ПОЛОЖЕНО —', 'НЕ ПРОСИ'], bg=WH, colors=[RED, BLK], border=RED, pad=0.8), 784, 380),
+    ])
+
+
 def dress(name, W):
+    if name == 'kassa': return dress_kassa(W)
     if not name.startswith('office'): return
     night = name == 'office_night'
     D.attach(W, [

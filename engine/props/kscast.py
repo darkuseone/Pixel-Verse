@@ -473,3 +473,37 @@ def lyuda(sp, t=0.0, expr='strict', mouth_=0.0, look=(0.6, 0.0), blink=None, han
     new = sp.m & ~before
     o = dilate(new) & ~sp.m & before
     sp.col[o] = INK
+
+
+def calc(sp, h, text='40000'):
+    """a desk calculator in the hand: grey body, a green display, button grid"""
+    x, y = h
+    sp.sup(x + 1.0, y + 3.6, 3.2, 4.4, tones((92, 92, 100)), n=4.0)
+    sp.fill(sp.m_super(x + 1.0, y + 6.2, 2.6, 1.1, 6.0)[0], (150, 220, 150))
+    for r in range(3):
+        for c in range(3): sp.dot(x - 0.6 + c * 1.3, y + 1.0 + r * 1.3, (220, 220, 214))
+    sp.anchors['calc'] = (x + 1.0, y + 6.2)
+
+
+def loupe(sp, h):
+    """a big magnifying glass: brass ring, glass with a white glint, a wooden handle"""
+    x, y = h
+    thin(sp, (x, y), (x + 2.6, y + 3.6), (110, 70, 40), 0.7)
+    ring = sp.m_ell(x + 5.0, y + 7.0, 3.6, 3.6)[0]
+    sp.fill(ring & ~sp.m_ell(x + 5.0, y + 7.0, 2.8, 2.8)[0], BRASS)
+    sp.fill(sp.m_ell(x + 5.0, y + 7.0, 2.8, 2.8)[0], (200, 230, 240))
+    sp.glint(x + 4.0, y + 8.0, 0.5)
+    sp.anchors['loupe'] = (x + 5.0, y + 7.0)
+
+
+def gramota(sp, h, back=False):
+    """a framed certificate held in front of the chest"""
+    x, y = h
+    sp.sup(x, y + 2.0, 7.0, 5.0, tones((200, 160, 70)), n=6.0, stripes=False)
+    sp.fill(sp.m_super(x, y + 2.0, 6.0, 4.0, 6.0)[0], (250, 244, 226) if not back else (236, 236, 232))
+    if not back:
+        sp.txt_box(['ГРАМОТА'], (x - 5.6, y + 3.0, x + 5.6, y + 5.6), (190, 40, 40), pad=0.1)
+        for q in range(2): thin(sp, (x - 4.0, y + 1.6 - q * 1.3), (x + 4.0, y + 1.6 - q * 1.3), (120, 120, 120), 0.18)
+    else:
+        sp.txt_box(['СЧЁТ'], (x - 5.6, y + 3.0, x + 5.6, y + 5.6), (40, 40, 44), pad=0.1)
+    sp.anchors['gramota'] = (x, y + 2.0)

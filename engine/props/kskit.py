@@ -97,7 +97,8 @@ def light_morning(v, t=0.0):
     return Light(amb=(1.04, 1.04, 1.06), keys=_keys(v, [(1000, 220, 520, (220, 230, 255), 0.22)]), grad=(1.04, 0.96))
 
 
-LIGHT = dict(office=light_evening, office_night=light_night, office_morning=light_morning)
+LIGHT = dict(office=light_evening, office_night=light_night, office_morning=light_morning,
+             kassa=lambda v, t=0.0: light_morning(v, t))
 
 
 # ---------------------------------------------------------------- the 2.5D shot
