@@ -98,7 +98,8 @@ def light_morning(v, t=0.0):
 
 
 LIGHT = dict(office=light_evening, office_night=light_night, office_morning=light_morning,
-             kassa=lambda v, t=0.0: light_morning(v, t))
+             kassa=lambda v, t=0.0: light_morning(v, t),
+             code_office=light_evening, code_office_night=light_night, code_office_morning=light_morning)
 
 
 # ---------------------------------------------------------------- the 2.5D shot
@@ -110,7 +111,7 @@ def shot(name, cx, cy, Z, acts=(), par=(0.0, 0.0), fx_=None, pre=None, t=0.0, ki
     big = D25.shot25(W_, lambda v_: LIGHT[name](v_, t), cx, cy, Z, depth(name), acts=acts, front=front, par=par, focus=focus, dof_k=dof_k, haze_=haze,
                      bloom_=bloom, rays_=rays, pre=pre, emit=emit, fx_=None, sx=ST.W // 2, sy=ST.H // 2, vig=0, t=t, kick=(0, 0))
     if motes:
-        col = (255, 236, 190) if name != 'office_night' else (190, 210, 255)
+        col = (255, 236, 190) if not name.endswith('_night') else (190, 210, 255)
         AT.motes(big, t, n=22, col=col, seed=int(cx * 3) % 11, par=par[0] * 3)
     if fx_: fx_(big, v)
     if juice: AT.juice(big, 1.26, 1.10)

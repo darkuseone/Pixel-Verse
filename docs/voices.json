@@ -986,15 +986,17 @@
    "status": "library_or_premade",
    "name": "Фикус Аркадий",
    "voice_name": "Ключевой сотрудник — Фикус Аркадий",
-   "lines": 6,
-   "episodes": 1,
+   "lines": 12,
+   "episodes": 2,
    "samples": [
     "series/klyuchevoy/voice/ep01/f3.mp3",
     "series/klyuchevoy/voice/ep01/f1.mp3",
+    "series/klyuchevoy/voice/ep02/f1.mp3",
+    "series/klyuchevoy/voice/ep02/f6.mp3",
     "series/klyuchevoy/voice/ep01/f4.mp3",
     "series/klyuchevoy/voice/ep01/f6.mp3",
-    "series/klyuchevoy/voice/ep01/f5.mp3",
-    "series/klyuchevoy/voice/ep01/f2.mp3"
+    "series/klyuchevoy/voice/ep02/f5.mp3",
+    "series/klyuchevoy/voice/ep02/f4.mp3"
    ]
   },
   {
@@ -1004,13 +1006,17 @@
    "status": "library_or_premade",
    "name": "Эдик Булкин",
    "voice_name": "Ключевой сотрудник — Эдик Булкин",
-   "lines": 4,
-   "episodes": 1,
+   "lines": 8,
+   "episodes": 2,
    "samples": [
     "series/klyuchevoy/voice/ep01/e2.mp3",
+    "series/klyuchevoy/voice/ep02/e1.mp3",
+    "series/klyuchevoy/voice/ep02/e4.mp3",
     "series/klyuchevoy/voice/ep01/e1.mp3",
+    "series/klyuchevoy/voice/ep02/e3.mp3",
     "series/klyuchevoy/voice/ep01/e4.mp3",
-    "series/klyuchevoy/voice/ep01/e3.mp3"
+    "series/klyuchevoy/voice/ep01/e3.mp3",
+    "series/klyuchevoy/voice/ep02/e5.mp3"
    ]
   },
   {
@@ -1020,10 +1026,12 @@
    "status": "library_or_premade",
    "name": "Шеф Громов",
    "voice_name": "Ключевой сотрудник — Шеф Громов",
-   "lines": 3,
-   "episodes": 1,
+   "lines": 5,
+   "episodes": 2,
    "samples": [
     "series/klyuchevoy/voice/ep01/s2.mp3",
+    "series/klyuchevoy/voice/ep02/s2.mp3",
+    "series/klyuchevoy/voice/ep02/s1.mp3",
     "series/klyuchevoy/voice/ep01/s3.mp3",
     "series/klyuchevoy/voice/ep01/s1.mp3"
    ]
@@ -1035,6 +1043,20 @@
    "status": "library_or_premade",
    "name": "Людмила Степановна",
    "voice_name": "Ключевой сотрудник — Людмила Степановна",
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/klyuchevoy/voice/ep02/l2.mp3",
+    "series/klyuchevoy/voice/ep02/l1.mp3"
+   ]
+  },
+  {
+   "slug": "klyuchevoy",
+   "char": "fikus_b",
+   "voice_id": "0vJ96DzHePfGJitmI6UX",
+   "status": "library_or_premade",
+   "name": "Фикус Аркадий (проба Ivan)",
+   "voice_name": "Ключевой сотрудник — Фикус Аркадий (проба Ivan)",
    "lines": 0,
    "episodes": 0,
    "samples": []
@@ -3136,5 +3158,5 @@
   "14NozJq5eoBmDc1FXFDq": "NIKITA2",
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA"
  },
- "updated": "2026-11-22 20:28"
+ "updated": "2026-11-22 21:08"
 }

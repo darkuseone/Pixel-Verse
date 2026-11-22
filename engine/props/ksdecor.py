@@ -95,8 +95,8 @@ def dress_kassa(W):
 
 def dress(name, W):
     if name == 'kassa': return dress_kassa(W)
-    if not name.startswith('office'): return
-    night = name == 'office_night'
+    if not (name.startswith('office') or name.startswith('code_office')): return
+    night = name.endswith('_night')
     D.attach(W, [
         (R.plate(250, 20, ['ООО «ВЕКТОР-СНАБ-СБЫТ»'], bg=(40, 70, 130), fg=WH, border=BRASS, bw=1.2), 306, 104),
         (R.plate(54, 16, ['В. П. ГРОМОВ', 'ГЕН. ДИРЕКТОР'], bg=BRASS, colors=[BLK, BLK], border=(120, 90, 40), weights=[1, 0.7], pad=1.0), 104, 251),
@@ -116,5 +116,5 @@ def dress(name, W):
     D.anim(W, clock())
     D.anim(W, frame_fill())
     D.anim(W, flakes((862, 90, 1172, 352), n=50, seed=4, speed=12.0, col=(250, 250, 255) if not night else (220, 230, 255)))
-    if name != 'office_morning':
+    if not name.endswith('_morning'):
         D.anim(W, dust((560, 360, 700, 470), n=18, seed=3))

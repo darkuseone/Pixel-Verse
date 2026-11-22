@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-11-22 20:28.
+Обновлено: 2026-11-22 21:08.
 
 ## agent-dibs
 
@@ -46,10 +46,11 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Фикус Аркадий | `fikus` | `2Zst4rvX5S2nMbiauLDN` | library_or_premade | 6 / 1 | Ключевой сотрудник — Фикус Аркадий |
-| Эдик Булкин | `edik` | `6Pm064JKx8KhPSIAdbHd` | library_or_premade | 4 / 1 | Ключевой сотрудник — Эдик Булкин |
-| Шеф Громов | `shef` | `SkGOoi8yfK3ONMNKMKj0` | library_or_premade | 3 / 1 | Ключевой сотрудник — Шеф Громов |
-| Людмила Степановна | `lyuda` | `Fy6bUBXCIVErEtK9FN5d` | library_or_premade | 0 / 0 | Ключевой сотрудник — Людмила Степановна |
+| Фикус Аркадий | `fikus` | `2Zst4rvX5S2nMbiauLDN` | library_or_premade | 12 / 2 | Ключевой сотрудник — Фикус Аркадий |
+| Эдик Булкин | `edik` | `6Pm064JKx8KhPSIAdbHd` | library_or_premade | 8 / 2 | Ключевой сотрудник — Эдик Булкин |
+| Шеф Громов | `shef` | `SkGOoi8yfK3ONMNKMKj0` | library_or_premade | 5 / 2 | Ключевой сотрудник — Шеф Громов |
+| Людмила Степановна | `lyuda` | `Fy6bUBXCIVErEtK9FN5d` | library_or_premade | 2 / 1 | Ключевой сотрудник — Людмила Степановна |
+| Фикус Аркадий (проба Ivan) | `fikus_b` | `0vJ96DzHePfGJitmI6UX` | library_or_premade | 0 / 0 | Ключевой сотрудник — Фикус Аркадий (проба Ivan) |
 
 ## mazutych
 

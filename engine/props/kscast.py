@@ -47,7 +47,7 @@ HIVE = (150, 84, 50)                # auburn beehive
 MUG = (248, 248, 240)
 
 XTRA = dict(
-    proud=dict(eo=0.9, pu=0.6, bt=-0.15, bl=0.35, mo=0.0, mc=0.85, teeth=True, lid=0.15),
+    proud=dict(eo=0.9, pu=0.6, bt=-0.15, bl=0.35, mo=0.0, mc=0.85, lid=0.15),
     beam=dict(eo=1.1, pu=0.62, bt=-0.35, bl=0.55, mo=0.7, mc=1.0),
     scheme=dict(eo=0.6, pu=0.55, bt=0.5, bl=-0.1, mo=0.0, mc=0.7, lid=0.4),
     hopeful=dict(eo=1.05, pu=0.68, bt=-0.5, bl=0.45, mo=0.0, mc=0.55),
@@ -56,9 +56,9 @@ XTRA = dict(
     sleepy=dict(eo=0.35, pu=0.6, bt=-0.1, bl=0.0, mo=0.15, mc=-0.1, lid=0.75),
     panic=dict(eo=1.45, pu=0.28, bt=-0.85, bl=0.95, mo=0.95, mc=-0.2),
     deadpan=dict(eo=0.65, pu=0.6, bt=0.0, bl=0.0, mo=0.0, mc=-0.05, lid=0.55),
-    boss=dict(eo=0.8, pu=0.55, bt=0.25, bl=0.1, mo=0.0, mc=0.9, teeth=True, lid=0.25),
+    boss=dict(eo=0.8, pu=0.55, bt=0.25, bl=0.1, mo=0.0, mc=0.9, lid=0.25),
     bark=dict(eo=1.0, pu=0.45, bt=0.7, bl=-0.2, mo=0.9, mc=-0.1),
-    sweet=dict(eo=0.7, pu=0.6, bt=-0.3, bl=0.3, mo=0.0, mc=0.95, teeth=True, lid=0.35),
+    sweet=dict(eo=0.7, pu=0.6, bt=-0.3, bl=0.3, mo=0.0, mc=0.95, lid=0.35),
     pleading=dict(eo=1.15, pu=0.72, bt=-0.8, bl=0.5, mo=0.2, mc=-0.35),
     strict=dict(eo=0.6, pu=0.55, bt=0.45, bl=-0.25, mo=0.0, mc=-0.3, lid=0.45),
     smirk=dict(eo=0.6, pu=0.6, bt=0.3, bl=0.0, mo=0.0, mc=0.6, lid=0.5),
@@ -129,7 +129,7 @@ def wc_key(sp, a, scale=1.0, swing=0.0):
 # ================================================================================ ЭДИК
 def edik(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None,
          legs=True, ox=0.0, oy=0.0, glasses=1.0, sweat=0.0, walk=None, lean=0.0, coat=False, hat=False, stubble_=0.0,
-         key_swing=None, tie_up=0.0, crumple=0.0):
+         key_swing=None, tie_up=0.0, crumple=0.0, young=False):
     """ЭДИК. coat=True — the grey coat over the shirt (17:59), hat=True — a knitted hat; stubble_ 0..1 (the morning after);
     key_swing — angle of the WC key (default: a slow sway)"""
     E = X(expr)
@@ -189,8 +189,11 @@ def edik(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_
     thin(sp, (hx - 5.6, hy + 1.2), (hx - 5.4, hy - 0.8), dark(SKIN, 0.7), 0.2)
     sp.glint(hx - 0.8, hy + 7.0, 0.6)                                                                  # bald-spot shine
     # side fringe + the famous comb-over: three strands across the bald top
+    if young:                                                                                         # 17 years ago: a full mop of hair
+        sp.union([sp.m_ell(hx - 0.2, hy + 6.0, 7.6, 4.2), sp.m_ell(hx - 4.6, hy + 2.6, 2.6, 4.2), sp.m_ell(hx + 4.6, hy + 7.0, 3.4, 2.0)],
+                 tones(dark(HAIR_E, 0.9)), exclude=head & (DX.YC < hy + 4.4) & (DX.XC > hx - 3.6))
     sp.fill(sp.m_super(hx - 4.8, hy + 2.6, 1.6, 3.4, 3.0)[0] & head, HAIR_E)
-    for q in range(3):
+    for q in range(0 if young else 3):
         y0 = hy + 4.8 + q * 1.3
         thin(sp, (hx - 6.2, y0 - 1.6), (hx + 1.0, y0 + 1.2), HAIR_E, 0.3)
         thin(sp, (hx + 1.0, y0 + 1.2), (hx + 5.0, y0 + 0.2 - q * 0.4), HAIR_E, 0.26)
@@ -200,7 +203,7 @@ def edik(sp, t=0.0, expr='proud', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_
     DX.eye(sp, hx - 1.4, hy + 0.8, 3.2, 3.6, E, (90, 120, 70), (lx, ly), blink, lash=INK, skin=SKIN, bold=1)
     DX.brow(sp, hx + 3.4, hy + 4.2, 3.8, E, +1, HAIR_E, th=1.4)
     DX.brow(sp, hx - 1.4, hy + 4.1, 3.2, E, -1, HAIR_E, th=1.4)
-    if glasses > 0:                                                                                    # glasses pushed up on the forehead
+    if glasses > 0 and not young:                                                                      # glasses pushed up on the forehead
         gy = hy + 6.8
         for gx, r in ((hx + 3.6, 2.0), (hx - 1.2, 1.7)):
             rr = sp.m_ell(gx, gy, r, r * 0.8)[0] & ~sp.m_ell(gx, gy, r - 0.55, r * 0.8 - 0.55)[0]
@@ -507,3 +510,25 @@ def gramota(sp, h, back=False):
     else:
         sp.txt_box(['СЧЁТ'], (x - 5.6, y + 3.0, x + 5.6, y + 5.6), (40, 40, 44), pad=0.1)
     sp.anchors['gramota'] = (x, y + 2.0)
+
+
+def wardrobe(sp, t=0.0, tilt=0.0):
+    """a heavy soviet office wardrobe (pushed across the floor in the flashback)"""
+    sp.sup(0.0, 30.0, 12.0, 30.0, tones((120, 76, 44)), n=8.0)
+    sp.fill(sp.m_super(0.0, 30.0, 10.4, 28.0, 8.0)[0], (140, 92, 54))
+    thin(sp, (0.0, 2.0), (0.0, 58.0), (80, 50, 30), 0.4)
+    for x in (-2.5, 2.5): sp.fill(sp.m_super(x, 32.0, 0.5, 2.0, 4.0)[0], (220, 190, 90))
+    sp.fill(sp.m_super(0.0, 61.0, 12.6, 1.4, 8.0)[0], (100, 62, 36))
+    sp.anchors['top'] = (0.0, 60.0)
+
+
+def office_chair(sp, t=0.0):
+    """a black office chair seen from the side-front: seat, back, gas lift, five-star base"""
+    sp.sup(0.0, 22.0, 9.0, 2.4, tones((46, 46, 54)), n=3.0)                                   # seat
+    sp.sup(-6.0, 34.0, 3.0, 10.0, tones((46, 46, 54)), n=3.0)                                 # back
+    thin(sp, (-4.0, 26.0), (-1.0, 22.0), (30, 30, 34), 0.6)
+    sp.cap((0.0, 20.0), (0.0, 6.0), 0.9, 0.9, tones((70, 70, 78)))
+    for dx in (-8.0, -3.0, 3.0, 8.0):
+        thin(sp, (0.0, 5.0), (dx, 2.0), (30, 30, 34), 0.7)
+        sp.blob(dx, 1.4, 1.0, (24, 24, 28))
+    sp.anchors['seat'] = (0.0, 24.0)
