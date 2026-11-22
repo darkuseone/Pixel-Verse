@@ -101,6 +101,7 @@ def dress(name, W):
         (R.plate(250, 20, ['ООО «ВЕКТОР-СНАБ-СБЫТ»'], bg=(40, 70, 130), fg=WH, border=BRASS, bw=1.2), 306, 104),
         (R.plate(54, 16, ['В. П. ГРОМОВ', 'ГЕН. ДИРЕКТОР'], bg=BRASS, colors=[BLK, BLK], border=(120, 90, 40), weights=[1, 0.7], pad=1.0), 104, 251),
         (R.plate(66, 28, ['ПЛАНЁРКА 8:00', 'БЕЗ ОПОЗДАНИЙ!'], bg=WH, colors=[NAVY, RED], border=NAVY, pad=1.2), 96, 300),
+        (R.plate(54, 13, ['ПРИЁМ: 9:00–17:59'], bg=(250, 246, 230), fg=RED, border=BRASS, pad=0.6), 104, 270),          # rewatch gag
         (R.plate(120, 16, ['ДОСКА ПОЧЁТА'], bg=(170, 30, 40), fg=(250, 220, 120), border=(250, 220, 120)), 372, 132),
         (R.plate(56, 92, ['СОТРУДНИК', 'ГОДА', '?'], bg=(244, 236, 214), colors=[RED, RED, BLK], border=(150, 110, 60),
                  weights=[0.6, 0.6, 2.6], bw=2.0, pad=1.6), 589, 190),
