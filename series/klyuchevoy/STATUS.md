@@ -6,3 +6,8 @@
 - **Длина:** правило владельца для сериала — 26–35 с.
 - **Команды:** `cd series/klyuchevoy/episodes/ep01 && python3 ep01.py test 1 5 20 | all`; `python3 mix.py ../../../../build/klyuchevoy-ep01/noaudio.mp4 final.mp4`; `python3 cover.py`; `python3 engine/critic.py series/klyuchevoy/episodes/ep01`.
 - **Известное:** голос фикуса медленный (темп 1,10) — общий темп ≈ 120 слов/мин.
+
+## 22.11.2026 (вечер) — E01 v2 по стандарту «голливудский уровень»
+- Владелец: v1 «чего-то не хватает», E02 не заказывал. Переделан только E01, два варианта: **A** `episodes/ep01/` (задник xAI) и **B** `episodes/ep01b/` (офис нарисован кодом, `engine/props/ksoffice.py`). v1 — `episodes/ep01_v1/`.
+- Новый сценарий (радиоспектакль, «Так это и был разговор!»), озвучка `voice/ep01v2`, звук — только CC0 (BigSoundBank), музыка FreePD (CC0). Стандарт и новый конвейер — `docs/hollywood-standard.md`.
+- **Ждём:** выбор владельца A или B и замечания по озвучке; после этого — сценарии E02–E06 заново по новому конвейеру (старый `season1_script.txt` — черновик, E02 v1 в `episodes/ep02/` не использовать без переписывания).
