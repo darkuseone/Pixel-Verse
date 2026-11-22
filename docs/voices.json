@@ -981,22 +981,66 @@
   },
   {
    "slug": "klyuchevoy",
+   "char": "shef",
+   "voice_id": "plP8n3VRVPCbh78vs2Ei",
+   "status": "active",
+   "name": "Шеф Громов",
+   "voice_name": "Ключевой сотрудник — Шеф Громов",
+   "lines": 9,
+   "episodes": 3,
+   "samples": [
+    "series/klyuchevoy/voice/ep01v2/s2.mp3",
+    "series/klyuchevoy/voice/ep01/s2.mp3",
+    "series/klyuchevoy/voice/ep02/s2.mp3",
+    "series/klyuchevoy/voice/ep01v2/s1.mp3",
+    "series/klyuchevoy/voice/ep02/s1.mp3",
+    "series/klyuchevoy/voice/ep01v2/s3.mp3",
+    "series/klyuchevoy/voice/ep01/s3.mp3",
+    "series/klyuchevoy/voice/ep01v2/s4.mp3"
+   ],
+   "design": {
+    "description": "A hoarse, raspy elderly Russian man in his late sixties, an old-school Soviet-style office director. Croaky smoker's voice, slightly wheezy and nasal, grating and nagging, condescending and fake-friendly, speaks loudly and bossily with long drawn-out vowels. Comedic, characterful. Native Russian speaker.",
+    "text": "[хрипло, по-хозяйски, громко] Булкин! Задержись на пять минут. Разговор есть. [удивлённо, потом довольно] О, Булкин, ты ещё тут? Отлично! Закроешь офис. [с ленцой] Так это и был разговор! Свет не забудь.",
+    "picked": {
+     "i": 1,
+     "dur": 12.2,
+     "f0": 210.5,
+     "f0_iqr": 207.1,
+     "rate": 22.4,
+     "loud_sd": 5.1
+    }
+   },
+   "history": [
+    {
+     "voice_id": "SkGOoi8yfK3ONMNKMKj0",
+     "until": "2026-11-22"
+    }
+   ],
+   "account": {
+    "category": "generated",
+    "description": "A hoarse, raspy elderly Russian man in his late sixties, an old-school Soviet-style office director. Croaky smoker's voice, slightly wheezy and nasal, grating and nagging, condescending and fake-friendly, speaks loudly and bossily with long drawn-out vowels. Comedic, characterful. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1795385715
+   }
+  },
+  {
+   "slug": "klyuchevoy",
    "char": "fikus",
    "voice_id": "2Zst4rvX5S2nMbiauLDN",
    "status": "library_or_premade",
    "name": "Фикус Аркадий",
    "voice_name": "Ключевой сотрудник — Фикус Аркадий",
-   "lines": 12,
-   "episodes": 2,
+   "lines": 15,
+   "episodes": 3,
    "samples": [
     "series/klyuchevoy/voice/ep01/f3.mp3",
+    "series/klyuchevoy/voice/ep01v2/f1.mp3",
     "series/klyuchevoy/voice/ep01/f1.mp3",
     "series/klyuchevoy/voice/ep02/f1.mp3",
     "series/klyuchevoy/voice/ep02/f6.mp3",
     "series/klyuchevoy/voice/ep01/f4.mp3",
     "series/klyuchevoy/voice/ep01/f6.mp3",
-    "series/klyuchevoy/voice/ep02/f5.mp3",
-    "series/klyuchevoy/voice/ep02/f4.mp3"
+    "series/klyuchevoy/voice/ep01v2/f3.mp3"
    ]
   },
   {
@@ -1006,34 +1050,17 @@
    "status": "library_or_premade",
    "name": "Эдик Булкин",
    "voice_name": "Ключевой сотрудник — Эдик Булкин",
-   "lines": 8,
-   "episodes": 2,
+   "lines": 14,
+   "episodes": 3,
    "samples": [
     "series/klyuchevoy/voice/ep01/e2.mp3",
+    "series/klyuchevoy/voice/ep01v2/e1.mp3",
     "series/klyuchevoy/voice/ep02/e1.mp3",
+    "series/klyuchevoy/voice/ep01v2/e2.mp3",
+    "series/klyuchevoy/voice/ep01v2/e3.mp3",
     "series/klyuchevoy/voice/ep02/e4.mp3",
     "series/klyuchevoy/voice/ep01/e1.mp3",
-    "series/klyuchevoy/voice/ep02/e3.mp3",
-    "series/klyuchevoy/voice/ep01/e4.mp3",
-    "series/klyuchevoy/voice/ep01/e3.mp3",
-    "series/klyuchevoy/voice/ep02/e5.mp3"
-   ]
-  },
-  {
-   "slug": "klyuchevoy",
-   "char": "shef",
-   "voice_id": "SkGOoi8yfK3ONMNKMKj0",
-   "status": "library_or_premade",
-   "name": "Шеф Громов",
-   "voice_name": "Ключевой сотрудник — Шеф Громов",
-   "lines": 5,
-   "episodes": 2,
-   "samples": [
-    "series/klyuchevoy/voice/ep01/s2.mp3",
-    "series/klyuchevoy/voice/ep02/s2.mp3",
-    "series/klyuchevoy/voice/ep02/s1.mp3",
-    "series/klyuchevoy/voice/ep01/s3.mp3",
-    "series/klyuchevoy/voice/ep01/s1.mp3"
+    "series/klyuchevoy/voice/ep02/e3.mp3"
    ]
   },
   {
@@ -2709,6 +2736,36 @@
    "deleted_reason": "auto: room for still-1986/fran"
   },
   {
+   "slug": "unlisted: Кощей из панельки",
+   "char": "Баба Яга",
+   "voice_id": "LakpqgKj0ywvEMqSS2OQ",
+   "status": "deleted",
+   "name": "Кощей из панельки — Баба Яга",
+   "voice_name": "Кощей из панельки — Баба Яга",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [
+    "library/voice_archive/unlisted_Кощей_из_панельки/Баба Яга_preview.mp3"
+   ],
+   "unlisted": true,
+   "account": {
+    "category": "generated",
+    "description": "A very old cunning village grandmother who is the self-appointed head of the apartment building, sitting on the bench by the entrance and knowing everyone's business. Raspy, croaky, crackly old woman's voice, fast gossipy patter, sly and sarcastic, cackles, sharp and bossy, with a light rural Russian accent. Woman in her eighties. Native Russian speaker, very expressive and funny.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1792383388
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/LakpqgKj0ywvEMqSS2OQ/9cf16702-f95d-47bf-9a0e-3e6ce4656900.mp3",
+   "deleted_on": "2026-11-22",
+   "deleted_reason": "auto: room for klyuchevoy/shef"
+  },
+  {
    "slug": "valera-i-kot",
    "char": "valera",
    "voice_id": "1q0c8LfKB7t97Mup7LOS",
@@ -3154,9 +3211,8 @@
   "7b7c6njy94EqNbu1iSbC": "Кощей из панельки — Змей Горыныч",
   "9TtJLIijaIcVmOE5P20m": "Кощей из панельки — Галина Аркадьевна",
   "LkhQGB8Q82s4UQOnplHh": "Кощей из панельки — Домовой Кузьмич",
-  "LakpqgKj0ywvEMqSS2OQ": "Кощей из панельки — Баба Яга",
   "14NozJq5eoBmDc1FXFDq": "NIKITA2",
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA"
  },
- "updated": "2026-11-22 21:08"
+ "updated": "2026-11-22 22:15"
 }

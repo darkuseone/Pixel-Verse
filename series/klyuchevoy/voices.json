@@ -42,11 +42,31 @@
         110
       ],
       "style": "[громко] [начальственно] бас, тепло-фальшиво",
-      "voice_id": "SkGOoi8yfK3ONMNKMKj0",
+      "voice_id": "plP8n3VRVPCbh78vs2Ei",
       "voice": "Ключевой сотрудник — Шеф Громов",
       "library": {
         "public_owner_id": "e560cff6983838369e6b8ae549c8b7d1dddab867b53105ec7e407389c133edaf",
         "voice_id": "SkGOoi8yfK3ONMNKMKj0"
+      },
+      "previous": {
+        "voice_id": "SkGOoi8yfK3ONMNKMKj0",
+        "library": {
+          "public_owner_id": "e560cff6983838369e6b8ae549c8b7d1dddab867b53105ec7e407389c133edaf",
+          "voice_id": "SkGOoi8yfK3ONMNKMKj0"
+        },
+        "note": "Maxim (Voice Library) — заменён 22.11.2026 по просьбе владельца: нужен хриплый надоедливый старческий"
+      },
+      "design": {
+        "description": "A hoarse, raspy elderly Russian man in his late sixties, an old-school Soviet-style office director. Croaky smoker's voice, slightly wheezy and nasal, grating and nagging, condescending and fake-friendly, speaks loudly and bossily with long drawn-out vowels. Comedic, characterful. Native Russian speaker.",
+        "text": "[хрипло, по-хозяйски, громко] Булкин! Задержись на пять минут. Разговор есть. [удивлённо, потом довольно] О, Булкин, ты ещё тут? Отлично! Закроешь офис. [с ленцой] Так это и был разговор! Свет не забудь.",
+        "picked": {
+          "i": 1,
+          "dur": 12.2,
+          "f0": 210.5,
+          "f0_iqr": 207.1,
+          "rate": 22.4,
+          "loud_sd": 5.1
+        }
       }
     },
     "lyuda": {

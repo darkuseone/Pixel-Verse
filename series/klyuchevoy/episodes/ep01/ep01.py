@@ -35,11 +35,11 @@ def WN(n): return n if VAR == 'A' else 'code_' + n
 EPI = Episode(EP, VOICE, DUR, FPS, colors=K.COL, slug=SLUG, endcard=dict(style='ks', lang='ru', promise='ЗАВТРА: ГДЕ ПРЕМИЯ?'),
               promo='ru')
 TAB = (C.XTRA, C.EXPR)
-FE = M.Face([(0.0, 'shock'), (0.9, 'hopeful'), (3.1, 'beam'), (6.6, 'hopeful'), (8.0, 'crushed'), (10.9, 'proud'), (14.3, 'shock'),
-             (15.4, 'crushed'), (16.4, 'sleepy'), (19.83, 'sleepy'), (20.4, 'shock'), (21.4, 'beam'), (22.6, 'panic'), (23.6, 'hopeful'),
-             (25.3, 'crushed'), (28.0, 'crushed'), (32.1, 'sleepy'), (34.27, 'beam')], TAB, seed=3)
-FF = M.Face([(0.0, 'deadpan'), (6.55, 'deadpan'), (14.3, 'smirk'), (16.0, 'deadpan'), (30.0, 'deadpan'), (31.3, 'smirk')], TAB, seed=8)
-FS = M.Face([(0.0, 'boss'), (19.83, 'shock'), (20.6, 'sweet'), (21.6, 'boss'), (25.3, 'sweet'), (32.1, 'boss')], TAB, seed=5)
+FE = M.Face([(0.0, 'shock'), (0.9, 'hopeful'), (3.37, 'beam'), (6.85, 'hopeful'), (8.3, 'crushed'), (11.15, 'proud'), (14.58, 'shock'),
+             (15.65, 'crushed'), (16.65, 'sleepy'), (20.08, 'sleepy'), (20.65, 'shock'), (21.7, 'beam'), (23.3, 'panic'), (24.16, 'hopeful'),
+             (25.87, 'crushed'), (28.93, 'crushed')], TAB, seed=3)
+FF = M.Face([(0.0, 'deadpan'), (6.8, 'deadpan'), (14.58, 'smirk'), (16.3, 'deadpan'), (30.87, 'deadpan'), (31.9, 'smirk')], TAB, seed=8)
+FS = M.Face([(0.0, 'boss'), (20.08, 'shock'), (20.85, 'sweet'), (21.9, 'boss'), (25.87, 'sweet')], TAB, seed=5)
 WS_SILL = 2.9
 SILL = (1040.0, 372.0)
 
@@ -132,12 +132,12 @@ def r_aside(t, u):
 
 
 # ================================================================== 2/5/13: FIKUS
-def r_fik(t, u, name='office', Z0=1.35, dark=False):
-    Z = Z0 + 0.04 * u
-    cx, cy = 1020.0, 250.0
-    v = V(name, cx, cy, Z)
-    fk = at(C.fikus, v, 540, 900, 22.0, pin='head', near=0.99, **fkw(t))
-    big = shot(name, cx, cy, Z, acts=[fk], par=(-4 + 8 * u, 0), t=t, clock='18:00')
+def r_fik(t, u, name='office', Z0=2.3, dark=False):
+    """the ficus close-up = the camera moves in on the windowsill: the pot stands ON the sill at its real size (owner 22.11.2026)"""
+    Z = Z0 + 0.06 * u
+    cx, cy = SILL[0] + 6.0, 290.0
+    fk = K.A(C.fikus, SILL[0], SILL[1], WS_SILL * 3 * Z, **fkw(t))
+    big = shot(name, cx, cy, Z, acts=[fk], par=(-2 + 3 * u, 0), t=t, clock='18:00')
     if dark:
         big[:] = (big * 0.55).astype(np.uint8)
         yy, xx = np.mgrid[0:OUT_H, 0:OUT_W]
@@ -147,7 +147,7 @@ def r_fik(t, u, name='office', Z0=1.35, dark=False):
 
 
 def r_fik1(t, u): return r_fik(t, u)
-def r_fkey(t, u): return r_fik(t, u, Z0=1.25)
+def r_fkey(t, u): return r_fik(t, u, Z0=2.0)
 def r_f3(t, u): return r_fik(t, u, 'office_night', dark=True)
 
 
@@ -178,7 +178,7 @@ def r_proud(t, u):
     Z = 1.3
     cx, cy = 560.0, 360.0
     v = V('office', cx, cy, Z)
-    chest = sm((t - 12.6) / 0.4)
+    chest = sm((t - 12.85) / 0.4)
     ed = at(C.edik, v, 540, 860 - 30 * chest, 32.0, pin='head', near=0.99,
             **ekw(t, (0.0, 0.0), coat=True, hand_n=(12.0 - 4 * chest, 48.0 + 10 * chest), hand_f=(-2.0, 46.0)))
     return shot('office', cx, cy, Z, acts=[ed], par=(-6 + 10 * u, 0), t=t)
@@ -190,7 +190,7 @@ def r_key(t, u):
     cx, cy = 430.0, 380.0
     v = V('office', cx, cy, Z)
     ed = at(C.edik, v, 540, 1000, 44.0, pin='wc', near=0.99,
-            **ekw(t, coat=True, key_swing=0.55 * math.sin((t - 15.35) * 5.5) * math.exp(-(t - 15.35) * 0.6)))
+            **ekw(t, coat=True, key_swing=0.55 * math.sin((t - 15.6) * 5.5) * math.exp(-(t - 15.6) * 0.6)))
     return shot('office', cx, cy, Z, acts=[ed], par=(4 * u, 0), t=t, dof_k=10)
 
 
@@ -224,20 +224,20 @@ def r_twist(t, u):
     cx, cy = 260.0, 330.0
     v = V('office_night', cx, cy, Z)
     w = glide(u / 1.2)
-    t_hit = 22.75
+    t_hit = 23.3
     caught = t >= t_hit
-    throw = t >= 22.2
+    throw = t >= 22.75
     sh = floor_actor(C.shef, lerp(132.0, 215.0, w), 508.0 + 12 * w, Z,
                      **skw(t, (0.9, 0.1), coat=True, walk=t * 7.0 if u < 1.2 else None,
-                           hand_n=(26.0, 66.0) if 21.6 < t < 22.4 else None, prop_f=lambda sp, h: C.briefcase(sp, h)))
+                           hand_n=(26.0, 66.0) if 21.9 < t < 22.95 else None, prop_f=lambda sp, h: C.briefcase(sp, h)))
     S = K.ws_at(540.0) * 3 * Z
     sag = (5.0 * math.exp(-(t - t_hit) * 3.0) * math.cos((t - t_hit) * 14) + 3.0) if caught else 0.0
-    ed = floor_actor(C.edik, 340.0, 548.0, Z, flip=True, oy=-sag, lean=-3.0 * (1 - sm((t - 20.3) / 0.3)),
+    ed = floor_actor(C.edik, 340.0, 548.0, Z, flip=True, oy=-sag, lean=-3.0 * (1 - sm((t - 20.55) / 0.3)),
                      **ekw(t, (-0.9, 0.2), coat=True, hand_n=(18.0, 46.0) if not caught else (16.0, 30.0 - sag),
                            prop_n=(lambda sp, h: C.keyring(sp, h, tag=True)) if caught else None))
     acts = [sh, ed]
     if throw and not caught:
-        kk = (t - 22.2) / (t_hit - 22.2)
+        kk = (t - 22.75) / (t_hit - 22.75)
         x = lerp(230.0, 325.0, kk); y = lerp(330.0, 400.0, kk) - 80 * math.sin(math.pi * kk)
         acts.append(keys_actor(x, y, S * 1.2, swing=t * 9))
     def pre(big, v_): door_open(big, v_, sm(u / 0.15))
@@ -262,11 +262,11 @@ def r_exit(t, u):
     v = V('office_night', cx, cy, Z)
     w = glide(u / 2.2)
     sh = floor_actor(C.shef, lerp(330.0, 268.0, w), 520.0, Z, flip=True, **skw(t, (-0.9, 0.0), coat=True, walk=t * 7.0 if u < 2.2 else None,
-                     hand_n=(24.0, 62.0) if t > 27.4 else None, prop_f=lambda sp, h: C.briefcase(sp, h)))
+                     hand_n=(24.0, 62.0) if t > 28.2 else None, prop_f=lambda sp, h: C.briefcase(sp, h)))
     ed = at(C.edik, v, 860, 900, 20.0, flip=True, pin='head', near=0.99,
             **ekw(t, (-0.9, 0.0), coat=True, hand_n=(16.0, 40.0), prop_n=lambda sp, h: C.keyring(sp, h, tag=True)))
     big = shot('office_night', cx, cy, Z, acts=[sh, ed], par=(-3 + 4 * u, 0), t=t, clock='21:32')
-    if t >= 27.72:
+    if t >= 28.6:
         big[:] = (big * 0.18).astype(np.uint8)                                           # the light goes off
     return big
 
@@ -287,14 +287,14 @@ def r_dark(t, u):
 
 
 ST_ZAV = K.st('ЗАВХОЗ?!', fg=(255, 232, 110), size=84)
-R = [r_hook, r_aside, r_fik1, r_flash, r_proud, r_fkey, r_key, r_clock, r_chair, r_twist, r_e4, r_exit, r_dark, r_f3, r_loop, r_jump]
+R = [r_hook, r_aside, r_fik1, r_flash, r_proud, r_fkey, r_key, r_clock, r_chair, r_twist, r_e4, r_exit, r_dark, r_f3]
 assert len(R) == len(CUTS) - 1 == len(NAMES)
 
 SHOW = K.Show(EPI, ['ЗАДЕРЖИСЬ', 'НА 5 МИНУТ!'], hook_t=(0.10, 2.6), hook_y=210, hook_size=72,
-              stickers=[(ST_ZAV, 22.85, 23.6, 540, 520)],
-              flashes=[TWIST], mosaics=[8.85, 10.90],
+              stickers=[(ST_ZAV, 23.4, 24.16, 540, 520)],
+              flashes=[TWIST], mosaics=[9.10, 11.15],
               cap_y={0: 1560, 1: 1560, 2: 1580, 3: 1560, 4: 1560, 5: 1580, 6: 1560, 7: 1700, 8: 1500, 9: 1560, 10: 1560, 11: 1300,
-                     12: 1560, 13: 1580, 14: 1560, 15: 1560})
+                     12: 1560, 13: 1580})
 
 
 def render(t):

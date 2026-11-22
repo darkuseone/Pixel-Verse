@@ -1,4 +1,4 @@
-"""Audio mix for S01E02 -> build/klyuchevoy-ep02/mix.wav (+ mux).  python3 mix.py [noaudio.mp4 final.mp4]"""
+"""Audio mix for S01E02 v2 -> build/klyuchevoy-ep01/mix.wav (+ mux).  python3 mix.py [noaudio.mp4 final.mp4]"""
 import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[4] / 'engine'))
 import mix
 import timeline as T

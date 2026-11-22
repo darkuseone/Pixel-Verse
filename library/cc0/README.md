@@ -70,3 +70,5 @@ coat_rustle (1104), yawn_man (1406), steps_wood_floor (0165), door_unlock_open (
 живые/оркестровые инструменты, НЕ чиптюн:** freepd_baltic_levity (лёгкая, светлая), freepd_lurking_sloth (крадущееся ожидание),
 freepd_fensters_explanation (чудаковатая), freepd_silly_boy (дурашливая), freepd_busybody (суета, пиццикато), freepd_managing_mischief
 (шалость). Обработка: highpass 140 Гц (убрать «гул» тубы на телефоне) + подъём 2,2 кГц, −20 LUFS. Komiku (чиптюн) — только по просьбе.
+**SFX (22.11.2026, E02):** calc_printer (3553), calc_printer_2 (3555), calc_key (3270), calc_ticket_tear (3288), paper_handle (0785),
+paper_crumple (1223), pencil_sign (0221) — BigSoundBank, CC0.

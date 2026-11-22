@@ -532,3 +532,13 @@ def office_chair(sp, t=0.0):
         thin(sp, (0.0, 5.0), (dx, 2.0), (30, 30, 34), 0.7)
         sp.blob(dx, 1.4, 1.0, (24, 24, 28))
     sp.anchors['seat'] = (0.0, 24.0)
+
+
+def envelope(sp, h, label='ПРЕМИЯ'):
+    """a paper envelope held in the hand"""
+    x, y = h
+    sp.sup(x + 3.0, y + 2.0, 5.0, 3.2, tones((240, 232, 210)), n=6.0, stripes=False)
+    thin(sp, (x - 1.8, y + 4.8), (x + 3.0, y + 1.8), (190, 180, 150), 0.2)
+    thin(sp, (x + 3.0, y + 1.8), (x + 7.8, y + 4.8), (190, 180, 150), 0.2)
+    sp.txt_box([label], (x - 1.4, y - 0.8, x + 7.4, y + 1.6), (190, 40, 40), pad=0.1)
+    sp.anchors['envelope'] = (x + 3.0, y + 2.0)
