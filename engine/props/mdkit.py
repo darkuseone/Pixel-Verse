@@ -244,9 +244,9 @@ def phone_insert(t, lines=('PARCELZ', 'SIGNATURE REQUIRED', 'Delivery TODAY', '8
     d.text((170, 290), lines[0], font=O.pfont(80), fill=(255, 255, 255))
     y = 520
     for i, ln in enumerate(lines[1:]):
-        sz = (64, 56, 72)[i % 3]
+        sz = (40, 52, 70)[i % 3]
         col = ((200, 40, 40), (40, 40, 50), (30, 60, 140))[i % 3]
         d.text((170, y), ln, font=O.pfont(sz), fill=col); y += sz + 50
     d.rounded_rectangle([170, y + 40, OUT_W - 170, y + 180], 24, fill=(246, 128, 40))
-    d.text((230, y + 80), 'STATUS: OUT FOR DELIVERY', font=O.pfont(40), fill=(255, 255, 255))
+    d.text((215, y + 88), 'OUT FOR DELIVERY', font=O.pfont(34), fill=(255, 255, 255))
     return np.array(im)
