@@ -986,17 +986,17 @@
    "status": "active",
    "name": "Шеф Громов",
    "voice_name": "Ключевой сотрудник — Шеф Громов",
-   "lines": 9,
-   "episodes": 3,
+   "lines": 18,
+   "episodes": 7,
    "samples": [
     "series/klyuchevoy/voice/ep01v2/s2.mp3",
-    "series/klyuchevoy/voice/ep01/s2.mp3",
-    "series/klyuchevoy/voice/ep02/s2.mp3",
-    "series/klyuchevoy/voice/ep01v2/s1.mp3",
-    "series/klyuchevoy/voice/ep02/s1.mp3",
-    "series/klyuchevoy/voice/ep01v2/s3.mp3",
-    "series/klyuchevoy/voice/ep01/s3.mp3",
-    "series/klyuchevoy/voice/ep01v2/s4.mp3"
+    "series/klyuchevoy/voice/ep03/s1.mp3",
+    "series/klyuchevoy/voice/ep03/s2.mp3",
+    "series/klyuchevoy/voice/ep02v2/s1.mp3",
+    "series/klyuchevoy/voice/ep06/s4.mp3",
+    "series/klyuchevoy/voice/ep06/s1.mp3",
+    "series/klyuchevoy/voice/ep06/s2.mp3",
+    "series/klyuchevoy/voice/ep01/s2.mp3"
    ],
    "design": {
     "description": "A hoarse, raspy elderly Russian man in his late sixties, an old-school Soviet-style office director. Croaky smoker's voice, slightly wheezy and nasal, grating and nagging, condescending and fake-friendly, speaks loudly and bossily with long drawn-out vowels. Comedic, characterful. Native Russian speaker.",
@@ -1025,42 +1025,42 @@
   },
   {
    "slug": "klyuchevoy",
-   "char": "fikus",
-   "voice_id": "2Zst4rvX5S2nMbiauLDN",
-   "status": "library_or_premade",
-   "name": "Фикус Аркадий",
-   "voice_name": "Ключевой сотрудник — Фикус Аркадий",
-   "lines": 15,
-   "episodes": 3,
-   "samples": [
-    "series/klyuchevoy/voice/ep01/f3.mp3",
-    "series/klyuchevoy/voice/ep01v2/f1.mp3",
-    "series/klyuchevoy/voice/ep01/f1.mp3",
-    "series/klyuchevoy/voice/ep02/f1.mp3",
-    "series/klyuchevoy/voice/ep02/f6.mp3",
-    "series/klyuchevoy/voice/ep01/f4.mp3",
-    "series/klyuchevoy/voice/ep01/f6.mp3",
-    "series/klyuchevoy/voice/ep01v2/f3.mp3"
-   ]
-  },
-  {
-   "slug": "klyuchevoy",
    "char": "edik",
    "voice_id": "6Pm064JKx8KhPSIAdbHd",
    "status": "library_or_premade",
    "name": "Эдик Булкин",
    "voice_name": "Ключевой сотрудник — Эдик Булкин",
-   "lines": 14,
-   "episodes": 3,
+   "lines": 32,
+   "episodes": 8,
    "samples": [
+    "series/klyuchevoy/voice/ep06/e1.mp3",
+    "series/klyuchevoy/voice/ep03/e1.mp3",
+    "series/klyuchevoy/voice/ep05/e1.mp3",
     "series/klyuchevoy/voice/ep01/e2.mp3",
     "series/klyuchevoy/voice/ep01v2/e1.mp3",
     "series/klyuchevoy/voice/ep02/e1.mp3",
-    "series/klyuchevoy/voice/ep01v2/e2.mp3",
-    "series/klyuchevoy/voice/ep01v2/e3.mp3",
-    "series/klyuchevoy/voice/ep02/e4.mp3",
-    "series/klyuchevoy/voice/ep01/e1.mp3",
-    "series/klyuchevoy/voice/ep02/e3.mp3"
+    "series/klyuchevoy/voice/ep05/e2.mp3",
+    "series/klyuchevoy/voice/ep01v2/e2.mp3"
+   ]
+  },
+  {
+   "slug": "klyuchevoy",
+   "char": "fikus",
+   "voice_id": "2Zst4rvX5S2nMbiauLDN",
+   "status": "library_or_premade",
+   "name": "Фикус Аркадий",
+   "voice_name": "Ключевой сотрудник — Фикус Аркадий",
+   "lines": 28,
+   "episodes": 8,
+   "samples": [
+    "series/klyuchevoy/voice/ep01/f3.mp3",
+    "series/klyuchevoy/voice/ep01v2/f1.mp3",
+    "series/klyuchevoy/voice/ep04/f1.mp3",
+    "series/klyuchevoy/voice/ep01/f1.mp3",
+    "series/klyuchevoy/voice/ep02/f1.mp3",
+    "series/klyuchevoy/voice/ep02/f6.mp3",
+    "series/klyuchevoy/voice/ep06/f1.mp3",
+    "series/klyuchevoy/voice/ep01/f4.mp3"
    ]
   },
   {
@@ -1070,11 +1070,17 @@
    "status": "library_or_premade",
    "name": "Людмила Степановна",
    "voice_name": "Ключевой сотрудник — Людмила Степановна",
-   "lines": 2,
-   "episodes": 1,
+   "lines": 17,
+   "episodes": 5,
    "samples": [
+    "series/klyuchevoy/voice/ep04/l2.mp3",
+    "series/klyuchevoy/voice/ep04/l4.mp3",
+    "series/klyuchevoy/voice/ep04/l1.mp3",
+    "series/klyuchevoy/voice/ep05/l1.mp3",
+    "series/klyuchevoy/voice/ep02v2/l1.mp3",
     "series/klyuchevoy/voice/ep02/l2.mp3",
-    "series/klyuchevoy/voice/ep02/l1.mp3"
+    "series/klyuchevoy/voice/ep03/l1.mp3",
+    "series/klyuchevoy/voice/ep02v2/l6.mp3"
    ]
   },
   {
@@ -1426,6 +1432,39 @@
      "note": "deleted, restored as IVC clone"
     }
    ]
+  },
+  {
+   "slug": "motion-detected",
+   "char": "glenn",
+   "voice_id": "QI6dMUTCXXVqw27WrlQs",
+   "status": "library_or_premade",
+   "name": "Glenn Hollis",
+   "voice_name": "MOTION DETECTED — Glenn Hollis",
+   "lines": 0,
+   "episodes": 0,
+   "samples": []
+  },
+  {
+   "slug": "motion-detected",
+   "char": "doris",
+   "voice_id": "rL5thyifUCj65q3mamdf",
+   "status": "library_or_premade",
+   "name": "Doris (KNOCKR Pro doorbell)",
+   "voice_name": "MOTION DETECTED — Doris (KNOCKR Pro doorbell)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": []
+  },
+  {
+   "slug": "motion-detected",
+   "char": "trent",
+   "voice_id": "b6Q4e5E5onTR1TYEJh9z",
+   "status": "library_or_premade",
+   "name": "Trent (solar guy)",
+   "voice_name": "MOTION DETECTED — Trent (solar guy)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": []
   },
   {
    "slug": "pochti-dikiy-zapad",
@@ -3214,5 +3253,5 @@
   "14NozJq5eoBmDc1FXFDq": "NIKITA2",
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA"
  },
- "updated": "2026-11-22 22:15"
+ "updated": "2026-11-23 18:46"
 }

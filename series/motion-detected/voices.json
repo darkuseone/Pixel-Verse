@@ -1,0 +1,53 @@
+{
+  "cartoon": "MOTION DETECTED",
+  "slug": "motion-detected",
+  "lang": "en",
+  "tts_model": "eleven_v4",
+  "characters": {
+    "glenn": {
+      "name": "Glenn Hollis",
+      "color_caption": [
+        255,
+        196,
+        70
+      ],
+      "style": "[smug] [outraged] overconfident suburban dad, voice cracks when he panics",
+      "voice_id": "QI6dMUTCXXVqw27WrlQs",
+      "voice": "MOTION DETECTED — Glenn Hollis",
+      "library": {
+        "public_owner_id": "e5a64bf09c56b5dc8f3ff781cb38746e236d3a29077c2743908e65228c6916cf",
+        "voice_id": "QI6dMUTCXXVqw27WrlQs"
+      }
+    },
+    "doris": {
+      "name": "Doris (KNOCKR Pro doorbell)",
+      "color_caption": [
+        110,
+        230,
+        255
+      ],
+      "style": "[calm] [polite] [sweetly] smart-doorbell AI, respectful but quietly taunting",
+      "voice_id": "rL5thyifUCj65q3mamdf",
+      "voice": "MOTION DETECTED — Doris (KNOCKR Pro doorbell)",
+      "library": {
+        "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+        "voice_id": "rL5thyifUCj65q3mamdf"
+      }
+    },
+    "trent": {
+      "name": "Trent (solar guy)",
+      "color_caption": [
+        180,
+        255,
+        120
+      ],
+      "style": "[chipper] [infomercial] door-to-door solar salesman",
+      "voice_id": "b6Q4e5E5onTR1TYEJh9z",
+      "voice": "MOTION DETECTED — Trent (solar guy)",
+      "library": {
+        "public_owner_id": "4a0cd9b7d40066a27671b73690fc8bf9972f35dae487e85e08fa2f3918765459",
+        "voice_id": "b6Q4e5E5onTR1TYEJh9z"
+      }
+    }
+  }
+}

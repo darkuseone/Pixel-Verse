@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-11-22 22:15.
+Обновлено: 2026-11-23 18:46.
 
 ## agent-dibs
 
@@ -46,10 +46,10 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Шеф Громов | `shef` | `plP8n3VRVPCbh78vs2Ei` | active | 9 / 3 | Ключевой сотрудник — Шеф Громов |
-| Фикус Аркадий | `fikus` | `2Zst4rvX5S2nMbiauLDN` | library_or_premade | 15 / 3 | Ключевой сотрудник — Фикус Аркадий |
-| Эдик Булкин | `edik` | `6Pm064JKx8KhPSIAdbHd` | library_or_premade | 14 / 3 | Ключевой сотрудник — Эдик Булкин |
-| Людмила Степановна | `lyuda` | `Fy6bUBXCIVErEtK9FN5d` | library_or_premade | 2 / 1 | Ключевой сотрудник — Людмила Степановна |
+| Шеф Громов | `shef` | `plP8n3VRVPCbh78vs2Ei` | active | 18 / 7 | Ключевой сотрудник — Шеф Громов |
+| Эдик Булкин | `edik` | `6Pm064JKx8KhPSIAdbHd` | library_or_premade | 32 / 8 | Ключевой сотрудник — Эдик Булкин |
+| Фикус Аркадий | `fikus` | `2Zst4rvX5S2nMbiauLDN` | library_or_premade | 28 / 8 | Ключевой сотрудник — Фикус Аркадий |
+| Людмила Степановна | `lyuda` | `Fy6bUBXCIVErEtK9FN5d` | library_or_premade | 17 / 5 | Ключевой сотрудник — Людмила Степановна |
 | Фикус Аркадий (проба Ivan) | `fikus_b` | `0vJ96DzHePfGJitmI6UX` | library_or_premade | 0 / 0 | Ключевой сотрудник — Фикус Аркадий (проба Ivan) |
 
 ## mazutych
@@ -63,6 +63,14 @@
 | Мазутыч | `maz` | `xSY5jZDD2Tge1l2uwiQn` | deleted 2026-11-01 | 58 / 7 | Мазутыч — Мазутыч |
 | Инспектор Столбов (ДПС) | `cop` | `sqjFPShWaZX3JdS3utu1` | library_or_premade | 8 / 1 | Мазутыч — Инспектор Столбов (ДПС) |
 | Вадик (барыга) | `vadik` | `3YcbIhxRmKe16pBspvSh` | library_or_premade | 7 / 1 | Мазутыч — Вадик (барыга) |
+
+## motion-detected
+
+| Герой | char | voice_id | Статус | Реплик / серий | Голос |
+|---|---|---|---|---|---|
+| Glenn Hollis | `glenn` | `QI6dMUTCXXVqw27WrlQs` | library_or_premade | 0 / 0 | MOTION DETECTED — Glenn Hollis |
+| Doris (KNOCKR Pro doorbell) | `doris` | `rL5thyifUCj65q3mamdf` | library_or_premade | 0 / 0 | MOTION DETECTED — Doris (KNOCKR Pro doorbell) |
+| Trent (solar guy) | `trent` | `b6Q4e5E5onTR1TYEJh9z` | library_or_premade | 0 / 0 | MOTION DETECTED — Trent (solar guy) |
 
 ## pochti-dikiy-zapad
 
