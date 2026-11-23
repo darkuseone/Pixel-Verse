@@ -1440,9 +1440,18 @@
    "status": "library_or_premade",
    "name": "Glenn Hollis",
    "voice_name": "MOTION DETECTED — Glenn Hollis",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 18,
+   "episodes": 4,
+   "samples": [
+    "series/motion-detected/voice/ep02/g3.mp3",
+    "series/motion-detected/voice/ep02/g1.mp3",
+    "series/motion-detected/voice/ep01/g3.mp3",
+    "series/motion-detected/voice/ep03/g2.mp3",
+    "series/motion-detected/voice/ep04/g3.mp3",
+    "series/motion-detected/voice/ep03/g1.mp3",
+    "series/motion-detected/voice/ep01/g1.mp3",
+    "series/motion-detected/voice/ep02/g2.mp3"
+   ]
   },
   {
    "slug": "motion-detected",
@@ -1451,9 +1460,18 @@
    "status": "library_or_premade",
    "name": "Doris (KNOCKR Pro doorbell)",
    "voice_name": "MOTION DETECTED — Doris (KNOCKR Pro doorbell)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 16,
+   "episodes": 4,
+   "samples": [
+    "series/motion-detected/voice/ep04/d1.mp3",
+    "series/motion-detected/voice/ep03/d1.mp3",
+    "series/motion-detected/voice/ep02/d3.mp3",
+    "series/motion-detected/voice/ep02/d4.mp3",
+    "series/motion-detected/voice/ep01/d6.mp3",
+    "series/motion-detected/voice/ep02/d1.mp3",
+    "series/motion-detected/voice/ep01/d3.mp3",
+    "series/motion-detected/voice/ep03/e2.mp3"
+   ]
   },
   {
    "slug": "motion-detected",
@@ -1462,6 +1480,74 @@
    "status": "library_or_premade",
    "name": "Trent (solar guy)",
    "voice_name": "MOTION DETECTED — Trent (solar guy)",
+   "lines": 4,
+   "episodes": 4,
+   "samples": [
+    "series/motion-detected/voice/ep04/t1.mp3",
+    "series/motion-detected/voice/ep02/t1.mp3",
+    "series/motion-detected/voice/ep01/t1.mp3",
+    "series/motion-detected/voice/ep03/t1.mp3"
+   ]
+  },
+  {
+   "slug": "motion-detected",
+   "char": "marcy",
+   "voice_id": "y3H6zY6KvCH2pEuQjmv8",
+   "status": "library_or_premade",
+   "name": "Marcy (HR)",
+   "voice_name": "MOTION DETECTED — Marcy (HR)",
+   "lines": 3,
+   "episodes": 1,
+   "samples": [
+    "series/motion-detected/voice/ep03/m1.mp3",
+    "series/motion-detected/voice/ep03/m2.mp3",
+    "series/motion-detected/voice/ep03/m3.mp3"
+   ]
+  },
+  {
+   "slug": "motion-detected",
+   "char": "clerk",
+   "voice_id": "RIxlkEgVTlW2XuYWyYjL",
+   "status": "library_or_premade",
+   "name": "Postal clerk",
+   "voice_name": "MOTION DETECTED — Postal clerk",
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/motion-detected/voice/ep04/c1.mp3"
+   ]
+  },
+  {
+   "slug": "motion-detected",
+   "char": "mom",
+   "voice_id": "vFLqXa8bgbofGarf6fZh",
+   "status": "library_or_premade",
+   "name": "Glenn's mom (and her doorbell message)",
+   "voice_name": "MOTION DETECTED — Glenn's mom (and her doorbell message)",
+   "lines": 1,
+   "episodes": 1,
+   "samples": [
+    "series/motion-detected/voice/ep04/m1.mp3"
+   ]
+  },
+  {
+   "slug": "motion-detected",
+   "char": "ron",
+   "voice_id": "MKlLqCItoCkvdhrxgtLv",
+   "status": "library_or_premade",
+   "name": "Ron (Linda's dad)",
+   "voice_name": "MOTION DETECTED — Ron (Linda's dad)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": []
+  },
+  {
+   "slug": "motion-detected",
+   "char": "ultra",
+   "voice_id": "wDsJlOXPqcvIUKdLXjDs",
+   "status": "library_or_premade",
+   "name": "KNOCKR ULTRA (the replacement doorbell)",
+   "voice_name": "MOTION DETECTED — KNOCKR ULTRA (the replacement doorbell)",
    "lines": 0,
    "episodes": 0,
    "samples": []
@@ -3253,5 +3339,5 @@
   "14NozJq5eoBmDc1FXFDq": "NIKITA2",
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA"
  },
- "updated": "2026-11-23 18:46"
+ "updated": "2026-11-23 23:57"
 }

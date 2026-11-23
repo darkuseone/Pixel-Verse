@@ -4,7 +4,7 @@
 Голос героя не меняется никогда: для сезона 2 берём `voice_id` отсюда; если статус `deleted` — `python3 engine/voices.py restore <slug> <char>`
 (клон из записанных реплик, занимает слот). Личные голоса владельца (NIKITA, NIKITA2, Cartman) не трогаем никогда.
 
-Обновлено: 2026-11-23 18:46.
+Обновлено: 2026-11-23 23:57.
 
 ## agent-dibs
 
@@ -68,9 +68,14 @@
 
 | Герой | char | voice_id | Статус | Реплик / серий | Голос |
 |---|---|---|---|---|---|
-| Glenn Hollis | `glenn` | `QI6dMUTCXXVqw27WrlQs` | library_or_premade | 0 / 0 | MOTION DETECTED — Glenn Hollis |
-| Doris (KNOCKR Pro doorbell) | `doris` | `rL5thyifUCj65q3mamdf` | library_or_premade | 0 / 0 | MOTION DETECTED — Doris (KNOCKR Pro doorbell) |
-| Trent (solar guy) | `trent` | `b6Q4e5E5onTR1TYEJh9z` | library_or_premade | 0 / 0 | MOTION DETECTED — Trent (solar guy) |
+| Glenn Hollis | `glenn` | `QI6dMUTCXXVqw27WrlQs` | library_or_premade | 18 / 4 | MOTION DETECTED — Glenn Hollis |
+| Doris (KNOCKR Pro doorbell) | `doris` | `rL5thyifUCj65q3mamdf` | library_or_premade | 16 / 4 | MOTION DETECTED — Doris (KNOCKR Pro doorbell) |
+| Trent (solar guy) | `trent` | `b6Q4e5E5onTR1TYEJh9z` | library_or_premade | 4 / 4 | MOTION DETECTED — Trent (solar guy) |
+| Marcy (HR) | `marcy` | `y3H6zY6KvCH2pEuQjmv8` | library_or_premade | 3 / 1 | MOTION DETECTED — Marcy (HR) |
+| Postal clerk | `clerk` | `RIxlkEgVTlW2XuYWyYjL` | library_or_premade | 1 / 1 | MOTION DETECTED — Postal clerk |
+| Glenn's mom (and her doorbell message) | `mom` | `vFLqXa8bgbofGarf6fZh` | library_or_premade | 1 / 1 | MOTION DETECTED — Glenn's mom (and her doorbell message) |
+| Ron (Linda's dad) | `ron` | `MKlLqCItoCkvdhrxgtLv` | library_or_premade | 0 / 0 | MOTION DETECTED — Ron (Linda's dad) |
+| KNOCKR ULTRA (the replacement doorbell) | `ultra` | `wDsJlOXPqcvIUKdLXjDs` | library_or_premade | 0 / 0 | MOTION DETECTED — KNOCKR ULTRA (the replacement doorbell) |
 
 ## pochti-dikiy-zapad
 

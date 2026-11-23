@@ -19,14 +19,16 @@ from props import mddecor as DEC
 from props.kskit import wpt, aout, _dil, title_trim, blur
 
 SLUG = 'motion-detected'
-COL = dict(glenn=(255, 196, 70), doris=(110, 230, 255), trent=(180, 255, 120))
+COL = dict(glenn=(255, 196, 70), doris=(110, 230, 255), trent=(180, 255, 120), marcy=(255, 140, 200), clerk=(200, 200, 210), mom=(255, 190, 150))
 INK = KX.INK
 RIM = ((255, 190, 110), (170, 120, 255))                # porch lamp amber / dusk violet
-FLOOR = {'porch': (520.0, 3.65, 0.010), 'hall': (560.0, 4.30, 0.012)}
+FLOOR = {'porch': (520.0, 3.65, 0.010), 'hall': (560.0, 4.30, 0.012), 'breakroom': (690.0, 3.10, 0.008),
+         'postoffice': (690.0, 2.90, 0.008), 'momporch': (528.0, 2.90, 0.010)}
 
 
 def ws_at(wy, name='porch'):
-    y0, w0, k = FLOOR['hall' if name.startswith('hall') else 'porch']
+    key = next((k_ for k_ in FLOOR if name.startswith(k_)), 'porch')
+    y0, w0, k = FLOOR[key]
     return w0 + (wy - y0) * k
 
 
@@ -74,7 +76,32 @@ def light_hall(v, t=0.0):
     return Light(amb=(1.04, 1.00, 0.94), keys=_keys(v, [(520, 300, 420, (255, 214, 150), 0.36)]), grad=(1.04, 0.96))
 
 
-LIGHT = dict(porch=light_porch, hall=light_hall)
+LGLOW = [0.0]                                            # E02: Glenn's own lights (0 off .. 1 blazing) light the porch
+
+
+def light_porch_night(v, t=0.0):
+    out = DEC.BLACKOUT[0]
+    keys = [(390, 175, 260, (255, 196, 110), 0.55)]
+    if out < 0.5:
+        keys += [(800, 290, 320, (255, 150, 120), 0.30), (1185, 160, 200, (255, 200, 120), 0.35)]
+    if LGLOW[0] > 0: keys += [(560, 120, 520, (255, 236, 170), 0.9 * LGLOW[0])]
+    a = 0.62 - 0.22 * out
+    return Light(amb=(a, a + 0.03, a + 0.30), keys=_keys(v, keys), grad=(0.98, 0.86))
+
+
+def light_office(v, t=0.0):
+    return Light(amb=(1.02, 1.03, 1.00), keys=_keys(v, [(450, 300, 380, (255, 200, 140), 0.28), (1000, 200, 420, (255, 140, 170), 0.16)]),
+                 grad=(1.04, 0.94))
+
+
+def light_momporch(v, t=0.0):
+    tv = 0.30 + 0.08 * math.sin(t * 9) * (math.sin(t * 2.3) > 0)
+    return Light(amb=(0.58, 0.62, 0.92), keys=_keys(v, [(380, 240, 240, (255, 196, 110), 0.55), (600, 320, 300, (140, 180, 255), tv)]),
+                 grad=(0.98, 0.86))
+
+
+LIGHT = dict(porch=light_porch, hall=light_hall, porch_night=light_porch_night, breakroom=light_office, postoffice=light_office,
+             momporch=light_momporch)
 
 
 def shot(name, cx, cy, Z, acts=(), par=(0.0, 0.0), fx_=None, pre=None, t=0.0, kick=(0, 0), focus=None, dof_k=0.0, haze=None,

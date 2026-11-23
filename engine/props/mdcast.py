@@ -373,3 +373,242 @@ def chair(sp, t=0.0):
     sp.sup(0.0, 17.0, 8.0, 1.4, tones(W_), n=4.0)
     sp.cap((-7.0, 17.0), (-7.4, 38.0), 1.2, 1.2, tones(W_))
     for q in range(3): sp.cap((-7.2, 24.0 + q * 5.0), (-6.8, 24.0 + q * 5.0), 1.0, 1.0, tones(dark(W_, 0.9)))
+
+
+# ================================================================================ E02 props: stepladder, light string, tester, flashlight
+BULBS = ((255, 60, 60), (60, 220, 90), (255, 214, 60), (70, 140, 255))
+
+
+def stepladder(sp, t=0.0, h=34.0):
+    """an aluminium A-frame stepladder in profile, top platform at y=h (sprite px)"""
+    AL = (196, 200, 210)
+    sp.cap((-7.0, 0.0), (-2.0, h), 0.9, 0.9, tones(AL))
+    sp.cap((7.0, 0.0), (2.0, h), 0.9, 0.9, tones(dark(AL, 0.85)))
+    for q in range(1, 4):
+        y = h * q / 4.0
+        x0 = -7.0 + 5.0 * y / h
+        sp.cap((x0, y), (x0 + 4.0, y), 0.7, 0.7, tones(AL))
+    sp.sup(0.0, h + 0.6, 3.6, 0.9, tones((240, 120, 40)), n=4.0)
+    sp.txt_box(['DO NOT', 'STAND'], (-3.4, h + 2.0, 3.4, h + 5.0), (200, 40, 40), pad=0.05)
+
+
+def light_string(sp, h, lit=0.0, n=9, t=0.0, test=None):
+    """a dangling string of big C9 bulbs from the hand: lit 0 dark .. 1 blazing; test = index of the bulb under the tester (blinks)"""
+    x, y = h
+    pts = [(x + 1.0 + i * 1.8, y - 2.0 - 6.0 * math.sin(math.pi * i / (n - 1)) - i * 0.5) for i in range(n)]
+    for a, b in zip(pts[:-1], pts[1:]): thin(sp, a, b, (40, 70, 40), 0.3)
+    for i, (px, py) in enumerate(pts):
+        c = BULBS[i % 4]
+        on = lit > 0.5 or (test == i and int(t * 8) % 2 == 0)
+        col = c if on else mix(dark(c, 0.45), (60, 60, 70), 0.4)
+        sp.ell(px, py - 1.2, 0.8, 1.3, tones(col), ol=False, gloss=0.6 if on else 0.0)
+        sp.fill(sp.m_super(px, py + 0.2, 0.5, 0.4, 4.0)[0], (60, 90, 60))
+    sp.anchors['string'] = pts[-1]
+
+
+def tester(sp, h, beep=False):
+    x, y = h
+    sp.sup(x + 0.4, y + 2.0, 1.2, 3.0, tones((250, 200, 40)), n=4.0)
+    sp.fill(sp.m_super(x + 0.4, y + 3.2, 0.7, 0.6, 4.0)[0], (255, 60, 40) if beep else (90, 40, 30), keep=True)
+    thin(sp, (x + 0.4, y + 5.0), (x + 0.4, y + 7.6), (200, 200, 200), 0.25)
+
+
+def silhouette(sp, t=0.0, kind=0, walk=0.0):
+    """a neighbor in the blackout: a dark figure with a robe/coat, only the rim and the flashlight show"""
+    D_ = (26, 24, 40)
+    sw = math.sin(walk) * 2.6
+    for k_, dx in enumerate((-3.0, 3.0)):
+        s_ = sw if k_ else -sw
+        sp.cap((dx, 30.0), (dx + s_, 2.0), 2.8, 2.4, tones(D_), stripes=False)
+    sp.sup(0.0, 44.0, 9.0 + kind % 2 * 1.4, 15.0, tones(D_), n=2.6, stripes=False)
+    sp.ell(0.6, 66.0, 5.8, 6.6, tones(D_), stripes=False)
+    if kind == 1: sp.ell(0.6, 72.0, 7.0, 2.4, tones(dark(D_, 0.8)), stripes=False)                    # bobble hat
+    if kind == 2:
+        for q in range(4): sp.blob(-4.0 + q * 2.6, 70.0 + (q % 2), 1.6, (60, 50, 80))                    # curlers
+    sp.cap((7.0, 54.0), (13.0, 44.0), 2.0, 1.8, tones(D_), stripes=False)
+    sp.sup(14.0, 44.0, 1.4, 1.0, tones((180, 180, 190)), n=3.0)
+    sp.anchors.update(head=(0.6, 66.0), torch=(15.0, 44.0))
+
+
+# ================================================================================ E03: MARCY (HR), gift boxes, phone-Doris, scratch-off
+SKIN_M = (246, 204, 176)
+SWEATER = (40, 130, 70)
+HAIR_M = (200, 70, 40)
+ANTLER = (150, 100, 60)
+
+
+def marcy(sp, t=0.0, expr='sweet', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None):
+    """MARCY from HR: short and round («a snowman in a sweater»), a huge red curly perm, a reindeer-antler headband with a jingle bell,
+    an ugly green Christmas sweater with white snowflakes and a pixel reindeer, a red skirt, white sneakers; big smile, rosy cheeks"""
+    E = X(expr)
+    if blink is None: blink = ((t + 2.3) % 4.4) < 0.12
+    br = 0.3 * math.sin(t * 2.4)
+    shF = (-9.0, 40.0 + br)
+    hf = hand_f if hand_f is not None else (-12.0, 24.0)
+    kF, eF = ik(shF, hf, 7.0, 7.0, -1.0)
+    sp.cap(shF, kF, 2.8, 2.6, tones(dark(SWEATER, 0.84)))
+    sp.cap(kF, eF, 2.4, 2.0, tones(dark(SWEATER, 0.84)))
+    sp.ell(eF[0], eF[1] - 0.3, 2.0, 1.9, tones(dark(SKIN_M, 0.86)))
+    if prop_f: prop_f(sp, eF)
+    for dx in (-3.0, 3.0):
+        sp.cap((dx, 14.0), (dx, 2.6), 2.0, 1.8, tones((240, 220, 210)), stripes=False)                          # tights
+        sp.sup(dx + 1.2, 1.2, 3.2, 1.4, tones((250, 250, 250)), n=2.4, stripes=False)
+    sp.sup(0.0, 16.0, 8.4, 4.2, tones((200, 40, 50)), n=3.0)                                                  # skirt
+    body = sp.ell(0.6, 30.0, 11.0, 11.6, tones(SWEATER))
+    for i in range(8):                                                                                         # snowflakes
+        x, y = -7.0 + (i % 4) * 4.6, 24.0 + (i // 4) * 9.0
+        sp.blob(x, y, 0.7, (250, 250, 250), keep=True)
+    for q in range(5): thin(sp, (-9.0 + q * 4.2, 20.0), (-7.0 + q * 4.2, 21.6), (200, 40, 50), 0.5, mask=body)   # zigzag hem
+    sp.sup(2.0, 31.0, 2.6, 2.2, tones((150, 100, 60)), n=3.0)                                                 # pixel reindeer
+    sp.blob(4.4, 31.0, 0.8, (230, 40, 40), keep=True)
+    sp.cap((0.6, 40.0), (1.0, 43.0), 2.0, 2.0, tones(dark(SKIN_M, 0.9)))
+    hx, hy = 1.6, 50.0
+    sp.union([sp.m_ell(hx - 1.0, hy + 4.0, 9.6, 7.0), sp.m_ell(hx - 6.0, hy - 1.0, 4.0, 6.0), sp.m_ell(hx + 6.0, hy - 1.0, 3.0, 5.0)],
+             tones(HAIR_M))                                                                                     # the perm
+    for i in range(10):
+        sp.blob(hx - 9.0 + i * 1.9, hy + 7.0 + (i % 3) * 1.4, 1.3, dark(HAIR_M, 0.8))
+    sp.ell(hx, hy, 6.2, 6.6, tones(SKIN_M))
+    for side in (-1, 1):                                                                                       # antlers
+        bx = hx + side * 4.0
+        thin(sp, (bx, hy + 9.0), (bx + side * 3.0, hy + 15.0), ANTLER, 0.7)
+        thin(sp, (bx + side * 1.6, hy + 12.0), (bx + side * 4.6, hy + 12.6), ANTLER, 0.6)
+    thin(sp, (hx - 5.6, hy + 8.4), (hx + 5.6, hy + 8.4), (60, 40, 30), 0.5)
+    sp.blob(hx + 5.0, hy + 9.6, 0.9, (240, 200, 60), keep=True)
+    lx, ly = look
+    DX.eye(sp, hx + 3.0, hy + 1.2, 2.9, 3.0, E, (90, 70, 40), (lx, ly), blink, lash=INK, skin=SKIN_M, bold=1)
+    DX.eye(sp, hx - 1.4, hy + 1.2, 2.6, 2.8, E, (90, 70, 40), (lx, ly), blink, lash=INK, skin=SKIN_M, bold=1)
+    DX.brow(sp, hx + 3.0, hy + 4.0, 3.0, E, +1, dark(HAIR_M, 0.7), th=1.1)
+    DX.brow(sp, hx - 1.4, hy + 3.9, 2.6, E, -1, dark(HAIR_M, 0.7), th=1.1)
+    sp.ell(hx + 5.4, hy - 1.0, 1.3, 1.4, tones(dark(SKIN_M, 0.98)), gloss=1.0)
+    DX.blush(sp, hx + 2.6, hy - 1.6, 1.6, 1.0, (240, 110, 120))
+    mx, my = hx + 2.6, hy - 3.6
+    DX.mouth(sp, mx, my, 4.0, E, mouth_, (190, 60, 70), inside=(96, 26, 36), teeth=(255, 255, 250), skin=SKIN_M, maxh=4.0)
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my), eyes=(hx + 1.0, hy + 1.2))
+    before = sp.m.copy()
+    shN = (9.6, 40.0 + br)
+    hn = hand_n if hand_n is not None else (12.0, 26.0)
+    kN, eN = ik(shN, hn, 7.0, 7.0, -1.0)
+    sp.cap(shN, kN, 2.8, 2.6, tones(SWEATER)); sp.cap(kN, eN, 2.4, 2.0, tones(SWEATER))
+    sp.ell(eN[0], eN[1] - 0.3, 2.1, 2.0, tones(SKIN_M))
+    if prop_n: prop_n(sp, eN)
+    sp.anchors['hand'] = eN
+    new = sp.m & ~before
+    o = dilate(new) & ~sp.m & before
+    sp.col[o] = INK
+
+
+def gift(sp, t=0.0, col=(220, 40, 60), rib=(250, 220, 80), w=6.0, h=5.0, gold=False, open_=0.0):
+    """a wrapped box (feet anchor at its bottom centre); gold=True — the shiny gold box; open_ 0..1 — the lid flies off"""
+    if gold: col, rib = (240, 196, 60), (200, 40, 50)
+    sp.sup(0.0, h, w, h, tones(col), n=6.0, gloss=0.8 if gold else 0.0)
+    thin(sp, (0.0, 0.2), (0.0, 2 * h), rib, 0.7); thin(sp, (-w, h), (w, h), rib, 0.7)
+    ly = 2 * h + 0.8 + 14.0 * open_
+    sp.sup(0.0 + 6.0 * open_, ly, w + 0.8, 1.0, tones(col), n=6.0)
+    sp.ell(-1.4 + 6.0 * open_, ly + 1.6, 1.6, 1.0, tones(rib)); sp.ell(1.4 + 6.0 * open_, ly + 1.6, 1.6, 1.0, tones(rib))
+    sp.anchors['top'] = (0.0, 2 * h)
+
+
+def scratch_off(sp, h):
+    x, y = h
+    sp.sup(x + 2.0, y + 3.0, 2.6, 3.6, tones((250, 230, 120)), n=6.0, stripes=False)
+    sp.txt_box(['LUCKY', 'LOSER'], (x - 0.4, y + 0.4, x + 4.4, y + 5.8), (200, 40, 40), pad=0.05)
+
+
+def phone_stand(sp, t=0.0, talk=0.0, expr='deadpan', look=(0.0, 0.0), blink=False):
+    """Glenn's phone on a little stand with the KNOCKR app: Doris's lens fills the screen, the LED ring pulses when she talks"""
+    sp.sup(0.0, 1.0, 4.0, 1.0, tones((60, 60, 70)), n=4.0)
+    sp.cap((0.0, 1.0), (1.0, 4.0), 0.6, 0.6, tones((60, 60, 70)))
+    sp.sup(1.0, 10.0, 4.0, 7.0, tones((24, 24, 30)), n=5.0, gloss=0.6)
+    sp.fill(sp.m_super(1.0, 10.2, 3.3, 6.2, 6.0)[0], (14, 20, 44), keep=True)
+    E = X(expr)
+    ex, ey = 1.0, 11.6
+    sp.ell(ex, ey, 2.4, 2.4, tones((20, 22, 28)))
+    sp.fill(sp.m_ell(ex + look[0] * 0.5, ey + look[1] * 0.5, 1.5, 1.5)[0], (40, 70, 110), keep=True)
+    sp.fill(sp.m_ell(ex + look[0] * 0.6, ey + look[1] * 0.6, 0.7, 0.7)[0], (8, 8, 12), keep=True)
+    if blink or E.get('lid', 0) > 0.4: sp.fill(sp.m_ell(ex, ey, 2.5, 2.5)[0] & (DX.YC > ey + 0.6), (60, 64, 76), keep=True)
+    for i in range(7):
+        u = (i - 3) / 3.0
+        sp.blob(ex + u * 2.0, ey + 3.0 + (1 - u * u) * 0.5 - u * E['bt'] * 0.8, 0.35, LED, keep=True)
+    puls = 0.35 + 0.65 * min(1.0, talk * (0.8 + 0.4 * math.sin(t * 40))) if talk > 0.05 else 0.3
+    rm = sp.m_ell(ex, 6.6, 1.6, 1.6)[0] & ~sp.m_ell(ex, 6.6, 1.0, 1.0)[0]
+    sp.fill(rm, mix((50, 54, 64), LED, puls), keep=True)
+    sp.anchors.update(head=(ex, ey), mouth=(ex, 6.6))
+
+
+def doorbell_box(sp, t=0.0, talk=0.0, expr='deadpan', look=(0.0, 0.0), boot=1.0):
+    """the unwrapped KNOCKR Pro retail box with the second doorbell inside its plastic window"""
+    sp.sup(0.0, 9.0, 7.0, 9.0, tones((240, 244, 250)), n=6.0, stripes=False)
+    sp.fill(sp.m_super(0.0, 16.0, 6.6, 1.6, 6.0)[0], (30, 60, 110))
+    sp.txt_box(['KNOCKR PRO'], (-6.0, 14.6, 6.0, 17.4), (250, 250, 250), pad=0.1)
+    sp.fill(sp.m_super(0.0, 7.6, 4.4, 6.6, 6.0)[0], (200, 220, 240))
+    E = X(expr)
+    sp.sup(0.0, 7.6, 2.6, 5.8, tones(DEV), n=4.0, gloss=0.8)
+    ex, ey = 0.0, 10.4
+    sp.ell(ex, ey, 1.8, 1.8, tones((20, 22, 28)))
+    if boot > 0.5:
+        sp.fill(sp.m_ell(ex + look[0] * 0.4, ey + look[1] * 0.4, 1.0, 1.0)[0], (40, 70, 110), keep=True)
+        sp.fill(sp.m_ell(ex + look[0] * 0.5, ey + look[1] * 0.5, 0.5, 0.5)[0], (8, 8, 12), keep=True)
+        for i in range(5):
+            u = (i - 2) / 2.0
+            sp.blob(ex + u * 1.4, ey + 2.4 - u * E['bt'] * 0.6, 0.3, LED, keep=True)
+    puls = 0.35 + 0.65 * min(1.0, talk * (0.8 + 0.4 * math.sin(t * 40))) if talk > 0.05 else 0.3
+    rm = sp.m_ell(0.0, 5.0, 1.3, 1.3)[0] & ~sp.m_ell(0.0, 5.0, 0.8, 0.8)[0]
+    sp.fill(rm, mix((50, 54, 64), LED, puls * boot), keep=True)
+    sp.anchors.update(head=(ex, ey), mouth=(0.0, 5.0))
+
+
+# ================================================================================ E04: the postal clerk, the mug, mom in her armchair
+UNIF = (70, 100, 160)
+SKIN_C = (214, 168, 132)
+
+
+def clerk(sp, t=0.0, expr='dead', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, stamp=False):
+    """the PARCEL POST clerk: «a melted candle» — droopy shoulders, a huge droopy walrus moustache, heavy eye bags, reading glasses on
+    the nose tip, a blue uniform shirt with an eagle-ish patch, a lanyard with 37 keys; only the upper body (he stands behind a counter)"""
+    E = X(expr)
+    if blink is None: blink = ((t + 0.9) % 3.4) < 0.16
+    sp.sup(0.0, 18.0, 12.0, 16.0, tones(UNIF), n=2.2)
+    sp.fill(sp.m_super(-5.0, 26.0, 2.6, 2.0, 4.0)[0], (240, 240, 230)); sp.blob(-5.0, 26.0, 0.9, (200, 40, 40), keep=True)
+    thin(sp, (0.0, 34.0), (0.0, 6.0), dark(UNIF, 0.6), 0.3)
+    sp.cap((0.6, 33.0), (1.0, 37.0), 2.4, 2.4, tones(dark(SKIN_C, 0.9)))
+    hx, hy = 1.4, 45.0
+    sp.ell(hx, hy, 7.4, 8.6, tones(SKIN_C))
+    sp.ell(hx - 6.6, hy + 0.4, 1.4, 2.0, tones(dark(SKIN_C, 0.92)))
+    sp.union([sp.m_ell(hx - 1.0, hy + 6.6, 6.6, 2.6)], tones((120, 110, 100)))                                 # thin grey hair
+    lx, ly = look
+    DX.eye(sp, hx + 3.2, hy + 1.6, 3.0, 2.8, E, (80, 80, 70), (lx, ly), blink, lash=INK, skin=SKIN_C, bold=1, bag=dark(SKIN_C, 0.7))
+    DX.eye(sp, hx - 1.4, hy + 1.6, 2.6, 2.6, E, (80, 80, 70), (lx, ly), blink, lash=INK, skin=SKIN_C, bold=1, bag=dark(SKIN_C, 0.7))
+    for gx in (hx + 3.2, hx - 1.4):                                                                              # glasses on the nose tip
+        rr = sp.m_ell(gx, hy - 0.8, 1.8, 1.2)[0] & ~sp.m_ell(gx, hy - 0.8, 1.3, 0.8)[0]
+        sp.fill(rr, (50, 40, 36), keep=True)
+    sp.ell(hx + 5.6, hy - 1.0, 1.6, 2.2, tones(dark(SKIN_C, 0.95)), gloss=0.8)
+    mx, my = hx + 3.0, hy - 5.4
+    DX.mouth(sp, mx, my, 4.0, E, mouth_, (140, 70, 60), inside=(90, 30, 30), teeth=(240, 236, 220), skin=SKIN_C, maxh=3.0)
+    sp.union([sp.m_ell(hx + 3.0, hy - 3.6, 5.0, 1.6), sp.m_ell(hx + 0.0, hy - 5.0, 1.6, 2.4), sp.m_ell(hx + 6.0, hy - 5.0, 1.6, 2.4)],
+             tones((150, 140, 130)))                                                                            # walrus moustache
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my), eyes=(hx + 1.0, hy + 1.6))
+    hn = hand_n if hand_n is not None else (10.0, 10.0 + (4.0 if stamp else 0.0))
+    kN, eN = ik((9.0, 28.0), hn, 7.0, 7.0, -1.0)
+    sp.cap((9.0, 28.0), kN, 2.8, 2.4, tones(UNIF)); sp.cap(kN, eN, 2.0, 1.8, tones(SKIN_C))
+    sp.ell(eN[0], eN[1], 2.0, 2.0, tones(SKIN_C))
+    sp.anchors['hand'] = eN
+
+
+def big_mug(sp, t=0.0):
+    """the $8 mug «WORLD'S OKAYEST SON» (feet = its bottom)"""
+    sp.sup(0.0, 4.0, 3.4, 4.0, tones((250, 250, 244)), n=4.0)
+    ring = sp.m_ell(4.2, 4.2, 1.8, 2.0)[0] & ~sp.m_ell(4.2, 4.2, 1.0, 1.2)[0]
+    sp.fill(ring, (210, 210, 200))
+    sp.txt_box(["WORLD'S", 'OKAYEST', 'SON'], (-3.0, 1.0, 3.0, 7.2), (200, 40, 60), pad=0.05)
+
+
+def mom_chair(sp, t=0.0, nod=0.0):
+    """Mom in her armchair, seen from behind/side in the TV light: curlers, a pink robe, a remote"""
+    sp.sup(0.0, 8.0, 10.0, 8.0, tones((120, 70, 90)), n=2.4)
+    sp.sup(-8.0, 18.0, 3.0, 12.0, tones((110, 64, 84)), n=2.4)
+    sp.ell(0.0, 16.0, 6.0, 7.0, tones((240, 160, 190)))
+    sp.ell(1.0 + nod, 27.0, 4.6, 5.0, tones((236, 196, 170)))
+    for q in range(5): sp.blob(-3.0 + q * 1.6, 31.0 + (q % 2) * 0.8, 1.1, (120, 150, 230), keep=True)
+    sp.cap((4.0, 18.0), (9.0, 21.0), 1.3, 1.1, tones((236, 196, 170)))
+    sp.sup(9.6, 21.4, 1.4, 0.6, tones((30, 30, 30)), n=4.0)
+    sp.anchors.update(head=(1.0, 27.0))

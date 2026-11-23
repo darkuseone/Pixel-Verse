@@ -48,6 +48,81 @@
         "public_owner_id": "4a0cd9b7d40066a27671b73690fc8bf9972f35dae487e85e08fa2f3918765459",
         "voice_id": "b6Q4e5E5onTR1TYEJh9z"
       }
+    },
+    "marcy": {
+      "name": "Marcy (HR)",
+      "color_caption": [
+        255,
+        140,
+        200
+      ],
+      "style": "[chipper] [bubbly] office party HR organizer",
+      "voice_id": "y3H6zY6KvCH2pEuQjmv8",
+      "voice": "MOTION DETECTED — Marcy (HR)",
+      "library": {
+        "public_owner_id": "8ddc896a6ccfffdfc129f1722b6efe46055ec420e0bf37828a3a41351e76e9c9",
+        "voice_id": "y3H6zY6KvCH2pEuQjmv8"
+      }
+    },
+    "clerk": {
+      "name": "Postal clerk",
+      "color_caption": [
+        200,
+        200,
+        210
+      ],
+      "style": "[bored] [deadpan] tired post office clerk",
+      "voice_id": "RIxlkEgVTlW2XuYWyYjL",
+      "voice": "MOTION DETECTED — Postal clerk",
+      "library": {
+        "public_owner_id": "abc8a67b5048cd0fa2d7a0d445a1143104efaf9bd737ffb70d7aa9ea882aa202",
+        "voice_id": "RIxlkEgVTlW2XuYWyYjL"
+      }
+    },
+    "mom": {
+      "name": "Glenn's mom (and her doorbell message)",
+      "color_caption": [
+        255,
+        190,
+        150
+      ],
+      "style": "[sweet] grandma",
+      "voice_id": "vFLqXa8bgbofGarf6fZh",
+      "voice": "MOTION DETECTED — Glenn's mom (and her doorbell message)",
+      "library": {
+        "public_owner_id": "ae23ca715ed6b339e4ad22f2d45dd40b36a6449e031b4f8970bfe29524bd1bbc",
+        "voice_id": "vFLqXa8bgbofGarf6fZh"
+      }
+    },
+    "ron": {
+      "name": "Ron (Linda's dad)",
+      "color_caption": [
+        255,
+        170,
+        90
+      ],
+      "style": "[grumpy] [whispering] cranky father-in-law",
+      "voice_id": "MKlLqCItoCkvdhrxgtLv",
+      "voice": "MOTION DETECTED — Ron (Linda's dad)",
+      "library": {
+        "public_owner_id": "675db5c1a341e2f820aefb00825680aa042d958a4a3aef3200735c799210dcb4",
+        "voice_id": "MKlLqCItoCkvdhrxgtLv"
+      }
+    },
+    "ultra": {
+      "name": "KNOCKR ULTRA (the replacement doorbell)",
+      "color_caption": [
+        200,
+        140,
+        255
+      ],
+      "style": "[robotic] [cold] smug premium doorbell",
+      "voice_id": "wDsJlOXPqcvIUKdLXjDs",
+      "voice": "MOTION DETECTED — KNOCKR ULTRA (the replacement doorbell)",
+      "library": {
+        "public_owner_id": "ad827f2c0300d36094ca79e518b1a5df8c3609eb269353c30dcec3ac8878a437",
+        "voice_id": "wDsJlOXPqcvIUKdLXjDs"
+      }
     }
   }
 }

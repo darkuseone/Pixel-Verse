@@ -1,0 +1,12 @@
+{
+ "g1": ["glenn", "[panicking, shouting, voice cracking] Linda's parents in ONE hour?! This house needs a WEEK!"],
+ "d1": ["doris", "[calm, quietly taunting] Motion detected. Laundry pile. Moving. Oh, that's GLENN."],
+ "g2": ["glenn", "[smug, proud] I have a SYSTEM. Everything goes in ONE closet."],
+ "d2": ["doris", "[dry, polite] Closet capacity: four hundred PERCENT. Door holding. For NOW."],
+ "g3": ["glenn", "[proud, out of breath] Fifty-nine minutes. Spotless. I'm a GENIUS."],
+ "d3": ["doris", "[calm, slowly] Motion detected. Ron. He's been in your driveway for FORTY minutes."],
+ "r1": ["ron", "[whispering, desperate, cranky] Glenn. Pat's still in the car. Can I hide in your CLOSET?"],
+ "g4": ["glenn", "[panic, shouting] Ron, NOT the clos-"],
+ "t1": ["trent", "[muffled, chipper, from under a pile] Hi, guys! Got a minute to talk about SOLAR?"],
+ "d4": ["doris", "[deadpan, slow] Motion detected. Two men. One salesman. Under a LAUNDRY pile."]
+}
