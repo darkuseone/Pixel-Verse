@@ -72,3 +72,5 @@ freepd_fensters_explanation (чудаковатая), freepd_silly_boy (дура
 (шалость). Обработка: highpass 140 Гц (убрать «гул» тубы на телефоне) + подъём 2,2 кГц, −20 LUFS. Komiku (чиптюн) — только по просьбе.
 **SFX (22.11.2026, E02):** calc_printer (3553), calc_printer_2 (3555), calc_key (3270), calc_ticket_tear (3288), paper_handle (0785),
 paper_crumple (1223), pencil_sign (0221) — BigSoundBank, CC0.
+**SFX (23.11.2026, E03–E06):** phone_vibrate (1035), party_horn (1556) — BigSoundBank, CC0.
+**SFX (23.11.2026, E05):** printer_start (0394), printer_print (0395), message_sent (1313) — BigSoundBank, CC0.

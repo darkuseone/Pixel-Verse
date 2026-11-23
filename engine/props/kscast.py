@@ -383,7 +383,7 @@ def shef(sp, t=0.0, expr='boss', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n
     sp.union([sp.m_super(mx, my + 1.4, 3.6, 1.0, 3.0)], tones(HAIR_S))                              # brush moustache
     for q in range(5): thin(sp, (mx - 3.0 + q * 1.4, my + 2.2), (mx - 3.2 + q * 1.4, my + 0.6), (70, 64, 64), 0.16)
     if hat_dm:
-        sp.union([sp.m_poly([(hx - 6.4, hy + 3.4), (hx + 6.4, hy + 3.4), (hx - 4.0, hy + 13.0)])], tones((220, 40, 40)))
+        sp.poly([(hx - 6.4, hy + 3.4), (hx + 6.4, hy + 3.4), (hx - 4.0, hy + 13.0)], tones((220, 40, 40)))
         sp.sup(hx, hy + 3.4, 6.8, 1.4, tones(WHITE), n=3.0)
         sp.blob(hx - 4.2, hy + 13.2, 1.5, WHITE)
     else:
@@ -542,3 +542,44 @@ def envelope(sp, h, label='ПРЕМИЯ'):
     thin(sp, (x + 3.0, y + 1.8), (x + 7.8, y + 4.8), (190, 180, 150), 0.2)
     sp.txt_box([label], (x - 1.4, y - 0.8, x + 7.4, y + 1.6), (190, 40, 40), pad=0.1)
     sp.anchors['envelope'] = (x + 3.0, y + 2.0)
+
+
+def bowl(sp, h, label='ЛЮДА', big=True):
+    """an enamel basin of olivier salad (the office party)"""
+    x, y = h
+    r = 7.0 if big else 3.6
+    sp.sup(x + 2.0, y + 1.0, r, r * 0.45, tones((236, 236, 230)), n=2.4)
+    sp.fill(sp.m_ell(x + 2.0, y + 1.0 + r * 0.38, r * 0.9, r * 0.25)[0], (240, 220, 150))
+    for q in range(6):
+        sp.blob(x + 2.0 - r * 0.7 + q * r * 0.28, y + 1.0 + r * 0.38 + (q % 2) * 0.4, 0.45, ((90, 160, 70), (230, 120, 60))[q % 2])
+    if big and label: sp.txt_box([label], (x - 2.6, y - 1.6, x + 6.6, y + 1.2), (190, 40, 40), pad=0.1)
+    sp.anchors['bowl'] = (x + 2.0, y + 1.0)
+
+
+def phone(sp, h, label='ТЁЩА'):
+    """a mobile phone with an incoming call on the screen"""
+    x, y = h
+    sp.sup(x + 1.0, y + 3.0, 1.8, 3.4, tones((30, 30, 36)), n=4.0)
+    sp.fill(sp.m_super(x + 1.0, y + 3.2, 1.4, 2.8, 4.0)[0], (90, 200, 120))
+    sp.txt_box([label], (x - 0.4, y + 2.0, x + 2.4, y + 4.6), (255, 255, 255), pad=0.05)
+    sp.anchors['phone'] = (x + 1.0, y + 3.2)
+
+
+def clipboard(sp, h, label='ГРАФИК'):
+    """a clipboard with a paper chart"""
+    x, y = h
+    sp.sup(x + 2.0, y + 4.0, 4.6, 6.0, tones((150, 110, 70)), n=6.0, stripes=False)
+    sp.fill(sp.m_super(x + 2.0, y + 3.6, 3.8, 5.0, 6.0)[0], (250, 248, 238))
+    sp.fill(sp.m_super(x + 2.0, y + 9.4, 1.6, 0.7, 4.0)[0], (190, 190, 196))
+    for q in range(4): thin(sp, (x - 1.2, y + 6.4 - q * 1.6), (x + 5.2, y + 6.4 - q * 1.6), (150, 150, 160), 0.15)
+    sp.txt_box([label], (x - 1.4, y + 7.0, x + 5.4, y + 8.8), (190, 40, 40), pad=0.05)
+    sp.anchors['clip'] = (x + 2.0, y + 4.0)
+
+
+def sheet(sp, h, lines=('ШЕФ —', 'ДЯТЕЛ')):
+    """a printed A4 sheet held in the hand (the chat printout)"""
+    x, y = h
+    sp.sup(x + 2.0, y + 5.0, 4.4, 6.0, tones((250, 250, 246)), n=8.0, stripes=False)
+    sp.txt_box(list(lines), (x - 1.8, y + 3.0, x + 5.8, y + 9.6), (40, 40, 44), pad=0.2)
+    for q in range(3): thin(sp, (x - 1.4, y + 2.0 - q * 1.0), (x + 5.4, y + 2.0 - q * 1.0), (170, 170, 176), 0.12)
+    sp.anchors['sheet'] = (x + 2.0, y + 5.0)
