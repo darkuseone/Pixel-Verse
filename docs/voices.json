@@ -980,6 +980,115 @@
    }
   },
   {
+   "slug": "klyuchevoy",
+   "char": "shef",
+   "voice_id": "plP8n3VRVPCbh78vs2Ei",
+   "status": "active",
+   "name": "Шеф Громов",
+   "voice_name": "Ключевой сотрудник — Шеф Громов",
+   "lines": 9,
+   "episodes": 3,
+   "samples": [
+    "series/klyuchevoy/voice/ep01v2/s2.mp3",
+    "series/klyuchevoy/voice/ep01/s2.mp3",
+    "series/klyuchevoy/voice/ep02/s2.mp3",
+    "series/klyuchevoy/voice/ep01v2/s1.mp3",
+    "series/klyuchevoy/voice/ep02/s1.mp3",
+    "series/klyuchevoy/voice/ep01v2/s3.mp3",
+    "series/klyuchevoy/voice/ep01/s3.mp3",
+    "series/klyuchevoy/voice/ep01v2/s4.mp3"
+   ],
+   "design": {
+    "description": "A hoarse, raspy elderly Russian man in his late sixties, an old-school Soviet-style office director. Croaky smoker's voice, slightly wheezy and nasal, grating and nagging, condescending and fake-friendly, speaks loudly and bossily with long drawn-out vowels. Comedic, characterful. Native Russian speaker.",
+    "text": "[хрипло, по-хозяйски, громко] Булкин! Задержись на пять минут. Разговор есть. [удивлённо, потом довольно] О, Булкин, ты ещё тут? Отлично! Закроешь офис. [с ленцой] Так это и был разговор! Свет не забудь.",
+    "picked": {
+     "i": 1,
+     "dur": 12.2,
+     "f0": 210.5,
+     "f0_iqr": 207.1,
+     "rate": 22.4,
+     "loud_sd": 5.1
+    }
+   },
+   "history": [
+    {
+     "voice_id": "SkGOoi8yfK3ONMNKMKj0",
+     "until": "2026-11-22"
+    }
+   ],
+   "account": {
+    "category": "generated",
+    "description": "A hoarse, raspy elderly Russian man in his late sixties, an old-school Soviet-style office director. Croaky smoker's voice, slightly wheezy and nasal, grating and nagging, condescending and fake-friendly, speaks loudly and bossily with long drawn-out vowels. Comedic, characterful. Native Russian speaker.",
+    "settings": null,
+    "created_at_unix": 1795385715
+   }
+  },
+  {
+   "slug": "klyuchevoy",
+   "char": "fikus",
+   "voice_id": "2Zst4rvX5S2nMbiauLDN",
+   "status": "library_or_premade",
+   "name": "Фикус Аркадий",
+   "voice_name": "Ключевой сотрудник — Фикус Аркадий",
+   "lines": 15,
+   "episodes": 3,
+   "samples": [
+    "series/klyuchevoy/voice/ep01/f3.mp3",
+    "series/klyuchevoy/voice/ep01v2/f1.mp3",
+    "series/klyuchevoy/voice/ep01/f1.mp3",
+    "series/klyuchevoy/voice/ep02/f1.mp3",
+    "series/klyuchevoy/voice/ep02/f6.mp3",
+    "series/klyuchevoy/voice/ep01/f4.mp3",
+    "series/klyuchevoy/voice/ep01/f6.mp3",
+    "series/klyuchevoy/voice/ep01v2/f3.mp3"
+   ]
+  },
+  {
+   "slug": "klyuchevoy",
+   "char": "edik",
+   "voice_id": "6Pm064JKx8KhPSIAdbHd",
+   "status": "library_or_premade",
+   "name": "Эдик Булкин",
+   "voice_name": "Ключевой сотрудник — Эдик Булкин",
+   "lines": 14,
+   "episodes": 3,
+   "samples": [
+    "series/klyuchevoy/voice/ep01/e2.mp3",
+    "series/klyuchevoy/voice/ep01v2/e1.mp3",
+    "series/klyuchevoy/voice/ep02/e1.mp3",
+    "series/klyuchevoy/voice/ep01v2/e2.mp3",
+    "series/klyuchevoy/voice/ep01v2/e3.mp3",
+    "series/klyuchevoy/voice/ep02/e4.mp3",
+    "series/klyuchevoy/voice/ep01/e1.mp3",
+    "series/klyuchevoy/voice/ep02/e3.mp3"
+   ]
+  },
+  {
+   "slug": "klyuchevoy",
+   "char": "lyuda",
+   "voice_id": "Fy6bUBXCIVErEtK9FN5d",
+   "status": "library_or_premade",
+   "name": "Людмила Степановна",
+   "voice_name": "Ключевой сотрудник — Людмила Степановна",
+   "lines": 2,
+   "episodes": 1,
+   "samples": [
+    "series/klyuchevoy/voice/ep02/l2.mp3",
+    "series/klyuchevoy/voice/ep02/l1.mp3"
+   ]
+  },
+  {
+   "slug": "klyuchevoy",
+   "char": "fikus_b",
+   "voice_id": "0vJ96DzHePfGJitmI6UX",
+   "status": "library_or_premade",
+   "name": "Фикус Аркадий (проба Ivan)",
+   "voice_name": "Ключевой сотрудник — Фикус Аркадий (проба Ivan)",
+   "lines": 0,
+   "episodes": 0,
+   "samples": []
+  },
+  {
    "slug": "mazutych",
    "char": "wheel",
    "voice_id": "qCq2QOkDqmbtFpDmNPRP",
@@ -1644,12 +1753,16 @@
    "status": "active",
    "name": "Fran (neon flamingo sign)",
    "voice_name": "STILL 1986 — Fran (neon flamingo sign)",
-   "lines": 4,
-   "episodes": 1,
+   "lines": 27,
+   "episodes": 7,
    "samples": [
     "series/still-1986/voice/ep01/f2.mp3",
     "series/still-1986/voice/ep01/f3.mp3",
+    "series/still-1986/voice/movie/ff1.mp3",
     "series/still-1986/voice/ep01/f1.mp3",
+    "series/still-1986/voice/ep05/f2.mp3",
+    "series/still-1986/voice/ep02/f2.mp3",
+    "series/still-1986/voice/ep03/f3.mp3",
     "series/still-1986/voice/ep01/f4.mp3"
    ],
    "design": {
@@ -1678,17 +1791,37 @@
    "status": "library_or_premade",
    "name": "Vince Velour",
    "voice_name": "STILL 1986 — Vince Velour",
-   "lines": 10,
-   "episodes": 1,
+   "lines": 63,
+   "episodes": 7,
    "samples": [
+    "series/still-1986/voice/movie/h1.mp3",
     "series/still-1986/voice/ep01/v5.mp3",
-    "series/still-1986/voice/ep01/v1.mp3",
-    "series/still-1986/voice/ep01/v2.mp3",
-    "series/still-1986/voice/ep01/v3.mp3",
-    "series/still-1986/voice/ep01/v9.mp3",
-    "series/still-1986/voice/ep01/v10.mp3",
-    "series/still-1986/voice/ep01/v6.mp3",
-    "series/still-1986/voice/ep01/v4.mp3"
+    "series/still-1986/voice/movie/l1.mp3",
+    "series/still-1986/voice/movie/m1.mp3",
+    "series/still-1986/voice/movie/f1.mp3",
+    "series/still-1986/voice/movie/s1.mp3",
+    "series/still-1986/voice/movie/d1.mp3",
+    "series/still-1986/voice/ep01/v1.mp3"
+   ]
+  },
+  {
+   "slug": "still-1986",
+   "char": "roofe",
+   "voice_id": "weA4Q36twV5kwSaTEL0Q",
+   "status": "library_or_premade",
+   "name": "ROOF-E (car assistant)",
+   "voice_name": "STILL 1986 — ROOF-E (car assistant)",
+   "lines": 9,
+   "episodes": 2,
+   "samples": [
+    "series/still-1986/voice/movie/xf1.mp3",
+    "series/still-1986/voice/movie/xc1.mp3",
+    "series/still-1986/voice/movie/xr2.mp3",
+    "series/still-1986/voice/movie/xr1.mp3",
+    "series/still-1986/voice/ep05/r1.mp3",
+    "series/still-1986/voice/ep05/r3.mp3",
+    "series/still-1986/voice/movie/xr3.mp3",
+    "series/still-1986/voice/ep05/r2.mp3"
    ]
   },
   {
@@ -1698,12 +1831,17 @@
    "status": "library_or_premade",
    "name": "Rey (tow truck driver)",
    "voice_name": "STILL 1986 — Rey (tow truck driver)",
-   "lines": 3,
-   "episodes": 1,
+   "lines": 8,
+   "episodes": 3,
    "samples": [
+    "series/still-1986/voice/movie/rc2.mp3",
+    "series/still-1986/voice/movie/rc1.mp3",
     "series/still-1986/voice/ep01/r1.mp3",
     "series/still-1986/voice/ep01/r2.mp3",
-    "series/still-1986/voice/ep01/r3.mp3"
+    "series/still-1986/voice/ep01/r3.mp3",
+    "series/still-1986/voice/movie/rl1.mp3",
+    "series/still-1986/voice/ep06/r2.mp3",
+    "series/still-1986/voice/ep06/r1.mp3"
    ]
   },
   {
@@ -1713,20 +1851,17 @@
    "status": "library_or_premade",
    "name": "Tiffany (box office, Gen Z)",
    "voice_name": "STILL 1986 — Tiffany (box office, Gen Z)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
-  },
-  {
-   "slug": "still-1986",
-   "char": "diaz",
-   "voice_id": "KvaCHcJoMXfOzwtsULOZ",
-   "status": "library_or_premade",
-   "name": "Officer Diaz (marine patrol)",
-   "voice_name": "STILL 1986 — Officer Diaz (marine patrol)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 7,
+   "episodes": 2,
+   "samples": [
+    "series/still-1986/voice/ep02/t2.mp3",
+    "series/still-1986/voice/ep02/t5.mp3",
+    "series/still-1986/voice/movie/tc1.mp3",
+    "series/still-1986/voice/ep02/t4.mp3",
+    "series/still-1986/voice/ep02/t6.mp3",
+    "series/still-1986/voice/ep02/t1.mp3",
+    "series/still-1986/voice/ep02/t3.mp3"
+   ]
   },
   {
    "slug": "still-1986",
@@ -1735,20 +1870,31 @@
    "status": "library_or_premade",
    "name": "Gary (Vince's boss)",
    "voice_name": "STILL 1986 — Gary (Vince's boss)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "lines": 6,
+   "episodes": 2,
+   "samples": [
+    "series/still-1986/voice/ep04/g3.mp3",
+    "series/still-1986/voice/movie/gc1.mp3",
+    "series/still-1986/voice/ep04/g1.mp3",
+    "series/still-1986/voice/ep04/g5.mp3",
+    "series/still-1986/voice/ep04/g2.mp3",
+    "series/still-1986/voice/ep04/g4.mp3"
+   ]
   },
   {
    "slug": "still-1986",
-   "char": "roofe",
-   "voice_id": "weA4Q36twV5kwSaTEL0Q",
+   "char": "diaz",
+   "voice_id": "KvaCHcJoMXfOzwtsULOZ",
    "status": "library_or_premade",
-   "name": "ROOF-E (car assistant)",
-   "voice_name": "STILL 1986 — ROOF-E (car assistant)",
-   "lines": 0,
-   "episodes": 0,
-   "samples": []
+   "name": "Officer Diaz (marine patrol)",
+   "voice_name": "STILL 1986 — Officer Diaz (marine patrol)",
+   "lines": 3,
+   "episodes": 2,
+   "samples": [
+    "series/still-1986/voice/movie/dc1.mp3",
+    "series/still-1986/voice/ep03/d1.mp3",
+    "series/still-1986/voice/ep03/d2.mp3"
+   ]
   },
   {
    "slug": "sunny-palms-hoa",
@@ -2590,6 +2736,36 @@
    "deleted_reason": "auto: room for still-1986/fran"
   },
   {
+   "slug": "unlisted: Кощей из панельки",
+   "char": "Баба Яга",
+   "voice_id": "LakpqgKj0ywvEMqSS2OQ",
+   "status": "deleted",
+   "name": "Кощей из панельки — Баба Яга",
+   "voice_name": "Кощей из панельки — Баба Яга",
+   "lines": 0,
+   "episodes": 0,
+   "samples": [
+    "library/voice_archive/unlisted_Кощей_из_панельки/Баба Яга_preview.mp3"
+   ],
+   "unlisted": true,
+   "account": {
+    "category": "generated",
+    "description": "A very old cunning village grandmother who is the self-appointed head of the apartment building, sitting on the bench by the entrance and knowing everyone's business. Raspy, croaky, crackly old woman's voice, fast gossipy patter, sly and sarcastic, cackles, sharp and bossy, with a light rural Russian accent. Woman in her eighties. Native Russian speaker, very expressive and funny.",
+    "settings": {
+     "stability": 0.5,
+     "use_speaker_boost": true,
+     "similarity_boost": 0.75,
+     "style": 0.0,
+     "speed": 1.0
+    },
+    "labels": {},
+    "created_at_unix": 1792383388
+   },
+   "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/424067ba319c47ccbff0e28903f7041c/voices/LakpqgKj0ywvEMqSS2OQ/9cf16702-f95d-47bf-9a0e-3e6ce4656900.mp3",
+   "deleted_on": "2026-11-22",
+   "deleted_reason": "auto: room for klyuchevoy/shef"
+  },
+  {
    "slug": "valera-i-kot",
    "char": "valera",
    "voice_id": "1q0c8LfKB7t97Mup7LOS",
@@ -3035,9 +3211,8 @@
   "7b7c6njy94EqNbu1iSbC": "Кощей из панельки — Змей Горыныч",
   "9TtJLIijaIcVmOE5P20m": "Кощей из панельки — Галина Аркадьевна",
   "LkhQGB8Q82s4UQOnplHh": "Кощей из панельки — Домовой Кузьмич",
-  "LakpqgKj0ywvEMqSS2OQ": "Кощей из панельки — Баба Яга",
   "14NozJq5eoBmDc1FXFDq": "NIKITA2",
   "7fU3YUxRrVGjNaZ5dzEH": "NIKITA"
  },
- "updated": "2026-11-12 22:12"
+ "updated": "2026-11-22 22:15"
 }
