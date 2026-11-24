@@ -30,7 +30,7 @@ FT = M.Face([(0.0, 'sales')], TAB, seed=5)
 
 W = 'living'
 MON = (1046.0, 172.0)                    # the KNOCKR wall monitor next to the front door
-MS = 2.2
+MS = 3.0
 CLO = (80.0, 480.0)                      # the closet door (bottom centre)
 
 
@@ -162,14 +162,14 @@ from props.kspix import thin
 
 
 def r_monitor(t, u):
-    Z = 3.4 + 0.2 * glide(u / 4.6)
-    cx, cy = MON[0] - 6.0, MON[1] - 30.0
+    Z = 3.2 + 0.2 * glide(u / 4.6)
+    cx, cy = MON[0] + 2.0, MON[1] - 30.0
     return shot(cx, cy, Z, t, [monitor(t, Z, inset=car_inset(t) if t > 19.6 else None)], kick=kick(t, [(TWIST, 0.8)]))
 
 
 def r_ron(t, u):
     Z = 1.6
-    cx, cy = 1060.0, 340.0
+    cx, cy = 1100.0, 330.0
     def door(big, v_):
         x0, y0 = v_.opt(1112.0, 85.0); x1, y1 = v_.opt(1268.0, 520.0)
         xa, xb, ya, yb = int(max(0, x0)), int(min(OUT_W, x1)), int(max(0, y0)), int(min(OUT_H, y1))
