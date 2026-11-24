@@ -1,0 +1,10 @@
+{
+ "g1": ["glenn", "[outraged, shouting, voice cracking] Thirty-eight dollars to ship an EIGHT dollar mug?!"],
+ "c1": ["clerk", "[bored, flat, monotone] Ground shipping. Arrives after Christmas. NEXT."],
+ "g2": ["glenn", "[smug, proud] I have a SYSTEM. I'll drive it MYSELF."],
+ "d1": ["doris", "[dry, quietly taunting] Motion detected. Glenn. Driving six hours. To save thirty BUCKS."],
+ "g3": ["glenn", "[exhausted, whispering, proud] Two in the morning. Mom's house. Mission COMPLETE."],
+ "m1": ["mom", "[sweet, recorded doorbell message] Hi, sweetie! Mommy's on Do Not Disturb. Leave it by the GNOME!"],
+ "d2": ["doris", "[sweetly, smug] Huh. Wonder where she learned THAT."],
+ "t1": ["trent", "[chipper, mouth full of pie] Glenn! Your mom said YES to solar. Want some PIE?"]
+}

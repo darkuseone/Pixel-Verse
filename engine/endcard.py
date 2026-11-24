@@ -100,6 +100,14 @@ def card(style='default', lang='us', width=None, promise=None):
         from props import teshkit as K
         title = fit(K.title_trim(K.hook_title([txt], 96 if width <= 1080 else 116, width=width + 300)), width - 60)
         img = _stack([title, _bell(11)], width, gap=6)
+    elif style == 'ks':                                          # «Ключевой сотрудник»: sticky-note letters + bell
+        from props import kskit as K
+        title = fit(K.title_trim(K.note_title([txt], 96 if width <= 1080 else 116, width=width + 300, tape=False)), width - 60)
+        img = _stack([title, _bell(11)], width, gap=6)
+    elif style == 'md':                                          # «MOTION DETECTED»: neon-notification letters + bell
+        from props import mdkit as K
+        title = fit(K.title_trim(K.neon_title([txt], 104 if width <= 1080 else 124, width=width + 300)), width - 60)
+        img = _stack([title, _bell(11)], width, gap=6)
     elif style == 'winter':                                     # «Валера и кот»: frosty winter_title letters (the series hook style) + bell
         title = fit(_trim(O.winter_title([txt], 92 if width <= 1080 else 110, width=width + 300)), width - 60)
         img = _stack([title, _bell(11)], width, gap=6)

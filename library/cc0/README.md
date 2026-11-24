@@ -61,3 +61,16 @@ Komiku — французский композитор, публикует вс�
 
 Использование: в `timeline.py` пути `library/cc0/sfx/<имя>.mp3` и `library/cc0/music/<имя>.mp3`; музыка в `BEDS` с `loop_sec` = длина
 файла (52–60 с), громкость 0,8–0,9 с дакингом (под речью ×0,4) и вырезом частот голоса (7-й элемент BEDS: `equalizer=f=1500:t=q:w=0.7:g=-7,equalizer=f=3200:t=q:w=1:g=-4`): речь на 16–18 дБ громче музыки, музыку слышно в паузах. При 1,2–1,3 без выреза музыка перебивала голоса (владелец 02.11.2026), при 0,15–0,3 её не слышно.
+
+## Пополнение 22.11.2026 (стандарт «голливудский уровень», «Ключевой сотрудник»)
+**SFX — BigSoundBank (CC0), нарезка + loudnorm:** clock_tick (0007), clock_tictac_loop (2816), keys_jingle (0445, связка ключей в руке),
+keys_lock_door (2425), door_slam_office (1501), door_slam_2 (0103), light_switch_click (0026), old_switch (0540), keyboard_slow (1733),
+coat_rustle (1104), yawn_man (1406), steps_wood_floor (0165), door_unlock_open (1320), snore_man (0170).
+**Музыка — FreePD (Kevin MacLeod и др., public domain / CC0; сайт закрыт, зеркало archive.org/details/freepd, раздел comedy/),
+живые/оркестровые инструменты, НЕ чиптюн:** freepd_baltic_levity (лёгкая, светлая), freepd_lurking_sloth (крадущееся ожидание),
+freepd_fensters_explanation (чудаковатая), freepd_silly_boy (дурашливая), freepd_busybody (суета, пиццикато), freepd_managing_mischief
+(шалость). Обработка: highpass 140 Гц (убрать «гул» тубы на телефоне) + подъём 2,2 кГц, −20 LUFS. Komiku (чиптюн) — только по просьбе.
+**SFX (22.11.2026, E02):** calc_printer (3553), calc_printer_2 (3555), calc_key (3270), calc_ticket_tear (3288), paper_handle (0785),
+paper_crumple (1223), pencil_sign (0221) — BigSoundBank, CC0.
+**SFX (23.11.2026, E03–E06):** phone_vibrate (1035), party_horn (1556) — BigSoundBank, CC0.
+**SFX (23.11.2026, E05):** printer_start (0394), printer_print (0395), message_sent (1313) — BigSoundBank, CC0.

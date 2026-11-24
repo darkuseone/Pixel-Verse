@@ -1,0 +1,16 @@
+{
+ "g1": ["glenn", "[furious, shouting, voice cracking] I was HOME! All DAY! And they leave me THIS?!"],
+ "d1": ["doris", "[calm, polite, quietly taunting] You were home, Glenn. Nine hours. In the ROBE."],
+ "g2": ["glenn", "[outraged, fast] I took a vacation day to sign for Linda's GIFT!"],
+ "g3": ["glenn", "[smug, proud] I had a SYSTEM. Chair. Coffee. Eyes on that DOOR."],
+ "d2": ["doris", "[dry, helpful] Correct. Let's watch two-fourteen."],
+ "g4": ["glenn", "[stunned, small voice] He was RIGHT there. Why didn't it RING?"],
+ "d3": ["doris", "[sweetly, slowly] Do Not Disturb, Glenn. You set it Monday. For SOLICITORS."],
+ "g5": ["glenn", "[panicking, shouting] Unmute it! Unmute it NOW!"],
+ "d4": ["doris", "[cheerful] Done."],
+ "t1": ["trent", "[chipper, big infomercial smile] Hi there! Got a minute to talk about SOLAR?"],
+ "g6": ["glenn", "[flat, defeated, quiet] Doris. Mute it."],
+ "d5": ["doris", "[helpful, casual] Muted. Oh, and the depot closes at FIVE."],
+ "g7": ["glenn", "[panic, shouting, voice cracking] It's four fifty-EIGHT!"],
+ "d6": ["doris", "[deadpan, slow] Motion detected. Glenn. Running. In the ROBE."]
+}

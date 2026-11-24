@@ -1,0 +1,13 @@
+{
+ "g1": ["glenn", "[furious, shouting, voice cracking] Twenty-five dollar LIMIT! And Kyle brought a SCRATCH-OFF?!"],
+ "m1": ["marcy", "[chipper, bubbly, HR announcer] White Elephant rules, Glenn! Any gift can be STOLEN. Three times, max!"],
+ "g2": ["glenn", "[smug, whispering] I have a SYSTEM. Let them fight. I steal LAST."],
+ "d1": ["doris", "[dry, quietly taunting] Motion detected. Glenn. Staring at the GOLD box. Like a hawk."],
+ "m2": ["marcy", "[excited, announcing] The gold box! Stolen TWICE! One steal left!"],
+ "g3": ["glenn", "[triumphant, loud] Sorry, Marcy. It's MINE!"],
+ "e1": ["doris", "[calm, robotic, freshly booted] Motion detected. Glenn. Opening ME."],
+ "d2": ["doris", "[horrified but polite, whispering] Oh no. There's TWO of us now."],
+ "m3": ["marcy", "[confused, disgusted] Who brings a DOORBELL to a gift exchange?"],
+ "t1": ["trent", "[chipper, big infomercial smile] That's me! Got a minute to talk about SOLAR?"],
+ "e2": ["doris", "[deadpan, slow] Motion detected. Glenn. Regifting ME."]
+}
