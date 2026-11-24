@@ -210,8 +210,8 @@ def r_dcu(t, u):
 
 
 def r_tag(t, u):
-    Z = 2.2
-    cx, cy = 300.0, 380.0
+    Z = 1.75
+    cx, cy = 330.0, 360.0
     g = mglenn(t, Z, hand_n=(20.0, 58.0 + 2 * math.sin(t * 20)), prop_n=None, base=(-0.9, -0.3))
     def f(big, v_):
         if u > 1.2:
@@ -228,7 +228,7 @@ def _my_tag(sp):
 
 def r_door(t, u):
     Z = 1.6
-    cx, cy = 300.0, 330.0
+    cx, cy = 335.0, 330.0
     k = sm(u / 0.4)
     tr = K.A(C.trent, 245.0, 512.0, K.ws_at(512.0, 'momporch') * 1.34 * 3 * Z, flip=False, rim=None,
              **kw_(FT, 'trent', t, (0.9, 0.0), hand_n=(13.0, 44.0), prop_n=lambda sp, h: C.mug(sp, h, 'PIE')))
@@ -239,11 +239,12 @@ def r_door(t, u):
 
 ST_MOON = K.st('MOM: DO NOT DISTURB', fg=(150, 170, 255), size=52)
 ST_TOT = K.st('$80 > $38', fg=(255, 120, 90), size=72)
+ST_TAG = K.st('SORRY I MISSED YOU, MOM', fg=(255, 150, 60), size=44)
 R = [r_hook, r_clerk, r_sys, r_map, r_mom, r_press, r_window, r_dcu, r_tag, r_door]
 assert len(R) == len(CUTS) - 1 == len(NAMES)
 
 SHOW = K.Show(EPI, ['$38 TO SHIP', 'A MUG?!'], hook_t=(0.10, 2.7), hook_y=1080, hook_size=76,
-              stickers=[(ST_TOT, 12.6, 13.9, 540, 1720 - 640), (ST_MOON, PRESS + 0.3, 19.2, 540, 1250)],
+              stickers=[(ST_TOT, 12.6, 13.9, 540, 1720 - 640), (ST_MOON, PRESS + 0.3, 19.2, 540, 1250), (ST_TAG, 24.95, DOOR, 540, 1300)],
               flashes=[TWIST], mosaics=[8.96, 13.9],
               cap_y={0: 1580, 1: 1580, 2: 1580, 3: 1060, 4: 1580, 5: 1580, 6: 1600, 7: 1600, 8: 1580, 9: 1580})
 
