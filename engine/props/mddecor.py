@@ -126,7 +126,16 @@ def flakes(box, n=60, seed=7):
     return f
 
 
+def dress_living(W):
+    D.attach(W, [
+        (R.plate(52, 26, ['HOME', 'SWEET HOME'], bg=(250, 246, 230), colors=[(120, 80, 50), (120, 80, 50)], border=(120, 80, 50), pad=0.6), 294, 140),
+        (R.plate(36, 40, ['DO NOT', 'OPEN', '(GLENN)'], bg=YEL, colors=[RED, RED, BLK], border=BLK, pad=0.6, tilt=-3), 80, 300),
+        (R.plate(40, 14, ['WIPE FEET'], bg=(30, 110, 60), fg=WH, border=None, pad=0.4), 1150, 540),
+    ])
+
+
 def dress(name, W):
+    if name.startswith('living'): return dress_living(W)
     if name.startswith('postoffice'): return dress_postoffice(W)
     if name.startswith('momporch'): return dress_momporch(W)
     if name.startswith('breakroom'): return dress_breakroom(W)
@@ -136,5 +145,7 @@ def dress(name, W):
             (R.plate(70, 24, ["BARRY'S", 'WINTER WONDERLAND'], bg=(30, 110, 60), colors=[WH, YEL], border=WH, pad=0.7), 800, 412),
             (R.plate(34, 16, ['ONE CLICK', 'SETUP!'], bg=WH, colors=[RED, BLK], border=RED, pad=0.5), 960, 418),
         ])
+    if name == 'porch_dawn':
+        D.attach(W, [(R.plate(40, 26, ['FINAL', 'ATTEMPT'], bg=(255, 140, 40), colors=[(40, 20, 10), (200, 20, 20)], border=None, pad=0.6), 232, 330)])
     if name.startswith('porch'): return dress_porch(W)
     if name.startswith('hall'): return dress_hall(W)

@@ -19,11 +19,12 @@ from props import mddecor as DEC
 from props.kskit import wpt, aout, _dil, title_trim, blur
 
 SLUG = 'motion-detected'
-COL = dict(glenn=(255, 196, 70), doris=(110, 230, 255), trent=(180, 255, 120), marcy=(255, 140, 200), clerk=(200, 200, 210), mom=(255, 190, 150))
+COL = dict(glenn=(255, 196, 70), doris=(110, 230, 255), trent=(180, 255, 120), marcy=(255, 140, 200), clerk=(200, 200, 210), mom=(255, 190, 150), ron=(255, 170, 90), ultra=(200, 140, 255))
 INK = KX.INK
 RIM = ((255, 190, 110), (170, 120, 255))                # porch lamp amber / dusk violet
 FLOOR = {'porch': (520.0, 3.65, 0.010), 'hall': (560.0, 4.30, 0.012), 'breakroom': (690.0, 3.10, 0.008),
-         'postoffice': (690.0, 2.90, 0.008), 'momporch': (528.0, 2.90, 0.010)}
+         'postoffice': (690.0, 2.90, 0.008), 'momporch': (528.0, 2.90, 0.010),
+         'living': (560.0, 3.90, 0.010)}
 
 
 def ws_at(wy, name='porch'):
@@ -101,7 +102,9 @@ def light_momporch(v, t=0.0):
 
 
 LIGHT = dict(porch=light_porch, hall=light_hall, porch_night=light_porch_night, breakroom=light_office, postoffice=light_office,
-             momporch=light_momporch)
+             momporch=light_momporch, living=lambda v, t=0.0: light_hall(v, t),
+             porch_dawn=lambda v, t=0.0: Light(amb=(1.0, 0.92, 0.98), keys=_keys(v, [(390, 175, 260, (255, 196, 110), 0.35),
+                                                                                  (900, 150, 520, (255, 170, 150), 0.25)]), grad=(1.02, 0.92)))
 
 
 def shot(name, cx, cy, Z, acts=(), par=(0.0, 0.0), fx_=None, pre=None, t=0.0, kick=(0, 0), focus=None, dof_k=0.0, haze=None,

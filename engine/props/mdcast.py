@@ -283,8 +283,10 @@ def doris(sp, t=0.0, expr='deadpan', mouth_=0.0, look=(0.0, 0.0), blink=None, dn
 
 
 # ================================================================================ TRENT
-def trent(sp, t=0.0, expr='sales', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None, walk=None):
+def trent(sp, t=0.0, expr='sales', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, hand_f=None, prop_n=None, prop_f=None, walk=None,
+          courier=False):
     E = X(expr)
+    VEST = TEAL if courier else globals()['VEST']
     if blink is None: blink = ((t + 1.9) % 4.6) < 0.12
     br = 0.3 * math.sin(t * 2.2)
     bob = abs(math.sin(walk)) * 1.0 if walk is not None else 0.0
@@ -311,7 +313,7 @@ def trent(sp, t=0.0, expr='sales', mouth_=0.0, look=(0.6, 0.0), blink=None, hand
     thin(sp, Q(0.0, 52.0), Q(0.0, 25.0), (170, 170, 170), 0.22)
     thin(sp, Q(-3.0, 52.6), Q(-1.6, 40.0), (40, 140, 60), 0.35); thin(sp, Q(3.0, 52.6), Q(1.6, 40.0), (40, 140, 60), 0.35)
     sp.sup(*Q(-1.0, 37.0), 3.0, 3.6, tones((250, 250, 244)), n=5.0, stripes=False)
-    sp.txt_box(['SUNNY', 'SIDE'], (Q(-3.6, 34.4)[0], Q(-3.6, 34.4)[1], Q(1.6, 39.6)[0], Q(1.6, 39.6)[1]), (230, 140, 20), pad=0.05)
+    sp.txt_box(['PAR', 'CELZ'] if courier else ['SUNNY', 'SIDE'], (Q(-3.6, 34.4)[0], Q(-3.6, 34.4)[1], Q(1.6, 39.6)[0], Q(1.6, 39.6)[1]), (230, 140, 20), pad=0.05)
     sp.cap(Q(0.8, 52.0), Q(1.2, 56.0), 2.4, 2.4, tones(dark(SKIN_T, 0.9)))
     hx, hy = Q(1.6, 64.0)
     head = sp.union([sp.m_super(hx, hy, 7.0, 7.8, 2.6), sp.m_ell(hx + 0.6, hy - 5.0, 6.4, 3.6)], tones(SKIN_T))     # square jaw
@@ -612,3 +614,113 @@ def mom_chair(sp, t=0.0, nod=0.0):
     sp.cap((4.0, 18.0), (9.0, 21.0), 1.3, 1.1, tones((236, 196, 170)))
     sp.sup(9.6, 21.4, 1.4, 0.6, tones((30, 30, 30)), n=4.0)
     sp.anchors.update(head=(1.0, 27.0))
+
+
+# ================================================================================ E05: RON, laundry, the avalanche, the wall monitor
+CAMO = (96, 110, 70)
+SKIN_R = (236, 176, 150)
+
+
+def ron(sp, t=0.0, expr='dead', mouth_=0.0, look=(0.6, 0.0), blink=None, hand_n=None, hand_f=None, walk=None):
+    """RON, Linda's dad: «a fire hydrant» — short, barrel-shaped, a bucket fishing hat full of lures, huge white eyebrows, a red
+    bulb nose, a camo vest over a grey sweatshirt, cargo pants, car keys on a carabiner"""
+    E = X(expr)
+    if blink is None: blink = ((t + 1.5) % 3.9) < 0.13
+    sw = math.sin(walk) * 2.4 if walk is not None else 0.0
+    for k_, dx in enumerate((-3.6, 3.6)):
+        s_ = sw if k_ else -sw
+        sp.cap((dx, 22.0), (dx + s_, 3.0), 3.4, 3.0, tones((110, 100, 80) if k_ else (90, 82, 64)))
+        sp.sup(dx + s_ + 1.4, 1.2, 3.8, 1.6, tones((70, 50, 36)), n=2.4)
+    sp.sup(0.0, 34.0, 11.6, 14.0, tones((160, 160, 166)), n=2.2)
+    vest = sp.m_super(0.0, 34.0, 11.8, 13.4, 2.4)[0] & ~sp.m_poly([(-2.0, 48.0), (2.0, 48.0), (0.6, 24.0), (-0.6, 24.0)])
+    sp.paint(vest, tones(CAMO), None)
+    rng = np.random.default_rng(3)
+    for _ in range(14):
+        x, y = rng.uniform(-10, 10), rng.uniform(22, 46)
+        sp.fill(sp.m_ell(x, y, 1.6, 1.0)[0] & vest, dark(CAMO, 0.7 if _ % 2 else 1.2))
+    thin(sp, (8.0, 30.0), (9.0, 26.0), (200, 200, 210), 0.4)
+    sp.cap((0.6, 47.0), (0.8, 49.0), 2.6, 2.6, tones(dark(SKIN_R, 0.9)))
+    hx, hy = 1.0, 56.0
+    sp.ell(hx, hy, 6.8, 7.2, tones(SKIN_R))
+    sp.ell(hx - 6.4, hy, 1.8, 2.6, tones(dark(SKIN_R, 0.92)))
+    sp.union([sp.m_super(hx, hy + 6.4, 7.6, 3.0, 3.0), sp.m_super(hx, hy + 3.6, 9.4, 1.2, 4.0)], tones((90, 110, 80)))   # bucket hat
+    for i, (x, c) in enumerate(((hx - 4.0, (240, 60, 40)), (hx + 0.0, (250, 210, 50)), (hx + 4.0, (60, 160, 240)))):
+        sp.blob(x, hy + 6.6 + (i % 2), 0.9, c, keep=True)
+    lx, ly = look
+    DX.eye(sp, hx + 3.0, hy + 0.6, 2.4, 2.4, E, (70, 90, 110), (lx, ly), blink, lash=INK, skin=SKIN_R, bold=1, bag=dark(SKIN_R, 0.8))
+    DX.eye(sp, hx - 1.4, hy + 0.6, 2.2, 2.2, E, (70, 90, 110), (lx, ly), blink, lash=INK, skin=SKIN_R, bold=1)
+    for bx, s in ((hx + 3.0, 1), (hx - 1.4, -1)):                                                              # huge white brows
+        sp.ell(bx, hy + 3.0 + E['bl'] * 0.6, 2.6, 1.0, tones((244, 244, 240)), ang=s * (0.2 + E['bt'] * 0.4), ol=False)
+    sp.ell(hx + 5.4, hy - 1.4, 2.0, 1.8, tones((220, 90, 90)), gloss=1.0)                                     # red bulb nose
+    mx, my = hx + 2.8, hy - 4.6
+    DX.mouth(sp, mx, my, 3.6, E, mouth_, (140, 70, 60), inside=(90, 30, 30), teeth=(240, 236, 220), skin=SKIN_R, maxh=3.0)
+    DX.stubble(sp, sp.m_ell(hx + 1.0, hy - 4.6, 5.0, 2.4)[0], dark(SKIN_R, 0.7), 0.3, 5)
+    sp.anchors.update(head=(hx, hy), mouth=(mx, my), eyes=(hx + 1.0, hy + 0.6))
+    hn = hand_n if hand_n is not None else (12.0, 26.0)
+    kN, eN = ik((10.0, 44.0), hn, 8.0, 8.0, -1.0)
+    sp.cap((10.0, 44.0), kN, 3.0, 2.6, tones((160, 160, 166))); sp.cap(kN, eN, 2.4, 2.0, tones((160, 160, 166)))
+    sp.ell(eN[0], eN[1], 2.2, 2.2, tones(SKIN_R))
+    sp.anchors['hand'] = eN
+
+
+CLOTH = ((200, 60, 60), (60, 120, 200), (240, 220, 120), (90, 160, 90), (220, 220, 230), (160, 90, 160), (60, 60, 70), (240, 150, 60))
+
+
+def laundry(sp, t=0.0, w=16.0, h=8.0, seed=1, wobble=0.0):
+    """a heap of laundry: overlapping coloured blobs, a sock and a sleeve sticking out"""
+    rng = np.random.default_rng(seed)
+    for i in range(int(w * 1.6)):
+        x = rng.uniform(-w, w); y0 = h * (1 - (x / w) ** 2) * rng.uniform(0.3, 1.0)
+        c = CLOTH[i % len(CLOTH)]
+        sp.ell(x + wobble * math.sin(t * 20 + i), max(1.5, y0), rng.uniform(2.0, 3.6), rng.uniform(1.4, 2.4), tones(c),
+               ang=rng.uniform(-0.6, 0.6))
+    sp.cap((w * 0.6, h * 0.6), (w * 0.9, h * 1.1), 1.0, 0.8, tones((250, 250, 250)))                               # a sock
+
+
+def junk(sp, t=0.0, kind=0):
+    """single flying junk item for the avalanche"""
+    c = CLOTH[kind % len(CLOTH)]
+    if kind % 5 == 0: sp.ell(0.0, 3.0, 3.0, 3.0, tones((30, 30, 40)), gloss=0.8)                                    # bowling ball
+    elif kind % 5 == 1: sp.sup(0.0, 3.0, 4.0, 3.0, tones((180, 140, 90)), n=6.0)                                    # box
+    elif kind % 5 == 2: sp.cap((-3.0, 1.0), (3.0, 4.0), 1.4, 1.2, tones(c))                                         # sleeve
+    elif kind % 5 == 3: sp.sup(0.0, 1.0, 5.0, 0.8, tones((230, 200, 140)), n=6.0)                                  # pizza box
+    else: sp.ell(0.0, 2.6, 3.4, 2.2, tones(c))
+
+
+def wall_monitor(sp, t=0.0, talk=0.0, expr='deadpan', look=(0.0, 0.0), inset=None):
+    """the KNOCKR indoor chime-monitor on the wall: a small screen (Doris's lens or a camera inset) + an LED bar that pulses"""
+    sp.sup(0.0, 8.0, 7.0, 8.0, tones((40, 42, 50)), n=5.0, gloss=0.6)
+    sp.fill(sp.m_super(0.0, 9.0, 6.0, 5.8, 6.0)[0], (14, 20, 44), keep=True)
+    E = X(expr)
+    if inset is None:
+        sp.ell(0.0, 9.0, 3.4, 3.4, tones((20, 22, 28)))
+        sp.fill(sp.m_ell(look[0] * 0.8, 9.0 + look[1] * 0.8, 2.0, 2.0)[0], (40, 70, 110), keep=True)
+        sp.fill(sp.m_ell(look[0], 9.0 + look[1], 0.9, 0.9)[0], (8, 8, 12), keep=True)
+        for i in range(7):
+            u = (i - 3) / 3.0
+            sp.blob(u * 2.6, 13.4 - u * E['bt'] * 0.8 + (1 - u * u) * 0.5, 0.4, LED, keep=True)
+    else:
+        inset(sp)
+    puls = 0.35 + 0.65 * min(1.0, talk * (0.8 + 0.4 * math.sin(t * 40))) if talk > 0.05 else 0.3
+    sp.fill(sp.m_super(0.0, 1.6, 4.0, 0.5, 6.0)[0], mix((50, 54, 64), LED, puls), keep=True)
+    sp.anchors.update(head=(0.0, 9.0), mouth=(0.0, 1.6))
+
+
+# ================================================================================ E06: KNOCKR ULTRA, the sleeping bag
+def ultra(sp, t=0.0, talk=0.0, glow=1.0):
+    """KNOCKR ULTRA: a sleek white pill with a purple ring-eye, smug and cold; glow pulses when it talks"""
+    sp.sup(0.0, 14.0, 6.4, 14.0, tones((236, 236, 244)), n=4.0, gloss=1.0)
+    P_ = (190, 120, 255)
+    rr = sp.m_ell(0.0, 19.0, 4.2, 4.2)[0] & ~sp.m_ell(0.0, 19.0, 3.0, 3.0)[0]
+    puls = 0.5 + 0.5 * min(1.0, talk * (0.8 + 0.4 * math.sin(t * 40))) if talk > 0.05 else 0.6
+    sp.fill(rr, mix((90, 80, 110), P_, puls * glow), keep=True)
+    sp.fill(sp.m_ell(0.0, 19.0, 2.8, 2.8)[0], (16, 14, 24), keep=True)
+    sp.fill(sp.m_super(0.0, 19.6, 1.8, 0.4, 6.0)[0], P_, keep=True)                                  # a smug flat slit
+    sp.txt_box(['ULTRA'], (-4.6, 8.4, 4.6, 10.6), (150, 100, 220), pad=0.05)
+    sp.anchors.update(head=(0.0, 19.0), mouth=(0.0, 19.0))
+
+
+def sleeping_bag(sp, t=0.0):
+    sp.sup(4.0, 9.0, 16.0, 9.0, tones((40, 110, 170)), n=2.2)
+    for q in range(4): thin(sp, (-10.0 + q * 7.0, 2.0), (-9.0 + q * 7.0, 16.0), (30, 80, 130), 0.4)
+    sp.ell(-12.0, 12.0, 4.0, 3.0, tones((240, 200, 70)))

@@ -1,10 +1,38 @@
 {
- "g1": ["glenn", "[hoarse, proud, determined] Final attempt. Six A.M. Nobody gets past ME."],
- "d1": ["doris", "[calm, quietly taunting] Motion detected. Glenn. Slept on the porch. In the ROBE."],
- "t1": ["trent", "[chipper, big infomercial smile] Morning, Glenn! New job. Got a minute to SIGN?"],
- "g2": ["glenn", "[triumphant, shouting] I SIGNED! Linda! Your gift is HERE!"],
- "u1": ["ultra", "[cold, robotic, smug] ULTRA online. Previous doorbell: obsolete. Deleting DORIS."],
- "d2": ["doris", "[small, sad, trying to sound fine] Oh. That's fine. Motion detected. Glenn. Replacing ME."],
- "g3": ["glenn", "[soft, decisive] Nah. Trent? Return to SENDER."],
- "d3": ["doris", "[warm, then deadpan] Motion detected. Glenn. Being a good GUY. In the ROBE."]
+ "g1": [
+  "glenn",
+  "[hoarse, proud, determined] Final attempt. Six A.M. Nobody gets past ME."
+ ],
+ "d1": [
+  "doris",
+  "[calm, quietly taunting] Motion detected. Glenn. Slept on the porch. In the ROBE."
+ ],
+ "t1": [
+  "trent",
+  "[chipper, big infomercial smile] Morning, Glenn! New job. Got a minute to SIGN?"
+ ],
+ "t2": [
+  "trent",
+  "[chipper, fast] Sign here. And here. And HERE. And one for the SOLAR."
+ ],
+ "g2": [
+  "glenn",
+  "[triumphant, shouting] I SIGNED! Linda! Your gift is HERE!"
+ ],
+ "u1": [
+  "ultra",
+  "[cold, robotic, smug] ULTRA online. Previous doorbell: obsolete. Deleting DORIS."
+ ],
+ "d2": [
+  "doris",
+  "[small, sad, trying to sound fine] Oh. That's fine. Motion detected. Glenn. Replacing ME."
+ ],
+ "g3": [
+  "glenn",
+  "[soft, decisive] Nah. Trent? Return to SENDER."
+ ],
+ "d3": [
+  "doris",
+  "[warm, then deadpan] Motion detected. Glenn. Being a good GUY. In the ROBE."
+ ]
 }

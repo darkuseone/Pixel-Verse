@@ -221,7 +221,7 @@ R = [r_hook, r_marcy, r_whisper, r_phone, r_mont, r_grab, r_twist, r_dcu, r_m3, 
 assert len(R) == len(CUTS) - 1 == len(NAMES)
 
 SHOW = K.Show(EPI, ['$25 LIMIT?!'], hook_t=(0.10, 2.7), hook_y=1180, hook_size=84,
-              stickers=[(ST_S1, MONT + 0.05, 16.3, 540, 520), (ST_S2, 16.3, 17.15, 540, 640), (ST_D2, 19.7, 22.6, 540, 560)],
+              stickers=[(ST_S1, MONT + 0.05, 16.3, 540, 520), (ST_S2, 16.3, 17.15, 540, 640), (ST_D2, 19.7, 22.6, 540, 1290)],
               flashes=[TWIST], mosaics=[MONT],
               cap_y={0: 1560, 1: 1580, 2: 1580, 3: 1580, 4: 1580, 5: 1580, 6: 1600, 7: 1600, 8: 1580, 9: 1580, 10: 1500})
 
